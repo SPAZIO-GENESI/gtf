@@ -1,0 +1,31 @@
+id: ADR-GTF-006
+title: "Collettore di evidenze settimanale (§6.3) e Integrità parziale"
+date: 2026-07-09
+status: accepted
+context: >
+  In M3 si era scelto deliberatamente di calcolare l'Open Trust Score solo
+  dal registro committato, senza collettore né chiamate di rete, per
+  restare riproducibile offline da chiunque clona il repo. Questo lasciava
+  però l'indicatore Integrità permanentemente n/d, perché il suo primo
+  componente (esito della sonda HMAC) esiste solo come stato live di
+  /api/status, mai registrato da nessuna parte.
+decision: >
+  Costruito generators/collect-evidence.mjs: raccoglie settimanalmente (+
+  workflow_dispatch) stato live, storico 90gg, health-log 7gg, issue del
+  monitor e commit recenti dei repo pubblici — sole letture pubbliche,
+  nessun dato privato — in snapshots/YYYY-Www/, con manifest.json
+  (SHA-256 di ogni file). Aggiorna anche last_seen sulle EVD corrispondenti
+  (sostituzione mirata sul testo grezzo, per non stravolgere la
+  formattazione con un dump YAML completo). score.mjs legge poi SOLO
+  l'ultimo snapshot già committato (mai una chiamata di rete propria):
+  la riproducibilità offline resta intatta, cambia solo la fonte del dato.
+consequences: >
+  Integrità passa da sempre n/d a parzialmente calcolabile (100/50/0 sul
+  solo componente "worker"), ma resta marcata esplicitamente come parziale
+  — sia nel JSON (campo note) sia nel Trust Center (asterisco + tooltip) —
+  perché non include ancora storico release taggate né esito ancore OTS
+  mensili (questi restano gap dichiarati in MET-integrity). Primo snapshot
+  reale (2026-W28) committato: score 92→94, 5→6 indicatori disponibili.
+affects: [MET-integrity]
+evidence: [EVD-status-live, EVD-r2-status-history, EVD-d1-health-log, EVD-monitor-issues, EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

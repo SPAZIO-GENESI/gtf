@@ -479,6 +479,33 @@
     <h2>Decisioni</h2>
     <div class="journal">
       <details class="entry">
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Pubblicazione di autart-signer (chiusura P11)</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>ADR-P11 (2026-06-12) aveva già ripulito la storia git di autart-signer in blocco (commit unico 9e524b2, LICENSE AGPL, README riscritto) ma lasciava un'azione manuale in sospeso: rendere il repo effettivamente pubblico su GitHub. Fino a quel momento CTL-pades-blt-tsa dipendeva solo dalla fiducia nel pannello firme di Acrobat, senza che il codice che genera la firma fosse ispezionabile da terzi.</p>
+          <p><strong>Decisione:</strong> Il repo è stato eliminato e ricreato (non solo reso pubblico in-place), come raccomandato dall'ADR-P11 per garanzia assoluta contro oggetti orfani raggiungibili lato server da vecchi riferimenti. Verificato via API pubblica GitHub, non sulla sola parola: repository pubblico, commit unico 9e524b2, licenza AGPL-3.0 confermata.</p>
+          <p><strong>Conseguenze:</strong> EVD-git-authart e IMP-authart-pades-tsa passano da internal a public; verify_howto di CTL-pades-blt-tsa aggiornato per includere il link al codice sorgente ispezionabile, non solo la verifica nel lettore PDF. Con questo, tutti e tre i repository di prodotto (imgauth, imgauthweb, autart-signer) sono pubblici — si chiude l'ultimo elemento esterno del backlog P0-P19 di CLAUDE.md (img-auth-hub).</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-007</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Collettore di evidenze settimanale (§6.3) e Integrità parziale</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>In M3 si era scelto deliberatamente di calcolare l'Open Trust Score solo dal registro committato, senza collettore né chiamate di rete, per restare riproducibile offline da chiunque clona il repo. Questo lasciava però l'indicatore Integrità permanentemente n/d, perché il suo primo componente (esito della sonda HMAC) esiste solo come stato live di /api/status, mai registrato da nessuna parte.</p>
+          <p><strong>Decisione:</strong> Costruito generators/collect-evidence.mjs: raccoglie settimanalmente (+ workflow_dispatch) stato live, storico 90gg, health-log 7gg, issue del monitor e commit recenti dei repo pubblici — sole letture pubbliche, nessun dato privato — in snapshots/YYYY-Www/, con manifest.json (SHA-256 di ogni file). Aggiorna anche last_seen sulle EVD corrispondenti (sostituzione mirata sul testo grezzo, per non stravolgere la formattazione con un dump YAML completo). score.mjs legge poi SOLO l'ultimo snapshot già committato (mai una chiamata di rete propria): la riproducibilità offline resta intatta, cambia solo la fonte del dato.</p>
+          <p><strong>Conseguenze:</strong> Integrità passa da sempre n/d a parzialmente calcolabile (100/50/0 sul solo componente &quot;worker&quot;), ma resta marcata esplicitamente come parziale — sia nel JSON (campo note) sia nel Trust Center (asterisco + tooltip) — perché non include ancora storico release taggate né esito ancore OTS mensili (questi restano gap dichiarati in MET-integrity). Primo snapshot reale (2026-W28) committato: score 92→94, 5→6 indicatori disponibili.</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-006</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Attivazione del canary HMAC esterno (chiusura P17-B)</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>P17-B era in backlog da tempo (vedi ADR-P17): la sonda interna di /api/status non rileva una rotazione ERRATA di HMAC_SECRET, perché rifà un round-trip firma+verifica col segreto ATTUALE — resta &quot;coerente&quot; anche se qualcuno cambia il segreto per errore. Serviva un riferimento firmato una volta col segreto corretto e conservato FUORI dal Worker.</p>
+          <p><strong>Decisione:</strong> Aggiunto un secondo job &quot;canary&quot; a monitor.yml (imgauth): POST a /api/verify con un'attestazione nota (variabili di repo non-secret CANARY_HASH/CANARY_ATTESTAZIONE/CANARY_HMAC, ottenute con un'attestazione reale generata in produzione), issue+Telegram separati (label hmac-canary-alert) se hmac_valido risulta false. CTL-hmac-canary passa da draft ad active solo dopo la prima verifica reale riuscita (Telegram &quot;test canary HMAC ok&quot;, 2026-07-09T11:26:37Z) — non al solo merge del codice, per non dichiarare attivo un controllo non ancora provato contro produzione.</p>
+          <p><strong>Conseguenze:</strong> Score: Trasparenza/Tracciabilità/Riproducibilità salgono con un controllo attivo in più a catena completa (90→92). Nessun impatto su imgauth oltre al nuovo job; rate limiting invariato (una chiamata ogni 15 min è ben sotto soglia RL_API).</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-005</span></p>
+        </div>
+      </details>
+      <details class="entry">
         <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Collocazione degli snapshot di evidenza</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">
           <p>Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot JSON che devono restare immutabili e verificabili nel tempo. Vanno collocati dentro il repo `gtf` stesso (versionati in git, diffabili, pubblici senza altra infrastruttura) oppure in un bucket R2 dedicato (più adatto se il volume cresce molto).</p>

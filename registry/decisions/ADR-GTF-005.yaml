@@ -1,0 +1,28 @@
+id: ADR-GTF-005
+title: "Attivazione del canary HMAC esterno (chiusura P17-B)"
+date: 2026-07-09
+status: accepted
+context: >
+  P17-B era in backlog da tempo (vedi ADR-P17): la sonda interna di
+  /api/status non rileva una rotazione ERRATA di HMAC_SECRET, perché rifà
+  un round-trip firma+verifica col segreto ATTUALE — resta "coerente"
+  anche se qualcuno cambia il segreto per errore. Serviva un riferimento
+  firmato una volta col segreto corretto e conservato FUORI dal Worker.
+decision: >
+  Aggiunto un secondo job "canary" a monitor.yml (imgauth): POST a
+  /api/verify con un'attestazione nota (variabili di repo non-secret
+  CANARY_HASH/CANARY_ATTESTAZIONE/CANARY_HMAC, ottenute con un'attestazione
+  reale generata in produzione), issue+Telegram separati (label
+  hmac-canary-alert) se hmac_valido risulta false. CTL-hmac-canary passa da
+  draft ad active solo dopo la prima verifica reale riuscita (Telegram
+  "test canary HMAC ok", 2026-07-09T11:26:37Z) — non al solo merge del
+  codice, per non dichiarare attivo un controllo non ancora provato contro
+  produzione.
+consequences: >
+  Score: Trasparenza/Tracciabilità/Riproducibilità salgono con un
+  controllo attivo in più a catena completa (90→92). Nessun impatto su
+  imgauth oltre al nuovo job; rate limiting invariato (una chiamata ogni
+  15 min è ben sotto soglia RL_API).
+affects: [CTL-hmac-canary]
+evidence: [EVD-canary-hmac-runs, EVD-git-imgauth]
+visibility: public

@@ -1,0 +1,27 @@
+id: ADR-GTF-007
+title: "Pubblicazione di autart-signer (chiusura P11)"
+date: 2026-07-09
+status: accepted
+context: >
+  ADR-P11 (2026-06-12) aveva già ripulito la storia git di autart-signer
+  in blocco (commit unico 9e524b2, LICENSE AGPL, README riscritto) ma
+  lasciava un'azione manuale in sospeso: rendere il repo effettivamente
+  pubblico su GitHub. Fino a quel momento CTL-pades-blt-tsa dipendeva solo
+  dalla fiducia nel pannello firme di Acrobat, senza che il codice che
+  genera la firma fosse ispezionabile da terzi.
+decision: >
+  Il repo è stato eliminato e ricreato (non solo reso pubblico in-place),
+  come raccomandato dall'ADR-P11 per garanzia assoluta contro oggetti
+  orfani raggiungibili lato server da vecchi riferimenti. Verificato via
+  API pubblica GitHub, non sulla sola parola: repository pubblico,
+  commit unico 9e524b2, licenza AGPL-3.0 confermata.
+consequences: >
+  EVD-git-authart e IMP-authart-pades-tsa passano da internal a public;
+  verify_howto di CTL-pades-blt-tsa aggiornato per includere il link al
+  codice sorgente ispezionabile, non solo la verifica nel lettore PDF.
+  Con questo, tutti e tre i repository di prodotto (imgauth, imgauthweb,
+  autart-signer) sono pubblici — si chiude l'ultimo elemento esterno del
+  backlog P0-P19 di CLAUDE.md (img-auth-hub).
+affects: [CTL-pades-blt-tsa]
+evidence: [EVD-git-authart]
+visibility: public
