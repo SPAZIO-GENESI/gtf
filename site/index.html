@@ -479,201 +479,12 @@
     <h2>Decisioni</h2>
     <div class="journal">
       <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P0 — Fix di sicurezza immediati</span><span class="entry-status">accepted</span></summary>
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Collocazione degli snapshot di evidenza</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">
-          <p>L'audit iniziale del progetto ha rilevato una password P12 hardcoded nel codice di authart e authweb ancora puntato al worker di anteprima invece che a quello di produzione.</p>
-          <p><strong>Decisione:</strong> Spostata P12_PASSWORD in variabile d'ambiente e ruotato il certificato p12 (rimosso anche dalla storia git); corrette le URL in authweb verso il worker di produzione (https://imgauth.spaziogenesi.org).</p>
-          <p><strong>Conseguenze:</strong> Nessun segreto in chiaro nel codice da questo punto in poi; authweb funzionante contro l'ambiente reale.</p>
-          <p class="tag-line"><span class="tag">ADR-P0</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P1 — Collegamento end-to-end tra imgauth e authart</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Il flusso hash → certificato → firma non era ancora cablato end-to-end: imgauth non chiamava davvero authart per firmare i PDF.</p>
-          <p><strong>Decisione:</strong> Cablata la chiamata server-to-server da /api/cert-pdf all'endpoint /sign di authart; il certificato p12 stoccato come P12_BASE64 nelle App Settings di Azure, decodificato in un file temporaneo all'avvio del processo.</p>
-          <p><strong>Conseguenze:</strong> Primo PDF firmato generato e testato con successo in produzione.</p>
-          <p class="tag-line"><span class="tag">ADR-P1</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P2 — Prima cintura di sicurezza architetturale</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Dopo il cablaggio end-to-end (ADR-P1), mancavano difese di base tra i tre componenti del sistema.</p>
-          <p><strong>Decisione:</strong> CORS di imgauth ristretto al dominio dell'interfaccia utente; /api/verify esteso a controllare anche la firma HMAC, non solo la corrispondenza dell'hash; l'endpoint /sign di authart reso raggiungibile solo con l'header X-Sign-Secret condiviso tra i due componenti.</p>
-          <p><strong>Conseguenze:</strong> Base su cui più tardi si sono costruiti i controlli CTL-cors-restricted e CTL-hmac-signing.</p>
-          <p class="tag-line"><span class="tag">ADR-P2</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P3 — Pulizia delle dipendenze e conferma delle scelte infrastrutturali</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Revisione di qualità del codice di authart e delle scelte infrastrutturali ereditate dalle fasi precedenti.</p>
-          <p><strong>Decisione:</strong> Rimossa la dipendenza inutilizzata psycopg2-binary da authart, aggiunto gunicorn come server WSGI (già attivo come Startup command Azure); confermato che sgart.azurewebsites.net resta un dominio interno (nessun dominio custom necessario) e che Matomo resta lo strumento di analytics per scelta.</p>
-          <p><strong>Conseguenze:</strong> Codebase più pulita; nessuna azione infrastrutturale ulteriore su domini/analytics richiesta in questa fase.</p>
-          <p class="tag-line"><span class="tag">ADR-P3</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P4 — QR dinamico e footer del certificato generati a runtime</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Il template PDF aveva un QR statico e un footer con testi non corrispondenti al servizio reale (indirizzo e URL sbagliati).</p>
-          <p><strong>Decisione:</strong> QR generato a runtime con la libreria uqr (puntando all'URL di verifica con l'hash); footer (indirizzo, URL) disegnato a runtime, centrato dinamicamente per larghezza del font Times Roman a 7pt; il content stream del template ripulito dai testi glyph-encoded del vecchio footer; authweb legge ?hash= dall'URL per precompilare il campo di verifica.</p>
-          <p><strong>Conseguenze:</strong> Certificato coerente col servizio reale; testo del footer copiabile (vettoriale, non raster).</p>
-          <p class="tag-line"><span class="tag">ADR-P4</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P5 — Versioning esplicito per componente e supporto a qualunque formato</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Nessuna versione era visibile all'utente; authweb accettava solo file image/*, mentre l'hash SHA-256 è indipendente dal tipo di file.</p>
-          <p><strong>Decisione:</strong> Introdotto SemVer esplicito per ciascun componente (package.json per imgauth, APP_VERSION per authweb e authart), reso visibile in /ping, nel footer e nell'health-check; rimosso il vincolo image/* in authweb.</p>
-          <p><strong>Conseguenze:</strong> Tracciabilità delle versioni in produzione; il servizio accetta opere di qualunque formato, con anteprima a miniatura per le immagini e icona con estensione per gli altri tipi.</p>
-          <p class="tag-line"><span class="tag">ADR-P5</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P6 — Cambio di dominio pubblico a attestazione.spaziogenesi.org</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Il servizio era pubblicato sotto imgauthweb.spaziogenesi.org, un nome meno chiaro per gli utenti finali.</p>
-          <p><strong>Decisione:</strong> Rinominato il CNAME GitHub Pages, aggiornato ALLOWED_ORIGIN in imgauth, aggiornati QR e footer del certificato verso il nuovo dominio; documentazione (CLAUDE.md, sito) allineata nello stesso giro.</p>
-          <p><strong>Conseguenze:</strong> Nessun redirect server necessario (nessun certificato era ancora stato emesso col vecchio dominio); URL utente-finale unificate.</p>
-          <p class="tag-line"><span class="tag">ADR-P6</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P7 — Hardening dopo audit esterno: falsificabilità di /api/cert-pdf</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Un audit black-box esterno ha scoperto che /api/cert-pdf non aveva autenticazione e si fidava del JSON inviato dal client, permettendo di far firmare certificati con hash falsi e date retrodatate.</p>
-          <p><strong>Decisione:</strong> Introdotto un token HMAC emesso da /api/hash e verificato da /api/cert-pdf (rifiuta hash/timestamp incoerenti con 400, token invalido con 403, segreto assente con 503); tetto 100MB sulle opere; messaggi d'errore generici; HMAC_SECRET impostato come secret Cloudflare (prima era assente, l'HMAC era inattivo); rate limiting nativo per-IP (RL_CERT, RL_API); anti-bot Turnstile — prima versione solo su &quot;Scarica PDF&quot;, poi spostata su &quot;Genera attestazione&quot; per chiudere il buco per cui l'attestazione (incluso il .txt) si otteneva senza alcuna challenge.</p>
-          <p><strong>Conseguenze:</strong> Momento fondativo dell'attuale modello di sicurezza (vedi CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot); authweb non ha richiesto modifiche di codice perché già round-trippava attestazione+hmac da /api/hash a /api/cert-pdf.</p>
-          <p class="tag-line"><span class="tag">ADR-P7</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-11</span><span class="entry-title">P8 — Metadati dell'opera dichiarati dall'autore, vincolati alla firma</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Gli utenti chiedevano di poter dichiarare titolo, autore, anno e note dell'opera nel certificato.</p>
-          <p><strong>Decisione:</strong> Campi facoltativi normalizzati in forma canonica (cleanMeta: whitespace collassato, solo WinAnsi, tetti di lunghezza) e accodati al messaggio firmato (hmacMessage): immutabili dopo l'emissione. Senza metadati il messaggio coincide con la sola attestazione, per compatibilità coi certificati pre-1.6.0. /api/verify richiede gli stessi metadati per una firma valida.</p>
-          <p><strong>Conseguenze:</strong> Fix collaterale: il box ATTESTAZIONE (32.6pt) troncava da sempre firma HMAC, emittente e versione motore — ora visibili nel blocco &quot;Dettagli tecnici&quot;. La prima collocazione dei dati dichiarati (1.6.0) era poco leggibile (fine print), corretta poco dopo (1.6.2) in un blocco separato e leggibile.</p>
-          <p class="tag-line"><span class="tag">ADR-P8</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-11</span><span class="entry-title">P9 — Marca temporale da terza parte riconosciuta nel certificato</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>La sola firma self-signed non dava alla data del certificato alcun riconoscimento di terze parti in lettori come Adobe Acrobat.</p>
-          <p><strong>Decisione:</strong> authart firma PAdES B-LT con marca temporale RFC 3161 da una TSA in Adobe AATL (default DigiCert, configurabile via TSA_URL) più LTV (catena TSA/OCSP embedded nel DSS); fail-open se TSA/OCSP sono irraggiungibili (firma senza marca, mai un errore all'utente); corretto il key usage del certificato di produzione a &quot;digital_signature&quot; (il default pyhanko per PAdES è non_repudiation, incompatibile col p12 esistente).</p>
-          <p><strong>Conseguenze:</strong> La data del certificato è ora attestata da terza parte attendibile anche restando self-signed sull'identità del firmatario; upgrade futuro possibile con un sigillo elettronico qualificato eIDAS (a pagamento).</p>
-          <p class="tag-line"><span class="tag">ADR-P9</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-11</span><span class="entry-title">P10 — Ancoraggio decentralizzato in Bitcoin via OpenTimestamps</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Mancava una prova di esistenza indipendente dal servizio stesso, che restasse verificabile anche se Spazio Genesi ETS smettesse di esistere.</p>
-          <p><strong>Decisione:</strong> In /api/cert-pdf, dopo la verifica HMAC e prima della firma, costruzione della prova OpenTimestamps (calendar alice+bob.btc.calendar. opentimestamps.org) serializzata a mano nel formato DetachedTimestampFile e validata contro la libreria ufficiale python-opentimestamps; riga &quot;Ancoraggio blockchain&quot; nel blocco Dettagli tecnici del PDF con link a /api/ots; link visibile in authweb dopo &quot;Scarica PDF&quot;.</p>
-          <p><strong>Conseguenze:</strong> Tre àncore indipendenti su ogni certificato: HMAC (server), marca temporale TSA (authart), Bitcoin (OpenTimestamps); l'identità del firmatario resta self-signed.</p>
-          <p class="tag-line"><span class="tag">ADR-P10</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-12</span><span class="entry-title">P11 — Apertura del codice sorgente: licenze e ripulitura della storia</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Si è deciso di pubblicare il codice del motore e dell'interfaccia, ma la storia git di autart-signer conteneva un file signer.p12 recuperabile e una password P12 hardcoded (già ruotati da tempo, mai riusati).</p>
-          <p><strong>Decisione:</strong> Licenza AGPL-3.0 per imgauth (chi riusa il motore per un servizio deve ripubblicare le modifiche; la licenza copre il codice, non il servizio — i segreti HMAC/firma restano server-side, un clone non supera la verifica ufficiale); licenza MIT per imgauthweb; storia git di autart-signer sostituita in blocco con un commit unico contenente LICENSE AGPL e README riscritto (il precedente descriveva uno stack .NET errato).</p>
-          <p><strong>Conseguenze:</strong> img-auth-hub resta privato per scelta (contiene materiale operativo). Il repo autart-signer è stato reso pubblico il 2026-07-09 (eliminato e ricreato, come previsto, per garanzia contro oggetti orfani lato server): github.com/SPAZIO-GENESI/autart-signer, commit unico 9e524b2 verificato via API pubblica.</p>
-          <p class="tag-line"><span class="tag">ADR-P11</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-13</span><span class="entry-title">P12 — Tre funzionalità gratuite ad alto valore</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Si volevano tre funzionalità (recupero certificato, verifica via PDF, badge) a costo zero, sfruttando l'infrastruttura già esistente (R2, hash, endpoint).</p>
-          <p><strong>Decisione:</strong> Sviluppate su una pagina di appoggio beta.html (stesso dominio → stesso CORS delle API di produzione), verificate live a step, poi promosse in index.html: GET /api/cert per il recupero del certificato smarrito (nuovo schema pdf/&lt;sha256&gt;/certificato_&lt;stamp&gt;.pdf); pdf.js auto-ospitato (nessuna CDN di terze parti) per leggere e verificare il certificato lato client; badge SVG &quot;Opera attestata&quot;, verde solo se l'hash è realmente in archivio.</p>
-          <p><strong>Conseguenze:</strong> beta.html eliminata subito dopo la promozione, per non far divergere due pagine (lezione riapplicata più volte nelle fasi successive); i certificati pre-1.8.0 non sono recuperabili per hash (nessuna migrazione fatta).</p>
-          <p class="tag-line"><span class="tag">ADR-P12</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-18</span><span class="entry-title">P13 — Storicizzazione fine di malfunzionamenti e rallentamenti su D1</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>/api/status dava solo lo stato istantaneo, senza storico degli eventi fini — inclusi i rallentamenti sotto soglia che non degradano il servizio ma indicano cosa è migliorabile.</p>
-          <p><strong>Decisione:</strong> I check di /api/status misurano la latenza (runChecks); logHealth scrive su Cloudflare D1 (tabella health_log, binding DB) solo gli eventi notevoli — errore, degrado, o esito ok con latenza oltre soglia &quot;watch&quot; — con scrittura non-blocking; nuovo endpoint GET /api/health-log?day=; il drill-down giorno di /status/ mostra questi eventi anche nei giorni &quot;verdi&quot;.</p>
-          <p><strong>Conseguenze:</strong> I rallentamenti si vedono prima che diventino guasti; un errore D1 non interrompe mai il Worker (try/catch attorno alla scrittura).</p>
-          <p class="tag-line"><span class="tag">ADR-P13</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-25</span><span class="entry-title">P14 — Pagina pubblica permanente di verifica per ogni opera attestata</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>L'unica prova portabile di un'attestazione era il PDF; mancava un URL pubblico stabile da condividere (per esempio con una galleria o un collezionista) senza dover allegare il file.</p>
-          <p><strong>Decisione:</strong> Nuovo endpoint GET /c/&lt;sha256&gt;: pagina HTML server-rendered con impronta, data, ancoraggio OpenTimestamps e QR (che codifica l'URL permanente stesso), servita via route Cloudflare su attestazione.spaziogenesi.org/c/* (dominio già proxato) e anche su imgauth.spaziogenesi.org/c/* (custom domain del Worker); dati letti da un sidecar meta/cert/&lt;sha256&gt;.json scritto all'emissione, in modo idempotente e non-blocking; il QR del certificato ora punta a questa pagina invece che alla sola verifica con hash precompilato.</p>
-          <p><strong>Conseguenze:</strong> Stesso modello di fiducia di /api/cert (recuperabile solo da chi conosce l'hash); i certificati pre-1.14.0 mostrano comunque impronta e ancoraggio, con data ricostruita per fallback dalla chiave del PDF.</p>
-          <p class="tag-line"><span class="tag">ADR-P14</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-06-25</span><span class="entry-title">P15 — Da 2 a 4 calendar OpenTimestamps, e una misura di latenza più onesta</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Si osservavano falsi &quot;rallentamenti&quot; dell'ancoraggio su /status, causati da un singolo calendar lento, anche se l'ancoraggio reale ha bisogno di una sola risposta su più calendar interrogati.</p>
-          <p><strong>Decisione:</strong> Emissione: da 2 calendar (alice, bob) a 4 (alice, bob, finney, catallaxy), interrogati in parallelo con timeout (OTS_SUBMIT_TIMEOUT 8s) invece che in sequenza senza scadenza; misura di /status basata sul tempo del primo calendar a rispondere (Promise.any) invece che del più lento (Promise.all); &quot;degraded&quot; solo se cadono tutti.</p>
-          <p><strong>Conseguenze:</strong> Più ridondanza sull'ancoraggio senza rischio che un calendar appeso rallenti o blocchi l'emissione del certificato; niente più falsi &quot;degradati&quot; per un singolo calendar lento.</p>
-          <p class="tag-line"><span class="tag">ADR-P15</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-07-01</span><span class="entry-title">P16 — Full privacy: l'opera non lascia mai il dispositivo dell'utente</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Fino a questo punto, sia per l'attestazione sia per la verifica, il file transitava comunque verso il server per il calcolo dell'hash.</p>
-          <p><strong>Decisione:</strong> SHA-256 calcolato nel browser via WebCrypto (funzione sha256Hex); /api/hash accetta sha256 dal client come percorso primario (il campo image in base64 resta accettato solo per retrocompatibilità con client in cache); /api/verify reso capace di verificare la sola firma HMAC senza file; tetto dimensione alzato da ~75MB effettivi a 1GB lato client (WebCrypto non è streaming, il file va letto in memoria).</p>
-          <p><strong>Conseguenze:</strong> Garanzia anti-retrodatazione intatta: timestamp e HMAC restano generati server-side. Nessuna versione &quot;parallela&quot; del servizio né gating a donazione — un solo percorso per tutti (stessa lezione di beta.html: le pagine doppie divergono). La video-guida è stata rigenerata interamente in locale (wrangler dev) per non toccare la produzione durante le riprese.</p>
-          <p class="tag-line"><span class="tag">ADR-P16</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-07-01</span><span class="entry-title">P17 — La sonda interna che fa fallire /api/status se l'HMAC è rotto</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Un audit interno ha rilevato che /api/status non esercitava affatto la logica di emissione: con HMAC_SECRET assente o rotto il servizio emetteva comunque attestazioni senza firma valida (hmac null) e cert-pdf falliva con 503, ma lo stato semaforico restava verde.</p>
-          <p><strong>Decisione:</strong> Round-trip signHmac + verifyHmac su una stringa fissa a ogni campionamento di stato; il risultato confluisce nel componente &quot;worker&quot; di /api/status (down se il round-trip fallisce). Dichiarato inoltre che HMAC_SECRET non va mai ruotato: la rotazione invaliderebbe per sempre la verifica di tutti i certificati già emessi (nessun supporto a doppia chiave).</p>
-          <p><strong>Conseguenze:</strong> La sonda interna non rileva però una rotazione ERRATA del segreto (una firma con un segreto nuovo ma sbagliato risulterebbe comunque &quot;internamente coerente&quot;). Identificato il bisogno di un canary esterno che confronti un'attestazione nota firmata col segreto giusto — pianificato nel GTF come CTL-hmac-canary (vedi il registro per lo stato attuale del controllo, aggiornato indipendentemente da questa ADR storica).</p>
-          <p class="tag-line"><span class="tag">ADR-P17</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-07-02</span><span class="entry-title">P18 — Interfaccia installabile sulla home screen, senza service worker</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Si voleva un'esperienza &quot;app&quot; per gli utenti mobile, senza i costi e la divergenza di codice di un'app nativa.</p>
-          <p><strong>Decisione:</strong> Aggiunto manifest.json (display standalone, lingua italiana) e icone PNG generate dal favicon SVG (monogramma); deliberatamente senza service worker, per non dover invalidare una cache offline — la pagina resta sempre live da GitHub Pages; avviso discreto &quot;Aggiungi alla schermata Home&quot; visibile solo su smartphone e nascosto se l'app è già installata (via media query display-mode: standalone).</p>
-          <p><strong>Conseguenze:</strong> Zero costi aggiuntivi, zero store, nessun secondo codebase da mantenere (alternativa scartata: app nativa Android/iOS, 99€/anno solo Apple più review e divergenza). Un possibile seguito (Web Share Target, &quot;Condividi → Attesta&quot; dalla galleria Android) richiederebbe però un service worker, non ancora implementato.</p>
-          <p class="tag-line"><span class="tag">ADR-P18</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-07-02</span><span class="entry-title">P19 — Redesign dell'interfaccia: identità B, tablist ARIA, lessico onesto</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>L'interfaccia originale non comunicava bene la promessa del servizio fin dall'alto della pagina e presentava contrasti sotto soglia WCAG AA.</p>
-          <p><strong>Decisione:</strong> Sviluppato come bozza index2.html (pubblicata noindex per valutazione), poi promossa a index.html (bozza rimossa, vecchia UI conservata in index.html.old): H1 = &quot;Attestazione delle opere digitali&quot; per le corrispondenze SEO, promessa in lingua piana come sottotitolo; tablist ARIA sticky (Attesta / Verifica / Come funziona); demo &quot;L'impronta, dal vivo&quot; (SHA-256 live di una frase digitata); eliminato ovunque il verbo &quot;caricare&quot; (15 occorrenze) a favore di scegli/apri/trascina, perché contraddiceva la garanzia di full privacy (P16); contrasti ≥4.5:1, focus visibile, target ≥44px, aria-label sugli input con solo placeholder.</p>
-          <p><strong>Conseguenze:</strong> Nessuna doppia pagina divergente (stessa lezione già applicata con beta.html in P12); il lessico onesto diventa un principio esplicito e durevole del progetto, non solo una scelta di questa release.</p>
-          <p class="tag-line"><span class="tag">ADR-P19</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Nome del framework e del repository</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Il progetto era stato disegnato come &quot;Open Trust Framework&quot; (OTF). Il gestore ha chiesto di rinominarlo per coerenza col nome dell'ente titolare.</p>
-          <p><strong>Decisione:</strong> Il framework si chiama &quot;Genesis Trust Framework&quot; (GTF); il repository pubblico che ne è la Single Source of Truth è `spazio-genesi/gtf`. I nomi di componenti interni (&quot;Trust Center&quot;, &quot;Trust Registry&quot;, &quot;Open Trust Score&quot;) restano invariati: sono nomi funzionali, non il brand del framework.</p>
-          <p><strong>Conseguenze:</strong> Tutti i riferimenti a OTF/ADR-OTF-* nell'architettura sono stati rinominati a GTF/ADR-GTF-* prima della creazione del repo, per evitare di partire con un nome già da correggere.</p>
-          <p class="tag-line"><span class="tag">ADR-GTF-001</span></p>
-        </div>
-      </details>
-      <details class="entry">
-        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">URL pubblico del Trust Center</span><span class="entry-status">accepted</span></summary>
-        <div class="entry-body">
-          <p>Il Trust Center (GTF-ARCH §7) deve avere un URL pubblico stabile. Due opzioni: instradarlo sotto il dominio già usato dal servizio (attestazione.spaziogenesi.org/trust/) via route Cloudflare + Worker proxy leggero — stesso pattern già rodato per /c/*; oppure un sottodominio dedicato (trust.spaziogenesi.org) con CNAME diretto su GitHub Pages, senza passare dal Worker.</p>
-          <p><strong>Decisione:</strong> Sottodominio dedicato trust.spaziogenesi.org (CNAME diretto su GitHub Pages, nessun coinvolgimento del Worker imgauth). Motivo del cambio rispetto alla propensione iniziale dell'architettura (che favoriva la route sotto lo stesso dominio): il principio di indipendenza dei tre repository (CLAUDE.md) vale anche per gtf, che deve potersi pubblicare da solo senza mai richiedere modifiche a imgauth. Il ragionamento &quot;un solo dominio&quot; ha senso per /c/&lt;hash&gt; (fa parte del percorso di verifica di un'opera, serve continuità di esperienza) ma non per il Trust Center, che è una pagina istituzionale/di trasparenza, non parte di quel flusso.</p>
-          <p><strong>Conseguenze:</strong> DNS: record CNAME &quot;trust&quot; → spazio-genesi.github.io. Impostazione del custom domain nelle GitHub Pages settings del repo gtf rimandata alla fase M3 (Trust Center + Score), quando site/ avrà davvero un contenuto da servire. Nessuna modifica necessaria a imgauth/wrangler.toml.</p>
-          <p class="tag-line"><span class="tag">ADR-GTF-002</span></p>
+          <p>Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot JSON che devono restare immutabili e verificabili nel tempo. Vanno collocati dentro il repo `gtf` stesso (versionati in git, diffabili, pubblici senza altra infrastruttura) oppure in un bucket R2 dedicato (più adatto se il volume cresce molto).</p>
+          <p><strong>Decisione:</strong> Partire con gli snapshot dentro il repo `gtf` (cartella `snapshots/`), perché a basso volume settimanale git è più che sufficiente ed è già pubblico e verificabile via storia; migrare a R2 solo se le dimensioni del repo diventano un problema concreto.</p>
+          <p><strong>Conseguenze:</strong> Nessun costo aggiuntivo nella fase iniziale; da rivalutare quando il volume degli snapshot cresce (nessuna soglia numerica fissata ora — lo si osserva in fase M4).</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-004</span></p>
         </div>
       </details>
       <details class="entry">
@@ -686,12 +497,201 @@
         </div>
       </details>
       <details class="entry">
-        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Collocazione degli snapshot di evidenza</span><span class="entry-status">accepted</span></summary>
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">URL pubblico del Trust Center</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">
-          <p>Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot JSON che devono restare immutabili e verificabili nel tempo. Vanno collocati dentro il repo `gtf` stesso (versionati in git, diffabili, pubblici senza altra infrastruttura) oppure in un bucket R2 dedicato (più adatto se il volume cresce molto).</p>
-          <p><strong>Decisione:</strong> Partire con gli snapshot dentro il repo `gtf` (cartella `snapshots/`), perché a basso volume settimanale git è più che sufficiente ed è già pubblico e verificabile via storia; migrare a R2 solo se le dimensioni del repo diventano un problema concreto.</p>
-          <p><strong>Conseguenze:</strong> Nessun costo aggiuntivo nella fase iniziale; da rivalutare quando il volume degli snapshot cresce (nessuna soglia numerica fissata ora — lo si osserva in fase M4).</p>
-          <p class="tag-line"><span class="tag">ADR-GTF-004</span></p>
+          <p>Il Trust Center (GTF-ARCH §7) deve avere un URL pubblico stabile. Due opzioni: instradarlo sotto il dominio già usato dal servizio (attestazione.spaziogenesi.org/trust/) via route Cloudflare + Worker proxy leggero — stesso pattern già rodato per /c/*; oppure un sottodominio dedicato (trust.spaziogenesi.org) con CNAME diretto su GitHub Pages, senza passare dal Worker.</p>
+          <p><strong>Decisione:</strong> Sottodominio dedicato trust.spaziogenesi.org (CNAME diretto su GitHub Pages, nessun coinvolgimento del Worker imgauth). Motivo del cambio rispetto alla propensione iniziale dell'architettura (che favoriva la route sotto lo stesso dominio): il principio di indipendenza dei tre repository (CLAUDE.md) vale anche per gtf, che deve potersi pubblicare da solo senza mai richiedere modifiche a imgauth. Il ragionamento &quot;un solo dominio&quot; ha senso per /c/&lt;hash&gt; (fa parte del percorso di verifica di un'opera, serve continuità di esperienza) ma non per il Trust Center, che è una pagina istituzionale/di trasparenza, non parte di quel flusso.</p>
+          <p><strong>Conseguenze:</strong> DNS: record CNAME &quot;trust&quot; → spazio-genesi.github.io. Impostazione del custom domain nelle GitHub Pages settings del repo gtf rimandata alla fase M3 (Trust Center + Score), quando site/ avrà davvero un contenuto da servire. Nessuna modifica necessaria a imgauth/wrangler.toml.</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-002</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Nome del framework e del repository</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Il progetto era stato disegnato come &quot;Open Trust Framework&quot; (OTF). Il gestore ha chiesto di rinominarlo per coerenza col nome dell'ente titolare.</p>
+          <p><strong>Decisione:</strong> Il framework si chiama &quot;Genesis Trust Framework&quot; (GTF); il repository pubblico che ne è la Single Source of Truth è `spazio-genesi/gtf`. I nomi di componenti interni (&quot;Trust Center&quot;, &quot;Trust Registry&quot;, &quot;Open Trust Score&quot;) restano invariati: sono nomi funzionali, non il brand del framework.</p>
+          <p><strong>Conseguenze:</strong> Tutti i riferimenti a OTF/ADR-OTF-* nell'architettura sono stati rinominati a GTF/ADR-GTF-* prima della creazione del repo, per evitare di partire con un nome già da correggere.</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-001</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-02</span><span class="entry-title">P19 — Redesign dell'interfaccia: identità B, tablist ARIA, lessico onesto</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>L'interfaccia originale non comunicava bene la promessa del servizio fin dall'alto della pagina e presentava contrasti sotto soglia WCAG AA.</p>
+          <p><strong>Decisione:</strong> Sviluppato come bozza index2.html (pubblicata noindex per valutazione), poi promossa a index.html (bozza rimossa, vecchia UI conservata in index.html.old): H1 = &quot;Attestazione delle opere digitali&quot; per le corrispondenze SEO, promessa in lingua piana come sottotitolo; tablist ARIA sticky (Attesta / Verifica / Come funziona); demo &quot;L'impronta, dal vivo&quot; (SHA-256 live di una frase digitata); eliminato ovunque il verbo &quot;caricare&quot; (15 occorrenze) a favore di scegli/apri/trascina, perché contraddiceva la garanzia di full privacy (P16); contrasti ≥4.5:1, focus visibile, target ≥44px, aria-label sugli input con solo placeholder.</p>
+          <p><strong>Conseguenze:</strong> Nessuna doppia pagina divergente (stessa lezione già applicata con beta.html in P12); il lessico onesto diventa un principio esplicito e durevole del progetto, non solo una scelta di questa release.</p>
+          <p class="tag-line"><span class="tag">ADR-P19</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-02</span><span class="entry-title">P18 — Interfaccia installabile sulla home screen, senza service worker</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Si voleva un'esperienza &quot;app&quot; per gli utenti mobile, senza i costi e la divergenza di codice di un'app nativa.</p>
+          <p><strong>Decisione:</strong> Aggiunto manifest.json (display standalone, lingua italiana) e icone PNG generate dal favicon SVG (monogramma); deliberatamente senza service worker, per non dover invalidare una cache offline — la pagina resta sempre live da GitHub Pages; avviso discreto &quot;Aggiungi alla schermata Home&quot; visibile solo su smartphone e nascosto se l'app è già installata (via media query display-mode: standalone).</p>
+          <p><strong>Conseguenze:</strong> Zero costi aggiuntivi, zero store, nessun secondo codebase da mantenere (alternativa scartata: app nativa Android/iOS, 99€/anno solo Apple più review e divergenza). Un possibile seguito (Web Share Target, &quot;Condividi → Attesta&quot; dalla galleria Android) richiederebbe però un service worker, non ancora implementato.</p>
+          <p class="tag-line"><span class="tag">ADR-P18</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-01</span><span class="entry-title">P17 — La sonda interna che fa fallire /api/status se l'HMAC è rotto</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Un audit interno ha rilevato che /api/status non esercitava affatto la logica di emissione: con HMAC_SECRET assente o rotto il servizio emetteva comunque attestazioni senza firma valida (hmac null) e cert-pdf falliva con 503, ma lo stato semaforico restava verde.</p>
+          <p><strong>Decisione:</strong> Round-trip signHmac + verifyHmac su una stringa fissa a ogni campionamento di stato; il risultato confluisce nel componente &quot;worker&quot; di /api/status (down se il round-trip fallisce). Dichiarato inoltre che HMAC_SECRET non va mai ruotato: la rotazione invaliderebbe per sempre la verifica di tutti i certificati già emessi (nessun supporto a doppia chiave).</p>
+          <p><strong>Conseguenze:</strong> La sonda interna non rileva però una rotazione ERRATA del segreto (una firma con un segreto nuovo ma sbagliato risulterebbe comunque &quot;internamente coerente&quot;). Identificato il bisogno di un canary esterno che confronti un'attestazione nota firmata col segreto giusto — pianificato nel GTF come CTL-hmac-canary (vedi il registro per lo stato attuale del controllo, aggiornato indipendentemente da questa ADR storica).</p>
+          <p class="tag-line"><span class="tag">ADR-P17</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-01</span><span class="entry-title">P16 — Full privacy: l'opera non lascia mai il dispositivo dell'utente</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Fino a questo punto, sia per l'attestazione sia per la verifica, il file transitava comunque verso il server per il calcolo dell'hash.</p>
+          <p><strong>Decisione:</strong> SHA-256 calcolato nel browser via WebCrypto (funzione sha256Hex); /api/hash accetta sha256 dal client come percorso primario (il campo image in base64 resta accettato solo per retrocompatibilità con client in cache); /api/verify reso capace di verificare la sola firma HMAC senza file; tetto dimensione alzato da ~75MB effettivi a 1GB lato client (WebCrypto non è streaming, il file va letto in memoria).</p>
+          <p><strong>Conseguenze:</strong> Garanzia anti-retrodatazione intatta: timestamp e HMAC restano generati server-side. Nessuna versione &quot;parallela&quot; del servizio né gating a donazione — un solo percorso per tutti (stessa lezione di beta.html: le pagine doppie divergono). La video-guida è stata rigenerata interamente in locale (wrangler dev) per non toccare la produzione durante le riprese.</p>
+          <p class="tag-line"><span class="tag">ADR-P16</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-25</span><span class="entry-title">P15 — Da 2 a 4 calendar OpenTimestamps, e una misura di latenza più onesta</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Si osservavano falsi &quot;rallentamenti&quot; dell'ancoraggio su /status, causati da un singolo calendar lento, anche se l'ancoraggio reale ha bisogno di una sola risposta su più calendar interrogati.</p>
+          <p><strong>Decisione:</strong> Emissione: da 2 calendar (alice, bob) a 4 (alice, bob, finney, catallaxy), interrogati in parallelo con timeout (OTS_SUBMIT_TIMEOUT 8s) invece che in sequenza senza scadenza; misura di /status basata sul tempo del primo calendar a rispondere (Promise.any) invece che del più lento (Promise.all); &quot;degraded&quot; solo se cadono tutti.</p>
+          <p><strong>Conseguenze:</strong> Più ridondanza sull'ancoraggio senza rischio che un calendar appeso rallenti o blocchi l'emissione del certificato; niente più falsi &quot;degradati&quot; per un singolo calendar lento.</p>
+          <p class="tag-line"><span class="tag">ADR-P15</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-25</span><span class="entry-title">P14 — Pagina pubblica permanente di verifica per ogni opera attestata</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>L'unica prova portabile di un'attestazione era il PDF; mancava un URL pubblico stabile da condividere (per esempio con una galleria o un collezionista) senza dover allegare il file.</p>
+          <p><strong>Decisione:</strong> Nuovo endpoint GET /c/&lt;sha256&gt;: pagina HTML server-rendered con impronta, data, ancoraggio OpenTimestamps e QR (che codifica l'URL permanente stesso), servita via route Cloudflare su attestazione.spaziogenesi.org/c/* (dominio già proxato) e anche su imgauth.spaziogenesi.org/c/* (custom domain del Worker); dati letti da un sidecar meta/cert/&lt;sha256&gt;.json scritto all'emissione, in modo idempotente e non-blocking; il QR del certificato ora punta a questa pagina invece che alla sola verifica con hash precompilato.</p>
+          <p><strong>Conseguenze:</strong> Stesso modello di fiducia di /api/cert (recuperabile solo da chi conosce l'hash); i certificati pre-1.14.0 mostrano comunque impronta e ancoraggio, con data ricostruita per fallback dalla chiave del PDF.</p>
+          <p class="tag-line"><span class="tag">ADR-P14</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-18</span><span class="entry-title">P13 — Storicizzazione fine di malfunzionamenti e rallentamenti su D1</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>/api/status dava solo lo stato istantaneo, senza storico degli eventi fini — inclusi i rallentamenti sotto soglia che non degradano il servizio ma indicano cosa è migliorabile.</p>
+          <p><strong>Decisione:</strong> I check di /api/status misurano la latenza (runChecks); logHealth scrive su Cloudflare D1 (tabella health_log, binding DB) solo gli eventi notevoli — errore, degrado, o esito ok con latenza oltre soglia &quot;watch&quot; — con scrittura non-blocking; nuovo endpoint GET /api/health-log?day=; il drill-down giorno di /status/ mostra questi eventi anche nei giorni &quot;verdi&quot;.</p>
+          <p><strong>Conseguenze:</strong> I rallentamenti si vedono prima che diventino guasti; un errore D1 non interrompe mai il Worker (try/catch attorno alla scrittura).</p>
+          <p class="tag-line"><span class="tag">ADR-P13</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-13</span><span class="entry-title">P12 — Tre funzionalità gratuite ad alto valore</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Si volevano tre funzionalità (recupero certificato, verifica via PDF, badge) a costo zero, sfruttando l'infrastruttura già esistente (R2, hash, endpoint).</p>
+          <p><strong>Decisione:</strong> Sviluppate su una pagina di appoggio beta.html (stesso dominio → stesso CORS delle API di produzione), verificate live a step, poi promosse in index.html: GET /api/cert per il recupero del certificato smarrito (nuovo schema pdf/&lt;sha256&gt;/certificato_&lt;stamp&gt;.pdf); pdf.js auto-ospitato (nessuna CDN di terze parti) per leggere e verificare il certificato lato client; badge SVG &quot;Opera attestata&quot;, verde solo se l'hash è realmente in archivio.</p>
+          <p><strong>Conseguenze:</strong> beta.html eliminata subito dopo la promozione, per non far divergere due pagine (lezione riapplicata più volte nelle fasi successive); i certificati pre-1.8.0 non sono recuperabili per hash (nessuna migrazione fatta).</p>
+          <p class="tag-line"><span class="tag">ADR-P12</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-12</span><span class="entry-title">P11 — Apertura del codice sorgente: licenze e ripulitura della storia</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Si è deciso di pubblicare il codice del motore e dell'interfaccia, ma la storia git di autart-signer conteneva un file signer.p12 recuperabile e una password P12 hardcoded (già ruotati da tempo, mai riusati).</p>
+          <p><strong>Decisione:</strong> Licenza AGPL-3.0 per imgauth (chi riusa il motore per un servizio deve ripubblicare le modifiche; la licenza copre il codice, non il servizio — i segreti HMAC/firma restano server-side, un clone non supera la verifica ufficiale); licenza MIT per imgauthweb; storia git di autart-signer sostituita in blocco con un commit unico contenente LICENSE AGPL e README riscritto (il precedente descriveva uno stack .NET errato).</p>
+          <p><strong>Conseguenze:</strong> img-auth-hub resta privato per scelta (contiene materiale operativo). Il repo autart-signer è stato reso pubblico il 2026-07-09 (eliminato e ricreato, come previsto, per garanzia contro oggetti orfani lato server): github.com/SPAZIO-GENESI/autart-signer, commit unico 9e524b2 verificato via API pubblica.</p>
+          <p class="tag-line"><span class="tag">ADR-P11</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-11</span><span class="entry-title">P10 — Ancoraggio decentralizzato in Bitcoin via OpenTimestamps</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Mancava una prova di esistenza indipendente dal servizio stesso, che restasse verificabile anche se Spazio Genesi ETS smettesse di esistere.</p>
+          <p><strong>Decisione:</strong> In /api/cert-pdf, dopo la verifica HMAC e prima della firma, costruzione della prova OpenTimestamps (calendar alice+bob.btc.calendar. opentimestamps.org) serializzata a mano nel formato DetachedTimestampFile e validata contro la libreria ufficiale python-opentimestamps; riga &quot;Ancoraggio blockchain&quot; nel blocco Dettagli tecnici del PDF con link a /api/ots; link visibile in authweb dopo &quot;Scarica PDF&quot;.</p>
+          <p><strong>Conseguenze:</strong> Tre àncore indipendenti su ogni certificato: HMAC (server), marca temporale TSA (authart), Bitcoin (OpenTimestamps); l'identità del firmatario resta self-signed.</p>
+          <p class="tag-line"><span class="tag">ADR-P10</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-11</span><span class="entry-title">P9 — Marca temporale da terza parte riconosciuta nel certificato</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>La sola firma self-signed non dava alla data del certificato alcun riconoscimento di terze parti in lettori come Adobe Acrobat.</p>
+          <p><strong>Decisione:</strong> authart firma PAdES B-LT con marca temporale RFC 3161 da una TSA in Adobe AATL (default DigiCert, configurabile via TSA_URL) più LTV (catena TSA/OCSP embedded nel DSS); fail-open se TSA/OCSP sono irraggiungibili (firma senza marca, mai un errore all'utente); corretto il key usage del certificato di produzione a &quot;digital_signature&quot; (il default pyhanko per PAdES è non_repudiation, incompatibile col p12 esistente).</p>
+          <p><strong>Conseguenze:</strong> La data del certificato è ora attestata da terza parte attendibile anche restando self-signed sull'identità del firmatario; upgrade futuro possibile con un sigillo elettronico qualificato eIDAS (a pagamento).</p>
+          <p class="tag-line"><span class="tag">ADR-P9</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-11</span><span class="entry-title">P8 — Metadati dell'opera dichiarati dall'autore, vincolati alla firma</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Gli utenti chiedevano di poter dichiarare titolo, autore, anno e note dell'opera nel certificato.</p>
+          <p><strong>Decisione:</strong> Campi facoltativi normalizzati in forma canonica (cleanMeta: whitespace collassato, solo WinAnsi, tetti di lunghezza) e accodati al messaggio firmato (hmacMessage): immutabili dopo l'emissione. Senza metadati il messaggio coincide con la sola attestazione, per compatibilità coi certificati pre-1.6.0. /api/verify richiede gli stessi metadati per una firma valida.</p>
+          <p><strong>Conseguenze:</strong> Fix collaterale: il box ATTESTAZIONE (32.6pt) troncava da sempre firma HMAC, emittente e versione motore — ora visibili nel blocco &quot;Dettagli tecnici&quot;. La prima collocazione dei dati dichiarati (1.6.0) era poco leggibile (fine print), corretta poco dopo (1.6.2) in un blocco separato e leggibile.</p>
+          <p class="tag-line"><span class="tag">ADR-P8</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P7 — Hardening dopo audit esterno: falsificabilità di /api/cert-pdf</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Un audit black-box esterno ha scoperto che /api/cert-pdf non aveva autenticazione e si fidava del JSON inviato dal client, permettendo di far firmare certificati con hash falsi e date retrodatate.</p>
+          <p><strong>Decisione:</strong> Introdotto un token HMAC emesso da /api/hash e verificato da /api/cert-pdf (rifiuta hash/timestamp incoerenti con 400, token invalido con 403, segreto assente con 503); tetto 100MB sulle opere; messaggi d'errore generici; HMAC_SECRET impostato come secret Cloudflare (prima era assente, l'HMAC era inattivo); rate limiting nativo per-IP (RL_CERT, RL_API); anti-bot Turnstile — prima versione solo su &quot;Scarica PDF&quot;, poi spostata su &quot;Genera attestazione&quot; per chiudere il buco per cui l'attestazione (incluso il .txt) si otteneva senza alcuna challenge.</p>
+          <p><strong>Conseguenze:</strong> Momento fondativo dell'attuale modello di sicurezza (vedi CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot); authweb non ha richiesto modifiche di codice perché già round-trippava attestazione+hmac da /api/hash a /api/cert-pdf.</p>
+          <p class="tag-line"><span class="tag">ADR-P7</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P6 — Cambio di dominio pubblico a attestazione.spaziogenesi.org</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Il servizio era pubblicato sotto imgauthweb.spaziogenesi.org, un nome meno chiaro per gli utenti finali.</p>
+          <p><strong>Decisione:</strong> Rinominato il CNAME GitHub Pages, aggiornato ALLOWED_ORIGIN in imgauth, aggiornati QR e footer del certificato verso il nuovo dominio; documentazione (CLAUDE.md, sito) allineata nello stesso giro.</p>
+          <p><strong>Conseguenze:</strong> Nessun redirect server necessario (nessun certificato era ancora stato emesso col vecchio dominio); URL utente-finale unificate.</p>
+          <p class="tag-line"><span class="tag">ADR-P6</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P5 — Versioning esplicito per componente e supporto a qualunque formato</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Nessuna versione era visibile all'utente; authweb accettava solo file image/*, mentre l'hash SHA-256 è indipendente dal tipo di file.</p>
+          <p><strong>Decisione:</strong> Introdotto SemVer esplicito per ciascun componente (package.json per imgauth, APP_VERSION per authweb e authart), reso visibile in /ping, nel footer e nell'health-check; rimosso il vincolo image/* in authweb.</p>
+          <p><strong>Conseguenze:</strong> Tracciabilità delle versioni in produzione; il servizio accetta opere di qualunque formato, con anteprima a miniatura per le immagini e icona con estensione per gli altri tipi.</p>
+          <p class="tag-line"><span class="tag">ADR-P5</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P4 — QR dinamico e footer del certificato generati a runtime</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Il template PDF aveva un QR statico e un footer con testi non corrispondenti al servizio reale (indirizzo e URL sbagliati).</p>
+          <p><strong>Decisione:</strong> QR generato a runtime con la libreria uqr (puntando all'URL di verifica con l'hash); footer (indirizzo, URL) disegnato a runtime, centrato dinamicamente per larghezza del font Times Roman a 7pt; il content stream del template ripulito dai testi glyph-encoded del vecchio footer; authweb legge ?hash= dall'URL per precompilare il campo di verifica.</p>
+          <p><strong>Conseguenze:</strong> Certificato coerente col servizio reale; testo del footer copiabile (vettoriale, non raster).</p>
+          <p class="tag-line"><span class="tag">ADR-P4</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P3 — Pulizia delle dipendenze e conferma delle scelte infrastrutturali</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Revisione di qualità del codice di authart e delle scelte infrastrutturali ereditate dalle fasi precedenti.</p>
+          <p><strong>Decisione:</strong> Rimossa la dipendenza inutilizzata psycopg2-binary da authart, aggiunto gunicorn come server WSGI (già attivo come Startup command Azure); confermato che sgart.azurewebsites.net resta un dominio interno (nessun dominio custom necessario) e che Matomo resta lo strumento di analytics per scelta.</p>
+          <p><strong>Conseguenze:</strong> Codebase più pulita; nessuna azione infrastrutturale ulteriore su domini/analytics richiesta in questa fase.</p>
+          <p class="tag-line"><span class="tag">ADR-P3</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P2 — Prima cintura di sicurezza architetturale</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Dopo il cablaggio end-to-end (ADR-P1), mancavano difese di base tra i tre componenti del sistema.</p>
+          <p><strong>Decisione:</strong> CORS di imgauth ristretto al dominio dell'interfaccia utente; /api/verify esteso a controllare anche la firma HMAC, non solo la corrispondenza dell'hash; l'endpoint /sign di authart reso raggiungibile solo con l'header X-Sign-Secret condiviso tra i due componenti.</p>
+          <p><strong>Conseguenze:</strong> Base su cui più tardi si sono costruiti i controlli CTL-cors-restricted e CTL-hmac-signing.</p>
+          <p class="tag-line"><span class="tag">ADR-P2</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P1 — Collegamento end-to-end tra imgauth e authart</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Il flusso hash → certificato → firma non era ancora cablato end-to-end: imgauth non chiamava davvero authart per firmare i PDF.</p>
+          <p><strong>Decisione:</strong> Cablata la chiamata server-to-server da /api/cert-pdf all'endpoint /sign di authart; il certificato p12 stoccato come P12_BASE64 nelle App Settings di Azure, decodificato in un file temporaneo all'avvio del processo.</p>
+          <p><strong>Conseguenze:</strong> Primo PDF firmato generato e testato con successo in produzione.</p>
+          <p class="tag-line"><span class="tag">ADR-P1</span></p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-06-10</span><span class="entry-title">P0 — Fix di sicurezza immediati</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>L'audit iniziale del progetto ha rilevato una password P12 hardcoded nel codice di authart e authweb ancora puntato al worker di anteprima invece che a quello di produzione.</p>
+          <p><strong>Decisione:</strong> Spostata P12_PASSWORD in variabile d'ambiente e ruotato il certificato p12 (rimosso anche dalla storia git); corrette le URL in authweb verso il worker di produzione (https://imgauth.spaziogenesi.org).</p>
+          <p><strong>Conseguenze:</strong> Nessun segreto in chiaro nel codice da questo punto in poi; authweb funzionante contro l'ambiente reale.</p>
+          <p class="tag-line"><span class="tag">ADR-P0</span></p>
         </div>
       </details>
     </div>

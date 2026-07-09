@@ -171,11 +171,12 @@ function renderDecisions(records) {
   const adrs = byFolder(records, "decisions")
     .filter((a) => a.visibility === "public")
     .sort((a, b) => {
-      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+      // Cronologia inversa: più recenti in cima.
+      if (a.date !== b.date) return a.date > b.date ? -1 : 1;
       const pa = phaseNumber(a.id);
       const pb = phaseNumber(b.id);
-      if (pa !== pb) return pa - pb;
-      return a.id.localeCompare(b.id);
+      if (pa !== pb) return pb - pa;
+      return b.id.localeCompare(a.id);
     });
   const items = adrs
     .map(
