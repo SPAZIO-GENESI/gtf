@@ -1,0 +1,22 @@
+id: ADR-P18
+title: "P18 — Interfaccia installabile sulla home screen, senza service worker"
+date: 2026-07-02
+status: accepted
+context: >
+  Si voleva un'esperienza "app" per gli utenti mobile, senza i costi e la
+  divergenza di codice di un'app nativa.
+decision: >
+  Aggiunto manifest.json (display standalone, lingua italiana) e icone PNG
+  generate dal favicon SVG (monogramma); deliberatamente senza service
+  worker, per non dover invalidare una cache offline — la pagina resta
+  sempre live da GitHub Pages; avviso discreto "Aggiungi alla schermata
+  Home" visibile solo su smartphone e nascosto se l'app è già installata
+  (via media query display-mode: standalone).
+consequences: >
+  Zero costi aggiuntivi, zero store, nessun secondo codebase da mantenere
+  (alternativa scartata: app nativa Android/iOS, 99€/anno solo Apple più
+  review e divergenza). Un possibile seguito (Web Share Target, "Condividi
+  → Attesta" dalla galleria Android) richiederebbe però un service worker,
+  non ancora implementato.
+evidence: [EVD-git-imgauthweb]
+visibility: public

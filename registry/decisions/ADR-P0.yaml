@@ -1,0 +1,17 @@
+id: ADR-P0
+title: "P0 — Fix di sicurezza immediati"
+date: 2026-06-10
+status: accepted
+context: >
+  L'audit iniziale del progetto ha rilevato una password P12 hardcoded nel
+  codice di authart e authweb ancora puntato al worker di anteprima invece
+  che a quello di produzione.
+decision: >
+  Spostata P12_PASSWORD in variabile d'ambiente e ruotato il certificato p12
+  (rimosso anche dalla storia git); corrette le URL in authweb verso il
+  worker di produzione (https://imgauth.spaziogenesi.org).
+consequences: >
+  Nessun segreto in chiaro nel codice da questo punto in poi; authweb
+  funzionante contro l'ambiente reale.
+evidence: [EVD-git-authart, EVD-git-imgauthweb]
+visibility: public

@@ -1,0 +1,13 @@
+id: CTL-rate-limiting
+title: "Rate limiting per-IP su emissione certificati e hash/verify"
+status: active
+visibility: public
+implemented_by: [IMP-imgauth-ratelimit]
+evidenced_by: [EVD-git-imgauth]
+verify_howto: >
+  Invia più di 10 richieste in 60s a /api/cert-pdf (o più di 60 a
+  /api/hash|/api/verify) dallo stesso IP: le richieste oltre soglia
+  ricevono 429.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

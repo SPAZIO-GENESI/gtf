@@ -1,0 +1,6 @@
+id: IMP-authweb-sha256hex
+title: Calcolo dell'impronta SHA-256 nel browser via WebCrypto
+repo: imgauthweb
+ref: "index.html — funzione sha256Hex, usata sia per l'attestazione sia per il recupero certificato; il file non viene mai inviato al server"
+supports: [CTL-hash-client-side]
+visibility: public

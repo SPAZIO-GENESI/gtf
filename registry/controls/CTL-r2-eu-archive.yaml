@@ -1,0 +1,13 @@
+id: CTL-r2-eu-archive
+title: "Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash"
+status: active
+visibility: public
+implemented_by: [IMP-imgauth-r2-eu-binding]
+evidenced_by: [EVD-certificates-archive, EVD-git-imgauth]
+verify_howto: >
+  GET /api/cert?hash=<sha256> restituisce il PDF archiviato per quell'hash;
+  un hash malformato o assente risponde 400/404, mai il contenuto di un
+  altro certificato.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

@@ -1,0 +1,21 @@
+id: ADR-P10
+title: "P10 — Ancoraggio decentralizzato in Bitcoin via OpenTimestamps"
+date: 2026-06-11
+status: accepted
+context: >
+  Mancava una prova di esistenza indipendente dal servizio stesso, che
+  restasse verificabile anche se Spazio Genesi ETS smettesse di esistere.
+decision: >
+  In /api/cert-pdf, dopo la verifica HMAC e prima della firma, costruzione
+  della prova OpenTimestamps (calendar alice+bob.btc.calendar.
+  opentimestamps.org) serializzata a mano nel formato DetachedTimestampFile
+  e validata contro la libreria ufficiale python-opentimestamps; riga
+  "Ancoraggio blockchain" nel blocco Dettagli tecnici del PDF con link a
+  /api/ots; link visibile in authweb dopo "Scarica PDF".
+consequences: >
+  Tre àncore indipendenti su ogni certificato: HMAC (server), marca
+  temporale TSA (authart), Bitcoin (OpenTimestamps); l'identità del
+  firmatario resta self-signed.
+affects: [CTL-ots-anchor]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

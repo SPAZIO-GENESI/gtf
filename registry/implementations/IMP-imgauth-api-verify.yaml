@@ -1,0 +1,6 @@
+id: IMP-imgauth-api-verify
+title: Verifica dell'HMAC senza richiedere il file
+repo: imgauth
+ref: "worker.js — handler di /api/verify: il file è facoltativo dalla 1.15.0, senza file verifica la sola firma HMAC (hash_calcolato/coincide: null); il confronto hash↔file lo fa il client in locale"
+supports: [CTL-hmac-signing, CTL-hash-client-side]
+visibility: public

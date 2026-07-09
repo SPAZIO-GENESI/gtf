@@ -1,0 +1,24 @@
+id: ADR-P16
+title: "P16 — Full privacy: l'opera non lascia mai il dispositivo dell'utente"
+date: 2026-07-01
+status: accepted
+context: >
+  Fino a questo punto, sia per l'attestazione sia per la verifica, il file
+  transitava comunque verso il server per il calcolo dell'hash.
+decision: >
+  SHA-256 calcolato nel browser via WebCrypto (funzione sha256Hex);
+  /api/hash accetta sha256 dal client come percorso primario (il campo
+  image in base64 resta accettato solo per retrocompatibilità con client in
+  cache); /api/verify reso capace di verificare la sola firma HMAC senza
+  file; tetto dimensione alzato da ~75MB effettivi a 1GB lato client
+  (WebCrypto non è streaming, il file va letto in memoria).
+consequences: >
+  Garanzia anti-retrodatazione intatta: timestamp e HMAC restano generati
+  server-side. Nessuna versione "parallela" del servizio né gating a
+  donazione — un solo percorso per tutti (stessa lezione di beta.html: le
+  pagine doppie divergono). La video-guida è stata rigenerata interamente
+  in locale (wrangler dev) per non toccare la produzione durante le
+  riprese.
+affects: [CTL-hash-client-side]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

@@ -1,0 +1,6 @@
+id: IMP-imgauth-hmac
+title: Generazione e verifica del token HMAC che vincola hash, timestamp e metadati dichiarati
+repo: imgauth
+ref: "worker.js — funzioni di firma/verifica HMAC usate da /api/hash e /api/cert-pdf; il messaggio firmato è \"SHA-256:<hash>@<timestamp_iso>\" più eventuali metadati normalizzati (cleanMeta)"
+supports: [CTL-hmac-signing]
+visibility: public

@@ -1,0 +1,9 @@
+id: EVD-d1-health-log
+title: Log fine degli eventi di salute (errori, degradi, rallentamenti)
+location: { system: cloudflare-d1, ref: "imgauth-health/health_log", public_via: "GET /api/health-log?day=" }
+produced_by: PRC-status-sampling
+collection: auto
+freshness_max_days: 1
+integrity: "append-only per convenzione; snapshot mensile hashato+ancorato (EVD-monthly-anchor)"
+supports: [CTL-availability-monitoring]
+visibility: public

@@ -1,0 +1,6 @@
+id: IMP-imgauth-ratelimit
+title: Rate limiting nativo per-IP su cert-pdf e hash/verify
+repo: imgauth
+ref: "wrangler.toml — binding nativo ratelimit (RL_CERT 10/60s su /api/cert-pdf, RL_API 60/60s su /api/hash e /api/verify); worker.js applica il binding nel fetch handler, chiave CF-Connecting-IP, fail-open se il binding manca"
+supports: [CTL-rate-limiting]
+visibility: public

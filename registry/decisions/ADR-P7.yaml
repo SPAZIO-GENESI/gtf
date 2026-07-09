@@ -1,0 +1,25 @@
+id: ADR-P7
+title: "P7 — Hardening dopo audit esterno: falsificabilità di /api/cert-pdf"
+date: 2026-06-10
+status: accepted
+context: >
+  Un audit black-box esterno ha scoperto che /api/cert-pdf non aveva
+  autenticazione e si fidava del JSON inviato dal client, permettendo di far
+  firmare certificati con hash falsi e date retrodatate.
+decision: >
+  Introdotto un token HMAC emesso da /api/hash e verificato da
+  /api/cert-pdf (rifiuta hash/timestamp incoerenti con 400, token invalido
+  con 403, segreto assente con 503); tetto 100MB sulle opere; messaggi
+  d'errore generici; HMAC_SECRET impostato come secret Cloudflare (prima
+  era assente, l'HMAC era inattivo); rate limiting nativo per-IP (RL_CERT,
+  RL_API); anti-bot Turnstile — prima versione solo su "Scarica PDF", poi
+  spostata su "Genera attestazione" per chiudere il buco per cui
+  l'attestazione (incluso il .txt) si otteneva senza alcuna challenge.
+consequences: >
+  Momento fondativo dell'attuale modello di sicurezza (vedi CTL-hmac-signing,
+  CTL-rate-limiting, CTL-turnstile-antibot); authweb non ha richiesto
+  modifiche di codice perché già round-trippava attestazione+hmac da
+  /api/hash a /api/cert-pdf.
+affects: [CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

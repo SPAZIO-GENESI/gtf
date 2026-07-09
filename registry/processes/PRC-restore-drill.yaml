@@ -1,0 +1,8 @@
+id: PRC-restore-drill
+title: Prova periodica di ripristino da backup
+owner: maintainer del servizio
+trigger: "cadenza semestrale (GTF-ARCH §9.3)"
+output: "verbale della prova di ripristino (riuscita/fallita, tempo impiegato, eventuali correzioni al piano)"
+produces_evidence: [EVD-backup-resilience]
+human_cost_minutes_month: 10
+visibility: public

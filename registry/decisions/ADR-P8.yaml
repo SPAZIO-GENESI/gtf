@@ -1,0 +1,23 @@
+id: ADR-P8
+title: "P8 — Metadati dell'opera dichiarati dall'autore, vincolati alla firma"
+date: 2026-06-11
+status: accepted
+context: >
+  Gli utenti chiedevano di poter dichiarare titolo, autore, anno e note
+  dell'opera nel certificato.
+decision: >
+  Campi facoltativi normalizzati in forma canonica (cleanMeta: whitespace
+  collassato, solo WinAnsi, tetti di lunghezza) e accodati al messaggio
+  firmato (hmacMessage): immutabili dopo l'emissione. Senza metadati il
+  messaggio coincide con la sola attestazione, per compatibilità coi
+  certificati pre-1.6.0. /api/verify richiede gli stessi metadati per una
+  firma valida.
+consequences: >
+  Fix collaterale: il box ATTESTAZIONE (32.6pt) troncava da sempre firma
+  HMAC, emittente e versione motore — ora visibili nel blocco "Dettagli
+  tecnici". La prima collocazione dei dati dichiarati (1.6.0) era poco
+  leggibile (fine print), corretta poco dopo (1.6.2) in un blocco separato
+  e leggibile.
+affects: [CTL-hmac-signing]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

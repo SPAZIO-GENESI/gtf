@@ -1,0 +1,8 @@
+id: EVD-monitor-issues
+title: Issue GitHub aperte/chiuse automaticamente sui guasti rilevati dal monitor
+location: { system: github, ref: "imgauth issues label:status-alert", public_via: "issue tracker del repo pubblico imgauth, filtro label status-alert" }
+produced_by: PRC-status-sampling
+collection: auto
+integrity: "un'issue per guasto critico (worker/archivio/firma), commentata e richiusa al ripristino; storia immutabile di fatto (GitHub)"
+supports: [CTL-availability-monitoring]
+visibility: public

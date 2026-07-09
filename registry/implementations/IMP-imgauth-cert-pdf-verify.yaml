@@ -1,0 +1,6 @@
+id: IMP-imgauth-cert-pdf-verify
+title: Verifica server-side di attestazione+HMAC prima di firmare un certificato
+repo: imgauth
+ref: "worker.js — handler di /api/cert-pdf: rifiuta con 400/403 se attestazione incoerente con sha256+timestamp_iso o HMAC non valido; 503 se HMAC_SECRET non configurato"
+supports: [CTL-hmac-signing]
+visibility: public

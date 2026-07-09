@@ -1,0 +1,6 @@
+id: IMP-imgauth-runchecks-hmac-probe
+title: Sonda HMAC interna nel campionamento di stato
+repo: imgauth
+ref: "worker.js — runChecks esegue un round-trip signHmac+verifyHmac su una stringa fissa a ogni campionamento; il componente worker in /api/status risulta down se il segreto è assente o la firma rotta"
+supports: [CTL-hmac-signing, CTL-availability-monitoring]
+visibility: public

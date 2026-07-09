@@ -1,0 +1,7 @@
+id: EVD-certificates-archive
+title: Archivio dei certificati PDF emessi, con sidecar dei metadati
+location: { system: cloudflare-r2, ref: "imgauth-pdf-archive/pdf/<sha256>/certificato_<stamp>.pdf + meta/cert/<sha256>.json", public_via: "GET /api/cert?hash= , GET /c/<sha256>" }
+collection: auto
+integrity: "bucket in giurisdizione EU; recuperabile solo da chi conosce l'hash (stesso modello di fiducia del QR)"
+supports: [CTL-r2-eu-archive]
+visibility: public

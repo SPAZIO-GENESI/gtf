@@ -1,0 +1,21 @@
+id: ADR-P13
+title: "P13 — Storicizzazione fine di malfunzionamenti e rallentamenti su D1"
+date: 2026-06-18
+status: accepted
+context: >
+  /api/status dava solo lo stato istantaneo, senza storico degli eventi
+  fini — inclusi i rallentamenti sotto soglia che non degradano il servizio
+  ma indicano cosa è migliorabile.
+decision: >
+  I check di /api/status misurano la latenza (runChecks); logHealth scrive
+  su Cloudflare D1 (tabella health_log, binding DB) solo gli eventi
+  notevoli — errore, degrado, o esito ok con latenza oltre soglia "watch" —
+  con scrittura non-blocking; nuovo endpoint GET /api/health-log?day=; il
+  drill-down giorno di /status/ mostra questi eventi anche nei giorni
+  "verdi".
+consequences: >
+  I rallentamenti si vedono prima che diventino guasti; un errore D1 non
+  interrompe mai il Worker (try/catch attorno alla scrittura).
+affects: [CTL-availability-monitoring]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-d1-health-log]
+visibility: public

@@ -1,0 +1,22 @@
+id: ADR-P11
+title: "P11 — Apertura del codice sorgente: licenze e ripulitura della storia"
+date: 2026-06-12
+status: accepted
+context: >
+  Si è deciso di pubblicare il codice del motore e dell'interfaccia, ma la
+  storia git di autart-signer conteneva un file signer.p12 recuperabile e
+  una password P12 hardcoded (già ruotati da tempo, mai riusati).
+decision: >
+  Licenza AGPL-3.0 per imgauth (chi riusa il motore per un servizio deve
+  ripubblicare le modifiche; la licenza copre il codice, non il servizio —
+  i segreti HMAC/firma restano server-side, un clone non supera la verifica
+  ufficiale); licenza MIT per imgauthweb; storia git di autart-signer
+  sostituita in blocco con un commit unico contenente LICENSE AGPL e README
+  riscritto (il precedente descriveva uno stack .NET errato).
+consequences: >
+  img-auth-hub resta privato per scelta (contiene materiale operativo);
+  resta un'azione manuale in sospeso — rendere pubblico il repo
+  autart-signer, idealmente eliminandolo e ricreandolo prima della
+  pubblicazione per garanzia assoluta contro oggetti orfani lato server.
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-git-authart]
+visibility: public

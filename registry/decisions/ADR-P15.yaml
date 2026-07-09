@@ -1,0 +1,21 @@
+id: ADR-P15
+title: "P15 — Da 2 a 4 calendar OpenTimestamps, e una misura di latenza più onesta"
+date: 2026-06-25
+status: accepted
+context: >
+  Si osservavano falsi "rallentamenti" dell'ancoraggio su /status, causati
+  da un singolo calendar lento, anche se l'ancoraggio reale ha bisogno di
+  una sola risposta su più calendar interrogati.
+decision: >
+  Emissione: da 2 calendar (alice, bob) a 4 (alice, bob, finney, catallaxy),
+  interrogati in parallelo con timeout (OTS_SUBMIT_TIMEOUT 8s) invece che in
+  sequenza senza scadenza; misura di /status basata sul tempo del primo
+  calendar a rispondere (Promise.any) invece che del più lento
+  (Promise.all); "degraded" solo se cadono tutti.
+consequences: >
+  Più ridondanza sull'ancoraggio senza rischio che un calendar appeso
+  rallenti o blocchi l'emissione del certificato; niente più falsi
+  "degradati" per un singolo calendar lento.
+affects: [CTL-ots-anchor]
+evidence: [EVD-git-imgauth]
+visibility: public

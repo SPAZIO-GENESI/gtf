@@ -1,0 +1,14 @@
+id: CTL-hmac-signing
+title: "Token HMAC che vincola hash, timestamp server-side e metadati dichiarati"
+status: active
+visibility: public
+implemented_by: [IMP-imgauth-hmac, IMP-imgauth-cert-pdf-verify, IMP-imgauth-runchecks-hmac-probe, IMP-imgauth-api-verify]
+evidenced_by: [EVD-status-live, EVD-git-imgauth]
+verify_howto: >
+  Prova a chiamare /api/cert-pdf con un hash o timestamp diverso da quello
+  restituito da /api/hash: la richiesta viene rifiutata (400/403). Lo stato
+  del componente "worker" su /api/status riflette anche l'esito della sonda
+  HMAC interna.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

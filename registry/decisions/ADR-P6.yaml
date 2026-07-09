@@ -1,0 +1,16 @@
+id: ADR-P6
+title: "P6 — Cambio di dominio pubblico a attestazione.spaziogenesi.org"
+date: 2026-06-10
+status: accepted
+context: >
+  Il servizio era pubblicato sotto imgauthweb.spaziogenesi.org, un nome meno
+  chiaro per gli utenti finali.
+decision: >
+  Rinominato il CNAME GitHub Pages, aggiornato ALLOWED_ORIGIN in imgauth,
+  aggiornati QR e footer del certificato verso il nuovo dominio;
+  documentazione (CLAUDE.md, sito) allineata nello stesso giro.
+consequences: >
+  Nessun redirect server necessario (nessun certificato era ancora stato
+  emesso col vecchio dominio); URL utente-finale unificate.
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

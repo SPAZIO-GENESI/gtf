@@ -1,0 +1,10 @@
+id: CTL-hmac-canary
+title: "Canary esterno che rileva una rotazione errata del segreto HMAC"
+status: draft
+visibility: public
+verify_howto: >
+  Non ancora implementato. Quando attivo: il monitor invierà a /api/verify
+  un'attestazione nota (hash+attestazione+hmac fissi) e pretenderà
+  hmac_valido: true; un HMAC_SECRET rotato per errore farebbe fallire il
+  check, cosa che la sola sonda interna (CTL-hmac-signing) non rileva.
+owner: it@spaziogenesi.org

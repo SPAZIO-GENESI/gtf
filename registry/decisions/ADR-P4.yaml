@@ -1,0 +1,18 @@
+id: ADR-P4
+title: "P4 — QR dinamico e footer del certificato generati a runtime"
+date: 2026-06-10
+status: accepted
+context: >
+  Il template PDF aveva un QR statico e un footer con testi non
+  corrispondenti al servizio reale (indirizzo e URL sbagliati).
+decision: >
+  QR generato a runtime con la libreria uqr (puntando all'URL di verifica
+  con l'hash); footer (indirizzo, URL) disegnato a runtime, centrato
+  dinamicamente per larghezza del font Times Roman a 7pt; il content
+  stream del template ripulito dai testi glyph-encoded del vecchio footer;
+  authweb legge ?hash= dall'URL per precompilare il campo di verifica.
+consequences: >
+  Certificato coerente col servizio reale; testo del footer copiabile
+  (vettoriale, non raster).
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

@@ -1,0 +1,9 @@
+id: EVD-status-live
+title: Stato semaforico live di worker/archivio/firma/ancoraggio, con sonda HMAC interna
+location: { system: cloudflare-worker, ref: "imgauth worker.js#runChecks", public_via: "GET /api/status" }
+produced_by: PRC-status-sampling
+collection: auto
+freshness_max_days: 1
+integrity: "cache 180s per-isolate con stale-while-revalidate; la sonda HMAC round-trip fa fallire il componente worker se il segreto è assente o rotto"
+supports: [CTL-availability-monitoring, CTL-hmac-signing]
+visibility: public

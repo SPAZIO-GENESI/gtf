@@ -1,0 +1,6 @@
+id: EVD-git-imgauthweb
+title: Storia git dell'interfaccia utente (repo pubblico imgauthweb, licenza MIT)
+location: { system: github, ref: "repo imgauthweb, storia commit + tag di versione" }
+collection: auto
+integrity: "storia immutabile di fatto; ogni bump di APP_VERSION tracciato in index.html"
+visibility: public

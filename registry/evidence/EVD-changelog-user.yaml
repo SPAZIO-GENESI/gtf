@@ -1,0 +1,7 @@
+id: EVD-changelog-user
+title: Changelog pubblico rivolto all'utente finale
+location: { system: authweb, ref: "changelog.html / clean URL", public_via: "https://attestazione.spaziogenesi.org/changelog/" }
+produced_by: PRC-release-coordinata
+collection: manual
+integrity: "una voce per rilascio coordinato che tocca l'esperienza utente; non copre ogni bump di versione interno"
+visibility: public

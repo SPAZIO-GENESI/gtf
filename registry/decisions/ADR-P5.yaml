@@ -1,0 +1,17 @@
+id: ADR-P5
+title: "P5 — Versioning esplicito per componente e supporto a qualunque formato"
+date: 2026-06-10
+status: accepted
+context: >
+  Nessuna versione era visibile all'utente; authweb accettava solo file
+  image/*, mentre l'hash SHA-256 è indipendente dal tipo di file.
+decision: >
+  Introdotto SemVer esplicito per ciascun componente (package.json per
+  imgauth, APP_VERSION per authweb e authart), reso visibile in /ping, nel
+  footer e nell'health-check; rimosso il vincolo image/* in authweb.
+consequences: >
+  Tracciabilità delle versioni in produzione; il servizio accetta opere di
+  qualunque formato, con anteprima a miniatura per le immagini e icona con
+  estensione per gli altri tipi.
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-git-authart, EVD-versions-live]
+visibility: public

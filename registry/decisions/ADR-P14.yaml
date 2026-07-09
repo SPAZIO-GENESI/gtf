@@ -1,0 +1,24 @@
+id: ADR-P14
+title: "P14 — Pagina pubblica permanente di verifica per ogni opera attestata"
+date: 2026-06-25
+status: accepted
+context: >
+  L'unica prova portabile di un'attestazione era il PDF; mancava un URL
+  pubblico stabile da condividere (per esempio con una galleria o un
+  collezionista) senza dover allegare il file.
+decision: >
+  Nuovo endpoint GET /c/<sha256>: pagina HTML server-rendered con impronta,
+  data, ancoraggio OpenTimestamps e QR (che codifica l'URL permanente
+  stesso), servita via route Cloudflare su attestazione.spaziogenesi.org/c/*
+  (dominio già proxato) e anche su imgauth.spaziogenesi.org/c/* (custom
+  domain del Worker); dati letti da un sidecar meta/cert/<sha256>.json
+  scritto all'emissione, in modo idempotente e non-blocking; il QR del
+  certificato ora punta a questa pagina invece che alla sola verifica con
+  hash precompilato.
+consequences: >
+  Stesso modello di fiducia di /api/cert (recuperabile solo da chi conosce
+  l'hash); i certificati pre-1.14.0 mostrano comunque impronta e
+  ancoraggio, con data ricostruita per fallback dalla chiave del PDF.
+affects: [CTL-r2-eu-archive, CTL-ots-anchor]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-certificates-archive]
+visibility: public

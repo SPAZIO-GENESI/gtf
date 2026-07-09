@@ -1,0 +1,12 @@
+id: CTL-ots-anchor
+title: "Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar"
+status: active
+visibility: public
+implemented_by: [IMP-imgauth-ots]
+evidenced_by: [EVD-ots-proofs, EVD-git-imgauth]
+verify_howto: >
+  Scarica la prova da /api/ots?hash=<sha256> e verificala con un client OTS
+  pubblico o su opentimestamps.org, indipendentemente da questo servizio.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

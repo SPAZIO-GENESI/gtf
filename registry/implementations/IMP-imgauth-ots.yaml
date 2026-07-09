@@ -1,0 +1,6 @@
+id: IMP-imgauth-ots
+title: Costruzione e verifica delle prove OpenTimestamps su 4 calendar in parallelo
+repo: imgauth
+ref: "worker.js — funzione ensureOtsProof; dalla 1.14.1 interroga in parallelo con timeout (OTS_SUBMIT_TIMEOUT 8s) i calendar alice, bob, finney, catallaxy; la prova è valida con una sola risposta"
+supports: [CTL-ots-anchor]
+visibility: public

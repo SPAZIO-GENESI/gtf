@@ -1,0 +1,25 @@
+id: ADR-P17
+title: "P17 — La sonda interna che fa fallire /api/status se l'HMAC è rotto"
+date: 2026-07-01
+status: accepted
+context: >
+  Un audit interno ha rilevato che /api/status non esercitava affatto la
+  logica di emissione: con HMAC_SECRET assente o rotto il servizio emetteva
+  comunque attestazioni senza firma valida (hmac null) e cert-pdf falliva
+  con 503, ma lo stato semaforico restava verde.
+decision: >
+  Round-trip signHmac + verifyHmac su una stringa fissa a ogni
+  campionamento di stato; il risultato confluisce nel componente "worker"
+  di /api/status (down se il round-trip fallisce). Dichiarato inoltre che
+  HMAC_SECRET non va mai ruotato: la rotazione invaliderebbe per sempre la
+  verifica di tutti i certificati già emessi (nessun supporto a doppia
+  chiave).
+consequences: >
+  La sonda interna non rileva però una rotazione ERRATA del segreto (una
+  firma con un segreto nuovo ma sbagliato risulterebbe comunque
+  "internamente coerente"). Resta aperto un canary esterno che confronti
+  un'attestazione nota firmata col segreto giusto — pianificato nel GTF
+  come CTL-hmac-canary, ancora in stato draft.
+affects: [CTL-hmac-signing, CTL-hmac-canary]
+evidence: [EVD-git-imgauth, EVD-status-live]
+visibility: public

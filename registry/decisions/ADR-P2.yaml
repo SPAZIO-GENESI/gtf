@@ -1,0 +1,18 @@
+id: ADR-P2
+title: "P2 — Prima cintura di sicurezza architetturale"
+date: 2026-06-10
+status: accepted
+context: >
+  Dopo il cablaggio end-to-end (ADR-P1), mancavano difese di base tra i tre
+  componenti del sistema.
+decision: >
+  CORS di imgauth ristretto al dominio dell'interfaccia utente; /api/verify
+  esteso a controllare anche la firma HMAC, non solo la corrispondenza
+  dell'hash; l'endpoint /sign di authart reso raggiungibile solo con
+  l'header X-Sign-Secret condiviso tra i due componenti.
+consequences: >
+  Base su cui più tardi si sono costruiti i controlli CTL-cors-restricted e
+  CTL-hmac-signing.
+affects: [CTL-cors-restricted, CTL-hmac-signing]
+evidence: [EVD-git-imgauth, EVD-git-authart]
+visibility: public

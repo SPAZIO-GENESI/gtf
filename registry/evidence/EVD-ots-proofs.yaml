@@ -1,0 +1,7 @@
+id: EVD-ots-proofs
+title: Prove OpenTimestamps (.ots) di ancoraggio Bitcoin per ogni opera attestata
+location: { system: cloudflare-r2, ref: "imgauth-pdf-archive/ots/<sha256>.ots", public_via: "GET /api/ots?hash=" }
+collection: auto
+integrity: "idempotente: la prima prova (la più antica) non si sovrascrive; verificabile con client OTS pubblico o opentimestamps.org indipendentemente dal servizio"
+supports: [CTL-ots-anchor]
+visibility: public

@@ -1,0 +1,6 @@
+id: IMP-imgauth-runchecks-status
+title: Aggregazione dello stato semaforico worker/archivio/firma/ancoraggio
+repo: imgauth
+ref: "worker.js — runChecks misura la latenza di ciascun componente (archive, signer, anchor via Promise.any sui calendar OTS) e produce l'oggetto restituito da /api/status; cache 180s per-isolate con stale-while-revalidate"
+supports: [CTL-availability-monitoring]
+visibility: public

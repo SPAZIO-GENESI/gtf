@@ -1,0 +1,6 @@
+id: IMP-imgauth-cors
+title: CORS ristretto al solo dominio dell'interfaccia utente
+repo: imgauth
+ref: "worker.js — header CORS limitati a https://attestazione.spaziogenesi.org (ALLOWED_ORIGIN); difesa lato browser, non contro client diretti (per quello serve il token HMAC)"
+supports: [CTL-cors-restricted]
+visibility: public

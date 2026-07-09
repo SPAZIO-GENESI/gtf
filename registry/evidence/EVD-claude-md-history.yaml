@@ -1,0 +1,8 @@
+id: EVD-claude-md-history
+title: Cronologia storica del progetto (backlog P0-P19) nel documento operativo interno
+location: { system: img-auth-hub, ref: "CLAUDE.md § Backlog" }
+produced_by: PRC-import-storico
+collection: manual
+integrity: "documento di lavoro non strutturato; il contenuto rilevante viene migrato una tantum in ADR pubbliche (registry/decisions/), che diventano la fonte pubblica di riferimento"
+visibility: internal
+why_not_public: "il documento contiene anche materiale operativo non pertinente alla fiducia pubblica (note di configurazione, promemoria interni); ciò che è rilevante per la fiducia è già estratto come ADR pubbliche"

@@ -1,0 +1,6 @@
+id: IMP-imgauth-r2-eu-binding
+title: Bucket R2 dell'archivio certificati in giurisdizione EU
+repo: imgauth
+ref: "wrangler.toml — binding PDF_ARCHIVE con jurisdiction = \"eu\" sul bucket imgauth-pdf-archive; certificati sotto pdf/<sha256>/, prove OTS sotto ots/<sha256>.ots"
+supports: [CTL-r2-eu-archive]
+visibility: public

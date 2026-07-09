@@ -1,0 +1,8 @@
+id: EVD-backup-resilience
+title: Piano di resilienza e backup del sistema
+location: { system: img-auth-hub, ref: "RESILIENZA-E-BACKUP.md" }
+produced_by: PRC-restore-drill
+collection: manual
+integrity: "documento di piano; non ancora accompagnato da un verbale di prova di ripristino effettiva (vedi gap in ARCHITECTURE.md §6.2, punto 3)"
+visibility: internal
+why_not_public: "descrive dettagli operativi di backup e ripristino la cui pubblicazione integrale potrebbe facilitare un attacco; i controlli pubblici derivati (se e quando esistono) vivono come CTL pubblici separati"

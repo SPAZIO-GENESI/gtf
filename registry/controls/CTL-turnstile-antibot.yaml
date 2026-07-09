@@ -1,0 +1,13 @@
+id: CTL-turnstile-antibot
+title: "Challenge anti-bot prima di qualunque emissione di attestazione"
+status: active
+visibility: public
+implemented_by: [IMP-imgauth-turnstile, IMP-authweb-turnstile-widget]
+evidenced_by: [EVD-git-imgauth, EVD-git-imgauthweb]
+verify_howto: >
+  Chiama /api/hash senza turnstile_token: risposta 400. Con un token
+  fasullo: 403. Il widget è visibile sopra "Genera attestazione" su
+  attestazione.spaziogenesi.org.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

@@ -1,0 +1,6 @@
+id: IMP-imgauth-monitor-workflow
+title: Guardiano schedulato che interroga /api/status e apre/chiude issue
+repo: imgauth
+ref: ".github/workflows/monitor.yml — ogni 15 min (+ workflow_dispatch); su guasto critico apre/aggiorna issue status-alert e fa fallire il run (email GitHub); notifica Telegram sui soli cambi di stato; al ripristino commenta e richiude"
+supports: [CTL-availability-monitoring]
+visibility: public

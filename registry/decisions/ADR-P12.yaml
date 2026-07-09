@@ -1,0 +1,24 @@
+id: ADR-P12
+title: "P12 — Tre funzionalità gratuite ad alto valore"
+date: 2026-06-13
+status: accepted
+context: >
+  Si volevano tre funzionalità (recupero certificato, verifica via PDF,
+  badge) a costo zero, sfruttando l'infrastruttura già esistente (R2, hash,
+  endpoint).
+decision: >
+  Sviluppate su una pagina di appoggio beta.html (stesso dominio → stesso
+  CORS delle API di produzione), verificate live a step, poi promosse in
+  index.html: GET /api/cert per il recupero del certificato smarrito
+  (nuovo schema pdf/<sha256>/certificato_<stamp>.pdf); pdf.js auto-ospitato
+  (nessuna CDN di terze parti) per leggere e verificare il certificato lato
+  client; badge SVG "Opera attestata", verde solo se l'hash è realmente in
+  archivio.
+consequences: >
+  beta.html eliminata subito dopo la promozione, per non far divergere due
+  pagine (lezione riapplicata più volte nelle fasi successive); i
+  certificati pre-1.8.0 non sono recuperabili per hash (nessuna migrazione
+  fatta).
+affects: [CTL-r2-eu-archive]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

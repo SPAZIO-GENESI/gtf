@@ -1,0 +1,6 @@
+id: IMP-authweb-turnstile-widget
+title: Widget Turnstile accanto a "Genera attestazione"
+repo: imgauthweb
+ref: "index.html — widget Turnstile (mode managed) e invio di turnstile_token a /api/hash; posizionato prima di qualunque emissione di attestazione (anche il solo .txt)"
+supports: [CTL-turnstile-antibot]
+visibility: public

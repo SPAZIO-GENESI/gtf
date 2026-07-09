@@ -1,0 +1,6 @@
+id: IMP-imgauth-turnstile
+title: Verifica server-side del token Turnstile prima di emettere un'attestazione
+repo: imgauth
+ref: "worker.js — funzione verifyTurnstile, chiamata da /api/hash; token mancante → 400, non valido → 403; fail-open se siteverify è irraggiungibile"
+supports: [CTL-turnstile-antibot]
+visibility: public

@@ -1,0 +1,7 @@
+id: IMP-escrow-vault
+title: Caveau esterno di recupero dei segreti critici
+repo: img-auth-hub
+ref: "procedura operativa interna, non versionata nel codice (per definizione: un segreto di recupero non può vivere nello stesso posto che protegge)"
+supports: [CTL-secrets-escrow]
+visibility: internal
+why_not_public: "descrivere dove/come è custodito il meccanismo di recupero dei segreti riduce sicurezza senza aggiungere fiducia verificabile"

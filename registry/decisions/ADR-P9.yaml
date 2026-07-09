@@ -1,0 +1,21 @@
+id: ADR-P9
+title: "P9 — Marca temporale da terza parte riconosciuta nel certificato"
+date: 2026-06-11
+status: accepted
+context: >
+  La sola firma self-signed non dava alla data del certificato alcun
+  riconoscimento di terze parti in lettori come Adobe Acrobat.
+decision: >
+  authart firma PAdES B-LT con marca temporale RFC 3161 da una TSA in Adobe
+  AATL (default DigiCert, configurabile via TSA_URL) più LTV (catena
+  TSA/OCSP embedded nel DSS); fail-open se TSA/OCSP sono irraggiungibili
+  (firma senza marca, mai un errore all'utente); corretto il key usage del
+  certificato di produzione a "digital_signature" (il default pyhanko per
+  PAdES è non_repudiation, incompatibile col p12 esistente).
+consequences: >
+  La data del certificato è ora attestata da terza parte attendibile anche
+  restando self-signed sull'identità del firmatario; upgrade futuro
+  possibile con un sigillo elettronico qualificato eIDAS (a pagamento).
+affects: [CTL-pades-blt-tsa]
+evidence: [EVD-git-authart]
+visibility: public

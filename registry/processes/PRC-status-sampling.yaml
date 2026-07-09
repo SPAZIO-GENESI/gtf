@@ -1,0 +1,8 @@
+id: PRC-status-sampling
+title: Campionamento periodico dello stato dei servizi
+owner: automazione (nessun intervento umano ricorrente)
+trigger: "cron Worker ogni 30 min + monitor GitHub Actions ogni 15 min + richiesta utente a /api/status (cache 180s)"
+output: "aggiornamento di /api/status, /api/status-history (rollup giornaliero) e /api/health-log (eventi notevoli); issue GitHub su guasto critico"
+produces_evidence: [EVD-status-live, EVD-r2-status-history, EVD-d1-health-log, EVD-monitor-issues]
+human_cost_minutes_month: 0
+visibility: public

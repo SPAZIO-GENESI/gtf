@@ -1,0 +1,6 @@
+id: IMP-imgauth-api-hash-clientpath
+title: Accettazione dell'impronta calcolata dal client su /api/hash
+repo: imgauth
+ref: "worker.js — handler di /api/hash, percorso primario dalla 1.15.0: accetta {sha256, name, type, size, meta...} senza byte del file; timestamp e HMAC restano generati server-side"
+supports: [CTL-hash-client-side]
+visibility: public

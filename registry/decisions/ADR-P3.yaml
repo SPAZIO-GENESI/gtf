@@ -1,0 +1,18 @@
+id: ADR-P3
+title: "P3 — Pulizia delle dipendenze e conferma delle scelte infrastrutturali"
+date: 2026-06-10
+status: accepted
+context: >
+  Revisione di qualità del codice di authart e delle scelte infrastrutturali
+  ereditate dalle fasi precedenti.
+decision: >
+  Rimossa la dipendenza inutilizzata psycopg2-binary da authart, aggiunto
+  gunicorn come server WSGI (già attivo come Startup command Azure);
+  confermato che sgart.azurewebsites.net resta un dominio interno (nessun
+  dominio custom necessario) e che Matomo resta lo strumento di analytics
+  per scelta.
+consequences: >
+  Codebase più pulita; nessuna azione infrastrutturale ulteriore su
+  domini/analytics richiesta in questa fase.
+evidence: [EVD-git-authart]
+visibility: public

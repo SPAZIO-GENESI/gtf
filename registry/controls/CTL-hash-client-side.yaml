@@ -1,0 +1,12 @@
+id: CTL-hash-client-side
+title: "L'impronta è calcolata nel browser; il file non lascia il dispositivo"
+status: active
+visibility: public
+implemented_by: [IMP-authweb-sha256hex, IMP-imgauth-api-hash-clientpath]
+evidenced_by: [EVD-git-imgauthweb, EVD-git-imgauth]
+verify_howto: >
+  Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file:
+  la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

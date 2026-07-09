@@ -1,0 +1,8 @@
+id: PRC-import-storico
+title: Migrazione una tantum della cronologia storica (CLAUDE.md P0-P19) in ADR pubbliche
+owner: maintainer del servizio (con assistenza AI)
+trigger: "fase M1 della roadmap GTF, una tantum"
+output: "un record ADR per ciascuna fase storica P0-P19, con data, contesto, decisione e conseguenze"
+produces_evidence: [EVD-claude-md-history]
+human_cost_minutes_month: 0
+visibility: public

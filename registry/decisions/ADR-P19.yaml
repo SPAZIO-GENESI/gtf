@@ -1,0 +1,23 @@
+id: ADR-P19
+title: "P19 — Redesign dell'interfaccia: identità B, tablist ARIA, lessico onesto"
+date: 2026-07-02
+status: accepted
+context: >
+  L'interfaccia originale non comunicava bene la promessa del servizio fin
+  dall'alto della pagina e presentava contrasti sotto soglia WCAG AA.
+decision: >
+  Sviluppato come bozza index2.html (pubblicata noindex per valutazione),
+  poi promossa a index.html (bozza rimossa, vecchia UI conservata in
+  index.html.old): H1 = "Attestazione delle opere digitali" per le
+  corrispondenze SEO, promessa in lingua piana come sottotitolo; tablist
+  ARIA sticky (Attesta / Verifica / Come funziona); demo "L'impronta, dal
+  vivo" (SHA-256 live di una frase digitata); eliminato ovunque il verbo
+  "caricare" (15 occorrenze) a favore di scegli/apri/trascina, perché
+  contraddiceva la garanzia di full privacy (P16); contrasti ≥4.5:1, focus
+  visibile, target ≥44px, aria-label sugli input con solo placeholder.
+consequences: >
+  Nessuna doppia pagina divergente (stessa lezione già applicata con
+  beta.html in P12); il lessico onesto diventa un principio esplicito e
+  durevole del progetto, non solo una scelta di questa release.
+evidence: [EVD-git-imgauthweb]
+visibility: public

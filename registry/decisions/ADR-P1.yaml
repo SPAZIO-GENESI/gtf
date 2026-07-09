@@ -1,0 +1,15 @@
+id: ADR-P1
+title: "P1 — Collegamento end-to-end tra imgauth e authart"
+date: 2026-06-10
+status: accepted
+context: >
+  Il flusso hash → certificato → firma non era ancora cablato end-to-end:
+  imgauth non chiamava davvero authart per firmare i PDF.
+decision: >
+  Cablata la chiamata server-to-server da /api/cert-pdf all'endpoint /sign
+  di authart; il certificato p12 stoccato come P12_BASE64 nelle App Settings
+  di Azure, decodificato in un file temporaneo all'avvio del processo.
+consequences: >
+  Primo PDF firmato generato e testato con successo in produzione.
+evidence: [EVD-git-imgauth, EVD-git-authart]
+visibility: public

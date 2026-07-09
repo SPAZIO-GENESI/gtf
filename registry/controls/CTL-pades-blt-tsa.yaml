@@ -1,0 +1,14 @@
+id: CTL-pades-blt-tsa
+title: "Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)"
+status: active
+visibility: public
+implemented_by: [IMP-authart-pades-tsa]
+evidenced_by: [EVD-git-authart]
+verify_howto: >
+  Apri un certificato PDF emesso in Adobe Acrobat (o un lettore PAdES
+  conforme): il pannello firme mostra la marca temporale da terza parte
+  attendibile (Adobe AATL), verificabile senza fidarsi del servizio. Non
+  richiede accesso al codice sorgente di authart, ancora privato (P11).
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09
