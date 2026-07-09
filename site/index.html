@@ -85,6 +85,7 @@
   .tag-line { margin: 0.6rem 0 0; }
 
   .pill { display: inline-block; font-size: 0.72rem; padding: 2px 9px; border-radius: 999px; font-weight: 600; }
+  .status-badge { margin-left: 0.3rem; }
   .pill-sage { background: var(--sage-bg); color: var(--sage-fg); }
   .pill-amber { background: var(--amber-bg); color: var(--amber-fg); }
   .pill-seal { background: var(--seal-bg); color: var(--seal-fg); }
@@ -225,7 +226,7 @@
   <section id="eidas" class="folio" data-folio="CTL">
     <h2>Cosa NON è questo servizio</h2>
     <p>Il servizio produce attestazioni di esistenza non qualificate: firma elettronica avanzata con certificato self-signed, più marca temporale RFC 3161 (TSA in Adobe AATL) e ancoraggio Bitcoin (OpenTimestamps). Non è un servizio fiduciario qualificato eIDAS. Alle prove elettroniche non qualificate non possono essere negati effetti giuridici per il solo motivo della forma elettronica o della non-qualificazione; il valore probatorio è rimesso al giudice. L'upgrade a sigillo qualificato è nella roadmap pubblica, condizionato alla sostenibilità economica dell'organizzazione.</p>
-    <p class="tag-line"><span class="tag">CTL-eidas-honest-positioning</span></p>
+    <p class="tag-line"><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span></p>
   </section>
 
   <section id="compliance" class="folio" data-folio="REQ · CTL · EVD">
@@ -239,13 +240,13 @@
         </header>
         <p>I controlli Annex A applicabili a un'organizzazione di volontari senza infrastruttura propria (controllo accessi, crittografia, sicurezza delle operazioni, gestione degli incidenti) sono adottati per ispirazione, non per certificazione formale: la certificazione è insostenibile per un ETS di questa scala, ma i controlli pertinenti sono comunque implementati e verificabili uno per uno.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hmac-signing</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati<details><summary>come verificare</summary><p>Prova a chiamare /api/cert-pdf con un hash o timestamp diverso da quello restituito da /api/hash: la richiesta viene rifiutata (400/403). Lo stato del componente &quot;worker&quot; su /api/status riflette anche l'esito della sonda HMAC interna.</p></details></li>
-          <li><span class="tag">CTL-rate-limiting</span> Rate limiting per-IP su emissione certificati e hash/verify<details><summary>come verificare</summary><p>Invia più di 10 richieste in 60s a /api/cert-pdf (o più di 60 a /api/hash|/api/verify) dallo stesso IP: le richieste oltre soglia ricevono 429.</p></details></li>
-          <li><span class="tag">CTL-turnstile-antibot</span> Challenge anti-bot prima di qualunque emissione di attestazione<details><summary>come verificare</summary><p>Chiama /api/hash senza turnstile_token: risposta 400. Con un token fasullo: 403. Il widget è visibile sopra &quot;Genera attestazione&quot; su attestazione.spaziogenesi.org.</p></details></li>
-          <li><span class="tag">CTL-cors-restricted</span> CORS ristretto al solo dominio dell'interfaccia utente<details><summary>come verificare</summary><p>Chiama un endpoint di imgauth da un'origine diversa da attestazione.spaziogenesi.org in un browser: la risposta CORS nega l'origine. Nota: è una difesa solo lato browser, non contro client diretti.</p></details></li>
-          <li><span class="tag">CTL-r2-eu-archive</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
-          <li><span class="tag">CTL-secrets-escrow</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
-          <li><span class="tag">CTL-availability-monitoring</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati<details><summary>come verificare</summary><p>Prova a chiamare /api/cert-pdf con un hash o timestamp diverso da quello restituito da /api/hash: la richiesta viene rifiutata (400/403). Lo stato del componente &quot;worker&quot; su /api/status riflette anche l'esito della sonda HMAC interna.</p></details></li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify<details><summary>come verificare</summary><p>Invia più di 10 richieste in 60s a /api/cert-pdf (o più di 60 a /api/hash|/api/verify) dallo stesso IP: le richieste oltre soglia ricevono 429.</p></details></li>
+          <li><span class="tag">CTL-turnstile-antibot</span> <span class="pill pill-sage status-badge">attivo</span> Challenge anti-bot prima di qualunque emissione di attestazione<details><summary>come verificare</summary><p>Chiama /api/hash senza turnstile_token: risposta 400. Con un token fasullo: 403. Il widget è visibile sopra &quot;Genera attestazione&quot; su attestazione.spaziogenesi.org.</p></details></li>
+          <li><span class="tag">CTL-cors-restricted</span> <span class="pill pill-sage status-badge">attivo</span> CORS ristretto al solo dominio dell'interfaccia utente<details><summary>come verificare</summary><p>Chiama un endpoint di imgauth da un'origine diversa da attestazione.spaziogenesi.org in un browser: la risposta CORS nega l'origine. Nota: è una difesa solo lato browser, non contro client diretti.</p></details></li>
+          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
+          <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">attivo</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
+          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27001-inspiration-01</span></p>
       </article>
@@ -257,7 +258,7 @@
         </header>
         <p>L'acquisizione dell'impronta digitale dell'opera deve essere documentata e riproducibile: algoritmo dichiarato, implementazione ispezionabile.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-acq-01</span></p>
       </article>
@@ -269,8 +270,8 @@
         </header>
         <p>Le prove (certificato, ancoraggio) devono essere conservate con integrità dimostrabile e non alterabile silenziosamente nel tempo.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-r2-eu-archive</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
-          <li><span class="tag">CTL-ots-anchor</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar<details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></li>
+          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
+          <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar<details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-pres-01</span></p>
       </article>
@@ -282,7 +283,7 @@
         </header>
         <p>Deve esistere un modo per un terzo di analizzare e interpretare l'autenticità di una prova (il certificato) senza doversi fidare ciecamente di chi l'ha emessa.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-cert-pdf-verification</span> Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF<details><summary>come verificare</summary><p>Trascina un certificato PDF emesso nella scheda &quot;Verifica&quot; di attestazione.spaziogenesi.org: il semaforo mostra corrispondenza, autenticità della firma, integrità dei dati e stato dell'ancoraggio Bitcoin — senza dover fidarsi della sola parola del servizio.</p></details></li>
+          <li><span class="tag">CTL-cert-pdf-verification</span> <span class="pill pill-sage status-badge">attivo</span> Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF<details><summary>come verificare</summary><p>Trascina un certificato PDF emesso nella scheda &quot;Verifica&quot; di attestazione.spaziogenesi.org: il semaforo mostra corrispondenza, autenticità della firma, integrità dei dati e stato dell'ancoraggio Bitcoin — senza dover fidarsi della sola parola del servizio.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27042-ver-01</span></p>
       </article>
@@ -294,7 +295,7 @@
         </header>
         <p>Deve esistere un processo definito e provato di rilevazione e risposta ai guasti/incidenti, non solo una reazione ad hoc.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-availability-monitoring</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></li>
+          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27043-ir-01</span></p>
       </article>
@@ -306,7 +307,7 @@
         </header>
         <p>Il certificato, come documento informatico, deve avere una firma e un riferimento temporale che ne rendano opponibile l'integrità nel tempo.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-pades-blt-tsa</span> Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)<details><summary>come verificare</summary><p>Apri un certificato PDF emesso in Adobe Acrobat (o un lettore PAdES conforme): il pannello firme mostra la marca temporale da terza parte attendibile (Adobe AATL), verificabile senza fidarsi del servizio. Non richiede accesso al codice sorgente di authart, ancora privato (P11).</p></details></li>
+          <li><span class="tag">CTL-pades-blt-tsa</span> <span class="pill pill-sage status-badge">attivo</span> Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)<details><summary>come verificare</summary><p>Apri un certificato PDF emesso in Adobe Acrobat (o un lettore PAdES conforme): il pannello firme mostra la marca temporale da terza parte attendibile (Adobe AATL), verificabile senza fidarsi del servizio. Non richiede accesso al codice sorgente di authart, ancora privato (P11).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-cad-doc-01</span></p>
       </article>
@@ -318,7 +319,7 @@
         </header>
         <p>Il servizio deve informare in modo veritiero sul livello di garanzia offerto, senza lasciar intendere una qualificazione eIDAS che non possiede.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-eidas-honest-positioning</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato<details><summary>come verificare</summary><p>Consulta https://trust.spaziogenesi.org, sezione &quot;Cosa NON è questo servizio&quot;: il testo dichiara esplicitamente la natura non qualificata dell'attestazione. Se il testo dovesse sparire o essere annacquato in una futura revisione, il registro GTF lo renderebbe visibile (il record sorgente di questo controllo resta pubblico e versionato).</p></details></li>
+          <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato<details><summary>come verificare</summary><p>Consulta https://trust.spaziogenesi.org, sezione &quot;Cosa NON è questo servizio&quot;: il testo dichiara esplicitamente la natura non qualificata dell'attestazione. Se il testo dovesse sparire o essere annacquato in una futura revisione, il registro GTF lo renderebbe visibile (il record sorgente di questo controllo resta pubblico e versionato).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-eidas-pos-01</span></p>
       </article>
@@ -330,7 +331,7 @@
         </header>
         <p>Chi usa il servizio deve poter leggere in modo chiaro cosa viene trattato, con quale base giuridica e per quanto tempo.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-privacy-policy-public</span> Informativa privacy pubblica e aggiornata<details><summary>come verificare</summary><p>Consulta privacy.html su attestazione.spaziogenesi.org: descrive cosa viene trattato, che il file non lascia mai il dispositivo, le basi giuridiche e i diritti dell'interessato.</p></details></li>
+          <li><span class="tag">CTL-privacy-policy-public</span> <span class="pill pill-sage status-badge">attivo</span> Informativa privacy pubblica e aggiornata<details><summary>come verificare</summary><p>Consulta privacy.html su attestazione.spaziogenesi.org: descrive cosa viene trattato, che il file non lascia mai il dispositivo, le basi giuridiche e i diritti dell'interessato.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-gdpr-info-01</span></p>
       </article>
@@ -342,8 +343,8 @@
         </header>
         <p>Trattare solo i dati strettamente necessari alla finalità di attestazione</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
-          <li><span class="tag">CTL-matomo-cookieless</span> Analytics senza cookie, nessun identificatore persistente<details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
+          <li><span class="tag">CTL-matomo-cookieless</span> <span class="pill pill-sage status-badge">attivo</span> Analytics senza cookie, nessun identificatore persistente<details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-gdpr-min-01</span></p>
       </article>
@@ -355,8 +356,8 @@
         </header>
         <p>L'interessato deve poter esercitare i propri diritti sui dati trattati. Applicabilità parziale: il servizio non crea account, non tratta il file originale (mai inviato al server) e l'analytics è senza identificatori persistenti — la maggior parte dei diritti classici (accesso al proprio profilo, portabilità di dati account) non si applica per assenza stessa del dato, non per una scelta di non conformità.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
-          <li><span class="tag">CTL-matomo-cookieless</span> Analytics senza cookie, nessun identificatore persistente<details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
+          <li><span class="tag">CTL-matomo-cookieless</span> <span class="pill pill-sage status-badge">attivo</span> Analytics senza cookie, nessun identificatore persistente<details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-gdpr-rights-01</span></p>
       </article>
@@ -376,8 +377,8 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-r2-eu-archive</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash</li>
-          <li><span class="tag">CTL-ots-anchor</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar</li>
+          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash</li>
+          <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-archive-tampering</span></p>
       </article>
@@ -391,8 +392,8 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-turnstile-antibot</span> Challenge anti-bot prima di qualunque emissione di attestazione</li>
-          <li><span class="tag">CTL-rate-limiting</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
+          <li><span class="tag">CTL-turnstile-antibot</span> <span class="pill pill-sage status-badge">attivo</span> Challenge anti-bot prima di qualunque emissione di attestazione</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-bot-abuse</span></p>
       </article>
@@ -406,9 +407,9 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hmac-signing</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati</li>
-          <li><span class="tag">CTL-pades-blt-tsa</span> Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)</li>
-          <li><span class="tag">CTL-cert-pdf-verification</span> Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF</li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati</li>
+          <li><span class="tag">CTL-pades-blt-tsa</span> <span class="pill pill-sage status-badge">attivo</span> Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)</li>
+          <li><span class="tag">CTL-cert-pdf-verification</span> <span class="pill pill-sage status-badge">attivo</span> Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-cert-forgery</span></p>
       </article>
@@ -422,7 +423,7 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo</li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-data-exfiltration</span></p>
       </article>
@@ -436,7 +437,7 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-eidas-honest-positioning</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato</li>
+          <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-overclaim-eidas</span></p>
       </article>
@@ -450,8 +451,8 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-secrets-escrow</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
-          <li><span class="tag">CTL-hmac-canary</span> Canary esterno che rileva una rotazione errata del segreto HMAC</li>
+          <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">attivo</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
+          <li><span class="tag">CTL-hmac-canary</span> <span class="pill pill-sage status-badge">attivo</span> Canary esterno che rileva una rotazione errata del segreto HMAC</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-secret-compromise</span></p>
       </article>
@@ -465,7 +466,7 @@
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-availability-monitoring</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero</li>
+          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-single-jurisdiction-outage</span></p>
       </article>

@@ -25,6 +25,15 @@ function pillClass(value) {
   return "pill pill-muted";
 }
 
+// Stato di un controllo (CTL), mostrato ovunque il suo cartellino compaia:
+// senza, nessuno saprebbe se è davvero attivo senza aprire il registro.
+function ctlStatusBadge(status) {
+  const s = String(status ?? "").toLowerCase();
+  const label = { active: "attivo", draft: "bozza", stale: "da rivedere", retired: "superato" }[s] ?? (status || "—");
+  const cls = { active: "pill-sage", draft: "pill-amber", stale: "pill-seal", retired: "pill-muted" }[s] ?? "pill-muted";
+  return `<span class="pill ${cls} status-badge">${esc(label)}</span>`;
+}
+
 function phaseNumber(id) {
   // "ADR-P7" -> 7, "ADR-GTF-002" -> Infinity (ordinate dopo, per id crescente)
   const m = /^ADR-P(\d+)$/.exec(id);
@@ -80,7 +89,7 @@ function renderEidas(records) {
   return `  <section id="eidas" class="folio" data-folio="CTL">
     <h2>Cosa NON è questo servizio</h2>
     <p>${para(ctl?.statement)}</p>
-    <p class="tag-line"><span class="tag">${esc(ctl?.id)}</span></p>
+    <p class="tag-line"><span class="tag">${esc(ctl?.id)}</span> ${ctlStatusBadge(ctl?.status)}</p>
   </section>`;
 }
 
@@ -95,7 +104,7 @@ function renderComplianceMap(records) {
           const verify = ctl.verify_howto
             ? `<details><summary>come verificare</summary><p>${para(ctl.verify_howto)}</p></details>`
             : "";
-          return `          <li><span class="tag">${esc(ctl.id)}</span> ${esc(ctl.title)}${verify}</li>`;
+          return `          <li><span class="tag">${esc(ctl.id)}</span> ${ctlStatusBadge(ctl.status)} ${esc(ctl.title)}${verify}</li>`;
         })
         .join("\n");
       return `      <article class="norm-card">
@@ -125,7 +134,10 @@ function renderRisks(records) {
   const cards = risks
     .map((r) => {
       const mitigations = (r.mitigated_by ?? [])
-        .map((id) => `          <li><span class="tag">${esc(id)}</span> ${esc(records.get(id)?.record?.title ?? id)}</li>`)
+        .map((id) => {
+          const ctl = records.get(id)?.record;
+          return `          <li><span class="tag">${esc(id)}</span> ${ctlStatusBadge(ctl?.status)} ${esc(ctl?.title ?? id)}</li>`;
+        })
         .join("\n");
       return `      <article class="norm-card">
         <header>
@@ -263,6 +275,7 @@ const STYLE = `
   .tag-line { margin: 0.6rem 0 0; }
 
   .pill { display: inline-block; font-size: 0.72rem; padding: 2px 9px; border-radius: 999px; font-weight: 600; }
+  .status-badge { margin-left: 0.3rem; }
   .pill-sage { background: var(--sage-bg); color: var(--sage-fg); }
   .pill-amber { background: var(--amber-bg); color: var(--amber-fg); }
   .pill-seal { background: var(--seal-bg); color: var(--seal-fg); }
