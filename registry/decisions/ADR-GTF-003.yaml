@@ -1,16 +1,18 @@
 id: ADR-GTF-003
 title: Lingua del registro
 date: 2026-07-09
-status: proposed
+status: accepted
 context: >
   Il registro deve essere leggibile sia da modelli AI diversi (interoperabilità
   con schemi/standard, spesso in inglese) sia dagli stakeholder italiani del
   progetto (studenti, ricercatori, collezionisti).
 decision: >
-  Non ancora deciso. Propensione dell'architettura verso record bilingui
-  minimi: campi strutturali (id, tipo, enum di stato) in inglese; campi
-  discorsivi (title, statement, context, decision) in italiano, generando poi
-  una versione inglese del Trust Center in un secondo tempo se richiesta.
+  Record bilingui minimi: campi strutturali (id, tipo, enum di stato) in
+  inglese; campi discorsivi (title, statement, context, decision) in
+  italiano. Già applicato di fatto a tutti i 122 record di M0-M3 (PRN, CTL,
+  REQ, RSK, ADR, MET...); una versione inglese del Trust Center resta
+  possibile in un secondo tempo se richiesta, senza dover toccare il
+  registro.
 consequences: >
   Una scelta "tutto italiano" semplificherebbe la scrittura ma renderebbe più
   difficile il riuso degli schemi da parte di modelli o revisori non italiani.

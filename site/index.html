@@ -674,16 +674,16 @@
         </div>
       </details>
       <details class="entry">
-        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Lingua del registro</span><span class="entry-status">proposed</span></summary>
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Lingua del registro</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">
           <p>Il registro deve essere leggibile sia da modelli AI diversi (interoperabilità con schemi/standard, spesso in inglese) sia dagli stakeholder italiani del progetto (studenti, ricercatori, collezionisti).</p>
-          <p><strong>Decisione:</strong> Non ancora deciso. Propensione dell'architettura verso record bilingui minimi: campi strutturali (id, tipo, enum di stato) in inglese; campi discorsivi (title, statement, context, decision) in italiano, generando poi una versione inglese del Trust Center in un secondo tempo se richiesta.</p>
+          <p><strong>Decisione:</strong> Record bilingui minimi: campi strutturali (id, tipo, enum di stato) in inglese; campi discorsivi (title, statement, context, decision) in italiano. Già applicato di fatto a tutti i 122 record di M0-M3 (PRN, CTL, REQ, RSK, ADR, MET...); una versione inglese del Trust Center resta possibile in un secondo tempo se richiesta, senza dover toccare il registro.</p>
           <p><strong>Conseguenze:</strong> Una scelta &quot;tutto italiano&quot; semplificherebbe la scrittura ma renderebbe più difficile il riuso degli schemi da parte di modelli o revisori non italiani.</p>
           <p class="tag-line"><span class="tag">ADR-GTF-003</span></p>
         </div>
       </details>
       <details class="entry">
-        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Collocazione degli snapshot di evidenza</span><span class="entry-status">proposed</span></summary>
+        <summary><span class="entry-date">2026-07-09</span><span class="entry-title">Collocazione degli snapshot di evidenza</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">
           <p>Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot JSON che devono restare immutabili e verificabili nel tempo. Vanno collocati dentro il repo `gtf` stesso (versionati in git, diffabili, pubblici senza altra infrastruttura) oppure in un bucket R2 dedicato (più adatto se il volume cresce molto).</p>
           <p><strong>Decisione:</strong> Partire con gli snapshot dentro il repo `gtf` (cartella `snapshots/`), perché a basso volume settimanale git è più che sufficiente ed è già pubblico e verificabile via storia; migrare a R2 solo se le dimensioni del repo diventano un problema concreto.</p>

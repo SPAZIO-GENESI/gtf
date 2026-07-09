@@ -1,7 +1,7 @@
 id: ADR-GTF-004
 title: Collocazione degli snapshot di evidenza
 date: 2026-07-09
-status: proposed
+status: accepted
 context: >
   Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot
   JSON che devono restare immutabili e verificabili nel tempo. Vanno
