@@ -1,7 +1,7 @@
 id: ADR-GTF-002
 title: URL pubblico del Trust Center
 date: 2026-07-09
-status: proposed
+status: accepted
 context: >
   Il Trust Center (GTF-ARCH §7) deve avere un URL pubblico stabile. Due
   opzioni: instradarlo sotto il dominio già usato dal servizio
@@ -10,13 +10,18 @@ context: >
   dedicato (trust.spaziogenesi.org) con CNAME diretto su GitHub Pages, senza
   passare dal Worker.
 decision: >
-  Non ancora deciso. Propensione dell'architettura verso la prima opzione
-  (route Worker sotto lo stesso dominio), per coerenza con l'esperienza
-  utente a un solo dominio e perché il pattern è già rodato su /c/*. Va
-  confermata dal gestore prima della fase M3 (Trust Center + Score), che
-  dipende da questa scelta.
+  Sottodominio dedicato trust.spaziogenesi.org (CNAME diretto su GitHub
+  Pages, nessun coinvolgimento del Worker imgauth). Motivo del cambio
+  rispetto alla propensione iniziale dell'architettura (che favoriva la
+  route sotto lo stesso dominio): il principio di indipendenza dei tre
+  repository (CLAUDE.md) vale anche per gtf, che deve potersi pubblicare da
+  solo senza mai richiedere modifiche a imgauth. Il ragionamento "un solo
+  dominio" ha senso per /c/<hash> (fa parte del percorso di verifica di
+  un'opera, serve continuità di esperienza) ma non per il Trust Center, che
+  è una pagina istituzionale/di trasparenza, non parte di quel flusso.
 consequences: >
-  Se si sceglie il sottodominio, si risparmia un hop Worker ma si introduce
-  un secondo dominio user-facing; se si sceglie la route, serve toccare
-  wrangler.toml del Worker imgauth (coordinamento cross-repo, non solo gtf).
+  DNS: record CNAME "trust" → spazio-genesi.github.io. Impostazione del
+  custom domain nelle GitHub Pages settings del repo gtf rimandata alla fase
+  M3 (Trust Center + Score), quando site/ avrà davvero un contenuto da
+  servire. Nessuna modifica necessaria a imgauth/wrangler.toml.
 visibility: public
