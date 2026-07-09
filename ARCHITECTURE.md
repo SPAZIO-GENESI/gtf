@@ -243,7 +243,7 @@ una-tantum come ADR retroattive con `evidence: [EVD-git-*]` (§12, fase M1).
 | `gtf` (nuovo) | **pubblico** | SSOT: registro + schemi + generatori + Trust Center + score |
 | `imgauth` | pubblico (AGPL) | L4; le sue Actions producono evidenze (monitor); `IMP-*` puntano qui |
 | `imgauthweb` | pubblico (MIT) | L4/L6; ospita il link al Trust Center; `IMP-*` puntano qui |
-| `autart-signer` | da pubblicare (P11 ⏳) | L4; prerequisito per CTL "codice interamente pubblico" |
+| `autart-signer` | pubblico (AGPL, dal 2026-07-09) | L4; firma PAdES/TSA — codice ispezionabile |
 | `img-auth-hub` | privato | Officina interna: bozze, marketing, materiale operativo. NON è SSOT di nulla che sia pubblico: ciò che matura migra in `gtf` |
 
 **Flussi tra repo** (tutti via GitHub Actions, nessun servizio nuovo):

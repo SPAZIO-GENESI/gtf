@@ -14,9 +14,10 @@ decision: >
   sostituita in blocco con un commit unico contenente LICENSE AGPL e README
   riscritto (il precedente descriveva uno stack .NET errato).
 consequences: >
-  img-auth-hub resta privato per scelta (contiene materiale operativo);
-  resta un'azione manuale in sospeso — rendere pubblico il repo
-  autart-signer, idealmente eliminandolo e ricreandolo prima della
-  pubblicazione per garanzia assoluta contro oggetti orfani lato server.
+  img-auth-hub resta privato per scelta (contiene materiale operativo).
+  Il repo autart-signer è stato reso pubblico il 2026-07-09 (eliminato e
+  ricreato, come previsto, per garanzia contro oggetti orfani lato server):
+  github.com/SPAZIO-GENESI/autart-signer, commit unico 9e524b2 verificato
+  via API pubblica.
 evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-git-authart]
 visibility: public

@@ -3,5 +3,4 @@ title: Firma PAdES B-LT con marca temporale RFC 3161 e LTV
 repo: autart-signer
 ref: "app.py — pyhanko, firma PKCS#7 con certificato self-signed + marca temporale da TSA configurabile (TSA_URL, default DigiCert/Adobe AATL) + catena TSA/OCSP embedded nel DSS; fail-open su TSA/OCSP irraggiungibili"
 supports: [CTL-pades-blt-tsa]
-visibility: internal
-why_not_public: "il repo autart-signer non è ancora stato reso pubblico su GitHub (azione manuale in sospeso, backlog P11)"
+visibility: public

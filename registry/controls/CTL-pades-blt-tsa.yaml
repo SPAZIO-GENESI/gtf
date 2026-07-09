@@ -9,8 +9,9 @@ evidenced_by: [EVD-git-authart]
 verify_howto: >
   Apri un certificato PDF emesso in Adobe Acrobat (o un lettore PAdES
   conforme): il pannello firme mostra la marca temporale da terza parte
-  attendibile (Adobe AATL), verificabile senza fidarsi del servizio. Non
-  richiede accesso al codice sorgente di authart, ancora privato (P11).
+  attendibile (Adobe AATL), verificabile senza fidarsi del servizio.
+  Dal 2026-07-09 il codice che genera la firma è anche direttamente
+  ispezionabile: github.com/SPAZIO-GENESI/autart-signer (AGPL-3.0).
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09

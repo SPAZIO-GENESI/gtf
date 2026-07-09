@@ -1,7 +1,6 @@
 id: EVD-git-authart
 title: Storia git del firmatario crittografico PDF (repo autart-signer)
-location: { system: github, ref: "repo autart-signer, storia commit + tag di versione" }
+location: { system: github, ref: "repo autart-signer, commit unico 9e524b2", public_via: "https://github.com/SPAZIO-GENESI/autart-signer" }
 collection: auto
-integrity: "storia sostituita in blocco una tantum (rimozione p12/password dalla cronologia, vedi backlog P11); da quel punto in poi immutabile di fatto"
-visibility: internal
-why_not_public: "il repo non è ancora stato reso pubblico su GitHub (azione manuale in sospeso, backlog P11); l'evidenza esiste ma non è ancora verificabile da terzi"
+integrity: "storia sostituita in blocco una tantum (rimozione p12/password dalla cronologia, vedi backlog P11); repo eliminato e ricreato il 2026-07-09 per garanzia contro oggetti orfani lato server; da quel punto in poi immutabile di fatto"
+visibility: public
