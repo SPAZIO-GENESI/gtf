@@ -19,6 +19,7 @@
     "produced_by": { "type": "string" },
     "collection": { "type": "string", "enum": ["auto", "manual"] },
     "freshness_max_days": { "type": "integer", "minimum": 1 },
+    "last_seen": { "type": "string", "format": "date", "description": "Data dell'ultima raccolta riuscita (scritta dal collettore automatico, generators/collect-evidence.mjs)" },
     "integrity": { "type": "string" },
     "supports": { "type": "array", "items": { "type": "string" } },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },

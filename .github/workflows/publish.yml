@@ -8,6 +8,7 @@ on:
       - "schemas/**"
       - "generators/**"
       - "site/**"
+      - "snapshots/**"
       - "package.json"
       - ".github/workflows/publish.yml"
   workflow_dispatch:

@@ -3,8 +3,13 @@ title: Integrità
 formula: >
   Combinazione di: esito della sonda HMAC interna (da /api/status), quota
   di release con tag git, quota di ancore OpenTimestamps mensili riuscite
-  su attese. Non ancora calcolabile: richiede il collettore di evidenze
-  live (GTF-ARCH §6.3), non ancora costruito, e uno storico di release
-  taggate (nessuna oggi). Si attiverà quando il collettore esisterà.
-unit: "0-100 oppure n/d"
+  su attese. Dal collettore di evidenze (generators/collect-evidence.mjs,
+  settimanale) è calcolabile il solo primo componente: il valore del campo
+  "worker" dell'ultimo snapshot (ok=100, degraded=50, down=0). Gli altri
+  due componenti restano fuori portata — nessuno storico di release
+  taggate esiste ancora, e l'ancoraggio dogfooding mensile (GTF-ARCH §6.4)
+  non è ancora stato costruito — quindi il valore mostrato è dichiaratamente
+  parziale (contrassegnato con un asterisco nel Trust Center), non l'intero
+  indicatore descritto in GTF-ARCH §8.2.
+unit: "0-100 (parziale) oppure n/d se nessuno snapshot esiste ancora"
 visibility: public

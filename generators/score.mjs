@@ -1,8 +1,31 @@
-import { writeFileSync } from "node:fs";
+import { writeFileSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
 
 const SITE_DIR = join(ROOT, "site");
+const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+
+// Legge l'ultimo snapshot settimanale del collettore (generators/collect-evidence.mjs),
+// se esiste, per il solo componente "worker" (sonda HMAC) di /api/status.
+// Le cartelle YYYY-Www ordinano correttamente in lessicografico (settimana a 2 cifre).
+function latestSnapshotWorkerStatus() {
+  if (!existsSync(SNAPSHOTS_DIR)) return null;
+  const weeks = readdirSync(SNAPSHOTS_DIR, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)
+    .sort();
+  if (weeks.length === 0) return null;
+  const latest = weeks[weeks.length - 1];
+  const file = join(SNAPSHOTS_DIR, latest, "status.json");
+  if (!existsSync(file)) return null;
+  try {
+    const wrapper = JSON.parse(readFileSync(file, "utf8"));
+    if (!wrapper.ok || !wrapper.data?.worker) return null;
+    return { week: latest, worker: wrapper.data.worker };
+  } catch {
+    return null;
+  }
+}
 
 function isPublic(record) {
   return (record.visibility ?? "public") === "public";
@@ -50,9 +73,18 @@ function computeIndicators(records) {
   // Riproducibilità: stesso segnale del secondo termine di Trasparenza (limite dichiarato in MET-reproducibility)
   const reproducibility = pctCtlVerify;
 
+  // Integrità: parziale, solo componente "worker" (sonda HMAC) dell'ultimo snapshot
+  // raccolto — non include ancora storico release taggate né esito ancore OTS mensili.
+  const snap = latestSnapshotWorkerStatus();
+  const WORKER_SCORE = { ok: 100, degraded: 50, down: 0 };
+  const integrity = snap ? WORKER_SCORE[snap.worker] ?? null : null;
+  const integrityNote = snap
+    ? `parziale: solo sonda HMAC (componente "worker", snapshot ${snap.week}) — non ancora storico release taggate né esito ancore OTS mensili`
+    : "richiede almeno uno snapshot dal collettore di evidenze (non ancora raccolto)";
+
   return [
     { id: "MET-transparency", label: "Trasparenza", value: transparency },
-    { id: "MET-integrity", label: "Integrità", value: null, note: "richiede il collettore di evidenze live (non ancora costruito)" },
+    { id: "MET-integrity", label: "Integrità", value: integrity, note: integrityNote },
     { id: "MET-traceability", label: "Tracciabilità", value: traceability },
     { id: "MET-documentation", label: "Documentazione", value: documentation },
     { id: "MET-automation", label: "Automazione", value: automation },

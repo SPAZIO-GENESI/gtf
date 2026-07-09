@@ -1,0 +1,13 @@
+{
+  "collected_at": "2026-07-09T11:49:36.651Z",
+  "week": "2026-W28",
+  "files": {
+    "status.json": "acc4d0497efc8f9dc8aeb23bf8c9d7d0061de575add378314487b6a58026278d",
+    "status-history.json": "60ac761323dd9861fd27ba037957029a064bab9295d489764059bf1b70649772",
+    "health-log.json": "25921ba9a09eaa2d16134efd24f434c598f2710451799874e1efa1907731675f",
+    "ping-imgauth.json": "ad1cdc6c8ea9898fd20cc2ca9fb5de309273269c0f481168775f87615eb3f941",
+    "monitor-issues.json": "d10cc982fa92b6c55d2cda6251d10c23715ca6f3c70f1744b05cfa4204918991",
+    "git-imgauth.json": "ba712e489804d2f90f1438afcacc7f81ef7765e012f31a41e9c583566d875637",
+    "git-imgauthweb.json": "0cd58355c18515779d35c062ced8c8018f60ed6d698aab248b280efd32e17a66"
+  }
+}

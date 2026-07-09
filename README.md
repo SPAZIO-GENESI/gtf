@@ -20,27 +20,29 @@ servizio, è il progetto del sistema che la produce. Il Trust Center pubblico
   implementazioni, evidenze, processi, decisioni, rischi, dati, metriche).
   Uno schema JSON per tipo in `schemas/`.
 - `generators/` — script Node: `validate.mjs` (schema + integrità del grafo),
-  `score.mjs` (Open Trust Score dal solo registro), `build-site.mjs`
-  (genera `site/index.html`).
+  `collect-evidence.mjs` (snapshot settimanale da endpoint pubblici),
+  `score.mjs` (Open Trust Score dal registro + ultimo snapshot),
+  `build-site.mjs` (genera `site/index.html`).
 - `site/` — Trust Center pubblico, generato — non modificarlo a mano.
-- `snapshots/` — bundle di evidenze raccolte nel tempo (non ancora popolato,
-  vedi ADR-GTF-004).
+- `snapshots/` — bundle di evidenze raccolte settimanalmente dal collettore
+  (vedi ADR-GTF-004 per la collocazione nel repo invece che su R2).
 
 ## Sviluppo locale
 
 ```bash
 npm install
-npm run validate    # schema, integrità dei riferimenti, anti-segreti
-npm run build       # validate + score + build-site (come in CI)
+npm run validate          # schema, integrità dei riferimenti, anti-segreti
+npm run collect-evidence  # snapshot da endpoint pubblici (sola lettura)
+npm run build             # validate + score + build-site (come in CI)
 ```
 
 ## Stato
 
-**M3 v0** completata: Trust Center generato dal registro (missione, principi,
-posizionamento eIDAS, Compliance Map, rischi, decisioni) + primo calcolo
-dell'Open Trust Score (5 dei 10 indicatori calcolabili solo dal registro, gli
-altri dichiaratamente `n/d`). Prossimi passi in
-[ARCHITECTURE.md §12](./ARCHITECTURE.md#12-roadmap--wbs).
+**M4 in corso**: canary HMAC (P17-B) attivo e verificato in produzione;
+collettore di evidenze settimanale attivo (sblocca parzialmente l'indicatore
+Integrità dello score). Restano operative: ancoraggio dogfooding mensile,
+restore drill, review esterna annuale, pubblicazione di `autart-signer`
+(P11). Dettagli in [ARCHITECTURE.md §12](./ARCHITECTURE.md#12-roadmap--wbs).
 
 ## Licenza
 

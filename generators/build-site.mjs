@@ -41,10 +41,14 @@ function phaseNumber(id) {
 }
 
 function renderLedger(score) {
+  const hasPartial = score.indicators.some((i) => i.value !== null && i.note);
   const rows = score.indicators
     .map((i) => {
       if (i.value === null) {
         return `        <tr class="is-pending" title="${esc(i.note)}"><td class="ledger-label">${esc(i.label)}</td><td class="ledger-value">n/d</td></tr>`;
+      }
+      if (i.note) {
+        return `        <tr class="is-counted is-partial" title="${esc(i.note)}"><td class="ledger-label">${esc(i.label)} *</td><td class="ledger-value">${i.value}</td></tr>`;
       }
       return `        <tr class="is-counted"><td class="ledger-label">${esc(i.label)}</td><td class="ledger-value">${i.value}</td></tr>`;
     })
@@ -56,7 +60,7 @@ ${rows}
           <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">${score.overall}<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
-      <p class="ledger-note">${score.available_count} di ${score.total} indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
+      <p class="ledger-note">${score.available_count} di ${score.total} indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero.${hasPartial ? " * = valore parziale, passa il mouse per i dettagli." : ""} <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
     </div>`;
 }
 
@@ -253,6 +257,8 @@ const STYLE = `
   .ledger-value { text-align: right; font-family: var(--font-mono); }
   tr.is-pending .ledger-label, tr.is-pending .ledger-value { color: var(--ink-muted); font-style: italic; cursor: help; }
   tr.is-pending .ledger-value::before { content: "— "; }
+  tr.is-partial { cursor: help; }
+  tr.is-partial .ledger-label { border-bottom: 1px dotted var(--ink-muted); }
   tr.ledger-total td { padding-top: 0.6rem; border-top: 3px double var(--ink); font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; }
   .ledger-total .unit { font-size: 1rem; font-weight: 400; color: var(--ink-muted); }
   .ledger-note { font-size: 0.85rem; color: var(--ink-muted); margin: 0.8rem 0 0; }
