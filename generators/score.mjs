@@ -11,7 +11,7 @@ const SNAPSHOTS_DIR = join(ROOT, "snapshots");
 function latestSnapshotWorkerStatus() {
   if (!existsSync(SNAPSHOTS_DIR)) return null;
   const weeks = readdirSync(SNAPSHOTS_DIR, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
+    .filter((d) => d.isDirectory() && d.name !== "anchors")
     .map((d) => d.name)
     .sort();
   if (weeks.length === 0) return null;

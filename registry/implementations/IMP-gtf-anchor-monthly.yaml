@@ -1,0 +1,6 @@
+id: IMP-gtf-anchor-monthly
+title: Costruzione del bundle mensile cumulativo di evidenze da ancorare
+repo: gtf
+ref: "generators/anchor-monthly.mjs — concatena in modo deterministico i manifest.json di tutti gli snapshot settimanali non ancora coperti in snapshots/anchors/<periodo>-bundle.json; l'ancoraggio vero e proprio (hash+cert-pdf+OTS) resta un passo manuale su attestazione.spaziogenesi.org, per il quale serve un umano (Turnstile)"
+supports: [CTL-dogfooding-anchor]
+visibility: public

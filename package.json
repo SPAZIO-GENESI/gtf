@@ -7,6 +7,7 @@
   "scripts": {
     "validate": "node generators/validate.mjs",
     "collect-evidence": "node generators/collect-evidence.mjs",
+    "anchor-monthly": "node generators/anchor-monthly.mjs",
     "score": "node generators/score.mjs",
     "build-site": "node generators/build-site.mjs",
     "build": "npm run validate && npm run score && npm run build-site"

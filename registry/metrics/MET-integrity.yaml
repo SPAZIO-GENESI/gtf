@@ -5,10 +5,13 @@ formula: >
   di release con tag git, quota di ancore OpenTimestamps mensili riuscite
   su attese. Dal collettore di evidenze (generators/collect-evidence.mjs,
   settimanale) è calcolabile il solo primo componente: il valore del campo
-  "worker" dell'ultimo snapshot (ok=100, degraded=50, down=0). Gli altri
-  due componenti restano fuori portata — nessuno storico di release
-  taggate esiste ancora, e l'ancoraggio dogfooding mensile (GTF-ARCH §6.4)
-  non è ancora stato costruito — quindi il valore mostrato è dichiaratamente
+  "worker" dell'ultimo snapshot (ok=100, degraded=50, down=0). Il terzo
+  componente ha ora un primo dato reale (CTL-dogfooding-anchor, primo
+  ancoraggio periodo 2026-07 — vedi EVD-dogfooding-anchor), ma score.mjs
+  non lo legge ancora nel calcolo: resta da definire quale sia il
+  denominatore "atteso" (mesi dalla nascita del GTF) prima di incorporarlo.
+  Il secondo componente resta fuori portata — nessuno storico di release
+  taggate esiste ancora. Il valore mostrato è quindi tuttora dichiaratamente
   parziale (contrassegnato con un asterisco nel Trust Center), non l'intero
   indicatore descritto in GTF-ARCH §8.2.
 unit: "0-100 (parziale) oppure n/d se nessuno snapshot esiste ancora"

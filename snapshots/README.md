@@ -8,6 +8,8 @@ issue del monitor, ultimi commit dei repo pubblici — JSON grezzi +
 `manifest.json` con SHA-256 di ogni file. Il collettore aggiorna anche il
 campo `last_seen` delle evidenze (EVD) corrispondenti nel registro.
 
-Non ancora presente: l'ancoraggio dogfooding mensile in Bitcoin (§6.4) —
-resta nel backlog di M4. Collocazione decisa in ADR-GTF-004 (nel repo,
-non R2, finché il volume resta basso).
+L'ancoraggio dogfooding mensile in Bitcoin (§6.4, `generators/anchor-monthly.mjs`)
+scrive in `anchors/<periodo>-bundle.json` il bundle cumulativo attestato col
+servizio stesso; primo ancoraggio: periodo 2026-07 (vedi CTL-dogfooding-anchor,
+EVD-dogfooding-anchor nel registro). Collocazione decisa in ADR-GTF-004 (nel
+repo, non R2, finché il volume resta basso).

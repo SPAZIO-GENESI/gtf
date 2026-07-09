@@ -1,0 +1,22 @@
+id: CTL-dogfooding-anchor
+title: "Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio"
+status: active
+visibility: public
+satisfies: [REQ-27037-pres-01]
+mitigates: [RSK-archive-tampering]
+implemented_by: [IMP-gtf-anchor-monthly, IMP-imgauth-hmac, IMP-imgauth-ots]
+evidenced_by: [EVD-dogfooding-anchor, EVD-git-imgauth]
+verify_howto: >
+  Mensile: generators/anchor-monthly.mjs concatena i manifest.json degli
+  snapshot settimanali non ancora coperti in un bundle deterministico
+  (committato in snapshots/anchors/); un umano lo trascina su
+  attestazione.spaziogenesi.org, genera l'attestazione e scarica il PDF
+  (solo /api/cert-pdf innesca l'ancoraggio OpenTimestamps reale). Chiunque
+  può ricalcolare l'hash del bundle nel repo gtf, confrontarlo con quello
+  stampato sul certificato, e verificare la prova .ots indipendentemente
+  su opentimestamps.org. Primo ancoraggio: periodo 2026-07 (bundle
+  snapshots/anchors/2026-07-bundle.json, hash
+  cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09
