@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 6 * * 1"   # ogni lunedì alle 06:00 UTC
   workflow_dispatch:
+    inputs:
+      test_telegram:
+        description: "Invia un messaggio Telegram di prova invece del controllo cadenze reale"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -29,6 +34,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_TELEGRAM: ${{ inputs.test_telegram }}
       - name: Commit lo snapshot e l'aggiornamento di last_seen, se cambia qualcosa
         run: |
           git config user.name "github-actions[bot]"

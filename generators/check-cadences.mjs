@@ -53,6 +53,15 @@ async function sendTelegram(text) {
 }
 
 async function main() {
+  if (process.env.TEST_TELEGRAM === "true") {
+    await sendTelegram(
+      "Genesis Trust Framework — messaggio di prova (check-cadences.mjs, avviato manualmente con test_telegram). " +
+        "Se lo stai leggendo, il canale funziona: i prossimi avvisi arriveranno solo quando un processo ricorrente sarà davvero scaduto."
+    );
+    console.log("Test Telegram inviato (o loggato soltanto, se i secret mancano ancora).");
+    return;
+  }
+
   const records = loadRegistry();
   const overdue = [];
 
