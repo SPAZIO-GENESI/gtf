@@ -1,0 +1,12 @@
+id: PRN-01
+type: principle
+title: Transparency by Design
+statement: >
+  Ogni elemento del sistema è visibile per default; ciò che non lo è deve
+  giustificare esplicitamente perché.
+rule: >
+  Ogni record del registro ha `visibility: public|internal|secret`; default
+  `public`; `internal`/`secret` richiedono il campo `why_not_public` compilato.
+derives_from: MSN-01
+status: active
+visibility: public

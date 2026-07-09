@@ -1,0 +1,12 @@
+id: PRN-03
+type: principle
+title: Documentation by Design
+statement: >
+  Nessun documento pubblico si scrive a mano nel Trust Center: si genera dal
+  registro, sempre, così non può mai divergere da ciò che è vero.
+rule: >
+  Nessun documento scritto a mano nel Trust Center: tutto generato dal
+  registro; la CI fallisce se un file pubblicato non ha un record sorgente.
+derives_from: MSN-01
+status: active
+visibility: public

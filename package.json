@@ -1,0 +1,16 @@
+{
+  "name": "gtf",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Genesis Trust Framework — registro, schemi e generatori del Trust Center di Spazio Genesi ETS",
+  "scripts": {
+    "validate": "node generators/validate.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "js-yaml": "^4.1.0"
+  }
+}

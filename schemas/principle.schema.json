@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "principle.schema.json",
+  "title": "Missione o Principio (MSN / PRN)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^(MSN|PRN)-[\\w-]+$" },
+    "type": { "type": "string", "enum": ["mission", "principle"] },
+    "title": { "type": "string" },
+    "statement": { "type": "string" },
+    "rule": { "type": "string", "description": "Regola meccanicamente verificabile dalla CI (solo per i principi)" },
+    "derives_from": { "type": "string", "description": "ID della missione da cui il principio discende (MSN-01)" },
+    "status": { "type": "string", "enum": ["active", "retired"], "default": "active" },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "type", "title", "statement"],
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "principle" } } },
+      "then": { "required": ["rule", "derives_from"] }
+    },
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

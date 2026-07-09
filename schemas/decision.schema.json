@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "decision.schema.json",
+  "title": "Decisione (ADR)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ADR-[\\w-]+$" },
+    "title": { "type": "string" },
+    "date": { "type": "string", "format": "date" },
+    "status": { "type": "string", "enum": ["proposed", "accepted", "superseded"] },
+    "context": { "type": "string" },
+    "decision": { "type": "string" },
+    "consequences": { "type": "string" },
+    "affects": { "type": "array", "items": { "type": "string" } },
+    "evidence": { "type": "array", "items": { "type": "string" } },
+    "superseded_by": { "type": "string" },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "date", "status", "context", "decision"],
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "superseded" } } },
+      "then": { "required": ["superseded_by"] }
+    },
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

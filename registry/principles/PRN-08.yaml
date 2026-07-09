@@ -1,0 +1,13 @@
+id: PRN-08
+type: principle
+title: Open Verification
+statement: >
+  Ogni affermazione pubblica porta con sé il modo per un terzo di verificarla
+  da solo, senza credenziali e senza doverci credere.
+rule: >
+  Per ogni affermazione pubblica esiste uno script o una procedura eseguibile
+  da terzi senza credenziali (`verify_howto` obbligatorio sui controlli
+  pubblici).
+derives_from: MSN-01
+status: active
+visibility: public

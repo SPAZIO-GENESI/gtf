@@ -1,0 +1,11 @@
+id: MSN-01
+type: mission
+title: Missione
+statement: >
+  Spazio Genesi ETS costruisce un servizio di attestazione digitale
+  (attestazione.spaziogenesi.org) capace di dimostrare pubblicamente, con
+  evidenze verificabili da chiunque, perché merita fiducia — senza mai
+  chiedere a nessuno di crederci sulla parola. La fiducia non si dichiara,
+  si dimostra.
+status: active
+visibility: public

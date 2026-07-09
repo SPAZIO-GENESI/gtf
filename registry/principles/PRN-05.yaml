@@ -1,0 +1,12 @@
+id: PRN-05
+type: principle
+title: Privacy by Design
+statement: >
+  Ogni flusso di dati personali è mappato, con base giuridica e retention
+  dichiarate, prima ancora di essere costruito — non dopo.
+rule: >
+  Ogni flusso di dati ha un record DAT (dato, base giuridica, retention);
+  un flusso senza DAT fa fallire la build.
+derives_from: MSN-01
+status: active
+visibility: public

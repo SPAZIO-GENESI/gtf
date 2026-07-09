@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "action.schema.json",
+  "title": "Azione correttiva/migliorativa (ACT)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ACT-[\\w-]+$" },
+    "title": { "type": "string" },
+    "origin": { "type": "string", "description": "ID dell'INC/ADR/RSK di origine, o testo libero" },
+    "due_date": { "type": "string", "format": "date" },
+    "status": { "type": "string", "enum": ["open", "done", "overdue"] },
+    "owner": { "type": "string" },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "due_date", "status"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

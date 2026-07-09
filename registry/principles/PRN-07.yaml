@@ -1,0 +1,13 @@
+id: PRN-07
+type: principle
+title: Automation by Design
+statement: >
+  Ciò che si può raccogliere automaticamente si raccoglie automaticamente;
+  la raccolta manuale è l'eccezione da giustificare, non la norma.
+rule: >
+  Campo `collection: auto|manual` su ogni evidenza (EVD); la percentuale
+  `auto` è un indicatore dello score; nuove EVD `manual` richiedono
+  giustificazione.
+derives_from: MSN-01
+status: active
+visibility: public

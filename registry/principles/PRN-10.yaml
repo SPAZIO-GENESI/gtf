@@ -1,0 +1,13 @@
+id: PRN-10
+type: principle
+title: Least Complexity
+statement: >
+  Il framework deve essere sostenibile da un'organizzazione di volontari:
+  ogni processo ricorrente dichiara il proprio costo umano, e il sistema
+  ha un tetto.
+rule: >
+  Ogni nuovo processo dichiara `human_cost_minutes_month`; il totale di
+  sistema ha un tetto (budget 8 h/mese) visibile nel Trust Center.
+derives_from: MSN-01
+status: active
+visibility: public

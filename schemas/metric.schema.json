@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "metric.schema.json",
+  "title": "Metrica / indicatore (MET)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^MET-[\\w-]+$" },
+    "title": { "type": "string" },
+    "formula": { "type": "string" },
+    "unit": { "type": "string" },
+    "target": { "type": "string" },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "formula"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "risk.schema.json",
+  "title": "Rischio (RSK)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^RSK-[\\w-]+$" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "likelihood": { "type": "string", "enum": ["low", "medium", "high"] },
+    "impact": { "type": "string", "enum": ["low", "medium", "high"] },
+    "mitigated_by": { "type": "array", "items": { "type": "string" } },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "description"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

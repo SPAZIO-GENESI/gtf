@@ -1,0 +1,18 @@
+id: ADR-GTF-001
+title: Nome del framework e del repository
+date: 2026-07-09
+status: accepted
+context: >
+  Il progetto era stato disegnato come "Open Trust Framework" (OTF). Il
+  gestore ha chiesto di rinominarlo per coerenza col nome dell'ente titolare.
+decision: >
+  Il framework si chiama "Genesis Trust Framework" (GTF); il repository
+  pubblico che ne è la Single Source of Truth è `spazio-genesi/gtf`. I nomi
+  di componenti interni ("Trust Center", "Trust Registry", "Open Trust
+  Score") restano invariati: sono nomi funzionali, non il brand del
+  framework.
+consequences: >
+  Tutti i riferimenti a OTF/ADR-OTF-* nell'architettura sono stati rinominati
+  a GTF/ADR-GTF-* prima della creazione del repo, per evitare di partire con
+  un nome già da correggere.
+visibility: public

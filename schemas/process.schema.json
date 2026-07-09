@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "process.schema.json",
+  "title": "Processo (PRC)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^PRC-[\\w-]+$" },
+    "title": { "type": "string" },
+    "owner": { "type": "string" },
+    "trigger": { "type": "string" },
+    "output": { "type": "string" },
+    "produces_evidence": { "type": "array", "items": { "type": "string" } },
+    "human_cost_minutes_month": { "type": "number", "minimum": 0 },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "owner", "trigger", "output", "human_cost_minutes_month"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

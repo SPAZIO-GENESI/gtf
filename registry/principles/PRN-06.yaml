@@ -1,0 +1,12 @@
+id: PRN-06
+type: principle
+title: Governance by Design
+statement: >
+  Ogni modifica al registro passa da revisione; le decisioni non ovvie
+  lasciano una traccia esplicita, non solo un commit.
+rule: >
+  Ogni modifica al registro passa da PR; le decisioni non ovvie richiedono
+  un'ADR obbligatoria (l'etichetta `needs-adr` blocca il merge finché non c'è).
+derives_from: MSN-01
+status: active
+visibility: public

@@ -1,0 +1,20 @@
+id: ADR-GTF-004
+title: Collocazione degli snapshot di evidenza
+date: 2026-07-09
+status: proposed
+context: >
+  Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot
+  JSON che devono restare immutabili e verificabili nel tempo. Vanno
+  collocati dentro il repo `gtf` stesso (versionati in git, diffabili,
+  pubblici senza altra infrastruttura) oppure in un bucket R2 dedicato
+  (più adatto se il volume cresce molto).
+decision: >
+  Partire con gli snapshot dentro il repo `gtf` (cartella `snapshots/`),
+  perché a basso volume settimanale git è più che sufficiente ed è già
+  pubblico e verificabile via storia; migrare a R2 solo se le dimensioni del
+  repo diventano un problema concreto.
+consequences: >
+  Nessun costo aggiuntivo nella fase iniziale; da rivalutare quando il
+  volume degli snapshot cresce (nessuna soglia numerica fissata ora — lo
+  si osserva in fase M4).
+visibility: public

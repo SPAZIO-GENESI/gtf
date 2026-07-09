@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "incident.schema.json",
+  "title": "Incidente (INC)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^INC-[\\w-]+$" },
+    "title": { "type": "string" },
+    "date": { "type": "string", "format": "date" },
+    "severity": { "type": "string", "enum": ["minor", "major", "critical"] },
+    "summary": { "type": "string" },
+    "root_cause": { "type": "string" },
+    "actions": { "type": "array", "items": { "type": "string" } },
+    "status": { "type": "string", "enum": ["open", "closed"] },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "date", "severity", "summary", "status"],
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "closed" } } },
+      "then": { "required": ["actions"], "properties": { "actions": { "type": "array", "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "data.schema.json",
+  "title": "Dato / flusso personale (DAT)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^DAT-[\\w-]+$" },
+    "title": { "type": "string" },
+    "data_categories": { "type": "array", "items": { "type": "string" } },
+    "legal_basis": { "type": "string" },
+    "retention": { "type": "string" },
+    "flow": { "type": "string" },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "data_categories", "legal_basis", "retention"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "evidence.schema.json",
+  "title": "Evidenza (EVD)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^EVD-[\\w-]+$" },
+    "title": { "type": "string" },
+    "location": {
+      "type": "object",
+      "properties": {
+        "system": { "type": "string" },
+        "ref": { "type": "string" },
+        "public_via": { "type": "string" }
+      },
+      "required": ["system", "ref"],
+      "additionalProperties": false
+    },
+    "produced_by": { "type": "string" },
+    "collection": { "type": "string", "enum": ["auto", "manual"] },
+    "freshness_max_days": { "type": "integer", "minimum": 1 },
+    "integrity": { "type": "string" },
+    "supports": { "type": "array", "items": { "type": "string" } },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "location", "collection"],
+  "allOf": [
+    {
+      "if": { "properties": { "collection": { "const": "manual" } } },
+      "then": { "required": ["produced_by"] }
+    },
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

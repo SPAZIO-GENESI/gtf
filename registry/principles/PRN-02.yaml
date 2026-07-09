@@ -1,0 +1,12 @@
+id: PRN-02
+type: principle
+title: Evidence by Design
+statement: >
+  Nessuna affermazione senza un'evidenza che la sostenga; un'evidenza scaduta
+  degrada silenziosamente il controllo che dipende da lei, mai lo status quo.
+rule: >
+  Ogni controllo (CTL) referenzia ≥1 evidenza (EVD) con `freshness`
+  dichiarata; evidenza scaduta → controllo passa a `stale`, lo score scende.
+derives_from: MSN-01
+status: active
+visibility: public

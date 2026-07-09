@@ -1,0 +1,12 @@
+id: PRN-04
+type: principle
+title: Security by Design
+statement: >
+  Ogni controllo di sicurezza è ancorato a un'implementazione reale e a una
+  minaccia dichiarata: nessuna misura "di facciata".
+rule: >
+  Ogni CTL di sicurezza referenzia l'implementazione (IMP → file/riga/config)
+  e il rischio (RSK) che mitiga.
+derives_from: MSN-01
+status: active
+visibility: public

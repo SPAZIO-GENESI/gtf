@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "glossary.schema.json",
+  "title": "Voce di glossario (GLS)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^GLS-[\\w-]+$" },
+    "term": { "type": "string" },
+    "definition": { "type": "string" },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "term", "definition"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

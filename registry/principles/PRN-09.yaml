@@ -1,0 +1,12 @@
+id: PRN-09
+type: principle
+title: Continuous Improvement
+statement: >
+  Un incidente senza un'azione correttiva è un incidente destinato a
+  ripetersi; il sistema non permette che accada senza segnalarlo.
+rule: >
+  Ogni incidente (INC) produce ≥1 azione (ACT) con scadenza; le ACT scadute
+  e ancora aperte mostrano un banner nel Trust Center.
+derives_from: MSN-01
+status: active
+visibility: public

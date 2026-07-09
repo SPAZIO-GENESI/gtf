@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "implementation.schema.json",
+  "title": "Implementazione (IMP)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^IMP-[\\w-]+$" },
+    "title": { "type": "string" },
+    "repo": { "type": "string", "description": "Repository che ospita l'implementazione (es. imgauth)" },
+    "ref": { "type": "string", "description": "Puntatore versionato: file#anchor o chiave di config" },
+    "supports": { "type": "array", "items": { "type": "string" } },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "title", "repo", "ref"],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}

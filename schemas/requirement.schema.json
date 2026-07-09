@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "requirement.schema.json",
+  "title": "Requisito normativo adottato (REQ)",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^REQ-[\\w-]+$" },
+    "source": {
+      "type": "object",
+      "properties": {
+        "norm": { "type": "string" },
+        "ref": { "type": "string" }
+      },
+      "required": ["norm", "ref"],
+      "additionalProperties": false
+    },
+    "statement": { "type": "string" },
+    "applicability": { "type": "string", "enum": ["full", "partial", "inspiration", "not-applicable"] },
+    "justification": { "type": "string" },
+    "satisfied_by": { "type": "array", "items": { "type": "string" } },
+    "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
+    "why_not_public": { "type": "string" }
+  },
+  "required": ["id", "source", "statement", "applicability"],
+  "allOf": [
+    {
+      "if": { "properties": { "applicability": { "const": "not-applicable" } } },
+      "then": { "required": ["justification"] }
+    },
+    {
+      "if": { "properties": { "visibility": { "enum": ["internal", "secret"] } }, "required": ["visibility"] },
+      "then": { "required": ["why_not_public"] }
+    }
+  ],
+  "additionalProperties": false
+}
