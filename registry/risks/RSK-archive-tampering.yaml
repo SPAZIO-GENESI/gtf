@@ -5,5 +5,5 @@ description: >
   alterare o cancellare certificati già emessi.
 likelihood: low
 impact: high
-mitigated_by: [CTL-r2-eu-archive, CTL-ots-anchor]
+mitigated_by: [CTL-r2-eu-archive, CTL-ots-anchor, CTL-dogfooding-anchor]
 visibility: public

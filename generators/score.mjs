@@ -79,7 +79,7 @@ function computeIndicators(records) {
   const WORKER_SCORE = { ok: 100, degraded: 50, down: 0 };
   const integrity = snap ? WORKER_SCORE[snap.worker] ?? null : null;
   const integrityNote = snap
-    ? `parziale: solo sonda HMAC (componente "worker", snapshot ${snap.week}) — non ancora storico release taggate né esito ancore OTS mensili`
+    ? `parziale: solo sonda HMAC (componente "worker", snapshot ${snap.week}) — non ancora storico release taggate; il primo ancoraggio dogfooding mensile esiste (CTL-dogfooding-anchor) ma non è ancora incorporato nel calcolo`
     : "richiede almeno uno snapshot dal collettore di evidenze (non ancora raccolto)";
 
   return [

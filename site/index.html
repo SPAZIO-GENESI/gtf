@@ -129,7 +129,7 @@
       <table class="ledger-table">
         <tbody>
         <tr class="is-counted"><td class="ledger-label">Trasparenza</td><td class="ledger-value">95</td></tr>
-        <tr class="is-counted is-partial" title="parziale: solo sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W28) — non ancora storico release taggate né esito ancore OTS mensili"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
+        <tr class="is-counted is-partial" title="parziale: solo sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W28) — non ancora storico release taggate; il primo ancoraggio dogfooding mensile esiste (CTL-dogfooding-anchor) ma non è ancora incorporato nel calcolo"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">71</td></tr>
@@ -274,6 +274,7 @@
         <ul class="ctl-list">
           <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
           <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar<details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></li>
+          <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio<details><summary>come verificare</summary><p>Mensile: generators/anchor-monthly.mjs concatena i manifest.json degli snapshot settimanali non ancora coperti in un bundle deterministico (committato in snapshots/anchors/); un umano lo trascina su attestazione.spaziogenesi.org, genera l'attestazione e scarica il PDF (solo /api/cert-pdf innesca l'ancoraggio OpenTimestamps reale). Chiunque può ricalcolare l'hash del bundle nel repo gtf, confrontarlo con quello stampato sul certificato, e verificare la prova .ots indipendentemente su opentimestamps.org. Primo ancoraggio: periodo 2026-07 (bundle snapshots/anchors/2026-07-bundle.json, hash cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-pres-01</span></p>
       </article>
@@ -381,6 +382,7 @@
         <ul class="ctl-list">
           <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash</li>
           <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar</li>
+          <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-archive-tampering</span></p>
       </article>
