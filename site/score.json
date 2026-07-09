@@ -1,0 +1,63 @@
+{
+  "overall": 90,
+  "available_count": 5,
+  "total": 10,
+  "indicators": [
+    {
+      "id": "MET-transparency",
+      "label": "Trasparenza",
+      "value": 93
+    },
+    {
+      "id": "MET-integrity",
+      "label": "Integrità",
+      "value": null,
+      "note": "richiede il collettore di evidenze live (non ancora costruito)"
+    },
+    {
+      "id": "MET-traceability",
+      "label": "Tracciabilità",
+      "value": 100
+    },
+    {
+      "id": "MET-documentation",
+      "label": "Documentazione",
+      "value": 93
+    },
+    {
+      "id": "MET-automation",
+      "label": "Automazione",
+      "value": 73
+    },
+    {
+      "id": "MET-audit",
+      "label": "Audit",
+      "value": null,
+      "note": "nessun ciclo di revisione trimestrale ancora concluso"
+    },
+    {
+      "id": "MET-conservation",
+      "label": "Conservazione",
+      "value": null,
+      "note": "nessun restore-drill ancora eseguito"
+    },
+    {
+      "id": "MET-reproducibility",
+      "label": "Riproducibilità",
+      "value": 93
+    },
+    {
+      "id": "MET-privacy",
+      "label": "Privacy",
+      "value": null,
+      "note": "richiede uno scanner del codice non ancora costruito"
+    },
+    {
+      "id": "MET-governance",
+      "label": "Governance",
+      "value": null,
+      "note": "richiede dati GitHub, score v0 lavora solo offline dal registro"
+    }
+  ],
+  "computed_at": "2026-07-09T09:44:19.889Z"
+}

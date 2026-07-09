@@ -6,6 +6,7 @@
   "properties": {
     "id": { "type": "string", "pattern": "^CTL-[\\w-]+$" },
     "title": { "type": "string" },
+    "statement": { "type": "string", "description": "Testo pubblico verbatim del controllo, quando il controllo È una dichiarazione (es. posizionamento eIDAS) e non solo un meccanismo tecnico" },
     "status": { "type": "string", "enum": ["draft", "active", "stale", "retired"], "default": "draft" },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
     "why_not_public": { "type": "string" },

@@ -1,0 +1,9 @@
+id: MET-transparency
+title: Trasparenza
+formula: >
+  Media di due percentuali calcolate sull'intero registro: (a) quota di
+  record con visibility=public sul totale; (b) quota di controlli (CTL)
+  status=active che hanno un campo verify_howto compilato. Attivo da subito
+  (dati interamente nel registro).
+unit: "0-100"
+visibility: public

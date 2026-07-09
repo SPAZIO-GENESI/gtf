@@ -1,0 +1,9 @@
+id: MET-traceability
+title: Tracciabilità
+formula: >
+  Quota di controlli (CTL) status=active che hanno una catena completa:
+  almeno un riferimento in satisfies (REQ o PRN), almeno uno in
+  implemented_by, almeno uno in evidenced_by. Attivo da subito (dati
+  interamente nel registro).
+unit: "0-100"
+visibility: public

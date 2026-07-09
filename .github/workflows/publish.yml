@@ -1,11 +1,15 @@
-name: Deploy Trust Center to Pages
+name: Build and publish Trust Center
 
 on:
   push:
     branches: [main]
     paths:
+      - "registry/**"
+      - "schemas/**"
+      - "generators/**"
       - "site/**"
-      - ".github/workflows/pages.yml"
+      - "package.json"
+      - ".github/workflows/publish.yml"
   workflow_dispatch:
 
 permissions:
@@ -18,13 +22,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run score
+      - run: npm run build-site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

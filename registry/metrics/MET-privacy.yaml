@@ -1,0 +1,12 @@
+id: MET-privacy
+title: Privacy
+formula: >
+  Quota di flussi di dati effettivamente presenti nel codice che hanno un
+  record DAT corrispondente completo, più assenza di dati personali negli
+  snapshot di evidenza. Non ancora calcolabile: non esiste una scansione
+  automatica del codice che rilevi i flussi di dati non ancora registrati
+  come DAT — oggi possiamo solo confermare che i DAT esistenti sono
+  completi (verificato dallo schema stesso), non che siano tutti quelli
+  che esistono nel codice. Si attiverà con uno scanner dedicato.
+unit: "0-100 oppure n/d"
+visibility: public

@@ -1,5 +1,15 @@
 id: CTL-eidas-honest-positioning
 title: "Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato"
+statement: >
+  Il servizio produce attestazioni di esistenza non qualificate: firma
+  elettronica avanzata con certificato self-signed, più marca temporale
+  RFC 3161 (TSA in Adobe AATL) e ancoraggio Bitcoin (OpenTimestamps). Non
+  è un servizio fiduciario qualificato eIDAS. Alle prove elettroniche non
+  qualificate non possono essere negati effetti giuridici per il solo
+  motivo della forma elettronica o della non-qualificazione; il valore
+  probatorio è rimesso al giudice. L'upgrade a sigillo qualificato è nella
+  roadmap pubblica, condizionato alla sostenibilità economica
+  dell'organizzazione.
 status: active
 visibility: public
 satisfies: [REQ-eidas-pos-01]

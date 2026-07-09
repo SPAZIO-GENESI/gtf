@@ -1,0 +1,8 @@
+id: MET-documentation
+title: Documentazione
+formula: >
+  Quota di controlli (CTL) con last_reviewed entro review_every_days dalla
+  data odierna; un controllo senza questi campi conta come non aggiornato.
+  Attivo da subito (dati interamente nel registro).
+unit: "0-100"
+visibility: public

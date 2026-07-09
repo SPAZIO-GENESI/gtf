@@ -1,0 +1,10 @@
+id: MET-reproducibility
+title: Riproducibilità
+formula: >
+  Quota di controlli (CTL) pubblici che hanno una procedura di verifica
+  (verify_howto) eseguibile da un terzo senza credenziali. Attivo da subito,
+  ma condivide oggi lo stesso segnale grezzo usato da MET-transparency: un
+  limite dichiarato, da raffinare quando esisterà un log di verifiche
+  realmente eseguite da terzi (non solo la presenza dell'istruzione).
+unit: "0-100"
+visibility: public

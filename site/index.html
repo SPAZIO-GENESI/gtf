@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trust Center — Genesis Trust Framework</title>
-<meta name="robots" content="noindex">
 <style>
   :root { color-scheme: light dark; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    max-width: 40rem;
-    margin: 4rem auto;
+    max-width: 60rem;
+    margin: 3rem auto;
     padding: 0 1.5rem;
     line-height: 1.6;
     color: #1a1a1a;
@@ -19,44 +18,257 @@
   @media (prefers-color-scheme: dark) {
     body { color: #eee; background: #16171a; }
     a { color: #8ab4f8; }
+    table, th, td { border-color: #444 !important; }
   }
-  h1 { font-size: 1.4rem; }
-  code { font-size: 0.9em; }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.2rem; margin-top: 2.5rem; border-bottom: 1px solid #ccc; padding-bottom: 0.3rem; }
   a { color: #5a3d10; }
+  nav ul { display: flex; flex-wrap: wrap; gap: 1rem; padding: 0; list-style: none; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; vertical-align: top; font-size: 0.92rem; }
+  .score-overall { font-size: 1.4rem; font-weight: bold; }
+  code, .mono { font-family: "IBM Plex Mono", monospace; }
   footer { margin-top: 3rem; font-size: 0.85rem; opacity: 0.7; }
+  details { margin-top: 0.3rem; }
 </style>
 </head>
 <body>
-  <h1>Trust Center — in costruzione</h1>
+  <h1>Trust Center — Genesis Trust Framework</h1>
   <p>
-    Questa pagina ospiterà il <strong>Genesis Trust Framework</strong>: le
-    evidenze verificabili con cui Spazio Genesi ETS dimostra perché
-    <a href="https://attestazione.spaziogenesi.org">attestazione.spaziogenesi.org</a>
-    merita fiducia — principi, controlli, evidenze, punteggio di maturità.
+    Perché <a href="https://attestazione.spaziogenesi.org">attestazione.spaziogenesi.org</a>
+    merita fiducia — con evidenze verificabili, non dichiarazioni.
   </p>
-  <p>
-    Non è ancora online: il registro esiste, ma il generatore delle pagine
-    pubbliche non è stato ancora costruito (fase M3 della roadmap).
-  </p>
-  <p>
-    Nel frattempo puoi leggere il progetto completo su
-    <a href="https://github.com/SPAZIO-GENESI/gtf/blob/main/ARCHITECTURE.md">ARCHITECTURE.md</a>
-    o esplorare il <a href="https://github.com/SPAZIO-GENESI/gtf">registro sorgente</a>.
-  </p>
+  <nav>
+    <ul>
+      <li><a href="#missione">Missione</a></li>
+      <li><a href="#eidas">Posizionamento eIDAS</a></li>
+      <li><a href="#score">Open Trust Score</a></li>
+      <li><a href="#compliance">Compliance Map</a></li>
+      <li><a href="#rischi">Rischi</a></li>
+      <li><a href="#decisioni">Decisioni</a></li>
+      <li><a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi ↗</a></li>
+      <li><a href="https://attestazione.spaziogenesi.org/changelog/">Changelog ↗</a></li>
+    </ul>
+  </nav>
 
-  <h2 style="font-size:1.1rem;">Cosa NON è questo servizio</h2>
-  <p>
-    Il servizio produce <strong>attestazioni di esistenza non qualificate</strong>:
-    firma elettronica avanzata con certificato self-signed, più marca
-    temporale RFC 3161 (TSA in Adobe AATL) e ancoraggio Bitcoin
-    (OpenTimestamps). <strong>Non</strong> è un servizio fiduciario
-    qualificato eIDAS. Alle prove elettroniche non qualificate non possono
-    essere negati effetti giuridici per il solo motivo della forma
-    elettronica o della non-qualificazione; il valore probatorio è rimesso
-    al giudice. L'upgrade a sigillo qualificato è nella roadmap pubblica,
-    condizionato alla sostenibilità economica dell'organizzazione.
-  </p>
+  <section id="missione">
+    <h2>Missione e principi</h2>
+    <p>Spazio Genesi ETS costruisce un servizio di attestazione digitale (attestazione.spaziogenesi.org) capace di dimostrare pubblicamente, con evidenze verificabili da chiunque, perché merita fiducia — senza mai chiedere a nessuno di crederci sulla parola. La fiducia non si dichiara, si dimostra.</p>
+    <ul>
+      <li><strong>Transparency by Design</strong> — Ogni elemento del sistema è visibile per default; ciò che non lo è deve giustificare esplicitamente perché.
+        <br><small>Regola verificabile: Ogni record del registro ha `visibility: public|internal|secret`; default `public`; `internal`/`secret` richiedono il campo `why_not_public` compilato.</small></li>
+      <li><strong>Evidence by Design</strong> — Nessuna affermazione senza un'evidenza che la sostenga; un'evidenza scaduta degrada silenziosamente il controllo che dipende da lei, mai lo status quo.
+        <br><small>Regola verificabile: Ogni controllo (CTL) referenzia ≥1 evidenza (EVD) con `freshness` dichiarata; evidenza scaduta → controllo passa a `stale`, lo score scende.</small></li>
+      <li><strong>Documentation by Design</strong> — Nessun documento pubblico si scrive a mano nel Trust Center: si genera dal registro, sempre, così non può mai divergere da ciò che è vero.
+        <br><small>Regola verificabile: Nessun documento scritto a mano nel Trust Center: tutto generato dal registro; la CI fallisce se un file pubblicato non ha un record sorgente.</small></li>
+      <li><strong>Security by Design</strong> — Ogni controllo di sicurezza è ancorato a un'implementazione reale e a una minaccia dichiarata: nessuna misura &quot;di facciata&quot;.
+        <br><small>Regola verificabile: Ogni CTL di sicurezza referenzia l'implementazione (IMP → file/riga/config) e il rischio (RSK) che mitiga.</small></li>
+      <li><strong>Privacy by Design</strong> — Ogni flusso di dati personali è mappato, con base giuridica e retention dichiarate, prima ancora di essere costruito — non dopo.
+        <br><small>Regola verificabile: Ogni flusso di dati ha un record DAT (dato, base giuridica, retention); un flusso senza DAT fa fallire la build.</small></li>
+      <li><strong>Governance by Design</strong> — Ogni modifica al registro passa da revisione; le decisioni non ovvie lasciano una traccia esplicita, non solo un commit.
+        <br><small>Regola verificabile: Ogni modifica al registro passa da PR; le decisioni non ovvie richiedono un'ADR obbligatoria (l'etichetta `needs-adr` blocca il merge finché non c'è).</small></li>
+      <li><strong>Automation by Design</strong> — Ciò che si può raccogliere automaticamente si raccoglie automaticamente; la raccolta manuale è l'eccezione da giustificare, non la norma.
+        <br><small>Regola verificabile: Campo `collection: auto|manual` su ogni evidenza (EVD); la percentuale `auto` è un indicatore dello score; nuove EVD `manual` richiedono giustificazione.</small></li>
+      <li><strong>Open Verification</strong> — Ogni affermazione pubblica porta con sé il modo per un terzo di verificarla da solo, senza credenziali e senza doverci credere.
+        <br><small>Regola verificabile: Per ogni affermazione pubblica esiste uno script o una procedura eseguibile da terzi senza credenziali (`verify_howto` obbligatorio sui controlli pubblici).</small></li>
+      <li><strong>Continuous Improvement</strong> — Un incidente senza un'azione correttiva è un incidente destinato a ripetersi; il sistema non permette che accada senza segnalarlo.
+        <br><small>Regola verificabile: Ogni incidente (INC) produce ≥1 azione (ACT) con scadenza; le ACT scadute e ancora aperte mostrano un banner nel Trust Center.</small></li>
+      <li><strong>Least Complexity</strong> — Il framework deve essere sostenibile da un'organizzazione di volontari: ogni processo ricorrente dichiara il proprio costo umano, e il sistema ha un tetto.
+        <br><small>Regola verificabile: Ogni nuovo processo dichiara `human_cost_minutes_month`; il totale di sistema ha un tetto (budget 8 h/mese) visibile nel Trust Center.</small></li>
+    </ul>
+  </section>
 
-  <footer>Genesis Trust Framework · gtf@0.1.0</footer>
+  <section id="eidas">
+    <h2>Cosa NON è questo servizio</h2>
+    <p>Il servizio produce attestazioni di esistenza non qualificate: firma elettronica avanzata con certificato self-signed, più marca temporale RFC 3161 (TSA in Adobe AATL) e ancoraggio Bitcoin (OpenTimestamps). Non è un servizio fiduciario qualificato eIDAS. Alle prove elettroniche non qualificate non possono essere negati effetti giuridici per il solo motivo della forma elettronica o della non-qualificazione; il valore probatorio è rimesso al giudice. L'upgrade a sigillo qualificato è nella roadmap pubblica, condizionato alla sostenibilità economica dell'organizzazione.</p>
+  </section>
+
+  <section id="score">
+    <h2>Open Trust Score</h2>
+    <p class="score-overall">90/100 <small>(5 di 10 indicatori disponibili — media dei soli indicatori calcolabili, gli altri restano dichiaratamente n/d)</small></p>
+    <table>
+      <thead><tr><th>Indicatore</th><th>Valore</th></tr></thead>
+      <tbody>
+      <tr><td>Trasparenza</td><td>93/100</td></tr>
+      <tr><td>Integrità</td><td>n/d <small>(richiede il collettore di evidenze live (non ancora costruito))</small></td></tr>
+      <tr><td>Tracciabilità</td><td>100/100</td></tr>
+      <tr><td>Documentazione</td><td>93/100</td></tr>
+      <tr><td>Automazione</td><td>73/100</td></tr>
+      <tr><td>Audit</td><td>n/d <small>(nessun ciclo di revisione trimestrale ancora concluso)</small></td></tr>
+      <tr><td>Conservazione</td><td>n/d <small>(nessun restore-drill ancora eseguito)</small></td></tr>
+      <tr><td>Riproducibilità</td><td>93/100</td></tr>
+      <tr><td>Privacy</td><td>n/d <small>(richiede uno scanner del codice non ancora costruito)</small></td></tr>
+      <tr><td>Governance</td><td>n/d <small>(richiede dati GitHub, score v0 lavora solo offline dal registro)</small></td></tr>
+      </tbody>
+    </table>
+    <p><small>Formula di ciascun indicatore nel <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">registro pubblico</a>. Calcolato il 2026-07-09T09:44:19.889Z.</small></p>
+  </section>
+
+  <section id="compliance">
+    <h2>Compliance Map</h2>
+    <table>
+      <thead><tr><th>Norma</th><th>Applicabilità</th><th>Requisito</th><th>Soddisfatto da</th></tr></thead>
+      <tbody>
+      <tr><td>ISO/IEC 27001<br><small>controlli Annex A pertinenti alla scala dell'organizzazione</small></td><td>inspiration</td><td>I controlli Annex A applicabili a un'organizzazione di volontari senza infrastruttura propria (controllo accessi, crittografia, sicurezza delle operazioni, gestione degli incidenti) sono adottati per ispirazione, non per certificazione formale: la certificazione è insostenibile per un ETS di questa scala, ma i controlli pertinenti sono comunque implementati e verificabili uno per uno.</td><td>Token HMAC che vincola hash, timestamp server-side e metadati dichiarati <details><summary>come verificare</summary><p>Prova a chiamare /api/cert-pdf con un hash o timestamp diverso da quello restituito da /api/hash: la richiesta viene rifiutata (400/403). Lo stato del componente &quot;worker&quot; su /api/status riflette anche l'esito della sonda HMAC interna.</p></details><br>Rate limiting per-IP su emissione certificati e hash/verify <details><summary>come verificare</summary><p>Invia più di 10 richieste in 60s a /api/cert-pdf (o più di 60 a /api/hash|/api/verify) dallo stesso IP: le richieste oltre soglia ricevono 429.</p></details><br>Challenge anti-bot prima di qualunque emissione di attestazione <details><summary>come verificare</summary><p>Chiama /api/hash senza turnstile_token: risposta 400. Con un token fasullo: 403. Il widget è visibile sopra &quot;Genera attestazione&quot; su attestazione.spaziogenesi.org.</p></details><br>CORS ristretto al solo dominio dell'interfaccia utente <details><summary>come verificare</summary><p>Chiama un endpoint di imgauth da un'origine diversa da attestazione.spaziogenesi.org in un browser: la risposta CORS nega l'origine. Nota: è una difesa solo lato browser, non contro client diretti.</p></details><br>Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash <details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details><br>Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer<br>Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero <details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></td></tr>
+      <tr><td>ISO/IEC 27037<br><small>principi di identificazione e acquisizione della prova digitale</small></td><td>partial</td><td>L'acquisizione dell'impronta digitale dell'opera deve essere documentata e riproducibile: algoritmo dichiarato, implementazione ispezionabile.</td><td>L'impronta è calcolata nel browser; il file non lascia il dispositivo <details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></td></tr>
+      <tr><td>ISO/IEC 27037<br><small>principi di conservazione della prova digitale</small></td><td>partial</td><td>Le prove (certificato, ancoraggio) devono essere conservate con integrità dimostrabile e non alterabile silenziosamente nel tempo.</td><td>Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash <details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details><br>Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar <details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></td></tr>
+      <tr><td>ISO/IEC 27042<br><small>analisi e interpretazione della prova digitale</small></td><td>partial</td><td>Deve esistere un modo per un terzo di analizzare e interpretare l'autenticità di una prova (il certificato) senza doversi fidare ciecamente di chi l'ha emessa.</td><td>Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF <details><summary>come verificare</summary><p>Trascina un certificato PDF emesso nella scheda &quot;Verifica&quot; di attestazione.spaziogenesi.org: il semaforo mostra corrispondenza, autenticità della firma, integrità dei dati e stato dell'ancoraggio Bitcoin — senza dover fidarsi della sola parola del servizio.</p></details></td></tr>
+      <tr><td>ISO/IEC 27043<br><small>processi di investigazione e risposta agli incidenti</small></td><td>partial</td><td>Deve esistere un processo definito e provato di rilevazione e risposta ai guasti/incidenti, non solo una reazione ad hoc.</td><td>Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero <details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></td></tr>
+      <tr><td>CAD + Linee guida AgID<br><small>formazione del documento informatico: integrità e riferimento temporale opponibile</small></td><td>partial</td><td>Il certificato, come documento informatico, deve avere una firma e un riferimento temporale che ne rendano opponibile l'integrità nel tempo.</td><td>Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL) <details><summary>come verificare</summary><p>Apri un certificato PDF emesso in Adobe Acrobat (o un lettore PAdES conforme): il pannello firme mostra la marca temporale da terza parte attendibile (Adobe AATL), verificabile senza fidarsi del servizio. Non richiede accesso al codice sorgente di authart, ancora privato (P11).</p></details></td></tr>
+      <tr><td>eIDAS 2.0<br><small>art. 46-equivalente — non discriminazione degli effetti giuridici delle prove elettroniche non qualificate</small></td><td>partial</td><td>Il servizio deve informare in modo veritiero sul livello di garanzia offerto, senza lasciar intendere una qualificazione eIDAS che non possiede.</td><td>Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato <details><summary>come verificare</summary><p>Consulta https://trust.spaziogenesi.org, sezione &quot;Cosa NON è questo servizio&quot;: il testo dichiara esplicitamente la natura non qualificata dell'attestazione. Se il testo dovesse sparire o essere annacquato in una futura revisione, il registro GTF lo renderebbe visibile (il record sorgente di questo controllo resta pubblico e versionato).</p></details></td></tr>
+      <tr><td>GDPR<br><small>art. 13/14 — informativa all'interessato</small></td><td>full</td><td>Chi usa il servizio deve poter leggere in modo chiaro cosa viene trattato, con quale base giuridica e per quanto tempo.</td><td>Informativa privacy pubblica e aggiornata <details><summary>come verificare</summary><p>Consulta privacy.html su attestazione.spaziogenesi.org: descrive cosa viene trattato, che il file non lascia mai il dispositivo, le basi giuridiche e i diritti dell'interessato.</p></details></td></tr>
+      <tr><td>GDPR<br><small>art. 5(1)(c) — minimizzazione</small></td><td>full</td><td>Trattare solo i dati strettamente necessari alla finalità di attestazione</td><td>L'impronta è calcolata nel browser; il file non lascia il dispositivo <details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details><br>Analytics senza cookie, nessun identificatore persistente <details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></td></tr>
+      <tr><td>GDPR<br><small>artt. 15-22 — diritti dell'interessato (accesso, cancellazione, opposizione...)</small></td><td>partial</td><td>L'interessato deve poter esercitare i propri diritti sui dati trattati. Applicabilità parziale: il servizio non crea account, non tratta il file originale (mai inviato al server) e l'analytics è senza identificatori persistenti — la maggior parte dei diritti classici (accesso al proprio profilo, portabilità di dati account) non si applica per assenza stessa del dato, non per una scelta di non conformità.</td><td>L'impronta è calcolata nel browser; il file non lascia il dispositivo <details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details><br>Analytics senza cookie, nessun identificatore persistente <details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="rischi">
+    <h2>Rischi</h2>
+    <table>
+      <thead><tr><th>Rischio</th><th>Probabilità</th><th>Impatto</th><th>Mitigato da</th></tr></thead>
+      <tbody>
+      <tr><td>Alterazione dei certificati archiviati o della cronologia di emissione</td><td>low</td><td>high</td><td>Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash, Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar</td></tr>
+      <tr><td>Abuso automatizzato del servizio (spam di attestazioni)</td><td>medium</td><td>medium</td><td>Challenge anti-bot prima di qualunque emissione di attestazione, Rate limiting per-IP su emissione certificati e hash/verify</td></tr>
+      <tr><td>Falsificazione di un certificato (hash falso o data retrodatata)</td><td>low</td><td>high</td><td>Token HMAC che vincola hash, timestamp server-side e metadati dichiarati, Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL), Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF</td></tr>
+      <tr><td>Invio non necessario del file originale dell'utente al server</td><td>low</td><td>high</td><td>L'impronta è calcolata nel browser; il file non lascia il dispositivo</td></tr>
+      <tr><td>Comunicare al pubblico un livello di garanzia legale superiore a quello reale</td><td>medium</td><td>high</td><td>Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato</td></tr>
+      <tr><td>Compromissione o perdita di HMAC_SECRET / SIGN_SECRET</td><td>low</td><td>high</td><td>Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer, Canary esterno che rileva una rotazione errata del segreto HMAC</td></tr>
+      <tr><td>Interruzione di un componente critico (Azure authart, R2, Worker Cloudflare)</td><td>medium</td><td>medium</td><td>Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="decisioni">
+    <h2>Decisioni</h2>
+    <ol>
+      <li><strong>2026-06-10 — P0 — Fix di sicurezza immediati</strong> <em>(accepted)</em>
+        <p>L'audit iniziale del progetto ha rilevato una password P12 hardcoded nel codice di authart e authweb ancora puntato al worker di anteprima invece che a quello di produzione.</p>
+        <p><strong>Decisione:</strong> Spostata P12_PASSWORD in variabile d'ambiente e ruotato il certificato p12 (rimosso anche dalla storia git); corrette le URL in authweb verso il worker di produzione (https://imgauth.spaziogenesi.org).</p>
+        <p><strong>Conseguenze:</strong> Nessun segreto in chiaro nel codice da questo punto in poi; authweb funzionante contro l'ambiente reale.</p>
+      </li>
+      <li><strong>2026-06-10 — P1 — Collegamento end-to-end tra imgauth e authart</strong> <em>(accepted)</em>
+        <p>Il flusso hash → certificato → firma non era ancora cablato end-to-end: imgauth non chiamava davvero authart per firmare i PDF.</p>
+        <p><strong>Decisione:</strong> Cablata la chiamata server-to-server da /api/cert-pdf all'endpoint /sign di authart; il certificato p12 stoccato come P12_BASE64 nelle App Settings di Azure, decodificato in un file temporaneo all'avvio del processo.</p>
+        <p><strong>Conseguenze:</strong> Primo PDF firmato generato e testato con successo in produzione.</p>
+      </li>
+      <li><strong>2026-06-10 — P2 — Prima cintura di sicurezza architetturale</strong> <em>(accepted)</em>
+        <p>Dopo il cablaggio end-to-end (ADR-P1), mancavano difese di base tra i tre componenti del sistema.</p>
+        <p><strong>Decisione:</strong> CORS di imgauth ristretto al dominio dell'interfaccia utente; /api/verify esteso a controllare anche la firma HMAC, non solo la corrispondenza dell'hash; l'endpoint /sign di authart reso raggiungibile solo con l'header X-Sign-Secret condiviso tra i due componenti.</p>
+        <p><strong>Conseguenze:</strong> Base su cui più tardi si sono costruiti i controlli CTL-cors-restricted e CTL-hmac-signing.</p>
+      </li>
+      <li><strong>2026-06-10 — P3 — Pulizia delle dipendenze e conferma delle scelte infrastrutturali</strong> <em>(accepted)</em>
+        <p>Revisione di qualità del codice di authart e delle scelte infrastrutturali ereditate dalle fasi precedenti.</p>
+        <p><strong>Decisione:</strong> Rimossa la dipendenza inutilizzata psycopg2-binary da authart, aggiunto gunicorn come server WSGI (già attivo come Startup command Azure); confermato che sgart.azurewebsites.net resta un dominio interno (nessun dominio custom necessario) e che Matomo resta lo strumento di analytics per scelta.</p>
+        <p><strong>Conseguenze:</strong> Codebase più pulita; nessuna azione infrastrutturale ulteriore su domini/analytics richiesta in questa fase.</p>
+      </li>
+      <li><strong>2026-06-10 — P4 — QR dinamico e footer del certificato generati a runtime</strong> <em>(accepted)</em>
+        <p>Il template PDF aveva un QR statico e un footer con testi non corrispondenti al servizio reale (indirizzo e URL sbagliati).</p>
+        <p><strong>Decisione:</strong> QR generato a runtime con la libreria uqr (puntando all'URL di verifica con l'hash); footer (indirizzo, URL) disegnato a runtime, centrato dinamicamente per larghezza del font Times Roman a 7pt; il content stream del template ripulito dai testi glyph-encoded del vecchio footer; authweb legge ?hash= dall'URL per precompilare il campo di verifica.</p>
+        <p><strong>Conseguenze:</strong> Certificato coerente col servizio reale; testo del footer copiabile (vettoriale, non raster).</p>
+      </li>
+      <li><strong>2026-06-10 — P5 — Versioning esplicito per componente e supporto a qualunque formato</strong> <em>(accepted)</em>
+        <p>Nessuna versione era visibile all'utente; authweb accettava solo file image/*, mentre l'hash SHA-256 è indipendente dal tipo di file.</p>
+        <p><strong>Decisione:</strong> Introdotto SemVer esplicito per ciascun componente (package.json per imgauth, APP_VERSION per authweb e authart), reso visibile in /ping, nel footer e nell'health-check; rimosso il vincolo image/* in authweb.</p>
+        <p><strong>Conseguenze:</strong> Tracciabilità delle versioni in produzione; il servizio accetta opere di qualunque formato, con anteprima a miniatura per le immagini e icona con estensione per gli altri tipi.</p>
+      </li>
+      <li><strong>2026-06-10 — P6 — Cambio di dominio pubblico a attestazione.spaziogenesi.org</strong> <em>(accepted)</em>
+        <p>Il servizio era pubblicato sotto imgauthweb.spaziogenesi.org, un nome meno chiaro per gli utenti finali.</p>
+        <p><strong>Decisione:</strong> Rinominato il CNAME GitHub Pages, aggiornato ALLOWED_ORIGIN in imgauth, aggiornati QR e footer del certificato verso il nuovo dominio; documentazione (CLAUDE.md, sito) allineata nello stesso giro.</p>
+        <p><strong>Conseguenze:</strong> Nessun redirect server necessario (nessun certificato era ancora stato emesso col vecchio dominio); URL utente-finale unificate.</p>
+      </li>
+      <li><strong>2026-06-10 — P7 — Hardening dopo audit esterno: falsificabilità di /api/cert-pdf</strong> <em>(accepted)</em>
+        <p>Un audit black-box esterno ha scoperto che /api/cert-pdf non aveva autenticazione e si fidava del JSON inviato dal client, permettendo di far firmare certificati con hash falsi e date retrodatate.</p>
+        <p><strong>Decisione:</strong> Introdotto un token HMAC emesso da /api/hash e verificato da /api/cert-pdf (rifiuta hash/timestamp incoerenti con 400, token invalido con 403, segreto assente con 503); tetto 100MB sulle opere; messaggi d'errore generici; HMAC_SECRET impostato come secret Cloudflare (prima era assente, l'HMAC era inattivo); rate limiting nativo per-IP (RL_CERT, RL_API); anti-bot Turnstile — prima versione solo su &quot;Scarica PDF&quot;, poi spostata su &quot;Genera attestazione&quot; per chiudere il buco per cui l'attestazione (incluso il .txt) si otteneva senza alcuna challenge.</p>
+        <p><strong>Conseguenze:</strong> Momento fondativo dell'attuale modello di sicurezza (vedi CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot); authweb non ha richiesto modifiche di codice perché già round-trippava attestazione+hmac da /api/hash a /api/cert-pdf.</p>
+      </li>
+      <li><strong>2026-06-11 — P8 — Metadati dell'opera dichiarati dall'autore, vincolati alla firma</strong> <em>(accepted)</em>
+        <p>Gli utenti chiedevano di poter dichiarare titolo, autore, anno e note dell'opera nel certificato.</p>
+        <p><strong>Decisione:</strong> Campi facoltativi normalizzati in forma canonica (cleanMeta: whitespace collassato, solo WinAnsi, tetti di lunghezza) e accodati al messaggio firmato (hmacMessage): immutabili dopo l'emissione. Senza metadati il messaggio coincide con la sola attestazione, per compatibilità coi certificati pre-1.6.0. /api/verify richiede gli stessi metadati per una firma valida.</p>
+        <p><strong>Conseguenze:</strong> Fix collaterale: il box ATTESTAZIONE (32.6pt) troncava da sempre firma HMAC, emittente e versione motore — ora visibili nel blocco &quot;Dettagli tecnici&quot;. La prima collocazione dei dati dichiarati (1.6.0) era poco leggibile (fine print), corretta poco dopo (1.6.2) in un blocco separato e leggibile.</p>
+      </li>
+      <li><strong>2026-06-11 — P9 — Marca temporale da terza parte riconosciuta nel certificato</strong> <em>(accepted)</em>
+        <p>La sola firma self-signed non dava alla data del certificato alcun riconoscimento di terze parti in lettori come Adobe Acrobat.</p>
+        <p><strong>Decisione:</strong> authart firma PAdES B-LT con marca temporale RFC 3161 da una TSA in Adobe AATL (default DigiCert, configurabile via TSA_URL) più LTV (catena TSA/OCSP embedded nel DSS); fail-open se TSA/OCSP sono irraggiungibili (firma senza marca, mai un errore all'utente); corretto il key usage del certificato di produzione a &quot;digital_signature&quot; (il default pyhanko per PAdES è non_repudiation, incompatibile col p12 esistente).</p>
+        <p><strong>Conseguenze:</strong> La data del certificato è ora attestata da terza parte attendibile anche restando self-signed sull'identità del firmatario; upgrade futuro possibile con un sigillo elettronico qualificato eIDAS (a pagamento).</p>
+      </li>
+      <li><strong>2026-06-11 — P10 — Ancoraggio decentralizzato in Bitcoin via OpenTimestamps</strong> <em>(accepted)</em>
+        <p>Mancava una prova di esistenza indipendente dal servizio stesso, che restasse verificabile anche se Spazio Genesi ETS smettesse di esistere.</p>
+        <p><strong>Decisione:</strong> In /api/cert-pdf, dopo la verifica HMAC e prima della firma, costruzione della prova OpenTimestamps (calendar alice+bob.btc.calendar. opentimestamps.org) serializzata a mano nel formato DetachedTimestampFile e validata contro la libreria ufficiale python-opentimestamps; riga &quot;Ancoraggio blockchain&quot; nel blocco Dettagli tecnici del PDF con link a /api/ots; link visibile in authweb dopo &quot;Scarica PDF&quot;.</p>
+        <p><strong>Conseguenze:</strong> Tre àncore indipendenti su ogni certificato: HMAC (server), marca temporale TSA (authart), Bitcoin (OpenTimestamps); l'identità del firmatario resta self-signed.</p>
+      </li>
+      <li><strong>2026-06-12 — P11 — Apertura del codice sorgente: licenze e ripulitura della storia</strong> <em>(accepted)</em>
+        <p>Si è deciso di pubblicare il codice del motore e dell'interfaccia, ma la storia git di autart-signer conteneva un file signer.p12 recuperabile e una password P12 hardcoded (già ruotati da tempo, mai riusati).</p>
+        <p><strong>Decisione:</strong> Licenza AGPL-3.0 per imgauth (chi riusa il motore per un servizio deve ripubblicare le modifiche; la licenza copre il codice, non il servizio — i segreti HMAC/firma restano server-side, un clone non supera la verifica ufficiale); licenza MIT per imgauthweb; storia git di autart-signer sostituita in blocco con un commit unico contenente LICENSE AGPL e README riscritto (il precedente descriveva uno stack .NET errato).</p>
+        <p><strong>Conseguenze:</strong> img-auth-hub resta privato per scelta (contiene materiale operativo); resta un'azione manuale in sospeso — rendere pubblico il repo autart-signer, idealmente eliminandolo e ricreandolo prima della pubblicazione per garanzia assoluta contro oggetti orfani lato server.</p>
+      </li>
+      <li><strong>2026-06-13 — P12 — Tre funzionalità gratuite ad alto valore</strong> <em>(accepted)</em>
+        <p>Si volevano tre funzionalità (recupero certificato, verifica via PDF, badge) a costo zero, sfruttando l'infrastruttura già esistente (R2, hash, endpoint).</p>
+        <p><strong>Decisione:</strong> Sviluppate su una pagina di appoggio beta.html (stesso dominio → stesso CORS delle API di produzione), verificate live a step, poi promosse in index.html: GET /api/cert per il recupero del certificato smarrito (nuovo schema pdf/&lt;sha256&gt;/certificato_&lt;stamp&gt;.pdf); pdf.js auto-ospitato (nessuna CDN di terze parti) per leggere e verificare il certificato lato client; badge SVG &quot;Opera attestata&quot;, verde solo se l'hash è realmente in archivio.</p>
+        <p><strong>Conseguenze:</strong> beta.html eliminata subito dopo la promozione, per non far divergere due pagine (lezione riapplicata più volte nelle fasi successive); i certificati pre-1.8.0 non sono recuperabili per hash (nessuna migrazione fatta).</p>
+      </li>
+      <li><strong>2026-06-18 — P13 — Storicizzazione fine di malfunzionamenti e rallentamenti su D1</strong> <em>(accepted)</em>
+        <p>/api/status dava solo lo stato istantaneo, senza storico degli eventi fini — inclusi i rallentamenti sotto soglia che non degradano il servizio ma indicano cosa è migliorabile.</p>
+        <p><strong>Decisione:</strong> I check di /api/status misurano la latenza (runChecks); logHealth scrive su Cloudflare D1 (tabella health_log, binding DB) solo gli eventi notevoli — errore, degrado, o esito ok con latenza oltre soglia &quot;watch&quot; — con scrittura non-blocking; nuovo endpoint GET /api/health-log?day=; il drill-down giorno di /status/ mostra questi eventi anche nei giorni &quot;verdi&quot;.</p>
+        <p><strong>Conseguenze:</strong> I rallentamenti si vedono prima che diventino guasti; un errore D1 non interrompe mai il Worker (try/catch attorno alla scrittura).</p>
+      </li>
+      <li><strong>2026-06-25 — P14 — Pagina pubblica permanente di verifica per ogni opera attestata</strong> <em>(accepted)</em>
+        <p>L'unica prova portabile di un'attestazione era il PDF; mancava un URL pubblico stabile da condividere (per esempio con una galleria o un collezionista) senza dover allegare il file.</p>
+        <p><strong>Decisione:</strong> Nuovo endpoint GET /c/&lt;sha256&gt;: pagina HTML server-rendered con impronta, data, ancoraggio OpenTimestamps e QR (che codifica l'URL permanente stesso), servita via route Cloudflare su attestazione.spaziogenesi.org/c/* (dominio già proxato) e anche su imgauth.spaziogenesi.org/c/* (custom domain del Worker); dati letti da un sidecar meta/cert/&lt;sha256&gt;.json scritto all'emissione, in modo idempotente e non-blocking; il QR del certificato ora punta a questa pagina invece che alla sola verifica con hash precompilato.</p>
+        <p><strong>Conseguenze:</strong> Stesso modello di fiducia di /api/cert (recuperabile solo da chi conosce l'hash); i certificati pre-1.14.0 mostrano comunque impronta e ancoraggio, con data ricostruita per fallback dalla chiave del PDF.</p>
+      </li>
+      <li><strong>2026-06-25 — P15 — Da 2 a 4 calendar OpenTimestamps, e una misura di latenza più onesta</strong> <em>(accepted)</em>
+        <p>Si osservavano falsi &quot;rallentamenti&quot; dell'ancoraggio su /status, causati da un singolo calendar lento, anche se l'ancoraggio reale ha bisogno di una sola risposta su più calendar interrogati.</p>
+        <p><strong>Decisione:</strong> Emissione: da 2 calendar (alice, bob) a 4 (alice, bob, finney, catallaxy), interrogati in parallelo con timeout (OTS_SUBMIT_TIMEOUT 8s) invece che in sequenza senza scadenza; misura di /status basata sul tempo del primo calendar a rispondere (Promise.any) invece che del più lento (Promise.all); &quot;degraded&quot; solo se cadono tutti.</p>
+        <p><strong>Conseguenze:</strong> Più ridondanza sull'ancoraggio senza rischio che un calendar appeso rallenti o blocchi l'emissione del certificato; niente più falsi &quot;degradati&quot; per un singolo calendar lento.</p>
+      </li>
+      <li><strong>2026-07-01 — P16 — Full privacy: l'opera non lascia mai il dispositivo dell'utente</strong> <em>(accepted)</em>
+        <p>Fino a questo punto, sia per l'attestazione sia per la verifica, il file transitava comunque verso il server per il calcolo dell'hash.</p>
+        <p><strong>Decisione:</strong> SHA-256 calcolato nel browser via WebCrypto (funzione sha256Hex); /api/hash accetta sha256 dal client come percorso primario (il campo image in base64 resta accettato solo per retrocompatibilità con client in cache); /api/verify reso capace di verificare la sola firma HMAC senza file; tetto dimensione alzato da ~75MB effettivi a 1GB lato client (WebCrypto non è streaming, il file va letto in memoria).</p>
+        <p><strong>Conseguenze:</strong> Garanzia anti-retrodatazione intatta: timestamp e HMAC restano generati server-side. Nessuna versione &quot;parallela&quot; del servizio né gating a donazione — un solo percorso per tutti (stessa lezione di beta.html: le pagine doppie divergono). La video-guida è stata rigenerata interamente in locale (wrangler dev) per non toccare la produzione durante le riprese.</p>
+      </li>
+      <li><strong>2026-07-01 — P17 — La sonda interna che fa fallire /api/status se l'HMAC è rotto</strong> <em>(accepted)</em>
+        <p>Un audit interno ha rilevato che /api/status non esercitava affatto la logica di emissione: con HMAC_SECRET assente o rotto il servizio emetteva comunque attestazioni senza firma valida (hmac null) e cert-pdf falliva con 503, ma lo stato semaforico restava verde.</p>
+        <p><strong>Decisione:</strong> Round-trip signHmac + verifyHmac su una stringa fissa a ogni campionamento di stato; il risultato confluisce nel componente &quot;worker&quot; di /api/status (down se il round-trip fallisce). Dichiarato inoltre che HMAC_SECRET non va mai ruotato: la rotazione invaliderebbe per sempre la verifica di tutti i certificati già emessi (nessun supporto a doppia chiave).</p>
+        <p><strong>Conseguenze:</strong> La sonda interna non rileva però una rotazione ERRATA del segreto (una firma con un segreto nuovo ma sbagliato risulterebbe comunque &quot;internamente coerente&quot;). Resta aperto un canary esterno che confronti un'attestazione nota firmata col segreto giusto — pianificato nel GTF come CTL-hmac-canary, ancora in stato draft.</p>
+      </li>
+      <li><strong>2026-07-02 — P18 — Interfaccia installabile sulla home screen, senza service worker</strong> <em>(accepted)</em>
+        <p>Si voleva un'esperienza &quot;app&quot; per gli utenti mobile, senza i costi e la divergenza di codice di un'app nativa.</p>
+        <p><strong>Decisione:</strong> Aggiunto manifest.json (display standalone, lingua italiana) e icone PNG generate dal favicon SVG (monogramma); deliberatamente senza service worker, per non dover invalidare una cache offline — la pagina resta sempre live da GitHub Pages; avviso discreto &quot;Aggiungi alla schermata Home&quot; visibile solo su smartphone e nascosto se l'app è già installata (via media query display-mode: standalone).</p>
+        <p><strong>Conseguenze:</strong> Zero costi aggiuntivi, zero store, nessun secondo codebase da mantenere (alternativa scartata: app nativa Android/iOS, 99€/anno solo Apple più review e divergenza). Un possibile seguito (Web Share Target, &quot;Condividi → Attesta&quot; dalla galleria Android) richiederebbe però un service worker, non ancora implementato.</p>
+      </li>
+      <li><strong>2026-07-02 — P19 — Redesign dell'interfaccia: identità B, tablist ARIA, lessico onesto</strong> <em>(accepted)</em>
+        <p>L'interfaccia originale non comunicava bene la promessa del servizio fin dall'alto della pagina e presentava contrasti sotto soglia WCAG AA.</p>
+        <p><strong>Decisione:</strong> Sviluppato come bozza index2.html (pubblicata noindex per valutazione), poi promossa a index.html (bozza rimossa, vecchia UI conservata in index.html.old): H1 = &quot;Attestazione delle opere digitali&quot; per le corrispondenze SEO, promessa in lingua piana come sottotitolo; tablist ARIA sticky (Attesta / Verifica / Come funziona); demo &quot;L'impronta, dal vivo&quot; (SHA-256 live di una frase digitata); eliminato ovunque il verbo &quot;caricare&quot; (15 occorrenze) a favore di scegli/apri/trascina, perché contraddiceva la garanzia di full privacy (P16); contrasti ≥4.5:1, focus visibile, target ≥44px, aria-label sugli input con solo placeholder.</p>
+        <p><strong>Conseguenze:</strong> Nessuna doppia pagina divergente (stessa lezione già applicata con beta.html in P12); il lessico onesto diventa un principio esplicito e durevole del progetto, non solo una scelta di questa release.</p>
+      </li>
+      <li><strong>2026-07-09 — Nome del framework e del repository</strong> <em>(accepted)</em>
+        <p>Il progetto era stato disegnato come &quot;Open Trust Framework&quot; (OTF). Il gestore ha chiesto di rinominarlo per coerenza col nome dell'ente titolare.</p>
+        <p><strong>Decisione:</strong> Il framework si chiama &quot;Genesis Trust Framework&quot; (GTF); il repository pubblico che ne è la Single Source of Truth è `spazio-genesi/gtf`. I nomi di componenti interni (&quot;Trust Center&quot;, &quot;Trust Registry&quot;, &quot;Open Trust Score&quot;) restano invariati: sono nomi funzionali, non il brand del framework.</p>
+        <p><strong>Conseguenze:</strong> Tutti i riferimenti a OTF/ADR-OTF-* nell'architettura sono stati rinominati a GTF/ADR-GTF-* prima della creazione del repo, per evitare di partire con un nome già da correggere.</p>
+      </li>
+      <li><strong>2026-07-09 — URL pubblico del Trust Center</strong> <em>(accepted)</em>
+        <p>Il Trust Center (GTF-ARCH §7) deve avere un URL pubblico stabile. Due opzioni: instradarlo sotto il dominio già usato dal servizio (attestazione.spaziogenesi.org/trust/) via route Cloudflare + Worker proxy leggero — stesso pattern già rodato per /c/*; oppure un sottodominio dedicato (trust.spaziogenesi.org) con CNAME diretto su GitHub Pages, senza passare dal Worker.</p>
+        <p><strong>Decisione:</strong> Sottodominio dedicato trust.spaziogenesi.org (CNAME diretto su GitHub Pages, nessun coinvolgimento del Worker imgauth). Motivo del cambio rispetto alla propensione iniziale dell'architettura (che favoriva la route sotto lo stesso dominio): il principio di indipendenza dei tre repository (CLAUDE.md) vale anche per gtf, che deve potersi pubblicare da solo senza mai richiedere modifiche a imgauth. Il ragionamento &quot;un solo dominio&quot; ha senso per /c/&lt;hash&gt; (fa parte del percorso di verifica di un'opera, serve continuità di esperienza) ma non per il Trust Center, che è una pagina istituzionale/di trasparenza, non parte di quel flusso.</p>
+        <p><strong>Conseguenze:</strong> DNS: record CNAME &quot;trust&quot; → spazio-genesi.github.io. Impostazione del custom domain nelle GitHub Pages settings del repo gtf rimandata alla fase M3 (Trust Center + Score), quando site/ avrà davvero un contenuto da servire. Nessuna modifica necessaria a imgauth/wrangler.toml.</p>
+      </li>
+      <li><strong>2026-07-09 — Lingua del registro</strong> <em>(proposed)</em>
+        <p>Il registro deve essere leggibile sia da modelli AI diversi (interoperabilità con schemi/standard, spesso in inglese) sia dagli stakeholder italiani del progetto (studenti, ricercatori, collezionisti).</p>
+        <p><strong>Decisione:</strong> Non ancora deciso. Propensione dell'architettura verso record bilingui minimi: campi strutturali (id, tipo, enum di stato) in inglese; campi discorsivi (title, statement, context, decision) in italiano, generando poi una versione inglese del Trust Center in un secondo tempo se richiesta.</p>
+        <p><strong>Conseguenze:</strong> Una scelta &quot;tutto italiano&quot; semplificherebbe la scrittura ma renderebbe più difficile il riuso degli schemi da parte di modelli o revisori non italiani.</p>
+      </li>
+      <li><strong>2026-07-09 — Collocazione degli snapshot di evidenza</strong> <em>(proposed)</em>
+        <p>Il collettore settimanale di evidenze (GTF-ARCH §6.3) produce snapshot JSON che devono restare immutabili e verificabili nel tempo. Vanno collocati dentro il repo `gtf` stesso (versionati in git, diffabili, pubblici senza altra infrastruttura) oppure in un bucket R2 dedicato (più adatto se il volume cresce molto).</p>
+        <p><strong>Decisione:</strong> Partire con gli snapshot dentro il repo `gtf` (cartella `snapshots/`), perché a basso volume settimanale git è più che sufficiente ed è già pubblico e verificabile via storia; migrare a R2 solo se le dimensioni del repo diventano un problema concreto.</p>
+        <p><strong>Conseguenze:</strong> Nessun costo aggiuntivo nella fase iniziale; da rivalutare quando il volume degli snapshot cresce (nessuna soglia numerica fissata ora — lo si osserva in fase M4).</p>
+      </li>
+    </ol>
+  </section>
+
+  <footer>
+    Genesis Trust Framework · pagina generata automaticamente dal
+    <a href="https://github.com/SPAZIO-GENESI/gtf">registro pubblico</a> —
+    nessun testo di questa pagina è scritto a mano (principio PRN-03).
+  </footer>
 </body>
 </html>

@@ -1,0 +1,7 @@
+id: MET-automation
+title: Automazione
+formula: >
+  Quota di evidenze (EVD) con collection=auto sul totale delle evidenze
+  pubbliche e interne. Attivo da subito (dati interamente nel registro).
+unit: "0-100"
+visibility: public

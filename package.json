@@ -5,7 +5,10 @@
   "type": "module",
   "description": "Genesis Trust Framework — registro, schemi e generatori del Trust Center di Spazio Genesi ETS",
   "scripts": {
-    "validate": "node generators/validate.mjs"
+    "validate": "node generators/validate.mjs",
+    "score": "node generators/score.mjs",
+    "build-site": "node generators/build-site.mjs",
+    "build": "npm run validate && npm run score && npm run build-site"
   },
   "license": "MIT",
   "dependencies": {

@@ -1,30 +1,8 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join, relative, basename, extname } from "node:path";
-import { fileURLToPath } from "node:url";
-import yaml from "js-yaml";
+import { readFileSync, readdirSync } from "node:fs";
+import { join, extname, basename } from "node:path";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-
-const ROOT = join(fileURLToPath(import.meta.url), "..", "..");
-const REGISTRY_DIR = join(ROOT, "registry");
-const SCHEMAS_DIR = join(ROOT, "schemas");
-
-// Mappa cartella del registro -> file di schema
-const FOLDER_SCHEMA = {
-  principles: "principle.schema.json",
-  requirements: "requirement.schema.json",
-  controls: "control.schema.json",
-  implementations: "implementation.schema.json",
-  evidence: "evidence.schema.json",
-  processes: "process.schema.json",
-  decisions: "decision.schema.json",
-  risks: "risk.schema.json",
-  incidents: "incident.schema.json",
-  actions: "action.schema.json",
-  data: "data.schema.json",
-  metrics: "metric.schema.json",
-  glossary: "glossary.schema.json",
-};
+import { SCHEMAS_DIR, FOLDER_SCHEMA, loadRegistry } from "./lib/registry.mjs";
 
 // Campi che contengono ID (singoli o array) e vanno risolti nel grafo
 const REFERENCE_FIELDS = [
@@ -42,16 +20,6 @@ const SECRET_VALUE_PATTERNS = [
   /\b(secret|password|token|api[_-]?key)\s*:\s*["']?[A-Za-z0-9+/_-]{20,}["']?/i,
 ];
 
-function walk(dir) {
-  const out = [];
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) out.push(...walk(p));
-    else if (extname(p) === ".yaml" || extname(p) === ".yml") out.push(p);
-  }
-  return out;
-}
-
 function loadSchemas(ajv) {
   const validators = {};
   for (const file of readdirSync(SCHEMAS_DIR)) {
@@ -68,38 +36,21 @@ function main() {
   addFormats(ajv);
   const validators = loadSchemas(ajv);
 
-  const files = walk(REGISTRY_DIR);
-  const records = new Map(); // id -> { record, file }
+  const records = loadRegistry();
+  const seenIds = new Map(); // per rilevare id duplicati tra file diversi
 
-  for (const file of files) {
-    const rel = relative(ROOT, file);
-    const folder = basename(join(file, ".."));
-    const schemaFile = FOLDER_SCHEMA[folder];
+  for (const [id, { record, rel, folder, file }] of records) {
     const text = readFileSync(file, "utf8");
 
-    // Lint anti-segreti sul testo grezzo, prima ancora del parsing
     for (const pattern of SECRET_VALUE_PATTERNS) {
       if (pattern.test(text)) {
         errors.push(`${rel}: possibile segreto in chiaro (pattern ${pattern})`);
       }
     }
 
+    const schemaFile = FOLDER_SCHEMA[folder];
     if (!schemaFile) {
       errors.push(`${rel}: cartella "${folder}" non mappata a nessuno schema`);
-      continue;
-    }
-
-    let record;
-    try {
-      // JSON_SCHEMA evita che js-yaml converta le date ISO in oggetti Date:
-      // il JSON Schema si aspetta stringhe (format: date), non oggetti.
-      record = yaml.load(text, { schema: yaml.JSON_SCHEMA });
-    } catch (e) {
-      errors.push(`${rel}: YAML non valido — ${e.message}`);
-      continue;
-    }
-    if (!record || typeof record !== "object") {
-      errors.push(`${rel}: il file non contiene un oggetto YAML valido`);
       continue;
     }
 
@@ -115,15 +66,15 @@ function main() {
       errors.push(`${rel}: id "${record.id}" non corrisponde al nome file "${expectedId}"`);
     }
 
-    if (records.has(record.id)) {
-      errors.push(`${rel}: id duplicato "${record.id}" (già usato in ${records.get(record.id).rel})`);
+    if (seenIds.has(id)) {
+      errors.push(`${rel}: id duplicato "${id}" (già usato in ${seenIds.get(id)})`);
     } else {
-      records.set(record.id, { record, rel });
+      seenIds.set(id, rel);
     }
   }
 
   // Risoluzione dei riferimenti nel grafo (regola PRN-01 / §3.4.1)
-  for (const [id, { record, rel }] of records) {
+  for (const [, { record, rel }] of records) {
     for (const field of REFERENCE_FIELDS) {
       const value = record[field];
       if (value === undefined) continue;

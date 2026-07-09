@@ -1,0 +1,10 @@
+id: MET-integrity
+title: Integrità
+formula: >
+  Combinazione di: esito della sonda HMAC interna (da /api/status), quota
+  di release con tag git, quota di ancore OpenTimestamps mensili riuscite
+  su attese. Non ancora calcolabile: richiede il collettore di evidenze
+  live (GTF-ARCH §6.3), non ancora costruito, e uno storico di release
+  taggate (nessuna oggi). Si attiverà quando il collettore esisterà.
+unit: "0-100 oppure n/d"
+visibility: public

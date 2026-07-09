@@ -1,0 +1,11 @@
+id: MET-governance
+title: Governance
+formula: >
+  Quota di merge nel registro avvenuti via pull request con revisione,
+  più quota di decisioni non ovvie accompagnate da un'ADR. Non ancora
+  calcolabile offline: richiede dati dell'API GitHub (storico PR/review)
+  che il generatore non interroga in questa versione (score v0 lavora solo
+  dal registro committato, per restare riproducibile senza rete). Si
+  attiverà con un collettore che legga questi dati.
+unit: "0-100 oppure n/d"
+visibility: public
