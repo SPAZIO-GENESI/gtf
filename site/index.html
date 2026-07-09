@@ -633,7 +633,7 @@
         <div class="entry-body">
           <p>Un audit interno ha rilevato che /api/status non esercitava affatto la logica di emissione: con HMAC_SECRET assente o rotto il servizio emetteva comunque attestazioni senza firma valida (hmac null) e cert-pdf falliva con 503, ma lo stato semaforico restava verde.</p>
           <p><strong>Decisione:</strong> Round-trip signHmac + verifyHmac su una stringa fissa a ogni campionamento di stato; il risultato confluisce nel componente &quot;worker&quot; di /api/status (down se il round-trip fallisce). Dichiarato inoltre che HMAC_SECRET non va mai ruotato: la rotazione invaliderebbe per sempre la verifica di tutti i certificati già emessi (nessun supporto a doppia chiave).</p>
-          <p><strong>Conseguenze:</strong> La sonda interna non rileva però una rotazione ERRATA del segreto (una firma con un segreto nuovo ma sbagliato risulterebbe comunque &quot;internamente coerente&quot;). Resta aperto un canary esterno che confronti un'attestazione nota firmata col segreto giusto — pianificato nel GTF come CTL-hmac-canary, ancora in stato draft.</p>
+          <p><strong>Conseguenze:</strong> La sonda interna non rileva però una rotazione ERRATA del segreto (una firma con un segreto nuovo ma sbagliato risulterebbe comunque &quot;internamente coerente&quot;). Identificato il bisogno di un canary esterno che confronti un'attestazione nota firmata col segreto giusto — pianificato nel GTF come CTL-hmac-canary (vedi il registro per lo stato attuale del controllo, aggiornato indipendentemente da questa ADR storica).</p>
           <p class="tag-line"><span class="tag">ADR-P17</span></p>
         </div>
       </details>

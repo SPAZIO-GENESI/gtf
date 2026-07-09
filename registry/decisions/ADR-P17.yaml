@@ -17,9 +17,11 @@ decision: >
 consequences: >
   La sonda interna non rileva però una rotazione ERRATA del segreto (una
   firma con un segreto nuovo ma sbagliato risulterebbe comunque
-  "internamente coerente"). Resta aperto un canary esterno che confronti
-  un'attestazione nota firmata col segreto giusto — pianificato nel GTF
-  come CTL-hmac-canary, ancora in stato draft.
+  "internamente coerente"). Identificato il bisogno di un canary esterno
+  che confronti un'attestazione nota firmata col segreto giusto —
+  pianificato nel GTF come CTL-hmac-canary (vedi il registro per lo stato
+  attuale del controllo, aggiornato indipendentemente da questa ADR
+  storica).
 affects: [CTL-hmac-signing, CTL-hmac-canary]
 evidence: [EVD-git-imgauth, EVD-status-live]
 visibility: public
