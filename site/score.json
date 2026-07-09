@@ -12,7 +12,7 @@
       "id": "MET-integrity",
       "label": "Integrità",
       "value": 100,
-      "note": "parziale: sonda HMAC (componente \"worker\", snapshot 2026-W28) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) — manca ancora lo storico delle release taggate"
+      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W28) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (0/n/d) — proxy iniziale, non ancora la quota storica di versioni taggate"
     },
     {
       "id": "MET-traceability",
@@ -59,5 +59,5 @@
       "note": "richiede dati GitHub, score v0 lavora solo offline dal registro"
     }
   ],
-  "computed_at": "2026-07-09T15:55:21.356Z"
+  "computed_at": "2026-07-09T16:01:14.705Z"
 }

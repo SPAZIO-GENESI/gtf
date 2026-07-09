@@ -10,26 +10,49 @@ const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
 // ancoraggio dogfooding al mese (CTL-dogfooding-anchor).
 const GTF_BIRTH_MONTH = "2026-07";
 
-// Legge l'ultimo snapshot settimanale del collettore (generators/collect-evidence.mjs),
-// se esiste, per il solo componente "worker" (sonda HMAC) di /api/status.
-// Le cartelle YYYY-Www ordinano correttamente in lessicografico (settimana a 2 cifre).
-function latestSnapshotWorkerStatus() {
+// Settimana più recente raccolta dal collettore (generators/collect-evidence.mjs).
+// Le cartelle YYYY-Www ordinano correttamente in lessicografico (settimana a 2 cifre);
+// "anchors" non è una settimana ed è esclusa.
+function latestWeek() {
   if (!existsSync(SNAPSHOTS_DIR)) return null;
   const weeks = readdirSync(SNAPSHOTS_DIR, { withFileTypes: true })
     .filter((d) => d.isDirectory() && d.name !== "anchors")
     .map((d) => d.name)
     .sort();
-  if (weeks.length === 0) return null;
-  const latest = weeks[weeks.length - 1];
-  const file = join(SNAPSHOTS_DIR, latest, "status.json");
+  return weeks.length > 0 ? weeks[weeks.length - 1] : null;
+}
+
+function readJsonSnapshot(week, filename) {
+  const file = join(SNAPSHOTS_DIR, week, filename);
   if (!existsSync(file)) return null;
   try {
-    const wrapper = JSON.parse(readFileSync(file, "utf8"));
-    if (!wrapper.ok || !wrapper.data?.worker) return null;
-    return { week: latest, worker: wrapper.data.worker };
+    return JSON.parse(readFileSync(file, "utf8"));
   } catch {
     return null;
   }
+}
+
+// Componente "worker" (sonda HMAC) dell'ultimo /api/status raccolto.
+function latestSnapshotWorkerStatus(week) {
+  if (!week) return null;
+  const wrapper = readJsonSnapshot(week, "status.json");
+  if (!wrapper?.ok || !wrapper.data?.worker) return null;
+  return { week, worker: wrapper.data.worker };
+}
+
+// Quota di repo pubblici (imgauth, imgauthweb, autart-signer) con almeno un
+// tag di release (convenzione vX.Y.Z, PRC-release-coordinata). Proxy semplice:
+// non conta ancora quante versioni storiche sono taggate, solo se la pratica
+// è adottata per repo — si raffina quando esisterà più storico.
+function releaseTagRatio(week) {
+  if (!week) return { ratio: null, tagged: 0, total: 0 };
+  const repos = ["imgauth", "imgauthweb", "autart-signer"];
+  const checked = repos
+    .map((repo) => readJsonSnapshot(week, `tags-${repo}.json`))
+    .filter((r) => r?.ok);
+  if (checked.length === 0) return { ratio: null, tagged: 0, total: 0 };
+  const tagged = checked.filter((r) => Array.isArray(r.data) && r.data.length > 0).length;
+  return { ratio: pct(tagged, checked.length), tagged, total: checked.length };
 }
 
 function isPublic(record) {
@@ -90,22 +113,23 @@ function computeIndicators(records) {
   const reproducibility = pctCtlVerify;
 
   // Integrità: media dei componenti disponibili tra sonda HMAC (ultimo snapshot
-  // settimanale) e quota di ancoraggi dogfooding mensili onorati da quando il
-  // GTF esiste — manca ancora lo storico delle release taggate (terzo componente
-  // dichiarato in MET-integrity.yaml).
-  const snap = latestSnapshotWorkerStatus();
+  // settimanale), quota di ancoraggi dogfooding mensili onorati e quota di repo
+  // pubblici con almeno un tag di release.
+  const week = latestWeek();
+  const snap = latestSnapshotWorkerStatus(week);
   const WORKER_SCORE = { ok: 100, degraded: 50, down: 0 };
   const workerComponent = snap ? WORKER_SCORE[snap.worker] ?? null : null;
   const anchor = dogfoodingAnchorRatio();
-  const integrityComponents = [workerComponent, anchor.ratio].filter((v) => v !== null);
+  const tags = releaseTagRatio(week);
+  const integrityComponents = [workerComponent, anchor.ratio, tags.ratio].filter((v) => v !== null);
   const integrity =
     integrityComponents.length > 0
       ? Math.round(integrityComponents.reduce((a, b) => a + b, 0) / integrityComponents.length)
       : null;
   const integrityNote =
     integrityComponents.length > 0
-      ? `parziale: sonda HMAC (${snap ? `componente "worker", snapshot ${snap.week}` : "nessuno snapshot"}) + ancoraggi dogfooding onorati (${anchor.done}/${anchor.expected} mesi da ${GTF_BIRTH_MONTH}) — manca ancora lo storico delle release taggate`
-      : "richiede almeno uno snapshot dal collettore di evidenze o un ancoraggio dogfooding (nessuno dei due ancora raccolto)";
+      ? `sonda HMAC (${snap ? `componente "worker", snapshot ${snap.week}` : "nessuno snapshot"}) + ancoraggi dogfooding onorati (${anchor.done}/${anchor.expected} mesi da ${GTF_BIRTH_MONTH}) + repo con tag di release (${tags.tagged}/${tags.total || "n/d"}) — proxy iniziale, non ancora la quota storica di versioni taggate`
+      : "richiede almeno uno snapshot dal collettore di evidenze, un ancoraggio dogfooding o dati sui tag (nessuno ancora raccolto)";
 
   return [
     { id: "MET-transparency", label: "Trasparenza", value: transparency },

@@ -91,6 +91,15 @@ async function main() {
   results["git-imgauthweb"] = await fetchJson("https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits?per_page=5", ghHeaders);
   if (results["git-imgauthweb"].ok) evdHits.add("EVD-git-imgauthweb");
 
+  results["git-authart"] = await fetchJson("https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits?per_page=5", ghHeaders);
+  if (results["git-authart"].ok) evdHits.add("EVD-git-authart");
+
+  // Tag di release (convenzione vX.Y.Z, vedi PRC-release-coordinata): alimentano
+  // il terzo componente di MET-integrity ("quota di release con tag git").
+  for (const repo of ["imgauth", "imgauthweb", "autart-signer"]) {
+    results[`tags-${repo}`] = await fetchJson(`https://api.github.com/repos/SPAZIO-GENESI/${repo}/tags?per_page=30`, ghHeaders);
+  }
+
   const manifest = { collected_at: today.toISOString(), week, files: {} };
   for (const [name, data] of Object.entries(results)) {
     const filename = `${name}.json`;

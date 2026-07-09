@@ -5,12 +5,15 @@ formula: >
   di release con tag git, quota di ancore OpenTimestamps mensili dogfooding
   riuscite su attese. score.mjs calcola la media dei componenti disponibili:
   il campo "worker" dell'ultimo snapshot settimanale (ok=100, degraded=50,
-  down=0) e la quota di bundle mensili committati in snapshots/anchors/
+  down=0); la quota di bundle mensili committati in snapshots/anchors/
   rispetto ai mesi trascorsi da GTF_BIRTH_MONTH (2026-07, un bundle onorato
-  = un mese). Il terzo componente — quota di release con tag git — resta
-  fuori portata: nessuno storico di release taggate esiste ancora. Il
-  valore mostrato è quindi tuttora dichiaratamente parziale (contrassegnato
-  con un asterisco nel Trust Center), non l'intero indicatore descritto in
-  GTF-ARCH §8.2.
-unit: "0-100 (parziale) oppure n/d se non esiste né uno snapshot né un ancoraggio"
+  = un mese); e (dal 2026-07-09, PRC-release-coordinata) la quota di repo
+  pubblici tra imgauth/imgauthweb/autart-signer con almeno un tag `vX.Y.Z`
+  su GitHub, letta dallo snapshot settimanale (tags-<repo>.json). Il terzo
+  componente è un **proxy iniziale** (solo "il repo tagga le release?", non
+  ancora "quale quota delle versioni storiche ha un tag") finché non si
+  accumula più storico dopo l'adozione della convenzione. Il valore
+  mostrato resta dichiaratamente parziale (contrassegnato con un asterisco
+  nel Trust Center), non l'intero indicatore descritto in GTF-ARCH §8.2.
+unit: "0-100 (parziale) oppure n/d se non esiste alcun dato per nessuno dei tre componenti"
 visibility: public

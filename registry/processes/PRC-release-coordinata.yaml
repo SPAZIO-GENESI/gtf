@@ -2,7 +2,7 @@ id: PRC-release-coordinata
 title: Rilascio coordinato di una modifica cross-repo
 owner: maintainer del servizio
 trigger: "una modifica che tocca il contratto API tra imgauth e authweb (o authart), o un cambiamento visibile all'utente"
-output: "bump di versione nel manifest di ciascun componente toccato (package.json / APP_VERSION / APP_VERSION app.py), redeploy coordinato, voce nel changelog utente se rilevante"
+output: "bump di versione nel manifest di ciascun componente toccato (package.json / APP_VERSION / APP_VERSION app.py), tag git `vX.Y.Z` creato e pushato nel repo del componente (convenzione dal 2026-07-09, alimenta MET-integrity), redeploy coordinato, voce nel changelog utente se rilevante"
 produces_evidence: [EVD-changelog-user, EVD-versions-live]
 human_cost_minutes_month: 30
 visibility: public
