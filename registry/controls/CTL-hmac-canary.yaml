@@ -1,17 +1,21 @@
 id: CTL-hmac-canary
 title: "Canary esterno che rileva una rotazione errata del segreto HMAC"
-status: draft
+status: active
 visibility: public
 satisfies: [PRN-04]
 mitigates: [RSK-secret-compromise]
 implemented_by: [IMP-imgauth-monitor-canary]
+evidenced_by: [EVD-canary-hmac-runs]
 verify_howto: >
-  Codice implementato (job "canary" in monitor.yml, imgauth): a ogni run
-  invia a /api/verify un'attestazione nota (variabili di repo CANARY_HASH/
-  CANARY_ATTESTAZIONE/CANARY_HMAC) e pretende hmac_valido: true; un
-  HMAC_SECRET rotato per errore farebbe fallire il check, cosa che la sola
-  sonda interna (CTL-hmac-signing) non rileva. Resta in stato "draft"
-  finché le tre variabili di repo non sono state impostate con
-  un'attestazione reale ottenuta dal servizio in produzione — senza,
-  il job si limita a un warning e salta il controllo (nessun falso allarme).
+  Operativo dal 2026-07-09 (prima verifica riuscita: Telegram "test canary
+  HMAC ok" alle 11:26:37Z). Ogni 15 minuti il job "canary" in monitor.yml
+  (imgauth) invia a /api/verify un'attestazione nota, firmata una volta col
+  segreto corretto e conservata come variabili di repo (CANARY_HASH,
+  CANARY_ATTESTAZIONE, CANARY_HMAC — non segreti: dati della stessa classe
+  stampata su un certificato pubblico). Un HMAC_SECRET rotato per errore
+  farebbe fallire il check, cosa che la sola sonda interna
+  (CTL-hmac-signing) non rileva: quella rifà firma+verifica col segreto
+  ATTUALE, quindi resta "coerente" anche dopo una rotazione sbagliata.
 owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

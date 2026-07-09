@@ -1,0 +1,7 @@
+id: EVD-canary-hmac-runs
+title: Storico delle esecuzioni del canary HMAC
+location: { system: github-actions, ref: "imgauth .github/workflows/monitor.yml, job canary", public_via: "tab Actions del repo pubblico imgauth" }
+collection: auto
+integrity: "ogni 15 minuti confronta production con un'attestazione nota firmata col segreto corretto; notifica Telegram e issue label hmac-canary-alert solo sui cambi di stato. Prima verifica riuscita: 2026-07-09T11:26:37Z"
+supports: [CTL-hmac-canary]
+visibility: public
