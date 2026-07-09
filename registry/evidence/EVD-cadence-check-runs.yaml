@@ -2,6 +2,7 @@ id: EVD-cadence-check-runs
 title: Storico delle esecuzioni del controllo cadenze (PRC ricorrenti + ancoraggio dogfooding)
 location: { system: github-actions, ref: "gtf .github/workflows/collect-evidence.yml, step check-cadences", public_via: "tab Actions del repo pubblico gtf" }
 collection: auto
-integrity: "gira ogni lunedì insieme al collettore di evidenze; confronta ciascun PRC con frequency_days contro last_run (o la nascita del GTF se mai eseguito) e l'ultimo bundle in snapshots/anchors/ per il ciclo dogfooding; invia un avviso Telegram solo se qualcosa è scaduto, verificabile chiunque rilanciando lo script localmente (npm run check-cadences) sullo stesso registro pubblico. Prima esecuzione attesa al prossimo giro schedulato (nessuna ancora osservata al 2026-07-09)."
+integrity: "gira ogni lunedì insieme al collettore di evidenze; confronta ciascun PRC con frequency_days contro last_run (o la nascita del GTF se mai eseguito) e l'ultimo bundle in snapshots/anchors/ per il ciclo dogfooding; invia un avviso Telegram solo se qualcosa è scaduto, verificabile chiunque rilanciando lo script localmente (npm run check-cadences) sullo stesso registro pubblico. Canale Telegram verificato funzionante il 2026-07-09 con un invio di test manuale (workflow_dispatch, input test_telegram); prima esecuzione schedulata: il lunedì successivo."
+last_seen: 2026-07-09
 supports: [CTL-cadence-monitoring]
 visibility: public
