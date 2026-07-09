@@ -24,6 +24,11 @@ jobs:
       - run: npm run collect-evidence
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Controlla le cadenze ricorrenti (revisioni, drill, ancoraggio) e avvisa su Telegram se qualcosa è scaduto
+        run: npm run check-cadences
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       - name: Commit lo snapshot e l'aggiornamento di last_seen, se cambia qualcosa
         run: |
           git config user.name "github-actions[bot]"

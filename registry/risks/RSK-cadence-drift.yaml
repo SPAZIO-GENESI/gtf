@@ -1,0 +1,13 @@
+id: RSK-cadence-drift
+title: Un processo ricorrente dichiarato smette di essere eseguito senza che nessuno se ne accorga
+description: >
+  Revisione trimestrale, restore drill, ancoraggio dogfooding e review esterna
+  annuale dipendono da un umano che se ne ricordi. Prima di questo controllo,
+  nulla nel registro registrava quando un processo ricorrente era stato
+  eseguito l'ultima volta: né il maintainer né un'assistenza AI potevano
+  verificarlo, solo "ricordarselo" — la stessa fragilità che il GTF esiste
+  per eliminare altrove.
+likelihood: medium
+impact: medium
+mitigated_by: [CTL-cadence-monitoring]
+visibility: public

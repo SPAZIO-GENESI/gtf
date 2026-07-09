@@ -1,0 +1,21 @@
+id: CTL-cadence-monitoring
+title: "Controllo automatico delle cadenze ricorrenti (revisioni, drill, ancoraggio) con avviso Telegram"
+status: active
+visibility: public
+satisfies: [PRN-02, PRN-07]
+mitigates: [RSK-cadence-drift]
+implemented_by: [IMP-gtf-check-cadences]
+evidenced_by: [EVD-cadence-check-runs]
+verify_howto: >
+  Settimanale, dentro .github/workflows/collect-evidence.yml: legge i
+  processi ricorrenti dichiarati nel registro (PRC-restore-drill,
+  PRC-review-trimestrale, PRC-review-esterna-annuale) e il più recente
+  bundle in snapshots/anchors/ per CTL-dogfooding-anchor; se un processo
+  ha superato la sua cadenza dichiarata (frequency_days) senza un last_run
+  più recente, invia un avviso Telegram al maintainer. Chiunque può
+  rilanciare `npm run check-cadences` in locale sul registro pubblico e
+  ottenere lo stesso esito (l'invio Telegram richiede i secret del
+  maintainer, ma il calcolo di cosa è scaduto è interamente pubblico).
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

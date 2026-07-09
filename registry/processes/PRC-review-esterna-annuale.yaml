@@ -1,0 +1,9 @@
+id: PRC-review-esterna-annuale
+title: Revisione esterna annuale del registro e dei controlli
+owner: revisore esterno indipendente (in fase di individuazione, vedi ARCHITECTURE.md §9.1)
+trigger: "cadenza annuale (GTF-ARCH §9.3)"
+output: "verbale pubblico di revisione esterna, con eventuali rilievi e azioni correttive (ACT) associate"
+produces_evidence: []
+human_cost_minutes_month: 5
+frequency_days: 365
+visibility: public

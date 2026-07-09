@@ -1,0 +1,6 @@
+id: IMP-gtf-check-cadences
+title: Controllo automatico delle cadenze ricorrenti e avviso Telegram
+repo: gtf
+ref: "generators/check-cadences.mjs — legge i PRC con frequency_days/last_run (default: da GTF_BIRTH se mai eseguiti) più l'ultimo bundle in snapshots/anchors/ per l'ancoraggio dogfooding; invia un messaggio Telegram (TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID) solo se qualcosa è scaduto. Eseguito settimanalmente da .github/workflows/collect-evidence.yml, dopo la raccolta evidenze."
+supports: [CTL-cadence-monitoring]
+visibility: public
