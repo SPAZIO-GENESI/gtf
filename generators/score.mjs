@@ -4,6 +4,11 @@ import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
 
 const SITE_DIR = join(ROOT, "site");
 const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
+
+// Mese di nascita del GTF (ARCHITECTURE.md): da qui parte l'attesa di un
+// ancoraggio dogfooding al mese (CTL-dogfooding-anchor).
+const GTF_BIRTH_MONTH = "2026-07";
 
 // Legge l'ultimo snapshot settimanale del collettore (generators/collect-evidence.mjs),
 // se esiste, per il solo componente "worker" (sonda HMAC) di /api/status.
@@ -40,6 +45,17 @@ function pct(numerator, denominator) {
   return Math.round((numerator / denominator) * 100);
 }
 
+// Quota di ancoraggi dogfooding mensili riusciti su quelli attesi da quando
+// il GTF esiste (un bundle <YYYY-MM>-bundle.json committato = un mese onorato).
+function dogfoodingAnchorRatio() {
+  if (!existsSync(ANCHORS_DIR)) return { ratio: null, done: 0, expected: 0 };
+  const done = readdirSync(ANCHORS_DIR).filter((f) => /^\d{4}-\d{2}-bundle\.json$/.test(f)).length;
+  const [birthYear, birthMonth] = GTF_BIRTH_MONTH.split("-").map(Number);
+  const now = new Date();
+  const expected = (now.getUTCFullYear() - birthYear) * 12 + (now.getUTCMonth() + 1 - birthMonth) + 1;
+  return { ratio: pct(Math.min(done, expected), expected), done, expected };
+}
+
 function computeIndicators(records) {
   const all = [...records.values()].map((r) => r.record);
   const ctl = byFolder(records, "controls");
@@ -73,14 +89,23 @@ function computeIndicators(records) {
   // Riproducibilità: stesso segnale del secondo termine di Trasparenza (limite dichiarato in MET-reproducibility)
   const reproducibility = pctCtlVerify;
 
-  // Integrità: parziale, solo componente "worker" (sonda HMAC) dell'ultimo snapshot
-  // raccolto — non include ancora storico release taggate né esito ancore OTS mensili.
+  // Integrità: media dei componenti disponibili tra sonda HMAC (ultimo snapshot
+  // settimanale) e quota di ancoraggi dogfooding mensili onorati da quando il
+  // GTF esiste — manca ancora lo storico delle release taggate (terzo componente
+  // dichiarato in MET-integrity.yaml).
   const snap = latestSnapshotWorkerStatus();
   const WORKER_SCORE = { ok: 100, degraded: 50, down: 0 };
-  const integrity = snap ? WORKER_SCORE[snap.worker] ?? null : null;
-  const integrityNote = snap
-    ? `parziale: solo sonda HMAC (componente "worker", snapshot ${snap.week}) — non ancora storico release taggate; il primo ancoraggio dogfooding mensile esiste (CTL-dogfooding-anchor) ma non è ancora incorporato nel calcolo`
-    : "richiede almeno uno snapshot dal collettore di evidenze (non ancora raccolto)";
+  const workerComponent = snap ? WORKER_SCORE[snap.worker] ?? null : null;
+  const anchor = dogfoodingAnchorRatio();
+  const integrityComponents = [workerComponent, anchor.ratio].filter((v) => v !== null);
+  const integrity =
+    integrityComponents.length > 0
+      ? Math.round(integrityComponents.reduce((a, b) => a + b, 0) / integrityComponents.length)
+      : null;
+  const integrityNote =
+    integrityComponents.length > 0
+      ? `parziale: sonda HMAC (${snap ? `componente "worker", snapshot ${snap.week}` : "nessuno snapshot"}) + ancoraggi dogfooding onorati (${anchor.done}/${anchor.expected} mesi da ${GTF_BIRTH_MONTH}) — manca ancora lo storico delle release taggate`
+      : "richiede almeno uno snapshot dal collettore di evidenze o un ancoraggio dogfooding (nessuno dei due ancora raccolto)";
 
   return [
     { id: "MET-transparency", label: "Trasparenza", value: transparency },
