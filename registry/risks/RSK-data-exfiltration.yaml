@@ -1,0 +1,10 @@
+id: RSK-data-exfiltration
+title: Invio non necessario del file originale dell'utente al server
+description: >
+  Se il file dell'opera transitasse verso il server per il calcolo
+  dell'hash, un'intercettazione o un log accidentale esporrebbe contenuti
+  che l'utente non intendeva condividere.
+likelihood: low
+impact: high
+mitigated_by: [CTL-hash-client-side]
+visibility: public

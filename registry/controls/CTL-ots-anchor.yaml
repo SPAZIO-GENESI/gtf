@@ -2,6 +2,8 @@ id: CTL-ots-anchor
 title: "Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar"
 status: active
 visibility: public
+satisfies: [REQ-27037-pres-01]
+mitigates: [RSK-archive-tampering]
 implemented_by: [IMP-imgauth-ots]
 evidenced_by: [EVD-ots-proofs, EVD-git-imgauth]
 verify_howto: >

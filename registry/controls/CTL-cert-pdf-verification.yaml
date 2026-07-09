@@ -1,0 +1,16 @@
+id: CTL-cert-pdf-verification
+title: "Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF"
+status: active
+visibility: public
+satisfies: [REQ-27042-ver-01]
+mitigates: [RSK-cert-forgery]
+implemented_by: [IMP-authweb-pdfjs-verify]
+evidenced_by: [EVD-git-imgauthweb]
+verify_howto: >
+  Trascina un certificato PDF emesso nella scheda "Verifica" di
+  attestazione.spaziogenesi.org: il semaforo mostra corrispondenza,
+  autenticità della firma, integrità dei dati e stato dell'ancoraggio
+  Bitcoin — senza dover fidarsi della sola parola del servizio.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

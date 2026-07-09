@@ -1,0 +1,12 @@
+id: REQ-27001-inspiration-01
+source: { norm: "ISO/IEC 27001", ref: "controlli Annex A pertinenti alla scala dell'organizzazione" }
+statement: >
+  I controlli Annex A applicabili a un'organizzazione di volontari senza
+  infrastruttura propria (controllo accessi, crittografia, sicurezza delle
+  operazioni, gestione degli incidenti) sono adottati per ispirazione, non
+  per certificazione formale: la certificazione è insostenibile per un ETS
+  di questa scala, ma i controlli pertinenti sono comunque implementati e
+  verificabili uno per uno.
+applicability: inspiration
+satisfied_by: [CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot, CTL-cors-restricted, CTL-r2-eu-archive, CTL-secrets-escrow, CTL-availability-monitoring]
+visibility: public

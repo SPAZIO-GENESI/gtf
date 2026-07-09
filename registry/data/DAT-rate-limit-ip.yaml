@@ -1,0 +1,7 @@
+id: DAT-rate-limit-ip
+title: Indirizzo IP come chiave del rate limiting
+data_categories: ["indirizzo IP (CF-Connecting-IP)"]
+legal_basis: "legittimo interesse (sicurezza e prevenzione dell'abuso)"
+retention: "effimera, nella sola finestra del binding rate limit (60 secondi)"
+flow: "richiesta HTTP → binding nativo Cloudflare ratelimit, nessuna persistenza applicativa"
+visibility: public

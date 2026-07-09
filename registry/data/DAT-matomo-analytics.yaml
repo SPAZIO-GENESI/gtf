@@ -1,0 +1,7 @@
+id: DAT-matomo-analytics
+title: Dati di navigazione aggregati (analytics)
+data_categories: ["pagine visitate, eventi, dati aggregati di navigazione — senza cookie né identificatori persistenti"]
+legal_basis: "legittimo interesse (analytics aggregata, non individuale)"
+retention: "gestita da Matomo (istanza propria); nessun identificatore persistente da revocare"
+flow: "browser → Matomo (matomodocker.azurewebsites.net), disableCookies attivo"
+visibility: public

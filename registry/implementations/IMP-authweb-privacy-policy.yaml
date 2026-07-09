@@ -1,0 +1,6 @@
+id: IMP-authweb-privacy-policy
+title: Informativa privacy pubblica
+repo: imgauthweb
+ref: "privacy.html — descrive trattamento dati, full privacy (§2 'l'opera non lascia il tuo dispositivo'), basi giuridiche, diritti dell'interessato"
+supports: [CTL-privacy-policy-public]
+visibility: public

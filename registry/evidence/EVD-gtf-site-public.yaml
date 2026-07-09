@@ -1,0 +1,6 @@
+id: EVD-gtf-site-public
+title: Contenuto pubblicato del Trust Center, generato dal deploy automatico
+location: { system: github-pages, ref: "gtf/site/index.html", public_via: "https://trust.spaziogenesi.org" }
+collection: auto
+integrity: "pubblicato automaticamente ad ogni push su main che tocca site/ (workflow pages.yml); storia delle modifiche nel git del repo gtf"
+visibility: public

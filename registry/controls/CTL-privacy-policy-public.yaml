@@ -1,0 +1,14 @@
+id: CTL-privacy-policy-public
+title: "Informativa privacy pubblica e aggiornata"
+status: active
+visibility: public
+satisfies: [REQ-gdpr-info-01]
+implemented_by: [IMP-authweb-privacy-policy]
+evidenced_by: [EVD-git-imgauthweb]
+verify_howto: >
+  Consulta privacy.html su attestazione.spaziogenesi.org: descrive cosa
+  viene trattato, che il file non lascia mai il dispositivo, le basi
+  giuridiche e i diritti dell'interessato.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

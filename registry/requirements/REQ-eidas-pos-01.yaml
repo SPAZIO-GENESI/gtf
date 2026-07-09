@@ -1,0 +1,9 @@
+id: REQ-eidas-pos-01
+source: { norm: "eIDAS 2.0", ref: "art. 46-equivalente — non discriminazione degli effetti giuridici delle prove elettroniche non qualificate" }
+statement: >
+  Il servizio deve informare in modo veritiero sul livello di garanzia
+  offerto, senza lasciar intendere una qualificazione eIDAS che non
+  possiede.
+applicability: partial
+satisfied_by: [CTL-eidas-honest-positioning]
+visibility: public

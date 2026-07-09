@@ -1,0 +1,17 @@
+id: CTL-eidas-honest-positioning
+title: "Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato"
+status: active
+visibility: public
+satisfies: [REQ-eidas-pos-01]
+mitigates: [RSK-overclaim-eidas]
+implemented_by: [IMP-gtf-site-eidas-disclosure]
+evidenced_by: [EVD-gtf-site-public]
+verify_howto: >
+  Consulta https://trust.spaziogenesi.org, sezione "Cosa NON è questo
+  servizio": il testo dichiara esplicitamente la natura non qualificata
+  dell'attestazione. Se il testo dovesse sparire o essere annacquato in
+  una futura revisione, il registro GTF lo renderebbe visibile (il record
+  sorgente di questo controllo resta pubblico e versionato).
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

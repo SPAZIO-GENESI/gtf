@@ -1,0 +1,14 @@
+id: CTL-matomo-cookieless
+title: "Analytics senza cookie, nessun identificatore persistente"
+status: active
+visibility: public
+satisfies: [REQ-gdpr-min-01]
+implemented_by: [IMP-authweb-matomo-cookieless]
+evidenced_by: [EVD-git-imgauthweb]
+verify_howto: >
+  Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli
+  strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente
+  non è presente alcun banner di consenso cookie.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-09

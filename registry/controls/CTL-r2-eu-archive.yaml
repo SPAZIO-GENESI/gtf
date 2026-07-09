@@ -2,6 +2,8 @@ id: CTL-r2-eu-archive
 title: "Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash"
 status: active
 visibility: public
+satisfies: [REQ-27037-pres-01]
+mitigates: [RSK-archive-tampering]
 implemented_by: [IMP-imgauth-r2-eu-binding]
 evidenced_by: [EVD-certificates-archive, EVD-git-imgauth]
 verify_howto: >

@@ -1,0 +1,6 @@
+id: IMP-authweb-pdfjs-verify
+title: Verifica lato client dell'autenticità del certificato PDF
+repo: imgauthweb
+ref: "index.html + /vendor/pdf/ (pdf.js auto-ospitato, nessuna CDN) — legge impronta/attestazione/HMAC/metadati dal PDF trascinato ed emette un verdetto a semaforo unico (corrispondenza, autenticità firma, integrità dati, ancoraggio Bitcoin)"
+supports: [CTL-cert-pdf-verification]
+visibility: public

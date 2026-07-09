@@ -2,6 +2,8 @@ id: CTL-hmac-canary
 title: "Canary esterno che rileva una rotazione errata del segreto HMAC"
 status: draft
 visibility: public
+satisfies: [PRN-04]
+mitigates: [RSK-secret-compromise]
 verify_howto: >
   Non ancora implementato. Quando attivo: il monitor invierà a /api/verify
   un'attestazione nota (hash+attestazione+hmac fissi) e pretenderà

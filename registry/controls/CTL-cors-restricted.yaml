@@ -2,6 +2,7 @@ id: CTL-cors-restricted
 title: "CORS ristretto al solo dominio dell'interfaccia utente"
 status: active
 visibility: public
+satisfies: [PRN-04]
 implemented_by: [IMP-imgauth-cors]
 evidenced_by: [EVD-git-imgauth]
 verify_howto: >

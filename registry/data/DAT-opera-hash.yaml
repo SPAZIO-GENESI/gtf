@@ -1,0 +1,7 @@
+id: DAT-opera-hash
+title: Impronta SHA-256 e metadati facoltativi dichiarati dell'opera
+data_categories: ["hash crittografico (non riconducibile al contenuto)", "metadati facoltativi dichiarati (titolo, autore, anno, note)"]
+legal_basis: "esecuzione di un servizio richiesto esplicitamente dall'utente (equivalente a base contrattuale/richiesta dell'interessato)"
+retention: "indefinita — l'attestazione è per natura permanente, è il prodotto stesso richiesto dall'utente"
+flow: "browser (WebCrypto) → /api/hash → HMAC+timestamp server-side → archivio R2/D1; il file originale non transita mai"
+visibility: public

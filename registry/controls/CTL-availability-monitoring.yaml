@@ -2,6 +2,8 @@ id: CTL-availability-monitoring
 title: "Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero"
 status: active
 visibility: public
+satisfies: [REQ-27043-ir-01, PRN-09]
+mitigates: [RSK-single-jurisdiction-outage]
 implemented_by: [IMP-imgauth-runchecks-status, IMP-imgauth-monitor-workflow]
 evidenced_by: [EVD-status-live, EVD-r2-status-history, EVD-d1-health-log, EVD-monitor-issues]
 verify_howto: >

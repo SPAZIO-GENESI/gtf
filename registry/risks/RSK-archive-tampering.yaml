@@ -1,0 +1,9 @@
+id: RSK-archive-tampering
+title: Alterazione dei certificati archiviati o della cronologia di emissione
+description: >
+  Un accesso non autorizzato al bucket R2, o un errore operativo, potrebbe
+  alterare o cancellare certificati già emessi.
+likelihood: low
+impact: high
+mitigated_by: [CTL-r2-eu-archive, CTL-ots-anchor]
+visibility: public

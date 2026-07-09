@@ -1,0 +1,8 @@
+id: REQ-cad-doc-01
+source: { norm: "CAD + Linee guida AgID", ref: "formazione del documento informatico: integrità e riferimento temporale opponibile" }
+statement: >
+  Il certificato, come documento informatico, deve avere una firma e un
+  riferimento temporale che ne rendano opponibile l'integrità nel tempo.
+applicability: partial
+satisfied_by: [CTL-pades-blt-tsa]
+visibility: public

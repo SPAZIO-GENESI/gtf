@@ -1,0 +1,8 @@
+id: PRC-incident-response
+title: Risposta a un guasto critico rilevato dal monitor o segnalato da un utente
+owner: maintainer del servizio
+trigger: "issue status-alert aperta dal monitor, o segnalazione diretta di un utente"
+output: "diagnosi e correzione del guasto; commento di richiusura sull'issue al ripristino; per i guasti rilevanti, un record INC pubblico con azione correttiva (ACT) associata"
+produces_evidence: [EVD-monitor-issues]
+human_cost_minutes_month: 15
+visibility: public

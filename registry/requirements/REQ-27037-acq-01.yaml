@@ -1,0 +1,8 @@
+id: REQ-27037-acq-01
+source: { norm: "ISO/IEC 27037", ref: "principi di identificazione e acquisizione della prova digitale" }
+statement: >
+  L'acquisizione dell'impronta digitale dell'opera deve essere documentata
+  e riproducibile: algoritmo dichiarato, implementazione ispezionabile.
+applicability: partial
+satisfied_by: [CTL-hash-client-side]
+visibility: public

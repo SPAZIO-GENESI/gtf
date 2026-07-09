@@ -1,0 +1,7 @@
+id: DAT-turnstile-challenge
+title: Segnali di verifica anti-bot (Cloudflare Turnstile)
+data_categories: ["indirizzo IP, segnali del browser necessari alla challenge anti-bot"]
+legal_basis: "legittimo interesse (prevenzione dell'abuso automatizzato del servizio)"
+retention: "gestita da Cloudflare secondo la propria informativa; il servizio riceve solo l'esito (valido/non valido)"
+flow: "browser → widget Turnstile → Cloudflare siteverify → /api/hash (solo l'esito booleano)"
+visibility: public

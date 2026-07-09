@@ -1,0 +1,10 @@
+id: RSK-single-jurisdiction-outage
+title: Interruzione di un componente critico (Azure authart, R2, Worker Cloudflare)
+description: >
+  Ciascun componente ha un solo fornitore/regione; un guasto lato Azure,
+  Cloudflare o rete potrebbe interrompere firma, archivio o emissione.
+  Il controllo esistente rileva il guasto, non lo previene.
+likelihood: medium
+impact: medium
+mitigated_by: [CTL-availability-monitoring]
+visibility: public

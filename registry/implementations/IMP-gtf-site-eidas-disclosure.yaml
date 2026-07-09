@@ -1,0 +1,6 @@
+id: IMP-gtf-site-eidas-disclosure
+title: Dichiarazione pubblica del posizionamento eIDAS non qualificato
+repo: gtf
+ref: "site/index.html — sezione \"Cosa NON è questo servizio\", testo stabile riprodotto da ARCHITECTURE.md §5.2"
+supports: [CTL-eidas-honest-positioning]
+visibility: public

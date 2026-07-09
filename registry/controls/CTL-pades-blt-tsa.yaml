@@ -2,6 +2,8 @@ id: CTL-pades-blt-tsa
 title: "Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)"
 status: active
 visibility: public
+satisfies: [REQ-cad-doc-01]
+mitigates: [RSK-cert-forgery]
 implemented_by: [IMP-authart-pades-tsa]
 evidenced_by: [EVD-git-authart]
 verify_howto: >

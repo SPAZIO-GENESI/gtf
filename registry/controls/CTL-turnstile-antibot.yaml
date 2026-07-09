@@ -2,6 +2,8 @@ id: CTL-turnstile-antibot
 title: "Challenge anti-bot prima di qualunque emissione di attestazione"
 status: active
 visibility: public
+satisfies: [PRN-04]
+mitigates: [RSK-bot-abuse]
 implemented_by: [IMP-imgauth-turnstile, IMP-authweb-turnstile-widget]
 evidenced_by: [EVD-git-imgauth, EVD-git-imgauthweb]
 verify_howto: >

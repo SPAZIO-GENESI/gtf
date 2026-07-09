@@ -1,0 +1,10 @@
+id: RSK-cert-forgery
+title: Falsificazione di un certificato (hash falso o data retrodatata)
+description: >
+  Un attaccante potrebbe tentare di far firmare un certificato con
+  un'impronta inventata o con un timestamp diverso da quello realmente
+  generato dal server, minando il valore probatorio del servizio.
+likelihood: low
+impact: high
+mitigated_by: [CTL-hmac-signing, CTL-pades-blt-tsa, CTL-cert-pdf-verification]
+visibility: public

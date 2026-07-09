@@ -1,0 +1,6 @@
+id: IMP-authweb-matomo-cookieless
+title: Analytics senza cookie
+repo: imgauthweb
+ref: "index.html — inizializzazione Matomo con disableCookies; nessun banner necessario"
+supports: [CTL-matomo-cookieless]
+visibility: public

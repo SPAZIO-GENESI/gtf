@@ -1,0 +1,9 @@
+id: REQ-27042-ver-01
+source: { norm: "ISO/IEC 27042", ref: "analisi e interpretazione della prova digitale" }
+statement: >
+  Deve esistere un modo per un terzo di analizzare e interpretare
+  l'autenticità di una prova (il certificato) senza doversi fidare
+  ciecamente di chi l'ha emessa.
+applicability: partial
+satisfied_by: [CTL-cert-pdf-verification]
+visibility: public

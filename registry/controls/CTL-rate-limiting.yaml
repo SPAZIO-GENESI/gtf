@@ -2,6 +2,8 @@ id: CTL-rate-limiting
 title: "Rate limiting per-IP su emissione certificati e hash/verify"
 status: active
 visibility: public
+satisfies: [PRN-04]
+mitigates: [RSK-bot-abuse]
 implemented_by: [IMP-imgauth-ratelimit]
 evidenced_by: [EVD-git-imgauth]
 verify_howto: >

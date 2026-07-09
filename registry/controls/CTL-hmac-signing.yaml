@@ -2,6 +2,8 @@ id: CTL-hmac-signing
 title: "Token HMAC che vincola hash, timestamp server-side e metadati dichiarati"
 status: active
 visibility: public
+satisfies: [PRN-04]
+mitigates: [RSK-cert-forgery]
 implemented_by: [IMP-imgauth-hmac, IMP-imgauth-cert-pdf-verify, IMP-imgauth-runchecks-hmac-probe, IMP-imgauth-api-verify]
 evidenced_by: [EVD-status-live, EVD-git-imgauth]
 verify_howto: >

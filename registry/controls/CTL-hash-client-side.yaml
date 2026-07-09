@@ -2,6 +2,8 @@ id: CTL-hash-client-side
 title: "L'impronta è calcolata nel browser; il file non lascia il dispositivo"
 status: active
 visibility: public
+satisfies: [REQ-gdpr-min-01, REQ-27037-acq-01, PRN-05]
+mitigates: [RSK-data-exfiltration]
 implemented_by: [IMP-authweb-sha256hex, IMP-imgauth-api-hash-clientpath]
 evidenced_by: [EVD-git-imgauthweb, EVD-git-imgauth]
 verify_howto: >

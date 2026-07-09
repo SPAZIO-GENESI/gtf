@@ -1,0 +1,8 @@
+id: REQ-27037-pres-01
+source: { norm: "ISO/IEC 27037", ref: "principi di conservazione della prova digitale" }
+statement: >
+  Le prove (certificato, ancoraggio) devono essere conservate con
+  integrità dimostrabile e non alterabile silenziosamente nel tempo.
+applicability: partial
+satisfied_by: [CTL-r2-eu-archive, CTL-ots-anchor]
+visibility: public

@@ -1,0 +1,10 @@
+id: RSK-overclaim-eidas
+title: Comunicare al pubblico un livello di garanzia legale superiore a quello reale
+description: >
+  Un materiale di marketing, una pagina o un futuro collaboratore
+  potrebbero (anche in buona fede) far intendere che il servizio è un
+  fornitore di servizi fiduciari qualificato eIDAS, cosa che non è.
+likelihood: medium
+impact: high
+mitigated_by: [CTL-eidas-honest-positioning]
+visibility: public

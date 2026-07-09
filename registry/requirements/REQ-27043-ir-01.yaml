@@ -1,0 +1,8 @@
+id: REQ-27043-ir-01
+source: { norm: "ISO/IEC 27043", ref: "processi di investigazione e risposta agli incidenti" }
+statement: >
+  Deve esistere un processo definito e provato di rilevazione e risposta
+  ai guasti/incidenti, non solo una reazione ad hoc.
+applicability: partial
+satisfied_by: [CTL-availability-monitoring]
+visibility: public

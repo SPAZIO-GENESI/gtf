@@ -1,0 +1,10 @@
+id: RSK-bot-abuse
+title: Abuso automatizzato del servizio (spam di attestazioni)
+description: >
+  Uno script potrebbe generare un volume elevato di attestazioni senza
+  intervento umano, esaurendo risorse gratuite o inquinando l'archivio con
+  attestazioni non genuine.
+likelihood: medium
+impact: medium
+mitigated_by: [CTL-turnstile-antibot, CTL-rate-limiting]
+visibility: public

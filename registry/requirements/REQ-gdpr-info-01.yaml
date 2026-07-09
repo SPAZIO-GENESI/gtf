@@ -1,0 +1,8 @@
+id: REQ-gdpr-info-01
+source: { norm: GDPR, ref: "art. 13/14 — informativa all'interessato" }
+statement: >
+  Chi usa il servizio deve poter leggere in modo chiaro cosa viene
+  trattato, con quale base giuridica e per quanto tempo.
+applicability: full
+satisfied_by: [CTL-privacy-policy-public]
+visibility: public
