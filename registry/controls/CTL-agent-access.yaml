@@ -1,0 +1,21 @@
+id: CTL-agent-access
+title: "Accesso agenti: bearer token D1-backed (API key + device flow), bypass del solo Turnstile"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+mitigates: [RSK-agent-credential-abuse]
+implemented_by: [IMP-imgauth-agent-access]
+evidenced_by: [EVD-git-imgauth, EVD-agent-key-lifecycle]
+verify_howto: >
+  Chiama POST /api/hash con un header Authorization: Bearer sg_(k|s)_<id>_<secret>
+  valido e senza turnstile_token: la richiesta va a buon fine (nessuna
+  challenge richiesta). Con credenziale sconosciuta/malformata/revocata →
+  403; con quota esaurita → 429; senza header Authorization il percorso
+  Turnstile resta identico a prima (invariato). Per il device flow: POST
+  /api/agent/authorize restituisce un codice, GET /agent/authorize?code=
+  serve la pagina di autorizzazione sul dominio pubblico, GET
+  /api/agent/token?code= consegna il session token una sola volta dopo
+  l'approvazione.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-10

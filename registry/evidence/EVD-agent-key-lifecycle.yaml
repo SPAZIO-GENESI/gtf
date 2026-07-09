@@ -1,0 +1,16 @@
+id: EVD-agent-key-lifecycle
+title: Policy di emissione, quota e revoca delle credenziali agente
+location:
+  system: "repo imgauth (pubblico) + D1 imgauth-health"
+  ref: "scripts/issue-agent-key.mjs (emissione) · tabella agent_credentials (id, kind, secret_hash, quota, used, revoked) · revoca manuale via wrangler d1 execute UPDATE agent_credentials SET revoked=1"
+produced_by: >
+  Processo manuale non self-service: le API key sono emesse solo su richiesta,
+  a mano, dal gestore, con lo script locale `issue-agent-key.mjs` (stampa la
+  chiave una sola volta, applica alla D1 solo l'hash del secret). I session
+  token nascono invece in automatico dal device flow, ma con TTL fisso (24h)
+  e quota totale (20) non rinnovabile senza una nuova autorizzazione umana.
+  Nessun endpoint HTTP crea o elenca credenziali.
+collection: manual
+integrity: "verificabile leggendo scripts/issue-agent-key.mjs e schema/agent_access.sql nel repo pubblico imgauth (AGPL-3.0); il secret in chiaro non è mai persistito né loggato, solo sha256(secret)"
+supports: [CTL-agent-access]
+visibility: public

@@ -1,0 +1,6 @@
+id: IMP-imgauth-agent-access
+title: Bearer token D1-backed su /api/hash — API key e device flow (P21)
+repo: imgauth
+ref: "worker.js — authenticateAgent, handleAgentAuthorize, handleAgentApprove, handleAgentToken, sweepExpiredAgentRows; schema/agent_access.sql (agent_credentials, agent_authorizations); scripts/issue-agent-key.mjs; wrangler.toml route attestazione.spaziogenesi.org/agent/*"
+supports: [CTL-agent-access]
+visibility: public

@@ -1,0 +1,46 @@
+id: ADR-P21
+title: "P21 — Accesso agenti: API key + device flow, bypass del solo Turnstile"
+date: 2026-07-10
+status: accepted
+context: >
+  L'onda di agenti AI e client automatici (assistenti, integrazioni, MCP) è
+  l'unico canale di crescita del servizio con potenziale non lineare: un
+  agente può attestare/verificare per conto di un umano senza passare dal
+  browser. Il flusso browser esistente richiede però una challenge Turnstile
+  a ogni attestazione — pensata per un umano davanti a uno schermo, non
+  automatizzabile da un agente senza rompere il modello anti-bot per tutti.
+  Serviva un secondo percorso di accesso che non indebolisse le garanzie
+  esistenti (HMAC, timestamp server, rate limit) né aprisse un endpoint
+  self-service senza controllo.
+decision: >
+  Due credenziali, un solo meccanismo: bearer token D1-backed (in D1 sta solo
+  sha256(secret), mai il secret in chiaro). **API key** (`sg_k_<id>_<secret>`)
+  per partner convenzionati — emessa a mano, quota mensile, nessun endpoint
+  admin (solo script locale `scripts/issue-agent-key.mjs` + `wrangler d1
+  execute` per la revoca). **Session token** (`sg_s_<id>_<secret>`) per uso
+  personale via agenti/MCP — ottenuto con un device flow: l'umano autorizza
+  una volta su una pagina servita dal Worker (`/agent/authorize`, stesso
+  widget Turnstile del sito), l'agente polla fino a ricevere il token
+  (consegnato una sola volta), valido 24h/20 attestazioni. Una credenziale
+  valida su `/api/hash` sblocca SOLO il bypass della challenge Turnstile:
+  HMAC, timestamp server e rate limit per-IP restano identici al percorso
+  browser. Client di riferimento pubblicato come repo separato (`attest-mcp`,
+  npm, stdio): calcola l'hash in locale, non invia mai i byte del file — la
+  stessa full privacy del sito, estesa agli agenti.
+consequences: >
+  Nessun indebolimento delle garanzie crittografiche esistenti: una
+  credenziale compromessa può al massimo emettere certificati VERI entro la
+  sua quota, mai falsificarne uno (vedi ARCHITECTURE.md Assunzione 7).
+  Superficie nuova da monitorare: quota/allarmi Telegram (sessione
+  autorizzata, soglia 80/100%, >10 credenziali invalide/giorno) coprono
+  l'abuso entro quota e i tentativi ripetuti di credenziali errate — non
+  eliminano il rischio residuo di abuso di una credenziale legittima da
+  parte del titolare stesso, mitigato solo da quota + revoca manuale (vedi
+  RSK-agent-credential-abuse). Gotcha operativo scoperto in fase di deploy:
+  `wrangler deploy`/`wrangler triggers deploy` non sincronizzano route zone
+  NUOVE — richiede creazione manuale dalla dashboard Cloudflare a ogni route
+  aggiunta (non specifico di questa decisione, ma osservato durante il
+  rollout: vedi memoria operativa `imgauth-wrangler-routes-trap`).
+affects: [CTL-agent-access, CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot]
+evidence: [EVD-git-imgauth, EVD-agent-key-lifecycle]
+visibility: public
