@@ -1,0 +1,32 @@
+id: ADR-GTF-008
+title: "Primo ancoraggio dogfooding e sua incorporazione nel calcolo di MET-integrity"
+date: 2026-07-09
+status: accepted
+context: >
+  Il meccanismo di ancoraggio dogfooding (GTF-ARCH §6.4) esisteva in codice
+  (generators/anchor-monthly.mjs) ma non era mai stato eseguito: MET-integrity
+  dichiarava tre componenti nella formula ma ne calcolava solo uno (sonda
+  HMAC). L'utente ha prodotto il primo bundle cumulativo e lo ha attestato
+  sul servizio stesso, chiedendo di completare la registrazione.
+decision: >
+  Registrato il primo ciclo (periodo 2026-07, bundle
+  snapshots/anchors/2026-07-bundle.json, hash
+  cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b) come
+  CTL-dogfooding-anchor + EVD-dogfooding-anchor + IMP-gtf-anchor-monthly.
+  Corretti nello stesso giro due difetti scoperti nel processo: score.mjs
+  non escludeva snapshots/anchors/ dalla ricerca dello snapshot settimanale
+  più recente (azzerava l'indicatore Integrità appena creata la cartella);
+  REQ-27037-pres-01.satisfied_by e RSK-archive-tampering.mitigated_by non
+  includevano il nuovo controllo, rendendolo invisibile sul Trust Center
+  (build-site.mjs legge quella direzione, non CTL.satisfies/mitigates).
+  Incorporato poi il componente nel calcolo numerico: quota di bundle
+  mensili committati rispetto ai mesi trascorsi da GTF_BIRTH_MONTH
+  (2026-07), in media con la sonda HMAC.
+consequences: >
+  MET-integrity passa da "un solo componente calcolabile" a due su tre
+  reali (manca ancora la quota di release taggate, vedi ADR-GTF-009).
+  Stabilita la cadenza mensile per i cicli successivi (prossimo: agosto
+  2026), sorvegliata da CTL-cadence-monitoring (ADR-GTF-009).
+affects: [CTL-dogfooding-anchor, MET-integrity]
+evidence: [EVD-dogfooding-anchor]
+visibility: public

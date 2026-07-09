@@ -359,6 +359,13 @@ ancorato in Bitcoin. Effetto: lo storico di trasparenza del servizio è protetto
 tecnologia che il servizio vende, e chiunque può verificarlo con gli stessi strumenti pubblici.
 È l'argomento di fiducia più forte disponibile a costo zero, ed è anche una dimostrazione d'uso.
 
+**Primo ciclo eseguito il 2026-07-09** (ADR-GTF-008): periodo 2026-07, bundle
+`snapshots/anchors/2026-07-bundle.json`, registrato come `CTL-dogfooding-anchor`. Il rapporto
+tra bundle mensili onorati e mesi trascorsi da `GTF_BIRTH_MONTH` è incorporato in `MET-integrity`
+(`generators/score.mjs`), in media con la sonda HMAC e la quota di repository con tag di release
+(§9.3). Sorvegliato da `CTL-cadence-monitoring`: un avviso Telegram scatta se il mese successivo
+non produce un nuovo bundle entro la finestra di grazia.
+
 ### 6.5 Conservazione e catena di custodia (ISO 27037 applicata a noi stessi)
 
 - Evidenze d'opera (cert, `.ots`): R2 EU, chiavi immutabili per convenzione (prima prova mai
@@ -475,6 +482,12 @@ chiunque può ricalcolarlo dagli stessi dati (PRN-08).
 
 Budget totale ≈ 6–7 h/anno di cerimonie + il lavoro ordinario. Se un'attività sfora
 sistematicamente, è un difetto di design da correggere (PRN-10), non da assorbire.
+
+**Nessuna di queste cadenze dipende dalla sola memoria umana** (ADR-GTF-009, dal 2026-07-09):
+ogni `PRC` ricorrente dichiara `frequency_days` e `last_run`; `generators/check-cadences.mjs`
+gira dentro il collettore settimanale e confronta ciascuna scadenza (comprese quelle mensile,
+trimestrale, semestrale, annuale della tabella sopra) contro il registro, avvisando via Telegram
+**solo** quando qualcosa è davvero scaduto (`CTL-cadence-monitoring`, `RSK-cadence-drift`).
 
 ### 9.4 Incidenti
 

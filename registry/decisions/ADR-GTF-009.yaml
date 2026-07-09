@@ -1,0 +1,46 @@
+id: ADR-GTF-009
+title: "Convenzione tag di release + monitoraggio automatico delle cadenze con avviso Telegram"
+date: 2026-07-09
+status: accepted
+context: >
+  Due lacune emerse nella stessa sessione. (1) MET-integrity dichiarava un
+  terzo componente ("quota di release con tag git") mai implementato:
+  nessuno dei tre repo pubblici (imgauth, imgauthweb, autart-signer) aveva
+  mai avuto un tag. (2) L'utente ha chiesto esplicitamente chi controlla
+  se un processo ricorrente (restore drill, revisione trimestrale, review
+  esterna annuale, ancoraggio dogfooding) viene dimenticato: si è scoperto
+  che il PRC.schema non tracciava affatto una data di ultima esecuzione,
+  quindi né il maintainer né un'assistenza AI potevano saperlo dal
+  registro — solo "ricordarselo", la stessa fragilità che il GTF esiste
+  per eliminare altrove. L'utente ha preferito un avviso Telegram a
+  un'email o un'issue GitHub (rischio di perdersi tra le email).
+decision: >
+  Adottata la convenzione: ogni bump di versione (PRC-release-coordinata
+  aggiornato) è accompagnato da un tag annotato vX.Y.Z pushato nel repo del
+  componente. Primi tag creati il 2026-07-09: imgauth v1.15.1, imgauthweb
+  v1.16.3, autart-signer v1.2.0. collect-evidence.mjs raccoglie ora anche
+  i tag (GitHub API /repos/.../tags) e i commit di autart-signer (prima
+  mancanti); score.mjs aggiunge un proxy iniziale (quota repo con almeno
+  un tag, non ancora quota storica di versioni taggate).
+  Aggiunto frequency_days/last_run allo schema PRC; creati i due processi
+  mancanti (PRC-review-trimestrale 90gg, PRC-review-esterna-annuale
+  365gg; PRC-restore-drill portato a 180gg). Scritto
+  generators/check-cadences.mjs: gira settimanalmente dentro
+  collect-evidence.yml, confronta ogni PRC (o l'ultimo bundle dogfooding)
+  con la sua cadenza dichiarata e invia un messaggio Telegram SOLO se
+  qualcosa è scaduto — nessuno spam se tutto è in regola. Aggiunta una
+  modalità di test esplicita (input test_telegram su workflow_dispatch,
+  stesso pattern del canary HMAC di imgauth) perché altrimenti non c'era
+  modo di verificare che il canale funzionasse senza aspettare mesi.
+  Registrati RSK-cadence-drift e CTL-cadence-monitoring.
+consequences: >
+  MET-integrity ha ora un dato reale anche sul terzo componente (2/3 al
+  primo giro del collettore dopo i tag di imgauth/imgauthweb, 3/3 atteso
+  al prossimo giro con anche autart-signer). I tre secret Telegram sono
+  stati aggiunti dall'utente sul repo gtf e il test è stato verificato
+  funzionante lo stesso giorno (EVD-cadence-check-runs). Le quattro
+  cadenze ricorrenti del GTF sono ora machine-checkable, non più
+  dipendenti dalla sola memoria umana.
+affects: [MET-integrity, CTL-cadence-monitoring]
+evidence: [EVD-cadence-check-runs]
+visibility: public
