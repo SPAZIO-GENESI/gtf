@@ -4,9 +4,14 @@ status: draft
 visibility: public
 satisfies: [PRN-04]
 mitigates: [RSK-secret-compromise]
+implemented_by: [IMP-imgauth-monitor-canary]
 verify_howto: >
-  Non ancora implementato. Quando attivo: il monitor invierà a /api/verify
-  un'attestazione nota (hash+attestazione+hmac fissi) e pretenderà
-  hmac_valido: true; un HMAC_SECRET rotato per errore farebbe fallire il
-  check, cosa che la sola sonda interna (CTL-hmac-signing) non rileva.
+  Codice implementato (job "canary" in monitor.yml, imgauth): a ogni run
+  invia a /api/verify un'attestazione nota (variabili di repo CANARY_HASH/
+  CANARY_ATTESTAZIONE/CANARY_HMAC) e pretende hmac_valido: true; un
+  HMAC_SECRET rotato per errore farebbe fallire il check, cosa che la sola
+  sonda interna (CTL-hmac-signing) non rileva. Resta in stato "draft"
+  finché le tre variabili di repo non sono state impostate con
+  un'attestazione reale ottenuta dal servizio in produzione — senza,
+  il job si limita a un warning e salta il controllo (nessun falso allarme).
 owner: it@spaziogenesi.org

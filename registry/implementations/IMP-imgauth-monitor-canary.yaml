@@ -1,0 +1,6 @@
+id: IMP-imgauth-monitor-canary
+title: Job "canary" nel monitor esterno che rileva una rotazione errata dell'HMAC
+repo: imgauth
+ref: ".github/workflows/monitor.yml — job canary: POST a /api/verify con un'attestazione nota (variabili di repo CANARY_HASH/CANARY_ATTESTAZIONE/CANARY_HMAC), issue+Telegram se hmac_valido risulta false"
+supports: [CTL-hmac-canary]
+visibility: public
