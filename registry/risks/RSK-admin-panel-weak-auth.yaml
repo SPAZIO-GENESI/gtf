@@ -1,0 +1,16 @@
+id: RSK-admin-panel-weak-auth
+title: Il pannello admin credenziali agente è protetto da secret condiviso, non da SSO
+description: >
+  /admin/* (gestione delle credenziali agente: emissione, revoca, quota) è
+  protetto da un secret condiviso confrontato a tempo costante, non da un
+  login individuale con Cloudflare Access (Zero Trust) — scelta esplicita
+  dichiarata "stopgap" in ADR-P21-admin. Chi ottiene il secret può
+  emettere/revocare credenziali agente entro lo stesso perimetro dello script
+  CLI equivalente, ma NON può falsificare o emettere certificati (governati
+  solo da HMAC_SECRET, non toccato da questo pannello). Un secret condiviso
+  non permette di distinguere chi lo ha usato né di revocare un solo accesso
+  senza invalidarli tutti.
+likelihood: low
+impact: medium
+mitigated_by: [CTL-agent-admin-panel, CTL-rate-limiting]
+visibility: public

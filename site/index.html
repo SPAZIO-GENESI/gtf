@@ -128,17 +128,17 @@
     <div class="ledger" role="group" aria-label="Punteggio di maturità calcolato dal registro pubblico">
       <table class="ledger-table">
         <tbody>
-        <tr class="is-counted"><td class="ledger-label">Trasparenza</td><td class="ledger-value">95</td></tr>
-        <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W28) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (2/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">89</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Trasparenza</td><td class="ledger-value">96</td></tr>
+        <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W28) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">68</td></tr>
         <tr class="is-pending" title="nessun ciclo di revisione trimestrale ancora concluso"><td class="ledger-label">Audit</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-pending" title="nessun restore-drill ancora eseguito"><td class="ledger-label">Conservazione</td><td class="ledger-value">n/d</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">94</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">95</td></tr>
         <tr class="is-pending" title="richiede uno scanner del codice non ancora costruito"><td class="ledger-label">Privacy</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-pending" title="richiede dati GitHub, score v0 lavora solo offline dal registro"><td class="ledger-label">Governance</td><td class="ledger-value">n/d</td></tr>
-          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">91<span class="unit">/100</span></td></tr>
+          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">93<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
       <p class="ledger-note">6 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
@@ -250,6 +250,7 @@
           <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">attivo</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
           <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></li>
           <li><span class="tag">CTL-agent-access</span> <span class="pill pill-sage status-badge">attivo</span> Accesso agenti: bearer token D1-backed (API key + device flow), bypass del solo Turnstile<details><summary>come verificare</summary><p>Chiama POST /api/hash con un header Authorization: Bearer sg_(k|s)_&lt;id&gt;_&lt;secret&gt; valido e senza turnstile_token: la richiesta va a buon fine (nessuna challenge richiesta). Con credenziale sconosciuta/malformata/revocata → 403; con quota esaurita → 429; senza header Authorization il percorso Turnstile resta identico a prima (invariato). Per il device flow: POST /api/agent/authorize restituisce un codice, GET /agent/authorize?code= serve la pagina di autorizzazione sul dominio pubblico, GET /api/agent/token?code= consegna il session token una sola volta dopo l'approvazione.</p></details></li>
+          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota dietro secret condiviso<details><summary>come verificare</summary><p>GET /admin restituisce la pagina (nessun dato, nessun auth richiesto per vederla). GET/POST/PATCH su /admin/api/keys senza header X-Admin-Secret o con un valore errato → 403 in ogni caso; con il secret corretto → elenco, emissione, revoca e modifica quota funzionano e sono verificabili interrogando poi /api/hash con la chiave emessa/revocata (deve rispettivamente funzionare o dare 403). Nota: questo controllo è esplicitamente uno stopgap — vedi ADR-P21-admin e RSK-admin-panel-weak-auth per il piano di superamento con Cloudflare Access.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27001-inspiration-01</span></p>
       </article>
@@ -371,6 +372,21 @@
   <section id="rischi" class="folio" data-folio="RSK">
     <h2>Rischi</h2>
     <div class="norm-grid">
+      <article class="norm-card">
+        <header>
+          <div class="risk-pills">
+            <span class="pill pill-sage">probabilità: low</span>
+            <span class="pill pill-amber">impatto: medium</span>
+          </div>
+          <h3>Il pannello admin credenziali agente è protetto da secret condiviso, non da SSO</h3>
+        </header>
+        <p class="ref">Mitigato da</p>
+        <ul class="ctl-list">
+          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota dietro secret condiviso</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
+        </ul>
+        <p class="tag-line"><span class="tag">RSK-admin-panel-weak-auth</span></p>
+      </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
@@ -511,6 +527,15 @@
   <section id="decisioni" class="folio" data-folio="ADR">
     <h2>Decisioni</h2>
     <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-10</span><span class="entry-title">P21 follow-up — Pannello admin credenziali agente, protetto da secret stopgap</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Dopo il rollout di P21 (ADR-P21), la sola via per emettere/revocare/monitorare le credenziali agente era uno script CLI locale (`scripts/issue-agent-key.mjs`) più query SQL a mano su D1 — sufficiente per una manciata di partner, non per gestirne decine. Serviva un'interfaccia più comoda, ma senza esporre un endpoint self-service pubblico né rimandare la sicurezza a &quot;poi&quot;.</p>
+          <p><strong>Decisione:</strong> Pannello HTML servito dal Worker (`GET /admin`, API dietro `/admin/api/keys`) con lo stesso identico perimetro dello script CLI: crea/elenca/revoca/modifica quota di `agent_credentials`, mai l'emissione di certificati (che resta governata solo da `HMAC_SECRET`). Protetto da un secret condiviso (`ADMIN_SECRET`, header `X-Admin-Secret`, confronto a tempo costante — stesso pattern già in produzione per `X-Sign-Secret` tra imgauth e authart), dichiarato esplicitamente come STOPGAP: il piano è affiancare/sostituire con **Cloudflare Access** (Zero Trust) davanti a `/admin/*`, configurabile solo dalla dashboard Cloudflare (nessuna credenziale con permessi di scrittura sufficienti al momento per farlo via API/deploy automatico). Nessuna nuova route Cloudflare: il pannello vive su `imgauth.spaziogenesi.org/admin`, già coperto dalla route esistente `imgauth.spaziogenesi.org/*`.</p>
+          <p><strong>Conseguenze:</strong> Guadagno operativo immediato (gestione via browser invece di SQL a mano) a fronte di un rischio residuo esplicito e documentato: un secret condiviso è più debole di un login individuale (nessuna distinzione di &quot;chi&quot; lo usa, nessuna revoca selettiva di un solo accesso). Mitigato da rate limiting, secret lungo/casuale mai loggato, e dal fatto che il perimetro d'azione non tocca comunque la firma dei certificati. Il rischio è tracciato in RSK-admin-panel-weak-auth con upgrade a Cloudflare Access come azione aperta, non silenziosamente accettato a tempo indeterminato.</p>
+          <p class="tag-line"><span class="tag">ADR-P21-admin</span></p>
+        </div>
+      </details>
       <details class="entry">
         <summary><span class="entry-date">2026-07-10</span><span class="entry-title">P21 — Accesso agenti: API key + device flow, bypass del solo Turnstile</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">

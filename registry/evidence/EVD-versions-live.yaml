@@ -2,7 +2,7 @@ id: EVD-versions-live
 title: Versioni dei tre componenti verificabili a runtime
 location: { system: imgauth-worker + authweb + authart, ref: "GET /ping (imgauth), footer authweb, GET / (authart)", public_via: "GET /ping, footer pagina, health authart" }
 collection: auto
-last_seen: 2026-07-09
+last_seen: 2026-07-10
 integrity: "sorgente di verità unica nel manifest di ciascun componente (package.json, APP_VERSION); nessuno step di build genera la versione"
 supports: [CTL-availability-monitoring]
 visibility: public

@@ -1,17 +1,17 @@
 {
-  "collected_at": "2026-07-09T17:12:17.086Z",
+  "collected_at": "2026-07-10T04:09:15.365Z",
   "week": "2026-W28",
   "files": {
-    "status.json": "e19e588d026235d3d8b2328dae698e301038feb45edbbbeaf8d0fba1ecf4c16d",
-    "status-history.json": "6e52467c6217d17fe67cb02f5caa44572d28457f822479b4646ff6c5861f4719",
-    "health-log.json": "25921ba9a09eaa2d16134efd24f434c598f2710451799874e1efa1907731675f",
-    "ping-imgauth.json": "ad1cdc6c8ea9898fd20cc2ca9fb5de309273269c0f481168775f87615eb3f941",
+    "status.json": "6478023a58167d75917ad9b0cb915638eeb19cda3f938c81e27f78ffcfd3ba55",
+    "status-history.json": "721495d5306afaf303305aff080aca2fdd2c75ae96873298c5efb2302751a570",
+    "health-log.json": "b2800f8e9c3f99b994e57d61b968b25c9041a794ab0bacbf12af10a6585490d0",
+    "ping-imgauth.json": "5a5a2a6a04f94aa9696e7e0829878da89f76c8ac459206f8d7e86ecd75a4858b",
     "monitor-issues.json": "d10cc982fa92b6c55d2cda6251d10c23715ca6f3c70f1744b05cfa4204918991",
-    "git-imgauth.json": "ba712e489804d2f90f1438afcacc7f81ef7765e012f31a41e9c583566d875637",
-    "git-imgauthweb.json": "0cd58355c18515779d35c062ced8c8018f60ed6d698aab248b280efd32e17a66",
+    "git-imgauth.json": "62d7d9516e4fe63ad41d628a1361465510d90e1a334ea0a988b22179eb0a45a1",
+    "git-imgauthweb.json": "2f2dd468a79152df78395e615fd4c89c9a6d7e55b6fd7553d44ec391fa3b0921",
     "git-authart.json": "7230af680f01d4bdf0196cfe66f8dff1ac6213dc7348f8d8ec239c82f9f916b6",
-    "tags-imgauth.json": "a3b92603334fc0e189b3f06c4e1a33ab5a15dac86eacd008dc39f2f9803b460e",
+    "tags-imgauth.json": "d29fe6b4097d585eb7af8baebc3c5674edc15dedd3b97580278ef0c545cd38fb",
     "tags-imgauthweb.json": "dbf0aea5ada7812442b46edc3a9d14f7525043c8084d11bbaf674f872c6ea13a",
-    "tags-autart-signer.json": "615fee2f9af55d484269051673d3fccaa29442d2f6123e7feb0812541b8290b3"
+    "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9"
   }
 }

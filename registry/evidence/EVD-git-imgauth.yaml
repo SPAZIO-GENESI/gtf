@@ -2,6 +2,6 @@ id: EVD-git-imgauth
 title: Storia git del motore di attestazione (repo pubblico imgauth, licenza AGPL-3.0)
 location: { system: github, ref: "repo imgauth, storia commit + tag di versione" }
 collection: auto
-last_seen: 2026-07-09
+last_seen: 2026-07-10
 integrity: "storia immutabile di fatto (force-push escluso dalle convenzioni operative); ogni bump di versione tracciato in package.json"
 visibility: public

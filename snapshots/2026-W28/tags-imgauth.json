@@ -2,6 +2,16 @@
   "ok": true,
   "data": [
     {
+      "name": "v1.16.0",
+      "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.16.0",
+      "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.16.0",
+      "commit": {
+        "sha": "83747f6216a87c29dbabf2cab333182d81c34ca3",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/83747f6216a87c29dbabf2cab333182d81c34ca3"
+      },
+      "node_id": "REF_kwDOR0mRsbFyZWZzL3RhZ3MvdjEuMTYuMA"
+    },
+    {
       "name": "v1.15.1",
       "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.15.1",
       "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.15.1",
