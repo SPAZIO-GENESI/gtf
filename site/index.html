@@ -117,6 +117,12 @@
   @media (max-width: 40rem) { .entry-body { padding-left: 0; } }
 
   footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--ink-muted); }
+  .footer-cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.6rem 2.6rem; margin: 0 0 1.5rem; }
+  .footer-col { min-width: 12rem; }
+  .footer-col h3 { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; margin: 0 0 0.6rem; }
+  .footer-col a { display: block; margin: 0.35rem 0; font-size: 0.85rem; }
+  .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
 </style>
 </head>
 <body>
@@ -837,10 +843,35 @@
   </main>
 
   <footer>
-    Genesis Trust Framework · pagina generata automaticamente dal
-    <a href="https://github.com/SPAZIO-GENESI/gtf">registro pubblico</a> —
-    nessun testo di questa pagina è scritto a mano (principio PRN-03).
-    <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+    <nav class="footer-cols" aria-label="Collegamenti del footer">
+      <div class="footer-col">
+        <h3>Il registro</h3>
+        <a href="https://github.com/SPAZIO-GENESI/gtf">Codice sorgente (GTF)</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry">Registro pubblico</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula del punteggio</a>
+      </div>
+      <div class="footer-col">
+        <h3>Il servizio di attestazione</h3>
+        <a href="https://attestazione.spaziogenesi.org">Attesta e verifica</a>
+        <a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi</a>
+        <a href="https://attestazione.spaziogenesi.org/changelog/">Cronologia dei miglioramenti</a>
+        <a href="https://attestazione.spaziogenesi.org/developer/">Sviluppatori: API &amp; MCP</a>
+        <a href="https://attestazione.spaziogenesi.org/privacy.html">Privacy</a>
+      </div>
+      <div class="footer-col">
+        <h3>Codice open source</h3>
+        <a href="https://github.com/SPAZIO-GENESI/imgauth">imgauth (motore)</a>
+        <a href="https://github.com/SPAZIO-GENESI/imgauthweb">imgauthweb (interfaccia)</a>
+        <a href="https://github.com/SPAZIO-GENESI/autart-signer">autart-signer (firma)</a>
+        <a href="https://github.com/SPAZIO-GENESI/attest-mcp">attest-mcp (server MCP)</a>
+      </div>
+    </nav>
+    <div class="footer-bottom">
+      Genesis Trust Framework · pagina generata automaticamente dal
+      <a href="https://github.com/SPAZIO-GENESI/gtf">registro pubblico</a> —
+      nessun testo di questa pagina è scritto a mano (principio PRN-03).
+      <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+    </div>
   </footer>
 </body>
 </html>
