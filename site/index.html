@@ -132,7 +132,7 @@
         <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W28) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">68</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">65</td></tr>
         <tr class="is-pending" title="nessun ciclo di revisione trimestrale ancora concluso"><td class="ledger-label">Audit</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-pending" title="nessun restore-drill ancora eseguito"><td class="ledger-label">Conservazione</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">95</td></tr>
@@ -250,7 +250,7 @@
           <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">attivo</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
           <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta https://attestazione.spaziogenesi.org/status/: stato live, barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;).</p></details></li>
           <li><span class="tag">CTL-agent-access</span> <span class="pill pill-sage status-badge">attivo</span> Accesso agenti: bearer token D1-backed (API key + device flow), bypass del solo Turnstile<details><summary>come verificare</summary><p>Chiama POST /api/hash con un header Authorization: Bearer sg_(k|s)_&lt;id&gt;_&lt;secret&gt; valido e senza turnstile_token: la richiesta va a buon fine (nessuna challenge richiesta). Con credenziale sconosciuta/malformata/revocata → 403; con quota esaurita → 429; senza header Authorization il percorso Turnstile resta identico a prima (invariato). Per il device flow: POST /api/agent/authorize restituisce un codice, GET /agent/authorize?code= serve la pagina di autorizzazione sul dominio pubblico, GET /api/agent/token?code= consegna il session token una sola volta dopo l'approvazione.</p></details></li>
-          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota dietro secret condiviso<details><summary>come verificare</summary><p>GET /admin restituisce la pagina (nessun dato, nessun auth richiesto per vederla). GET/POST/PATCH su /admin/api/keys senza header X-Admin-Secret o con un valore errato → 403 in ogni caso; con il secret corretto → elenco, emissione, revoca e modifica quota funzionano e sono verificabili interrogando poi /api/hash con la chiave emessa/revocata (deve rispettivamente funzionare o dare 403). Nota: questo controllo è esplicitamente uno stopgap — vedi ADR-P21-admin e RSK-admin-panel-weak-auth per il piano di superamento con Cloudflare Access.</p></details></li>
+          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota dietro secret condiviso<details><summary>come verificare</summary><p>GET /admin restituisce la pagina (nessun dato, nessun auth richiesto per vederla). GET/POST/PATCH su /admin/api/keys senza header X-Admin-Secret o con un valore errato → 403 in ogni caso; con il secret corretto → elenco, emissione, revoca e modifica quota funzionano e sono verificabili interrogando poi /api/hash con la chiave emessa/revocata (deve rispettivamente funzionare o dare 403). Nota: il secret condiviso era stato dichiarato uno stopgap in ADR-P21-admin; dal 2026-07-10 è affiancato da Cloudflare Access (Zero Trust) — vedi ADR-P21-admin-cfaccess e CTL-cloudflare-access-admin.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27001-inspiration-01</span></p>
       </article>
@@ -378,13 +378,14 @@
         <header>
           <div class="risk-pills">
             <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-sage">impatto: low</span>
           </div>
-          <h3>Il pannello admin credenziali agente è protetto da secret condiviso, non da SSO</h3>
+          <h3>Pannello admin credenziali agente: da unico secret condiviso a doppio strato con Cloudflare Access</h3>
         </header>
         <p class="ref">Mitigato da</p>
         <ul class="ctl-list">
           <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota dietro secret condiviso</li>
+          <li><span class="tag">CTL-cloudflare-access-admin</span> <span class="pill pill-sage status-badge">attivo</span> Cloudflare Access (Zero Trust) davanti al pannello admin credenziali agente</li>
           <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-admin-panel-weak-auth</span></p>
@@ -543,6 +544,15 @@
   <section id="decisioni" class="folio" data-folio="ADR">
     <h2>Decisioni</h2>
     <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-10</span><span class="entry-title">Superato lo stopgap: Cloudflare Access davanti al pannello admin</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>ADR-P21-admin aveva dichiarato il secret condiviso (ADMIN_SECRET) uno stopgap esplicito per /admin/*, con piano di affiancarlo/sostituirlo con Cloudflare Access (Zero Trust) appena configurabile da dashboard.</p>
+          <p><strong>Decisione:</strong> Il gestore ha configurato una policy Cloudflare Zero Trust Access davanti a imgauth.spaziogenesi.org/admin/*. Il secret condiviso (X-Admin-Secret) resta attivo come secondo strato applicativo (non ancora rimosso; se mantenerlo o eliminarlo è una decisione aperta, non urgente).</p>
+          <p><strong>Conseguenze:</strong> Il rischio tracciato in RSK-admin-panel-weak-auth passa da &quot;unica barriera è un secret condiviso&quot; a &quot;doppio strato, con identità verificata a monte dell'accesso al Worker&quot; — impatto residuo abbassato da medium a low. Nessuna modifica di codice nel repo imgauth: la configurazione vive solo nella dashboard Cloudflare, non nel version control.</p>
+          <p class="tag-line"><span class="tag">ADR-P21-admin-cfaccess</span></p>
+        </div>
+      </details>
       <details class="entry">
         <summary><span class="entry-date">2026-07-10</span><span class="entry-title">P21 follow-up — Pannello admin credenziali agente, protetto da secret stopgap</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">

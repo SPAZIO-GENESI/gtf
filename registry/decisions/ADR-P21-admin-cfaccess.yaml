@@ -1,0 +1,22 @@
+id: ADR-P21-admin-cfaccess
+title: "Superato lo stopgap: Cloudflare Access davanti al pannello admin"
+date: 2026-07-10
+status: accepted
+context: >
+  ADR-P21-admin aveva dichiarato il secret condiviso (ADMIN_SECRET) uno
+  stopgap esplicito per /admin/*, con piano di affiancarlo/sostituirlo con
+  Cloudflare Access (Zero Trust) appena configurabile da dashboard.
+decision: >
+  Il gestore ha configurato una policy Cloudflare Zero Trust Access davanti a
+  imgauth.spaziogenesi.org/admin/*. Il secret condiviso (X-Admin-Secret)
+  resta attivo come secondo strato applicativo (non ancora rimosso; se
+  mantenerlo o eliminarlo è una decisione aperta, non urgente).
+consequences: >
+  Il rischio tracciato in RSK-admin-panel-weak-auth passa da "unica barriera
+  è un secret condiviso" a "doppio strato, con identità verificata a monte
+  dell'accesso al Worker" — impatto residuo abbassato da medium a low.
+  Nessuna modifica di codice nel repo imgauth: la configurazione vive solo
+  nella dashboard Cloudflare, non nel version control.
+affects: [CTL-agent-admin-panel, CTL-cloudflare-access-admin]
+evidence: [EVD-cloudflare-access-admin]
+visibility: public

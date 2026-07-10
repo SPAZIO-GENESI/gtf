@@ -12,9 +12,10 @@ verify_howto: >
   con un valore errato → 403 in ogni caso; con il secret corretto → elenco,
   emissione, revoca e modifica quota funzionano e sono verificabili
   interrogando poi /api/hash con la chiave emessa/revocata (deve
-  rispettivamente funzionare o dare 403). Nota: questo controllo è
-  esplicitamente uno stopgap — vedi ADR-P21-admin e
-  RSK-admin-panel-weak-auth per il piano di superamento con Cloudflare Access.
+  rispettivamente funzionare o dare 403). Nota: il secret condiviso era stato
+  dichiarato uno stopgap in ADR-P21-admin; dal 2026-07-10 è affiancato da
+  Cloudflare Access (Zero Trust) — vedi ADR-P21-admin-cfaccess e
+  CTL-cloudflare-access-admin.
 owner: it@spaziogenesi.org
 review_every_days: 90
 last_reviewed: 2026-07-10

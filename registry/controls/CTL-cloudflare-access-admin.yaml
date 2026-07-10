@@ -1,0 +1,16 @@
+id: CTL-cloudflare-access-admin
+title: "Cloudflare Access (Zero Trust) davanti al pannello admin credenziali agente"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+mitigates: [RSK-admin-panel-weak-auth]
+implemented_by: [IMP-cloudflare-access-admin]
+evidenced_by: [EVD-cloudflare-access-admin]
+verify_howto: >
+  Una richiesta non autenticata a https://imgauth.spaziogenesi.org/admin
+  riceve un redirect al login Cloudflare Access, prima ancora di raggiungere
+  il Worker e il suo secret applicativo (X-Admin-Secret). Supera il piano di
+  superamento dichiarato in ADR-P21-admin — vedi ADR-P21-admin-cfaccess.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-10
