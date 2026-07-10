@@ -1,0 +1,6 @@
+id: IMP-gtf-iso27037-honest-positioning
+title: Dichiarazione del posizionamento ISO/IEC 27037 (parziale, non forense) nel registro pubblico
+repo: gtf
+ref: "registry/controls/CTL-iso27037-honest-positioning.yaml + registry/requirements/REQ-27037-acq-01.yaml, REQ-27037-pres-01.yaml — visibili nella sezione Controlli/Requisiti del Trust Center (non ha, a differenza del posizionamento eIDAS, una sezione dedicata in evidenza su site/index.html)"
+supports: [CTL-iso27037-honest-positioning]
+visibility: public

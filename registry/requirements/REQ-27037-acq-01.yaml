@@ -4,5 +4,5 @@ statement: >
   L'acquisizione dell'impronta digitale dell'opera deve essere documentata
   e riproducibile: algoritmo dichiarato, implementazione ispezionabile.
 applicability: partial
-satisfied_by: [CTL-hash-client-side]
+satisfied_by: [CTL-hash-client-side, CTL-iso27037-honest-positioning]
 visibility: public

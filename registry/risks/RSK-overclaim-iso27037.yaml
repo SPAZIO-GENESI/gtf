@@ -1,0 +1,16 @@
+id: RSK-overclaim-iso27037
+title: Far intendere una piena conformità forense ISO/IEC 27037 che non esiste
+description: >
+  Un materiale di marketing, una convenzione con un istituto, o una
+  comunicazione pubblica potrebbero (anche in buona fede) far intendere che
+  il servizio segue integralmente ISO/IEC 27037 come farebbe uno strumento
+  forense per investigatori. Non è così per costruzione: il modello è
+  self-service (l'autore avvia la propria attestazione), non c'è un
+  investigatore terzo che maneggia prove altrui, quindi mancano ruoli
+  formalizzati (Digital Evidence First Responder/Specialist), log di
+  catena di custodia per singola prova e report di validazione degli
+  strumenti nel senso classico forense.
+likelihood: low
+impact: medium
+mitigated_by: [CTL-iso27037-honest-positioning]
+visibility: public

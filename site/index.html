@@ -263,6 +263,7 @@
         <p>L'acquisizione dell'impronta digitale dell'opera deve essere documentata e riproducibile: algoritmo dichiarato, implementazione ispezionabile.</p>
         <ul class="ctl-list">
           <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
+          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena<details><summary>come verificare</summary><p>Confronta i due requisiti collegati (REQ-27037-acq-01, REQ-27037-pres-01): entrambi dichiarano applicability &quot;partial&quot;, mai &quot;full&quot;. Il codice di acquisizione (hash client-side) e i tre meccanismi di conservazione (R2 immutabile, HMAC, TSA, OTS) sono verificabili nei repo pubblici imgauth/imgauthweb; l'assenza di log di catena di custodia consultabile e di ruoli forensi formalizzati è un gap dichiarato, non nascosto.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-acq-01</span></p>
       </article>
@@ -277,6 +278,7 @@
           <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
           <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar<details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></li>
           <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio<details><summary>come verificare</summary><p>Mensile: generators/anchor-monthly.mjs concatena i manifest.json degli snapshot settimanali non ancora coperti in un bundle deterministico (committato in snapshots/anchors/); un umano lo trascina su attestazione.spaziogenesi.org, genera l'attestazione e scarica il PDF (solo /api/cert-pdf innesca l'ancoraggio OpenTimestamps reale). Chiunque può ricalcolare l'hash del bundle nel repo gtf, confrontarlo con quello stampato sul certificato, e verificare la prova .ots indipendentemente su opentimestamps.org. Primo ancoraggio: periodo 2026-07 (bundle snapshots/anchors/2026-07-bundle.json, hash cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).</p></details></li>
+          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena<details><summary>come verificare</summary><p>Confronta i due requisiti collegati (REQ-27037-acq-01, REQ-27037-pres-01): entrambi dichiarano applicability &quot;partial&quot;, mai &quot;full&quot;. Il codice di acquisizione (hash client-side) e i tre meccanismi di conservazione (R2 immutabile, HMAC, TSA, OTS) sono verificabili nei repo pubblici imgauth/imgauthweb; l'assenza di log di catena di custodia consultabile e di ruoli forensi formalizzati è un gap dichiarato, non nascosto.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-pres-01</span></p>
       </article>
@@ -491,6 +493,20 @@
           <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-overclaim-eidas</span></p>
+      </article>
+      <article class="norm-card">
+        <header>
+          <div class="risk-pills">
+            <span class="pill pill-sage">probabilità: low</span>
+            <span class="pill pill-amber">impatto: medium</span>
+          </div>
+          <h3>Far intendere una piena conformità forense ISO/IEC 27037 che non esiste</h3>
+        </header>
+        <p class="ref">Mitigato da</p>
+        <ul class="ctl-list">
+          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena</li>
+        </ul>
+        <p class="tag-line"><span class="tag">RSK-overclaim-iso27037</span></p>
       </article>
       <article class="norm-card">
         <header>

@@ -1,0 +1,33 @@
+id: CTL-iso27037-honest-positioning
+title: "Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena"
+statement: >
+  Il servizio applica per ispirazione i principi ISO/IEC 27037 di
+  acquisizione e conservazione della prova digitale pertinenti al proprio
+  modello: impronta calcolata lato client con algoritmo dichiarato e codice
+  ispezionabile (acquisizione riproducibile), archivio immutabile per
+  convenzione con tre ancore indipendenti — HMAC server, marca temporale
+  TSA, ancoraggio Bitcoin (conservazione con integrità dimostrabile senza
+  doversi fidare dei soli log interni). Non offre invece — perché il
+  modello è self-service e non forense — un log di catena di custodia per
+  singola prova consultabile dall'utente, ruoli formalizzati (Digital
+  Evidence First Responder/Specialist) né report di validazione degli
+  strumenti nel senso classico investigativo: ISO 27037 nasce per chi
+  maneggia prove altrui in un procedimento legale, non per un servizio
+  dove l'autore attesta la propria opera in autonomia. Applicabilità
+  dichiarata "partial", mai "full", in entrambi i requisiti collegati.
+status: active
+visibility: public
+satisfies: [REQ-27037-acq-01, REQ-27037-pres-01]
+mitigates: [RSK-overclaim-iso27037]
+implemented_by: [IMP-gtf-iso27037-honest-positioning]
+evidenced_by: [EVD-gtf-site-public]
+verify_howto: >
+  Confronta i due requisiti collegati (REQ-27037-acq-01, REQ-27037-pres-01):
+  entrambi dichiarano applicability "partial", mai "full". Il codice di
+  acquisizione (hash client-side) e i tre meccanismi di conservazione
+  (R2 immutabile, HMAC, TSA, OTS) sono verificabili nei repo pubblici
+  imgauth/imgauthweb; l'assenza di log di catena di custodia consultabile
+  e di ruoli forensi formalizzati è un gap dichiarato, non nascosto.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-10
