@@ -1,6 +1,6 @@
 id: EVD-cloudflare-access-admin
 title: Verifica manuale del redirect Cloudflare Access su /admin
-location: { system: cloudflare-access, ref: "richiesta non autenticata a imgauth.spaziogenesi.org/admin osservata in redirect verso il login Cloudflare Access" }
+location: { system: cloudflare-access, ref: "richiesta non autenticata al pannello admin osservata in redirect verso il login Cloudflare Access" }
 produced_by: it@spaziogenesi.org
 collection: manual
 last_seen: 2026-07-10

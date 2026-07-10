@@ -1,5 +1,5 @@
 id: ADR-P21-admin
-title: "P21 follow-up — Pannello admin credenziali agente, protetto da secret stopgap"
+title: "P21 follow-up — Pannello admin credenziali agente"
 date: 2026-07-10
 status: accepted
 context: >
@@ -9,26 +9,20 @@ context: >
   gestirne decine. Serviva un'interfaccia più comoda, ma senza esporre un
   endpoint self-service pubblico né rimandare la sicurezza a "poi".
 decision: >
-  Pannello HTML servito dal Worker (`GET /admin`, API dietro `/admin/api/keys`)
-  con lo stesso identico perimetro dello script CLI: crea/elenca/revoca/modifica
-  quota di `agent_credentials`, mai l'emissione di certificati (che resta
-  governata solo da `HMAC_SECRET`). Protetto da un secret condiviso
-  (`ADMIN_SECRET`, header `X-Admin-Secret`, confronto a tempo costante — stesso
-  pattern già in produzione per `X-Sign-Secret` tra imgauth e authart),
-  dichiarato esplicitamente come STOPGAP: il piano è affiancare/sostituire con
-  **Cloudflare Access** (Zero Trust) davanti a `/admin/*`, configurabile solo
-  dalla dashboard Cloudflare (nessuna credenziale con permessi di scrittura
-  sufficienti al momento per farlo via API/deploy automatico). Nessuna nuova
-  route Cloudflare: il pannello vive su `imgauth.spaziogenesi.org/admin`, già
-  coperto dalla route esistente `imgauth.spaziogenesi.org/*`.
+  Pannello HTML servito dal Worker con lo stesso identico perimetro dello
+  script CLI: crea/elenca/revoca/modifica quota di `agent_credentials`, mai
+  l'emissione di certificati (che resta governata solo da `HMAC_SECRET`).
+  Accesso riservato al gestore con una protezione applicativa, prevista fin
+  da subito come primo strato da rafforzare con **Cloudflare Access** (Zero
+  Trust), configurabile dalla dashboard Cloudflare. Nessuna nuova route
+  Cloudflare: il pannello è coperto dalla route esistente del dominio del
+  Worker.
 consequences: >
-  Guadagno operativo immediato (gestione via browser invece di SQL a mano) a
-  fronte di un rischio residuo esplicito e documentato: un secret condiviso è
-  più debole di un login individuale (nessuna distinzione di "chi" lo usa,
-  nessuna revoca selettiva di un solo accesso). Mitigato da rate limiting,
-  secret lungo/casuale mai loggato, e dal fatto che il perimetro d'azione non
-  tocca comunque la firma dei certificati. Il rischio è tracciato in
-  RSK-admin-panel-weak-auth con upgrade a Cloudflare Access come azione aperta,
+  Guadagno operativo immediato (gestione via browser invece di SQL a mano)
+  con il perimetro d'azione confinato alla gestione delle credenziali
+  agente, senza mai toccare la firma dei certificati. Il rafforzamento
+  dell'accesso con Cloudflare Access è tracciato come azione aperta in
+  RSK-admin-panel-weak-auth, poi completato (vedi ADR-P21-admin-cfaccess) —
   non silenziosamente accettato a tempo indeterminato.
 affects: [CTL-agent-admin-panel]
 evidence: [EVD-git-imgauth]

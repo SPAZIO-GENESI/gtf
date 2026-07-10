@@ -1,6 +1,6 @@
 id: IMP-cloudflare-access-admin
-title: Policy Cloudflare Zero Trust Access sul percorso /admin/* di imgauth
+title: Policy Cloudflare Zero Trust Access sul percorso del pannello admin di imgauth
 repo: imgauth
-ref: "Configurazione lato dashboard Cloudflare Zero Trust (Access), non versionata in wrangler.toml/worker.js: policy sul path imgauth.spaziogenesi.org/admin/*. Applicata dal gestore il 2026-07-10 (fuori dalla portata di un deploy automatico, vedi ADR-P21-admin)."
+ref: "Configurazione lato dashboard Cloudflare Zero Trust (Access), non versionata in wrangler.toml/worker.js: policy sul percorso del pannello admin. Applicata dal gestore il 2026-07-10 (fuori dalla portata di un deploy automatico, vedi ADR-P21-admin)."
 supports: [CTL-cloudflare-access-admin]
 visibility: public

@@ -1,6 +1,6 @@
 id: IMP-imgauth-admin-panel
-title: Pannello HTML gestione credenziali agente (GET /admin, /admin/api/keys)
+title: Pannello HTML gestione credenziali agente
 repo: imgauth
-ref: "worker.js — verifyAdminSecret, handleAdminKeysList, handleAdminKeysIssue, handleAdminKeysUpdate, adminPageHtml; env.ADMIN_SECRET (Cloudflare secret)"
+ref: "worker.js — pannello di gestione di agent_credentials (elenco/emissione/revoca/quota); accesso riservato con protezione applicativa via secret Cloudflare, affiancata da Cloudflare Access (vedi IMP-cloudflare-access-admin). Perimetro estraneo alla firma dei certificati (HMAC_SECRET)."
 supports: [CTL-agent-admin-panel]
 visibility: public

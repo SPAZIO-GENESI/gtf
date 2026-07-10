@@ -1,18 +1,16 @@
 id: RSK-admin-panel-weak-auth
-title: "Pannello admin credenziali agente: da unico secret condiviso a doppio strato con Cloudflare Access"
+title: "Pannello admin credenziali agente: accesso protetto in profondità"
 description: >
-  Fino al 2026-07-10, /admin/* (gestione delle credenziali agente:
-  emissione, revoca, quota) era raggiungibile da chiunque conoscesse il solo
-  secret condiviso (confrontato a tempo costante, non un login individuale)
-  — scelta esplicita dichiarata "stopgap" in ADR-P21-admin. Il gestore ha da
-  allora configurato una policy Cloudflare Access (Zero Trust) davanti a
-  /admin/*: le richieste non autenticate ricevono un redirect al login
-  Cloudflare prima ancora di raggiungere il Worker (vedi
-  ADR-P21-admin-cfaccess), quindi il secret applicativo non è più l'unica
-  barriera. Chi ottiene comunque il secret può emettere/revocare credenziali
-  agente entro lo stesso perimetro dello script CLI equivalente, ma NON può
-  falsificare o emettere certificati (governati solo da HMAC_SECRET, non
-  toccato da questo pannello).
+  Il pannello di gestione delle credenziali agente (emissione, revoca,
+  quota) è una funzione riservata al gestore del servizio. L'accesso è
+  protetto in profondità: una policy Cloudflare Access (Zero Trust) verifica
+  l'identità a monte, prima ancora che la richiesta raggiunga il Worker, con
+  una protezione applicativa come secondo strato e rate limiting (vedi
+  ADR-P21-admin-cfaccess). Anche nell'ipotesi che questo perimetro venga
+  superato, l'ambito d'azione resta la sola gestione delle credenziali
+  agente — lo stesso dell'utilità CLI equivalente — e NON tocca in alcun
+  modo l'emissione o la firma dei certificati, governata unicamente da
+  HMAC_SECRET, che questo pannello non conosce né usa.
 likelihood: low
 impact: low
 mitigated_by: [CTL-agent-admin-panel, CTL-cloudflare-access-admin, CTL-rate-limiting]

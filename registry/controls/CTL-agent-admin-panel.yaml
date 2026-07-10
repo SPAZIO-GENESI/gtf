@@ -1,5 +1,5 @@
 id: CTL-agent-admin-panel
-title: "Pannello admin credenziali agente: elenco/emissione/revoca/quota dietro secret condiviso"
+title: "Pannello admin credenziali agente: elenco/emissione/revoca/quota con accesso riservato"
 status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
@@ -7,15 +7,12 @@ mitigates: [RSK-admin-panel-weak-auth]
 implemented_by: [IMP-imgauth-admin-panel]
 evidenced_by: [EVD-git-imgauth]
 verify_howto: >
-  GET /admin restituisce la pagina (nessun dato, nessun auth richiesto per
-  vederla). GET/POST/PATCH su /admin/api/keys senza header X-Admin-Secret o
-  con un valore errato → 403 in ogni caso; con il secret corretto → elenco,
-  emissione, revoca e modifica quota funzionano e sono verificabili
-  interrogando poi /api/hash con la chiave emessa/revocata (deve
-  rispettivamente funzionare o dare 403). Nota: il secret condiviso era stato
-  dichiarato uno stopgap in ADR-P21-admin; dal 2026-07-10 è affiancato da
-  Cloudflare Access (Zero Trust) — vedi ADR-P21-admin-cfaccess e
-  CTL-cloudflare-access-admin.
+  L'accesso al pannello e alle sue funzioni di gestione è riservato al
+  gestore e protetto in profondità (Cloudflare Access a monte più protezione
+  applicativa — vedi CTL-cloudflare-access-admin e ADR-P21-admin-cfaccess).
+  L'effetto delle operazioni di gestione è osservabile in modo indiretto:
+  una credenziale emessa autentica su /api/hash, una revocata riceve 403.
+  Il perimetro non tocca in alcun caso l'emissione dei certificati.
 owner: it@spaziogenesi.org
 review_every_days: 90
 last_reviewed: 2026-07-10
