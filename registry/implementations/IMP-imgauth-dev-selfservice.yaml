@@ -1,0 +1,6 @@
+id: IMP-imgauth-dev-selfservice
+title: Self-service API key con verifica email OAuth Google/Microsoft (P22)
+repo: imgauth
+ref: "worker.js — devKeysPageHtml, handleDevOAuthStart, handleDevOAuthCallback, devAlreadyActiveBody, devKeyIssuedBody; schema/dev_selfservice.sql (colonne owner_email/owner_provider/revoked_at su agent_credentials, tabella dev_oauth_state); sweepExpiredAgentRows (pulizia state scaduti + anonimizzazione retention 180gg); handleAdminKeysUpdate (colonna Titolare, forget); wrangler.toml [vars] GOOGLE_OAUTH_CLIENT_ID/MS_OAUTH_CLIENT_ID/DEV_KEY_QUOTA, secrets GOOGLE_OAUTH_CLIENT_SECRET/MS_OAUTH_CLIENT_SECRET"
+supports: [CTL-dev-selfservice]
+visibility: public

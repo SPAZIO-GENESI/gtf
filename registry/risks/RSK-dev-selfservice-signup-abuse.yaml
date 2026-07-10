@@ -1,0 +1,18 @@
+id: RSK-dev-selfservice-signup-abuse
+title: Emissione automatizzata o ripetuta di chiavi self-service (signup abuse)
+description: >
+  A differenza dell'API key manuale (emessa a mano dal gestore, quota 200) o
+  del session token (device flow, quota 20 senza identità), la chiave
+  self-service (P22) nasce da un flusso HTTP raggiungibile da chiunque:
+  senza Turnstile su questo percorso (il consenso OAuth è considerato
+  barriera sufficiente), uno script potrebbe tentare emissioni ripetute
+  usando alias email (es. Gmail `nome+1@`) o caselle usa-e-getta compatibili
+  con Google/Microsoft. Il bypass ottenuto riguarda comunque SOLO la
+  challenge Turnstile su /api/hash (stesso perimetro di P21): HMAC,
+  timestamp server e rate limit per-IP restano attivi, quindi l'impatto
+  massimo è l'emissione di certificati VERI entro la quota di ciascuna
+  chiave (50/mese) — mai la falsificazione di un'attestazione.
+likelihood: low
+impact: low
+mitigated_by: [CTL-dev-selfservice, CTL-hmac-signing, CTL-rate-limiting]
+visibility: public

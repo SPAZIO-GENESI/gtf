@@ -2,11 +2,17 @@ id: REQ-gdpr-rights-01
 source: { norm: GDPR, ref: "artt. 15-22 — diritti dell'interessato (accesso, cancellazione, opposizione...)" }
 statement: >
   L'interessato deve poter esercitare i propri diritti sui dati trattati.
-  Applicabilità parziale: il servizio non crea account, non tratta il file
-  originale (mai inviato al server) e l'analytics è senza identificatori
-  persistenti — la maggior parte dei diritti classici (accesso al proprio
-  profilo, portabilità di dati account) non si applica per assenza stessa
-  del dato, non per una scelta di non conformità.
+  Applicabilità parziale: per chi attesta un'opera, il servizio non crea
+  account, non tratta il file originale (mai inviato al server) e
+  l'analytics è senza identificatori persistenti — la maggior parte dei
+  diritti classici (accesso al proprio profilo, portabilità di dati
+  account) non si applica per assenza stessa del dato, non per una scelta
+  di non conformità. Dalla P22 (2026-07-10) esiste una seconda categoria di
+  interessati con dati reali da gestire: gli sviluppatori che richiedono
+  una chiave API self-service (email + provider OAuth). Per loro il diritto
+  di cancellazione è self-service-adiacente (richiesta al gestore →
+  anonimizzazione immediata dal pannello admin) e comunque automatico dopo
+  180 giorni dalla revoca della chiave.
 applicability: partial
-satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless]
+satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice]
 visibility: public

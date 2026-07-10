@@ -1,0 +1,54 @@
+id: ADR-P22
+title: "P22 — Self-service API key con verifica email OAuth one-shot, post-moderazione"
+date: 2026-07-10
+status: accepted
+context: >
+  L'emissione delle API key `sg_k_…` era interamente manuale (email a
+  it@spaziogenesi.org), un attrito che scoraggia l'adozione da parte di
+  sviluppatori terzi proprio mentre P21 apriva il servizio agli agenti AI.
+  Un self-service completamente anonimo avrebbe però rimosso l'unica leva
+  utile contro l'abuso: sapere chi ha chiesto una chiave. Serviva un modo
+  di verificare un'identità minima (un'email reale) senza costruire un
+  sistema di account con password, senza raccogliere più dati del
+  necessario, e senza indebolire il perimetro di sicurezza già stabilito
+  in P21 (il bypass resta limitato alla sola challenge Turnstile).
+decision: >
+  OAuth **one-shot**, non login: l'authorization code flow di Google o
+  Microsoft (scope minimo `openid email`) serve a UNA sola chiamata a
+  `userinfo` per leggere l'email verificata dal provider; l'access/id token
+  vengono scartati subito dopo — nessuna sessione, nessun cookie, nessun
+  token OAuth persistito in D1 o nei log. La chiave emessa
+  (`GET /developer/keys` → `/api/dev/oauth/start` → `/api/dev/oauth/callback/<provider>`)
+  è una normale `sg_k_…` (stessa tabella, stesso meccanismo bearer di P21),
+  con `owner_email`/`owner_provider` associati in chiaro (non hashati, a
+  differenza del secret) per consentire **post-moderazione**: quota 50/mese,
+  un'email = una chiave attiva (indice UNIQUE parziale in D1, non solo
+  applicativo), emissione immediata + Telegram al gestore ad ogni emissione
+  + revoca a un tap dal pannello admin. Niente pre-approvazione (attrito
+  minimo per il pubblico developer, decisione esplicita del gestore) e
+  niente Turnstile su questo flusso (il consenso OAuth è già una barriera
+  più forte, e la sitekey attuale è vincolata a un altro hostname). Email in
+  **D1** (non R2 EU come i PDF): l'alternativa "email in R2 EU + solo id in
+  D1" è stata valutata e scartata perché avrebbe complicato pannello admin e
+  vincolo di unicità per un beneficio marginale — D1 non offre la stessa
+  garanzia di giurisdizione di R2, coperta invece dal DPA Cloudflare + SCC.
+  Retention: email attiva finché la chiave è attiva + 180 giorni dalla
+  revoca (traccia anti-abuso), poi anonimizzata da cron; cancellazione
+  anticipata su richiesta via `forget` nel pannello admin.
+consequences: >
+  Attrito di emissione ridotto a un login OAuth, senza indebolire nessuna
+  garanzia crittografica: il bypass concesso da una chiave self-service
+  resta identico a quello di P21 (solo Turnstile su /api/hash), HMAC e
+  rate-limit invariati. Introduce il **primo trattamento di dati personali**
+  del sistema (email+provider di chi richiede una chiave) — gli utenti che
+  attestano restano a zero dati personali, invariato. Superficie nuova:
+  abuso di email verificate temporaneamente (alias, caselle condivise) —
+  limitato dalla quota bassa (50/mese) e dalla notifica immediata al
+  gestore per revoca rapida (vedi RSK-dev-selfservice-signup-abuse). Il
+  `MS_OAUTH_CLIENT_SECRET`, a differenza degli altri segreti del Worker,
+  **scade** per policy Entra ID — nuovo elemento nel ciclo di vita dei
+  segreti da tracciare nel caveau (piano B se il tenant riblocca la
+  creazione di secret: certificato + `private_key_jwt`).
+affects: [CTL-dev-selfservice, CTL-agent-access, CTL-privacy-policy-public]
+evidence: [EVD-git-imgauth, EVD-dev-selfservice-privacy]
+visibility: public

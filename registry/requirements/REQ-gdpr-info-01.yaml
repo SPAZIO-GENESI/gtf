@@ -4,5 +4,5 @@ statement: >
   Chi usa il servizio deve poter leggere in modo chiaro cosa viene
   trattato, con quale base giuridica e per quanto tempo.
 applicability: full
-satisfied_by: [CTL-privacy-policy-public]
+satisfied_by: [CTL-privacy-policy-public, CTL-dev-selfservice]
 visibility: public
