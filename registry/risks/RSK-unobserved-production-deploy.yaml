@@ -1,0 +1,14 @@
+id: RSK-unobserved-production-deploy
+title: Modifica deployata in produzione senza mai essere stata osservata "dal vivo"
+description: >
+  Con un solo ambiente (la produzione), ogni modifica veniva provata solo
+  in locale (`wrangler dev`, che non replica service binding, rete reale,
+  D1/R2 remoti) e poi deployata direttamente sull'ambiente che gli utenti
+  usano — senza un passaggio intermedio in cui osservarne il comportamento
+  reale, e senza un secondo paio d'occhi prima della promozione. Il
+  rollback esisteva già (Cloudflare conserva le versioni), ma solo come
+  rimedio a posteriori, non come prevenzione.
+likelihood: medium
+impact: medium
+mitigated_by: [CTL-cicd-pipeline]
+visibility: public

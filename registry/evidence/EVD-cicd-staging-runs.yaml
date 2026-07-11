@@ -1,0 +1,17 @@
+id: EVD-cicd-staging-runs
+title: Run pubblici della CI imgauth (check + deploy staging + smoke)
+location:
+  system: "GitHub Actions, repo imgauth (pubblico)"
+  ref: "workflow CI (.github/workflows/ci.yml) — job check e deploy-staging"
+  public_via: "https://github.com/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml"
+produced_by: >
+  Collaudo end-to-end del 2026-07-11 (P24 FASE 3): push diretto su main
+  (check + deploy-staging verdi), PR normale con modifica banale (solo
+  check gira, deploy-staging correttamente skipped), merge della PR (deploy
+  staging automatico + smoke verdi), PR con errore di sintassi introdotto
+  ad arte (check fallisce, PR chiusa senza merge). Ogni run è pubblico e
+  ispezionabile da chiunque sul repo GitHub.
+collection: manual
+integrity: "verificabile aprendo la tab Actions del repo pubblico imgauth: ogni run mostra i singoli step con esito"
+supports: [CTL-cicd-pipeline]
+visibility: public

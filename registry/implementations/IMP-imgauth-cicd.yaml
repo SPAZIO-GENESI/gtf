@@ -1,0 +1,6 @@
+id: IMP-imgauth-cicd
+title: Staging replicato + CI per imgauth (P24 FASE 0-3)
+repo: imgauth
+ref: "wrangler.toml — blocco [env.staging] (worker imgauth-staging, D1/R2/secret propri, cron disattivato, solo workers.dev); .github/workflows/ci.yml — job check (sintassi, contratto OpenAPI, dry-run) su ogni PR/push e job deploy-staging (deploy + smoke, solo push su main); scripts/smoke-staging.mjs (ping, status, giro hash->cert-pdf->cert)"
+supports: [CTL-cicd-pipeline]
+visibility: public

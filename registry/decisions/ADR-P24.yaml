@@ -1,0 +1,44 @@
+id: ADR-P24
+title: "P24 — Catena DevOps CI/CD con ambiente staging replicato"
+date: 2026-07-11
+status: accepted
+context: >
+  Fino a questa decisione esisteva un solo ambiente — la produzione. Ogni
+  modifica veniva provata in `wrangler dev` locale (che non replica service
+  binding, rete reale, D1/R2 remoti) e poi deployata direttamente
+  sull'ambiente che gli utenti usano: nessuna versione era mai stata
+  osservata "dal vivo" prima che un utente reale la vedesse. Un fix di
+  produzione del 2026-07-11 (propagazione errori del firmatario) ne è
+  l'esempio: verificabile solo simulando in locale, deployato senza
+  osservazione diretta sull'ambiente reale.
+decision: >
+  Introdurre, componente per componente, un ambiente di **staging
+  replicato** (stesso `wrangler.toml`, blocco `[env.staging]` — il config
+  non può divergere strutturalmente), **CI su GitHub Actions** (check
+  automatici su ogni PR, deploy staging automatico + smoke test su merge in
+  main) e un **gate umano formalizzato** per la produzione (GitHub
+  Environment con required reviewer, `wrangler versions upload` a traffico
+  zero prima della promozione, `wrangler rollback` come via d'emergenza).
+  Lo staging non contiene mai dati né segreti di produzione (D1/R2/secret
+  propri, generati apposta); `HMAC_SECRET` di produzione non lascia mai il
+  suo perimetro. Esecuzione per fasi piccole e verificabili (design
+  completo in `P24-DESIGN-devops-cicd.md`, hub privato), ciascuna con
+  criteri di accettazione concreti prima di procedere alla successiva.
+consequences: >
+  FASE 0-3 completate il 2026-07-11: inventario, codice imgauth reso
+  multi-ambiente (CORS configurabile), staging `imgauth-staging` in
+  funzione (D1/R2/secret propri, cron disattivato), CI collaudata
+  end-to-end su run reali pubblici (push diretto, PR normale, merge con
+  deploy automatico, PR con errore introdotto ad arte che fa fallire il
+  check senza mai arrivare al merge). Il **gate di produzione non è ancora
+  attivo** (FASE 4): fino alla sua chiusura, i deploy in produzione restano
+  manuali come prima — la catena descritta qui copre oggi solo staging e
+  verifica pre-merge, non ancora la promozione in produzione stessa. RADART
+  e authweb hanno il proprio staging pianificato (FASE 5-7) ma non ancora
+  eseguito. Il controllo pubblico collegato (CTL-cicd-pipeline) riflette
+  questo stato intermedio con `status: draft`, non `active`, finché il
+  gate di produzione non è verificabile end-to-end — coerente con il
+  principio del registro (evidenze, non dichiarazioni).
+affects: [CTL-cicd-pipeline]
+evidence: [EVD-cicd-staging-runs]
+visibility: public

@@ -1,0 +1,26 @@
+id: CTL-cicd-pipeline
+title: "Catena di rilascio: staging replicato + CI, gate di produzione in costruzione (P24)"
+status: draft
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+mitigates: [RSK-unobserved-production-deploy]
+implemented_by: [IMP-imgauth-cicd]
+evidenced_by: [EVD-cicd-staging-runs]
+verify_howto: >
+  Stato ad oggi (2026-07-11, FASE 0-3 di 8 completate — vedi
+  https://trust.spaziogenesi.org/devops.html per la tabella completa):
+  ogni pull request sul repo pubblico imgauth fa girare automaticamente
+  check di sintassi/contratto/build (tab Actions, workflow "CI"); il merge
+  in main aggiorna da solo l'ambiente di staging (`imgauth-staging`,
+  workers.dev, mai dati o segreti di produzione) e lo verifica con uno
+  smoke test end-to-end (ping, stato, giro completo attestazione →
+  certificato → recupero). Il **gate di produzione con approvazione umana
+  non è ancora attivo**: fino alla sua chiusura (FASE 4), i deploy in
+  produzione restano un passo manuale separato, non coperto da questo
+  controllo — per questo lo stato resta "draft" e non "active". Passerà ad
+  "active" quando il gate di produzione (GitHub Environment con required
+  reviewer, promozione a traffico zero) sarà collaudato end-to-end quanto
+  lo staging lo è oggi.
+owner: it@spaziogenesi.org
+review_every_days: 90
+last_reviewed: 2026-07-11
