@@ -25,20 +25,25 @@ decision: >
   completo in `P24-DESIGN-devops-cicd.md`, hub privato), ciascuna con
   criteri di accettazione concreti prima di procedere alla successiva.
 consequences: >
-  FASE 0-3 completate il 2026-07-11: inventario, codice imgauth reso
+  FASE 0-4 completate il 2026-07-11: inventario, codice imgauth reso
   multi-ambiente (CORS configurabile), staging `imgauth-staging` in
   funzione (D1/R2/secret propri, cron disattivato), CI collaudata
   end-to-end su run reali pubblici (push diretto, PR normale, merge con
   deploy automatico, PR con errore introdotto ad arte che fa fallire il
-  check senza mai arrivare al merge). Il **gate di produzione non è ancora
-  attivo** (FASE 4): fino alla sua chiusura, i deploy in produzione restano
-  manuali come prima — la catena descritta qui copre oggi solo staging e
-  verifica pre-merge, non ancora la promozione in produzione stessa. RADART
-  e authweb hanno il proprio staging pianificato (FASE 5-7) ma non ancora
-  eseguito. Il controllo pubblico collegato (CTL-cicd-pipeline) riflette
-  questo stato intermedio con `status: draft`, non `active`, finché il
-  gate di produzione non è verificabile end-to-end — coerente con il
-  principio del registro (evidenze, non dichiarazioni).
+  check senza mai arrivare al merge), **gate di produzione attivo e
+  collaudato**: GitHub Environment `production` con required reviewer, job
+  `deploy-production` che resta in attesa di approvazione prima di
+  eseguire qualunque step, `versions upload` (0% traffico) seguito da
+  `versions deploy` (promozione al 100%) solo dopo l'approvazione,
+  rollback provato dal vivo su staging. Primo rilascio gated della storia
+  del progetto completato (run pubblico
+  https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055). Il
+  controllo pubblico collegato (CTL-cicd-pipeline) è stato promosso da
+  `status: draft` a **`active`**: il gate di produzione è ora collaudato
+  quanto lo staging, non solo dichiarato — coerente con il principio del
+  registro (evidenze, non dichiarazioni). RADART e authweb hanno il
+  proprio staging/CI pianificato (FASE 5-7) ma non ancora eseguito: il
+  controllo copre oggi solo imgauth.
 affects: [CTL-cicd-pipeline]
 evidence: [EVD-cicd-staging-runs]
 visibility: public
