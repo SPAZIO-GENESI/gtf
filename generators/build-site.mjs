@@ -369,6 +369,7 @@ ${body}
         <a href="https://github.com/SPAZIO-GENESI/gtf">Codice sorgente (GTF)</a>
         <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry">Registro pubblico</a>
         <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula del punteggio</a>
+        <a href="/devops.html">DevOps e rilasci</a>
       </div>
       <div class="footer-col">
         <h3>Il servizio di attestazione</h3>
