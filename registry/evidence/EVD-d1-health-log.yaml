@@ -3,7 +3,7 @@ title: Log fine degli eventi di salute (errori, degradi, rallentamenti)
 location: { system: cloudflare-d1, ref: "imgauth-health/health_log", public_via: "GET /api/health-log?day=" }
 produced_by: PRC-status-sampling
 collection: auto
-last_seen: 2026-07-10
+last_seen: 2026-07-11
 freshness_max_days: 1
 integrity: "append-only per convenzione; snapshot mensile hashato+ancorato (EVD-monthly-anchor)"
 supports: [CTL-availability-monitoring]

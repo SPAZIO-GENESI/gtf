@@ -1,0 +1,50 @@
+id: ADR-P23
+title: "P23 — Bot Telegram di attestazione come canale comodità dichiarato"
+date: 2026-07-11
+status: accepted
+context: >
+  Il servizio raggiunge chi arriva sul sito. Molti utenti vivono già dentro
+  Telegram e non aprirebbero mai un browser per attestare un file — un bot
+  avrebbe portato l'attestazione dove le persone già sono. Il vincolo era la
+  privacy: la promessa pubblica del sito ("il file non lascia mai il tuo
+  dispositivo") si basa sul calcolo dell'impronta nel browser dell'utente;
+  un bot Telegram non ha equivalente — un file inviato in chat DEVE transitare
+  per i server di Telegram e per il nostro Worker prima che l'impronta possa
+  essere calcolata. Una nota di design precedente (P21, 2026-07-09) aveva
+  scartato l'idea per questo motivo, rimandando la decisione a una sessione
+  dedicata con il gestore.
+decision: >
+  **Due canali, due livelli di privacy dichiarati** — non un compromesso
+  nascosto. Il sito resta il canale full-privacy, invariato. Il bot
+  (`attest-bot`, repo pubblico, Cloudflare Worker webhook, client puro
+  dell'API pubblica imgauth — zero modifiche al motore) è un canale di
+  **comodità dichiarata**: prima di scaricare qualunque file, mostra una
+  disclosure bloccante (il file transita per Telegram e per il nostro
+  server; l'impronta si calcola in streaming con `crypto.DigestStream`; i
+  byte si scartano subito; nulla viene salvato) e richiede un'accettazione
+  esplicita, una volta per utente. Le garanzie crittografiche restano
+  identiche su entrambi i canali (HMAC, timestamp server, ancoraggio
+  Bitcoin): cambia solo dove transita il file, mai l'integrità
+  dell'attestazione. Credenziale dedicata (`sg_k_…`, label `telegram-bot`)
+  che bypassa solo la challenge Turnstile, stesso perimetro di P21. Foto
+  rifiutate (Telegram le ricomprime, l'impronta non corrisponderebbe più
+  all'originale); tetto 20 MB (limite Bot API); quote giornaliere per
+  utente (5 attestazioni, 20 verifiche).
+consequences: >
+  Amplia l'accesso al servizio senza toccare imgauth né indebolire il
+  perimetro di sicurezza esistente. Introduce una nuova, piccola superficie
+  di dati personali: id utente Telegram e contatori d'uso giornalieri
+  (D1 dedicata `attest-bot`, distinta da quella del motore), cancellati
+  automaticamente dopo 90 giorni o su richiesta. Il file dell'opera non
+  viene mai salvato (hash in streaming), ma transita — un compromesso
+  esplicito, accettato dall'utente prima di ogni download, non una
+  scorciatoia silenziosa. Durante l'implementazione sono emersi e stati
+  corretti due bug reali nell'estrazione dei dati da un certificato PDF
+  (interpretazione dei nomi filtro PDF e della sintassi esadecimale del
+  testo) e un bug di design (un PDF veniva sempre trattato come "candidato
+  certificato", rifiutando l'attestazione di PDF qualsiasi) — tutti scoperti
+  solo testando contro dati reali di produzione, non dalla sola lettura del
+  codice.
+affects: [CTL-telegram-channel, CTL-hmac-signing, CTL-rate-limiting]
+evidence: [EVD-telegram-privacy]
+visibility: public

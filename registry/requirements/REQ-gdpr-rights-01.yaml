@@ -12,7 +12,10 @@ statement: >
   una chiave API self-service (email + provider OAuth). Per loro il diritto
   di cancellazione è self-service-adiacente (richiesta al gestore →
   anonimizzazione immediata dal pannello admin) e comunque automatico dopo
-  180 giorni dalla revoca della chiave.
+  180 giorni dalla revoca della chiave. Dalla P23 (2026-07-11) esiste una
+  terza categoria: chi usa il bot Telegram (id utente + contatori d'uso).
+  Anche qui la cancellazione è su richiesta al gestore e comunque
+  automatica dopo 90 giorni.
 applicability: partial
-satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice]
+satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel]
 visibility: public

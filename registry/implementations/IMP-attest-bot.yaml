@@ -1,0 +1,6 @@
+id: IMP-attest-bot
+title: Bot Telegram di attestazione e verifica, canale comodità dichiarato (P23)
+repo: attest-bot
+ref: "worker.js — ensureAccepted/DISCLAIMER_TEXT (gate di consenso), downloadAndHash (hash in streaming via crypto.DigestStream), handleAttestDocument/handleCertificatePdfParsed/handleVerifyCompareFile (attestazione e verifica), tryHandleAsCertificate (un PDF si prova prima come certificato, poi come file qualsiasi), bumpQuota (quote giornaliere), handleScheduled (retention 90gg); schema/bot.sql (bot_users, bot_usage); client puro dell'API pubblica imgauth, nessuna modifica al motore"
+supports: [CTL-telegram-channel]
+visibility: public

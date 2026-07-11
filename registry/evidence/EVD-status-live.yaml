@@ -3,7 +3,7 @@ title: Stato semaforico live di worker/archivio/firma/ancoraggio, con sonda HMAC
 location: { system: cloudflare-worker, ref: "imgauth worker.js#runChecks", public_via: "GET /api/status" }
 produced_by: PRC-status-sampling
 collection: auto
-last_seen: 2026-07-10
+last_seen: 2026-07-11
 freshness_max_days: 1
 integrity: "cache 180s per-isolate con stale-while-revalidate; la sonda HMAC round-trip fa fallire il componente worker se il segreto è assente o rotto"
 supports: [CTL-availability-monitoring, CTL-hmac-signing]

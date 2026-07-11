@@ -2,5 +2,5 @@ id: REQ-gdpr-min-01
 source: { norm: GDPR, ref: "art. 5(1)(c) — minimizzazione" }
 statement: "Trattare solo i dati strettamente necessari alla finalità di attestazione"
 applicability: full
-satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice]
+satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel]
 visibility: public

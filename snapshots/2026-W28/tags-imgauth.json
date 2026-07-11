@@ -2,6 +2,46 @@
   "ok": true,
   "data": [
     {
+      "name": "v1.19.0",
+      "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.19.0",
+      "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.19.0",
+      "commit": {
+        "sha": "01dc46b951a10594f3eccdcc1669e9fb1588d5e5",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/01dc46b951a10594f3eccdcc1669e9fb1588d5e5"
+      },
+      "node_id": "REF_kwDOR0mRsbFyZWZzL3RhZ3MvdjEuMTkuMA"
+    },
+    {
+      "name": "v1.18.1",
+      "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.18.1",
+      "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.18.1",
+      "commit": {
+        "sha": "2fc98030a84a2bca079a6d451c3b2e5c22161345",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/2fc98030a84a2bca079a6d451c3b2e5c22161345"
+      },
+      "node_id": "REF_kwDOR0mRsbFyZWZzL3RhZ3MvdjEuMTguMQ"
+    },
+    {
+      "name": "v1.18.0",
+      "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.18.0",
+      "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.18.0",
+      "commit": {
+        "sha": "bed8e516ff996114d55aaf5bd15de8fd131f0a73",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/bed8e516ff996114d55aaf5bd15de8fd131f0a73"
+      },
+      "node_id": "REF_kwDOR0mRsbFyZWZzL3RhZ3MvdjEuMTguMA"
+    },
+    {
+      "name": "v1.17.0",
+      "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.17.0",
+      "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.17.0",
+      "commit": {
+        "sha": "d4ea1f671e124dffc2a261d1df0f31602366aad8",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/d4ea1f671e124dffc2a261d1df0f31602366aad8"
+      },
+      "node_id": "REF_kwDOR0mRsbFyZWZzL3RhZ3MvdjEuMTcuMA"
+    },
+    {
       "name": "v1.16.0",
       "zipball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/zipball/refs/tags/v1.16.0",
       "tarball_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/tarball/refs/tags/v1.16.0",

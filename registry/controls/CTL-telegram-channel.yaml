@@ -1,0 +1,22 @@
+id: CTL-telegram-channel
+title: "Canale Telegram (attest-bot): disclosure bloccante, hash in streaming, quote e retention"
+status: active
+visibility: public
+satisfies: [REQ-gdpr-info-01, REQ-gdpr-min-01, REQ-gdpr-rights-01]
+mitigates: [RSK-telegram-file-transit]
+implemented_by: [IMP-attest-bot]
+evidenced_by: [EVD-telegram-privacy]
+verify_howto: >
+  Apri @SGAttestBot su Telegram e invia un file come primo messaggio: il bot
+  risponde con l'avvertenza sul transito del file PRIMA di scaricare
+  qualunque cosa (nessuna chiamata a getFile finché non accetti). Dopo
+  l'accettazione, un file attestato produce un'impronta identica a quella
+  calcolata a mano sullo stesso file (nessuna alterazione in transito).
+  Una foto (non un documento) viene rifiutata con l'avviso sulla
+  ricompressione, senza alcun download. Sesto file di attestazione nello
+  stesso giorno (o ventunesima verifica) → messaggio di quota, nessuna
+  chiamata a imgauth. Scrivendo a info@spaziogenesi.org si può chiedere la
+  cancellazione anticipata dell'id utente e dei contatori d'uso.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-11

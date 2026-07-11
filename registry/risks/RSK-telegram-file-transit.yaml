@@ -1,0 +1,23 @@
+id: RSK-telegram-file-transit
+title: File dell'opera in transito su infrastruttura terza (Telegram) e sul Worker del bot
+description: >
+  A differenza del sito, dove l'impronta si calcola nel browser e il file
+  non lascia mai il dispositivo dell'utente, un file inviato al bot
+  Telegram DEVE transitare per i server di Telegram e per il Worker
+  `attest-bot` prima che l'impronta possa essere calcolata — non esiste un
+  equivalente "calcolo lato client" per un bot di messaggistica. Il rischio
+  è duplice: (a) esposizione del contenuto a un'infrastruttura terza durante
+  il transito, fuori dal controllo diretto di Spazio Genesi; (b) rischio che
+  il file venga persistito, anche solo temporaneamente, sul Worker.
+  Mitigato per costruzione: il bot dichiara il transito PRIMA di scaricare
+  qualunque file (disclosure bloccante, una volta per utente) e calcola
+  l'impronta in streaming (`crypto.DigestStream`) senza mai bufferizzare né
+  salvare i byte — l'unica eccezione è la lettura in memoria di un
+  certificato PDF (documento già pubblico, legato a un'impronta nota) per
+  l'estrazione dei campi, comunque mai scritto su disco. Il perimetro di
+  sicurezza crittografico (HMAC, timestamp server, rate limit) è invariato:
+  il bot bypassa solo la challenge Turnstile, stesso limite di P21.
+likelihood: low
+impact: low
+mitigated_by: [CTL-telegram-channel, CTL-hmac-signing, CTL-rate-limiting]
+visibility: public

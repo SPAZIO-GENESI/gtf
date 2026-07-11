@@ -1,0 +1,18 @@
+id: EVD-telegram-privacy
+title: Disclosure nel bot e informativa privacy per il canale Telegram
+location:
+  system: "repo attest-bot (pubblico) + imgauthweb (pubblico)"
+  ref: "attest-bot: worker.js DISCLAIMER_TEXT + ensureAccepted (gate bloccante prima di ogni download), downloadAndHash (crypto.DigestStream, mai bufferizzato), handleScheduled (retention 90gg) · imgauthweb: privacy.html §3.6 'Canale Telegram (bot)'"
+  public_via: "https://attestazione.spaziogenesi.org/privacy.html#canale-telegram · https://t.me/SGAttestBot (/start, /privacy)"
+produced_by: >
+  Testo scritto in coordinamento col design doc P23-DESIGN-telegram-bot.md:
+  dichiara dato trattato (id utente Telegram, accettazione, contatori d'uso),
+  finalità (applicare le quote, prevenire abusi), base giuridica (art. 6.1.b
+  + 6.1.f GDPR), cosa NON viene fatto (il file non viene mai salvato) e
+  retention (90 giorni, poi cancellazione automatica). Il meccanismo di
+  streaming/scarto e la pulizia automatica sono codice verificabile (cron +
+  crypto.DigestStream), non solo dichiarazione.
+collection: manual
+integrity: "verificabile leggendo privacy.html §3.6 (repo pubblico imgauthweb, MIT) e worker.js del repo pubblico attest-bot (MIT)"
+supports: [CTL-telegram-channel]
+visibility: public
