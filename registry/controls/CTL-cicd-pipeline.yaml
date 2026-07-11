@@ -4,10 +4,10 @@ status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
 mitigates: [RSK-unobserved-production-deploy]
-implemented_by: [IMP-imgauth-cicd]
+implemented_by: [IMP-imgauth-cicd, IMP-imgauthweb-staging]
 evidenced_by: [EVD-cicd-staging-runs]
 verify_howto: >
-  Stato ad oggi (2026-07-11, FASE 0-4 di 8 completate — vedi
+  Stato ad oggi (2026-07-11, FASE 0-4 e 7 di 8 completate — vedi
   https://trust.spaziogenesi.org/devops.html per la tabella completa):
   ogni pull request sul repo pubblico imgauth fa girare automaticamente
   check di sintassi/contratto/build (tab Actions, workflow "CI"); il merge
@@ -15,10 +15,10 @@ verify_howto: >
   workers.dev, mai dati o segreti di produzione) e lo verifica con uno
   smoke test end-to-end (ping, stato, giro completo attestazione →
   certificato → recupero). Il **gate di produzione con approvazione umana
-  è ora attivo**: un job dedicato (`deploy-production`) resta IN ATTESA
-  finché un required reviewer (GitHub Environment "production") non
-  approva dall'interfaccia GitHub — nessuno step del deploy parte prima.
-  Dopo l'approvazione: `wrangler versions upload` (nuova versione a 0%
+  è attivo**: un job dedicato (`deploy-production`) resta IN ATTESA finché
+  un required reviewer (GitHub Environment "production") non approva
+  dall'interfaccia GitHub — nessuno step del deploy parte prima. Dopo
+  l'approvazione: `wrangler versions upload` (nuova versione a 0%
   traffico) seguito da `wrangler versions deploy` (promozione al 100%),
   poi uno smoke di sola lettura su `/ping`. Verificabile aprendo un run
   pubblico che ha attraversato l'intero percorso, es.
@@ -27,9 +27,21 @@ verify_howto: >
   `deploy-production` mostra lo stato "waiting" fino all'approvazione, poi
   i passi di upload/promozione/smoke, tutti verdi. Il rollback
   (`wrangler rollback <version-id> --yes`, secondi, senza rebuild) è stato
-  collaudato dal vivo su staging, mai in produzione per un test. RADART e
-  authweb hanno il proprio staging/CI pianificato ma non ancora eseguito
-  (FASE 5-7) — questo controllo copre oggi solo imgauth.
+  collaudato dal vivo su staging, mai in produzione per un test.
+
+  L'**interfaccia di staging** (repo pubblico `attestazione-staging`,
+  GitHub Pages su `*.github.io`, nessun dominio custom) è generata dal
+  branch `staging` di imgauthweb e collaudata con un test browser reale
+  (Playwright, non solo curl): footer con versione del motore letta da
+  `imgauth-staging` (conferma CORS), attestazione completa con Turnstile
+  di test, PDF non firmato scaricato e verificato, link permanente
+  presente. Chiunque può ripetere il collaudo aprendo
+  https://spazio-genesi.github.io/attestazione-staging/ e attestando un
+  file di prova.
+
+  RADART ha il proprio staging/CI pianificato ma non ancora eseguito
+  (FASE 5-6) — questo controllo copre oggi imgauth e authweb, non ancora
+  RADART.
 owner: it@spaziogenesi.org
 review_every_days: 90
 last_reviewed: 2026-07-11

@@ -25,25 +25,40 @@ decision: >
   completo in `P24-DESIGN-devops-cicd.md`, hub privato), ciascuna con
   criteri di accettazione concreti prima di procedere alla successiva.
 consequences: >
-  FASE 0-4 completate il 2026-07-11: inventario, codice imgauth reso
-  multi-ambiente (CORS configurabile), staging `imgauth-staging` in
-  funzione (D1/R2/secret propri, cron disattivato), CI collaudata
-  end-to-end su run reali pubblici (push diretto, PR normale, merge con
-  deploy automatico, PR con errore introdotto ad arte che fa fallire il
-  check senza mai arrivare al merge), **gate di produzione attivo e
-  collaudato**: GitHub Environment `production` con required reviewer, job
-  `deploy-production` che resta in attesa di approvazione prima di
-  eseguire qualunque step, `versions upload` (0% traffico) seguito da
-  `versions deploy` (promozione al 100%) solo dopo l'approvazione,
+  FASE 0-4 e 7 completate il 2026-07-11 (FASE 7 eseguita prima di 5-6
+  RADART su richiesta esplicita — nessuna dipendenza tra le due): inventario,
+  codice imgauth reso multi-ambiente (CORS configurabile), staging
+  `imgauth-staging` in funzione (D1/R2/secret propri, cron disattivato), CI
+  collaudata end-to-end su run reali pubblici (push diretto, PR normale,
+  merge con deploy automatico, PR con errore introdotto ad arte che fa
+  fallire il check senza mai arrivare al merge), **gate di produzione
+  attivo e collaudato**: GitHub Environment `production` con required
+  reviewer, job `deploy-production` che resta in attesa di approvazione
+  prima di eseguire qualunque step, `versions upload` (0% traffico) seguito
+  da `versions deploy` (promozione al 100%) solo dopo l'approvazione,
   rollback provato dal vivo su staging. Primo rilascio gated della storia
   del progetto completato (run pubblico
-  https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055). Il
-  controllo pubblico collegato (CTL-cicd-pipeline) è stato promosso da
+  https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055).
+
+  **Interfaccia di staging** (FASE 7): repo pubblico `attestazione-staging`
+  (GitHub Pages, solo `*.github.io`, D2), generato dal branch `staging` di
+  imgauthweb, puntato a `imgauth-staging`. Collaudo browser reale con
+  Playwright (non solo curl): footer con versione del motore confermata
+  via CORS, attestazione completa con Turnstile di test, PDF non firmato
+  scaricato e verificato, link permanente presente. Emersi e corretti nel
+  collaudo due bug nel codice **condiviso con la produzione**
+  (comportamento in produzione verificato invariato dopo il deploy):
+  `turnstileEnabled()` non riconosceva le sitekey di test Cloudflare
+  (estesa da `/^0x/` a `/^[0-3]x/`); i percorsi assoluti risolvono alla
+  radice del dominio, corretto in produzione (dominio custom) ma non nel
+  sottopercorso del repo Pages secondario (fix solo nella copia generata).
+
+  Il controllo pubblico collegato (CTL-cicd-pipeline) è stato promosso da
   `status: draft` a **`active`**: il gate di produzione è ora collaudato
   quanto lo staging, non solo dichiarato — coerente con il principio del
-  registro (evidenze, non dichiarazioni). RADART e authweb hanno il
-  proprio staging/CI pianificato (FASE 5-7) ma non ancora eseguito: il
-  controllo copre oggi solo imgauth.
+  registro (evidenze, non dichiarazioni). RADART ha il proprio staging/CI
+  pianificato (FASE 5-6) ma non ancora eseguito: il controllo copre oggi
+  imgauth e authweb, non ancora RADART.
 affects: [CTL-cicd-pipeline]
 evidence: [EVD-cicd-staging-runs]
 visibility: public

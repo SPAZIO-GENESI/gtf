@@ -10,7 +10,14 @@ produced_by: >
   check gira, deploy-staging correttamente skipped), merge della PR (deploy
   staging automatico + smoke verdi), PR con errore di sintassi introdotto
   ad arte (check fallisce, PR chiusa senza merge). Ogni run è pubblico e
-  ispezionabile da chiunque sul repo GitHub.
+  ispezionabile da chiunque sul repo GitHub. Esteso alla FASE 4 (stesso
+  giorno): run pubblico che attraversa l'intero gate di produzione
+  (attesa approvazione → upload → promozione → smoke), primo rilascio
+  gated della storia del progetto
+  (https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055).
+  Esteso alla FASE 7 (stesso giorno): collaudo browser reale (Playwright)
+  dell'interfaccia di staging pubblicata su attestazione-staging, flusso
+  completo scegli→attesta→PDF→verifica confermato dal vivo.
 collection: manual
 integrity: "verificabile aprendo la tab Actions del repo pubblico imgauth: ogni run mostra i singoli step con esito"
 supports: [CTL-cicd-pipeline]

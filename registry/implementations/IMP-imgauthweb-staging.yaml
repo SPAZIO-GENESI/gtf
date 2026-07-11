@@ -1,0 +1,6 @@
+id: IMP-imgauthweb-staging
+title: Copia di staging dell'interfaccia, generata e pubblicata su repo secondario (P24 FASE 7)
+repo: imgauthweb
+ref: "branch staging + .github/workflows/deploy-staging.yml — sostituisce WORKER_BASE/CERT_PAGE_BASE/TURNSTILE_SITEKEY in index.html con i valori di imgauth-staging e la chiave Turnstile di test, riscrive i percorsi assoluti per il sottopercorso del repo Pages secondario, pubblica su attestazione-staging via git push diretto (nessuna action di terze parti); fix condivisi con main: turnstileEnabled() esteso a /^[0-3]x/ (sitekey di test Cloudflare)"
+supports: [CTL-cicd-pipeline]
+visibility: public
