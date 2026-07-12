@@ -58,6 +58,28 @@ consequences: >
   promozione — qui è mancata proprio perché il rilascio non è passato dal
   gate P24. Non genera una nuova voce di rischio dedicata: rientra nella
   categoria già coperta da RSK-unobserved-production-deploy (P24).
+  **Verificato con un login OAuth reale in produzione dal gestore, lo
+  stesso giorno**: attestazione e certificato PDF generati dal sito e
+  riconosciuti in convenzione — prima prova end-to-end genuina del canale
+  (i test precedenti usavano voucher costruiti da uno script che replica
+  la firma del server, non un vero provider OAuth). `CTL-site-voucher-auth`
+  promosso da `draft` ad `active`. Durante questo primo uso reale sono
+  emersi due difetti mai incontrati dai test automatizzati, entrambi
+  corretti lo stesso giorno: (1) i tre bottoni provider erano invisibili —
+  riusata per errore la classe CSS `.btn-copy` (`position:absolute`,
+  pensata per il pulsante "Copia" ancorato a un blocco specifico), che
+  fuori da quel contesto faceva finire i link impilati fuori vista;
+  sostituita con classi dedicate nel flusso normale, verificate con
+  Playwright (bounding box distinti). (2) il pannello `/admin` non
+  rifletteva la nuova attestazione senza un refresh manuale della pagina
+  intera — `loadKeys`/`loadConventions` partivano solo al login, non alla
+  riapertura della scheda; corretto ricaricando i dati ad ogni click sulla
+  scheda. Nessuno dei due difetti era rilevabile dai test locali: il primo
+  perché non controllavano il posizionamento visivo reale (solo presenza
+  nel DOM), il secondo perché richiede due sessioni del pannello aperte in
+  parallelo — un caso d'uso reale, non simulato dall'harness di test.
+  `/condizioni/`: rimosso il tag "in arrivo" sul canale sito per la sola
+  fascia Convenzione (resta per Professionale, non ancora costruita).
 affects: [CTL-site-voucher-auth, CTL-convention-accounting, RSK-agent-credential-abuse]
-evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-site-voucher-local-test]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-site-voucher-local-test, EVD-site-voucher-live-test]
 visibility: public

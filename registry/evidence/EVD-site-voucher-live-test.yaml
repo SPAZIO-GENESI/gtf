@@ -1,0 +1,20 @@
+id: EVD-site-voucher-live-test
+title: Login OAuth reale in produzione — attestazione e certificato generati dal sito, riconosciuti in convenzione
+location:
+  system: "attestazione.spaziogenesi.org (produzione) + D1 imgauth-health (produzione, non pubblica)"
+  ref: "sessione reale del gestore: scheda Attesta → \"Hai una convenzione? Accedi con la tua email istituzionale\" → login OAuth reale → attestazione + certificato PDF generati e riconosciuti in convenzione"
+produced_by: >
+  Il gestore ha completato il flusso end-to-end in produzione con un vero
+  account (non un voucher simulato da script, a differenza di
+  EVD-site-voucher-local-test): accesso dalla scheda Attesta, redirect
+  OAuth reale, ritorno con voucher nel fragment, attestazione di un file e
+  generazione del certificato PDF, entrambi riconosciuti in convenzione.
+  Durante questo primo uso reale sono emersi due difetti non coperti dai
+  test automatizzati precedenti: i bottoni provider risultavano invisibili
+  (classe CSS riusata fuori contesto) e il pannello /admin non rifletteva
+  la nuova attestazione senza un refresh manuale della pagina. Entrambi
+  corretti lo stesso giorno (vedi ADR-P25-site-voucher).
+collection: manual
+integrity: "verificabile da chi ha accesso a D1 imgauth-health (staff); il codice che produce questo comportamento è pubblico e verificabile in worker.js/index.html (repo imgauth AGPL-3.0, imgauthweb MIT)"
+supports: [CTL-site-voucher-auth]
+visibility: public
