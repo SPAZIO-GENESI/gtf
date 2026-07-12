@@ -1,0 +1,6 @@
+id: IMP-attest-mcp-remote
+title: Server MCP remoto, zero installazione — attestazione per impronta (P26)
+repo: attest-mcp-remote
+ref: "src/index.js — McpAgent con tool pubblici (service_status, check_anchor, verify_attestation, lookup_certificate) e tool con credenziale (authorize, complete_authorization, attest_hash, create_certificate_pdf); stato del token di sessione nel Durable Object (new_sqlite_classes), mai loggato; header Authorization pass-through via ctx.props; client puro dell'API pubblica imgauth, zero segreti propri, zero route Cloudflare (workers.dev)"
+supports: [CTL-agent-access]
+visibility: public

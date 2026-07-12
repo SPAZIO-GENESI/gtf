@@ -1,0 +1,61 @@
+id: ADR-P26
+title: "P26 — Server MCP remoto, zero installazione: attestazione per impronta, mai per upload"
+date: 2026-07-12
+status: accepted
+context: >
+  Il pacchetto MCP `attest-mcp` (P21) richiede un'installazione locale
+  (Node, `npx`) e resta il canale con accesso pieno al filesystem. La
+  domanda di partenza era se estendere l'accesso agli agenti AI con un
+  server MCP raggiungibile per URL, senza installazione — e se farlo
+  ripristinando un canale di upload come nel bot Telegram (P23). La
+  verifica sulla spec MCP corrente (revisione 2025-11-25) ha chiuso la
+  domanda: gli argomenti dei tool sono JSON che transitano nel contesto del
+  modello, non esiste un canale upload client→server affidabile. Passare
+  un file in base64 sarebbe impraticabile oltre pochi KB e non affidabile
+  (un modello che ricopia base64 può corromperlo — un certificato valido su
+  un'impronta sbagliata è il fallimento peggiore possibile per questo
+  servizio).
+decision: >
+  **`attest_hash`, non `attest_file`**: il tool riceve solo l'impronta
+  SHA-256, calcolata dall'agente eseguendo codice in locale
+  (`sha256sum`/`certutil`/`shasum`). Nuovo repo pubblico
+  `attest-mcp-remote` (Cloudflare Worker con `McpAgent`, agents SDK,
+  Durable Object SQLite per lo stato di sessione), client puro dell'API
+  pubblica di imgauth — zero modifiche al motore, zero segreti propri nel
+  Worker. Due strade di autenticazione, entrambe riuso di P21 senza
+  modifiche: header `Authorization: Bearer` pass-through per client con
+  header personalizzati (Claude Code), device flow in sessione per client
+  che non li supportano (claude.ai, che non offre header custom sui
+  connettori remoti — verificato in FASE 0). Il token di sessione vive solo
+  nello stato del Durable Object di quella connessione, mai loggato né
+  restituito dopo il claim. Tool pubblici (service_status, check_anchor,
+  verify_attestation, lookup_certificate) e tool con credenziale
+  (authorize, complete_authorization, attest_hash, create_certificate_pdf
+  — risposta sempre link, mai base64 del PDF nel contesto).
+consequences: >
+  Il vincolo del protocollo diventa un vantaggio: il file non transita
+  nemmeno dal Worker remoto, un livello di privacy pari al sito e
+  superiore al bot Telegram (che deve scaricare i byte per calcolarne
+  l'hash). Nessuna nuova superficie di dati personali: nessun id utente,
+  nessun contatore persistito — l'unico stato è il token di sessione
+  effimero nel Durable Object, mai scritto su disco persistente al di
+  fuori di quel contesto. **Nessun nuovo rischio privacy**: `privacy.html`
+  resta invariata, verificato esplicitamente con il gestore, non solo
+  assunto. Limite onesto accettato: la sessione MCP è legata alla
+  connessione — una riconnessione azzera il token e richiede una nuova
+  autorizzazione; su claude.ai questo è anche l'unico modo di attestare,
+  quindi una chiave API `sg_k_…` (quota Sviluppatore o pool Convenzione)
+  non è utilizzabile lì — reso esplicito nella developer page (matrice
+  credenziale×client) PRIMA che l'utente scelga il client. Nel collaudo
+  reale su claude.ai (giro completo: hash calcolato dall'agente →
+  autorizzazione con Turnstile umano → attestazione → certificato PDF) è
+  emerso e stato corretto un bug reale di produzione latente da P21
+  (imgauth 1.21.3): il bottone "Autorizza" della pagina
+  `/agent/authorize` faceva una fetch relativa a `/api/agent/approve`, mai
+  instradata al Worker sul dominio pubblico (route solo `/agent/*`) —
+  l'approvazione dalla pagina non era mai stata esercitata in produzione
+  prima d'ora (i test di P21 usavano una chiave interna, saltando quel
+  passaggio). Scoperto solo testando dal vivo, non dalla sola lettura del
+  codice — stesso pattern già visto in P23.
+affects: [CTL-agent-access]
+visibility: public
