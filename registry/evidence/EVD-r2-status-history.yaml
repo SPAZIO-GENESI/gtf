@@ -3,7 +3,7 @@ title: Rollup giornaliero dello stato dei servizi (90 giorni)
 location: { system: cloudflare-r2, ref: "imgauth-pdf-archive/status/history.json", public_via: "GET /api/status-history" }
 produced_by: PRC-status-sampling
 collection: auto
-last_seen: 2026-07-11
+last_seen: 2026-07-12
 freshness_max_days: 1
 integrity: "stato peggiore del giorno per componente, finestra a scorrimento 90gg, aggiornato dal cron ogni 30 min"
 supports: [CTL-availability-monitoring]

@@ -1,0 +1,50 @@
+id: ADR-P25-linkedin
+title: "P25 — LinkedIn come quarto provider OAuth self-service, ripensato dopo il rinvio del mattino"
+date: 2026-07-11
+status: accepted
+context: >
+  Il design P25 (mattina del 2026-07-11) aveva valutato e rinviato LinkedIn
+  come provider OAuth per `/developer/keys`, motivando la scelta con un
+  "pubblico marginale per una pagina API key": LinkedIn è percepito come
+  identità professionale/social, non da developer, a differenza di GitHub
+  (primario) e GitLab (opzionale). La stessa sera, nella conversazione sulle
+  fasce di utilizzo pubblicate su `/condizioni/` (Base / Sviluppatore /
+  Professionale "in arrivo" / Convenzione — vedi ADR-P25 quando registrato),
+  il gestore ha riletto quella stessa caratteristica come un vantaggio: la
+  fascia Professionale (fotografi, artisti, professionisti che si presentano
+  con un profilo pubblico, non un account Google generico) non ha ancora
+  un'identità OAuth dedicata. LinkedIn è l'unico provider del lotto P25 che
+  comunica esplicitamente "professionista".
+decision: >
+  Aggiunto LinkedIn a `DEV_PROVIDERS` in `worker.js` (imgauth 1.20.0) con lo
+  stesso pattern OIDC generico già usato per Google/Microsoft (nessun caso
+  speciale come il previsto per GitHub): authorization code flow one-shot,
+  `userinfo` letto una sola volta, token scartato subito dopo (stesso
+  invariante di ADR-P22). Unica differenza tecnica dagli altri due provider:
+  scope **`openid profile email`** invece di `openid email` — il prodotto
+  "Sign In with LinkedIn using OpenID Connect" concede i tre scope in blocco
+  e un sottoinsieme rischia `invalid_scope`; il campo `scope` è stato reso
+  configurabile per provider (`handleDevOAuthStart` ora legge `cfg.scope`)
+  invece di restare hardcoded uguale per tutti. Il controllo
+  `email_verified === false` (prima solo su Google) è esteso a LinkedIn.
+  Nessun aggancio automatico oggi tra provider LinkedIn e fascia
+  Professionale: è solo un quarto bottone su `/developer/keys`, alla pari di
+  Google/Microsoft — l'attribuzione "email LinkedIn ⇒ fascia Professionale"
+  resta da disegnare quando quella fascia esce dal perimetro P26.
+consequences: >
+  Codice pronto in locale (`worker.js`, `package.json` → 1.20.0, README
+  aggiornato), ma **non ancora deployato**: manca la FASE 0 (registrazione
+  manuale dell'app OAuth su LinkedIn Developer Portal — prodotto "Sign In
+  with LinkedIn using OpenID Connect", gratuito) e il rilascio via pipeline
+  P24 (staging → gate production). `CTL-dev-selfservice` resta accurato
+  così com'è (Google/Microsoft, in produzione) e va esteso a menzionare
+  LinkedIn solo al momento del deploy — stesso principio di onestà del
+  punteggio già applicato in ADR-GTF-008 e a `CTL-cicd-pipeline` (P24): il
+  registro non anticipa uno stato non ancora verificabile in produzione.
+  Superficie di abuso invariata rispetto a Google/Microsoft (stessa quota
+  50/mese, stesso indice UNIQUE parziale, stessa notifica Telegram) —
+  nessun nuovo rischio, copertura di `RSK-dev-selfservice-signup-abuse`
+  invariata.
+affects: [CTL-dev-selfservice]
+evidence: [EVD-git-imgauth]
+visibility: public
