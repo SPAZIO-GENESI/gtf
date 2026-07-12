@@ -1,6 +1,6 @@
 id: IMP-imgauth-conventions
-title: Convenzioni per dominio email — pool mensile, tetto individuale, degrado, admin CRUD + report
+title: Convenzioni per dominio email — pool mensile, tetto individuale, degrado, admin CRUD + report, voucher dal sito
 repo: imgauth
-ref: "worker.js — matchConvention, wiring in handleDevOAuthCallback (quota/label/expires_at/convention_id), authenticateAgent (SELECT convention_id/owner_email, check expires_at esteso a entrambi i kind), handleHash (contabilità pool/tetto, log convention_attestations, fascia/fascia_motivo/convenzione in risposta), peekAgentCredential + handlePdf (tier sidecar), writeCertMeta (tier/convention_id), handleAdminConventionsList/Create/Update/Report, handleAdminKeysUpdate (forget esteso a convention_attestations); schema/conventions.sql (tabelle conventions, convention_attestations)"
-supports: [CTL-convention-accounting]
+ref: "worker.js — matchConvention, wiring in handleDevOAuthCallback (quota/label/expires_at/convention_id), authenticateAgent (SELECT convention_id/owner_email, check expires_at esteso a entrambi i kind), accountConventionUsage (helper condiviso pool/tetto/log, rifattorizzato dal voucher — usato sia da via='key' che via='site'), handleHash (contabilità, log convention_attestations, fascia/fascia_motivo/convenzione in risposta, riconoscimento header X-SG-Voucher), peekAgentCredential + peekVoucherConvention + handlePdf (tier sidecar per entrambi i canali), writeCertMeta (tier/convention_id), handleAdminConventionsList/Create/Update/Report, handleAdminKeysUpdate (forget esteso a convention_attestations); buildVoucher/verifyVoucher (firma/verifica del voucher stateless), handleDevOAuthStart/Callback con purpose=attest (redirect col voucher nel fragment, nessuna chiave emessa); schema/conventions.sql + schema/voucher.sql (colonna dev_oauth_state.purpose)"
+supports: [CTL-convention-accounting, CTL-site-voucher-auth]
 visibility: public

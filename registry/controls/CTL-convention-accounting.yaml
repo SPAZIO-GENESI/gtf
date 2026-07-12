@@ -20,6 +20,11 @@ verify_howto: >
   produzione il 2026-07-12 con la prima convenzione reale (dominio
   spaziogenesi.org): login OAuth reale, chiave taggata correttamente,
   attestazione con fascia:'convenzione', riga di log corretta.
+  Dal 2026-07-12 la STESSA contabilità (accountConventionUsage) serve anche
+  il canale voucher dal sito (via='site', nessuna chiave coinvolta) — vedi
+  CTL-site-voucher-auth per il meccanismo di autenticazione via voucher, non
+  ancora verificato con un login reale in produzione a differenza di questo
+  controllo.
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-12

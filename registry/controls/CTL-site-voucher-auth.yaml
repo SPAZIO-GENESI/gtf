@@ -1,0 +1,34 @@
+id: CTL-site-voucher-auth
+title: "Voucher stateless firmato per l'accesso email dal sito (\"attesta con la tua email\")"
+status: draft
+visibility: public
+satisfies: [REQ-27001-inspiration-01, REQ-gdpr-min-01, REQ-gdpr-info-01]
+mitigates: [RSK-agent-credential-abuse]
+implemented_by: [IMP-imgauth-conventions]
+evidenced_by: [EVD-site-voucher-local-test, EVD-git-imgauth, EVD-git-imgauthweb]
+verify_howto: >
+  Da attestazione.spaziogenesi.org, scheda Attesta → "Hai una convenzione?
+  Accedi con la tua email istituzionale" → login OAuth reale (Google,
+  Microsoft o LinkedIn) → redirect a
+  attestazione.spaziogenesi.org/#sgv=<voucher>. Verificare: il fragment
+  sparisce subito dall'URL (history.replaceState), il voucher non compare
+  in alcuna richiesta di rete verso il server (resta solo in
+  sessionStorage), il banner mostra l'email e se una convenzione è
+  riconosciuta. Attestare un file: nessun widget Turnstile richiesto,
+  risposta di /api/hash con fascia:'convenzione' (o 'base' con
+  fascia_motivo se pool/tetto sono esauriti). Un voucher manomesso o oltre
+  le 8 ore restituisce 403 {error:"voucher_scaduto"}; una convenzione
+  disattivata dopo l'emissione del voucher azzera il vantaggio al
+  successivo uso (il voucher non è mai la fonte di verità sullo stato
+  della convenzione). Il bypass riguarda SOLO il widget Turnstile: HMAC,
+  timestamp server e rate-limit per-IP restano invariati, stesso
+  principio già verificato per CTL-agent-access.
+  ⚠️ Verificato finora solo in locale (wrangler dev, D1 reale, voucher
+  emesso da uno script di test che replica la firma del server — non un
+  vero login OAuth in produzione, vedi EVD-site-voucher-local-test):
+  status "draft" finché qualcuno con accesso a un account Google/Microsoft/
+  LinkedIn reale non completa il flusso end-to-end in produzione, stesso
+  criterio già applicato a CTL-cicd-pipeline prima del suo collaudo.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-12

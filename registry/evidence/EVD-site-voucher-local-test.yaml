@@ -1,0 +1,27 @@
+id: EVD-site-voucher-local-test
+title: Voucher "attesta con la tua email" verificato in locale contro D1 reale, non ancora con login OAuth reale in produzione
+location:
+  system: "wrangler dev (locale) + D1 imgauth-health locale + browser Chromium (Playwright)"
+  ref: "convention_attestations locale (righe via='site'), transcript dei test worker.js e frontend"
+produced_by: >
+  Voucher costruiti con uno script di test che replica esattamente
+  l'algoritmo di firma del server (stesso HMAC_SECRET locale), per
+  simulare l'esito di un login OAuth senza un browser collegato a un
+  account reale. Backend: voucher valido con convenzione riconosciuta
+  (fascia:'convenzione', riga via='site' in convention_attestations),
+  tetto individuale raggiunto (degrado a base, fascia_motivo:
+  'tetto_individuale'), pool esaurito (fascia_motivo:'pool_esaurito'),
+  convenzione disattivata dopo l'emissione del voucher (nessun vantaggio,
+  il voucher non è mai fonte di verità), voucher scaduto e voucher
+  manomesso (entrambi 403), preflight CORS con l'header X-SG-Voucher,
+  nessuna regressione sul percorso a chiave esistente (stesso helper
+  condiviso). Frontend: test Playwright con Chromium
+  (--disable-web-security per il CORS locale) su una copia patchata di
+  index.html — arrivo dal fragment #sgv= con/senza convenzione
+  riconosciuta, pulizia del fragment dall'URL, banner d'identità corretto,
+  pulsante "Esci", voucher scaduto nel fragment trattato come stato
+  anonimo, stato di default senza voucher pregresso.
+collection: manual
+integrity: "riproducibile da chiunque abbia accesso al repo imgauth (pubblico, AGPL-3.0) e a wrangler dev; NON sostituisce un test end-to-end in produzione con un vero provider OAuth"
+supports: [CTL-site-voucher-auth]
+visibility: public
