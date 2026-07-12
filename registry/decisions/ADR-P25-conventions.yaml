@@ -42,17 +42,24 @@ decision: >
 consequences: >
   Codice completo e verificato in locale (`wrangler dev`, convenzione di
   test: match dominio, scadenza/disattivazione, pool esaurito, tetto
-  individuale, log solo per emissioni tassate, sidecar `meta/cert/`),
-  **non ancora deployato in produzione** — manca il rilascio 1.21.0 via
-  pipeline P24. `CTL-convention-accounting` registrato in `status: draft`
-  per lo stesso principio di onestà già applicato a `CTL-cicd-pipeline`
-  (P24) e `CTL-dev-selfservice` per LinkedIn: il registro non anticipa uno
-  stato non ancora verificabile in produzione, passerà ad `active` al
-  deploy. Non testato con un login OAuth reale su un dominio istituzionale
-  vero (nessuno disponibile in questa sessione) — la wiring in
-  `handleDevOAuthCallback` è verificata per revisione del codice e dalla
-  query SQL di match confermata funzionante, da confermare alla prima
-  convenzione vera firmata.
+  individuale, log solo per emissioni tassate, sidecar `meta/cert/`), poi
+  **rilasciato in produzione lo stesso giorno** (imgauth 1.21.0, tag
+  `v1.21.0`, via pipeline P24 — schema `conventions.sql` applicato a D1
+  staging e produzione PRIMA della promozione, per evitare che
+  `authenticateAgent` rompesse su una colonna mancante). **Verificato con
+  un login OAuth reale in produzione**: prima convenzione vera creata
+  (dominio `spaziogenesi.org`), login Google reale, chiave emessa con
+  `convention_id` corretto, attestazione con `fascia:'convenzione'`, riga
+  di log corretta in `convention_attestations` — tutto confermato via query
+  diretta su D1 di produzione, non solo dalla risposta dell'API.
+  `CTL-convention-accounting` promosso da `draft` ad `active` (stesso
+  principio già applicato a `CTL-cicd-pipeline` e a LinkedIn: il registro
+  non anticipa, ma nemmeno ritarda oltre il dovuto, uno stato ormai
+  verificato in produzione). Lungo il percorso emerso e risolto un
+  problema di configurazione preesistente e non collegato al codice P25:
+  l'URI di redirect OAuth per Google in Google Cloud Console aveva un
+  carattere iniziale mancante (`redirect_uri_mismatch`), corretto dal
+  gestore.
   **Approssimazione nota nel sidecar**: il campo `tier` di
   `meta/cert/<hash>.json` riflette l'appartenenza STATICA della credenziale
   bearer alla convenzione (lookup read-only, non tocca quota), non l'esito

@@ -1,16 +1,16 @@
 {
-  "collected_at": "2026-07-12T05:32:57.747Z",
+  "collected_at": "2026-07-12T09:00:36.057Z",
   "week": "2026-W28",
   "files": {
-    "status.json": "fc7dfa280e494cc80eb1cf4a30eb18423d0881b3d067f49db70fde3ab58fa1d7",
-    "status-history.json": "c08b74a45151a30c8722a8311c2f51ece20ec766fddb048a67508f46d1253231",
-    "health-log.json": "392e6e2741cf7d800fd5ce0cb0a4664678f965f737163af559ac8071e1c71afe",
-    "ping-imgauth.json": "abec80c85317da235c8d60e9a0c86d84149a0fd6fb4a5ef37414467ac88cab02",
+    "status.json": "bd58841dc8e914676cbb631aaa1fa9cd508a6e3e3cdf92ce3a03801e6d0e174c",
+    "status-history.json": "0ee093ff70ca2afef890703483a0ee0e847d39f476aa078e0e46360a688e0949",
+    "health-log.json": "403eff75b82135fbb09c12fff75b03746d627aaa9ce6279bccd81d435e1f5628",
+    "ping-imgauth.json": "cc7c2732af74412f9d5c6e7f3e642fc89b55c4e6464d35c58431eb2dc66e8731",
     "monitor-issues.json": "d10cc982fa92b6c55d2cda6251d10c23715ca6f3c70f1744b05cfa4204918991",
-    "git-imgauth.json": "b08b3635c36b74e41242eee1982f3806f19dfb09795b338758908750fc2ea11a",
+    "git-imgauth.json": "1644eb84a017f29f027a53595f8041a738af73c1e3d22f79109cfa1a8cd4eaef",
     "git-imgauthweb.json": "8a83d9e03cbec4497812def590e298f54f28dcc4ad6d68c2e0aea92f180ecb9b",
     "git-authart.json": "7230af680f01d4bdf0196cfe66f8dff1ac6213dc7348f8d8ec239c82f9f916b6",
-    "tags-imgauth.json": "a80e4c958aa9a45818982aa9edf6395641ae7a1e5177f2aacc757b11704e9313",
+    "tags-imgauth.json": "cd7576be09930393067985f7e564a0fa06552c8763c2fc7229c9f7f1c047a636",
     "tags-imgauthweb.json": "2e57f861869be522b3890236958170ed6f553da0fe5eadaaa7987e5c22f8ba1d",
     "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9"
   }

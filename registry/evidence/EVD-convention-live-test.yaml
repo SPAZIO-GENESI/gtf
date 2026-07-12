@@ -1,0 +1,21 @@
+id: EVD-convention-live-test
+title: Login reale + attestazione taggata verificati in produzione per la prima convenzione (spaziogenesi)
+location:
+  system: "D1 imgauth-health (produzione, non pubblica) + imgauth.spaziogenesi.org"
+  ref: "agent_credentials (riga con convention_id valorizzato, quota=member_cap, owner_provider='google'), convention_attestations (riga via='key' per la stessa chiave)"
+produced_by: >
+  Convenzione di prova creata dal gestore nel pannello /admin (dominio
+  spaziogenesi.org). Login OAuth reale con Google su un indirizzo di quel
+  dominio da /developer/keys → chiave sg_k_… emessa con convention_id
+  corretto (verificato via query D1 diretta, non solo dal codice). Chiamata
+  reale a POST /api/hash con quella chiave (Swagger /docs) → risposta con
+  fascia:'convenzione' e nome ente corretto; riga corrispondente comparsa in
+  convention_attestations (ym Europe/Rome corretto). Durante il test emerso
+  e risolto un problema di configurazione preesistente e non collegato al
+  codice P25: l'URI di redirect OAuth per Google registrato in Google Cloud
+  Console aveva un carattere iniziale mancante (redirect_uri_mismatch),
+  corretto dal gestore direttamente sulla console Google.
+collection: manual
+integrity: "verificabile da chi ha accesso a D1 imgauth-health (staff); il codice che produce questo comportamento è pubblico e verificabile in worker.js (repo imgauth, AGPL-3.0)"
+supports: [CTL-convention-accounting]
+visibility: public

@@ -1,21 +1,25 @@
 id: CTL-convention-accounting
 title: "Convenzioni per dominio email: pool mensile dell'ente, degrado mai blocco, log minimizzato alle sole emissioni tassate"
-status: draft
+status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01, REQ-gdpr-min-01, REQ-gdpr-info-01, REQ-gdpr-rights-01]
 mitigates: [RSK-agent-credential-abuse, RSK-convention-data-linkage]
 implemented_by: [IMP-imgauth-conventions]
+evidenced_by: [EVD-convention-live-test, EVD-git-imgauth]
 verify_howto: >
-  Al deploy: apri il pannello /admin (sezione Convenzioni), crea una
-  convenzione di test (dominio, pool mensile, tetto individuale, date).
-  Con un'email verificata OAuth su quel dominio, GET /developer/keys →
-  chiave emessa con quota = tetto individuale ed expires_at = fine
-  convenzione. Attestazioni da quella chiave rispondono con
-  fascia:'convenzione' finché pool e tetto non sono esauriti; superata una
-  delle due soglie, fascia degrada a 'base' con fascia_motivo esplicito
-  (mai un errore/blocco) e nessuna riga aggiuntiva compare in
-  convention_attestations. Il report per membro
+  Apri il pannello /admin (sezione Convenzioni), crea una convenzione di
+  test (dominio, pool mensile, tetto individuale, date). Con un'email
+  verificata OAuth su quel dominio, GET /developer/keys → chiave emessa con
+  quota = tetto individuale ed expires_at = fine convenzione. Attestazioni
+  da quella chiave rispondono con fascia:'convenzione' finché pool e tetto
+  non sono esauriti; superata una delle due soglie, fascia degrada a 'base'
+  con fascia_motivo esplicito (mai un errore/blocco) e nessuna riga
+  aggiuntiva compare in convention_attestations. Il report per membro
   (/admin/api/conventions/<id>/report) è visibile solo nel pannello del
-  gestore — verso l'ente va condiviso in forma aggregata.
+  gestore — verso l'ente va condiviso in forma aggregata. Verificato in
+  produzione il 2026-07-12 con la prima convenzione reale (dominio
+  spaziogenesi.org): login OAuth reale, chiave taggata correttamente,
+  attestazione con fascia:'convenzione', riga di log corretta.
 owner: it@spaziogenesi.org
 review_every_days: 180
+last_reviewed: 2026-07-12
