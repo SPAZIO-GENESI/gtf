@@ -1,5 +1,5 @@
 id: CTL-dev-selfservice
-title: "Self-service API key con verifica email OAuth one-shot (Google/Microsoft), post-moderazione"
+title: "Self-service API key con verifica email OAuth one-shot (Google/Microsoft/LinkedIn), post-moderazione"
 status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01, REQ-gdpr-info-01, REQ-gdpr-min-01, REQ-gdpr-rights-01]
@@ -8,8 +8,9 @@ implemented_by: [IMP-imgauth-dev-selfservice]
 evidenced_by: [EVD-git-imgauth, EVD-dev-selfservice-privacy]
 verify_howto: >
   Apri GET /developer/keys su imgauth.spaziogenesi.org: mostra l'informativa
-  privacy sintetica prima del redirect e due bottoni "Continua con
-  Google/Microsoft" (assenti se il provider non è configurato). Dopo il
+  privacy sintetica prima del redirect e tre bottoni "Continua con
+  Google/Microsoft/LinkedIn" (assenti se il provider non è configurato;
+  LinkedIn dal 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). Dopo il
   login, la chiave sg_k_… è mostrata una sola volta e autentica su
   /api/hash come qualunque altra API key. Una seconda richiesta con la
   stessa email non emette una seconda chiave ("hai già una chiave attiva").
@@ -18,4 +19,4 @@ verify_howto: >
   immediata (altrimenti automatica dopo 180 giorni dalla revoca, via cron).
 owner: it@spaziogenesi.org
 review_every_days: 180
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-12

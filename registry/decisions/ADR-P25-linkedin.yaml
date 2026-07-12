@@ -32,19 +32,19 @@ decision: >
   Google/Microsoft — l'attribuzione "email LinkedIn ⇒ fascia Professionale"
   resta da disegnare quando quella fascia esce dal perimetro P26.
 consequences: >
-  Codice pronto in locale (`worker.js`, `package.json` → 1.20.0, README
-  aggiornato), ma **non ancora deployato**: manca la FASE 0 (registrazione
-  manuale dell'app OAuth su LinkedIn Developer Portal — prodotto "Sign In
-  with LinkedIn using OpenID Connect", gratuito) e il rilascio via pipeline
-  P24 (staging → gate production). `CTL-dev-selfservice` resta accurato
-  così com'è (Google/Microsoft, in produzione) e va esteso a menzionare
-  LinkedIn solo al momento del deploy — stesso principio di onestà del
-  punteggio già applicato in ADR-GTF-008 e a `CTL-cicd-pipeline` (P24): il
-  registro non anticipa uno stato non ancora verificabile in produzione.
-  Superficie di abuso invariata rispetto a Google/Microsoft (stessa quota
-  50/mese, stesso indice UNIQUE parziale, stessa notifica Telegram) —
-  nessun nuovo rischio, copertura di `RSK-dev-selfservice-signup-abuse`
-  invariata.
+  **In produzione dal 2026-07-12** (imgauth 1.20.0, tag `v1.20.0`): FASE 0
+  completata (app registrata su LinkedIn Developer Portal, prodotto "Sign In
+  with LinkedIn using OpenID Connect" provisionato, redirect URI registrate),
+  login reale verificato in locale, poi rilascio via pipeline P24 (push →
+  check+deploy-staging automatici → gate `production` approvato dal gestore
+  → `wrangler versions upload`+`deploy`). `CTL-dev-selfservice` esteso a
+  menzionare LinkedIn nello stesso giro del deploy — stesso principio di
+  onestà del registro già applicato in ADR-GTF-008 e a `CTL-cicd-pipeline`
+  (P24): il controllo ora descrive solo ciò che è verificabile in
+  produzione, non prima. Superficie di abuso invariata rispetto a
+  Google/Microsoft (stessa quota 50/mese, stesso indice UNIQUE parziale,
+  stessa notifica Telegram) — nessun nuovo rischio, copertura di
+  `RSK-dev-selfservice-signup-abuse` invariata.
 affects: [CTL-dev-selfservice]
 evidence: [EVD-git-imgauth]
 visibility: public
