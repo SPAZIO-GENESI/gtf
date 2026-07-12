@@ -1,0 +1,69 @@
+id: ADR-P25-conventions
+title: "P25 (B) — Convenzioni per dominio email: pool mensile dell'ente, degrado mai blocco, log minimizzato"
+date: 2026-07-12
+status: accepted
+context: >
+  Il design P25 (mattina 2026-07-11) prevedeva una quota INDIVIDUALE per
+  membro di convenzione (`student_quota` per-chiave). La sera stessa il
+  gestore ha riconsiderato: un ente reale ("ABAQ ha 200 certificati al
+  mese") ragiona per **monte collettivo**, non per persona — la contabilità
+  giusta è un pool mensile condiviso tra tutti i membri dell'ente, con un
+  tetto individuale come secondo argine anti-drenaggio, non come unità di
+  misura primaria. Serviva inoltre decidere cosa succede quando pool o
+  tetto si esauriscono: bloccare l'utente (rischio di lasciare a piedi uno
+  studente a metà sessione d'esame) o degradare silenziosamente. Il gestore
+  ha scelto esplicitamente il degrado. Infine: quanto loggare per rendere
+  possibile un report all'ente, senza trasformare il sistema (oggi a zero
+  dati personali per chi attesta dal percorso anonimo) in un tracciamento
+  esteso.
+decision: >
+  Contabilità a **pool mensile dell'ente** (`conventions.monthly_quota`,
+  contato con `COUNT(*)` su `convention_attestations` filtrato per
+  `(convention_id, ym)`, `ym` in Europe/Rome) più un **tetto individuale**
+  anti-drenaggio (`member_cap`, default 50/mese — la stessa soglia del
+  self-service ordinario, così la convenzione non è mai percepita come un
+  downgrade del gratuito). Esaurito l'uno o l'altro, l'emissione **degrada
+  silenziosamente alla fascia Base** (certificato comunque emesso, con
+  avviso esplicito nella risposta — `fascia_motivo: 'pool_esaurito'` o
+  `'tetto_individuale'`): mai un 429, mai un blocco. Il log
+  `convention_attestations` (convenzione→membro→impronta) si scrive SOLO
+  per le emissioni effettivamente taggate in convenzione — non per il
+  self-service individuale né per il percorso anonimo — perché è l'unica
+  associazione identità→opere dell'intero sistema e la sua esistenza va
+  giustificata caso per caso (garanzia di persistenza contrattuale,
+  contabilità del pool, report all'ente), non generalizzata.
+  Nello stesso giro, il gestore ha inoltre disposto il **varo di
+  `/condizioni/`** (pagina pubblica delle fasce, `attestazione.spaziogenesi.org/condizioni/`)
+  — pubblicata `noindex` l'11/7 in attesa della delibera di un'assemblea,
+  varata (linkata + indicizzata) il 12/7 **senza attendere quella delibera**:
+  decisione esplicita di rendere pubbliche le regole prima ancora che il
+  meccanismo di convenzione sottostante sia deployato, sui contenuti già
+  scritti l'11/7 (nessuna modifica ai numeri).
+consequences: >
+  Codice completo e verificato in locale (`wrangler dev`, convenzione di
+  test: match dominio, scadenza/disattivazione, pool esaurito, tetto
+  individuale, log solo per emissioni tassate, sidecar `meta/cert/`),
+  **non ancora deployato in produzione** — manca il rilascio 1.21.0 via
+  pipeline P24. `CTL-convention-accounting` registrato in `status: draft`
+  per lo stesso principio di onestà già applicato a `CTL-cicd-pipeline`
+  (P24) e `CTL-dev-selfservice` per LinkedIn: il registro non anticipa uno
+  stato non ancora verificabile in produzione, passerà ad `active` al
+  deploy. Non testato con un login OAuth reale su un dominio istituzionale
+  vero (nessuno disponibile in questa sessione) — la wiring in
+  `handleDevOAuthCallback` è verificata per revisione del codice e dalla
+  query SQL di match confermata funzionante, da confermare alla prima
+  convenzione vera firmata.
+  **Approssimazione nota nel sidecar**: il campo `tier` di
+  `meta/cert/<hash>.json` riflette l'appartenenza STATICA della credenziale
+  bearer alla convenzione (lookup read-only, non tocca quota), non l'esito
+  dinamico pool/tetto calcolato al momento esatto di `/api/hash` — un
+  certificato degradato a Base può comparire `tier:'convenzione'` nel
+  sidecar. Accettato perché `tier` non è ancora consumato da nessuna
+  logica di retention differenziata (P26+); da rivalutare quando lo sarà.
+  **Varo anticipato di `/condizioni/`**: le regole pubblicate potrebbero
+  cambiare se/quando l'assemblea delibera — la pagina non promette
+  immutabilità dei numeri, solo l'onestà di quanto già vero oggi (minimi
+  garantiti, non retroattività).
+affects: [CTL-convention-accounting, RSK-convention-data-linkage]
+evidence: [EVD-git-imgauth]
+visibility: public

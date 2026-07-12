@@ -134,17 +134,17 @@
     <div class="ledger" role="group" aria-label="Punteggio di maturità calcolato dal registro pubblico">
       <table class="ledger-table">
         <tbody>
-        <tr class="is-counted"><td class="ledger-label">Trasparenza</td><td class="ledger-value">96</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Trasparenza</td><td class="ledger-value">97</td></tr>
         <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W28) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">96</td></tr>
         <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">57</td></tr>
         <tr class="is-pending" title="nessun ciclo di revisione trimestrale ancora concluso"><td class="ledger-label">Audit</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-pending" title="nessun restore-drill ancora eseguito"><td class="ledger-label">Conservazione</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">96</td></tr>
         <tr class="is-pending" title="richiede uno scanner del codice non ancora costruito"><td class="ledger-label">Privacy</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-pending" title="richiede dati GitHub, score v0 lavora solo offline dal registro"><td class="ledger-label">Governance</td><td class="ledger-value">n/d</td></tr>
-          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">92<span class="unit">/100</span></td></tr>
+          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">91<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
       <p class="ledger-note">6 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
@@ -485,6 +485,20 @@
         <header>
           <div class="risk-pills">
             <span class="pill pill-sage">probabilità: low</span>
+            <span class="pill pill-amber">impatto: medium</span>
+          </div>
+          <h3>Il log delle convenzioni associa una persona (email) alle opere che attesta</h3>
+        </header>
+        <p class="ref">Mitigato da</p>
+        <ul class="ctl-list">
+          <li><span class="tag">CTL-convention-accounting</span> <span class="pill pill-amber status-badge">bozza</span> Convenzioni per dominio email: pool mensile dell'ente, degrado mai blocco, log minimizzato alle sole emissioni tassate</li>
+        </ul>
+        <p class="tag-line"><span class="tag">RSK-convention-data-linkage</span></p>
+      </article>
+      <article class="norm-card">
+        <header>
+          <div class="risk-pills">
+            <span class="pill pill-sage">probabilità: low</span>
             <span class="pill pill-seal">impatto: high</span>
           </div>
           <h3>Invio non necessario del file originale dell'utente al server</h3>
@@ -604,6 +618,15 @@
   <section id="decisioni" class="folio" data-folio="ADR">
     <h2>Decisioni</h2>
     <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-12</span><span class="entry-title">P25 (B) — Convenzioni per dominio email: pool mensile dell'ente, degrado mai blocco, log minimizzato</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Il design P25 (mattina 2026-07-11) prevedeva una quota INDIVIDUALE per membro di convenzione (`student_quota` per-chiave). La sera stessa il gestore ha riconsiderato: un ente reale (&quot;ABAQ ha 200 certificati al mese&quot;) ragiona per **monte collettivo**, non per persona — la contabilità giusta è un pool mensile condiviso tra tutti i membri dell'ente, con un tetto individuale come secondo argine anti-drenaggio, non come unità di misura primaria. Serviva inoltre decidere cosa succede quando pool o tetto si esauriscono: bloccare l'utente (rischio di lasciare a piedi uno studente a metà sessione d'esame) o degradare silenziosamente. Il gestore ha scelto esplicitamente il degrado. Infine: quanto loggare per rendere possibile un report all'ente, senza trasformare il sistema (oggi a zero dati personali per chi attesta dal percorso anonimo) in un tracciamento esteso.</p>
+          <p><strong>Decisione:</strong> Contabilità a **pool mensile dell'ente** (`conventions.monthly_quota`, contato con `COUNT(*)` su `convention_attestations` filtrato per `(convention_id, ym)`, `ym` in Europe/Rome) più un **tetto individuale** anti-drenaggio (`member_cap`, default 50/mese — la stessa soglia del self-service ordinario, così la convenzione non è mai percepita come un downgrade del gratuito). Esaurito l'uno o l'altro, l'emissione **degrada silenziosamente alla fascia Base** (certificato comunque emesso, con avviso esplicito nella risposta — `fascia_motivo: 'pool_esaurito'` o `'tetto_individuale'`): mai un 429, mai un blocco. Il log `convention_attestations` (convenzione→membro→impronta) si scrive SOLO per le emissioni effettivamente taggate in convenzione — non per il self-service individuale né per il percorso anonimo — perché è l'unica associazione identità→opere dell'intero sistema e la sua esistenza va giustificata caso per caso (garanzia di persistenza contrattuale, contabilità del pool, report all'ente), non generalizzata. Nello stesso giro, il gestore ha inoltre disposto il **varo di `/condizioni/`** (pagina pubblica delle fasce, `attestazione.spaziogenesi.org/condizioni/`) — pubblicata `noindex` l'11/7 in attesa della delibera di un'assemblea, varata (linkata + indicizzata) il 12/7 **senza attendere quella delibera**: decisione esplicita di rendere pubbliche le regole prima ancora che il meccanismo di convenzione sottostante sia deployato, sui contenuti già scritti l'11/7 (nessuna modifica ai numeri).</p>
+          <p><strong>Conseguenze:</strong> Codice completo e verificato in locale (`wrangler dev`, convenzione di test: match dominio, scadenza/disattivazione, pool esaurito, tetto individuale, log solo per emissioni tassate, sidecar `meta/cert/`), **non ancora deployato in produzione** — manca il rilascio 1.21.0 via pipeline P24. `CTL-convention-accounting` registrato in `status: draft` per lo stesso principio di onestà già applicato a `CTL-cicd-pipeline` (P24) e `CTL-dev-selfservice` per LinkedIn: il registro non anticipa uno stato non ancora verificabile in produzione, passerà ad `active` al deploy. Non testato con un login OAuth reale su un dominio istituzionale vero (nessuno disponibile in questa sessione) — la wiring in `handleDevOAuthCallback` è verificata per revisione del codice e dalla query SQL di match confermata funzionante, da confermare alla prima convenzione vera firmata. **Approssimazione nota nel sidecar**: il campo `tier` di `meta/cert/&lt;hash&gt;.json` riflette l'appartenenza STATICA della credenziale bearer alla convenzione (lookup read-only, non tocca quota), non l'esito dinamico pool/tetto calcolato al momento esatto di `/api/hash` — un certificato degradato a Base può comparire `tier:'convenzione'` nel sidecar. Accettato perché `tier` non è ancora consumato da nessuna logica di retention differenziata (P26+); da rivalutare quando lo sarà. **Varo anticipato di `/condizioni/`**: le regole pubblicate potrebbero cambiare se/quando l'assemblea delibera — la pagina non promette immutabilità dei numeri, solo l'onestà di quanto già vero oggi (minimi garantiti, non retroattività).</p>
+          <p class="tag-line"><span class="tag">ADR-P25-conventions</span></p>
+        </div>
+      </details>
       <details class="entry">
         <summary><span class="entry-date">2026-07-11</span><span class="entry-title">P25 — LinkedIn come quarto provider OAuth self-service, ripensato dopo il rinvio del mattino</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">

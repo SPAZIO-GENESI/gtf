@@ -1,0 +1,17 @@
+id: RSK-convention-data-linkage
+title: "Il log delle convenzioni associa una persona (email) alle opere che attesta"
+description: >
+  `convention_attestations` (schema/conventions.sql) è l'UNICA tabella
+  dell'intero sistema che lega un'identità nota (email del membro) a
+  impronte specifiche (sha256) di opere attestate — necessaria per erogare
+  la garanzia di persistenza contrattuale, contabilizzare il pool mensile
+  dell'ente e produrre il report per fattura/rinnovo. Il resto del
+  servizio (percorso anonimo dal sito, self-service individuale) resta a
+  zero associazioni identità→opere. Il rischio: se questo log venisse
+  esposto o consultato oltre lo scopo previsto, rivelerebbe non solo "chi
+  ha una chiave" (già vero per il self-service) ma "quali opere specifiche
+  ha attestato" — un dato più sensibile.
+likelihood: low
+impact: medium
+mitigated_by: [CTL-convention-accounting]
+visibility: public
