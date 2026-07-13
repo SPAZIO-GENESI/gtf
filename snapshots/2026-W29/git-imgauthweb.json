@@ -1,0 +1,416 @@
+{
+  "ok": true,
+  "data": [
+    {
+      "sha": "6473eb284bbfc9264d20feea2a7720be33846f46",
+      "node_id": "C_kwDOR1AMp9oAKDY0NzNlYjI4NGJiZmM5MjY0ZDIwZmVlYTJhNzcyMGJlMzM4NDZmNDY",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T18:36:48Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T18:36:48Z"
+        },
+        "message": "feat: server MCP remoto — zero installazione (P26), 1.17.1\n\nNuova pagina /developer/ con due blocchi: MCP remoto (URL pubblico,\nnessuna installazione, l'agente calcola l'impronta in locale) e la\nmatrice trasparente \"quale credenziale funziona su quale client\" —\nla chiave API personale non e' utilizzabile su claude.ai (niente\nheader custom sui connettori), solo l'autorizzazione temporanea in\nsessione. Voce di changelog pubblicata.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "e0449a0af73b451d807a526caa7df7939c911fae",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/e0449a0af73b451d807a526caa7df7939c911fae"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/6473eb284bbfc9264d20feea2a7720be33846f46",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/6473eb284bbfc9264d20feea2a7720be33846f46",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/6473eb284bbfc9264d20feea2a7720be33846f46",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/6473eb284bbfc9264d20feea2a7720be33846f46/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "000369ad34fee947b964dc618e30e60f24cb94ae",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/000369ad34fee947b964dc618e30e60f24cb94ae",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/000369ad34fee947b964dc618e30e60f24cb94ae"
+        }
+      ]
+    },
+    {
+      "sha": "000369ad34fee947b964dc618e30e60f24cb94ae",
+      "node_id": "C_kwDOR1AMp9oAKDAwMDM2OWFkMzRmZWU5NDdiOTY0ZGM2MThlMzBlNjBmMjRjYjk0YWU",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T10:52:07Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T10:52:07Z"
+        },
+        "message": "docs: /condizioni/ — canale sito non più \"in arrivo\" per la Convenzione\n\nIl voucher \"attesta con la tua email\" (P25 §2.7) è ora davvero disponibile\nper chi ha una convenzione attiva, verificato con un login OAuth reale in\nproduzione. Il tag resta per la fascia Professionale, ancora da costruire.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "aa0a6675fcf14648800b053e2760be06fa1e0ec6",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/aa0a6675fcf14648800b053e2760be06fa1e0ec6"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/000369ad34fee947b964dc618e30e60f24cb94ae",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/000369ad34fee947b964dc618e30e60f24cb94ae",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/000369ad34fee947b964dc618e30e60f24cb94ae",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/000369ad34fee947b964dc618e30e60f24cb94ae/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "480b1a0f7507ef9d18074ce1d045f0cb3481f147",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/480b1a0f7507ef9d18074ce1d045f0cb3481f147",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/480b1a0f7507ef9d18074ce1d045f0cb3481f147"
+        }
+      ]
+    },
+    {
+      "sha": "480b1a0f7507ef9d18074ce1d045f0cb3481f147",
+      "node_id": "C_kwDOR1AMp9oAKDQ4MGIxYTBmNzUwN2VmOWQxODA3NGNlMWQwNDVmMGNiMzQ4MWYxNDc",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T10:28:05Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T10:28:05Z"
+        },
+        "message": "fix: bottoni provider OAuth invisibili nel box \"Hai una convenzione?\"\n\n.btn-copy usa position:absolute (pensata per il pulsante \"Copia\" ancorato\nsopra .hash-block) — riusata per errore sui tre link Google/Microsoft/\nLinkedIn e sul pulsante \"Esci\", li faceva finire impilati/fuori posto e\ninvisibili. Nuove classi dedicate .provider-links/.provider-link, nel\nflusso normale, affiancate. Verificato con Playwright: i tre bottoni ora\nhanno bounding box distinti e sono tutti visibili.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "52ddee44840ba70a2371f3f7b4e5cfbfa7a5dba2",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/52ddee44840ba70a2371f3f7b4e5cfbfa7a5dba2"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/480b1a0f7507ef9d18074ce1d045f0cb3481f147",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/480b1a0f7507ef9d18074ce1d045f0cb3481f147",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/480b1a0f7507ef9d18074ce1d045f0cb3481f147",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/480b1a0f7507ef9d18074ce1d045f0cb3481f147/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "d01f8f9dc2ff583ed5652403f3d856fe997e45d1",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/d01f8f9dc2ff583ed5652403f3d856fe997e45d1",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/d01f8f9dc2ff583ed5652403f3d856fe997e45d1"
+        }
+      ]
+    },
+    {
+      "sha": "d01f8f9dc2ff583ed5652403f3d856fe997e45d1",
+      "node_id": "C_kwDOR1AMp9oAKGQwMWY4ZjlkYzJmZjU4M2VkNTY1MjQwM2YzZDg1NmZlOTk3ZTQ1ZDE",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T10:05:13Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T10:05:13Z"
+        },
+        "message": "docs: changelog + privacy.html §3.7 per il voucher e le convenzioni (P25 §2.7)\n\n- /changelog/: nuova voce \"Attesta con la tua email istituzionale\".\n- privacy.html: nuova §3.7 \"Convenzioni con enti formativi\" — copre sia le\n  chiavi API in convenzione (già in produzione da P25(B) 1.21.0, mai\n  dichiarate finora) sia il nuovo accesso voucher dal sito. Aggiornati anche\n  §4 (conservazione), §5 (nota titolari autonomi) e §7 (cancellazione\n  anticipata/pseudonimizzazione del log).\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "3f505cddd7b2a85ed99bab6301d4fbfee075814b",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/3f505cddd7b2a85ed99bab6301d4fbfee075814b"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/d01f8f9dc2ff583ed5652403f3d856fe997e45d1",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/d01f8f9dc2ff583ed5652403f3d856fe997e45d1",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/d01f8f9dc2ff583ed5652403f3d856fe997e45d1",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/d01f8f9dc2ff583ed5652403f3d856fe997e45d1/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "49f06c5de581bc983f340c8b60942a9b7cc23a3d",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/49f06c5de581bc983f340c8b60942a9b7cc23a3d",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/49f06c5de581bc983f340c8b60942a9b7cc23a3d"
+        }
+      ]
+    },
+    {
+      "sha": "49f06c5de581bc983f340c8b60942a9b7cc23a3d",
+      "node_id": "C_kwDOR1AMp9oAKDQ5ZjA2YzVkZTU4MWJjOTgzZjM0MGM4YjYwOTQyYTliN2NjMjNhM2Q",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T09:58:21Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-07-12T09:58:21Z"
+        },
+        "message": "feat: authweb 1.17.0 — \"attesta con la tua email\" per le convenzioni (P25 §2.7)\n\nNella scheda Attesta, link discreto \"Hai una convenzione? Accedi con la tua\nemail istituzionale\" (Google/Microsoft/LinkedIn, OAuth one-shot su imgauth,\npurpose=attest). Il voucher firmato torna nel fragment #sgv=, viene letto\nuna sola volta e tenuto in sessionStorage (niente cookie, niente sessione\nserver); un banner mostra l'identità attiva con un pulsante \"Esci\". Quando\nil voucher è attivo, la challenge Turnstile viene saltata (stesso principio\ndelle credenziali agente: l'OAuth one-shot è una barriera più forte) e\nl'header X-SG-Voucher viaggia su /api/hash e /api/cert-pdf. La risposta di\n/api/hash include fascia/fascia_motivo: un avviso onesto informa se\nl'attestazione è stata riconosciuta dalla convenzione o degradata (monte\nmensile o tetto individuale esauriti — mai un blocco).\n\nTestato in locale con Playwright (--disable-web-security, sitekey Turnstile\ndi test) contro wrangler dev: identità mostrata correttamente con/senza\nconvenzione riconosciuta, fragment ripulito dall'URL, voucher scaduto nel\nfragment trattato come stato anonimo, uscita e stato di default verificati.\n\nCorrisponde al motore imgauth già in produzione (P25 §2.7, backend voucher\nin worker.js — vedi CLAUDE.md/registro GTF per lo stato completo).\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "46f7c2788f0088e3afa8014e2a5949bed7962ce6",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/46f7c2788f0088e3afa8014e2a5949bed7962ce6"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/49f06c5de581bc983f340c8b60942a9b7cc23a3d",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/49f06c5de581bc983f340c8b60942a9b7cc23a3d",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/49f06c5de581bc983f340c8b60942a9b7cc23a3d",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/49f06c5de581bc983f340c8b60942a9b7cc23a3d/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "b16c59c6f48c09aa68d38ebe6ca9058c2567a6ae",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/b16c59c6f48c09aa68d38ebe6ca9058c2567a6ae",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/b16c59c6f48c09aa68d38ebe6ca9058c2567a6ae"
+        }
+      ]
+    }
+  ],
+  "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits?per_page=5"
+}

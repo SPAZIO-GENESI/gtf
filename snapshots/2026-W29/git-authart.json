@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "data": [
+    {
+      "sha": "9e524b2b3dc58b20197c8b5c79c2f202a18c9fd7",
+      "node_id": "C_kwDOTTUHPtoAKDllNTI0YjJiM2RjNThiMjAxOTdjOGI1Yzc5YzJmMjAyYTE4YzlmZDc",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-06-12T09:54:17Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-06-12T09:54:17Z"
+        },
+        "message": "authart signer 1.2.0 — ripartenza con storia pulita\n\nFirma PAdES B-LT (pyhanko): certificato PKCS#12 da env, marca temporale\nRFC 3161 da TSA AATL (default DigiCert), LTV, fail-open su TSA giu.\nAutenticazione /sign via X-Sign-Secret. Nessun segreto nel repository.\n\nLa cronologia precedente conteneva materiale di sviluppo non destinato\nalla pubblicazione ed e' stata sostituita in blocco in vista del\nrilascio open source (AGPL-3.0).\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "3394a60827cae3e380fd676fd8a931543b7ac3b7",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/3394a60827cae3e380fd676fd8a931543b7ac3b7"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/9e524b2b3dc58b20197c8b5c79c2f202a18c9fd7",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/9e524b2b3dc58b20197c8b5c79c2f202a18c9fd7",
+      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/9e524b2b3dc58b20197c8b5c79c2f202a18c9fd7",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/9e524b2b3dc58b20197c8b5c79c2f202a18c9fd7/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": []
+    }
+  ],
+  "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits?per_page=5"
+}
