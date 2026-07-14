@@ -1,0 +1,8 @@
+id: EVD-edge-security-headers
+title: "Verifica degli header di sicurezza sugli host proxati e assenza di regressioni"
+location: { system: cloudflare-edge, ref: "curl -I su spaziogenesi.org / attestazione.spaziogenesi.org / imgauth.spaziogenesi.org: HSTS+CSP+Permissions-Policy presenti; browser reale (Playwright headless) sull'interfaccia di attestazione: zero eventi securitypolicyviolation; preflight CORS di imgauth invariato" }
+produced_by: it@spaziogenesi.org
+collection: manual
+last_seen: 2026-07-14
+integrity: "verifica puntuale post-attivazione (header + browser reale); non automatizzata — la configurazione vive nella dashboard Cloudflare, fuori portata del collettore settimanale; ripetibile in ogni momento con curl -I"
+visibility: public

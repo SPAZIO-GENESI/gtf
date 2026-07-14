@@ -1,0 +1,20 @@
+id: CTL-edge-security-headers
+title: "Header di sicurezza HTTP (HSTS, CSP, Permissions-Policy) all'edge Cloudflare"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+implemented_by: [IMP-edge-security-headers]
+evidenced_by: [EVD-edge-security-headers]
+verify_howto: >
+  Interroga gli header di risposta di spaziogenesi.org o
+  attestazione.spaziogenesi.org (es. curl -I o securityheaders.com):
+  devono comparire Strict-Transport-Security (max-age un anno,
+  includeSubDomains), Content-Security-Policy e Permissions-Policy.
+  La CSP è una baseline dichiarata (mantiene 'unsafe-inline' per i siti
+  single-file, vedi ADR-edge-security-headers): il controllo verifica la
+  presenza e le direttive restrittive (object-src 'none', frame-ancestors
+  'self', base-uri 'self', upgrade-insecure-requests), non un allowlist
+  completo.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-14

@@ -8,5 +8,5 @@ statement: >
   di questa scala, ma i controlli pertinenti sono comunque implementati e
   verificabili uno per uno.
 applicability: inspiration
-satisfied_by: [CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot, CTL-cors-restricted, CTL-r2-eu-archive, CTL-secrets-escrow, CTL-availability-monitoring, CTL-agent-access, CTL-agent-admin-panel, CTL-dev-selfservice, CTL-cicd-pipeline]
+satisfied_by: [CTL-hmac-signing, CTL-rate-limiting, CTL-turnstile-antibot, CTL-cors-restricted, CTL-r2-eu-archive, CTL-secrets-escrow, CTL-availability-monitoring, CTL-agent-access, CTL-agent-admin-panel, CTL-dev-selfservice, CTL-cicd-pipeline, CTL-edge-security-headers]
 visibility: public

@@ -1,0 +1,6 @@
+id: IMP-edge-security-headers
+title: "Impostazione HSTS e Transform Rule security-headers sulla zona Cloudflare"
+repo: img-auth-hub
+ref: "Configurazione lato dashboard Cloudflare, non versionata nei repo (stessa classe di IMP-cloudflare-access-admin): HSTS in SSL/TLS → Edge Certificates; Transform Rule 'security-headers' (Response Header Transform, tutta la zona) con CSP e Permissions-Policy. Valori documentati in ARCHITECTURE.md §3.4 (v4.29) e CLAUDE.md dell'hub. Applicata dal gestore il 2026-07-14."
+supports: [CTL-edge-security-headers]
+visibility: public

@@ -1,0 +1,37 @@
+id: ADR-edge-security-headers
+title: "Header di sicurezza HTTP iniettati all'edge Cloudflare per i siti statici"
+date: 2026-07-14
+status: accepted
+context: >
+  Una scansione securityheaders.com su spaziogenesi.org segnalava tre header
+  mancanti: Strict-Transport-Security, Content-Security-Policy e
+  Permissions-Policy. I siti pubblici (sito principale, interfaccia di
+  attestazione) sono GitHub Pages, che non permette header di risposta
+  custom: l'unico punto di iniezione è l'edge Cloudflare che li proxa.
+decision: >
+  Configurati a livello di zona Cloudflare (dashboard, non versionabile nei
+  repo): HSTS via impostazione dedicata (max-age un anno, includeSubDomains,
+  senza preload) e una Transform Rule che aggiunge a tutte le risposte una
+  Content-Security-Policy baseline e una Permissions-Policy restrittiva.
+  La CSP mantiene deliberatamente 'unsafe-inline' negli script: sito
+  principale e interfaccia di attestazione hanno JavaScript inline
+  (l'interfaccia è un singolo file HTML per design); rimuoverlo
+  richiederebbe hash CSP fragili o un refactoring a script esterni,
+  rinviato a una decisione dedicata. Il valore della baseline sta nelle
+  direttive object-src 'none', frame-ancestors 'self', base-uri 'self' e
+  upgrade-insecure-requests.
+consequences: >
+  I tre header rispondono su tutti gli host proxati della zona, incluse le
+  risposte del Worker imgauth. Verificato senza regressioni: nessun evento
+  securitypolicyviolation in browser reale, Turnstile e flusso di
+  attestazione integri, CORS di imgauth intatto. Restano due residui
+  dichiarati: 'unsafe-inline' (compromesso accettato, rivalutabile) e
+  l'header Access-Control-Allow-Origin: * inviato da GitHub Pages (innocuo
+  su contenuto pubblico; una rimozione mirata ai soli host Pages è proposta
+  ma non applicata — mai zone-wide, perché il CORS di imgauth è vitale per
+  l'interfaccia). Il Trust Center (trust.spaziogenesi.org) è DNS-only e non
+  riceve gli header finché il suo record non viene proxato. Nessun nuovo
+  rischio introdotto: la modifica è puramente additiva sulle risposte.
+affects: [CTL-edge-security-headers]
+evidence: [EVD-edge-security-headers]
+visibility: public
