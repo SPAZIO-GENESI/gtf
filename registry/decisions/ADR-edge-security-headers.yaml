@@ -24,14 +24,27 @@ consequences: >
   I tre header rispondono su tutti gli host proxati della zona, incluse le
   risposte del Worker imgauth. Verificato senza regressioni: nessun evento
   securitypolicyviolation in browser reale, Turnstile e flusso di
-  attestazione integri, CORS di imgauth intatto. Restano due residui
-  dichiarati: 'unsafe-inline' (compromesso accettato, rivalutabile) e
-  l'header Access-Control-Allow-Origin: * inviato da GitHub Pages (innocuo
-  su contenuto pubblico; una rimozione mirata ai soli host Pages è proposta
-  ma non applicata — mai zone-wide, perché il CORS di imgauth è vitale per
-  l'interfaccia). Il Trust Center (trust.spaziogenesi.org) è DNS-only e non
-  riceve gli header finché il suo record non viene proxato. Nessun nuovo
-  rischio introdotto: la modifica è puramente additiva sulle risposte.
+  attestazione integri, CORS di imgauth intatto. Il Trust Center
+  (trust.spaziogenesi.org) è DNS-only e non riceve gli header finché il suo
+  record non viene proxato. Nessun nuovo rischio introdotto: la modifica è
+  puramente additiva sulle risposte.
+
+  Aggiornamento 2026-07-14 (stesso giorno): i due residui inizialmente
+  accettati sono stati risolti. (1) Access-Control-Allow-Origin: * di GitHub
+  Pages rimosso con una Transform Rule mirata ai soli host Pages
+  (spaziogenesi.org, www., attestazione.) — mai zone-wide, il CORS di
+  imgauth resta intatto (verificato). (2) 'unsafe-inline' rimosso da
+  script-src esternalizzando ogni script eseguibile del sito principale e
+  di authweb in file JS same-origin — refactoring più ampio del previsto
+  (Astro inlinea di default anche gli script senza is:inline), nel corso del
+  quale è stato scoperto e corretto un bug reale non legato alla CSP: alcuni
+  script che Astro compilava come moduli (scope isolato per file) collidevano
+  sugli identificatori una volta esternalizzati come script classici,
+  risolto ripristinando type="module" dove serviva. Verificato con
+  Playwright sia su una build locale completa (56 pagine, CSP rigorosa
+  simulata) sia dal vivo in produzione (11 pagine reali, CSP genuina già
+  attiva): zero violazioni, zero errori JS in entrambi i giri. Nessuna
+  decisione aperta residua su questo controllo.
 affects: [CTL-edge-security-headers]
 evidence: [EVD-edge-security-headers]
 visibility: public
