@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.1.0 · **Data**: 2026-07-09 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.1.1 · **Data**: 2026-07-14 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -458,7 +458,7 @@ chiunque può ricalcolarlo dagli stessi dati (PRN-08).
 | Maintainer del servizio | merge su repo di prodotto; deploy (con conferma esplicita, come da convenzione) | oggi: il gestore |
 | Trust Officer | merge sul repo `gtf`; presidia score, review scadute, ACT aperte | può coincidere col Maintainer finché l'ETS è piccolo — la separazione è un obiettivo di maturità (indicatore Governance) |
 | Referente privacy | registro DAT, informative, richieste interessati | interno all'ETS |
-| Revisore esterno leggero | 1 review/anno del registro da parte di persona esterna al progetto (docente/ricercatore dell'Accademia) — verbale = EVD | costo zero, valore alto: prima forma di audit indipendente |
+| Revisore esterno leggero | 1 review/anno del registro da parte di una terza parte indipendente — verbale = EVD | dal 2026-07-14: **Radixia srl** ([radixia.ai](https://www.radixia.ai)), nessun legame con l'ETS né con l'Accademia (ADR-GTF-010); piano operativo in `docs/piano-review-esterna-2026.md` |
 
 ### 9.2 Ciclo decisionale
 

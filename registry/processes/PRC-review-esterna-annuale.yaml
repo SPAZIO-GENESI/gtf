@@ -1,6 +1,6 @@
 id: PRC-review-esterna-annuale
 title: Revisione esterna annuale del registro e dei controlli
-owner: revisore esterno indipendente (in fase di individuazione, vedi ARCHITECTURE.md §9.1)
+owner: "Radixia srl (https://www.radixia.ai) — revisore esterno indipendente, confermata il 2026-07-14 (ADR-GTF-010; piano operativo in docs/piano-review-esterna-2026.md)"
 trigger: "cadenza annuale (GTF-ARCH §9.3)"
 output: "verbale pubblico di revisione esterna, con eventuali rilievi e azioni correttive (ACT) associate"
 produces_evidence: []

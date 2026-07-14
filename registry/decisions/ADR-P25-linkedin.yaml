@@ -1,20 +1,19 @@
 id: ADR-P25-linkedin
-title: "P25 — LinkedIn come quarto provider OAuth self-service, ripensato dopo il rinvio del mattino"
+title: "P25 — LinkedIn come quarto provider OAuth self-service"
 date: 2026-07-11
 status: accepted
 context: >
-  Il design P25 (mattina del 2026-07-11) aveva valutato e rinviato LinkedIn
-  come provider OAuth per `/developer/keys`, motivando la scelta con un
-  "pubblico marginale per una pagina API key": LinkedIn è percepito come
-  identità professionale/social, non da developer, a differenza di GitHub
-  (primario) e GitLab (opzionale). La stessa sera, nella conversazione sulle
-  fasce di utilizzo pubblicate su `/condizioni/` (Base / Sviluppatore /
-  Professionale "in arrivo" / Convenzione — vedi ADR-P25 quando registrato),
-  il gestore ha riletto quella stessa caratteristica come un vantaggio: la
-  fascia Professionale (fotografi, artisti, professionisti che si presentano
-  con un profilo pubblico, non un account Google generico) non ha ancora
-  un'identità OAuth dedicata. LinkedIn è l'unico provider del lotto P25 che
-  comunica esplicitamente "professionista".
+  Il primo design P25 (2026-07-11) aveva valutato e rinviato LinkedIn come
+  provider OAuth per `/developer/keys`: pubblico marginale per una pagina
+  di API key, perché LinkedIn è percepito come identità professionale, non
+  da developer, a differenza di GitHub (primario) e GitLab (opzionale). La
+  valutazione è stata rovesciata alla definizione delle fasce di utilizzo
+  pubblicate su `/condizioni/` (Base / Sviluppatore / Professionale "in
+  arrivo" / Convenzione): quella stessa caratteristica è un vantaggio — la
+  futura fascia Professionale (fotografi, artisti, professionisti che si
+  presentano con un profilo pubblico, non un account Google generico) non
+  aveva ancora un'identità OAuth adatta, e LinkedIn è l'unico provider del
+  lotto P25 che comunica esplicitamente "professionista".
 decision: >
   Aggiunto LinkedIn a `DEV_PROVIDERS` in `worker.js` (imgauth 1.20.0) con lo
   stesso pattern OIDC generico già usato per Google/Microsoft (nessun caso
@@ -38,10 +37,8 @@ consequences: >
   login reale verificato in locale, poi rilascio via pipeline P24 (push →
   check+deploy-staging automatici → gate `production` approvato dal gestore
   → `wrangler versions upload`+`deploy`). `CTL-dev-selfservice` esteso a
-  menzionare LinkedIn nello stesso giro del deploy — stesso principio di
-  onestà del registro già applicato in ADR-GTF-008 e a `CTL-cicd-pipeline`
-  (P24): il controllo ora descrive solo ciò che è verificabile in
-  produzione, non prima. Superficie di abuso invariata rispetto a
+  menzionare LinkedIn nello stesso giro del deploy: il controllo descrive
+  solo ciò che è verificabile in produzione. Superficie di abuso invariata rispetto a
   Google/Microsoft (stessa quota 50/mese, stesso indice UNIQUE parziale,
   stessa notifica Telegram) — nessun nuovo rischio, copertura di
   `RSK-dev-selfservice-signup-abuse` invariata.

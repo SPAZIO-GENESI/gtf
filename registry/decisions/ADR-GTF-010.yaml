@@ -1,0 +1,33 @@
+id: ADR-GTF-010
+title: "Radixia srl confermata come revisore esterno indipendente dei controlli periodici umani"
+date: 2026-07-14
+status: accepted
+context: >
+  La review esterna annuale (PRC-review-esterna-annuale) era l'unica cadenza
+  ricorrente del GTF senza un titolare nominato. ARCHITECTURE.md §9.1
+  suggeriva come opzione un docente/ricercatore dell'Accademia — a costo
+  zero, ma con indipendenza debole: la stessa istituzione da cui nasce
+  Spazio Genesi ETS. La ricerca di una terza parte realmente indipendente
+  era aperta dal 2026-07-09.
+decision: >
+  Radixia srl (Milano, https://www.radixia.ai — società attiva in Enterprise
+  AI, Open Cloud e ricerca applicata; membro dell'Eclipse Foundation) ha
+  confermato il 2026-07-14 la propria disponibilità come terza parte per i
+  controlli periodici umani previsti dal GTF, a partire dalla review esterna
+  annuale del registro e dei controlli. Nessun legame societario o
+  istituzionale con Spazio Genesi ETS né con l'Accademia: il requisito di
+  indipendenza è soddisfatto. `PRC-review-esterna-annuale.owner` aggiornato;
+  perimetro, materiali e passi operativi della prima review sono definiti in
+  `docs/piano-review-esterna-2026.md` (nel repo pubblico gtf), così la
+  review può partire senza ulteriore lavoro preparatorio.
+consequences: >
+  Tutte le cadenze ricorrenti del GTF hanno ora un owner nominato. La prima
+  review produrrà un verbale pubblico, registrato come evidenza (EVD) con
+  eventuali azioni correttive (ACT) e con l'aggiornamento di
+  `PRC-review-esterna-annuale.last_run`. Il costo lato ETS resta dentro il
+  budget di §9.3 (~2 h/anno). L'indicatore Governance dell'Open Trust Score
+  beneficerà della prima evidenza di audit indipendente quando il verbale
+  sarà committato — non prima: il punteggio riflette evidenze, non
+  disponibilità dichiarate.
+affects: [PRC-review-esterna-annuale]
+visibility: public

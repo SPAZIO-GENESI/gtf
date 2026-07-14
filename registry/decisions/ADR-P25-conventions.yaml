@@ -3,19 +3,18 @@ title: "P25 (B) — Convenzioni per dominio email: pool mensile dell'ente, degra
 date: 2026-07-12
 status: accepted
 context: >
-  Il design P25 (mattina 2026-07-11) prevedeva una quota INDIVIDUALE per
-  membro di convenzione (`student_quota` per-chiave). La sera stessa il
-  gestore ha riconsiderato: un ente reale ("ABAQ ha 200 certificati al
-  mese") ragiona per **monte collettivo**, non per persona — la contabilità
-  giusta è un pool mensile condiviso tra tutti i membri dell'ente, con un
-  tetto individuale come secondo argine anti-drenaggio, non come unità di
-  misura primaria. Serviva inoltre decidere cosa succede quando pool o
-  tetto si esauriscono: bloccare l'utente (rischio di lasciare a piedi uno
-  studente a metà sessione d'esame) o degradare silenziosamente. Il gestore
-  ha scelto esplicitamente il degrado. Infine: quanto loggare per rendere
-  possibile un report all'ente, senza trasformare il sistema (oggi a zero
-  dati personali per chi attesta dal percorso anonimo) in un tracciamento
-  esteso.
+  Il primo design P25 (2026-07-11) prevedeva una quota INDIVIDUALE per
+  membro di convenzione (`student_quota` per-chiave). In revisione il
+  modello è stato corretto: un ente ragiona per **monte collettivo mensile**
+  dell'istituzione, non per persona — la contabilità giusta è un pool
+  mensile condiviso tra tutti i membri dell'ente, con un tetto individuale
+  come secondo argine anti-drenaggio, non come unità di misura primaria.
+  Restava da decidere il comportamento a pool o tetto esauriti — bloccare
+  l'utente (con il rischio di fermare uno studente a metà di una sessione
+  d'esame) oppure degradare con avviso: scelto il degrado — e quanto
+  loggare per rendere possibile un report all'ente senza trasformare in
+  tracciamento esteso un sistema oggi a zero dati personali per chi attesta
+  dal percorso anonimo.
 decision: >
   Contabilità a **pool mensile dell'ente** (`conventions.monthly_quota`,
   contato con `COUNT(*)` su `convention_attestations` filtrato per
@@ -32,13 +31,13 @@ decision: >
   associazione identità→opere dell'intero sistema e la sua esistenza va
   giustificata caso per caso (garanzia di persistenza contrattuale,
   contabilità del pool, report all'ente), non generalizzata.
-  Nello stesso giro, il gestore ha inoltre disposto il **varo di
-  `/condizioni/`** (pagina pubblica delle fasce, `attestazione.spaziogenesi.org/condizioni/`)
-  — pubblicata `noindex` l'11/7 in attesa della delibera di un'assemblea,
-  varata (linkata + indicizzata) il 12/7 **senza attendere quella delibera**:
-  decisione esplicita di rendere pubbliche le regole prima ancora che il
-  meccanismo di convenzione sottostante sia deployato, sui contenuti già
-  scritti l'11/7 (nessuna modifica ai numeri).
+  Nello stesso giro è stata **varata `/condizioni/`** (pagina pubblica
+  delle fasce, `attestazione.spaziogenesi.org/condizioni/`): pubblicata
+  `noindex` l'11/7 in attesa di una delibera assembleare, linkata e
+  indicizzata il 12/7 senza attendere quella delibera — scelta esplicita di
+  rendere pubbliche le regole prima ancora che il meccanismo di convenzione
+  sottostante fosse deployato, sui contenuti già scritti (nessuna modifica
+  ai numeri).
 consequences: >
   Codice completo e verificato in locale (`wrangler dev`, convenzione di
   test: match dominio, scadenza/disattivazione, pool esaurito, tetto
@@ -52,14 +51,11 @@ consequences: >
   `convention_id` corretto, attestazione con `fascia:'convenzione'`, riga
   di log corretta in `convention_attestations` — tutto confermato via query
   diretta su D1 di produzione, non solo dalla risposta dell'API.
-  `CTL-convention-accounting` promosso da `draft` ad `active` (stesso
-  principio già applicato a `CTL-cicd-pipeline` e a LinkedIn: il registro
-  non anticipa, ma nemmeno ritarda oltre il dovuto, uno stato ormai
-  verificato in produzione). Lungo il percorso emerso e risolto un
-  problema di configurazione preesistente e non collegato al codice P25:
-  l'URI di redirect OAuth per Google in Google Cloud Console aveva un
-  carattere iniziale mancante (`redirect_uri_mismatch`), corretto dal
-  gestore.
+  `CTL-convention-accounting` promosso da `draft` ad `active` — il
+  registro descrive solo ciò che è verificato in produzione. Emerso e
+  risolto lungo il percorso un problema di configurazione preesistente,
+  non collegato al codice P25: l'URI di redirect OAuth per Google era
+  registrato con un carattere iniziale mancante (`redirect_uri_mismatch`).
   **Approssimazione nota nel sidecar**: il campo `tier` di
   `meta/cert/<hash>.json` riflette l'appartenenza STATICA della credenziale
   bearer alla convenzione (lookup read-only, non tocca quota), non l'esito
