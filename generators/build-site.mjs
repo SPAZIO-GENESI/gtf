@@ -12,8 +12,20 @@ function esc(str) {
     .replace(/"/g, "&quot;");
 }
 
+// Rende cliccabili gli URL nudi nel testo delle ADR (già escaped da esc()):
+// non c'è markdown nei campi del registro, un URL scritto in prosa deve
+// comunque arrivare cliccabile sul Trust Center pubblico.
+function linkifyUrls(str) {
+  return str.replace(/https?:\/\/[^\s<>"']+/g, (url) => {
+    const trailing = url.match(/[.,;:)]+$/);
+    const clean = trailing ? url.slice(0, -trailing[0].length) : url;
+    const trail = trailing ? trailing[0] : "";
+    return `<a href="${clean}" target="_blank" rel="noopener">${clean}</a>${trail}`;
+  });
+}
+
 function para(str) {
-  return esc(str).trim().replace(/\n\s*/g, " ");
+  return linkifyUrls(esc(str).trim().replace(/\n\s*/g, " "));
 }
 
 // low/full → salvia, medium/partial → ambra, high → sigillo, resto → neutro
