@@ -1,0 +1,18 @@
+id: EVD-integrations-showcase
+title: Collaudo end-to-end del gestore in produzione — candidatura, approvazione, vetrina pubblica, badge
+location:
+  system: "imgauth.spaziogenesi.org (produzione)"
+  ref: "sessione reale del gestore: /profilo → candidatura di un'applicazione di prova → /admin (scheda Integrazioni) → approvazione → verifica di /integrazioni e del badge SVG"
+produced_by: >
+  Il gestore ha completato il flusso end-to-end in produzione, dopo il
+  rilascio gated di imgauth 1.24.0: candidatura reale da /profilo, comparsa
+  come `pending` nel pannello admin, approvazione, verifica che la scheda
+  compaia sulla vetrina pubblica /integrazioni e che il badge
+  "Funziona con Attestazione Spazio Genesi" risponda correttamente. Dal
+  collaudo è emersa una richiesta di rifinitura (loghi troppo piccoli
+  nella vetrina), rilasciata lo stesso giorno come patch 1.24.1 attraverso
+  lo stesso gate di produzione — vedi ADR-P28.
+collection: manual
+integrity: "verificabile da chi ha accesso al pannello /admin (staff); il codice che produce questo comportamento è pubblico e verificabile in worker.js (repo imgauth, AGPL-3.0)"
+supports: [CTL-integrations-showcase]
+visibility: public

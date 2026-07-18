@@ -1,0 +1,22 @@
+id: RSK-third-party-content
+title: Contenuto di terzi (nome, URL, logo) pubblicato nella vetrina Integrazioni sotto il nome Spazio Genesi
+description: >
+  La vetrina pubblica /integrazioni mostra applicazioni costruite da terzi
+  accanto al nome dell'ente: un contenuto ingannevole o un progetto senza
+  reale rapporto con l'attestazione, se pubblicato, danneggerebbe la
+  fiducia nel servizio. Rischio distinto e residuo anche dopo
+  l'approvazione: un URL verificato manualmente al momento della
+  candidatura può cambiare destinazione in seguito (dominio scaduto o
+  rivenduto) — nessun controllo automatico periodico in v1. Mitigato per
+  costruzione da tre argini indipendenti: (1) pre-moderazione — a
+  differenza di ogni altro flusso self-service del sistema, qui niente va
+  online prima di un'approvazione umana esplicita, con verifica di
+  veridicità e senso del progetto; (2) ogni modifica successiva alla
+  candidatura, incluso il solo logo, riporta lo stato a `pending` e
+  richiede una nuova revisione; (3) il logo è validato sui magic bytes
+  all'upload (mai il Content-Type dichiarato, mai SVG — vettore di XSS) e
+  servito pubblicamente solo per le candidature approvate.
+likelihood: low
+impact: low
+mitigated_by: [CTL-integrations-showcase]
+visibility: public

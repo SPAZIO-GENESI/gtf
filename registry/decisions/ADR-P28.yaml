@@ -1,0 +1,56 @@
+id: ADR-P28
+title: "P28 — Vetrina pubblica Integrazioni + convenzioni partner software house"
+date: 2026-07-18
+status: accepted
+context: >
+  Una software house che integra l'attestazione aveva un percorso
+  incompleto: una chiave Sviluppatore (P22) basta per costruire e testare,
+  ma la sua quota bassa non è pensata per la produzione, e non esisteva un
+  modo per l'ente di riconoscere pubblicamente le applicazioni che
+  integrano il servizio. Due domande di design: (1) come far arrivare in
+  produzione un'app che attesta per conto di molti utenti finali senza
+  costruire un nuovo tipo di credenziale; (2) come dare visibilità alle
+  integrazioni senza che contenuto di terzi (nome, URL, logo) finisca
+  online sotto il nome Spazio Genesi senza controllo.
+decision: >
+  Due modelli di produzione, entrambi già coperti dal meccanismo esistente:
+  **modello A** (l'app è un client puro, l'utente finale porta il proprio
+  abbonamento Professionale o la propria convenzione — zero codice nuovo)
+  e **modello B** (convenzione con la software house: riuso quasi
+  integrale di P25 — una convenzione con `domains` **placeholder** che non
+  può mai combaciare con un'email reale, es. `partner:nomesoftware`, e una
+  chiave `sg_k_…` con `convention_id` che scala dal pool mensile
+  dell'ente). Per la visibilità: vetrina pubblica `/integrazioni` con
+  **pre-moderazione** — a differenza di ogni altro flusso self-service del
+  sistema (tutti post-moderazione: la conseguenza è immediata, la
+  revisione arriva dopo), qui niente va online prima di un'approvazione
+  esplicita del gestore, perché il contenuto è pubblico e accostato al
+  nome dell'ente. Candidatura da `/profilo` (voucher, eleggibile con
+  chiave attiva o abbonamento Professionale), logo validato sui **magic
+  bytes** (mai il Content-Type dichiarato, mai SVG), ogni modifica
+  successiva — anche di una candidatura già approvata — riporta lo stato a
+  `pending`.
+consequences: >
+  Il modello B ha richiesto un'estensione non prevista esplicitamente dal
+  design doc, scoperta solo in fase di implementazione: `owner_email` reso
+  **obbligatorio** quando l'admin emette una chiave con `convention_id`,
+  perché la contabilità del pool (`accountConventionUsage`) scrive
+  `member_email` in `convention_attestations` con un vincolo NOT NULL —
+  senza, l'attestazione avrebbe comunque funzionato (fascia `convenzione`
+  restituita in sincrono) ma l'INSERT di log sarebbe fallito in modo
+  silenzioso (fire-and-forget via `ctx.waitUntil`, errore inghiottito),
+  rompendo silenziosamente la contabilità del pool per quel partner.
+  Collaudo end-to-end in `wrangler dev` con dati reali (convenzione
+  fittizia, chiave partner, ciclo completo pending→approved→pending-dopo-
+  modifica, logo SVG/mime-spoofed/oversize rifiutati) prima del rilascio;
+  smoke test su staging e produzione dopo ogni deploy gated (imgauth
+  1.24.0, poi patch 1.24.1 per loghi più grandi, richiesta dal gestore dopo
+  il collaudo reale in produzione). Nessun nuovo trattamento di dati
+  personali sensibile: l'unico dato personale è l'email del titolare della
+  candidatura, già trattata dallo stesso meccanismo OAuth one-shot di
+  P22/P25/P27 (mai persistita se non come colonna esistente su
+  `agent_credentials`/`integrations.owner_email`); ciò che diventa
+  pubblico (nome app, URL, descrizione, logo) è scelto volontariamente
+  dall'interessato e revocabile in ogni momento.
+affects: [CTL-integrations-showcase]
+visibility: public

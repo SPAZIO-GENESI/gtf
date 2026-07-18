@@ -1,0 +1,34 @@
+id: CTL-integrations-showcase
+title: "Vetrina pubblica Integrazioni (pre-moderata) + convenzioni partner software house con pool mensile"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01, REQ-gdpr-info-01, REQ-gdpr-min-01, REQ-gdpr-rights-01]
+mitigates: [RSK-third-party-content]
+implemented_by: [IMP-imgauth-integrations-showcase]
+evidenced_by: [EVD-integrations-showcase, EVD-git-imgauth, EVD-git-imgauthweb]
+verify_howto: >
+  Apri imgauth.spaziogenesi.org/integrazioni: vetrina pubblica, solo le
+  candidature approvate compaiono (logo, nome, descrizione, link
+  `rel="noopener nofollow"`), con conteggio totale e spiegazione onesta che
+  la presenza non è una certificazione del software. Chi ha una chiave API
+  attiva o un abbonamento Professionale può candidare la propria
+  applicazione dalla sezione "La tua integrazione" di
+  imgauth.spaziogenesi.org/profilo (stesso login OAuth one-shot di
+  CTL-dev-selfservice e CTL-pro-subscription): la candidatura risulta
+  subito `pending`, mai pubblica finché il gestore non la approva dal
+  pannello /admin (scheda Integrazioni) — pre-moderazione, a differenza di
+  ogni altro flusso self-service del sistema. Qualunque modifica successiva
+  — nome, URL, descrizione o solo il logo — riporta lo stato a `pending`:
+  non esiste un canale per cambiare silenziosamente ciò che è già online.
+  Il logo, se presente, è servito solo per le candidature approvate
+  (`GET /integrazioni/logo/<id>`, 404 altrimenti) ed è stato validato
+  all'upload sui magic bytes (PNG/JPEG/WebP, mai SVG, mai il Content-Type
+  dichiarato). Le software house che attestano per conto dei propri utenti
+  usano una convenzione con pool mensile dedicato (`convention_id` sulla
+  chiave, `domains` placeholder che non può mai combaciare con un'email
+  reale) — stesso meccanismo di CTL-convention-accounting, riusato senza
+  nuovo codice sul motore. Il "forget" GDPR del pannello admin anonimizza
+  anche il titolare di una candidatura e la ritira dalla vetrina.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-18

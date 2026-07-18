@@ -1,0 +1,6 @@
+id: IMP-imgauth-integrations-showcase
+title: Vetrina Integrazioni + convenzioni partner software house (P28)
+repo: imgauth
+ref: "schema/integrations.sql (tabelle integrations, pool_pricing); worker.js — handleProIntegration/handleProIntegrationLogo/handleProIntegrationGet (candidatura da /profilo, voucher X-SG-Voucher), integrationEligible (chiave attiva o abbonamento Professionale), detectImageType (magic bytes PNG/JPEG/WebP), handleIntegrationsPage/handleIntegrationsLogoPublic/handleIntegrationBadge (vetrina pubblica, solo status='approved'), handleAdminIntegrationsList/Update/Logo + handleAdminPoolPricing* (pannello admin, X-Admin-Secret); handleAdminKeysIssue esteso con convention_id/owner_email opzionali per le chiavi partner (modello B)"
+supports: [CTL-integrations-showcase]
+visibility: public

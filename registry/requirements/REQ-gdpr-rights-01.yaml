@@ -27,5 +27,5 @@ statement: >
   chiedere anche l'eliminazione dei PDF archiviati non condivisi con altre
   attestazioni.
 applicability: partial
-satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel, CTL-pro-subscription]
+satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel, CTL-pro-subscription, CTL-integrations-showcase]
 visibility: public
