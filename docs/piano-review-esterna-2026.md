@@ -4,6 +4,8 @@
 **Revisore**: Radixia srl — [radixia.ai](https://www.radixia.ai) (Milano; Enterprise AI, Open Cloud, Labs; membro Eclipse Foundation)
 **Committente**: Spazio Genesi ETS (contatto: it@spaziogenesi.org)
 **Stato**: predisposto il 2026-07-14, eseguibile da subito
+**Guida passo-passo**: `docs/guida-esecutiva-review-esterna.md` (stesso perimetro,
+comandi e output attesi spiegati per chi non è programmatore)
 
 ## Oggetto
 
