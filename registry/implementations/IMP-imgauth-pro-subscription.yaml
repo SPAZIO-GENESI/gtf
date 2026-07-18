@@ -1,0 +1,6 @@
+id: IMP-imgauth-pro-subscription
+title: Fascia Professionale — abbonamento Stripe, pagina profilo, listino/sconti in admin (P27)
+repo: imgauth
+ref: "worker.js — matchProSubscription/accountProUsage (catena convenzione→professionale→sviluppatore→base), stripeClient/activeProPricing/resolveProDiscount, handleProCheckout/handleStripeWebhook/handleProPortal, handleProCheckoutCompleted/handleProInvoicePaid/handleProInvoicePaymentFailed/handleProSubscriptionDeleted/handleProSubscriptionUpdated (subscriptionPeriodEndMs con fallback per lo shape API), profiloPageHtml + handleProMe/handleProCertificates/handleProProfile/handleProDevProfile, handleAdminProPricing*/handleAdminProDiscounts*/handleAdminProSubscribersForget; schema/pro.sql + pro_cancel_scheduled.sql + dev_profile.sql; public/js/profilo.js, public/js/admin.js (scheda Professionale); wrangler.toml [vars] PRO_MONTHLY_QUOTA/PRO_GRACE_DAYS, secrets STRIPE_SECRET_KEY/STRIPE_WEBHOOK_SECRET"
+supports: [CTL-pro-subscription]
+visibility: public

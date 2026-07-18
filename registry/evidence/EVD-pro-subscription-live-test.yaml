@@ -1,0 +1,24 @@
+id: EVD-pro-subscription-live-test
+title: Abbonamento reale (1€) end-to-end in produzione — checkout, attestazione, archivio, cessazione, rimborso
+location:
+  system: "imgauth.spaziogenesi.org (produzione) + Stripe (modalità live) + D1 imgauth-health (produzione, non pubblica)"
+  ref: "sessione reale del gestore: /profilo → login OAuth reale → Checkout Stripe (riga di listino di collaudo, 1,00 €) → attestazione dal sito riconosciuta in fascia professionale → verifica dell'archivio con canale corretto → cessazione dal Customer Portal → rimborso dalla dashboard Stripe"
+produced_by: >
+  Il gestore ha completato il flusso end-to-end in produzione con un vero
+  abbonamento a pagamento (non un dato sintetico locale): checkout reale,
+  profilo popolato con stato/scadenza/log ricariche, un'attestazione fatta
+  dal sito con la stessa email risultata in fascia `professionale` e
+  archiviata con canale `web`, poi cessazione dal Customer Portal Stripe e
+  rimborso. Nel collaudo sono emersi e corretti tre difetti reali mai
+  incontrati nei test locali con dati sintetici (vedi ADR-P27): shape
+  dell'API Stripe (`current_period_end` negli item, non sulla
+  subscription), `cancel_at_period_end` sempre `false` (fonte di verità
+  reale `cancel_at`), doppio evento `customer.subscription.updated` per un
+  singolo click di cessazione dal Customer Portal (filtro cosmetico a 60s,
+  non un problema di correttezza: l'idempotenza su `event.id` già
+  impediva un doppio conteggio reale). Verificato anche il degrado
+  corretto a fascia Base dopo la cessazione effettiva.
+collection: manual
+integrity: "verificabile da chi ha accesso a D1 imgauth-health e al dashboard Stripe (staff); il codice che produce questo comportamento è pubblico e verificabile in worker.js (repo imgauth, AGPL-3.0)"
+supports: [CTL-pro-subscription]
+visibility: public

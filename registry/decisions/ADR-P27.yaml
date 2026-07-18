@@ -1,0 +1,57 @@
+id: ADR-P27
+title: "P27 — Fascia Professionale: abbonamento annuale, pagina profilo, pagamenti interamente su Stripe"
+date: 2026-07-18
+status: accepted
+context: >
+  `/condizioni/` prometteva da tempo una fascia Professionale (200
+  attestazioni/mese, garanzia di recupero certificato ≥5 anni, "senza
+  account e senza password") mai attivata. Tre domande di design aperte:
+  (1) come gestire l'account senza costruire un vero sistema di account —
+  opzione C scelta: pagina profilo in sola lettura, tutte le azioni di
+  pagamento (fatture, metodo, cessazione) delegate allo Stripe Customer
+  Portal hosted, mai dati di carta sul Worker; (2) come tenere il listino
+  senza hardcodare un prezzo non ancora deciso dal CDA — listino in D1
+  gestito dal pannello admin, con validità a finestre e codici sconto,
+  applicato al Checkout come `price_data` inline (mai un oggetto
+  Price/Coupon su Stripe); (3) se varare con il fiscale ETS e il prezzo
+  definitivo ancora in discussione — deciso di sì: nessun consumo reale
+  esiste ancora, quindi la produzione stessa è il collaudo, con una riga di
+  listino simbolica (1€) sostituibile senza codice quando il prezzo sarà
+  approvato.
+decision: >
+  Fascia Professionale IN PRODUZIONE con: pagina `imgauth.spaziogenesi.org
+  /profilo` (stati anonimo → onboarding → attivo/past_due → cessato,
+  costruita sullo stesso voucher stateless di P25 §2.7 con un nuovo
+  `purpose='profile'`); catena di precedenza fascia **convenzione →
+  professionale → sviluppatore → base** (mai un blocco, degrado con motivo
+  esplicito, stessa logica già in produzione per le convenzioni); canale di
+  produzione (web/api/mcp/telegram) tracciato nel sidecar e nei log per la
+  prima volta; profilazione facoltativa doppia — Professionale
+  (segmento/regione) e, decisione presa a valle del collaudo, Sviluppatore
+  (applicazione/OS/ambiente di sviluppo) — entrambe su consenso esplicito e
+  cancellabili dall'interessato. PayPal esplicitamente rinviato: un solo
+  processore di pagamento al lancio.
+consequences: >
+  **Collaudato con un abbonamento reale (1€), non solo in test**: checkout
+  → attestazione dal sito riconosciuta in fascia professionale → archivio
+  con canale corretto → cessazione dal Customer Portal → rimborso. Il
+  collaudo a soldi veri ha scoperto tre difetti reali mai emersi nei test
+  sintetici, tutti nella versione API Stripe dell'account
+  (`2026-02-25.clover`, `billing_mode: flexible`): `current_period_end` è
+  migrato dal livello subscription al livello subscription-item;
+  `cancel_at_period_end` risulta sempre `false` — la cancellazione a fine
+  periodo (comportamento di default del Customer Portal per abbonamenti
+  annuali pagati in anticipo, confermato come quello desiderato) si legge
+  invece dal campo `cancel_at`; il Customer Portal invia più eventi
+  `customer.subscription.updated` reali e distinti per un solo click
+  utente, richiedendo un filtro cosmetico (non un problema di correttezza:
+  l'idempotenza su `event.id` già impediva un vero doppio conteggio).
+  Nessuno di questi tre bug era rilevabile dalla sola lettura della
+  documentazione Stripe generica — lezione generale: le versioni API di un
+  fornitore esterno vanno verificate con una chiamata reale, non assunte.
+  `CTL-pro-subscription` nasce direttamente `active` (non `draft`): il
+  criterio già applicato a `CTL-cicd-pipeline`, `CTL-site-voucher-auth` e
+  `CTL-convention-accounting` — un controllo collaudato end-to-end con dati
+  reali, non solo dichiarato.
+affects: [CTL-pro-subscription]
+visibility: public

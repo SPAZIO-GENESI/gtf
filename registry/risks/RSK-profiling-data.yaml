@@ -1,0 +1,22 @@
+id: RSK-profiling-data
+title: Profilazione facoltativa (segmento/regione, applicazione/OS/ambiente) — dato aggiuntivo oltre il minimo necessario all'erogazione del servizio
+description: >
+  La pagina `/profilo` offre, su consenso separato e mai obbligatorio, due
+  moduli di profilazione: per la fascia Professionale (settore, regione) e
+  per la fascia Sviluppatore (applicazione/progetto, sistema operativo,
+  ambiente di sviluppo). Nessuno dei due è necessario per erogare il
+  servizio di attestazione o l'abbonamento stesso — è un dato aggiuntivo
+  raccolto per finalità dichiarata all'utente ("condizioni di vantaggio e
+  convenzioni quando disponibili"), quindi soggetto a un rischio distinto
+  dal trattamento minimo necessario: raccolta oltre lo stretto necessario
+  se il consenso non fosse davvero libero e specifico, o se i dati
+  restassero oltre la finalità dichiarata. Mitigato per costruzione:
+  consenso esplicito e separato (checkbox dedicata, mai precompilata),
+  dato mai pubblico (visibile solo al titolare e al gestore), modificabile
+  e cancellabile in autonomia in qualsiasi momento dalla stessa pagina
+  senza dover scrivere al gestore, azzeramento automatico 180 giorni dopo
+  la cessazione dell'abbonamento/revoca della chiave se non rimosso prima.
+likelihood: low
+impact: low
+mitigated_by: [CTL-pro-subscription]
+visibility: public

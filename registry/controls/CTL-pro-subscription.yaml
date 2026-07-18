@@ -1,0 +1,43 @@
+id: CTL-pro-subscription
+title: "Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01, REQ-gdpr-info-01, REQ-gdpr-min-01, REQ-gdpr-rights-01]
+mitigates: [RSK-payment-integration, RSK-profiling-data]
+implemented_by: [IMP-imgauth-pro-subscription]
+evidenced_by: [EVD-pro-subscription-live-test, EVD-git-imgauth, EVD-git-imgauthweb]
+verify_howto: >
+  Apri imgauth.spaziogenesi.org/profilo, accedi con un login OAuth one-shot
+  (Google/Microsoft/LinkedIn — stesso meccanismo di CTL-dev-selfservice e
+  CTL-site-voucher-auth, nessuna password, nessun account). Senza
+  abbonamento: prezzo del listino attivo mostrato dinamicamente (mai
+  hardcodato) e bottone Checkout, che apre una pagina Stripe hosted — nessun
+  campo carta compare mai su imgauth.spaziogenesi.org. Con un abbonamento
+  attivo: stato, scadenza, log ricariche, consumo del mese, archivio dei
+  certificati con canale di produzione (web/api/mcp/telegram), bottone
+  "Gestisci o cessa l'abbonamento" che apre lo Stripe Customer Portal
+  hosted (fatture, metodo di pagamento, cessazione — mai su questo
+  Worker). Una cessazione dal Portal (comportamento di default per
+  abbonamenti annuali: resta attivo fino alla scadenza già pagata) mostra
+  un banner "cessazione programmata" senza perdere la fascia. La catena di
+  precedenza convenzione→professionale→sviluppatore→base non blocca mai:
+  quota o abbonamento esauriti degradano a Base con motivo esplicito
+  (`fascia_motivo`), stessa logica già verificata per
+  CTL-convention-accounting. Il listino e i codici sconto si gestiscono dal
+  pannello /admin (scheda Professionale): righe con finestre di validità
+  (mai si modifica un importo passato, si chiude e se ne crea una nuova) e
+  sconti percentuali/fissi, anche riservati a una singola email.
+  ✅ Collaudato con un **abbonamento reale a pagamento** (1€, non un dato
+  sintetico) end-to-end in produzione il 17-18 luglio 2026 — vedi
+  EVD-pro-subscription-live-test: checkout → attestazione dal sito
+  riconosciuta in fascia professionale → archivio con canale → cessazione
+  dal Customer Portal → rimborso. Nel collaudo emersi e corretti tre difetti
+  reali mai incontrati nei test locali (shape dell'API Stripe
+  dell'account, `cancel_at_period_end` sempre `false`, doppio evento del
+  Customer Portal per un click) — vedi ADR-P27. Nasce direttamente `active`,
+  stesso criterio già applicato a CTL-cicd-pipeline, CTL-site-voucher-auth
+  e CTL-convention-accounting: un controllo collaudato con dati reali, non
+  solo dichiarato.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-18

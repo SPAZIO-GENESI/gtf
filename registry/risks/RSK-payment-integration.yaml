@@ -1,0 +1,30 @@
+id: RSK-payment-integration
+title: Dipendenza da Stripe per l'intero ciclo di vita del pagamento; disallineamento di stato su eventi webhook persi o in ritardo
+description: >
+  La fascia Professionale delega interamente a Stripe (Checkout, Billing
+  Portal) la raccolta e gestione dei dati di pagamento — nessun numero di
+  carta tocca mai imgauth, mantenendo il perimetro PCI-DSS a SAQ-A. Lo
+  stato dell'abbonamento (attivo, in tolleranza, cessato, cessazione
+  programmata) non è però letto da Stripe ad ogni richiesta: dipende dagli
+  eventi webhook (`checkout.session.completed`, `invoice.paid`,
+  `invoice.payment_failed`, `customer.subscription.deleted`,
+  `customer.subscription.updated`) ricevuti e processati con successo. Un
+  webhook perso, in ritardo, o con firma non verificabile (fail-closed:
+  scartato) può temporaneamente disallineare lo stato osservato da imgauth
+  rispetto allo stato reale su Stripe. Rischio distinto e ulteriore,
+  concretamente realizzato nel collaudo: assumere lo shape della risposta
+  API di un fornitore esterno senza verificarlo con una chiamata reale — la
+  versione API dell'account (`2026-02-25.clover`, `billing_mode: flexible`)
+  ha campi in posizioni diverse da quanto la documentazione generica
+  suggerisce (`current_period_end` negli item, non sulla subscription;
+  `cancel_at_period_end` sempre `false`, fonte di verità reale `cancel_at`).
+  Mitigato per costruzione: idempotenza su `event.id` (nessun doppio
+  conteggio anche con eventi ridelivered), `invoice.paid` periodico come
+  resync naturale dello stato ad ogni rinnovo, smoke `/ping` di sola
+  lettura dopo ogni deploy, e — per il rischio di shape API — verifica
+  esplicita con chiamate reali prima di fidarsi di un campo, non solo della
+  documentazione.
+likelihood: low
+impact: medium
+mitigated_by: [CTL-pro-subscription, CTL-cicd-pipeline]
+visibility: public

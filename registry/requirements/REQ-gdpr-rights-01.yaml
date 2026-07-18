@@ -15,7 +15,17 @@ statement: >
   180 giorni dalla revoca della chiave. Dalla P23 (2026-07-11) esiste una
   terza categoria: chi usa il bot Telegram (id utente + contatori d'uso).
   Anche qui la cancellazione è su richiesta al gestore e comunque
-  automatica dopo 90 giorni.
+  automatica dopo 90 giorni. Dalla P27 (2026-07-17/18) esiste una quarta
+  categoria: chi sottoscrive l'abbonamento Professionale (email, provider,
+  riferimenti abbonamento Stripe, log delle attestazioni, profilazione
+  facoltativa). L'interessato può gestire in autonomia dalla pagina
+  `/profilo` la profilazione facoltativa (salvataggio/rimozione, nessuna
+  richiesta al gestore necessaria) e chiedere la cancellazione anticipata
+  dei dati dell'abbonamento — con un trade-off esplicito e dichiarato:
+  perde l'accesso al proprio archivio consultabile (i certificati restano
+  comunque validi e recuperabili per impronta, come per chiunque), e può
+  chiedere anche l'eliminazione dei PDF archiviati non condivisi con altre
+  attestazioni.
 applicability: partial
-satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel]
+satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel, CTL-pro-subscription]
 visibility: public
