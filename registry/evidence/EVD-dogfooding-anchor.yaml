@@ -1,18 +1,20 @@
 id: EVD-dogfooding-anchor
 title: Bundle mensile di evidenze GTF attestato e ancorato in Bitcoin col servizio stesso
 location: { system: git-gtf, ref: "snapshots/anchors/<periodo>-bundle.json + certificato PDF scaricato da attestazione.spaziogenesi.org", public_via: "GET /c/<sha256> (pagina pubblica del certificato) e GET /api/ots?hash=<sha256>" }
-produced_by: it@spaziogenesi.org
-collection: manual
+collection: auto
 freshness_max_days: 40
-last_seen: 2026-07-09
+last_seen: 2026-07-19
 integrity: >
-  Hash SHA-256 del bundle committato nel repo, firmato via HMAC dal servizio
-  e ancorato in Bitcoin via OpenTimestamps: chiunque può ricalcolare l'hash
-  del file in snapshots/anchors/ e confrontarlo col certificato, poi
-  verificare la prova .ots indipendentemente su opentimestamps.org. Primo
-  ancoraggio: periodo 2026-07, bundle snapshots/anchors/2026-07-bundle.json,
-  hash cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b,
-  pagina https://attestazione.spaziogenesi.org/c/cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b,
+  Raccolta settimanale (collect-evidence.mjs, P32/C2): ricalcola in locale
+  lo SHA-256 del bundle mensile più recente in snapshots/anchors/ (nessun
+  segreto coinvolto, il file è già committato) e verifica che
+  GET /api/badge?hash=<hash> risponda verde ("✓ opera attestata") — non
+  falsificabile, il badge è verde solo se quell'impronta è realmente in
+  archivio. Non riverifica la prova OpenTimestamps in sé (resta
+  verificabile a mano su opentimestamps.org). Primo ancoraggio: periodo
+  2026-07, bundle snapshots/anchors/2026-07-bundle.json, hash
+  cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b, pagina
+  https://attestazione.spaziogenesi.org/c/cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b,
   prova .ots emessa (pending, matura in poche ore con la conferma Bitcoin).
 supports: [CTL-dogfooding-anchor]
 visibility: public

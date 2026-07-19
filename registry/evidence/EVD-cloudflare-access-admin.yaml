@@ -1,8 +1,7 @@
 id: EVD-cloudflare-access-admin
 title: Verifica manuale del redirect Cloudflare Access su /admin
 location: { system: cloudflare-access, ref: "richiesta non autenticata al pannello admin osservata in redirect verso il login Cloudflare Access" }
-produced_by: it@spaziogenesi.org
-collection: manual
-last_seen: 2026-07-10
-integrity: "verifica puntuale del gestore; non automatizzata (configurazione dashboard, fuori portata del collettore settimanale)"
+collection: auto
+last_seen: 2026-07-19
+integrity: "raccolta settimanale (collect-evidence.mjs): richiesta non autenticata a /admin con redirect non seguito, verifica che lo status sia 3xx e che l'header Location punti a cloudflareaccess.com — la policy Cloudflare Access stessa resta configurazione da dashboard, fuori portata del collettore, ma il suo effetto osservabile (il redirect) sì; prima verifica manuale del gestore il 2026-07-10"
 visibility: public

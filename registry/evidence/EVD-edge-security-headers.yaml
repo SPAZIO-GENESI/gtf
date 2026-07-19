@@ -1,8 +1,7 @@
 id: EVD-edge-security-headers
 title: "Verifica degli header di sicurezza sugli host proxati e assenza di regressioni"
 location: { system: cloudflare-edge, ref: "curl -I su spaziogenesi.org / attestazione.spaziogenesi.org / imgauth.spaziogenesi.org: HSTS+CSP(senza unsafe-inline)+Permissions-Policy presenti, ACAO assente sui soli host Pages; Playwright headless su build locale (56 pagine) e dal vivo in produzione (11 pagine reali): zero securitypolicyviolation, zero errori JS; preflight CORS di imgauth invariato" }
-produced_by: it@spaziogenesi.org
-collection: manual
-last_seen: 2026-07-14
-integrity: "verifica puntuale post-attivazione (header + browser reale, sia locale sia produzione); non automatizzata — la configurazione vive nella dashboard Cloudflare, fuori portata del collettore settimanale; ripetibile in ogni momento con curl -I o rilanciando lo script Playwright"
+collection: auto
+last_seen: 2026-07-19
+integrity: "raccolta settimanale (collect-evidence.mjs): HEAD su attestazione.spaziogenesi.org/ e imgauth.spaziogenesi.org/ping, verifica presenza di Content-Security-Policy + Strict-Transport-Security + Permissions-Policy — prova solo la presenza degli header sui due host, non l'assenza di securitypolicyviolation lato browser né la sintassi CSP; lo sweep Playwright completo (56 pagine locali, 11 in produzione, zero violazioni/errori JS) resta la verifica puntuale del gestore del 2026-07-14, non ripetuta automaticamente"
 visibility: public

@@ -1,9 +1,10 @@
-import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { ROOT } from "./lib/registry.mjs";
 
 const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
 const REGISTRY_EVIDENCE_DIR = join(ROOT, "registry", "evidence");
 
 function isoWeek(date) {
@@ -27,6 +28,37 @@ async function fetchJson(url, headers = {}) {
 
 function sha256(text) {
   return createHash("sha256").update(text).digest("hex");
+}
+
+// Come fetchJson ma per risposte non-JSON (HTML, redirect, SVG): non legge
+// mai il body a meno che serva davvero (fetchText), altrimenti solo status/header.
+async function fetchMeta(url, { method = "GET", redirect = "follow", headers = {} } = {}) {
+  try {
+    const res = await fetch(url, { method, redirect, headers, signal: AbortSignal.timeout(15000) });
+    return {
+      ok: true,
+      url,
+      status: res.status,
+      location: res.headers.get("location"),
+      headers: {
+        "content-security-policy": res.headers.get("content-security-policy"),
+        "strict-transport-security": res.headers.get("strict-transport-security"),
+        "permissions-policy": res.headers.get("permissions-policy"),
+      },
+    };
+  } catch (e) {
+    return { ok: false, error: e.message, url };
+  }
+}
+
+async function fetchText(url, headers = {}) {
+  try {
+    const res = await fetch(url, { headers, signal: AbortSignal.timeout(15000) });
+    if (!res.ok) return { ok: false, status: res.status, url };
+    return { ok: true, text: await res.text(), url };
+  } catch (e) {
+    return { ok: false, error: e.message, url };
+  }
 }
 
 // Aggiorna last_seen con una sostituzione mirata sul testo grezzo, non un
@@ -161,6 +193,70 @@ async function main() {
     }
   }
   results["governance-prod-gate"] = { ok: prodGateRunsRaw.ok, url: prodGateRunsRaw.url, data: prodGateEntries };
+
+  // EVD-cicd-staging-runs (P32/C2): riusa il fetch di sopra, zero chiamate in
+  // più — la sola visibilità pubblica dei run di ci.yml è ciò che l'evidenza
+  // dichiara ("verificabile aprendo la tab Actions del repo pubblico imgauth").
+  if (prodGateRunsRaw.ok) evdHits.add("EVD-cicd-staging-runs");
+
+  // EVD-changelog-user (P32/C2): la pagina pubblica del changelog risponde.
+  // GET, non HEAD: GitHub Pages lo supporta comunque, ma il Worker imgauth
+  // (sotto) risponde 404 a HEAD (router interno, non instrada quel verbo).
+  results["changelog-user"] = await fetchMeta("https://attestazione.spaziogenesi.org/changelog/");
+  if (results["changelog-user"].ok && results["changelog-user"].status === 200) evdHits.add("EVD-changelog-user");
+
+  // EVD-cloudflare-access-admin (P32/C2): /admin non autenticato deve
+  // reindirizzare al login di Cloudflare Access, mai rispondere direttamente.
+  results["cloudflare-access-admin"] = await fetchMeta("https://imgauth.spaziogenesi.org/admin", { redirect: "manual" });
+  {
+    const r = results["cloudflare-access-admin"];
+    if (r.ok && r.status >= 300 && r.status < 400 && (r.location ?? "").includes("cloudflareaccess.com")) {
+      evdHits.add("EVD-cloudflare-access-admin");
+    }
+  }
+
+  // EVD-edge-security-headers (P32/C2): CSP+HSTS+Permissions-Policy presenti
+  // sui due host esposti (attestazione via GitHub Pages+edge, imgauth Worker).
+  // GET, non HEAD: il router del Worker imgauth risponde 404 a HEAD (verbo
+  // non instradato) pur restituendo comunque gli header di sicurezza edge —
+  // usare GET ovunque evita di dipendere da quel dettaglio di implementazione.
+  results["edge-security-headers"] = {
+    attestazione: await fetchMeta("https://attestazione.spaziogenesi.org/"),
+    imgauth: await fetchMeta("https://imgauth.spaziogenesi.org/ping"),
+  };
+  {
+    const edgeOk = ["attestazione", "imgauth"].every((k) => {
+      const r = results["edge-security-headers"][k];
+      return Boolean(
+        r.ok &&
+          r.status === 200 &&
+          r.headers["content-security-policy"] &&
+          r.headers["strict-transport-security"] &&
+          r.headers["permissions-policy"]
+      );
+    });
+    if (edgeOk) evdHits.add("EVD-edge-security-headers");
+  }
+
+  // EVD-dogfooding-anchor (P32/C2): sha256 del bundle mensile più recente
+  // ricalcolato in locale (file già committato, nessun segreto coinvolto) e
+  // confrontato via il badge pubblico — verde solo se l'hash è realmente
+  // in archivio (stesso principio non falsificabile del badge stesso).
+  const anchorFiles = existsSync(ANCHORS_DIR)
+    ? readdirSync(ANCHORS_DIR)
+        .filter((f) => /^\d{4}-\d{2}-bundle\.json$/.test(f))
+        .sort()
+    : [];
+  if (anchorFiles.length > 0) {
+    const latestAnchor = anchorFiles[anchorFiles.length - 1];
+    const bundleHash = sha256(readFileSync(join(ANCHORS_DIR, latestAnchor)));
+    const badgeRes = await fetchText(`https://imgauth.spaziogenesi.org/api/badge?hash=${bundleHash}`);
+    const anchored = badgeRes.ok && badgeRes.text.includes("✓ opera attestata");
+    results["dogfooding-anchor"] = { file: latestAnchor, hash: bundleHash, ok: badgeRes.ok, anchored };
+    if (anchored) evdHits.add("EVD-dogfooding-anchor");
+  } else {
+    results["dogfooding-anchor"] = { file: null, hash: null, ok: false, anchored: false };
+  }
 
   const manifest = { collected_at: today.toISOString(), week, files: {} };
   for (const [name, data] of Object.entries(results)) {
