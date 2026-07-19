@@ -1,10 +1,12 @@
 id: MET-conservation
 title: Conservazione
 formula: >
-  Freschezza degli snapshot di evidenza raccolti nel tempo, più l'esito
-  dell'ultimo restore-drill (binario, che decade dopo 210 giorni senza una
-  nuova prova). Non ancora calcolabile: nessun collettore di snapshot e
-  nessun restore-drill sono ancora stati eseguiti. Si attiverà quando
-  entrambi esisteranno (vedi PRC-restore-drill).
+  Media di due componenti, calcolati offline da generators/score.mjs: (1)
+  freschezza degli snapshot di evidenza — quota delle ultime 8 settimane
+  ISO con una cartella snapshots/ presente; (2) esito dell'ultimo
+  restore-drill (PRC-restore-drill) — 100 se riuscito entro 210 giorni, 0
+  se fallito o decaduto oltre i 210 giorni, componente assente se il drill
+  non è mai stato eseguito. Attivata dal 2026-07-19 (primo restore-drill
+  riuscito, vedi ADR-GTF-013 e gtf/docs/verbali/2026-07-restore-drill.md).
 unit: "0-100 oppure n/d"
 visibility: public

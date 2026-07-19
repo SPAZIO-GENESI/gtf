@@ -1,0 +1,38 @@
+id: ADR-GTF-013
+title: "Backup offsite dell'archivio R2 verso un secondo provider, verificato con un restore drill reale"
+date: 2026-07-19
+status: accepted
+context: >
+  L'archivio dei certificati (bucket R2 in giurisdizione EU) non aveva mai
+  avuto una copia fuori da Cloudflare: un lockout dell'account o una
+  cancellazione applicativa avrebbe potuto compromettere lo storico
+  probatorio. Il piano era già scritto (img-auth-hub, RESILIENZA-E-BACKUP.md
+  Parte 2) ma mai eseguito — MET-conservation era n/d anche per questo
+  (un restore drill senza un backup reale non ha da cosa ripristinare).
+decision: >
+  Copia notturna (mai sincronizzazione: solo aggiunte, nessuna cancellazione
+  a monte propagata) dell'archivio verso un secondo provider indipendente,
+  in una regione coerente con la giurisdizione EU del bucket primario.
+  Il workflow che esegue la copia vive in un repository privato: i suoi log
+  elencherebbero, se pubblici, l'insieme completo delle impronte di tutte le
+  opere attestate — oggi recuperabili solo da chi conosce il singolo hash,
+  un modello di fiducia che un elenco pubblico completo cambierebbe.
+  Verificato con un primo run reale (conteggio oggetti e byte identici tra
+  sorgente e destinazione, zero differenze) e un secondo run immediatamente
+  successivo (quasi nessun oggetto trasferito, incrementalità confermata),
+  poi con un vero restore drill (vedi CTL-r2-offsite-backup): 3 opere
+  campione ripristinate dal backup e verificate con gli stessi strumenti
+  pubblici — firma HMAC, ancoraggio Bitcoin, badge d'archivio — tutte e tre
+  con esito positivo.
+consequences: >
+  MET-conservation passa da n/d a un valore reale (componente drill:
+  100/100, esito riuscito il 2026-07-19). Il gap dichiarato in
+  ARCHITECTURE.md §6.2 punto 3 ("backup provato, non solo pianificato") è
+  chiuso. La prova non è ripetibile automaticamente dal collettore
+  settimanale del GTF (repo privato, non leggibile senza autenticazione):
+  l'evidenza del ciclo di backup resta manuale, con verifica periodica del
+  log del workflow (vedi EVD-r2-offsite-backup). Il prossimo restore drill
+  è dovuto entro la cadenza dichiarata in PRC-restore-drill.
+affects: [MET-conservation]
+evidence: [EVD-r2-offsite-backup, EVD-backup-resilience]
+visibility: public

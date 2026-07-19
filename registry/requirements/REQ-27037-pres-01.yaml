@@ -4,5 +4,5 @@ statement: >
   Le prove (certificato, ancoraggio) devono essere conservate con
   integrità dimostrabile e non alterabile silenziosamente nel tempo.
 applicability: partial
-satisfied_by: [CTL-r2-eu-archive, CTL-ots-anchor, CTL-dogfooding-anchor, CTL-iso27037-honest-positioning]
+satisfied_by: [CTL-r2-eu-archive, CTL-ots-anchor, CTL-dogfooding-anchor, CTL-iso27037-honest-positioning, CTL-r2-offsite-backup]
 visibility: public

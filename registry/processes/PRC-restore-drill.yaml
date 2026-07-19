@@ -6,4 +6,6 @@ output: "verbale della prova di ripristino (riuscita/fallita, tempo impiegato, e
 produces_evidence: [EVD-backup-resilience]
 human_cost_minutes_month: 10
 frequency_days: 180
+last_run: "2026-07-19"
+last_outcome: ok
 visibility: public

@@ -138,16 +138,16 @@
         <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W29) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">62</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">60</td></tr>
         <tr class="is-pending" title="nessun ciclo di revisione trimestrale ancora concluso"><td class="ledger-label">Audit</td><td class="ledger-value">n/d</td></tr>
-        <tr class="is-pending" title="nessun restore-drill ancora eseguito"><td class="ledger-label">Conservazione</td><td class="ledger-value">n/d</td></tr>
+        <tr class="is-counted is-partial" title="snapshot 2/8 settimane + drill: riuscito il 2026-07-19 (0 giorni fa)"><td class="ledger-label">Conservazione *</td><td class="ledger-value">63</td></tr>
         <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">97</td></tr>
         <tr class="is-counted is-partial" title="scanner su imgauth@v1.24.0: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"><td class="ledger-label">Privacy *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted is-partial" title="validate 30/30 + gate 15/17 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"><td class="ledger-label">Governance *</td><td class="ledger-value">94</td></tr>
-          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">94<span class="unit">/100</span></td></tr>
+          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">90<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
-      <p class="ledger-note">8 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
+      <p class="ledger-note">9 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
     </div>
   </header>
 
@@ -290,6 +290,7 @@
           <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar<details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></li>
           <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio<details><summary>come verificare</summary><p>Mensile: generators/anchor-monthly.mjs concatena i manifest.json degli snapshot settimanali non ancora coperti in un bundle deterministico (committato in snapshots/anchors/); un umano lo trascina su attestazione.spaziogenesi.org, genera l'attestazione e scarica il PDF (solo /api/cert-pdf innesca l'ancoraggio OpenTimestamps reale). Chiunque può ricalcolare l'hash del bundle nel repo gtf, confrontarlo con quello stampato sul certificato, e verificare la prova .ots indipendentemente su opentimestamps.org. Primo ancoraggio: periodo 2026-07 (bundle snapshots/anchors/2026-07-bundle.json, hash cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).</p></details></li>
           <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena<details><summary>come verificare</summary><p>Confronta i due requisiti collegati (REQ-27037-acq-01, REQ-27037-pres-01): entrambi dichiarano applicability &quot;partial&quot;, mai &quot;full&quot;. Il codice di acquisizione (hash client-side) e i tre meccanismi di conservazione (R2 immutabile, HMAC, TSA, OTS) sono verificabili nei repo pubblici imgauth/imgauthweb; l'assenza di log di catena di custodia consultabile e di ruoli forensi formalizzati è un gap dichiarato, non nascosto.</p></details></li>
+          <li><span class="tag">CTL-r2-offsite-backup</span> <span class="pill pill-sage status-badge">attivo</span> Backup offsite dell'archivio certificati, verificato con un restore drill reale<details><summary>come verificare</summary><p>Verbale pubblico dell'ultima prova di ripristino in gtf/docs/verbali/2026-07-restore-drill.md: campioni ripristinati dal backup (non dall'archivio primario) e verificati con gli strumenti pubblici standard (firma HMAC via /api/verify, ancoraggio Bitcoin, badge d'archivio). I dettagli operativi del backup (provider, regione, nomi) non sono pubblici per scelta — vedi ADR-GTF-013.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-pres-01</span></p>
       </article>
@@ -443,6 +444,7 @@
           <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash</li>
           <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar</li>
           <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio</li>
+          <li><span class="tag">CTL-r2-offsite-backup</span> <span class="pill pill-sage status-badge">attivo</span> Backup offsite dell'archivio certificati, verificato con un restore drill reale</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-archive-tampering</span></p>
       </article>
@@ -671,6 +673,15 @@
   <section id="decisioni" class="folio" data-folio="ADR">
     <h2>Decisioni</h2>
     <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-19</span><span class="entry-title">Backup offsite dell'archivio R2 verso un secondo provider, verificato con un restore drill reale</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>L'archivio dei certificati (bucket R2 in giurisdizione EU) non aveva mai avuto una copia fuori da Cloudflare: un lockout dell'account o una cancellazione applicativa avrebbe potuto compromettere lo storico probatorio. Il piano era già scritto (img-auth-hub, RESILIENZA-E-BACKUP.md Parte 2) ma mai eseguito — MET-conservation era n/d anche per questo (un restore drill senza un backup reale non ha da cosa ripristinare).</p>
+          <p><strong>Decisione:</strong> Copia notturna (mai sincronizzazione: solo aggiunte, nessuna cancellazione a monte propagata) dell'archivio verso un secondo provider indipendente, in una regione coerente con la giurisdizione EU del bucket primario. Il workflow che esegue la copia vive in un repository privato: i suoi log elencherebbero, se pubblici, l'insieme completo delle impronte di tutte le opere attestate — oggi recuperabili solo da chi conosce il singolo hash, un modello di fiducia che un elenco pubblico completo cambierebbe. Verificato con un primo run reale (conteggio oggetti e byte identici tra sorgente e destinazione, zero differenze) e un secondo run immediatamente successivo (quasi nessun oggetto trasferito, incrementalità confermata), poi con un vero restore drill (vedi CTL-r2-offsite-backup): 3 opere campione ripristinate dal backup e verificate con gli stessi strumenti pubblici — firma HMAC, ancoraggio Bitcoin, badge d'archivio — tutte e tre con esito positivo.</p>
+          <p><strong>Conseguenze:</strong> MET-conservation passa da n/d a un valore reale (componente drill: 100/100, esito riuscito il 2026-07-19). Il gap dichiarato in ARCHITECTURE.md §6.2 punto 3 (&quot;backup provato, non solo pianificato&quot;) è chiuso. La prova non è ripetibile automaticamente dal collettore settimanale del GTF (repo privato, non leggibile senza autenticazione): l'evidenza del ciclo di backup resta manuale, con verifica periodica del log del workflow (vedi EVD-r2-offsite-backup). Il prossimo restore drill è dovuto entro la cadenza dichiarata in PRC-restore-drill.</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-013</span></p>
+        </div>
+      </details>
       <details class="entry">
         <summary><span class="entry-date">2026-07-19</span><span class="entry-title">MET-privacy: attivata con scanner dedicato su schema SQL + prefissi R2 di imgauth (v1)</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">

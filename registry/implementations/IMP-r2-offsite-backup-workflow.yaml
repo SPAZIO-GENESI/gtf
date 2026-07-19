@@ -1,0 +1,7 @@
+id: IMP-r2-offsite-backup-workflow
+title: Workflow di backup notturno dell'archivio R2 verso un secondo provider
+repo: img-auth-hub
+ref: ".github/workflows/backup-r2.yml — copia (mai sync) programmata + esecuzione manuale, verifica di completezza sorgente/destinazione a ogni run"
+supports: [CTL-r2-offsite-backup]
+visibility: internal
+why_not_public: "il repo che ospita il workflow è privato per scelta (i suoi log elencherebbero, se pubblici, l'insieme completo delle impronte attestate — vedi ADR-GTF-013); il dettaglio implementativo resta coerente con quella scelta"

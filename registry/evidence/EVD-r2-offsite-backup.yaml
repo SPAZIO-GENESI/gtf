@@ -1,0 +1,9 @@
+id: EVD-r2-offsite-backup
+title: Esito dell'ultimo ciclo di backup offsite (log del workflow)
+location: { system: img-auth-hub, ref: "Actions log di .github/workflows/backup-r2.yml" }
+produced_by: IMP-r2-offsite-backup-workflow
+collection: manual
+integrity: "verificato manualmente il 2026-07-19: primo run con conteggi sorgente=destinazione (0 differenze), secondo run incrementale quasi vuoto; controllo periodico mensile del log come da cadenza dichiarata in RESILIENZA-E-BACKUP.md"
+supports: [CTL-r2-offsite-backup]
+visibility: internal
+why_not_public: "il repo che ospita il workflow è privato (vedi ADR-GTF-013); il collettore automatico del GTF non è autenticato verso repo privati e non può leggere questo log da solo, quindi l'evidenza resta manuale finché non si deciderà di automatizzarla con un token dedicato"

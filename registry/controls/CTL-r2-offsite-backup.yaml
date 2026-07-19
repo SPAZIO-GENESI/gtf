@@ -1,0 +1,18 @@
+id: CTL-r2-offsite-backup
+title: "Backup offsite dell'archivio certificati, verificato con un restore drill reale"
+status: active
+visibility: public
+satisfies: [REQ-27037-pres-01]
+mitigates: [RSK-archive-tampering]
+implemented_by: [IMP-r2-offsite-backup-workflow]
+evidenced_by: [EVD-r2-offsite-backup, EVD-backup-resilience]
+verify_howto: >
+  Verbale pubblico dell'ultima prova di ripristino in
+  gtf/docs/verbali/2026-07-restore-drill.md: campioni ripristinati dal
+  backup (non dall'archivio primario) e verificati con gli strumenti
+  pubblici standard (firma HMAC via /api/verify, ancoraggio Bitcoin,
+  badge d'archivio). I dettagli operativi del backup (provider, regione,
+  nomi) non sono pubblici per scelta — vedi ADR-GTF-013.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-07-19

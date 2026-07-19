@@ -12,7 +12,8 @@
     "produces_evidence": { "type": "array", "items": { "type": "string" } },
     "human_cost_minutes_month": { "type": "number", "minimum": 0 },
     "frequency_days": { "type": "integer", "minimum": 1, "description": "Cadenza attesa in giorni, per i processi ricorrenti verificabili da generators/check-cadences.mjs (vedi anche last_run)" },
-    "last_run": { "type": "string", "format": "date", "description": "Data dell'ultima esecuzione riuscita, aggiornata a mano dal maintainer dopo averla svolta" },
+    "last_run": { "type": "string", "format": "date", "description": "Data dell'ultima esecuzione, aggiornata a mano dal maintainer dopo averla svolta" },
+    "last_outcome": { "type": "string", "enum": ["ok", "failed"], "description": "Esito dell'esecuzione registrata in last_run" },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
     "why_not_public": { "type": "string" }
   },
