@@ -1,12 +1,18 @@
 id: MET-privacy
 title: Privacy
 formula: >
-  Quota di flussi di dati effettivamente presenti nel codice che hanno un
-  record DAT corrispondente completo, più assenza di dati personali negli
-  snapshot di evidenza. Non ancora calcolabile: non esiste una scansione
-  automatica del codice che rilevi i flussi di dati non ancora registrati
-  come DAT — oggi possiamo solo confermare che i DAT esistenti sono
-  completi (verificato dallo schema stesso), non che siano tutti quelli
-  che esistono nel codice. Si attiverà con uno scanner dedicato.
+  Quota di flussi di dati rilevati dallo scanner (generators/scan-privacy.mjs)
+  che hanno un record DAT corrispondente nel mapping
+  generators/lib/privacy-map.json: mappati / (rilevati − falsi positivi
+  dichiarati). Emendata da ADR-GTF-012: scanner v1, eseguito nel giro
+  settimanale del collettore, scarica worker.js + schema/*.sql del repo
+  pubblico imgauth all'ultimo tag di release (non main, per uno scan
+  riproducibile) e rileva (a) tabelle SQL con almeno una colonna dal nome
+  sensibile e (b) scritture R2 sotto prefissi noti. Il rilevamento di host
+  esterni nelle fetch di worker.js è stato valutato ed escluso dal v1
+  (tutti provider terzi già documentati in privacy.html §5 o già coperti da
+  un DAT esistente, zero flussi nuovi). Copre solo imgauth: i flussi che
+  vivono in repo client (es. attest-bot/bot Telegram) restano fuori dallo
+  scanner, pur avendo un DAT scritto a mano nel registro.
 unit: "0-100 oppure n/d"
 visibility: public

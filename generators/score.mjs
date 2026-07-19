@@ -95,6 +95,26 @@ function governanceRatio(week) {
   return { ratio, note };
 }
 
+// Privacy (MET-privacy, ADR-GTF-012): quota di flussi rilevati dallo
+// scanner (generators/scan-privacy.mjs, snapshot privacy-scan.json) che
+// hanno un DAT corrispondente nel mapping, al netto dei falsi positivi
+// dichiarati. Snapshot assente/fallito → null, mai un valore inventato.
+function privacyRatio(week) {
+  if (!week) return { ratio: null, note: null };
+  const scan = readJsonSnapshot(week, "privacy-scan.json");
+  if (!scan?.ok || !Array.isArray(scan.flows)) return { ratio: null, note: null };
+
+  const covered = scan.flows.filter((f) => f.status === "covered").length;
+  const falsePositives = scan.flows.filter((f) => f.status === "false_positive").length;
+  const notCovered = scan.flows.filter((f) => f.status === "not_covered").length;
+  const denom = scan.flows.length - falsePositives;
+  if (denom <= 0) return { ratio: null, note: "nessun flusso rilevato dallo scanner al netto dei falsi positivi" };
+
+  const ratio = pct(covered, denom);
+  const note = `scanner su imgauth@${scan.tag ?? "n/d"}: ${covered}/${denom} flussi mappati a un DAT (${falsePositives} falsi positivi dichiarati esclusi${notCovered > 0 ? `, ${notCovered} non coperti` : ""}) — non copre repo client (es. bot Telegram)`;
+  return { ratio, note };
+}
+
 function isPublic(record) {
   return (record.visibility ?? "public") === "public";
 }
@@ -172,6 +192,7 @@ function computeIndicators(records) {
       : "richiede almeno uno snapshot dal collettore di evidenze, un ancoraggio dogfooding o dati sui tag (nessuno ancora raccolto)";
 
   const governance = governanceRatio(week);
+  const privacy = privacyRatio(week);
 
   return [
     { id: "MET-transparency", label: "Trasparenza", value: transparency },
@@ -182,7 +203,12 @@ function computeIndicators(records) {
     { id: "MET-audit", label: "Audit", value: null, note: "nessun ciclo di revisione trimestrale ancora concluso" },
     { id: "MET-conservation", label: "Conservazione", value: null, note: "nessun restore-drill ancora eseguito" },
     { id: "MET-reproducibility", label: "Riproducibilità", value: reproducibility },
-    { id: "MET-privacy", label: "Privacy", value: null, note: "richiede uno scanner del codice non ancora costruito" },
+    {
+      id: "MET-privacy",
+      label: "Privacy",
+      value: privacy.ratio,
+      note: privacy.note ?? "richiede almeno uno snapshot dallo scanner (nessuno ancora raccolto)",
+    },
     {
       id: "MET-governance",
       label: "Governance",

@@ -1,0 +1,61 @@
+{
+  "_comment": "Mapping flusso→DAT per MET-privacy (P32/ADR-GTF-012). Ogni chiave è un flow id prodotto da scan-privacy.mjs (sql:<tabella> o r2:<prefisso>). status: covered (richiede dat[]), false_positive (richiede reason), not_covered (richiede reason). Un flusso rilevato dallo scanner ma assente da questo file conta come not_covered con motivo generico — mai un 100 di default.",
+  "flows": {
+    "sql:conventions": {
+      "status": "false_positive",
+      "reason": "nome e tetto mensile dell'ente convenzionato (persona giuridica), non dato personale di un individuo"
+    },
+    "sql:convention_attestations": {
+      "status": "covered",
+      "dat": ["DAT-convention-log"]
+    },
+    "sql:agent_credentials": {
+      "status": "covered",
+      "dat": ["DAT-dev-selfservice-email", "DAT-dev-optional-profiling"]
+    },
+    "sql:integrations": {
+      "status": "covered",
+      "dat": ["DAT-integrations-candidacy"]
+    },
+    "sql:pro_subscriptions": {
+      "status": "covered",
+      "dat": ["DAT-pro-subscription", "DAT-pro-optional-profiling"]
+    },
+    "sql:pro_attestations": {
+      "status": "covered",
+      "dat": ["DAT-pro-subscription"]
+    },
+    "sql:pro_discounts": {
+      "status": "covered",
+      "dat": ["DAT-pro-discount-email"]
+    },
+    "sql:health_log": {
+      "status": "false_positive",
+      "reason": "check_name è il nome del controllo di salute (archive/signer/anchor), non di una persona"
+    },
+    "r2:pdf": {
+      "status": "covered",
+      "dat": ["DAT-opera-hash"]
+    },
+    "r2:ots": {
+      "status": "covered",
+      "dat": ["DAT-opera-hash"]
+    },
+    "r2:meta/cert": {
+      "status": "covered",
+      "dat": ["DAT-opera-hash"]
+    },
+    "r2:integrations": {
+      "status": "covered",
+      "dat": ["DAT-integrations-candidacy"]
+    },
+    "r2:status": {
+      "status": "false_positive",
+      "reason": "storico dello stato del servizio (worker/archive/signer/anchor), nessun dato personale"
+    },
+    "r2:meta-counters": {
+      "status": "false_positive",
+      "reason": "contatori operativi aggregati (meta/agent-403-count, meta/cert-count), nessun dato personale"
+    }
+  }
+}

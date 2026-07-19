@@ -1,0 +1,160 @@
+{
+  "week": "2026-W29",
+  "tag": "v1.24.0",
+  "ok": true,
+  "schema_files": [
+    "agent_access.sql",
+    "conventions.sql",
+    "dev_profile.sql",
+    "dev_selfservice.sql",
+    "health_log.sql",
+    "integrations.sql",
+    "pro.sql",
+    "pro_cancel_scheduled.sql",
+    "voucher.sql"
+  ],
+  "worker_fetched": true,
+  "flows": [
+    {
+      "id": "sql:agent_credentials",
+      "status": "covered",
+      "dat": [
+        "DAT-dev-selfservice-email",
+        "DAT-dev-optional-profiling"
+      ],
+      "reason": null,
+      "columns": [
+        "dev_app_name",
+        "owner_email",
+        "owner_provider"
+      ]
+    },
+    {
+      "id": "sql:convention_attestations",
+      "status": "covered",
+      "dat": [
+        "DAT-convention-log"
+      ],
+      "reason": null,
+      "columns": [
+        "member_email"
+      ]
+    },
+    {
+      "id": "sql:conventions",
+      "status": "false_positive",
+      "dat": null,
+      "reason": "nome e tetto mensile dell'ente convenzionato (persona giuridica), non dato personale di un individuo",
+      "columns": [
+        "name",
+        "member_cap"
+      ]
+    },
+    {
+      "id": "sql:health_log",
+      "status": "false_positive",
+      "dat": null,
+      "reason": "check_name è il nome del controllo di salute (archive/signer/anchor), non di una persona",
+      "columns": [
+        "check_name"
+      ]
+    },
+    {
+      "id": "sql:integrations",
+      "status": "covered",
+      "dat": [
+        "DAT-integrations-candidacy"
+      ],
+      "reason": null,
+      "columns": [
+        "owner_email",
+        "app_name"
+      ]
+    },
+    {
+      "id": "sql:pro_attestations",
+      "status": "covered",
+      "dat": [
+        "DAT-pro-subscription"
+      ],
+      "reason": null,
+      "columns": [
+        "email"
+      ]
+    },
+    {
+      "id": "sql:pro_discounts",
+      "status": "covered",
+      "dat": [
+        "DAT-pro-discount-email"
+      ],
+      "reason": null,
+      "columns": [
+        "restricted_email"
+      ]
+    },
+    {
+      "id": "sql:pro_subscriptions",
+      "status": "covered",
+      "dat": [
+        "DAT-pro-subscription",
+        "DAT-pro-optional-profiling"
+      ],
+      "reason": null,
+      "columns": [
+        "email",
+        "stripe_customer_id"
+      ]
+    },
+    {
+      "id": "r2:pdf",
+      "status": "covered",
+      "dat": [
+        "DAT-opera-hash"
+      ],
+      "reason": null,
+      "columns": null
+    },
+    {
+      "id": "r2:ots",
+      "status": "covered",
+      "dat": [
+        "DAT-opera-hash"
+      ],
+      "reason": null,
+      "columns": null
+    },
+    {
+      "id": "r2:meta/cert",
+      "status": "covered",
+      "dat": [
+        "DAT-opera-hash"
+      ],
+      "reason": null,
+      "columns": null
+    },
+    {
+      "id": "r2:integrations",
+      "status": "covered",
+      "dat": [
+        "DAT-integrations-candidacy"
+      ],
+      "reason": null,
+      "columns": null
+    },
+    {
+      "id": "r2:status",
+      "status": "false_positive",
+      "dat": null,
+      "reason": "storico dello stato del servizio (worker/archive/signer/anchor), nessun dato personale",
+      "columns": null
+    },
+    {
+      "id": "r2:meta-counters",
+      "status": "false_positive",
+      "dat": null,
+      "reason": "contatori operativi aggregati (meta/agent-403-count, meta/cert-count), nessun dato personale",
+      "columns": null
+    }
+  ]
+}

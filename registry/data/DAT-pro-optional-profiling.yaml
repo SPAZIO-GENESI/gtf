@@ -1,0 +1,7 @@
+id: DAT-pro-optional-profiling
+title: Profilazione facoltativa dell'abbonato Professionale (settore, regione)
+data_categories: ["settore/segment", "regione", "data di consenso — mai pubblici"]
+legal_basis: "consenso specifico (art. 6.1.a), revocabile in ogni momento senza conseguenze sull'abbonamento"
+retention: "azzerata 180 giorni dopo la cessazione dell'abbonamento, se non rimossa prima dall'interessato; modificabile/cancellabile in autonomia dalla pagina profilo"
+flow: "pagina profilo (consenso separato, facoltativo) → pro_subscriptions.segment/region/profile_consent_at (D1 imgauth-health) — usata solo per proporre condizioni di vantaggio o convenzioni"
+visibility: public

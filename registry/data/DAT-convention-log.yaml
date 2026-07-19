@@ -1,0 +1,7 @@
+id: DAT-convention-log
+title: Log membro→impronta per attestazioni emesse nell'ambito di una convenzione
+data_categories: ["email istituzionale del membro", "provider di accesso", "associazione email↔impronte attestate", "canale (web/api/mcp/telegram)"]
+legal_basis: "erogazione del servizio richiesto dal membro nell'ambito della convenzione (art. 6.1.b) e legittimo interesse alla prevenzione degli abusi (art. 6.1.f)"
+retention: "per la durata della garanzia di custodia prevista dalla convenzione (5-10 anni secondo l'accordo con l'ente); cancellazione anticipata su richiesta (il log resta in forma pseudonima, le opere restano contate ai fini del rendiconto)"
+flow: "OAuth one-shot (chiave sg_k_ con convention_id, oppure voucher stateless dal sito) → convention_attestations (D1 imgauth-health, colonne member_email/credential_id/via/sha256/ym/ts/channel) — il voucher stesso non è mai persistito lato server, solo l'esito dell'attestazione lo è"
+visibility: public

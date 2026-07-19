@@ -1,0 +1,7 @@
+id: DAT-dev-optional-profiling
+title: Profilazione facoltativa dello Sviluppatore (applicazione, sistema operativo, ambiente)
+data_categories: ["nome applicazione", "sistema operativo", "ambiente di sviluppo", "data di consenso — mai pubblici"]
+legal_basis: "consenso specifico (art. 6.1.a), revocabile in ogni momento"
+retention: "modificabile e cancellabile in autonomia in qualsiasi momento dalla pagina profilo, nessuna scadenza automatica dichiarata (stesso principio del consenso Professionale, ambito Sviluppatore)"
+flow: "pagina profilo (consenso separato, facoltativo, richiede chiave API attiva) → agent_credentials.dev_app_name/dev_os/dev_environment/dev_profile_consent_at (D1 imgauth-health) — usata solo per proporre condizioni di vantaggio o convenzioni"
+visibility: public

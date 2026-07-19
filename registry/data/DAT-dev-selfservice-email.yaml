@@ -1,0 +1,7 @@
+id: DAT-dev-selfservice-email
+title: Email e provider OAuth di chi richiede una chiave API self-service
+data_categories: ["email verificata dal provider OAuth", "provider scelto (google/microsoft/linkedin)", "data di richiesta"]
+legal_basis: "misure precontrattuali/contrattuali richieste dall'interessato (art. 6.1.b) e legittimo interesse alla prevenzione degli abusi (art. 6.1.f)"
+retention: "per tutta la durata della chiave attiva, poi 180 giorni dalla revoca (traccia anti-abuso), poi anonimizzazione automatica da cron; cancellazione anticipata su richiesta"
+flow: "browser → OAuth one-shot (token del provider scartato dopo la lettura di userinfo) → agent_credentials.owner_email/owner_provider (D1 imgauth-health) — la chiave stessa viaggia solo nel fragment URL, mai in una risposta HTML"
+visibility: public

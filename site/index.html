@@ -142,12 +142,12 @@
         <tr class="is-pending" title="nessun ciclo di revisione trimestrale ancora concluso"><td class="ledger-label">Audit</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-pending" title="nessun restore-drill ancora eseguito"><td class="ledger-label">Conservazione</td><td class="ledger-value">n/d</td></tr>
         <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">97</td></tr>
-        <tr class="is-pending" title="richiede uno scanner del codice non ancora costruito"><td class="ledger-label">Privacy</td><td class="ledger-value">n/d</td></tr>
+        <tr class="is-counted is-partial" title="scanner su imgauth@v1.24.0: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"><td class="ledger-label">Privacy *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted is-partial" title="validate 30/30 + gate 15/17 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"><td class="ledger-label">Governance *</td><td class="ledger-value">94</td></tr>
-          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">93<span class="unit">/100</span></td></tr>
+          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">94<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
-      <p class="ledger-note">7 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
+      <p class="ledger-note">8 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
     </div>
   </header>
 
@@ -671,6 +671,15 @@
   <section id="decisioni" class="folio" data-folio="ADR">
     <h2>Decisioni</h2>
     <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-07-19</span><span class="entry-title">MET-privacy: attivata con scanner dedicato su schema SQL + prefissi R2 di imgauth (v1)</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>MET-privacy era n/d: nessuno scanner del codice rilevava i flussi di dati personali non ancora registrati come DAT, quindi non era verificabile che i 4 DAT esistenti coprissero tutto ciò che il codice tratta davvero. Inventario manuale (P32/B0, letto da privacy.html §3.1-3.8 e dagli schemi pubblici di imgauth) ha individuato 8 flussi non ancora documentati come DAT: email self-service sviluppatori, log convenzioni per dominio email, candidature alla vetrina integrazioni, abbonamento Professionale, due profilazioni facoltative (Professionale e Sviluppatore), utenti del bot Telegram (repo attest-bot) e — scoperto solo durante la progettazione dello scanner, non nell'inventario iniziale — l'email del beneficiario di un codice sconto riservato (pro_discounts.restricted_email, esistente da P27 ma mai citata in privacy.html §3.8).</p>
+          <p><strong>Decisione:</strong> Scritti 8 nuovi record DAT (i 7 attesi più DAT-pro-discount-email). Nuovo generatore `scan-privacy.mjs`, eseguito nel giro settimanale del collettore: scarica `worker.js` e `schema/*.sql` di imgauth (repo pubblico) via raw.githubusercontent.com all'ultimo tag di release (non `main`, per uno scan riferito a una versione precisa e riproducibile), rileva (a) tabelle SQL con almeno una colonna dal nome sensibile (`email|owner|member|name|user|phone|address|customer`, alto recall deliberato) e (b) scritture R2 sotto prefissi noti (`pdf/`, `ots/`, `meta/cert/`, `integrations/`, più i prefissi non personali `status/` e i contatori `meta/*-count`). Il terzo rilevatore previsto in fase di progettazione (host esterni nelle fetch di worker.js) è stato valutato e scartato per il v1: i ~15 host individuati a mano (Google/Microsoft/ LinkedIn OAuth, calendar OpenTimestamps, Turnstile, Telegram per le sole notifiche all'amministratore) sono tutti provider terzi già documentati in privacy.html §5 &quot;Destinatari&quot; o già coperti da un DAT esistente (Turnstile) — avrebbe prodotto solo falsi positivi da dichiarare, senza aumentare il recall reale sui flussi B0. Il mapping flusso→DAT vive in `generators/lib/privacy-map.json`: ogni flusso rilevato è marcato &quot;coperto&quot; (uno o più DAT), &quot;falso positivo dichiarato&quot; (con motivo — es. `conventions.name` è il nome dell'ente, non di una persona; `health_log.check_name` è il nome di un controllo di salute) o &quot;non coperto&quot;. Formula: `privacyRatio = mappati / (rilevati − falsi positivi dichiarati)`. Snapshot assente o fetch fallito → indicatore `null`, mai un valore inventato.</p>
+          <p><strong>Conseguenze:</strong> MET-privacy passa da n/d a un valore reale (atteso 100/100 con la copertura raggiunta: 8 DAT esistenti + gli 8 nuovi coprono tutti i flussi rilevati dallo scanner v1, nessuno lasciato &quot;non coperto&quot;). Score complessivo: 8/10 indicatori disponibili. Limite dichiarato nella nota pubblica dell'indicatore: lo scanner v1 copre solo il repo imgauth — i flussi che vivono in repo client (attest-bot, il bot Telegram) restano fuori, con DAT-telegram-bot-users scritto ugualmente nel registro ma non verificato automaticamente; possibile estensione v2. Il rilevamento host esterni resta una possibilità futura se emergerà un'integrazione esterna che condivide dati personali non ancora documentata.</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-012</span></p>
+        </div>
+      </details>
       <details class="entry">
         <summary><span class="entry-date">2026-07-19</span><span class="entry-title">MET-governance: formula emendata per maintainer singolo (validazione CI + gate umano P24)</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">

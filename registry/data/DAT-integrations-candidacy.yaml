@@ -1,0 +1,7 @@
+id: DAT-integrations-candidacy
+title: Candidatura alla vetrina pubblica "Integrazioni e applicazioni"
+data_categories: ["email del titolare della candidatura (privata, mai pubblicata)", "nome applicazione, URL, descrizione, logo (pubblici solo dopo approvazione)"]
+legal_basis: "consenso (art. 6.1.a) — la candidatura è un'azione volontaria e revocabile"
+retention: "finché la candidatura resta attiva o fino al ritiro; la cancellazione della chiave API associata anonimizza anche il titolare della candidatura e la rimuove dalla vetrina"
+flow: "profilo (chiave attiva o abbonamento Professionale) → candidatura → tabella integrations (D1 imgauth-health, owner_email/app_name/url/description/logo_key/status) → pre-moderazione admin → pubblicazione su /integrazioni (solo campi pubblici, mai l'email)"
+visibility: public

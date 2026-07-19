@@ -1,0 +1,7 @@
+id: DAT-telegram-bot-users
+title: Id utente Telegram e contatori d'uso del bot @SGAttestBot
+data_categories: ["id utente Telegram", "accettazione dell'avvertenza sul transito del file", "contatori d'uso giornalieri (attestazioni/verifiche)"]
+legal_basis: "erogazione del servizio richiesto dall'utente (art. 6.1.b) e legittimo interesse alla prevenzione degli abusi (art. 6.1.f)"
+retention: "contatori d'uso cancellati automaticamente dopo 90 giorni; cancellazione anticipata su richiesta"
+flow: "bot Telegram → Worker attest-bot (repo separato, client di imgauth) → tabelle bot_users/bot_usage (D1 dedicata al bot, distinta da imgauth-health) — non username/nome, solo id numerico; il file transita per Telegram e per il Worker ma non viene mai salvato (hash in streaming, byte scartati subito)"
+visibility: public

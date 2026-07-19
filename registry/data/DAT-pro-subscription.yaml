@@ -1,0 +1,7 @@
+id: DAT-pro-subscription
+title: Riferimenti dell'abbonamento Professionale e log delle attestazioni in fascia
+data_categories: ["email", "provider di accesso", "identificativi Stripe (customer/subscription id, stato, scadenza, importo)", "associazione email↔impronte attestate in questa fascia", "canale (web/api/mcp/telegram)"]
+legal_basis: "esecuzione del contratto di abbonamento (art. 6.1.b); obblighi contabili e fiscali sui riferimenti di pagamento (art. 6.1.c)"
+retention: "almeno 5 anni dalla produzione di ciascun certificato (garanzia di recupero); l'email non è anonimizzata anticipatamente per un abbonamento cessato finché esistono certificati ancora coperti dalla garanzia; cancellazione anticipata su richiesta comporta perdita dell'accesso all'archivio consultabile"
+flow: "OAuth one-shot → Checkout/Customer Portal Stripe (dati di pagamento mai visti dal servizio) → pro_subscriptions + pro_events + pro_attestations (D1 imgauth-health) — Stripe è titolare autonomo dei dati di pagamento"
+visibility: public
