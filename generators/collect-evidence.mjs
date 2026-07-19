@@ -100,6 +100,68 @@ async function main() {
     results[`tags-${repo}`] = await fetchJson(`https://api.github.com/repos/SPAZIO-GENESI/${repo}/tags?per_page=30`, ghHeaders);
   }
 
+  // Governance (MET-governance, P32/ADR-GTF-011): validazione CI del registro —
+  // ultimi 30 run di validate.yml su gtf/main, campi minimi (id/conclusion/data).
+  const validateRunsRaw = await fetchJson(
+    "https://api.github.com/repos/SPAZIO-GENESI/gtf/actions/workflows/validate.yml/runs?per_page=30&branch=main",
+    ghHeaders
+  );
+  results["governance-validate-runs"] = validateRunsRaw.ok
+    ? {
+        ok: true,
+        url: validateRunsRaw.url,
+        data: (validateRunsRaw.data.workflow_runs ?? []).map((r) => ({
+          id: r.id,
+          conclusion: r.conclusion,
+          created_at: r.created_at,
+        })),
+      }
+    : validateRunsRaw;
+
+  // Governance: quota di PR sul registro gtf (termine NON usato dalla formula
+  // v1 — un maintainer singolo non fa revisione tra pari — ma tenuto
+  // verificabile nel tempo per trasparenza sul perché è escluso).
+  const prsRaw = await fetchJson("https://api.github.com/search/issues?q=repo:SPAZIO-GENESI/gtf+is:pr", ghHeaders);
+  results["governance-prs"] = prsRaw.ok
+    ? { ok: true, url: prsRaw.url, data: { total_count: prsRaw.data.total_count } }
+    : prsRaw;
+
+  // Governance: gate umano sui rilasci di produzione (P24) — ultimi 20 run di
+  // ci.yml su imgauth/main; per ciascuno, il job deploy-production e, se
+  // concluso, il record di approvazione ridotto a {login, state} (nessun
+  // altro campo personale). Run senza quel job (path-ignore, fallito prima)
+  // restano con has_job:false: il denominatore li esclude in score.mjs.
+  const prodGateRunsRaw = await fetchJson(
+    "https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml/runs?per_page=20&branch=main",
+    ghHeaders
+  );
+  const prodGateEntries = [];
+  if (prodGateRunsRaw.ok) {
+    for (const run of prodGateRunsRaw.data.workflow_runs ?? []) {
+      const jobsRes = await fetchJson(`https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/runs/${run.id}/jobs`, ghHeaders);
+      const job = jobsRes.ok ? (jobsRes.data.jobs ?? []).find((j) => j.name === "deploy-production") : null;
+      const entry = {
+        run_id: run.id,
+        created_at: run.created_at,
+        has_job: Boolean(job),
+        job_conclusion: job?.conclusion ?? null,
+        approvals: null,
+      };
+      if (job && job.conclusion) {
+        const approvalsRes = await fetchJson(
+          `https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/runs/${run.id}/approvals`,
+          ghHeaders
+        );
+        entry.approvals =
+          approvalsRes.ok && Array.isArray(approvalsRes.data)
+            ? approvalsRes.data.map((a) => ({ login: a.user?.login ?? null, state: a.state }))
+            : [];
+      }
+      prodGateEntries.push(entry);
+    }
+  }
+  results["governance-prod-gate"] = { ok: prodGateRunsRaw.ok, url: prodGateRunsRaw.url, data: prodGateEntries };
+
   const manifest = { collected_at: today.toISOString(), week, files: {} };
   for (const [name, data] of Object.entries(results)) {
     const filename = `${name}.json`;

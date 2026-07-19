@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "url": "https://api.github.com/repos/SPAZIO-GENESI/gtf/actions/workflows/validate.yml/runs?per_page=30&branch=main",
+  "data": [
+    {
+      "id": 29678391275,
+      "conclusion": "success",
+      "created_at": "2026-07-19T07:36:37Z"
+    },
+    {
+      "id": 29657665320,
+      "conclusion": "success",
+      "created_at": "2026-07-18T19:22:18Z"
+    },
+    {
+      "id": 29647259325,
+      "conclusion": "success",
+      "created_at": "2026-07-18T14:02:02Z"
+    },
+    {
+      "id": 29646058164,
+      "conclusion": "success",
+      "created_at": "2026-07-18T13:23:33Z"
+    },
+    {
+      "id": 29350079713,
+      "conclusion": "success",
+      "created_at": "2026-07-14T16:32:39Z"
+    },
+    {
+      "id": 29342352251,
+      "conclusion": "success",
+      "created_at": "2026-07-14T14:46:23Z"
+    },
+    {
+      "id": 29341326123,
+      "conclusion": "success",
+      "created_at": "2026-07-14T14:32:44Z"
+    },
+    {
+      "id": 29340423016,
+      "conclusion": "success",
+      "created_at": "2026-07-14T14:20:46Z"
+    },
+    {
+      "id": 29204187331,
+      "conclusion": "success",
+      "created_at": "2026-07-12T18:36:09Z"
+    },
+    {
+      "id": 29189903420,
+      "conclusion": "success",
+      "created_at": "2026-07-12T10:54:09Z"
+    },
+    {
+      "id": 29188839914,
+      "conclusion": "success",
+      "created_at": "2026-07-12T10:15:44Z"
+    },
+    {
+      "id": 29186770059,
+      "conclusion": "success",
+      "created_at": "2026-07-12T09:00:58Z"
+    },
+    {
+      "id": 29181353115,
+      "conclusion": "success",
+      "created_at": "2026-07-12T05:33:54Z"
+    },
+    {
+      "id": 29180078192,
+      "conclusion": "success",
+      "created_at": "2026-07-12T04:41:30Z"
+    },
+    {
+      "id": 29157904194,
+      "conclusion": "success",
+      "created_at": "2026-07-11T15:26:04Z"
+    },
+    {
+      "id": 29157081643,
+      "conclusion": "success",
+      "created_at": "2026-07-11T14:58:34Z"
+    },
+    {
+      "id": 29154313617,
+      "conclusion": "success",
+      "created_at": "2026-07-11T13:26:29Z"
+    },
+    {
+      "id": 29153659384,
+      "conclusion": "success",
+      "created_at": "2026-07-11T13:02:54Z"
+    },
+    {
+      "id": 29153317555,
+      "conclusion": "success",
+      "created_at": "2026-07-11T12:50:47Z"
+    },
+    {
+      "id": 29151946351,
+      "conclusion": "success",
+      "created_at": "2026-07-11T12:01:33Z"
+    },
+    {
+      "id": 29148526248,
+      "conclusion": "success",
+      "created_at": "2026-07-11T09:55:49Z"
+    },
+    {
+      "id": 29147132272,
+      "conclusion": "success",
+      "created_at": "2026-07-11T09:03:59Z"
+    },
+    {
+      "id": 29146435993,
+      "conclusion": "success",
+      "created_at": "2026-07-11T08:38:28Z"
+    },
+    {
+      "id": 29144676629,
+      "conclusion": "success",
+      "created_at": "2026-07-11T07:32:51Z"
+    },
+    {
+      "id": 29119553325,
+      "conclusion": "success",
+      "created_at": "2026-07-10T19:53:57Z"
+    },
+    {
+      "id": 29110596411,
+      "conclusion": "success",
+      "created_at": "2026-07-10T17:20:02Z"
+    },
+    {
+      "id": 29083501487,
+      "conclusion": "success",
+      "created_at": "2026-07-10T09:34:32Z"
+    },
+    {
+      "id": 29081100750,
+      "conclusion": "success",
+      "created_at": "2026-07-10T08:51:14Z"
+    },
+    {
+      "id": 29074916892,
+      "conclusion": "success",
+      "created_at": "2026-07-10T06:50:32Z"
+    },
+    {
+      "id": 29068405852,
+      "conclusion": "success",
+      "created_at": "2026-07-10T04:09:52Z"
+    }
+  ]
+}

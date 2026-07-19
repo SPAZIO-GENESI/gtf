@@ -1,6 +1,6 @@
 {
   "overall": 90,
-  "available_count": 6,
+  "available_count": 7,
   "total": 10,
   "indicators": [
     {
@@ -55,9 +55,9 @@
     {
       "id": "MET-governance",
       "label": "Governance",
-      "value": null,
-      "note": "richiede dati GitHub, score v0 lavora solo offline dal registro"
+      "value": 94,
+      "note": "validate 30/30 + gate 15/17 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
     }
   ],
-  "computed_at": "2026-07-19T07:36:06.055Z"
+  "computed_at": "2026-07-19T12:20:46.991Z"
 }

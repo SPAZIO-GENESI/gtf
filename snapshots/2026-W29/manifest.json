@@ -1,17 +1,20 @@
 {
-  "collected_at": "2026-07-13T07:15:22.632Z",
+  "collected_at": "2026-07-19T12:14:50.053Z",
   "week": "2026-W29",
   "files": {
-    "status.json": "48f6c708a181b53ff184582a7e2480046e6457d32bce6575805ba83f06dfe275",
-    "status-history.json": "62ace4f94193ccd63fa41a66b960ff443670f50702a6b2b1108ec3dd85f9cfdf",
-    "health-log.json": "ae20971f869a634039807f2f8eb5bd02df26c9d50b0e6fde4a947524d23c042e",
-    "ping-imgauth.json": "8c0a9c9c2641d379ba6d57dc1d52464cee91b1219a185e969378c0517e76b3f6",
+    "status.json": "e0d6a4d7a219dbd5b0c05059432ae3a14641633862850713e6b8e8921a438940",
+    "status-history.json": "db37c73c3f088c406ded4ecc4efecc90b041c0665775a93d4f4ecadadfabcc00",
+    "health-log.json": "4521689b7f51efc568c64818a7860a6ef7a15c963241eba1b02cbe961fefb6aa",
+    "ping-imgauth.json": "860930ebdf4f4b2e911e5628a0c861a2bcb7e1dd37aef01a8b67966bd22e0247",
     "monitor-issues.json": "d10cc982fa92b6c55d2cda6251d10c23715ca6f3c70f1744b05cfa4204918991",
-    "git-imgauth.json": "b28635825354175475205cb1d6b2867124e0befbf95fa35ea0cd3c789657299b",
-    "git-imgauthweb.json": "1e40f62a58e456f5e3a160095b1f93075e68f6857b009730b1f4ea08766ac28c",
+    "git-imgauth.json": "ddbffc2f91c249e9c3bb8052b760d9de14aff67333935e86ac9b3a9a642cf0c6",
+    "git-imgauthweb.json": "3170eff093e90e25952aa188677e9eba6f1ccd5e6c103edb75fd95f8b8191baa",
     "git-authart.json": "7230af680f01d4bdf0196cfe66f8dff1ac6213dc7348f8d8ec239c82f9f916b6",
-    "tags-imgauth.json": "84be505eea8540f854065c88ac363ff771922bb5a105650920180c28baecd343",
-    "tags-imgauthweb.json": "ef25644580748b66619a6a924d2e07edcafcc44388e16c4eb78d0c3f14e6efa2",
-    "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9"
+    "tags-imgauth.json": "2c895bd28bdf877e22257cf7bd3627533ac1d5889543bcb8f40911231109d290",
+    "tags-imgauthweb.json": "9453cfa649dce119783d80d2b1bc609ff0f26d134d4ea596dd4cb79038ebfaed",
+    "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9",
+    "governance-validate-runs.json": "9d4b15f650be2d4384d9477ee87f6e5bd51cd3986402dc4e19428d9b82d2ff12",
+    "governance-prs.json": "fdd89b1630c013767d070021a28b9f4671f6915c958cb06783826a35c68ae179",
+    "governance-prod-gate.json": "8903a7557d8b165fbc82d50bf74f5fac037f45d4f43eb46123aab2624173650a"
   }
 }

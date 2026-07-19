@@ -2,25 +2,25 @@
   "ok": true,
   "data": [
     {
-      "sha": "1cd8bb9a06810bb466e828ea69f2905a46c7becb",
-      "node_id": "C_kwDOR0mRsdoAKDFjZDhiYjlhMDY4MTBiYjQ2NmU4MjhlYTY5ZjI5MDVhNDZjN2JlY2I",
+      "sha": "aa6655520304093c1c5a8a41675da07d5985a654",
+      "node_id": "C_kwDOR0mRsdoAKGFhNjY1NTUyMDMwNDA5M2MxYzVhOGE0MTY3NWRhMDdkNTk4NWE2NTQ",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T14:55:51Z"
+          "date": "2026-07-19T07:25:24Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T14:55:51Z"
+          "date": "2026-07-19T07:25:24Z"
         },
-        "message": "fix: bottone Autorizza del device flow — fetch assoluta verso imgauth\n\nLa pagina /agent/authorize è servita su attestazione.spaziogenesi.org\n(route Cloudflare /agent/*), ma la fetch relativa a /api/agent/approve\nfiniva su GitHub Pages (405): il path /api/agent/* non è instradato al\nWorker su quel dominio. Il CORS di imgauth consente già l'origine\nattestazione (preflight 204 verificato), quindi basta l'URL assoluta.\nBug latente da P21: in produzione l'approve dalla pagina non era mai\nstato esercitato (i test reali usavano la chiave interna). Scoperto al\nprimo device flow reale, collaudo P26 FASE 4.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+        "message": "P29 FASE 5: redirect /c/* verso attestazione, pulizia link e file morti\n\nGET /c/<hash> ora fa 301 verso attestazione.spaziogenesi.org/c/<hash>\nquando la richiesta non arriva già su quell'host (route Cloudflare\ninvariata, la pagina resta servita da lì come sempre) -- decisione\nesplicita del gestore, elimina il contenuto duplicato: QR e certificati\nstampano già l'URL attestazione. Rimosso public/js/profilo.js, non più\nservito da nessuna pagina dopo la FASE 4. README.md e DEVOPS.md\naggiornati con gli URL canonici e la nota sul sync manuale di\nopenapi.json ai rilasci che toccano il contratto.\n\nVerificato in locale: /c/<hash> su host diverso da attestazione -> 301;\nsu Host: attestazione.spaziogenesi.org -> gestito direttamente (invariato).\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
         "tree": {
-          "sha": "a009f917629f77fe3fd610fc820303d8acb32f64",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/a009f917629f77fe3fd610fc820303d8acb32f64"
+          "sha": "99bb585581b30aed420b3a7f2c1218732c51943b",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/99bb585581b30aed420b3a7f2c1218732c51943b"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/1cd8bb9a06810bb466e828ea69f2905a46c7becb",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/aa6655520304093c1c5a8a41675da07d5985a654",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -30,9 +30,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/1cd8bb9a06810bb466e828ea69f2905a46c7becb",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/1cd8bb9a06810bb466e828ea69f2905a46c7becb",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/1cd8bb9a06810bb466e828ea69f2905a46c7becb/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/aa6655520304093c1c5a8a41675da07d5985a654",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/aa6655520304093c1c5a8a41675da07d5985a654",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/aa6655520304093c1c5a8a41675da07d5985a654/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -77,32 +77,32 @@
       },
       "parents": [
         {
-          "sha": "6178a464e4cb403023381fef9e2bbe15e25cc82b",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/6178a464e4cb403023381fef9e2bbe15e25cc82b",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/6178a464e4cb403023381fef9e2bbe15e25cc82b"
+          "sha": "3f19098df262752c24829a703a59d21e4834d9af",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/3f19098df262752c24829a703a59d21e4834d9af",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/3f19098df262752c24829a703a59d21e4834d9af"
         }
       ]
     },
     {
-      "sha": "6178a464e4cb403023381fef9e2bbe15e25cc82b",
-      "node_id": "C_kwDOR0mRsdoAKDYxNzhhNDY0ZTRjYjQwMzAyMzM4MWZlZjllMmJiZTE1ZTI1Y2M4MmI",
+      "sha": "3f19098df262752c24829a703a59d21e4834d9af",
+      "node_id": "C_kwDOR0mRsdoAKDNmMTkwOThkZjI2Mjc1MmMyNDgyOWE3MDNhNTlkMjFlNDgzNGQ5YWY",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T10:35:28Z"
+          "date": "2026-07-19T07:00:56Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T10:35:28Z"
+          "date": "2026-07-19T07:00:56Z"
         },
-        "message": "fix: pannello admin — apertura scheda ricarica i dati (Chiavi/Convenzioni)\n\nloadKeys/loadConventions partivano solo al login e dopo un'azione fatta\nDA QUELLA scheda: un'attestazione emessa altrove (es. dal sito, via\nvoucher) non si rifletteva finché non si ricaricava l'intera pagina.\nOra ogni click sulla scheda ricarica i dati correnti.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "P29 FASE 4: /profilo migra su authweb, 3 URL Stripe/voucher aggiornati\n\nGET /profilo ora fa 301 verso attestazione.spaziogenesi.org/profilo/\n(rimossa profiloPageHtml, 223 righe, e PRO_SEGMENT_LABELS -- non piu'\nreferenziate: le etichette italiane vivono ora nel guscio statico).\nTre URL che usavano url.origin (il Worker stesso) ora puntano fissi a\nCERT_PAGE_BASE/profilo/: redirect voucher purpose='profile',\nsuccess_url/cancel_url del Checkout Stripe, return_url del Customer\nPortal.\n\nVerificato in locale: node --check, wrangler deploy --dry-run, GET\n/profilo -> 301 corretto, preflight CORS per /api/pro/me da Origin\nattestazione -> 204 con gli header giusti. Il collaudo reale del\nround-trip Stripe (checkout/portale con ritorno sul nuovo dominio) e\ndel login voucher via OAuth restano al gestore -- non riproducibili\nsenza credenziali/pagamenti veri, stesso limite gia' incontrato per\nFASE 3.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
         "tree": {
-          "sha": "ade5dafd43296101ec0b4a49dbb097707427ff78",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/ade5dafd43296101ec0b4a49dbb097707427ff78"
+          "sha": "92d4c5c5effd3eb0d690fc187a54d1a4995f9adf",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/92d4c5c5effd3eb0d690fc187a54d1a4995f9adf"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/6178a464e4cb403023381fef9e2bbe15e25cc82b",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/3f19098df262752c24829a703a59d21e4834d9af",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -112,9 +112,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/6178a464e4cb403023381fef9e2bbe15e25cc82b",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/6178a464e4cb403023381fef9e2bbe15e25cc82b",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/6178a464e4cb403023381fef9e2bbe15e25cc82b/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/3f19098df262752c24829a703a59d21e4834d9af",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/3f19098df262752c24829a703a59d21e4834d9af",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/3f19098df262752c24829a703a59d21e4834d9af/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -159,32 +159,32 @@
       },
       "parents": [
         {
-          "sha": "676950c5748acdc21891be5616745da606674fed",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/676950c5748acdc21891be5616745da606674fed",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/676950c5748acdc21891be5616745da606674fed"
+          "sha": "3f1a8dccfd40ae2d266d870dae34477fd95252fb",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/3f1a8dccfd40ae2d266d870dae34477fd95252fb",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/3f1a8dccfd40ae2d266d870dae34477fd95252fb"
         }
       ]
     },
     {
-      "sha": "676950c5748acdc21891be5616745da606674fed",
-      "node_id": "C_kwDOR0mRsdoAKDY3Njk1MGM1NzQ4YWNkYzIxODkxYmU1NjE2NzQ1ZGE2MDY2NzRmZWQ",
+      "sha": "3f1a8dccfd40ae2d266d870dae34477fd95252fb",
+      "node_id": "C_kwDOR0mRsdoAKDNmMWE4ZGNjZmQ0MGFlMmQyNjZkODcwZGFlMzQ0NzdmZDk1MjUyZmI",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T09:52:41Z"
+          "date": "2026-07-19T06:14:16Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T09:52:41Z"
+          "date": "2026-07-19T06:14:16Z"
         },
-        "message": "docs: registra schema/voucher.sql (già applicato a locale e produzione)\n\nIl worker.js che richiede la colonna dev_oauth_state.purpose è finito in\nproduzione (1.21.2) tramite un commit di un'altra sessione concorrente\n(12a4e2f, \"fix pannello admin\") che ha inglobato anche questo lavoro P25(C)\nnon ancora finito. La migrazione era già stata applicata a mano sia alla D1\nlocale che, per correggere il 500 su /api/dev/oauth/start in produzione,\nalla D1 remota — questo commit allinea il repo aggiungendo lo schema file\nmancante, che prima esisteva solo su disco (non tracciato).\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "P29 FASE 3: /developer/keys migra su authweb, chiave via fragment #sgk\n\nGET /developer/keys ora fa 301 verso attestazione.spaziogenesi.org\n/developer/keys/ (rimossa devKeysPageHtml). Il callback OAuth\n(purpose='key', default) non renderizza piu' pagine HTML per nessun\nesito: 302 con #sgk=<chiave>&q=<quota>[&conv=<id>] al successo,\n#sgstate=gia-attiva&id=<id> se la chiave esiste gia', #sgerr=<codice>\nper ogni errore -- mai piu' una chiave in una risposta del server.\nQuando il purpose non e' ricostruibile (provider invalido/non\nconfigurato, consenso annullato, richiesta malformata, state\nsconosciuto/scaduto) si assume il default 'key'. I purpose\n'attest'/'profile' restano INVARIATI (voucher nel fragment, HTML solo\nper i loro errori di token/userinfo) -- verificato in locale con\nwrangler dev + D1 seeded a mano: stesso identico input (state valido,\ntoken exchange fallito) produce redirect con fragment per purpose='key'\ne la vecchia pagina HTML 502 per purpose='attest', a conferma che il\nramo esistente non e' stato toccato. Rimosse anche devAlreadyActiveBody\ne devKeyIssuedBody, non piu' referenziate. Bump 1.27.0.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
         "tree": {
-          "sha": "7251c018bfe9d94b9f5a648f9bc4bc9a51ddcf00",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/7251c018bfe9d94b9f5a648f9bc4bc9a51ddcf00"
+          "sha": "be4d80967b2056c2badfc5355e3580b011427a24",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/be4d80967b2056c2badfc5355e3580b011427a24"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/676950c5748acdc21891be5616745da606674fed",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/3f1a8dccfd40ae2d266d870dae34477fd95252fb",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -194,9 +194,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/676950c5748acdc21891be5616745da606674fed",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/676950c5748acdc21891be5616745da606674fed",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/676950c5748acdc21891be5616745da606674fed/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/3f1a8dccfd40ae2d266d870dae34477fd95252fb",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/3f1a8dccfd40ae2d266d870dae34477fd95252fb",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/3f1a8dccfd40ae2d266d870dae34477fd95252fb/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -241,32 +241,32 @@
       },
       "parents": [
         {
-          "sha": "12a4e2ff61e501d48bca95c83dde231858450b72",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/12a4e2ff61e501d48bca95c83dde231858450b72",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/12a4e2ff61e501d48bca95c83dde231858450b72"
+          "sha": "a274fb43cb54da6eedba3e35d7362fac8ad2dd4a",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/a274fb43cb54da6eedba3e35d7362fac8ad2dd4a",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/a274fb43cb54da6eedba3e35d7362fac8ad2dd4a"
         }
       ]
     },
     {
-      "sha": "12a4e2ff61e501d48bca95c83dde231858450b72",
-      "node_id": "C_kwDOR0mRsdoAKDEyYTRlMmZmNjFlNTAxZDQ4YmNhOTVjODNkZGUyMzE4NTg0NTBiNzI",
+      "sha": "a274fb43cb54da6eedba3e35d7362fac8ad2dd4a",
+      "node_id": "C_kwDOR0mRsdoAKGEyNzRmYjQzY2I1NGRhNmVlZGJhM2UzNWQ3MzYyZmFjOGFkMmRkNGE",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T09:44:42Z"
+          "date": "2026-07-18T21:31:41Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T09:44:42Z"
+          "date": "2026-07-18T21:31:41Z"
         },
-        "message": "fix: pannello admin rotto — escape backslash in un template literal annidato (1.21.2)\n\nIl tasto \"Elimina\" (1.21.1) usava \\\" dentro il JS client, ma quel codice\nvive nel template literal esterno di adminPageHtml(): il backslash veniva\nconsumato prima di raggiungere il browser, rompendo la sintassi del\nJavaScript servito (SyntaxError: missing ) after argument list). Riscritto\nsenza escape annidati. Aggiunto anche un tasto \"Mostra/Nascondi\" al campo\ndel secret di login, per verificare cosa si sta incollando.\n\nVerificato questa volta valutando l'OUTPUT REALE della funzione (non il\nsolo codice sorgente, che aveva mascherato il bug la prima volta) sia via\neval locale sia via risposta HTTP di wrangler dev.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "P29 FASE 2 (passo B): GET /integrazioni ora fa 301 verso authweb\n\nLa pagina statica gemella su attestazione.spaziogenesi.org/integrazioni/\ne' confermata live (generata dal workflow build-integrazioni.yml).\nRimossa handleIntegrationsPage(), non piu' referenziata. FASE 2 chiusa.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
         "tree": {
-          "sha": "f787e92a0173491d54fece4c430209523796b8ff",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/f787e92a0173491d54fece4c430209523796b8ff"
+          "sha": "c5b8810cd1e09d548a657cbbe47e7f5720162c59",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/c5b8810cd1e09d548a657cbbe47e7f5720162c59"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/12a4e2ff61e501d48bca95c83dde231858450b72",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/a274fb43cb54da6eedba3e35d7362fac8ad2dd4a",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -276,9 +276,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/12a4e2ff61e501d48bca95c83dde231858450b72",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/12a4e2ff61e501d48bca95c83dde231858450b72",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/12a4e2ff61e501d48bca95c83dde231858450b72/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/a274fb43cb54da6eedba3e35d7362fac8ad2dd4a",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/a274fb43cb54da6eedba3e35d7362fac8ad2dd4a",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/a274fb43cb54da6eedba3e35d7362fac8ad2dd4a/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -323,32 +323,32 @@
       },
       "parents": [
         {
-          "sha": "8908455ada016511168d43297066ffd35f9d0861",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/8908455ada016511168d43297066ffd35f9d0861",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/8908455ada016511168d43297066ffd35f9d0861"
+          "sha": "9af598792acba2b6e91397a277903f25145910e2",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/9af598792acba2b6e91397a277903f25145910e2",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/9af598792acba2b6e91397a277903f25145910e2"
         }
       ]
     },
     {
-      "sha": "8908455ada016511168d43297066ffd35f9d0861",
-      "node_id": "C_kwDOR0mRsdoAKDg5MDg0NTVhZGEwMTY1MTExNjhkNDMyOTcwNjZmZmQzNWY5ZDA4NjE",
+      "sha": "9af598792acba2b6e91397a277903f25145910e2",
+      "node_id": "C_kwDOR0mRsdoAKDlhZjU5ODc5MmFjYmEyYjZlOTEzOTdhMjc3OTAzZjI1MTQ1OTEwZTI",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T09:18:18Z"
+          "date": "2026-07-18T21:11:39Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-12T09:18:18Z"
+          "date": "2026-07-18T21:11:39Z"
         },
-        "message": "fix: admin panel tabs + hard delete chiavi, openapi.json aggiornato (1.21.1)\n\n- openapi.json: /api/hash 200 include ora fascia/fascia_motivo/convenzione\n  (dimenticanza della sessione P25 B); 413/429 dichiarano lo schema Errore\n  che già restituivano (mancava solo la documentazione).\n- /admin: sezione Convenzioni spostata in una tab separata dalle Credenziali\n  (la lista chiavi rendeva la pagina troppo lunga).\n- Nuovo DELETE /admin/api/keys/<id>: eliminazione DEFINITIVA (a differenza\n  di \"Revoca\", reversibile) per pulire chiavi di test. Il log\n  convention_attestations resta intatto (indipendente dall'esistenza della\n  riga in agent_credentials, coerente con \"forget\").\n\nVerificato in locale: tab funzionanti, DELETE 200/404/403, openapi.json\nvalido con /docs che lo carica correttamente.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "P29 FASE 2 (passo A): GET /api/integrations + dispatch verso authweb\n\nNuovo endpoint pubblico GET /api/integrations (JSON, sole approvate,\ncache 60s, RL_API) come sorgente machine-readable per la CI di authweb\nche rigenererà /integrazioni/ come pagina statica. Aggiunto a\nopenapi.json. dispatchIntegrationsUpdated() spara un repository_dispatch\n(event_type: integrations-updated) verso SPAZIO-GENESI/imgauthweb sui 5\npunti che invalidano _integrationsCache (approvazione/rifiuto/rimozione/\nritiro/forget GDPR) — fail-safe, richiede il nuovo secret\nGITHUB_DISPATCH_TOKEN (non ancora impostato: senza, il dispatch è un\nno-op e resta solo il cron settimanale del workflow authweb).\n\nGET /integrazioni resta INVARIATA (pagina dinamica) in questo passo:\nil 301 verso authweb arriva in un commit successivo (passo B), solo\ndopo aver confermato live la pagina statica gemella — vedi gotcha §9\ndi P29-DESIGN-pagine-authweb.md.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
         "tree": {
-          "sha": "b3ef3d7148261777bd344d055f11965708e4cfee",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/b3ef3d7148261777bd344d055f11965708e4cfee"
+          "sha": "d62a9b1f72d3ea8efbfdbcabc5f777ef1936caeb",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/trees/d62a9b1f72d3ea8efbfdbcabc5f777ef1936caeb"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/8908455ada016511168d43297066ffd35f9d0861",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/git/commits/9af598792acba2b6e91397a277903f25145910e2",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -358,9 +358,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/8908455ada016511168d43297066ffd35f9d0861",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/8908455ada016511168d43297066ffd35f9d0861",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/8908455ada016511168d43297066ffd35f9d0861/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/9af598792acba2b6e91397a277903f25145910e2",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/9af598792acba2b6e91397a277903f25145910e2",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/9af598792acba2b6e91397a277903f25145910e2/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -405,9 +405,9 @@
       },
       "parents": [
         {
-          "sha": "6ae7dbf53cdf0edd1cfd8c0d1d82a8e4cb2c049d",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/6ae7dbf53cdf0edd1cfd8c0d1d82a8e4cb2c049d",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/6ae7dbf53cdf0edd1cfd8c0d1d82a8e4cb2c049d"
+          "sha": "0d69002618ad4808d057969ee2d638e6caa9b732",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits/0d69002618ad4808d057969ee2d638e6caa9b732",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauth/commit/0d69002618ad4808d057969ee2d638e6caa9b732"
         }
       ]
     }

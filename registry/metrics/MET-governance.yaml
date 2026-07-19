@@ -1,11 +1,20 @@
 id: MET-governance
 title: Governance
 formula: >
-  Quota di merge nel registro avvenuti via pull request con revisione,
-  più quota di decisioni non ovvie accompagnate da un'ADR. Non ancora
-  calcolabile offline: richiede dati dell'API GitHub (storico PR/review)
-  che il generatore non interroga in questa versione (score v0 lavora solo
-  dal registro committato, per restare riproducibile senza rete). Si
-  attiverà con un collettore che legga questi dati.
+  Media di due controlli verificabili via API GitHub pubbliche: quota di run
+  `success` di validate.yml su gtf/main (validazione automatica del
+  registro) e quota di run di ci.yml su imgauth/main in cui il job
+  deploy-production è concluso con un record di approvazione
+  dell'environment (gate umano P24). Emendata da ADR-GTF-011: la formula
+  originale (quota di merge nel registro via pull request con revisione)
+  non è applicabile a un progetto a maintainer singolo — 0 PR su ~60 commit
+  su gtf, non un segnale di governance debole. Il termine "quota PR" resta
+  escluso dal calcolo v1 e tracciato per trasparenza (governance-prs.json
+  nello snapshot settimanale); si riapre se il progetto guadagnerà più
+  contributor. Anche il terzo termine originale ("decisioni non ovvie con
+  ADR") resta non automatizzato ed escluso, stile "proxy iniziale" di
+  MET-integrity. Dati raccolti offline dal collettore settimanale
+  (collect-evidence.mjs → governance-validate-runs.json,
+  governance-prod-gate.json), mai da rete in score.mjs.
 unit: "0-100 oppure n/d"
 visibility: public

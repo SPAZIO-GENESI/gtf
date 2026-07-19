@@ -1,0 +1,37 @@
+id: ADR-GTF-011
+title: "MET-governance: formula emendata per maintainer singolo (validazione CI + gate umano P24)"
+date: 2026-07-19
+status: accepted
+context: >
+  MET-governance era n/d: la formula originale misurava la quota di merge nel
+  registro avvenuti via pull request con revisione tra pari, dato non ancora
+  raccolto offline. Il collettore ora legge questo dato: il repo gtf conta 0
+  pull request su ~60 commit, tutti push diretti su main. Con la formula
+  originale il valore sarebbe 0 e lo score complessivo scenderebbe da 90 a
+  circa 77 — non perché la governance sia debole, ma perché il progetto ha
+  un solo maintainer e la revisione tra pari via PR non si applica.
+decision: >
+  La formula è emendata alla media di due controlli reali e verificabili via
+  API GitHub pubbliche: (1) quota di run `success` di `validate.yml` su
+  gtf/main (validazione automatica del registro ad ogni commit, 30/30 negli
+  ultimi run raccolti) e (2) quota di run di `ci.yml` su imgauth/main in cui
+  il job `deploy-production` è concluso con un record di approvazione
+  dell'environment (gate umano P24, 15/17 — i due run mancanti hanno
+  conclusione `cancelled` per un push successivo, non un'approvazione
+  negata). Valore risultante: 94. Il termine "quota PR" resta escluso dal
+  calcolo v1 e non applicabile a un maintainer singolo; il conteggio PR è
+  comunque raccolto nello snapshot settimanale (`governance-prs.json`) per
+  trasparenza sul perché è escluso, e la formula si riapre se il progetto
+  guadagnerà più contributor. Decisione presa dal gestore mostrando
+  entrambi i numeri (0 vs 94; score 77 vs 90).
+consequences: >
+  MET-governance passa da n/d a 94/100 (nota pubblica con i conteggi
+  espliciti). Score complessivo: 7/10 indicatori disponibili, 90/100
+  (invariato nell'arrotondamento). `registry/metrics/MET-governance.yaml`
+  aggiornato con la nuova formula; `generators/score.mjs` implementa
+  `governanceRatio(week)` sullo stesso modello di `releaseTagRatio`; i dati
+  arrivano dal collettore settimanale (`governance-validate-runs.json`,
+  `governance-prod-gate.json`, `governance-prs.json`), mai da chiamate a
+  rete in `score.mjs` — principio offline dello score invariato.
+affects: [MET-governance]
+visibility: public

@@ -55,6 +55,46 @@ function releaseTagRatio(week) {
   return { ratio: pct(tagged, checked.length), tagged, total: checked.length };
 }
 
+// Governance (MET-governance, ADR-GTF-011): media di validazione CI del
+// registro (quota run success di validate.yml su gtf/main) e gate umano P24
+// sui rilasci di produzione (quota run ci.yml su imgauth/main il cui job
+// deploy-production è concluso con un record di approvazione). I run senza
+// quel job (path-ignore, fallimento a monte) sono esclusi dal denominatore,
+// non contati come mancate approvazioni.
+function governanceRatio(week) {
+  if (!week) return { ratio: null, note: null };
+  const validateSnap = readJsonSnapshot(week, "governance-validate-runs.json");
+  const gateSnap = readJsonSnapshot(week, "governance-prod-gate.json");
+
+  let validateRatio = null;
+  let validateNote = "n/d";
+  if (validateSnap?.ok && Array.isArray(validateSnap.data) && validateSnap.data.length > 0) {
+    const total = validateSnap.data.length;
+    const success = validateSnap.data.filter((r) => r.conclusion === "success").length;
+    validateRatio = pct(success, total);
+    validateNote = `validate ${success}/${total}`;
+  }
+
+  let gateRatio = null;
+  let gateNote = "n/d";
+  if (gateSnap?.ok && Array.isArray(gateSnap.data)) {
+    const withJob = gateSnap.data.filter((r) => r.has_job);
+    if (withJob.length > 0) {
+      const approved = withJob.filter(
+        (r) => r.job_conclusion === "success" && Array.isArray(r.approvals) && r.approvals.length > 0
+      ).length;
+      gateRatio = pct(approved, withJob.length);
+      gateNote = `gate ${approved}/${withJob.length}`;
+    }
+  }
+
+  const components = [validateRatio, gateRatio].filter((v) => v !== null);
+  if (components.length === 0) return { ratio: null, note: null };
+  const ratio = Math.round(components.reduce((a, b) => a + b, 0) / components.length);
+  const note = `${validateNote} + ${gateNote} — quota PR esclusa (maintainer singolo, ADR-GTF-011)`;
+  return { ratio, note };
+}
+
 function isPublic(record) {
   return (record.visibility ?? "public") === "public";
 }
@@ -131,6 +171,8 @@ function computeIndicators(records) {
       ? `sonda HMAC (${snap ? `componente "worker", snapshot ${snap.week}` : "nessuno snapshot"}) + ancoraggi dogfooding onorati (${anchor.done}/${anchor.expected} mesi da ${GTF_BIRTH_MONTH}) + repo con tag di release (${tags.tagged}/${tags.total || "n/d"}) — proxy iniziale, non ancora la quota storica di versioni taggate`
       : "richiede almeno uno snapshot dal collettore di evidenze, un ancoraggio dogfooding o dati sui tag (nessuno ancora raccolto)";
 
+  const governance = governanceRatio(week);
+
   return [
     { id: "MET-transparency", label: "Trasparenza", value: transparency },
     { id: "MET-integrity", label: "Integrità", value: integrity, note: integrityNote },
@@ -141,7 +183,12 @@ function computeIndicators(records) {
     { id: "MET-conservation", label: "Conservazione", value: null, note: "nessun restore-drill ancora eseguito" },
     { id: "MET-reproducibility", label: "Riproducibilità", value: reproducibility },
     { id: "MET-privacy", label: "Privacy", value: null, note: "richiede uno scanner del codice non ancora costruito" },
-    { id: "MET-governance", label: "Governance", value: null, note: "richiede dati GitHub, score v0 lavora solo offline dal registro" },
+    {
+      id: "MET-governance",
+      label: "Governance",
+      value: governance.ratio,
+      note: governance.note ?? "richiede almeno uno snapshot dal collettore di evidenze (nessuno ancora raccolto)",
+    },
   ];
 }
 
