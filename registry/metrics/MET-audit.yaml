@@ -1,10 +1,13 @@
 id: MET-audit
 title: Audit
 formula: >
-  Giorni trascorsi dall'ultima revisione interna rispetto alla cadenza
-  dichiarata (GTF-ARCH §9.3), più la quota di azioni correttive (ACT)
-  chiuse entro la scadenza. Non ancora calcolabile: nessun ciclo di
-  revisione trimestrale si è ancora concluso da quando il framework esiste
-  (dal 2026-07-09). Si attiverà al primo ciclo completato.
+  Media di due componenti, calcolati offline da generators/score.mjs: (1)
+  freschezza dell'ultima revisione trimestrale (PRC-review-trimestrale) —
+  100 se entro la cadenza dichiarata, poi decadimento lineare fino a 0 a
+  due cadenze di ritardo; (2) quota di azioni correttive (ACT) chiuse
+  entro scadenza sul totale delle risolte (chiuse + scadute) — con zero
+  ACT ancora risolte il componente è assente, non 100. Attivata dal
+  2026-07-19 (primo ciclo di revisione concluso, vedi
+  gtf/docs/verbali/2026-07-review-trimestrale.md).
 unit: "0-100 oppure n/d"
 visibility: public

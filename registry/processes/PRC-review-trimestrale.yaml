@@ -6,4 +6,6 @@ output: "controllo dei CTL con last_reviewed/review_every_days in scadenza entro
 produces_evidence: []
 human_cost_minutes_month: 20
 frequency_days: 90
+last_run: "2026-07-19"
+last_outcome: ok
 visibility: public
