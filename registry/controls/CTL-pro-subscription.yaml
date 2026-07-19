@@ -7,7 +7,8 @@ mitigates: [RSK-payment-integration, RSK-profiling-data]
 implemented_by: [IMP-imgauth-pro-subscription]
 evidenced_by: [EVD-pro-subscription-live-test, EVD-git-imgauth, EVD-git-imgauthweb]
 verify_howto: >
-  Apri imgauth.spaziogenesi.org/profilo, accedi con un login OAuth one-shot
+  Apri attestazione.spaziogenesi.org/profilo/ (P29: guscio statico su
+  authweb, fetch verso imgauth), accedi con un login OAuth one-shot
   (Google/Microsoft/LinkedIn — stesso meccanismo di CTL-dev-selfservice e
   CTL-site-voucher-auth, nessuna password, nessun account). Senza
   abbonamento: prezzo del listino attivo mostrato dinamicamente (mai

@@ -2,8 +2,8 @@ id: EVD-dev-selfservice-privacy
 title: Informativa nel punto di raccolta e policy di retention delle email sviluppatori
 location:
   system: "repo imgauthweb (pubblico) + imgauth (pubblico) + D1 imgauth-health"
-  ref: "imgauthweb: privacy.html §3.5 'Accesso per sviluppatori: richiesta di chiave API' · imgauth: worker.js devKeysPageHtml (informativa sintetica prima del redirect al provider), sweepExpiredAgentRows (anonimizzazione automatica oltre DEV_OWNER_RETENTION_MS = 180gg), handleAdminKeysUpdate (cancellazione anticipata via forget)"
-  public_via: "https://attestazione.spaziogenesi.org/privacy.html#sviluppatori · https://imgauth.spaziogenesi.org/developer/keys"
+  ref: "imgauthweb: privacy.html §3.5 'Accesso per sviluppatori: richiesta di chiave API', developer/keys/index.html (informativa sintetica prima del redirect al provider, P29: pagina statica, prima era worker.js devKeysPageHtml) · imgauth: sweepExpiredAgentRows (anonimizzazione automatica oltre DEV_OWNER_RETENTION_MS = 180gg), handleAdminKeysUpdate (cancellazione anticipata via forget)"
+  public_via: "https://attestazione.spaziogenesi.org/privacy.html#sviluppatori · https://attestazione.spaziogenesi.org/developer/keys/"
 produced_by: >
   Testo scritto a mano dal gestore in coordinamento col design doc
   P22-DESIGN-selfservice-keys.md: dichiara dato trattato (email, provider,

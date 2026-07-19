@@ -1,0 +1,58 @@
+id: ADR-P29
+title: "P29 — Pagine pubbliche su authweb, il Worker torna a fare solo API e flussi"
+date: 2026-07-19
+status: accepted
+context: >
+  Quattro pagine destinate agli utenti (`/docs`, `/integrazioni`,
+  `/developer/keys`, `/profilo`) erano servite dal Worker imgauth invece
+  che da authweb, l'interfaccia pubblica del servizio — un'incoerenza di
+  dominio (due host per un solo servizio agli occhi di chi naviga e dei
+  motori di ricerca) accumulata fase dopo fase (P22, P26, P27, P28) senza
+  mai essere corretta. In più, la pagina `/developer/keys` mostrava la
+  chiave `sg_k_…` appena emessa in una risposta HTML del Worker — non un
+  rischio concreto (nessun log la registra), ma un'occasione di
+  irrigidire ulteriormente la garanzia "la chiave non tocca mai un
+  server" già usata per il voucher `#sgv=` (P25 §2.7).
+decision: >
+  Migrare tutte e quattro le pagine su authweb (GitHub Pages, HTML puro),
+  lasciando imgauth a fare solo API ed endpoint di flusso (OAuth,
+  Stripe, device flow). Ogni fase rilasciata solo dopo aver confermato
+  **live la pagina authweb prima di attivare il 301** sul vecchio path
+  (mai un redirect verso una pagina non ancora pubblicata) — per la
+  vetrina Integrazioni, l'unica con una dipendenza dati (serve
+  `GET /api/integrations` per generarsi), questo ha richiesto due deploy
+  separati del Worker. La chiave API self-service non è più renderizzata
+  in nessuna pagina HTML: la callback OAuth (`purpose='key'`) fa sempre
+  un 302 con l'esito SOLO nel fragment dell'URL (`#sgk=…`, `#sgstate=…`,
+  `#sgerr=…`) — un miglioramento di privacy non richiesto esplicitamente
+  dal problema originale, aggiunto perché lo stesso pattern era già
+  collaudato per il voucher. Aggiunto anche il 301 di
+  `imgauth.spaziogenesi.org/c/*` verso la canonica su attestazione
+  (decisione esplicita del gestore): elimina contenuto duplicato, QR e
+  certificati stampano già quell'URL.
+consequences: >
+  Nessun nuovo trattamento di dati personali, nessuna modifica al
+  contratto `/api/*` (cresce di un solo endpoint pubblico,
+  `GET /api/integrations`, sorgente machine-readable per la CI di
+  authweb) — la migrazione è di superficie (dove vive l'HTML), non di
+  sostanza. Due bug reali scoperti nel collaudo dal vivo, nessuno dei due
+  nei test locali: (1) il `GITHUB_TOKEN` di default di GitHub Actions è
+  read-only sull'org, i due nuovi workflow di sync (openapi.json,
+  vetrina Integrazioni) fallivano silenziosamente sul `git push` finché
+  non è stato aggiunto `permissions: contents: write` esplicito —
+  scoperto lanciando un workflow a mano, non da un test automatizzato;
+  (2) testo invisibile sui bottoni provider di `/developer/keys/`: un
+  selettore CSS generico (`section.blocco a`) vinceva per specificità su
+  quello dedicato (`.provider-link`), stesso colore oro di testo e
+  sfondo — stessa classe di bug già vista in P25 (verificare il
+  contrasto reso in browser, non solo la presenza nel DOM). Trade-off
+  accettato: le pagine statiche (`/developer/keys/`, `/profilo/`) non
+  riflettono più la configurazione runtime dei provider OAuth su imgauth
+  (bottoni sempre presenti, prima sparivano se client id/secret
+  mancanti) — nessun impatto di sicurezza, solo di UX in un caso raro
+  (provider temporaneamente non configurato). Collaudo reale del
+  gestore sul round-trip Stripe completo su `/profilo/` (login, portale,
+  riattivazione di un abbonamento sospeso, ritorno con stato aggiornato)
+  prima di considerare la FASE 4 chiusa.
+affects: [CTL-dev-selfservice, CTL-pro-subscription, CTL-integrations-showcase]
+visibility: public

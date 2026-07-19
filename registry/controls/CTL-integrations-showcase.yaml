@@ -7,13 +7,14 @@ mitigates: [RSK-third-party-content]
 implemented_by: [IMP-imgauth-integrations-showcase]
 evidenced_by: [EVD-integrations-showcase, EVD-git-imgauth, EVD-git-imgauthweb]
 verify_howto: >
-  Apri imgauth.spaziogenesi.org/integrazioni: vetrina pubblica, solo le
+  Apri attestazione.spaziogenesi.org/integrazioni/ (P29: pagina statica su
+  authweb, rigenerata a evento da imgauth): vetrina pubblica, solo le
   candidature approvate compaiono (logo, nome, descrizione, link
   `rel="noopener nofollow"`), con conteggio totale e spiegazione onesta che
   la presenza non è una certificazione del software. Chi ha una chiave API
   attiva o un abbonamento Professionale può candidare la propria
   applicazione dalla sezione "La tua integrazione" di
-  imgauth.spaziogenesi.org/profilo (stesso login OAuth one-shot di
+  attestazione.spaziogenesi.org/profilo/ (stesso login OAuth one-shot di
   CTL-dev-selfservice e CTL-pro-subscription): la candidatura risulta
   subito `pending`, mai pubblica finché il gestore non la approva dal
   pannello /admin (scheda Integrazioni) — pre-moderazione, a differenza di

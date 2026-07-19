@@ -7,13 +7,17 @@ mitigates: [RSK-dev-selfservice-signup-abuse, RSK-agent-credential-abuse]
 implemented_by: [IMP-imgauth-dev-selfservice]
 evidenced_by: [EVD-git-imgauth, EVD-dev-selfservice-privacy]
 verify_howto: >
-  Apri GET /developer/keys su imgauth.spaziogenesi.org: mostra l'informativa
-  privacy sintetica prima del redirect e tre bottoni "Continua con
-  Google/Microsoft/LinkedIn" (assenti se il provider non è configurato;
-  LinkedIn dal 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). Dopo il
-  login, la chiave sg_k_… è mostrata una sola volta e autentica su
-  /api/hash come qualunque altra API key. Una seconda richiesta con la
-  stessa email non emette una seconda chiave ("hai già una chiave attiva").
+  Apri attestazione.spaziogenesi.org/developer/keys/ (P29: pagina statica
+  su authweb, tre bottoni "Continua con Google/Microsoft/LinkedIn" ora
+  fissi nell'HTML — trade-off accettato in FASE 3, non riflettono più la
+  configurazione runtime del provider su imgauth): mostra l'informativa
+  privacy sintetica prima del redirect (LinkedIn dal 2026-07-12, imgauth
+  1.20.0, ADR-P25-linkedin). Dopo il login, la callback OAuth reindirizza
+  con la chiave sg_k_… SOLO nel fragment dell'URL (`#sgk=…`, mai in una
+  risposta HTML del server, P29), mostrata una sola volta dal JS lato
+  client e usabile su /api/hash come qualunque altra API key. Una seconda
+  richiesta con la stessa email non emette una seconda chiave (fragment
+  `#sgstate=gia-attiva`).
   Nel pannello /admin la chiave compare con colonna Titolare (email +
   provider); revocandola compare "Dimentica titolare" per l'anonimizzazione
   immediata (altrimenti automatica dopo 180 giorni dalla revoca, via cron).
