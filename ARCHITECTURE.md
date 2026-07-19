@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.1.2 · **Data**: 2026-07-19 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.1.3 · **Data**: 2026-07-19 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -335,8 +335,12 @@ la rileva) anziché un'abitudine.
 2. **Evidenza del processo di release**: tag git firmati o almeno release GitHub per ogni
    bump di versione (oggi la versione è nel manifest ma il rilascio non lascia un oggetto
    release). CTL nuovo, costo ~0 (fa parte del flusso di deploy).
-3. **Evidenza di restore**: il backup non provato non è un'evidenza. `PRC-restore-drill`
-   semestrale (manuale, ≤30 min, verbale = record EVD).
+3. ✅ **Evidenza di restore** — chiuso il 2026-07-19 (P33): backup offsite R2→
+   secondo provider implementato e provato con un restore drill reale (3
+   campioni, firma HMAC + ancoraggio Bitcoin + badge tutti verificati),
+   verbale pubblico in `docs/verbali/2026-07-restore-drill.md`,
+   `CTL-r2-offsite-backup` attivo. `PRC-restore-drill` prosegue con cadenza
+   semestrale (≤30 min, verbale = record EVD).
 4. **Canary HMAC esterno** (già P17-B in backlog): unica evidenza che rileva la rotazione
    errata del segreto. Entra nel GTF come `CTL-hmac-canary` con `status: draft`.
 
@@ -429,8 +433,8 @@ chiunque può ricalcolarlo dagli stessi dati (PRN-08).
 | Tracciabilità | % CTL con catena completa REQ→CTL→IMP→EVD senza buchi |
 | Documentazione | % record entro `review_every_days`; penalità per `stale` |
 | Automazione | % EVD `collection: auto` |
-| Audit | giorni dall'ultima review interna vs cadenza; % finding (ACT) chiusi nei termini |
-| Conservazione | freshness snapshot; esito ultimo restore-drill (binario, decade dopo 210gg) |
+| Audit | freschezza dell'ultima revisione trimestrale (100 entro cadenza, decadimento lineare fino a due cadenze di ritardo) + quota ACT chiuse entro scadenza sul totale delle risolte (attiva dal 2026-07-19, P33) |
+| Conservazione | quota delle ultime 8 settimane ISO con snapshot presente + esito dell'ultimo restore-drill (100 se riuscito entro 210gg, 0 se fallito o decaduto, assente se mai eseguito) — attiva dal 2026-07-19, P33 |
 | Riproducibilità | % claim pubblici con procedura di verifica eseguibile da terzi |
 | Privacy | % flussi rilevati da uno scanner su schema SQL + prefissi R2 di imgauth (ultimo tag) mappati a un DAT, al netto dei falsi positivi dichiarati (ADR-GTF-012, P32) |
 | Governance | media di % run `validate.yml` (gtf) `success` e % run `ci.yml` (imgauth) con gate di produzione P24 approvato; quota PR esclusa dal calcolo v1, non applicabile a un maintainer singolo (ADR-GTF-011, P32) |
