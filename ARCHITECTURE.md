@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.1.1 · **Data**: 2026-07-14 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.1.2 · **Data**: 2026-07-19 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -432,8 +432,8 @@ chiunque può ricalcolarlo dagli stessi dati (PRN-08).
 | Audit | giorni dall'ultima review interna vs cadenza; % finding (ACT) chiusi nei termini |
 | Conservazione | freshness snapshot; esito ultimo restore-drill (binario, decade dopo 210gg) |
 | Riproducibilità | % claim pubblici con procedura di verifica eseguibile da terzi |
-| Privacy | % flussi con DAT completo; assenza dati personali negli snapshot (check automatico) |
-| Governance | % merge nel registro via PR con review; % decisioni non-ovvie con ADR |
+| Privacy | % flussi rilevati da uno scanner su schema SQL + prefissi R2 di imgauth (ultimo tag) mappati a un DAT, al netto dei falsi positivi dichiarati (ADR-GTF-012, P32) |
+| Governance | media di % run `validate.yml` (gtf) `success` e % run `ci.yml` (imgauth) con gate di produzione P24 approvato; quota PR esclusa dal calcolo v1, non applicabile a un maintainer singolo (ADR-GTF-011, P32) |
 
 ### 8.3 Anti-gaming (il punteggio deve poter scendere)
 
