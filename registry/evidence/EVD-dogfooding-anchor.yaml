@@ -3,7 +3,7 @@ title: Bundle mensile di evidenze GTF attestato e ancorato in Bitcoin col serviz
 location: { system: git-gtf, ref: "snapshots/anchors/<periodo>-bundle.json + certificato PDF scaricato da attestazione.spaziogenesi.org", public_via: "GET /c/<sha256> (pagina pubblica del certificato) e GET /api/ots?hash=<sha256>" }
 collection: auto
 freshness_max_days: 40
-last_seen: 2026-07-19
+last_seen: 2026-07-20
 integrity: >
   Raccolta settimanale (collect-evidence.mjs, P32/C2): ricalcola in locale
   lo SHA-256 del bundle mensile più recente in snapshots/anchors/ (nessun

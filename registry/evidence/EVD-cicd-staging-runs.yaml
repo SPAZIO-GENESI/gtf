@@ -19,7 +19,7 @@ produced_by: >
   dell'interfaccia di staging pubblicata su attestazione-staging, flusso
   completo scegli→attesta→PDF→verifica confermato dal vivo.
 collection: auto
-last_seen: 2026-07-19
+last_seen: 2026-07-20
 integrity: "raccolta settimanale (collect-evidence.mjs, riuso dei dati già raccolti per MET-governance/P32, zero fetch in più): prova solo che i run di ci.yml su imgauth/main sono pubblicamente visibili via API GitHub — verificabile anche a mano aprendo la tab Actions del repo pubblico imgauth, dove ogni run mostra i singoli step con esito"
 supports: [CTL-cicd-pipeline]
 visibility: public

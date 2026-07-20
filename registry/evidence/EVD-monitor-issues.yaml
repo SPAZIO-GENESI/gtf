@@ -3,7 +3,7 @@ title: Issue GitHub aperte/chiuse automaticamente sui guasti rilevati dal monito
 location: { system: github, ref: "imgauth issues label:status-alert", public_via: "issue tracker del repo pubblico imgauth, filtro label status-alert" }
 produced_by: PRC-status-sampling
 collection: auto
-last_seen: 2026-07-19
+last_seen: 2026-07-20
 integrity: "un'issue per guasto critico (worker/archivio/firma), commentata e richiusa al ripristino; storia immutabile di fatto (GitHub)"
 supports: [CTL-availability-monitoring]
 visibility: public

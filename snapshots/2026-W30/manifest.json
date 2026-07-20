@@ -1,0 +1,24 @@
+{
+  "collected_at": "2026-07-20T07:12:53.357Z",
+  "week": "2026-W30",
+  "files": {
+    "status.json": "e71281f7ddca648bac30c03b7d1612400085df2b99c32be4dbc96c833e432ab4",
+    "status-history.json": "1ef31bc4af5f659b21d3a538d29c7a4aa353707827207a12b063df4bf5fc00d1",
+    "health-log.json": "f955e42dcb9cf19e61d16d7d8d7067bde38d0c8483e455839f62376c12291be9",
+    "ping-imgauth.json": "860930ebdf4f4b2e911e5628a0c861a2bcb7e1dd37aef01a8b67966bd22e0247",
+    "monitor-issues.json": "d10cc982fa92b6c55d2cda6251d10c23715ca6f3c70f1744b05cfa4204918991",
+    "git-imgauth.json": "ddbffc2f91c249e9c3bb8052b760d9de14aff67333935e86ac9b3a9a642cf0c6",
+    "git-imgauthweb.json": "444e7134598fb6d2c5bb68d17b4165299b35159584a9ffa596b5430c6d637fe9",
+    "git-authart.json": "7230af680f01d4bdf0196cfe66f8dff1ac6213dc7348f8d8ec239c82f9f916b6",
+    "tags-imgauth.json": "2c895bd28bdf877e22257cf7bd3627533ac1d5889543bcb8f40911231109d290",
+    "tags-imgauthweb.json": "9453cfa649dce119783d80d2b1bc609ff0f26d134d4ea596dd4cb79038ebfaed",
+    "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9",
+    "governance-validate-runs.json": "ce73b2e616a5ecb5c9f7edaf3bb1aa3feacd930d0894320c0ee9f9e4b2e85f6c",
+    "governance-prs.json": "fdd89b1630c013767d070021a28b9f4671f6915c958cb06783826a35c68ae179",
+    "governance-prod-gate.json": "17b2a84ef67bc32b2f66dd4c6545ffbbc22f737bbda52c9e8c965e404e6d35e5",
+    "changelog-user.json": "5abffe7c0398630d9e81e7e6f60aeec43591e909a170ddf5c01e3ceff1688bfb",
+    "cloudflare-access-admin.json": "846292f39f919424b5fa750555b682799f6999039990657ffe4f442930508598",
+    "edge-security-headers.json": "2d9a5b1f383c1ee37524071d154bc72dc565dc825d6fb3a6ece3590cae2dff11",
+    "dogfooding-anchor.json": "a24d66f02ca412ee21ac90ead4dee0175569cb198b1e31e6d3167c882484637a"
+  }
+}
