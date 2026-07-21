@@ -258,6 +258,27 @@ async function main() {
     results["dogfooding-anchor"] = { file: null, hash: null, ok: false, anchored: false };
   }
 
+  // EVD-security-txt (P37): security.txt raggiungibile e non scaduto su
+  // entrambi i domini. GET, non HEAD (il Worker imgauth non risponde a
+  // HEAD, memoria gtf-collector-network-gotchas).
+  results["security-txt"] = {
+    attestazione: await fetchText("https://attestazione.spaziogenesi.org/.well-known/security.txt"),
+    imgauth: await fetchText("https://imgauth.spaziogenesi.org/.well-known/security.txt"),
+  };
+  {
+    const notExpired = (text) => {
+      const m = /^Expires:\s*(.+)$/m.exec(text ?? "");
+      if (!m) return false;
+      const d = new Date(m[1].trim());
+      return !Number.isNaN(d.getTime()) && d.getTime() > today.getTime();
+    };
+    const securityTxtOk = ["attestazione", "imgauth"].every((k) => {
+      const r = results["security-txt"][k];
+      return Boolean(r.ok && r.text.includes("Contact:") && notExpired(r.text));
+    });
+    if (securityTxtOk) evdHits.add("EVD-security-txt");
+  }
+
   const manifest = { collected_at: today.toISOString(), week, files: {} };
   for (const [name, data] of Object.entries(results)) {
     const filename = `${name}.json`;

@@ -1,0 +1,11 @@
+id: PRC-security-txt-renewal
+title: Rinnovo annuale del campo Expires di security.txt
+owner: it@spaziogenesi.org
+trigger: "allarme Telegram di check-cadences.mjs ~1 mese prima della scadenza del campo Expires (frequency_days 330 su un Expires a 365 giorni)"
+output: "Expires (+1 anno) rigenerato in ENTRAMBI i file (imgauthweb/.well-known/security.txt, imgauth/public/.well-known/security.txt — stessa data, un solo processo di rinnovo) e rilasciato: push authweb (GitHub Pages) + imgauth via pipeline P24 (staging → gate produzione)"
+produces_evidence: [EVD-security-txt]
+human_cost_minutes_month: 2
+frequency_days: 330
+last_run: "2026-07-21"
+last_outcome: ok
+visibility: public

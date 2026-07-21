@@ -1,0 +1,60 @@
+id: ADR-P37
+title: "P37 — security.txt (RFC 9116) e policy di responsible disclosure"
+date: 2026-07-21
+status: accepted
+context: >
+  Primo lavoro adottato dall'analisi esterna sulla roadmap del 21/07
+  (`img-auth-hub/VALUTAZIONE-analisi-esterna-roadmap-2026-07-21.md` §2.1).
+  Verificato lo stesso giorno: `/.well-known/security.txt` rispondeva 404
+  sia su `attestazione.spaziogenesi.org` sia su `imgauth.spaziogenesi.org`
+  — un ricercatore che avesse trovato una vulnerabilità non aveva un canale
+  dichiarato per segnalarla, né una garanzia esplicita di non conseguenze
+  per una ricerca in buona fede (vedi RSK-undisclosed-vulnerability).
+decision: >
+  Pubblicato un `security.txt` conforme RFC 9116 su entrambi i domini
+  (`imgauthweb/.well-known/security.txt`, servito da GitHub Pages;
+  `imgauth/public/.well-known/security.txt`, servito come static asset del
+  Worker, priorità sugli asset già attiva in wrangler.toml — zero righe
+  toccate in worker.js) e una pagina pubblica di policy
+  (`attestazione.spaziogenesi.org/sicurezza/`): ambito dichiarato (i due
+  domini, i servizi workers.dev attest-bot/attest-mcp-remote, i repo GitHub
+  pubblici dell'organizzazione), contatto `mailto:it@spaziogenesi.org`,
+  impegno di safe harbor per la ricerca in buona fede, tempi di risposta (5
+  giorni lavorativi), limiti espliciti (niente DoS, social engineering,
+  accesso fisico, dati reali di terzi), riconoscimento pubblico invece di
+  bug bounty (ETS no profit, lessico onesto). Solo la collocazione RFC
+  corrente (`.well-known/`); niente campo `Encryption` (nessuna chiave PGP
+  pubblicata, nessuna creata per questo piano); `Expires` a un anno, con un
+  nuovo processo (`PRC-security-txt-renewal`) che allarma via Telegram circa
+  un mese prima della scadenza — il rinnovo non dipende dalla memoria di
+  nessuno, stesso principio di `PRC-restore-drill`/`PRC-review-trimestrale`.
+  `trust.spaziogenesi.org` e il sito principale restano fuori perimetro,
+  estendibili in un giro successivo.
+
+  Nella stessa valutazione esterna (§4-5), quattro proposte sono state
+  esaminate e scartate, non ignorate: **certificazione ISO 27001** (costo
+  d'audit sproporzionato per un ETS di questa scala; il GTF la usa già "a
+  ispirazione" nella Compliance Map, coerente con REQ-27001-inspiration-01);
+  **SOC 2** (standard USA per vendor B2B enterprise, zero rilevanza per il
+  pubblico di riferimento italiano; l'Open Trust Score del GTF è la risposta
+  equivalente e più verificabile, registro committato e riproducibile
+  offline); **Sigstore** (categoria sbagliata — firma keyless di artefatti
+  software, non di opere digitali; l'idea trasferibile del transparency log
+  resta annotata nel whitepaper, non adottata); **pentest commerciale
+  dedicato** (costo sproporzionato ora; coperture alternative già in campo:
+  l'audit black-box P7, e la possibilità di chiedere a Radixia una
+  componente di security testing nella review annuale già pianificata).
+consequences: >
+  Un ricercatore esterno che parta da uno qualunque dei due domini trova in
+  ≤2 click canale di contatto, ambito, safe harbor e tempi di risposta — non
+  più un vuoto. Il controllo nasce direttamente `active`: i due file e la
+  pagina sono live e verificati (200 su entrambe le URL, redatti secondo il
+  design doc P37), non solo dichiarati — stesso criterio già applicato a
+  P24/P25/P27. Nessun nuovo trattamento di dati personali (il file è
+  statico, la pagina non raccoglie nulla). Il rinnovo annuale di `Expires`
+  è un processo ricorrente in più da tracciare, ma con allarme automatico
+  (nessun affidamento alla memoria umana, stesso principio di
+  RSK-cadence-drift).
+affects: [CTL-responsible-disclosure]
+evidence: [EVD-security-txt]
+visibility: public

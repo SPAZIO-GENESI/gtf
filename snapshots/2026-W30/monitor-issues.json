@@ -1,5 +1,112 @@
 {
   "ok": true,
-  "data": [],
+  "data": [
+    {
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues/4",
+      "repository_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth",
+      "labels_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues/4/labels{/name}",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues/4/comments",
+      "events_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues/4/events",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauth/issues/4",
+      "id": 4936696625,
+      "node_id": "I_kwDOR0mRsc8AAAABJkADMQ",
+      "number": 4,
+      "title": "🔴 Disservizio rilevato (/api/status)",
+      "user": {
+        "login": "github-actions[bot]",
+        "id": 41898282,
+        "node_id": "MDM6Qm90NDE4OTgyODI=",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+        "html_url": "https://github.com/apps/github-actions",
+        "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 11584743568,
+          "node_id": "LA_kwDOR0mRsc8AAAACsoEokA",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/labels/status-alert",
+          "name": "status-alert",
+          "color": "ededed",
+          "default": false,
+          "description": null
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2026-07-21T07:58:46Z",
+      "updated_at": "2026-07-21T09:00:15Z",
+      "closed_at": "2026-07-21T09:00:15Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Rilevato un problema sui servizi (`/api/status`):\n\n- signer = down\n\n```json\n{\"worker\":\"ok\",\"archive\":\"ok\",\"signer\":\"down\",\"anchor\":\"ok\",\"checked_at\":\"2026-07-21T07:58:43.341Z\"}\n```\n\nControllo: 2026-07-21T07:58:45.786Z",
+      "closed_by": {
+        "login": "github-actions[bot]",
+        "id": 41898282,
+        "node_id": "MDM6Qm90NDE4OTgyODI=",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+        "html_url": "https://github.com/apps/github-actions",
+        "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "reactions": {
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues/4/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues/4/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null
+    }
+  ],
   "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues?labels=status-alert&state=all&per_page=20"
 }

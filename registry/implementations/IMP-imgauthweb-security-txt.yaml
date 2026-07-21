@@ -1,0 +1,6 @@
+id: IMP-imgauthweb-security-txt
+title: "security.txt + pagina /sicurezza/ (authweb)"
+repo: imgauthweb
+ref: ".well-known/security.txt (RFC 9116, Contact/Expires/Preferred-Languages/Canonical/Policy); sicurezza/index.html (ambito, come segnalare, safe harbor, limiti, riconoscimento, English summary); .nojekyll aggiunto in root perché GitHub Pages/Jekyll esclude le dot-directory di default; footer con voce 'Segnala una vulnerabilità' su tutte le pagine + scripts/build-integrazioni.mjs"
+supports: [CTL-responsible-disclosure]
+visibility: public

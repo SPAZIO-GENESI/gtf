@@ -1,0 +1,9 @@
+id: EVD-security-txt
+title: "security.txt raggiungibile e non scaduto su entrambi i domini"
+location: { system: authweb + imgauth-worker, ref: "GET https://attestazione.spaziogenesi.org/.well-known/security.txt e GET https://imgauth.spaziogenesi.org/.well-known/security.txt" }
+collection: auto
+freshness_max_days: 8
+last_seen: 2026-07-21
+integrity: "raccolta settimanale (collect-evidence.mjs): GET (mai HEAD, il Worker imgauth non risponde a HEAD) su entrambe le URL, verifica 200 + presenza di 'Contact:' + un campo 'Expires:' con data futura rispetto al momento della raccolta — non valida la sintassi RFC 9116 completa né il contenuto della pagina /sicurezza/ collegata"
+supports: [CTL-responsible-disclosure]
+visibility: public

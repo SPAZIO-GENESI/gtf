@@ -2,25 +2,25 @@
   "ok": true,
   "data": [
     {
-      "sha": "0fbb0267c1c2012ef4f5f2c127d973b5dbd51670",
-      "node_id": "C_kwDOR1AMp9oAKDBmYmIwMjY3YzFjMjAxMmVmNGY1ZjJjMTI3ZDk3M2I1ZGJkNTE2NzA",
+      "sha": "0078f90e486ff707ff4493539547d95b37b8f26f",
+      "node_id": "C_kwDOR1AMp9oAKDAwNzhmOTBlNDg2ZmY3MDdmZjQ0OTM1Mzk1NDdkOTViMzdiOGYyNmY",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T18:59:49Z"
+          "date": "2026-07-21T13:34:59Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T18:59:49Z"
+          "date": "2026-07-21T13:34:59Z"
         },
-        "message": "privacy: par. 3.8 -- dichiarato il trattamento 'codici sconto riservati' (pro_discounts.restricted_email, debito documentale P32)\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+        "message": "feat: security.txt (RFC 9116) + pagina /sicurezza/ (P37)\n\nCanale dichiarato di responsible disclosure: .well-known/security.txt\nsu entrambi i domini del servizio, pagina pubblica /sicurezza/ con\npolicy (contatto, ambito, safe harbor, limiti), link nel footer a\n4 colonne di tutte le pagine + template del generatore integrazioni,\nsitemap e changelog aggiornati. APP_VERSION 1.26.0.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
         "tree": {
-          "sha": "67f9854e1034e41d06b29d79ba0944a1ef7a612f",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/67f9854e1034e41d06b29d79ba0944a1ef7a612f"
+          "sha": "7ea90dc6410977eb2759a7b7e2833a1c9645fb10",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/7ea90dc6410977eb2759a7b7e2833a1c9645fb10"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/0fbb0267c1c2012ef4f5f2c127d973b5dbd51670",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/0078f90e486ff707ff4493539547d95b37b8f26f",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -30,9 +30,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/0fbb0267c1c2012ef4f5f2c127d973b5dbd51670",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/0fbb0267c1c2012ef4f5f2c127d973b5dbd51670",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/0fbb0267c1c2012ef4f5f2c127d973b5dbd51670/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/0078f90e486ff707ff4493539547d95b37b8f26f",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/0078f90e486ff707ff4493539547d95b37b8f26f",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/0078f90e486ff707ff4493539547d95b37b8f26f/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -77,32 +77,32 @@
       },
       "parents": [
         {
-          "sha": "c6a3d54450f752ad1185a5e91e4fef2b34e35576",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/c6a3d54450f752ad1185a5e91e4fef2b34e35576",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/c6a3d54450f752ad1185a5e91e4fef2b34e35576"
+          "sha": "4caafd4d9e2adaab35f3ab9e23ce9726caa0d784",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/4caafd4d9e2adaab35f3ab9e23ce9726caa0d784",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/4caafd4d9e2adaab35f3ab9e23ce9726caa0d784"
         }
       ]
     },
     {
-      "sha": "c6a3d54450f752ad1185a5e91e4fef2b34e35576",
-      "node_id": "C_kwDOR1AMp9oAKGM2YTNkNTQ0NTBmNzUyYWQxMTg1YTVlOTFlNGZlZjJiMzRlMzU1NzY",
+      "sha": "4caafd4d9e2adaab35f3ab9e23ce9726caa0d784",
+      "node_id": "C_kwDOR1AMp9oAKDRjYWFmZDRkOWUyYWRhYWIzNWYzYWI5ZTIzY2U5NzI2Y2FhMGQ3ODQ",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T11:53:58Z"
+          "date": "2026-07-21T09:56:11Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T11:53:58Z"
+          "date": "2026-07-21T09:56:11Z"
         },
-        "message": "feat: authweb 1.23.0 -- footer a quattro gruppi, nuova colonna \"Fasce e accesso\"\n\nEstratte le tre voci di P25/P27 (Fasce e condizioni, Fascia Professionale,\nArea professionale) dalla colonna Servizio (7 voci) in un quarto gruppo\ndedicato \"Fasce e accesso\", secondo in ordine dopo Servizio. Riorganizzazione\npura su 11 file (10 HTML + template del generatore integrazioni), nessuna\nURL nuova o cambiata.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "P36-B FASE 4: authweb 1.25.0 — changelog della barra proporzionale\n\nAccompagna il rilascio di imgauth 1.30.0 (campo `b` con le fasce da 30\nminuti su /api/status-history): la barra di /status disegna una tacca\nproporzionale alla durata reale del disservizio invece di colorare\nl'intera giornata, e l'uptime e' pesato sul tempo.\n\nIl rendering era gia' nel commit di FASE 2 (aba48a2); qui solo la voce\ndi changelog pubblico e il bump di APP_VERSION. sitemap.xml non toccata:\nlastmod di /status/ e /changelog/ e' gia' 2026-07-21, stesso giorno\ndell'opzione A.\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
         "tree": {
-          "sha": "d404c62a4812dc63e607c76d9344b848024070f4",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/d404c62a4812dc63e607c76d9344b848024070f4"
+          "sha": "7148a758dbeb9c976cc4e9fe9b7753568559ed87",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/7148a758dbeb9c976cc4e9fe9b7753568559ed87"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/c6a3d54450f752ad1185a5e91e4fef2b34e35576",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/4caafd4d9e2adaab35f3ab9e23ce9726caa0d784",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -112,9 +112,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/c6a3d54450f752ad1185a5e91e4fef2b34e35576",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/c6a3d54450f752ad1185a5e91e4fef2b34e35576",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/c6a3d54450f752ad1185a5e91e4fef2b34e35576/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/4caafd4d9e2adaab35f3ab9e23ce9726caa0d784",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/4caafd4d9e2adaab35f3ab9e23ce9726caa0d784",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/4caafd4d9e2adaab35f3ab9e23ce9726caa0d784/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -159,32 +159,32 @@
       },
       "parents": [
         {
-          "sha": "58c23ddd68b9750086d62cb3f4d8577375ea2176",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/58c23ddd68b9750086d62cb3f4d8577375ea2176",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/58c23ddd68b9750086d62cb3f4d8577375ea2176"
+          "sha": "aba48a2a7c75714f33e52747d0338160bf1a7f64",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/aba48a2a7c75714f33e52747d0338160bf1a7f64",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/aba48a2a7c75714f33e52747d0338160bf1a7f64"
         }
       ]
     },
     {
-      "sha": "58c23ddd68b9750086d62cb3f4d8577375ea2176",
-      "node_id": "C_kwDOR1AMp9oAKDU4YzIzZGRkNjhiOTc1MDA4NmQ2MmNiM2Y0ZDg1NzczNzVlYTIxNzY",
+      "sha": "aba48a2a7c75714f33e52747d0338160bf1a7f64",
+      "node_id": "C_kwDOR1AMp9oAKGFiYTQ4YTJhN2M3NTcxNGYzM2U1Mjc0N2QwMzM4MTYwYmYxYTdmNjQ",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T08:53:24Z"
+          "date": "2026-07-21T09:39:08Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T08:53:24Z"
+          "date": "2026-07-21T09:39:08Z"
         },
-        "message": "P30: coerenza pagine authweb — riconoscere Professionale/convenzione ovunque\n\n- profilo/index.html + js/profilo.js: nuova card stateConvention, intestazione\n  neutra \"Accedi con la tua email\", footer standard a colonne\n- index.html + js/app.js: blocco email generalizzato a Professionale, banner\n  identità con fascia effettiva da /api/pro/me (fail-safe), avvisi onesti per\n  fascia professionale e quota mensile esaurita\n- developer/*, privacy.html §3.7: testi superati dal P27/P28 corretti\n  (quota più alta = fascia Professionale; convenzioni anche per aziende)\n- footer: nuova voce \"Fascia Professionale\" su 9 pagine + generatore vetrina;\n  monitor/index.html noindex\n- versione 1.22.0, changelog pubblico, sitemap lastmod\n\nNessuna modifica a imgauth: solo authweb, frontend.",
+        "message": "P36-B FASE 2: barra proporzionale (tacca) al posto del giorno pieno\n\nrender() disegna un segmento rosso/ambra sovrapposto (bar-split) quando il\ngiorno arriva con il campo b (fasce), proporzionale a down/degraded su n;\nfallback identico a oggi (barra piena worst-of-day) se b è assente (giorno\nvecchio formato o nodata). Tooltip con percentuale operativa reale e numero\ndi intervalli con disservizio. CSS in status/index.html: .bar-split verde\ndi sfondo con segmenti assoluti, min-height 2px per restare visibile anche\ncon un solo intervallo su 48.",
         "tree": {
-          "sha": "2120c21751b8cb18bd7436a9f4e0161c3da8841b",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/2120c21751b8cb18bd7436a9f4e0161c3da8841b"
+          "sha": "4e26448c824d4b1116b710a7f41670eddbf83a63",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/4e26448c824d4b1116b710a7f41670eddbf83a63"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/58c23ddd68b9750086d62cb3f4d8577375ea2176",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/aba48a2a7c75714f33e52747d0338160bf1a7f64",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -194,9 +194,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/58c23ddd68b9750086d62cb3f4d8577375ea2176",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/58c23ddd68b9750086d62cb3f4d8577375ea2176",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/58c23ddd68b9750086d62cb3f4d8577375ea2176/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/aba48a2a7c75714f33e52747d0338160bf1a7f64",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/aba48a2a7c75714f33e52747d0338160bf1a7f64",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/aba48a2a7c75714f33e52747d0338160bf1a7f64/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -241,32 +241,32 @@
       },
       "parents": [
         {
-          "sha": "4ea04e9d26b9f9b5a52dbe38d03561c1808a6754",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/4ea04e9d26b9f9b5a52dbe38d03561c1808a6754",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/4ea04e9d26b9f9b5a52dbe38d03561c1808a6754"
+          "sha": "987afc4edfae172636c48de4c0d6370ac311c988",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/987afc4edfae172636c48de4c0d6370ac311c988",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/987afc4edfae172636c48de4c0d6370ac311c988"
         }
       ]
     },
     {
-      "sha": "4ea04e9d26b9f9b5a52dbe38d03561c1808a6754",
-      "node_id": "C_kwDOR1AMp9oAKDRlYTA0ZTlkMjZiOWY5YjVhNTJkYmUzOGQwMzU2MWMxODA4YTY3NTQ",
+      "sha": "987afc4edfae172636c48de4c0d6370ac311c988",
+      "node_id": "C_kwDOR1AMp9oAKDk4N2FmYzRlZGZhZTE3MjYzNmM0OGRlNGMwZDYzNzBhYzMxMWM5ODg",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T07:26:05Z"
+          "date": "2026-07-21T08:24:29Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T07:26:05Z"
+          "date": "2026-07-21T08:24:29Z"
         },
-        "message": "P29 FASE 5: link residui su /profilo e /integrazioni, changelog, bump 1.21.0\n\nTutti i link che puntavano ancora a imgauth.spaziogenesi.org/profilo e\n/integrazioni (footer di ogni pagina, prosa in developer/, condizioni/,\nprofessionale/, integrazioni/, privacy.html, JSON-LD di professionale/,\ngeneratore build-integrazioni.mjs) ora puntano ai percorsi canonici su\nquesto stesso sito. privacy.html §3.5 aggiorna anche l'URL di\n/developer/keys e nota il miglioramento di privacy della consegna\nchiave via fragment. Voce di changelog pubblico per l'intera P29\n(\"Un solo indirizzo per tutto il servizio\"). APP_VERSION 1.20.0 -> 1.21.0.\n\nVerificato: sweep locale con Playwright su tutte le pagine toccate\n(index, developer, developer/keys, docs, integrazioni, profilo,\nchangelog, status, condizioni, professionale, privacy) — zero errori\nconsole su tutte tranne la home, dove gli errori CORS/Turnstile sono\nun artefatto noto del test da origin locale, non legato a queste modifiche.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "feat(status): riepilogo d'impatto onesto nel dettaglio giorno (authweb 1.24.1)\n\nLa pagina /status coloriva la barra di un'intera giornata al primo intoppo\n(rollup = stato peggiore del giorno), dando l'impressione di un'indisponibilità\ndurata 24h anche per un timeout di pochi minuti (segnalazione reale sul\nfirmatario, 21/07 09:58). Opzione A (solo display, nessun cambio a imgauth):\n\n- drill-down: nuovo riquadro d'impatto ricavato dagli eventi reali di\n  health_log (quanti episodi, a che ora, resto della giornata regolare)\n- tooltip barra + pastiglia riepilogo: \"non disponibile\" -> \"disservizio\n  rilevato\" (non asserisce piu' una durata estesa all'intero giorno)\n- changelog pubblico, sitemap lastmod, APP_VERSION 1.24.0 -> 1.24.1\n\nVerificato: node --check, logica su dati reali, rendering Edge headless.\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
         "tree": {
-          "sha": "867dbdedb19626f187d79817c5e1bc280b403b6b",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/867dbdedb19626f187d79817c5e1bc280b403b6b"
+          "sha": "1a9bf0fa48d0a94789657b412ad30f69fc7cfcd9",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/1a9bf0fa48d0a94789657b412ad30f69fc7cfcd9"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/4ea04e9d26b9f9b5a52dbe38d03561c1808a6754",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/987afc4edfae172636c48de4c0d6370ac311c988",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -276,9 +276,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/4ea04e9d26b9f9b5a52dbe38d03561c1808a6754",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/4ea04e9d26b9f9b5a52dbe38d03561c1808a6754",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/4ea04e9d26b9f9b5a52dbe38d03561c1808a6754/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/987afc4edfae172636c48de4c0d6370ac311c988",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/987afc4edfae172636c48de4c0d6370ac311c988",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/987afc4edfae172636c48de4c0d6370ac311c988/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -323,32 +323,32 @@
       },
       "parents": [
         {
-          "sha": "af35fb4507fde05a4ac0dd81171c8e776d50d8ad",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/af35fb4507fde05a4ac0dd81171c8e776d50d8ad",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/af35fb4507fde05a4ac0dd81171c8e776d50d8ad"
+          "sha": "a6f3e6c82b3035d9b84e370a158b8f8bdc47da26",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/a6f3e6c82b3035d9b84e370a158b8f8bdc47da26",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/a6f3e6c82b3035d9b84e370a158b8f8bdc47da26"
         }
       ]
     },
     {
-      "sha": "af35fb4507fde05a4ac0dd81171c8e776d50d8ad",
-      "node_id": "C_kwDOR1AMp9oAKGFmMzVmYjQ1MDdmZGUwNWE0YWMwZGQ4MTE3MWM4ZTc3NmQ1MGQ4YWQ",
+      "sha": "a6f3e6c82b3035d9b84e370a158b8f8bdc47da26",
+      "node_id": "C_kwDOR1AMp9oAKGE2ZjNlNmM4MmIzMDM1ZDliODRlMzcwYTE1OGI4ZjhiZGM0N2RhMjY",
       "commit": {
         "author": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T07:01:18Z"
+          "date": "2026-07-21T05:37:58Z"
         },
         "committer": {
           "name": "maxAlone",
           "email": "mascam64@gmail.com",
-          "date": "2026-07-19T07:01:18Z"
+          "date": "2026-07-21T05:37:58Z"
         },
-        "message": "P29 FASE 4: guscio statico /profilo/ con fetch assolute verso imgauth\n\nprofilo/index.html (noindex, canonical) + js/profilo.js: stesso guscio\ne stessa logica del Worker, adattati per vivere su authweb. Tutte le\nchiamate passano dal wrapper api() esistente, ora prefissato con\nAPI_BASE assoluto verso imgauth.spaziogenesi.org (CORS gia' pronto sul\nWorker). Le liste segmento/regione/OS e i tre bottoni provider, prima\ngenerati server-side, sono ora hardcoded nell'HTML statico (stesso\ntrade-off gia' accettato per /developer/keys/ in FASE 3). Corretto\nanche il link della vetrina nello snippet badge, prima ancora\nimgauth.../integrazioni invece della canonica su authweb.\n\nTestato con Playwright contro un server statico locale: stato\nanonimo (zero fetch, bottoni con contrasto corretto, select popolate),\ne stato \"attivo\" con risposte /api/pro/* mockate (voucher catturato dal\nfragment e ripulito dall'URL, header X-SG-Voucher presente, tutte le\nfetch verso l'URL assoluto giusto, portale POST corretto).\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+        "message": "feat: link \"Crediti Logo\" nel footer della home (autrice del logo)\n\nDopo Tangram.page, credito all'autrice del logo del contest associati\n(biografia su spaziogenesi.org). Solo footer index.html.",
         "tree": {
-          "sha": "1ffc595b17eb63779fc02e21ad3d3a80258e8c84",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/1ffc595b17eb63779fc02e21ad3d3a80258e8c84"
+          "sha": "5600a5b540a2828794c715d407831b8814efa65e",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/trees/5600a5b540a2828794c715d407831b8814efa65e"
         },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/af35fb4507fde05a4ac0dd81171c8e776d50d8ad",
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/git/commits/a6f3e6c82b3035d9b84e370a158b8f8bdc47da26",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -358,9 +358,9 @@
           "verified_at": null
         }
       },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/af35fb4507fde05a4ac0dd81171c8e776d50d8ad",
-      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/af35fb4507fde05a4ac0dd81171c8e776d50d8ad",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/af35fb4507fde05a4ac0dd81171c8e776d50d8ad/comments",
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/a6f3e6c82b3035d9b84e370a158b8f8bdc47da26",
+      "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/a6f3e6c82b3035d9b84e370a158b8f8bdc47da26",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/a6f3e6c82b3035d9b84e370a158b8f8bdc47da26/comments",
       "author": {
         "login": "maxalone",
         "id": 28682199,
@@ -405,9 +405,9 @@
       },
       "parents": [
         {
-          "sha": "54c9e95549c13c9217f8f587b13a47df7f0bd376",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/54c9e95549c13c9217f8f587b13a47df7f0bd376",
-          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/54c9e95549c13c9217f8f587b13a47df7f0bd376"
+          "sha": "836f0e624a7319a66b509d554a1d4ab4d35f6ae8",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits/836f0e624a7319a66b509d554a1d4ab4d35f6ae8",
+          "html_url": "https://github.com/SPAZIO-GENESI/imgauthweb/commit/836f0e624a7319a66b509d554a1d4ab4d35f6ae8"
         }
       ]
     }

@@ -1,0 +1,6 @@
+id: IMP-imgauth-security-txt
+title: "security.txt (RFC 9116) come static asset del Worker"
+repo: imgauth
+ref: "public/.well-known/security.txt, servito da [assets] in wrangler.toml (priorità sugli asset per i path che combaciano) senza alcuna modifica a worker.js; package.json e openapi.json (info.version, guardia CI P34) allineati alla versione di rilascio"
+supports: [CTL-responsible-disclosure]
+visibility: public

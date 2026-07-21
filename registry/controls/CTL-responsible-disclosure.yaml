@@ -1,0 +1,22 @@
+id: CTL-responsible-disclosure
+title: "security.txt (RFC 9116) + policy pubblica di responsible disclosure"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01, REQ-27043-ir-01]
+mitigates: [RSK-undisclosed-vulnerability]
+implemented_by: [IMP-imgauthweb-security-txt, IMP-imgauth-security-txt]
+evidenced_by: [EVD-security-txt]
+verify_howto: >
+  `curl https://attestazione.spaziogenesi.org/.well-known/security.txt` e
+  `curl https://imgauth.spaziogenesi.org/.well-known/security.txt`
+  rispondono entrambi 200 con `Contact: mailto:it@spaziogenesi.org`, un
+  `Expires` nel futuro e `Policy: https://attestazione.spaziogenesi.org/sicurezza/`.
+  Quella pagina elenca l'ambito (i due domini, i servizi workers.dev
+  attest-bot/attest-mcp-remote, i repo GitHub pubblici dell'organizzazione),
+  l'impegno di safe harbor per la ricerca in buona fede, la presa in carico
+  entro 5 giorni lavorativi, i limiti espliciti (niente DoS, social
+  engineering, accesso fisico, dati reali di terzi) e un riepilogo in
+  inglese. Il rinnovo di `Expires` è tracciato da PRC-security-txt-renewal.
+owner: it@spaziogenesi.org
+review_every_days: 330
+last_reviewed: 2026-07-21

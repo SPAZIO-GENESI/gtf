@@ -4,5 +4,5 @@ statement: >
   Deve esistere un processo definito e provato di rilevazione e risposta
   ai guasti/incidenti, non solo una reazione ad hoc.
 applicability: partial
-satisfied_by: [CTL-availability-monitoring]
+satisfied_by: [CTL-availability-monitoring, CTL-responsible-disclosure]
 visibility: public
