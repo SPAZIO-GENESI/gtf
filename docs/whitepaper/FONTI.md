@@ -205,3 +205,194 @@ I due claim che richiedono verifica **esterna** (non nel registro/CLAUDE.md)
 sono isolati sopra: stato dell'arte SHA-256 (§5) e spec/adozione C2PA
 (§11) — citare versione/data della fonte pubblica consultata, come
 richiesto dal gotcha §9.6 del design doc.
+
+---
+
+# ESITO DELLA FASE 2 (2026-07-21)
+
+FASE 2 completata: scritte le quattro sezioni nuove (§4 modello di
+minaccia, §5 fondamenti crittografici, §8 limiti dichiarati, §10
+posizionamento C2PA) più il posizionamento eIDAS (§9.1), ed eseguito il
+fact-check dell'intero documento, comprese le sezioni derivate in F1.
+
+## A. Fonti esterne consultate e verificate in F2
+
+Tutte consultate il **21 luglio 2026**. Il gotcha §9.6 del design doc
+chiede di citare versione/data: fatto, sia qui sia nei commenti del
+sorgente.
+
+**Crittografia (§5)**
+- NIST, FIPS 180-4 *Secure Hash Standard* — standard di SHA-256.
+- NIST SP 800-131A — SHA-256 raccomandata come minimo per
+  l'interoperabilità; SHA-2 e SHA-3 ammesse.
+- NIST, *NIST Retires SHA-1 Cryptographic Algorithm* (dicembre 2022) —
+  SHA-1 già vietata per la generazione di firme digitali, deprecata fino
+  al 31/12/2030, non ammessa oltre.
+- *The First Practical Collision for 31-Step SHA-256*, ASIACRYPT 2024 —
+  collisione pratica su 31 dei 64 passi, ~1,2 ore su 64 thread.
+- *Collision Attacks on SHA-256 up to 37 Steps with Improved Trail
+  Search*, EUROCRYPT 2026 — IACR ePrint **2026/232**, 13 febbraio 2026,
+  Zhang / Li / Gao / Wang. ⚠️ Verificata solo la **pagina ePrint** (titolo,
+  autori, data, "first 37-step collision attack"): il PDF completo non è
+  stato letto, quindi il whitepaper **non afferma nulla** su complessità
+  o tipo di collisione — solo il numero di passi, che è nel titolo.
+- Kelsey–Schneier, *Second Preimages on n-Bit Hash Functions for Much Less
+  than 2^n Work* (2005) — costo k·2^(n/2+1) + 2^(n−k). Il valore 2^222 per
+  un messaggio da 2^34 blocchi è **aritmetica derivata** dalla formula,
+  non una citazione.
+- Grover / post-quantistico: consenso pubblico corrente (SHA-256 → ~2^128
+  effettivi; i percorsi di transizione PQC riguardano la chiave pubblica,
+  non impongono la sostituzione delle hash SHA-2).
+
+**C2PA (§10)**
+- Specifica tecnica C2PA **2.4, aprile 2026** — versione e data verificate
+  direttamente sulla specifica pubblicata (spec.c2pa.org). Per contesto:
+  2.3 del 05/01/2026, 2.2 del 01/05/2025 — cadenza rapida, motivo per cui
+  il testo scrive sempre "alla data di questo documento".
+- Governance: Joint Development Foundation, affiliata Linux Foundation;
+  specifica aperta royalty-free. ⚠️ **Non** è stato possibile confermare
+  che C2PA sia uno standard ISO o di altro ente formale: il whitepaper
+  quindi **non lo afferma**.
+- *C2PA Soft Binding API* + elenco pubblico degli algoritmi di soft
+  binding approvati — filigrane invisibili e impronte percettive per
+  recuperare un manifest rimosso, tramite un'API di risoluzione remota.
+- Sezione della specifica su dati incorporati vs conservati all'esterno —
+  fonte del punto sulla rimovibilità del manifest.
+- EU AI Act: obblighi di trasparenza sui contenuti sintetici applicabili
+  dal **2 agosto 2026** (fonti concordanti). ⚠️ Esiste una proroga in
+  discussione al 02/12/2026 per i sistemi già sul mercato: **non citata**
+  nel testo perché in evoluzione e destinata a invecchiare in un PDF
+  immutabile.
+
+**eIDAS (§9.1)**
+- Regolamento (UE) n. 910/2014, come modificato dal Regolamento (UE)
+  2024/1183 ("eIDAS 2", in vigore dal 20/05/2024).
+- Articoli 25 (firma elettronica), 41 (marca temporale — non
+  discriminazione al §1, presunzione riservata alle sole marche
+  qualificate al §2), 46 (documento elettronico).
+- ⚠️⚠️ **Limite di verifica da segnalare al gestore**: EUR-Lex non è
+  risultata leggibile dagli strumenti automatici (pagina vuota in due
+  tentativi, sia sul testo originale sia sul consolidato al 18/10/2024).
+  I numeri di articolo e la sostanza sono stati verificati su **fonti
+  secondarie concordanti**, non sul testo letterale. Per questo il
+  whitepaper **parafrasa e non virgoletta mai** il Regolamento. Si
+  raccomanda una verifica umana dei tre riferimenti prima della
+  pubblicazione. Nessuna affermazione dipende dal numero esatto: se un
+  riferimento risultasse errato si corregge il numero, non la sostanza.
+
+## B. Errori trovati nel fact-check delle sezioni derivate in F1
+
+Cinque, tutti corretti nel sorgente con un commento `⚠️ CORREZIONE F2`
+adiacente. Sono elencati qui perché la loro tipologia è istruttiva: sono
+tutti **overclaim per generalizzazione**, cioè affermazioni vere in un
+caso presentate come vere in tutti.
+
+1. **§2.2** — «il canale web è l'unico in cui il file non transita mai da
+   alcun server». **Falso**: `ARCHITECTURE.md` Assunzione 11 (P26)
+   stabilisce che il canale MCP remoto ha "un livello di privacy pari al
+   sito", e lo stdio calcola l'impronta in locale. L'unico canale con
+   transito reale è quello di messaggistica (Assunzione 10). Corretto, e
+   propagato ad abstract, sommario e §4.1.
+2. **§3.4** — «nessuna delle tre [àncore] dipende da un singolo fornitore
+   commerciale che il servizio controlli direttamente». Ambiguo e in
+   tensione con §8.5: l'HMAC è generato **esattamente** dal servizio.
+   Riscritto per dire la cosa vera e più forte — due delle tre àncore sono
+   fuori dal nostro controllo, ed è quello il punto.
+3. **§7.1** — «è il singolo meccanismo che rende impossibile retrodatare
+   un'attestazione», senza qualificare rispetto a chi. In contraddizione
+   diretta con §8.5 (chi detiene la chiave **può** firmare qualunque
+   istante). Qualificato: impossibile *a chi richiede l'attestazione*.
+4. **§11** — «il registro **è** soggetto a una revisione esterna annuale
+   da parte di Radixia srl». **Overclaim**: verificato su
+   `PRC-review-esterna-annuale`, che ha `produces_evidence: []` e nessun
+   `last_run` — il revisore è designato e il piano pubblicato, ma la prima
+   revisione **non è ancora avvenuta**. Riformulato al futuro, con lo
+   stato attuale dichiarato. È esattamente la classe di affermazione che
+   `RSK-overclaim-eidas` invita a sorvegliare.
+5. **§11** — «lo storico è append-only nel repository». Un repository git
+   non è append-only in senso tecnico. Riformulato in ciò che è vero e
+   comunque sufficiente (ogni rilevazione è committata e conservata; una
+   rimozione sarebbe a sua volta visibile).
+
+Minori, corretti senza commento dedicato: un rimando `(§4)` che puntava
+alla sezione sbagliata dopo la numerazione definitiva (era §3); un accordo
+grammaticale in §6.1; la frase oscura di §11 sui «giorni che superano la
+soglia di disponibilità», che non corrispondeva al comportamento reale
+(ciò che si mostra anche nei giorni senza disservizio sono i
+rallentamenti sotto soglia).
+
+## C. Verifiche di conformità eseguite sul testo finale
+
+- **Gotcha §9.1 (fonti private → documento pubblico)**: sweep sul testo
+  ripulito dai commenti per nomi di fornitori, componenti, script,
+  segreti, endpoint e prodotti interni. **Unico riscontro**: "Adobe AATL",
+  che è il nome di un programma pubblico e compare già nel testo pubblico
+  di `CTL-eidas-honest-positioning`. Nessun altro dettaglio operativo è
+  entrato nel documento.
+- **Lessico onesto**: nessuna occorrenza di "carica/caricare" riferita al
+  file dell'utente. Le due occorrenze presenti sono legittime — "il
+  caricamento su una piattaforma" (di terzi, §10.3) e "scaricare questo
+  PDF" (download reale, §12).
+- **Overclaim**: nessuna occorrenza di "firma qualificata", "sigillo
+  qualificato" riferito a noi, "valore legale", "conforme a eIDAS",
+  "certificazione ISO", né di superlativi di marketing.
+- **Numeri commerciali** (regola §1.9 del design doc): nessun prezzo,
+  fascia o promozione nel testo; §6.3 rimanda alla pagina pubblica delle
+  condizioni. Nessun nome di QTSP e nessuna cifra di costo del sigillo,
+  benché presenti nelle fonti private.
+- **Punteggio di maturità**: verificato su `generators/score.mjs` (media
+  degli indicatori disponibili) e `site/score.json` (10 indicatori, le cui
+  etichette corrispondono a quelle elencate nel testo). Il **valore
+  corrente non è citato**, per non congelare in un PDF immutabile un
+  numero che cambia.
+- **Lunghezza**: ~7.600 parole al netto dei commenti, entro il target di
+  15-25 pagine (§1.8 del design doc).
+
+## D. Deviazioni consapevoli dalla scaletta del design doc
+
+Da sottoporre al gestore in FASE 3.
+
+1. **§5.2 — resistenza alle collisioni.** Il design doc §3.5 chiedeva di
+   argomentare «perché per la proof-of-existence conta la seconda
+   [preimmagine], non la prima [collisione]». Il fact-check ha rilevato
+   che l'affermazione è **imprecisa**: la resistenza alle collisioni serve
+   eccome, ma protegge un soggetto diverso — i terzi contro chi attesta,
+   non chi attesta contro i terzi. È anche la proprietà che storicamente è
+   caduta per MD5 e SHA-1, quindi ometterla sarebbe la scelta peggiore.
+   §5.2 riporta la versione corretta e segnala esplicitamente la
+   semplificazione diffusa. **Il gestore può alleggerire il livello di
+   dettaglio; non può tornare alla formulazione semplificata, che sarebbe
+   scorretta.**
+2. **§4.4 — l'audit iniziale.** La scaletta diceva che il difetto fu
+   corretto «prima di qualunque uso pubblico del servizio». Non
+   verificabile dalle fonti (P0, P1 e P7 sono tutti del 10/06/2026 e
+   risultano già emessi certificati precedenti alla 1.8.0). Sostituito con
+   «nello stesso ciclo di sviluppo in cui fu segnalato», che le fonti
+   sostengono.
+3. **§7.2 — precisione contro indipendenza.** Aggiunto un paragrafo non
+   previsto: la sezione si intitolava "Granularità e affidabilità" ma
+   trattava solo la granularità. Il paragrafo ordina le tre àncore per
+   indipendenza crescente e precisione decrescente.
+4. **§8.8 — «il diritto d'autore sorge con la creazione».** Unica
+   affermazione di natura giuridica introdotta in F2 (principio generale;
+   Convenzione di Berna, in Italia L. 633/1941 art. 6). Il gestore valuti
+   se mantenerla.
+5. **§10.5 ragione 1 — indipendenza dal formato.** È una lettura del
+   perimetro del prodotto, non un fatto tecnico: da confermare.
+6. **§10 — nessun nome commerciale di adopter C2PA.** Verificati (editor,
+   fotocamere di più produttori, generatori IA, piattaforme) ma **non
+   citati per nome**: un elenco datato invecchia male in un PDF
+   immutabile.
+
+## E. Che cosa resta aperto per FASE 3 e successive
+
+- ⛔ **Approvazione esplicita del testo** da parte del gestore: titolo,
+  tono, posizionamento eIDAS, sezione limiti (è quella che espone di più),
+  licenza. Senza, non si passa a FASE 4.
+- Verifica umana dei tre riferimenti eIDAS su EUR-Lex (punto A sopra).
+- Data di pubblicazione e conferma del numero di versione (§12 del
+  sorgente, ancora segnaposto).
+- Impronta del PDF e link `/c/<hash>`: segnaposto in §12, valorizzati in
+  FASE 5 dopo l'attestazione dogfooding.
+- Rimozione dei commenti `<!-- FONTE -->` prima del render (FASE 4.1) —
+  questo file `FONTI.md` **resta** nel repository: è trasparenza anch'esso.
