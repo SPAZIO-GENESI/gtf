@@ -1,25 +1,26 @@
 {
-  "collected_at": "2026-07-21T14:01:03.964Z",
+  "collected_at": "2026-07-21T19:31:48.528Z",
   "week": "2026-W30",
   "files": {
-    "status.json": "3eb165021ba53f636d348dd49f4ca1776c950ef0c41fb1ce0f83f19ff85ad75a",
-    "status-history.json": "28121a42b6aaa9a39b452e52ccb34586faa854d7166ae3a67b1def7eca3b362c",
-    "health-log.json": "12e910f272a02683d9b1004bc2ffbcc6323d53a59eb4b2a45dea5b570dfbc1a8",
+    "status.json": "c9fb5086c0a8409da92b0305a81be3a60da1aa642f77674b2cafa209a42febb7",
+    "status-history.json": "8df7ed83163ff688dc6916b0893aefe13e3d7aa9a3ac16c1d90d92f7ccde7225",
+    "health-log.json": "68ccd4b96eee675985eb88e681c2fcb7d0fb8fd51fa697310778cf2c611aee80",
     "ping-imgauth.json": "1fe1853349c0a1c462fda7ef21f5a582e0c9373a8cd9a3be6dbcd94ba4f3af24",
     "monitor-issues.json": "108e23ddc132ee6e1cd55f3a4595e76b718961d7af48da8a97c77b31bb06a1f0",
-    "git-imgauth.json": "177c38653dda535074d2d18f6b478331c6402f71f8a836dc3db36ffdb85d670f",
-    "git-imgauthweb.json": "339e891b942e7519587b498196a9c1d0ce31fb294215e55c24cbe68c53a01d4e",
+    "git-imgauth.json": "70f026c9532b5548c549306ed4b36a12960245cd611a09ebd1284f6268ceb121",
+    "git-imgauthweb.json": "bd19275a9dfff63aa6b6508f609ca337cd09337a231f6aab4490394293802ab0",
     "git-authart.json": "7230af680f01d4bdf0196cfe66f8dff1ac6213dc7348f8d8ec239c82f9f916b6",
     "tags-imgauth.json": "7bb75caef20dace0b8e8e7a724d863406a1349aa215f0d0ff70cfe3e4c932eb1",
     "tags-imgauthweb.json": "83ab43384c9a0d9c1c07c5aff9210cb43476f09994d3717b3cb9a8e3b97bd7a1",
     "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9",
-    "governance-validate-runs.json": "1b50ac362c9f93e01994b428baa9723fd7a68d1beea85cf152f68d49de7ac677",
+    "governance-validate-runs.json": "bb74c158ea3b08088d137678b54fb555fccf74ea17c52925a870a32709fcb50e",
     "governance-prs.json": "fdd89b1630c013767d070021a28b9f4671f6915c958cb06783826a35c68ae179",
     "governance-prod-gate.json": "e6941102a39706dd56e0f6367570d66a6f2c246f814e0e830cd47fc508a9a6b9",
     "changelog-user.json": "5abffe7c0398630d9e81e7e6f60aeec43591e909a170ddf5c01e3ceff1688bfb",
-    "cloudflare-access-admin.json": "0e7e9b0da79c80d68376530c201436b191493835c495146451d050be4d09474f",
+    "cloudflare-access-admin.json": "8d27b6ab46d6752b3a8fb9d11b135dd2a15f5fb3404c2b8028769051d83e6426",
     "edge-security-headers.json": "2d9a5b1f383c1ee37524071d154bc72dc565dc825d6fb3a6ece3590cae2dff11",
     "dogfooding-anchor.json": "a24d66f02ca412ee21ac90ead4dee0175569cb198b1e31e6d3167c882484637a",
-    "security-txt.json": "ad7ae2808db017ef2da93da4a0664c7e6c791cfc1241cb545b2d3362462546e9"
+    "security-txt.json": "ad7ae2808db017ef2da93da4a0664c7e6c791cfc1241cb545b2d3362462546e9",
+    "whitepaper-integrity.json": "3e77a369b0b6597ad2f2e36e8e56f969f7d472492c57672edc65186ec2a3476d"
   }
 }

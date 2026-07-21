@@ -3,7 +3,7 @@
     "ok": true,
     "data": {
       "day": "2026-07-21",
-      "count": 2,
+      "count": 4,
       "events": [
         {
           "ts": 1784593833255,
@@ -21,6 +21,24 @@
           "latency": 8000,
           "check": "signer",
           "cause": "timeout",
+          "detail": null
+        },
+        {
+          "ts": 1784650859855,
+          "iso": "2026-07-21T16:20:59.855Z",
+          "status": "ok",
+          "latency": 306,
+          "check": "archive",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1784658283790,
+          "iso": "2026-07-21T18:24:43.790Z",
+          "status": "ok",
+          "latency": 305,
+          "check": "archive",
+          "cause": "slow",
           "detail": null
         }
       ]

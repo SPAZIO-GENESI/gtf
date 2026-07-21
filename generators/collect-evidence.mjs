@@ -61,6 +61,18 @@ async function fetchText(url, headers = {}) {
   }
 }
 
+// Come fetchText ma per contenuto binario (PDF): serve per ricalcolare
+// l'impronta del file effettivamente servito, non del file committato.
+async function fetchBytes(url, headers = {}) {
+  try {
+    const res = await fetch(url, { headers, signal: AbortSignal.timeout(15000) });
+    if (!res.ok) return { ok: false, status: res.status, url };
+    return { ok: true, bytes: Buffer.from(await res.arrayBuffer()), url };
+  } catch (e) {
+    return { ok: false, error: e.message, url };
+  }
+}
+
 // Aggiorna last_seen con una sostituzione mirata sul testo grezzo, non un
 // dump YAML completo: preserva formattazione, commenti e ordine dei campi
 // del file esistente (un dump js-yaml li riscriverebbe tutti).
@@ -277,6 +289,18 @@ async function main() {
       return Boolean(r.ok && r.text.includes("Contact:") && notExpired(r.text));
     });
     if (securityTxtOk) evdHits.add("EVD-security-txt");
+  }
+
+  // EVD-whitepaper-integrity (P38): il PDF pubblicato deve restare
+  // bit-per-bit identico all'impronta attestata (ADR-P38) — è dichiarato
+  // immutabile per design. GET, non HEAD (stesso gotcha di rete di sopra).
+  {
+    const WHITEPAPER_SHA256 = "898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452";
+    const pdfRes = await fetchBytes("https://trust.spaziogenesi.org/whitepaper-v1.0.pdf");
+    const liveHash = pdfRes.ok ? sha256(pdfRes.bytes) : null;
+    const matches = liveHash === WHITEPAPER_SHA256;
+    results["whitepaper-integrity"] = { ok: pdfRes.ok, sha256: liveHash, expected: WHITEPAPER_SHA256, matches };
+    if (matches) evdHits.add("EVD-whitepaper-integrity");
   }
 
   const manifest = { collected_at: today.toISOString(), week, files: {} };

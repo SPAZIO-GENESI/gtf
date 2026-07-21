@@ -1,0 +1,72 @@
+id: ADR-P38
+title: "P38 — Whitepaper tecnico pubblico: architettura, garanzie e limiti"
+date: 2026-07-21
+status: accepted
+context: >
+  Secondo lavoro adottato dall'analisi esterna sulla roadmap del 21/07
+  (`img-auth-hub/VALUTAZIONE-analisi-esterna-roadmap-2026-07-21.md` §2.2,
+  "la voce di maggior valore"): mancava un documento tecnico pubblico che
+  spiegasse con rigore che cosa il sistema di attestazione garantisce, con
+  quali meccanismi, e — con lo stesso peso — che cosa non garantisce.
+  Pubblico di riferimento: prestatori di servizi fiduciari, CDA e
+  assemblea dell'ente, accademie e partner convenzionati, revisori esterni
+  indipendenti, ricercatori e sviluppatori.
+decision: >
+  Pubblicato `whitepaper-v1.0.pdf` (18 pagine, licenza CC BY 4.0, autore
+  "Spazio Genesi ETS") su trust.spaziogenesi.org, con pagina di
+  accompagnamento `whitepaper.html` (abstract EN+IT, indice, download,
+  impronta SHA-256, storia delle revisioni). Sorgente Markdown pubblico e
+  versionato in questo stesso repository (`docs/whitepaper/`), con mappa
+  completa claim→fonte in `FONTI.md` per ogni affermazione tecnica.
+
+  Contenuto: flusso end-to-end e sei canali di attestazione; le tre àncore
+  temporali indipendenti (HMAC, marca RFC 3161/AATL, ancoraggio Bitcoin) e
+  la loro analisi di indipendenza; un modello di minaccia esplicito
+  (avversari, mitigazioni, residui accettati — incluso il caso reale
+  dell'audit iniziale che trovò e portò a correggere una falsificabilità,
+  citato come prova di metodo, non nascosto); i fondamenti crittografici
+  di SHA-256 (le tre proprietà distinte e a chi servono, stato dell'arte
+  verificato su fonti pubbliche datate, cosa accadrebbe in caso di
+  indebolimento futuro); una sezione limiti dichiarati che è la più estesa
+  del documento (identità self-signed, metadati auto-dichiarati, impronta
+  dal client, chiave HMAC singola, risoluzione di 30 minuti dello storico
+  di stato); il posizionamento onesto rispetto a eIDAS (riusando il testo
+  già validato del Trust Center) e rispetto a C2PA/Content Credentials
+  (complementare, non concorrente — nessuna adozione in questa versione,
+  con le ragioni esplicitate).
+
+  Processo: fasi 0-1 di ricognizione e assemblaggio da materiale esistente
+  (Sonnet), fase 2 di stesura delle sezioni tecniche nuove e fact-check
+  completo del documento (Opus) — cinque errori corretti, tutti dello
+  stesso tipo (overclaim per generalizzazione: un'affermazione vera in un
+  caso presentata come vera in tutti). La revisione del gestore (fase 3)
+  si è svolta punto per punto in chat, non come approvazione in blocco:
+  il gestore ha verificato di persona sul testo consolidato di EUR-Lex i
+  tre riferimenti eIDAS citati (articoli 25, 41, 46), confermandone numeri
+  e sostanza e affinando la formulazione sulla presunzione di legge
+  riservata alle sole marche temporali qualificate. Su sua richiesta è
+  stato aggiunto un paragrafo che dichiara la natura di ente del terzo
+  settore senza scopo di lucro come ragione strutturale coerente con le
+  scelte di trasparenza del documento — bilanciata esplicitamente
+  ("nessuna forma giuridica garantisce l'onestà di per sé") per non
+  scivolare in materiale promozionale, cosa che il documento esclude fin
+  dalla prima riga.
+
+  Chiusura circolare: il PDF pubblicato è stato a sua volta attestato sul
+  servizio che descrive (stesso pattern del bundle mensile di evidenze,
+  ADR-GTF-008) — pagina pubblica di verifica
+  https://attestazione.spaziogenesi.org/c/898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452.
+consequences: >
+  Un lettore tecnico scettico può verificare da sé ogni affermazione del
+  documento: leggendo il codice pubblico e il registro citati, ricalcolando
+  l'impronta del PDF, e confrontando la pagina di verifica pubblica. Il
+  file `whitepaper-v1.0.pdf` è ora immutabile per design (la sua impronta è
+  attestata): eventuali correzioni future generano una nuova versione
+  numerata, mai una sostituzione silenziosa. Nessun cambio di architettura
+  o di controllo di sicurezza: il whitepaper descrive il sistema esistente,
+  non lo modifica — `ARCHITECTURE.md` non è stato toccato. Zero modifiche a
+  imgauth/authweb: l'unica interazione con il servizio di produzione è
+  stata l'attestazione stessa (dogfooding), eseguita dal gestore dal sito
+  con Turnstile umano.
+evidence: [EVD-whitepaper-integrity]
+visibility: public

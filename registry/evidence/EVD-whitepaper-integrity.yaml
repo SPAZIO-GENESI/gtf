@@ -1,0 +1,15 @@
+id: EVD-whitepaper-integrity
+title: "Il whitepaper pubblicato coincide, byte per byte, con l'impronta attestata"
+location: { system: gtf-site, ref: "GET https://trust.spaziogenesi.org/whitepaper-v1.0.pdf", public_via: "GET /c/898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452 (pagina pubblica di verifica su attestazione.spaziogenesi.org)" }
+collection: auto
+freshness_max_days: 8
+last_seen: 2026-07-21
+integrity: >
+  Raccolta settimanale (collect-evidence.mjs): GET (mai HEAD, memoria
+  gtf-collector-network-gotchas) del PDF pubblicato, ricalcolo dello
+  SHA-256 in locale e confronto con l'impronta attestata
+  (898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452,
+  ADR-P38). Rileva sia un file corrotto/alterato sia un mancato deploy;
+  non riverifica la firma HMAC né la prova OpenTimestamps del certificato
+  stesso (verificabili a mano sulla pagina pubblica).
+visibility: public
