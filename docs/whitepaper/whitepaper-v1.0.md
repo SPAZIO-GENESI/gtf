@@ -22,8 +22,9 @@ nel testo con "NOTA PER F3" o "CORREZIONE F2" nel commento adiacente):
  3. ✅ CHIUSO (2026-07-21) §8.8 — "il diritto d'autore sorge con la
     creazione" è l'unica affermazione di natura giuridica introdotta in
     F2. Il gestore ha scelto di TENERLA — nessuna modifica al testo.
- 4. §10.5 ragione 1 (indipendenza dal formato) è una lettura del
-    perimetro del prodotto, non un fatto tecnico.
+ 4. ✅ CHIUSO (2026-07-21) §10.5 ragione 1 (indipendenza dal formato) è
+    una lettura del perimetro del prodotto, non un fatto tecnico. Il
+    gestore ha scelto di TENERLA — nessuna modifica al testo.
  5. §4.4 — rimossa l'affermazione non verificabile "prima di qualunque
     uso pubblico del servizio" a proposito dell'audit iniziale.
 -->
@@ -1195,9 +1196,9 @@ datata e non alterabile.
      VALUTAZIONE-analisi-esterna-roadmap-2026-07-21.md §2.2/§4.4 (privato).
      Le tre ragioni di §10.5 sono argomentate qui per la prima volta: la
      ragione 2 discende direttamente da CTL-hash-client-side, la ragione 3
-     da CTL-eidas-honest-positioning. ⚠️ Per F3: verificare che il gestore
-     concordi con la ragione 1 (indipendenza dal formato), che è una
-     lettura del perimetro del prodotto, non un fatto tecnico. -->
+     da CTL-eidas-honest-positioning. ✅ CHIUSO IN F3 (2026-07-21): il
+     gestore ha confermato la ragione 1 (indipendenza dal formato) —
+     nessuna modifica al testo. -->
 
 ## 11. Trasparenza operativa
 

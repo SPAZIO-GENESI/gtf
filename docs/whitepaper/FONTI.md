@@ -376,8 +376,10 @@ Da sottoporre al gestore in FASE 3.
    creazione».** Unica affermazione di natura giuridica introdotta in F2
    (principio generale; Convenzione di Berna, in Italia L. 633/1941 art.
    6). **Decisione del gestore: tenerla — nessuna modifica al testo.**
-5. **§10.5 ragione 1 — indipendenza dal formato.** È una lettura del
-   perimetro del prodotto, non un fatto tecnico: da confermare.
+5. ✅ **CHIUSO (2026-07-21) — §10.5 ragione 1 — indipendenza dal
+   formato.** È una lettura del perimetro del prodotto, non un fatto
+   tecnico. **Decisione del gestore: confermata — nessuna modifica al
+   testo.**
 6. **§10 — nessun nome commerciale di adopter C2PA.** Verificati (editor,
    fotocamere di più produttori, generatori IA, piattaforme) ma **non
    citati per nome**: un elenco datato invecchia male in un PDF
