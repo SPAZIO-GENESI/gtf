@@ -14,9 +14,11 @@ nel testo con "NOTA PER F3" o "CORREZIONE F2" nel commento adiacente):
     (25, 41, 46) sono stati verificati dal gestore sul testo letterale di
     EUR-Lex: numeri e sostanza corretti. Applicata una precisazione sulla
     presunzione dell'art. 41 (vedi commento ✅ VERIFICATO IN F3 nel testo).
- 2. §5.2 — deviazione consapevole dalla scaletta del design doc: la
-    formulazione "per la proof-of-existence conta solo la seconda
-    preimmagine" è tecnicamente imprecisa e non è stata usata.
+ 2. ✅ CHIUSO (2026-07-21) §5.2 — deviazione consapevole dalla scaletta del
+    design doc: la formulazione "per la proof-of-existence conta solo la
+    seconda preimmagine" è tecnicamente imprecisa e non è stata usata. Il
+    gestore ha scelto di TENERE il livello di dettaglio attuale (tutte e
+    tre le proprietà spiegate) — nessuna modifica al testo.
  3. §8.8 — "il diritto d'autore sorge con la creazione" è l'unica
     affermazione di natura giuridica introdotta in F2.
  4. §10.5 ragione 1 (indipendenza dal formato) è una lettura del
@@ -636,16 +638,14 @@ hash.
        standard, precedente storico HMAC-MD5.
      FONTE (interna): l'argomento "un'impronta inventata non è preimmagine
      di nulla" resta in §8.3 (ARCHITECTURE.md Assunzione 6).
-     ⚠️ NOTA PER F3 — deviazione consapevole dalla scaletta: il design doc
-     §3.5 chiedeva di argomentare "perché per la proof-of-existence conta
-     la seconda [preimmagine], non la prima [collisione]". Il fact-check
-     ha rilevato che l'affermazione è imprecisa: la resistenza alle
-     collisioni serve eccome, ma protegge un soggetto diverso (i terzi
-     contro chi attesta, non chi attesta contro i terzi). §5.2 riporta la
-     versione corretta e segnala esplicitamente la semplificazione. Il
-     gestore può decidere in F3 se mantenere questo livello di dettaglio o
-     alleggerirlo; non può essere sostituito con la formulazione
-     semplificata, che sarebbe scorretta. -->
+     ✅ CHIUSO IN F3 (2026-07-21) — deviazione consapevole dalla scaletta:
+     il design doc §3.5 chiedeva di argomentare "perché per la
+     proof-of-existence conta la seconda [preimmagine], non la prima
+     [collisione]". Il fact-check ha rilevato che l'affermazione è
+     imprecisa: la resistenza alle collisioni serve eccome, ma protegge un
+     soggetto diverso (i terzi contro chi attesta, non chi attesta contro
+     i terzi). §5.2 riporta la versione corretta. Il gestore ha scelto di
+     TENERE questo livello di dettaglio — nessuna modifica al testo. -->
 
 ## 6. Catena di custodia
 

@@ -352,17 +352,16 @@ rallentamenti sotto soglia).
 
 Da sottoporre al gestore in FASE 3.
 
-1. **§5.2 — resistenza alle collisioni.** Il design doc §3.5 chiedeva di
-   argomentare «perché per la proof-of-existence conta la seconda
-   [preimmagine], non la prima [collisione]». Il fact-check ha rilevato
-   che l'affermazione è **imprecisa**: la resistenza alle collisioni serve
-   eccome, ma protegge un soggetto diverso — i terzi contro chi attesta,
-   non chi attesta contro i terzi. È anche la proprietà che storicamente è
-   caduta per MD5 e SHA-1, quindi ometterla sarebbe la scelta peggiore.
-   §5.2 riporta la versione corretta e segnala esplicitamente la
-   semplificazione diffusa. **Il gestore può alleggerire il livello di
-   dettaglio; non può tornare alla formulazione semplificata, che sarebbe
-   scorretta.**
+1. ✅ **CHIUSO (2026-07-21) — §5.2 — resistenza alle collisioni.** Il
+   design doc §3.5 chiedeva di argomentare «perché per la
+   proof-of-existence conta la seconda [preimmagine], non la prima
+   [collisione]». Il fact-check ha rilevato che l'affermazione è
+   **imprecisa**: la resistenza alle collisioni serve eccome, ma protegge
+   un soggetto diverso — i terzi contro chi attesta, non chi attesta
+   contro i terzi. È anche la proprietà che storicamente è caduta per MD5
+   e SHA-1, quindi ometterla sarebbe la scelta peggiore. §5.2 riporta la
+   versione corretta. **Decisione del gestore: tenere il livello di
+   dettaglio attuale — nessuna modifica al testo.**
 2. **§4.4 — l'audit iniziale.** La scaletta diceva che il difetto fu
    corretto «prima di qualunque uso pubblico del servizio». Non
    verificabile dalle fonti (P0, P1 e P7 sono tutti del 10/06/2026 e
