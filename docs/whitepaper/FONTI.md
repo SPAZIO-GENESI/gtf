@@ -389,7 +389,13 @@ Da sottoporre al gestore in FASE 3.
 - ⛔ **Approvazione esplicita del testo** da parte del gestore: titolo,
   tono, posizionamento eIDAS, sezione limiti (è quella che espone di più),
   licenza. Senza, non si passa a FASE 4.
-- Verifica umana dei tre riferimenti eIDAS su EUR-Lex (punto A sopra).
+- ✅ **CHIUSO (2026-07-21)** — Verifica umana dei tre riferimenti eIDAS su
+  EUR-Lex (punto A sopra): il gestore ha letto il testo consolidato del
+  Regolamento (UE) 910/2014 e confermato numeri e sostanza degli articoli
+  25/41/46. Applicata in §9.1 una precisazione sulla presunzione dell'art.
+  41 (evitare di presentare la versione non qualificata come "sempre
+  rimessa al giudice caso per caso"; il punto esatto è l'assenza di quella
+  specifica presunzione di legge). Nessuna verifica ulteriore necessaria.
 - Data di pubblicazione e conferma del numero di versione (§12 del
   sorgente, ancora segnaposto).
 - Impronta del PDF e link `/c/<hash>`: segnaposto in §12, valorizzati in

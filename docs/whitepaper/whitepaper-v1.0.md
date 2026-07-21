@@ -10,10 +10,10 @@ Non rendere questo file in PDF così com'è.
 
 PUNTI CHE RICHIEDONO UNA DECISIONE DEL GESTORE IN FASE 3 (tutti marcati
 nel testo con "NOTA PER F3" o "CORREZIONE F2" nel commento adiacente):
- 1. §9.1 — i riferimenti agli articoli eIDAS (25, 41, 46) sono verificati
-    su fonti secondarie concordanti, NON sul testo letterale di EUR-Lex
-    (irraggiungibile dagli strumenti automatici). Verifica umana
-    raccomandata. Il documento parafrasa e non virgoletta mai.
+ 1. ✅ CHIUSO (2026-07-21) §9.1 — i riferimenti agli articoli eIDAS
+    (25, 41, 46) sono stati verificati dal gestore sul testo letterale di
+    EUR-Lex: numeri e sostanza corretti. Applicata una precisazione sulla
+    presunzione dell'art. 41 (vedi commento ✅ VERIFICATO IN F3 nel testo).
  2. §5.2 — deviazione consapevole dalla scaletta del design doc: la
     formulazione "per la proof-of-existence conta solo la seconda
     preimmagine" è tecnicamente imprecisa e non è stata usata.
@@ -1023,10 +1023,14 @@ possono essere negati gli effetti giuridici e l'ammissibilità come prova
 in giudizio per il solo motivo della loro forma elettronica o del fatto
 che non soddisfino i requisiti della corrispondente versione qualificata.
 La differenza fra qualificato e non qualificato non è dunque fra "vale" e
-"non vale": è fra una presunzione stabilita per legge, che sposta l'onere
-della prova su chi contesta, e una valutazione rimessa al giudice nel caso
-concreto. Questo servizio si colloca — dichiaratamente — nel secondo
-gruppo.
+"non vale": è che la sola versione qualificata beneficia di una
+presunzione stabilita per legge — per la marca temporale, l'articolo 41
+la definisce come presunzione di accuratezza della data e dell'ora e di
+integrità dei dati associati — che sposta l'onere della prova su chi
+contesta. La versione non qualificata resta pienamente ammissibile come
+prova, ma senza quell'automatismo specifico: la sua efficacia probatoria
+va argomentata nel merito, invece di beneficiare di una presunzione di
+legge. Questo servizio si colloca — dichiaratamente — nel secondo gruppo.
 
 **Roadmap.** L'evoluzione verso un sigillo elettronico qualificato è nella
 roadmap pubblica del progetto ed è condizionata alla sostenibilità
@@ -1038,18 +1042,15 @@ economica dell'organizzazione. Non è associata ad alcuna data (§8.1).
      articolato con i riferimenti puntuali agli articoli. REQ-eidas-pos-01
      (pubblico) per il requisito collegato; RSK-overclaim-eidas per il
      rischio che questo paragrafo mitiga (§4.3 M9).
-     ⚠️ NOTA PER F3 (gotcha §9.5 del design doc — l'overclaim eIDAS è il
-     punto più delicato del documento): i numeri di articolo (25, 41, 46) e
-     la sostanza della presunzione dell'art. 41 sono stati verificati in F2
-     su fonti pubbliche secondarie concordanti, ma **il testo letterale su
-     EUR-Lex non è stato leggibile dagli strumenti automatici** (la pagina
-     è tornata vuota in due tentativi, sia sul testo originale sia sul
-     consolidato al 18/10/2024). Per questo il documento **parafrasa e non
-     virgoletta mai** il Regolamento. Si raccomanda una verifica umana dei
-     tre riferimenti su EUR-Lex prima della pubblicazione. Nessuna
-     affermazione di questa sezione dipende dal numero esatto di articolo:
-     se un riferimento risultasse errato, si corregge il numero senza
-     toccare la sostanza. -->
+     ✅ VERIFICATO IN F3 (2026-07-21): il gestore ha letto il testo
+     letterale su EUR-Lex (art. 25, 41, 46 del Regolamento (UE) 910/2014
+     consolidato) e confermato numeri e sostanza corretti. Unica
+     precisazione richiesta: evitare di far sembrare la versione non
+     qualificata sistematicamente "rimessa al giudice caso per caso" in
+     ogni situazione — il punto esatto è che non beneficia di quella
+     specifica presunzione di legge riservata alla versione qualificata.
+     Paragrafo riformulato di conseguenza. Punto chiuso, nessuna verifica
+     ulteriore necessaria prima della pubblicazione. -->
 
 ## 10. Posizionamento rispetto a C2PA / Content Credentials
 
