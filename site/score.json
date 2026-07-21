@@ -12,7 +12,7 @@
       "id": "MET-integrity",
       "label": "Integrità",
       "value": 100,
-      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W29) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"
+      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W30) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"
     },
     {
       "id": "MET-traceability",
@@ -38,8 +38,8 @@
     {
       "id": "MET-conservation",
       "label": "Conservazione",
-      "value": 63,
-      "note": "snapshot 2/8 settimane + drill: riuscito il 2026-07-19 (2 giorni fa)"
+      "value": 69,
+      "note": "snapshot 3/8 settimane + drill: riuscito il 2026-07-19 (2 giorni fa)"
     },
     {
       "id": "MET-reproducibility",
@@ -55,9 +55,9 @@
     {
       "id": "MET-governance",
       "label": "Governance",
-      "value": 94,
-      "note": "validate 30/30 + gate 15/17 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
+      "value": 90,
+      "note": "validate 30/30 + gate 16/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
     }
   ],
-  "computed_at": "2026-07-21T10:20:10.103Z"
+  "computed_at": "2026-07-21T10:21:18.572Z"
 }
