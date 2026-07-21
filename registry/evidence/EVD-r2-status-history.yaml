@@ -1,10 +1,16 @@
 id: EVD-r2-status-history
-title: Rollup giornaliero dello stato dei servizi (90 giorni)
+title: Rollup dello stato dei servizi a 48 fasce da 30 min (90 giorni)
 location: { system: cloudflare-r2, ref: "imgauth-pdf-archive/status/history.json", public_via: "GET /api/status-history" }
 produced_by: PRC-status-sampling
 collection: auto
-last_seen: 2026-07-20
+last_seen: 2026-07-21
 freshness_max_days: 8 # cadenza del collettore settimanale + 1 giorno di margine (il dato live si osserva su /api/status; qui conta la freschezza dello snapshot committato)
-integrity: "stato peggiore del giorno per componente, finestra a scorrimento 90gg, aggiornato dal cron ogni 30 min"
+integrity: >
+  dalla 1.30.0 (P36-B, 2026-07-21): mappa di 48 fasce da 30 min per
+  componente/giorno (o/g/x/nodata), scritta con un max idempotente per
+  fascia (converge anche con isolate concorrenti senza transazioni R2),
+  finestra a scorrimento 90gg, aggiornata dal cron ogni 30 min. Campo
+  `b` (conteggio fasce) additivo: assente sui giorni pre-migrazione, che
+  restano stato-peggiore-del-giorno.
 supports: [CTL-availability-monitoring]
 visibility: public

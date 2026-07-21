@@ -1,5 +1,5 @@
 id: CTL-availability-monitoring
-title: "Stato semaforico pubblico dei servizi, con storico e drill-down giornaliero"
+title: "Stato semaforico pubblico dei servizi, con storico proporzionale e drill-down giornaliero"
 status: active
 visibility: public
 satisfies: [REQ-27043-ir-01, PRN-09]
@@ -8,8 +8,10 @@ implemented_by: [IMP-imgauth-runchecks-status, IMP-imgauth-monitor-workflow]
 evidenced_by: [EVD-status-live, EVD-r2-status-history, EVD-d1-health-log, EVD-monitor-issues]
 verify_howto: >
   Consulta https://attestazione.spaziogenesi.org/status/: stato live,
-  barre 90 giorni con uptime %, drill-down sugli eventi fini di ogni
-  giornata (anche quelle "verdi").
+  barre 90 giorni con uptime % pesato sul tempo (P36, 2026-07-21: un
+  disservizio breve mostra una tacca proporzionale alla sua durata reale,
+  non più l'intera giornata colorata), drill-down sugli eventi fini di
+  ogni giornata (anche quelle "verdi") con un riquadro d'impatto onesto.
 owner: it@spaziogenesi.org
 review_every_days: 180
-last_reviewed: 2026-07-09
+last_reviewed: 2026-07-21

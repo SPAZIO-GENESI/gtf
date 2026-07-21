@@ -1,0 +1,54 @@
+id: ADR-P36
+title: "P36 — /status onesto in entrambe le direzioni: tacca proporzionale e uptime pesato sul tempo"
+date: 2026-07-21
+status: accepted
+context: >
+  Il bot di monitoraggio ha segnalato un timeout del firmatario >8s
+  (cold-start Azure, rientrato da sé in pochi minuti). La pagina pubblica
+  `/status/` mostrava però la barra dell'intera giornata colorata di
+  rosso e l'uptime abbassato come se il servizio fosse stato giù 24 ore:
+  il rollup giornaliero (`recordHistory`) conservava un solo stato per
+  giorno — il peggiore osservato. Il difetto non era nel firmatario ma
+  in come lo stato viene riassunto e raccontato al pubblico, su una
+  pagina che il Trust Center rimanda come prova di trasparenza
+  (`CTL-availability-monitoring`).
+decision: >
+  Due correzioni distinte, entrambe rilasciate. (A, solo display, authweb
+  1.24.1) il dettaglio del giorno mostra un riquadro d'impatto ricavato
+  dagli eventi reali di `/api/health-log` (episodi, orari, "il resto è
+  stato regolare") invece di implicare un guasto esteso a tutta la
+  giornata — non tocca l'uptime. (B, dato + rendering, imgauth 1.30.0 +
+  authweb 1.25.0) il valore-giorno del rollup passa da una stringa-stato
+  a una mappa di 48 fasce da 30 minuti (la cadenza reale del cron:
+  risoluzione onesta massima, sotto la quale si inventerebbe un dato che
+  non esiste), scritta con un max idempotente per fascia; la barra
+  diventa verde con una tacca proporzionale alla durata reale del
+  disservizio (soglia minima 2px perché un incidente vero non sparisca
+  mai visivamente); l'uptime passa da binario per-giorno a pesato sul
+  tempo. Il contratto `GET /api/status-history` cresce in modo additivo
+  (campo `b` con il conteggio delle fasce, assente sui giorni già
+  passati in vecchio formato) — nessun consumatore esistente si rompe.
+  Deciso di non fare backfill dei giorni passati in v1: tecnicamente
+  possibile da `health_log` ma a basso ritorno (l'ancoraggio, in
+  particolare, non ha quasi mai avuto degradi reali dopo P15).
+consequences: >
+  Onestà bidirezionale: un disservizio breve non appare più come un
+  blackout di 24h (il caso reale del 21/07 passa da 97,3% a 99,9% di
+  uptime giornaliero sul componente firmatario), ma un disservizio
+  prolungato continua a tingere la barra in proporzione — nessuna delle
+  due direzioni è stata sacrificata per l'altra. Bug reale scoperto solo
+  in produzione, non nei test: la migrazione soft del formato, alla
+  prima scrittura del nuovo rollup, ha sostituito il valore del giorno
+  *in corso* (ancora in vecchio formato, con l'incidente già registrato)
+  con una mappa vuota valorizzata sulla sola fascia corrente — il blip
+  delle 09:58 è sparito dalla barra mentre il riquadro di (A) continuava
+  a riportarlo. Corretto ricostruendo a mano la mappa dagli eventi reali
+  di `health_log` per quel solo giorno/componente. Lezione generale:
+  qualunque migrazione soft di un formato di rollup va verificata anche
+  sul periodo *in corso* al momento dello switch, non solo su quelli già
+  passati. Nessun nuovo trattamento di dati personali, nessun nuovo
+  rischio: stesso perimetro dei dati già raccolti (health_log, rollup
+  R2), cambia solo la granularità con cui vengono riassunti e mostrati.
+affects: [CTL-availability-monitoring]
+evidence: [EVD-r2-status-history, EVD-status-live, EVD-d1-health-log]
+visibility: public
