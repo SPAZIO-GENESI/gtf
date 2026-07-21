@@ -131,6 +131,28 @@ tanto da ciò che copre quanto dalla trasparenza su ciò che non copre.
      `trasparenza-punto-di-decisione`; qui riportato solo come principio,
      non come catalogo di casi interni -->
 
+Chi fornisce questo servizio non è indifferente a come lo si valuta.
+Spazio Genesi è un ente del terzo settore (ETS) senza scopo di lucro: non
+ha soci di controllo da remunerare né un obiettivo di uscita che renda
+conveniente esagerare le garanzie o minimizzare i limiti. Questo non
+sostituisce le prove tecniche descritte nelle sezioni seguenti — nessuna
+forma giuridica, di per sé, garantisce l'onestà di un sistema — ma è la
+ragione strutturale per cui le scelte descritte in questo documento
+(politiche fail-open dichiarate, una sezione limiti di pari peso rispetto
+alle garanzie, un registro di governance pubblico anziché autodichiarato)
+sono coerenti con l'assenza di un incentivo commerciale a fare
+diversamente.
+<!-- FONTE: natura ETS del gestore — pubblica (stampata su ogni
+     certificato PDF emesso, footer "Spazio Genesi ETS", e dichiarata su
+     tutte le pagine pubbliche del progetto); nessun dettaglio operativo
+     privato (numero RUNTS, indirizzi) riportato qui, non necessario alla
+     tesi. Argomentazione nuova, aggiunta su richiesta del gestore in F3
+     (2026-07-21): la neutralità non-profit come ragione strutturale,
+     non come claim di superiorità morale — bilanciata esplicitamente
+     con "nessuna forma giuridica garantisce l'onestà di per sé", per
+     restare coerente con il registro del documento e non scivolare in
+     materiale promozionale (§1, prima frase). -->
+
 ## 2. Il sistema in breve
 
 Il sistema produce **attestazioni di esistenza** ("proof of existence")

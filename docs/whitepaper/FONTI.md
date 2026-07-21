@@ -55,6 +55,14 @@ Concettuale, non tecnico — deriva dall'obiettivo del design doc stesso
 e dal principio "le garanzie si dichiarano insieme ai limiti", già applicato
 in tutto il progetto (vedi memoria `trasparenza-punto-di-decisione`).
 
+**Aggiunta in FASE 3 (2026-07-21, su richiesta del gestore)**: un
+paragrafo su Spazio Genesi come ente del terzo settore (ETS) senza scopo
+di lucro, e su perché questo è coerente con (non sostitutivo di) le
+garanzie tecniche del documento. Fonte: natura ETS pubblica (stampata su
+ogni certificato emesso, dichiarata su tutte le pagine pubbliche);
+nessun dettaglio privato (RUNTS, indirizzi) riportato. Da includere nella
+revisione del gestore insieme al resto del testo.
+
 ### §3 Il sistema in breve
 - Flusso end-to-end (hash nel browser → timestamp+HMAC server → PDF firmato
   → ancoraggi): `CLAUDE.md` § "Flusso end-to-end" (privato, hub) — concetto
