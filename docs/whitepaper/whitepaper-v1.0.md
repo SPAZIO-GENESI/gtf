@@ -1,53 +1,9 @@
-<!--
-STATO: bozza FASE 2 completata (sezioni nuove + fact-check dell'intero
-documento). Tutte le sezioni sono scritte: non restano stub.
-Prossimo passo: FASE 3 — revisione del gestore (⛔ approvazione esplicita
-del testo prima di qualunque render o pubblicazione).
-
-I commenti <!-- FONTE: ... --> tracciano la provenienza di ogni claim
-(regola §5 del design doc) e vanno RIMOSSI prima del render in FASE 4.
-Non rendere questo file in PDF così com'è.
-
-PUNTI CHE RICHIEDONO UNA DECISIONE DEL GESTORE IN FASE 3 (tutti marcati
-nel testo con "NOTA PER F3" o "CORREZIONE F2" nel commento adiacente):
- 1. ✅ CHIUSO (2026-07-21) §9.1 — i riferimenti agli articoli eIDAS
-    (25, 41, 46) sono stati verificati dal gestore sul testo letterale di
-    EUR-Lex: numeri e sostanza corretti. Applicata una precisazione sulla
-    presunzione dell'art. 41 (vedi commento ✅ VERIFICATO IN F3 nel testo).
- 2. ✅ CHIUSO (2026-07-21) §5.2 — deviazione consapevole dalla scaletta del
-    design doc: la formulazione "per la proof-of-existence conta solo la
-    seconda preimmagine" è tecnicamente imprecisa e non è stata usata. Il
-    gestore ha scelto di TENERE il livello di dettaglio attuale (tutte e
-    tre le proprietà spiegate) — nessuna modifica al testo.
- 3. ✅ CHIUSO (2026-07-21) §8.8 — "il diritto d'autore sorge con la
-    creazione" è l'unica affermazione di natura giuridica introdotta in
-    F2. Il gestore ha scelto di TENERLA — nessuna modifica al testo.
- 4. ✅ CHIUSO (2026-07-21) §10.5 ragione 1 (indipendenza dal formato) è
-    una lettura del perimetro del prodotto, non un fatto tecnico. Il
-    gestore ha scelto di TENERLA — nessuna modifica al testo.
- 5. INFORMATIVO (non richiede decisione) §4.4 — rimossa l'affermazione
-    non verificabile "prima di qualunque uso pubblico del servizio" a
-    proposito dell'audit iniziale, sostituita con "nello stesso ciclo di
-    sviluppo in cui fu segnalato" (verificabile dalle fonti).
- 6. ✅ CHIUSO (2026-07-21) Titolo — confermato dal gestore così com'è.
- 7. ⏳ APERTO, non bloccante — data di pubblicazione e numero di versione
-    (§12): segnaposto, si valorizzano in FASE 4 al momento del render.
-
-TUTTI E 6 I PUNTI CHE RICHIEDEVANO UNA DECISIONE SONO STATI CHIUSI IL
-2026-07-21 (revisione punto per punto in chat con il gestore). Resta solo
-il segnaposto §7 (data/versione), non bloccante. Il testo è quindi
-APPROVATO e pronto per FASE 4, in attesa della conferma esplicita finale
-del gestore sul bundle completo (render + push).
--->
-
 # Attestazione di esistenza per opere digitali: architettura, garanzie e limiti
 
 **Whitepaper tecnico, v1.0**
 Spazio Genesi ETS
-<!-- FONTE: decisione P38-DESIGN-whitepaper-tecnico.md §1.2/§1.3, titolo
-     confermato dal gestore in F3 (2026-07-21) senza modifiche -->
 
-*Bozza — data e numero di versione da confermare alla pubblicazione (FASE 4).*
+*Pubblicato il 21 luglio 2026.*
 
 ---
 
@@ -77,7 +33,6 @@ public, machine-readable governance registry (the Genesis Trust Framework)
 makes every claim in this document independently checkable, including the
 integrity of this PDF itself, which is attested on the very service it
 describes.
-<!-- FONTE: sintesi delle sezioni 3-9, 12; nessun claim nuovo non altrove tracciato -->
 
 ## Sommario
 
@@ -105,7 +60,6 @@ governance pubblico e leggibile da macchina (il Genesis Trust Framework)
 rende ogni affermazione di questo documento verificabile in modo
 indipendente, inclusa l'integrità di questo stesso PDF, attestato sul
 servizio che descrive.
-<!-- FONTE: traduzione italiana dell'abstract, stessa provenienza -->
 
 ---
 
@@ -120,16 +74,12 @@ al Consiglio Direttivo e all'assemblea dei soci dell'ente, ad accademie e
 partner convenzionati che devono spiegare il servizio ai propri iscritti,
 a revisori esterni indipendenti, e a ricercatori e sviluppatori che
 vogliono integrare o verificare il sistema in autonomia.
-<!-- FONTE: P38-DESIGN-whitepaper-tecnico.md §"Pubblico del documento" -->
 
 Il principio guida di questo documento — e, più in generale, di tutta la
 comunicazione pubblica del progetto — è che **le garanzie si dichiarano
 insieme ai limiti**. Non esiste una sezione "vantaggi" senza una sezione
 "limiti" di pari dignità: il valore probatorio di un'attestazione dipende
 tanto da ciò che copre quanto dalla trasparenza su ciò che non copre.
-<!-- FONTE: principio applicato in tutto il progetto, vedi memoria
-     `trasparenza-punto-di-decisione`; qui riportato solo come principio,
-     non come catalogo di casi interni -->
 
 Chi fornisce questo servizio non è indifferente a come lo si valuta.
 Spazio Genesi è un ente del terzo settore (ETS) senza scopo di lucro: non
@@ -142,16 +92,6 @@ ragione strutturale per cui le scelte descritte in questo documento
 alle garanzie, un registro di governance pubblico anziché autodichiarato)
 sono coerenti con l'assenza di un incentivo commerciale a fare
 diversamente.
-<!-- FONTE: natura ETS del gestore — pubblica (stampata su ogni
-     certificato PDF emesso, footer "Spazio Genesi ETS", e dichiarata su
-     tutte le pagine pubbliche del progetto); nessun dettaglio operativo
-     privato (numero RUNTS, indirizzi) riportato qui, non necessario alla
-     tesi. Argomentazione nuova, aggiunta su richiesta del gestore in F3
-     (2026-07-21): la neutralità non-profit come ragione strutturale,
-     non come claim di superiorità morale — bilanciata esplicitamente
-     con "nessuna forma giuridica garantisce l'onestà di per sé", per
-     restare coerente con il registro del documento e non scivolare in
-     materiale promozionale (§1, prima frase). -->
 
 ## 2. Il sistema in breve
 
@@ -180,9 +120,6 @@ tre meccanismi indipendenti a corroborare la data.
    ricalcolo dell'impronta in locale (mai un invio del file al server),
    oppure il solo controllo della validità della firma HMAC — utile per
    chi possiede il certificato ma non l'opera stessa in quel momento.
-<!-- FONTE: CLAUDE.md § "Flusso end-to-end" (privato); concetto equivalente
-     pubblico in CTL-hash-client-side (registro GTF) e nella pagina
-     Attesta/Verifica di attestazione.spaziogenesi.org -->
 
 ### 2.2 Sei canali, una sola garanzia crittografica
 
@@ -203,16 +140,6 @@ altri due — e solo l'impronta viene trasmessa. Il canale di messaggistica
 fa eccezione dichiarata: lì il file transita per forza di cose, l'impronta
 è calcolata al volo e i byte vengono scartati senza essere conservati, e
 questo è comunicato all'utente **prima** del primo utilizzo, non dopo.
-<!-- FONTE: CLAUDE.md tabella repository + voci backlog P21/P23/P26/P29
-     (privato); pubblico in attestazione.spaziogenesi.org/developer/
-     (matrice credenziale×client), privacy.html §3.6 e nei repo pubblici
-     attest-bot, attest-mcp, attest-mcp-remote.
-     ⚠️ CORREZIONE F2 (fact-check): la stesura F1 affermava che il canale
-     web fosse "l'unico in cui il file non transita mai da alcun server".
-     È FALSO: ARCHITECTURE.md Assunzione 11 (P26) stabilisce esplicitamente
-     che il canale MCP remoto ha "un livello di privacy pari al sito", e
-     lo stdio calcola l'hash in locale in streaming. L'unico canale con
-     transito reale è quello di messaggistica (Assunzione 10). Corretto. -->
 
 ### 2.3 Full privacy by design
 
@@ -226,8 +153,6 @@ da dove l'impronta sia stata calcolata — la garanzia anti-retrodatazione
 resta intatta perché timestamp e firma restano generati esclusivamente
 dal server. È lo stesso modello di fiducia adottato da OpenTimestamps
 stesso, i cui calendari pubblici vedono solo digest, mai i file originali.
-<!-- FONTE: ARCHITECTURE.md Assunzione 6 (P16, privato); pubblico in
-     CTL-hash-client-side + privacy.html §2 (authweb) -->
 
 ## 3. Le tre àncore temporali indipendenti
 
@@ -245,8 +170,6 @@ può essere alterata dopo l'emissione senza invalidare la firma: un
 tentativo di modificare l'impronta dichiarata, il timestamp o i metadati
 di un certificato già emesso produce un token che non supera più la
 verifica.
-<!-- FONTE: CLAUDE.md § "Sicurezza emissione certificati" (privato);
-     pubblico in CTL-hmac-signing (registro GTF) -->
 
 I campi puramente descrittivi — nome del file, dimensione dichiarata,
 tipo MIME — restano **fuori** dal perimetro vincolato dalla firma: sono
@@ -255,8 +178,6 @@ prova. Questo è un residuo di design dichiarato, non una lacuna scoperta
 successivamente: l'impronta crittografica, il timestamp e i metadati
 dichiarati dall'autore sono l'unico contenuto che il certificato prova
 davvero.
-<!-- FONTE: CLAUDE.md § "Sicurezza emissione certificati", paragrafo
-     "Residuo noto (basso impatto)" -->
 
 ### 3.2 Marca temporale RFC 3161 — la terza parte fidata
 
@@ -272,8 +193,6 @@ fail-open per design: se la terza parte (TSA) o il servizio di verifica
 dello stato del certificato (OCSP) non sono raggiungibili al momento
 dell'emissione, il certificato viene comunque prodotto, privo della sola
 marca temporale — l'emissione non si blocca per un disservizio esterno.
-<!-- FONTE: CLAUDE.md § authart (privato, backlog P9); pubblico in
-     CTL-pades-blt-tsa + repo pubblico autart-signer (AGPL-3.0) -->
 
 ### 3.3 Ancoraggio Bitcoin — la prova decentralizzata
 
@@ -288,9 +207,6 @@ senza fidarsi né del servizio né dei calendari stessi. La prova è
 transazione Bitcoin sottostante riceve conferma. La ridondanza su più
 calendari indipendenti significa che la prova resta valida anche se uno o
 più calendari smettono di funzionare: ne basta uno a rispondere.
-<!-- FONTE: CLAUDE.md backlog P10/P15 (privato); pubblico in
-     CTL-ots-anchor + CTL-dogfooding-anchor (quest'ultimo con hash e
-     bundle reali verificabili indipendentemente da chiunque) -->
 
 ### 3.4 Indipendenza e degradazione controllata
 
@@ -312,16 +228,6 @@ sempre presente e verificabile istantaneamente; il certificato che ne
 risulta è però distinguibile da uno completo, perché la riga di ancoraggio
 semplicemente non compare quando la prova non esiste. Il degrado è
 visibile, non silenzioso.
-<!-- FONTE: CLAUDE.md § endpoint /api/cert-pdf e § authart
-     ("Fail-open: TSA od OCSP irraggiungibili → firma senza marca";
-     "riga Ancoraggio blockchain nel PDF solo se la prova esiste"),
-     entrambi privati.
-     ⚠️ CORREZIONE F2: la stesura F1 affermava che "nessuna delle tre
-     dipende da un singolo fornitore commerciale che il servizio controlli
-     direttamente" — formulazione ambigua e in tensione con §8.5, dato che
-     l'HMAC è generato ESATTAMENTE dal servizio. Riscritto per dire la
-     cosa vera e più forte: due delle tre àncore sono fuori dal nostro
-     controllo, ed è quello il punto. -->
 
 ## 4. Modello di minaccia
 
@@ -480,33 +386,6 @@ segnalato.
 Il caso è riportato qui, e non omesso, per una ragione precisa: la
 credibilità di un modello di minaccia si misura da quello che ha già
 trovato, non da quanto è completo sulla carta.
-<!-- FONTE: struttura da P38-DESIGN-whitepaper-tecnico.md §3.4.
-     M1/M2: CLAUDE.md § "Sicurezza emissione certificati" (privato) →
-     pubblico in CTL-hmac-signing + CTL-cert-pdf-verification, rischio
-     RSK-cert-forgery. M3: ARCHITECTURE.md Assunzioni 7/9 (privato) →
-     pubblico in RSK-agent-credential-abuse + CTL-agent-access. M4:
-     ragionamento derivato — le tre àncore sono CTL-hmac-signing,
-     CTL-pades-blt-tsa, CTL-ots-anchor; la conclusione "non retrodatabile
-     nemmeno dal gestore con tutte e tre" è deduzione dalle proprietà
-     dichiarate dei tre controlli, non un claim nuovo. Degrado visibile:
-     CLAUDE.md § endpoint /api/cert-pdf ("riga OTS solo se la prova
-     esiste"). M5: RSK-secret-compromise + CTL-secrets-escrow (visibility
-     internal: nel testo entra SOLO l'esistenza, mai il meccanismo —
-     gotcha §9.1) + CTL-hmac-canary (verify_howto pubblico, spiega proprio
-     perché la sonda interna non basta). M6: RSK-archive-tampering +
-     CTL-r2-eu-archive/CTL-r2-offsite-backup + verbale restore drill.
-     M7: CLAUDE.md § /api/status e § authart (fail-open), P15 (ridondanza
-     4 calendar). M8: RSK-data-exfiltration + CTL-hash-client-side;
-     modello di fiducia dell'archivio: CLAUDE.md § /api/cert ("stesso
-     modello di fiducia del QR: recuperabile solo da chi conosce l'hash").
-     M9: RSK-overclaim-eidas + CTL-eidas-honest-positioning.
-     §4.4: CLAUDE.md backlog P7 ("Audit black-box esterno → trovata
-     falsificabilità"). ⚠️ F3: la bozza di scaletta diceva "prima di
-     qualunque uso pubblico del servizio" — NON verificabile dalle fonti
-     (P0/P1/P7 sono tutti del 2026-06-10 e certificati pre-1.8.0
-     risultano già emessi), quindi il claim è stato sostituito con
-     "nello stesso ciclo di sviluppo in cui fu segnalato", che le fonti
-     sostengono. -->
 
 ## 5. Fondamenti crittografici
 
@@ -646,42 +525,6 @@ collisioni della funzione hash sottostante, bensì sulle proprietà della
 sua funzione di compressione — motivo per cui HMAC-MD5 rimase considerato
 robusto come autenticatore anche dopo che MD5 era caduta come funzione di
 hash.
-<!-- FONTE (esterne, verificate in F2 come richiesto dal gotcha §9.6):
-     · FIPS 180-4, Secure Hash Standard — NIST (nvlpubs.nist.gov).
-     · NIST SP 800-131A (raccomandazione SHA-256 minimo per
-       interoperabilità; SHA-2 e SHA-3 ammesse).
-     · SHA-1: annuncio NIST "NIST Retires SHA-1 Cryptographic Algorithm",
-       dicembre 2022 (nist.gov/news-events/news/2022/12) — deprecata fino
-       al 31/12/2030, disallowed dopo, già vietata per la generazione di
-       firme; collisione pratica pubblicata nel 2017.
-     · 31 passi, prima collisione pratica: "The First Practical Collision
-       for 31-Step SHA-256", ASIACRYPT 2024 (~1,2 h su 64 thread).
-     · 37 passi: "Collision Attacks on SHA-256 up to 37 Steps with
-       Improved Trail Search", EUROCRYPT 2026 — IACR ePrint 2026/232,
-       13 febbraio 2026, Zhang/Li/Gao/Wang. ⚠️ verificata la pagina
-       ePrint (titolo, autori, data, "first 37-step collision attack");
-       NON è stato letto il PDF completo, quindi il testo NON afferma
-       nulla sulla complessità né sul tipo di collisione — solo il numero
-       di passi, che è nel titolo.
-     · Kelsey–Schneier: "Second Preimages on n-Bit Hash Functions for Much
-       Less than 2^n Work" (2005); costo k·2^(n/2+1) + 2^(n−k). Il calcolo
-       2^222 per 2^34 blocchi è aritmetica derivata dalla formula, non un
-       claim di terzi.
-     · Grover/post-quantum: consenso pubblico corrente (SHA-256 → ~2^128
-       effettivi; nessuna sostituzione delle hash SHA-2 nei percorsi di
-       transizione PQC, che riguardano la chiave pubblica).
-     · HMAC non dipende dalla collision resistance: proprietà nota e
-       standard, precedente storico HMAC-MD5.
-     FONTE (interna): l'argomento "un'impronta inventata non è preimmagine
-     di nulla" resta in §8.3 (ARCHITECTURE.md Assunzione 6).
-     ✅ CHIUSO IN F3 (2026-07-21) — deviazione consapevole dalla scaletta:
-     il design doc §3.5 chiedeva di argomentare "perché per la
-     proof-of-existence conta la seconda [preimmagine], non la prima
-     [collisione]". Il fact-check ha rilevato che l'affermazione è
-     imprecisa: la resistenza alle collisioni serve eccome, ma protegge un
-     soggetto diverso (i terzi contro chi attesta, non chi attesta contro
-     i terzi). §5.2 riporta la versione corretta. Il gestore ha scelto di
-     TENERE questo livello di dettaglio — nessuna modifica al testo. -->
 
 ## 6. Catena di custodia
 
@@ -690,7 +533,6 @@ in forma canonica — è distinto da ciò che resta puramente descrittivo
 (nome file, dimensione, tipo MIME): questa distinzione, già introdotta al
 §3.1, è la base su cui si fonda ogni garanzia di integrità successiva
 all'emissione.
-<!-- FONTE: ripresa da §3.1, stessa fonte -->
 
 ### 6.1 Archiviazione
 
@@ -699,8 +541,6 @@ dati nell'Unione Europea, e sono recuperabili solo da chi conosce
 l'impronta dell'opera: la chiave di recupero è l'impronta stessa, a 256
 bit, quindi non è possibile enumerare l'archivio né scoprire per
 tentativi che cosa vi sia stato depositato.
-<!-- FONTE: CLAUDE.md § imgauth ("Archivio: bucket R2 … giurisdizione
-     EU"), privato; pubblico in CTL-r2-eu-archive -->
 
 ### 6.2 Backup offsite e prova di ripristino
 
@@ -719,10 +559,6 @@ documenta anche un errore di metodo emerso durante l'esecuzione (uno
 strumento di estrazione non ancora aggiornato ai metadati facoltativi) e
 la sua correzione — un esempio, non un'eccezione, del modo in cui questo
 progetto tratta i propri errori: documentati, non nascosti.
-<!-- FONTE: CLAUDE.md backlog P33 (privato); dettagli operativi
-     (provider, bucket, regione) deliberatamente non pubblici — ADR-GTF-013;
-     fonte pubblica citata: gtf/docs/verbali/2026-07-restore-drill.md +
-     CTL-r2-offsite-backup (registro GTF) -->
 
 ### 6.3 Garanzie di recupero
 
@@ -733,9 +569,6 @@ tecnica. Questo documento non riporta le cifre esatte (soggette a
 revisione più frequente di quanto sia opportuno per un PDF immutabile):
 si rimanda alla pagina pubblica delle condizioni di utilizzo per i valori
 correnti.
-<!-- FONTE: regola §1.9 del design doc (niente numeri commerciali in un
-     documento immutabile); la pagina di riferimento è /condizioni/
-     (authweb, pubblica) -->
 
 ## 7. Il tempo
 
@@ -753,13 +586,6 @@ formalità: rende impossibile la retrodatazione a tutti tranne che a chi
 detiene la chiave di firma, cioè al servizio stesso. A rendere
 impraticabile anche quella provvedono le altre due àncore, non questa
 (§4.3 M4, §8.5).
-<!-- FONTE: CLAUDE.md § "Sicurezza emissione certificati" punto 1 e
-     ARCHITECTURE.md Assunzione 6 ("Timestamp e HMAC restano
-     server-side").
-     ⚠️ CORREZIONE F2: la stesura F1 diceva "è il singolo meccanismo che
-     rende impossibile retrodatare un'attestazione", senza qualificare
-     rispetto a chi — in contraddizione diretta con §8.5, che dichiara
-     che chi detiene la chiave PUÒ firmare qualunque istante. Qualificato. -->
 
 ### 7.2 Granularità e affidabilità di ciascuna àncora
 
@@ -782,12 +608,6 @@ individua un istante ma un intervallo, quello del blocco che lo contiene —
 ed è però il più difficile da contestare, perché non richiede di fidarsi
 di nessuno, noi inclusi. Un lettore che debba valutare un certificato
 farebbe bene a considerarle in quest'ordine.
-<!-- FONTE: CLAUDE.md § endpoint /api/ots ("La prova è 'pending'
-     all'emissione: matura in poche ore con la conferma Bitcoin");
-     il paragrafo su precisione↔indipendenza è aggiunta F2, derivata
-     dalle proprietà già dichiarate delle tre àncore (§3) e coerente con
-     §4.3 M4 / §8.5 — la sezione si intitolava "Granularità e
-     affidabilità" ma trattava solo la granularità. -->
 
 ### 7.3 Cosa significa "prova di esistenza a una data"
 
@@ -798,8 +618,6 @@ specifico contenuto — esisteva già a quella data. È lo stesso concetto
 tecnico su cui si fonda l'intero protocollo OpenTimestamps ("proof of
 existence"), qui applicato con tre livelli di corroborazione indipendenti
 anziché uno solo.
-<!-- FONTE: concetto standard di proof-of-existence, già usato nel
-     linguaggio pubblico del Trust Center e nelle ADR del progetto -->
 
 ## 8. Limiti dichiarati
 
@@ -965,38 +783,6 @@ Per chiudere ogni ambiguità, quattro cose che un'attestazione di esistenza
 - **Non rileva se un contenuto sia stato generato da un'intelligenza
   artificiale.** È una domanda diversa, cui rispondono tecnologie di
   provenienza: se ne parla al §10.
-<!-- FONTE: struttura da P38-DESIGN-whitepaper-tecnico.md §3.9.
-     §8.1: CTL-eidas-honest-positioning (registro GTF, pubblico) —
-     sostanza riusata, testo già validato in ogni revisione precedente;
-     "cosa vede Acrobat" + omonimo + upgrade solo di p12/provider da
-     ARCHITECTURE.md Assunzione 4 (privato, filtrato: NESSUN nome di
-     QTSP, NESSUNA cifra di costo — sono numeri commerciali, §1.9 del
-     design doc). ⚠️ Deliberatamente NON si afferma che la TSA usata sia
-     "qualificata" ai sensi eIDAS: Adobe AATL ≠ EU Trusted List, e la
-     qualificazione del servizio di marcatura non è stata verificata.
-     §8.2: ARCHITECTURE.md Assunzione 5 + backlog P8 (privato); pubblico
-     nel certificato stesso (avvertenza "dichiarati"). EUDI Wallet resta
-     una watch-list senza impegno (VALUTAZIONE 2026-07-18).
-     §8.3: ARCHITECTURE.md Assunzione 6 (P16) — argomento riportato per
-     intero come richiesto dalla scaletta.
-     §8.4: CLAUDE.md § "Sicurezza emissione certificati", "Residuo noto".
-     §8.5: RSK-secret-compromise + CTL-secrets-escrow (⚠️ visibility
-     INTERNAL: nel testo entra SOLO l'esistenza della recuperabilità e la
-     motivazione della non-pubblicità, che è il campo why_not_public del
-     record stesso — mai il meccanismo, gotcha §9.1) + CTL-hmac-canary.
-     "Non ruotabile": CLAUDE.md § imgauth (privato) → il fatto è già
-     implicito in RSK-secret-compromise ("HMAC_SECRET non supporta doppia
-     chiave"), che è pubblico: quindi pubblicabile.
-     §8.6: CTL-iso27037-honest-positioning (pubblico) — sostanza riusata.
-     ⚠️ Il numero della norma NON è citato per esteso qui: compare in §9
-     insieme agli altri riferimenti.
-     §8.7: CTL-availability-monitoring (pubblico) + P36.
-     §8.8: le prime tre voci sono conseguenze dirette di §8.2/§8.3 e del
-     posizionamento; "il diritto d'autore sorge con la creazione" è
-     principio generale (Convenzione di Berna; in Italia L. 633/1941
-     art. 6) — ✅ CHIUSO IN F3 (2026-07-21): unica affermazione di natura
-     giuridica scritta in F2, il gestore ha scelto di TENERLA senza
-     modifiche. -->
 
 ## 9. Standard e riferimenti
 
@@ -1014,15 +800,13 @@ standard e riferimenti pubblici:
 - **RFC 9116** (`security.txt`): il formato standard con cui il servizio
   pubblica il proprio canale di responsible disclosure per la ricerca di
   sicurezza in buona fede, con un impegno pubblico di safe harbor.
-  <!-- FONTE: CLAUDE.md backlog P37 (privato); pubblico in
-       CTL-responsible-disclosure + attestazione.spaziogenesi.org/sicurezza/ -->
+  
 - **GDPR** (Regolamento UE 2016/679): il percorso di attestazione anonimo
   (il canale primario) non tratta alcun dato personale dell'utente finale;
   i soli trattamenti esistenti nel sistema riguardano l'identità di chi
   richiede credenziali per sviluppatori o un abbonamento, documentati
   pubblicamente con base giuridica e tempi di conservazione.
-  <!-- FONTE: privacy.html (authweb, pubblico) + CTL-privacy-policy-public/
-       CTL-hash-client-side/CTL-matomo-cookieless (registro GTF) -->
+  
 - **ISO/IEC 27037** (linee guida per identificazione, raccolta e
   conservazione della prova digitale): applicata **per ispirazione e in
   modo parziale**, con i limiti dichiarati al §8.6. L'applicabilità è
@@ -1030,8 +814,7 @@ standard e riferimenti pubblici:
 - **W3C Verifiable Credentials**: modello di riferimento seguito con
   attenzione come possibile evoluzione futura del formato di certificato;
   nessuna adozione né impegno di roadmap in questa versione del documento.
-  <!-- FONTE: nessuna fonte interna; menzione da watch-list, nessuna
-       promessa di adozione — vincolo del design doc §6 -->
+  
 
 ### 9.1 Posizionamento rispetto a eIDAS
 
@@ -1072,22 +855,6 @@ legge. Questo servizio si colloca — dichiaratamente — nel secondo gruppo.
 **Roadmap.** L'evoluzione verso un sigillo elettronico qualificato è nella
 roadmap pubblica del progetto ed è condizionata alla sostenibilità
 economica dell'organizzazione. Non è associata ad alcuna data (§8.1).
-<!-- FONTE: CTL-eidas-honest-positioning (registro GTF, pubblico) — la
-     sostanza dei tre blocchi "cosa è / cosa non è / cosa non significa"
-     riprende il testo già validato e pubblicato su
-     trust.spaziogenesi.org (sezione "Cosa NON è questo servizio"), qui
-     articolato con i riferimenti puntuali agli articoli. REQ-eidas-pos-01
-     (pubblico) per il requisito collegato; RSK-overclaim-eidas per il
-     rischio che questo paragrafo mitiga (§4.3 M9).
-     ✅ VERIFICATO IN F3 (2026-07-21): il gestore ha letto il testo
-     letterale su EUR-Lex (art. 25, 41, 46 del Regolamento (UE) 910/2014
-     consolidato) e confermato numeri e sostanza corretti. Unica
-     precisazione richiesta: evitare di far sembrare la versione non
-     qualificata sistematicamente "rimessa al giudice caso per caso" in
-     ogni situazione — il punto esatto è che non beneficia di quella
-     specifica presunzione di legge riservata alla versione qualificata.
-     Paragrafo riformulato di conseguenza. Punto chiuso, nessuna verifica
-     ulteriore necessaria prima della pubblicazione. -->
 
 ## 10. Posizionamento rispetto a C2PA / Content Credentials
 
@@ -1200,39 +967,6 @@ già Content Credentials funziona senza modifiche, e l'impronta calcolata
 copre anche il manifest incorporato. L'attestazione, in quel caso,
 congela anche la provenienza dichiarata — che diventa così a sua volta
 datata e non alterabile.
-<!-- FONTE (esterne, verificate in F2 come richiesto dal gotcha §9.6):
-     · Specifica C2PA 2.4, aprile 2026 (spec.c2pa.org, sezione delle
-       versioni: "2.4 - April 2026") — versione e data verificate
-       direttamente sulla specifica pubblicata; la 2.3 è del 5/01/2026 e
-       la 2.2 del 1/05/2025, il che conferma la cadenza rapida e giustifica
-       la formula "alla data di questo documento".
-     · Governance: Joint Development Foundation, affiliata Linux
-       Foundation; specifica aperta royalty-free (fonte: voce enciclopedica
-       Content Credentials, che cita la documentazione C2PA). ⚠️ NON si
-       afferma che C2PA sia uno standard ISO o di altro ente formale: la
-       verifica non lo ha confermato.
-     · Manifest, asserzioni, binding crittografico via hash, embedded vs
-       external: specifica tecnica C2PA (sezione "Embedded vs
-       Externally-Stored Data").
-     · Soft binding, API di risoluzione, filigrane/impronte percettive:
-       "C2PA Soft Binding API" (spec.c2pa.org) + elenco pubblico degli
-       algoritmi di soft binding approvati.
-     · Adozione: strumenti di editing, fotocamere di più produttori,
-       generatori IA, piattaforme di pubblicazione. ⚠️ I nomi commerciali
-       specifici NON sono citati nel testo: sono verificabili ma cambiano
-       in fretta, e un elenco datato in un PDF immutabile invecchia male.
-     · AI Act: obblighi di trasparenza sui contenuti sintetici applicabili
-       dal 2 agosto 2026 (fonti concordanti; esiste una proroga in
-       discussione al 2/12/2026 per i sistemi già sul mercato, non citata
-       nel testo perché in evoluzione).
-     FONTE (interna): la decisione "nessuna adozione C2PA, complementare
-     non concorrente" è già presa in
-     VALUTAZIONE-analisi-esterna-roadmap-2026-07-21.md §2.2/§4.4 (privato).
-     Le tre ragioni di §10.5 sono argomentate qui per la prima volta: la
-     ragione 2 discende direttamente da CTL-hash-client-side, la ragione 3
-     da CTL-eidas-honest-positioning. ✅ CHIUSO IN F3 (2026-07-21): il
-     gestore ha confermato la ragione 1 (indipendenza dal formato) —
-     nessuna modifica al testo. -->
 
 ## 11. Trasparenza operativa
 
@@ -1255,16 +989,6 @@ Center pubblico del progetto, insieme al suo storico: ogni rilevazione
 periodica è committata e conservata nel repository pubblico, quindi un
 calo resterebbe visibile — e la sua eventuale rimozione lo sarebbe
 altrettanto.
-<!-- FONTE: gtf/ARCHITECTURE.md §8 "Open Trust Score" (pubblico, repo gtf
-     stesso); i 10 indicatori e la loro media verificati in F2 su
-     generators/score.mjs (riga 343: media degli indicatori disponibili) e
-     site/score.json (10 label, corrispondenti a quelle elencate). Il
-     valore numerico corrente NON è citato: si rimanda al Trust Center
-     live, come deciso in FONTI.md §12.
-     ⚠️ CORREZIONE F2: la stesura F1 diceva che "lo storico è append-only
-     nel repository". Un repository git non è append-only in senso
-     tecnico (una riscrittura della storia è possibile): riformulato in
-     ciò che è vero e comunque sufficiente. -->
 
 Le evidenze che sostengono i controlli attivi sono raccolte in gran parte
 in modo automatico da un collettore che interroga direttamente i sistemi
@@ -1277,17 +1001,6 @@ designato e il piano operativo della prima revisione è pubblicato, ma la
 revisione non è ancora stata svolta. Il suo esito sarà un verbale
 pubblico, come già avvenuto per la prova di ripristino (§6.2) e per la
 prima revisione interna periodica.
-<!-- FONTE: gtf/ARCHITECTURE.md §8.2 riga Automazione +
-     generators/collect-evidence.mjs (pubblico); ADR-GTF-010 (revisore
-     esterno, pubblico) + gtf/docs/piano-review-esterna-2026.md.
-     ⚠️ CORREZIONE F2 (overclaim): la stesura F1 affermava al presente che
-     "il registro È soggetto a una revisione esterna annuale da parte di
-     Radixia srl". VERIFICATO su PRC-review-esterna-annuale: il record ha
-     `produces_evidence: []` e nessun `last_run` — la prima revisione NON
-     è ancora avvenuta (memoria di progetto, 18/07: "in attesa dell'ok di
-     Radixia per il kickoff"). Riformulato al futuro, dichiarando
-     esplicitamente lo stato attuale. Questo è esattamente il tipo di
-     affermazione che RSK-overclaim-eidas invita a sorvegliare. -->
 
 Il servizio pubblica un canale dichiarato di responsible disclosure
 (§9) e una pagina di stato pubblica che riporta, con risoluzione onesta,
@@ -1295,35 +1008,28 @@ sia i disservizi sia i rallentamenti che **non** hanno causato alcun
 disservizio ma che restano visibili nel dettaglio della giornata: un
 episodio minore non viene né esagerato né fatto sparire
 nell'aggregazione dello storico (§8.7).
-<!-- FONTE: P37 (CTL-responsible-disclosure) e P36
-     (CTL-availability-monitoring), entrambi pubblici; il dettaglio
-     "rallentamenti visibili anche nei giorni verdi" viene da P13.
-     ⚠️ CORREZIONE F2: la frase F1 "compresi i giorni che superano la
-     soglia di disponibilità" era oscura e non corrispondeva al
-     comportamento reale (ciò che si mostra anche nei giorni senza
-     disservizio sono i rallentamenti sotto soglia). -->
 
 ## 12. Storia delle revisioni · Licenza · Come verificare questo documento
 
 **Licenza**: questo documento è distribuito con licenza Creative Commons
 Attribuzione 4.0 Internazionale (CC BY 4.0).
-<!-- FONTE: decisione §1.4 del design doc -->
 
-**Versione corrente**: v1.0 — *[data di pubblicazione da confermare in
-FASE 4]*. Il file pubblicato `whitepaper-v1.0.pdf` non viene più
-modificato dopo l'attestazione della sua impronta (§ sotto): eventuali
-correzioni successive alla pubblicazione danno luogo a una nuova versione
+**Versione corrente**: v1.0 — pubblicato il 21 luglio 2026. Il file
+pubblicato `whitepaper-v1.0.pdf` non viene più modificato dopo
+l'attestazione della sua impronta (§ sotto): eventuali correzioni
+successive alla pubblicazione danno luogo a una nuova versione
 (`whitepaper-v1.1.pdf` e successive), mai a una sostituzione silenziosa
 del file esistente. Le versioni precedenti restano pubblicate.
-<!-- FONTE: decisione §1.5 del design doc -->
 
 **Come verificare questo documento**: l'impronta SHA-256 di questo PDF è
 stata a sua volta attestata sul servizio che questo documento descrive.
-*[placeholder — valorizzato in FASE 5, dopo l'attestazione dogfooding:
-impronta SHA-256, link alla pagina pubblica di verifica `/c/<hash>`]*.
+L'impronta e il link alla pagina pubblica di verifica sono pubblicati
+sulla pagina di accompagnamento di questo documento
+(`trust.spaziogenesi.org/whitepaper.html`) — non qui, per una ragione
+tecnica precisa: un PDF non può contenere l'impronta di sé stesso, perché
+aggiungerla ne cambierebbe il contenuto e quindi l'impronta stessa.
 Chiunque può scaricare questo PDF, ricalcolarne l'impronta in autonomia
 (con qualunque strumento SHA-256, non necessariamente il nostro) e
-confrontarla con quella pubblicata — la stessa chiusura circolare già
-applicata al bundle di evidenze mensile del registro di governance.
-<!-- FONTE: pattern ADR-GTF-008 (dogfooding, pubblico); il PDF stesso non
-     esiste ancora in questa fase, valori da compilare in FASE 5 -->
+confrontarla con quella pubblicata sulla pagina di accompagnamento — la
+stessa chiusura circolare già applicata al bundle di evidenze mensile del
+registro di governance.
