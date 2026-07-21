@@ -382,6 +382,7 @@ ${body}
         <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry">Registro pubblico</a>
         <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula del punteggio</a>
         <a href="/devops.html">DevOps e rilasci</a>
+        <a href="/whitepaper.html">Whitepaper tecnico</a>
       </div>
       <div class="footer-col">
         <h3>Il servizio di attestazione</h3>

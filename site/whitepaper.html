@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whitepaper tecnico — Genesis Trust Framework</title>
+<meta name="description" content="Attestazione di esistenza per opere digitali: architettura, garanzie e limiti. Whitepaper tecnico v1.0 di Spazio Genesi ETS, verificabile in autonomia.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --paper: #FBFAF6;
+    --card: #F3EEE1;
+    --ink: #221c14;
+    --ink-muted: #6b6152;
+    --rule: #ddd2ba;
+    --gold: #5a3d10;
+    --sage-bg: #dde8d5; --sage-fg: #2f4a2a;
+    --amber-bg: #f3e3ab; --amber-fg: #6b4a10;
+    --muted-bg: #eae5d8; --muted-fg: #6b6152;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17140f;
+      --card: #201b13;
+      --ink: #ece4d3;
+      --ink-muted: #a89a80;
+      --rule: #3a3324;
+      --gold: #d1a969;
+      --sage-bg: #24301f; --sage-fg: #a8c49c;
+      --amber-bg: #3a2c14; --amber-fg: #d9b273;
+      --muted-bg: #2a2518; --muted-fg: #a89a80;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  a { color: var(--gold); }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .hero { padding: 3rem 0 1.5rem; }
+  .eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 0.4rem; }
+  .hero h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 600; margin: 0 0 0.6rem; }
+  .thesis { max-width: 40rem; margin: 0 0 1.4rem; }
+  .hero-note { font-size: 0.85rem; color: var(--ink-muted); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.8rem 0; max-width: 40rem; }
+
+  nav.spine { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 0.7rem 0; margin-bottom: 1rem; }
+  nav.spine ul { display: flex; flex-wrap: wrap; gap: 1.3rem; padding: 0; margin: 0; list-style: none; }
+  nav.spine a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; }
+  nav.spine a:hover, nav.spine a:focus-visible { border-bottom-color: var(--gold); }
+
+  section.folio { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.6rem 1.6rem 1.8rem; margin: 1.6rem 0; scroll-margin-top: 4rem; }
+  section.folio::before {
+    content: attr(data-folio);
+    position: absolute; top: 0.7rem; right: 1rem;
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em;
+    color: var(--ink-muted); opacity: 0.7;
+  }
+  section.folio h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1rem; }
+  section.folio h3 { font-size: 1rem; margin: 1.2rem 0 0.4rem; }
+  section.folio p { margin: 0 0 0.9rem; }
+  section.folio p:last-child { margin-bottom: 0; }
+
+  .lang-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin: 0 0 0.4rem; }
+  blockquote.abstract { margin: 0 0 1.3rem; padding-left: 1rem; border-left: 3px solid var(--rule); font-size: 0.95rem; }
+  blockquote.abstract:last-child { margin-bottom: 0; }
+
+  ol.toc { padding-left: 1.4rem; margin: 0; columns: 1; }
+  ol.toc li { margin-bottom: 0.55rem; }
+  @media (min-width: 38rem) { ol.toc { columns: 2; column-gap: 2rem; } ol.toc li { break-inside: avoid; } }
+
+  .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.01em; padding: 1px 6px; border: 1px solid var(--rule); border-radius: 3px; color: var(--ink-muted); background: var(--paper); white-space: nowrap; }
+  .pill { display: inline-block; font-size: 0.72rem; padding: 2px 9px; border-radius: 999px; font-weight: 600; }
+  .pill-sage { background: var(--sage-bg); color: var(--sage-fg); }
+  .pill-amber { background: var(--amber-bg); color: var(--amber-fg); }
+
+  .download {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1.1rem 1.3rem; margin: 0 0 1rem;
+  }
+  .download .icon { font-size: 1.8rem; line-height: 1; }
+  .download .meta { flex: 1; min-width: 12rem; }
+  .download .meta .fname { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); }
+  .btn {
+    display: inline-block; font-weight: 600; text-decoration: none;
+    background: var(--gold); color: var(--paper); padding: 0.55rem 1.1rem;
+    border-radius: 6px; font-size: 0.9rem;
+  }
+  .btn:hover, .btn:focus-visible { opacity: 0.9; }
+
+  .hashbox {
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 0.8rem 1rem; margin: 0.6rem 0 1rem; overflow-x: auto;
+  }
+  .hashbox .hlabel { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 0.3rem; }
+  .hashbox code { font-family: var(--font-mono); font-size: 0.92rem; word-break: break-all; color: var(--ink); }
+
+  .table-wrap { overflow-x: auto; }
+  table.doc { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table.doc th { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-muted); text-align: left; font-weight: 600; padding: 0.45rem 0.7rem 0.45rem 0; border-bottom: 2px solid var(--rule); }
+  table.doc td { padding: 0.5rem 0.7rem 0.5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  table.doc tr:last-child td { border-bottom: none; }
+  table.doc code, .mono { font-family: var(--font-mono); font-size: 0.85em; }
+
+  footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--ink-muted); }
+  .footer-cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.6rem 2.6rem; margin: 0 0 1.5rem; }
+  .footer-col { min-width: 12rem; }
+  .footer-col h3 { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; margin: 0 0 0.6rem; }
+  .footer-col a { display: block; margin: 0.35rem 0; font-size: 0.85rem; }
+  .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
+</style>
+  <!-- Matomo (sg-matomo) -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//sg-matomo.azurewebsites.net/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Genesis Trust Framework · documento pubblico</p>
+    <h1>Attestazione di esistenza per opere digitali: architettura, garanzie e limiti</h1>
+    <p class="thesis">Whitepaper tecnico v1.0 di Spazio Genesi ETS — che cosa il
+    sistema di <a href="https://attestazione.spaziogenesi.org">attestazione delle
+    opere digitali</a> garantisce, con quali meccanismi, e che cosa non garantisce.
+    Non è materiale promozionale: le garanzie si dichiarano insieme ai limiti.</p>
+    <p class="hero-note"><b>v1.0 · pubblicato il 21 luglio 2026 · licenza CC BY
+    4.0.</b> Sorgente verificabile nel repository pubblico di questo registro
+    (<span class="mono">docs/whitepaper/whitepaper-v1.0.md</span>); il PDF
+    pubblicato non viene più modificato dopo l'attestazione della sua impronta
+    — correzioni successive danno luogo a una nuova versione, mai a una
+    sostituzione silenziosa.</p>
+  </header>
+
+  <nav class="spine">
+    <ul>
+      <li><a href="/">← Trust Center</a></li>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#indice">Indice</a></li>
+      <li><a href="#scarica">Scarica</a></li>
+      <li><a href="#verifica">Come verificare</a></li>
+      <li><a href="#storia">Storia delle revisioni</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+  <section id="abstract" class="folio" data-folio="§0">
+    <h2>Abstract</h2>
+    <p class="lang-label">English</p>
+    <blockquote class="abstract">
+      <p>This document describes, in technical terms, what a digital-existence
+      attestation system built on public infrastructure can and cannot
+      guarantee. The system computes a SHA-256 fingerprint of a digital work —
+      on the primary channels, entirely on the client, so the file itself
+      never leaves the user's device — and binds it to a server-generated
+      timestamp with an HMAC token. Three independent time anchors
+      corroborate the resulting certificate: the HMAC itself, an RFC 3161
+      timestamp from a Certificate Authority trusted in Adobe's AATL program
+      (embedded in a PAdES B-LT/LTV signature), and a Bitcoin timestamp via
+      OpenTimestamps. None of these mechanisms proves authorship; together
+      they prove that a specific fingerprint existed at a specific instant in
+      time, and that the resulting certificate has not been altered since.</p>
+      <p>The document is deliberately as precise about what the system does
+      <b>not</b> guarantee as about what it does: the signing identity is
+      self-signed (not a qualified eIDAS trust service), declared metadata
+      (title, author, year) are self-declarations, and the HMAC signing key
+      is a single point of trust mitigated — not eliminated — by a documented
+      recovery path and continuous self-testing. A public, machine-readable
+      governance registry (the Genesis Trust Framework) makes every claim in
+      this document independently checkable, including the integrity of this
+      PDF itself, which is attested on the very service it describes.</p>
+    </blockquote>
+    <p class="lang-label">Italiano</p>
+    <blockquote class="abstract">
+      <p>Questo documento descrive, in termini tecnici, cosa un sistema di
+      attestazione di esistenza per opere digitali costruito su
+      infrastruttura pubblica può e non può garantire. Il sistema calcola
+      l'impronta SHA-256 di un'opera digitale — sui canali principali
+      interamente sul dispositivo dell'utente, che il file non lascia mai —
+      e la vincola a un timestamp generato dal server tramite un token HMAC.
+      Tre àncore temporali indipendenti corroborano il certificato
+      risultante: l'HMAC stesso, una marca temporale RFC 3161 da
+      un'autorità di certificazione riconosciuta nel programma Adobe AATL
+      (incorporata in una firma PAdES B-LT/LTV), e un'ancora Bitcoin via
+      OpenTimestamps. Nessuno di questi meccanismi prova la paternità
+      dell'opera; insieme provano che una determinata impronta esisteva a un
+      determinato istante, e che il certificato risultante non è stato
+      alterato da allora.</p>
+      <p>Il documento è deliberatamente preciso tanto su ciò che il sistema
+      <b>non</b> garantisce quanto su ciò che garantisce: l'identità del
+      firmatario è self-signed (non un servizio fiduciario qualificato
+      eIDAS), i metadati dichiarati sono auto-dichiarazioni, e la chiave di
+      firma HMAC è un punto di fiducia singolo — mitigato, non eliminato —
+      da un meccanismo di recupero e da un'auto-verifica continua. Un
+      registro di governance pubblico e leggibile da macchina (il Genesis
+      Trust Framework) rende ogni affermazione di questo documento
+      verificabile in modo indipendente, inclusa l'integrità di questo
+      stesso PDF, attestato sul servizio che descrive.</p>
+    </blockquote>
+  </section>
+
+  <section id="indice" class="folio" data-folio="§1–12">
+    <h2>Indice</h2>
+    <ol class="toc">
+      <li>Scopo e pubblico</li>
+      <li>Il sistema in breve</li>
+      <li>Le tre àncore temporali indipendenti</li>
+      <li>Modello di minaccia</li>
+      <li>Fondamenti crittografici</li>
+      <li>Catena di custodia</li>
+      <li>Il tempo</li>
+      <li>Limiti dichiarati</li>
+      <li>Standard e riferimenti</li>
+      <li>Posizionamento rispetto a C2PA / Content Credentials</li>
+      <li>Trasparenza operativa</li>
+      <li>Storia delle revisioni · Licenza · Come verificare questo documento</li>
+    </ol>
+  </section>
+
+  <section id="scarica" class="folio" data-folio="PDF">
+    <h2>Scarica</h2>
+    <div class="download">
+      <span class="icon" aria-hidden="true">📄</span>
+      <span class="meta">
+        <div>Whitepaper tecnico v1.0 — PDF, 18 pagine</div>
+        <div class="fname">whitepaper-v1.0.pdf · 332 KB</div>
+      </span>
+      <a class="btn" href="/whitepaper-v1.0.pdf">Scarica il PDF</a>
+    </div>
+    <p>Il sorgente Markdown (con la mappa completa claim→fonte usata nella
+    stesura) è pubblico nel repository di questo registro, sotto
+    <span class="mono">docs/whitepaper/</span>.</p>
+  </section>
+
+  <section id="verifica" class="folio" data-folio="§12">
+    <h2>Come verificare questo documento</h2>
+    <p>L'impronta SHA-256 di questo PDF esatto è pubblicata qui — non
+    all'interno del file stesso, perché un PDF non può contenere la propria
+    impronta senza cambiarla nel farlo.</p>
+    <div class="hashbox">
+      <div class="hlabel">SHA-256 di whitepaper-v1.0.pdf</div>
+      <code>898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452</code>
+    </div>
+    <p>Chiunque può scaricare il PDF, ricalcolarne l'impronta con qualunque
+    strumento SHA-256 (non necessariamente il nostro) e confrontarla con
+    quella qui sopra.</p>
+    <p><span class="pill pill-amber">⏳ in arrivo</span> questo stesso PDF
+    verrà attestato sul servizio che descrive — la stessa "chiusura
+    circolare" già applicata al bundle mensile di evidenze del registro
+    (dogfooding): la pagina pubblica di verifica comparirà qui non appena
+    l'attestazione sarà completata.</p>
+  </section>
+
+  <section id="storia" class="folio" data-folio="§12">
+    <h2>Storia delle revisioni</h2>
+    <div class="table-wrap">
+    <table class="doc">
+      <thead><tr><th>Versione</th><th>Data</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td><code>v1.0</code></td><td>2026-07-21</td><td>Pubblicazione iniziale.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--ink-muted); margin-top:0.8rem;">
+    Licenza: Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0).
+    Autore: Spazio Genesi ETS. Correzioni successive alla pubblicazione danno
+    luogo a un nuovo file versionato (<code>whitepaper-v1.1.pdf</code> e
+    successivi); le versioni precedenti restano pubblicate.</p>
+  </section>
+
+  </main>
+
+  <footer>
+    <nav class="footer-cols" aria-label="Collegamenti del footer">
+      <div class="footer-col">
+        <h3>Il registro</h3>
+        <a href="/">Trust Center</a>
+        <a href="/devops.html">DevOps e rilasci</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf">Codice sorgente (GTF)</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry">Registro pubblico</a>
+      </div>
+      <div class="footer-col">
+        <h3>Il servizio di attestazione</h3>
+        <a href="https://attestazione.spaziogenesi.org">Attesta e verifica</a>
+        <a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi</a>
+        <a href="https://attestazione.spaziogenesi.org/condizioni/">Fasce e condizioni</a>
+        <a href="https://attestazione.spaziogenesi.org/developer/">Sviluppatori: API &amp; MCP</a>
+        <a href="https://attestazione.spaziogenesi.org/privacy.html">Privacy</a>
+      </div>
+      <div class="footer-col">
+        <h3>Codice open source</h3>
+        <a href="https://github.com/SPAZIO-GENESI/imgauth">imgauth (motore)</a>
+        <a href="https://github.com/SPAZIO-GENESI/imgauthweb">imgauthweb (interfaccia)</a>
+        <a href="https://github.com/SPAZIO-GENESI/autart-signer">autart-signer (firma)</a>
+        <a href="https://github.com/SPAZIO-GENESI/attest-mcp">attest-mcp (server MCP)</a>
+      </div>
+    </nav>
+    <div class="footer-bottom">
+      Documento pubblico · sorgente versionato insieme al registro GTF.
+      <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+    </div>
+  </footer>
+</body>
+</html>
