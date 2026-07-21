@@ -372,10 +372,10 @@ Da sottoporre al gestore in FASE 3.
    previsto: la sezione si intitolava "Granularità e affidabilità" ma
    trattava solo la granularità. Il paragrafo ordina le tre àncore per
    indipendenza crescente e precisione decrescente.
-4. **§8.8 — «il diritto d'autore sorge con la creazione».** Unica
-   affermazione di natura giuridica introdotta in F2 (principio generale;
-   Convenzione di Berna, in Italia L. 633/1941 art. 6). Il gestore valuti
-   se mantenerla.
+4. ✅ **CHIUSO (2026-07-21) — §8.8 — «il diritto d'autore sorge con la
+   creazione».** Unica affermazione di natura giuridica introdotta in F2
+   (principio generale; Convenzione di Berna, in Italia L. 633/1941 art.
+   6). **Decisione del gestore: tenerla — nessuna modifica al testo.**
 5. **§10.5 ragione 1 — indipendenza dal formato.** È una lettura del
    perimetro del prodotto, non un fatto tecnico: da confermare.
 6. **§10 — nessun nome commerciale di adopter C2PA.** Verificati (editor,

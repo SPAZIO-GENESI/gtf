@@ -19,8 +19,9 @@ nel testo con "NOTA PER F3" o "CORREZIONE F2" nel commento adiacente):
     seconda preimmagine" è tecnicamente imprecisa e non è stata usata. Il
     gestore ha scelto di TENERE il livello di dettaglio attuale (tutte e
     tre le proprietà spiegate) — nessuna modifica al testo.
- 3. §8.8 — "il diritto d'autore sorge con la creazione" è l'unica
-    affermazione di natura giuridica introdotta in F2.
+ 3. ✅ CHIUSO (2026-07-21) §8.8 — "il diritto d'autore sorge con la
+    creazione" è l'unica affermazione di natura giuridica introdotta in
+    F2. Il gestore ha scelto di TENERLA — nessuna modifica al testo.
  4. §10.5 ragione 1 (indipendenza dal formato) è una lettura del
     perimetro del prodotto, non un fatto tecnico.
  5. §4.4 — rimossa l'affermazione non verificabile "prima di qualunque
@@ -958,8 +959,9 @@ Per chiudere ogni ambiguità, quattro cose che un'attestazione di esistenza
      §8.8: le prime tre voci sono conseguenze dirette di §8.2/§8.3 e del
      posizionamento; "il diritto d'autore sorge con la creazione" è
      principio generale (Convenzione di Berna; in Italia L. 633/1941
-     art. 6) — ⚠️ per F3: è l'unica affermazione di natura giuridica
-     scritta in F2, il gestore valuti se mantenerla. -->
+     art. 6) — ✅ CHIUSO IN F3 (2026-07-21): unica affermazione di natura
+     giuridica scritta in F2, il gestore ha scelto di TENERLA senza
+     modifiche. -->
 
 ## 9. Standard e riferimenti
 
