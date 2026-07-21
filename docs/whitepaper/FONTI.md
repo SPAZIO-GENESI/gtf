@@ -387,9 +387,9 @@ Da sottoporre al gestore in FASE 3.
 
 ## E. Che cosa resta aperto per FASE 3 e successive
 
-- ⛔ **Approvazione esplicita del testo** da parte del gestore: titolo,
-  tono, posizionamento eIDAS, sezione limiti (è quella che espone di più),
-  licenza. Senza, non si passa a FASE 4.
+- ✅ **CHIUSO (2026-07-21)** — Titolo confermato dal gestore senza
+  modifiche: "Attestazione di esistenza per opere digitali: architettura,
+  garanzie e limiti".
 - ✅ **CHIUSO (2026-07-21)** — Verifica umana dei tre riferimenti eIDAS su
   EUR-Lex (punto A sopra): il gestore ha letto il testo consolidato del
   Regolamento (UE) 910/2014 e confermato numeri e sostanza degli articoli
@@ -397,6 +397,11 @@ Da sottoporre al gestore in FASE 3.
   41 (evitare di presentare la versione non qualificata come "sempre
   rimessa al giudice caso per caso"; il punto esatto è l'assenza di quella
   specifica presunzione di legge). Nessuna verifica ulteriore necessaria.
+- ⛔ **Approvazione esplicita del testo nel suo complesso** (tono,
+  posizionamento eIDAS, sezione limiti, licenza CC BY 4.0): tutti e sei i
+  punti puntuali sono stati chiusi in revisione punto per punto; resta da
+  raccogliere l'ok finale complessivo del gestore sul bundle intero prima
+  di passare a FASE 4 (render + push).
 - Data di pubblicazione e conferma del numero di versione (§12 del
   sorgente, ancora segnaposto).
 - Impronta del PDF e link `/c/<hash>`: segnaposto in §12, valorizzati in

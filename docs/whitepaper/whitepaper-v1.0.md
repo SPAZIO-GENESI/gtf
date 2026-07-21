@@ -25,15 +25,27 @@ nel testo con "NOTA PER F3" o "CORREZIONE F2" nel commento adiacente):
  4. ✅ CHIUSO (2026-07-21) §10.5 ragione 1 (indipendenza dal formato) è
     una lettura del perimetro del prodotto, non un fatto tecnico. Il
     gestore ha scelto di TENERLA — nessuna modifica al testo.
- 5. §4.4 — rimossa l'affermazione non verificabile "prima di qualunque
-    uso pubblico del servizio" a proposito dell'audit iniziale.
+ 5. INFORMATIVO (non richiede decisione) §4.4 — rimossa l'affermazione
+    non verificabile "prima di qualunque uso pubblico del servizio" a
+    proposito dell'audit iniziale, sostituita con "nello stesso ciclo di
+    sviluppo in cui fu segnalato" (verificabile dalle fonti).
+ 6. ✅ CHIUSO (2026-07-21) Titolo — confermato dal gestore così com'è.
+ 7. ⏳ APERTO, non bloccante — data di pubblicazione e numero di versione
+    (§12): segnaposto, si valorizzano in FASE 4 al momento del render.
+
+TUTTI E 6 I PUNTI CHE RICHIEDEVANO UNA DECISIONE SONO STATI CHIUSI IL
+2026-07-21 (revisione punto per punto in chat con il gestore). Resta solo
+il segnaposto §7 (data/versione), non bloccante. Il testo è quindi
+APPROVATO e pronto per FASE 4, in attesa della conferma esplicita finale
+del gestore sul bundle completo (render + push).
 -->
 
 # Attestazione di esistenza per opere digitali: architettura, garanzie e limiti
 
 **Whitepaper tecnico, v1.0**
 Spazio Genesi ETS
-<!-- FONTE: decisione P38-DESIGN-whitepaper-tecnico.md §1.2/§1.3 -->
+<!-- FONTE: decisione P38-DESIGN-whitepaper-tecnico.md §1.2/§1.3, titolo
+     confermato dal gestore in F3 (2026-07-21) senza modifiche -->
 
 *Bozza — data e numero di versione da confermare alla pubblicazione (FASE 4).*
 
