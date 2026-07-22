@@ -1,0 +1,55 @@
+id: ADR-P39
+title: "P39 — CLI sg-attest e GitHub Action: attestazione da terminale e da CI"
+date: 2026-07-22
+status: accepted
+context: >
+  Quarto lavoro adottato dall'analisi esterna sulla roadmap del 21/07
+  (`img-auth-hub/VALUTAZIONE-analisi-esterna-roadmap-2026-07-21.md` §2,
+  punto 4): mancava un percorso pensato per sviluppatori da riga di
+  comando e per pipeline di CI/CD — l'unico canale programmabile fino a
+  quel momento era il server MCP `attest-mcp` (stdio, pensato per agenti
+  AI, non per uno script di build). La logica di hash locale streaming e
+  di autenticazione bearer era già interamente presente in `attest-mcp`:
+  serviva solo un'interfaccia diversa sullo stesso motore.
+decision: >
+  Nuovo terzo `bin` (`sg-attest`) nello stesso pacchetto npm
+  `@spazio-genesi/attest-mcp` (nessun pacchetto separato: SDK e CLI
+  condividono i moduli `api.js`/`hash.js`/`config.js` già esistenti),
+  pubblicato come **0.3.1**. Comandi: `authorize` (device flow P21),
+  `attest` (hash locale streaming + `--pdf` opzionale), `verify`,
+  `status`. Nuovo repo pubblico separato `attest-action`
+  (`SPAZIO-GENESI/attest-action`, MIT, tag `v1.1.0`+`v1`): action
+  composite YAML sottile sopra la CLI, per attestare artefatti di build
+  in pipeline CI — installa `@spazio-genesi/attest-mcp`, esegue `sg-attest
+  attest` con la chiave passata via variabile d'ambiente (mai su argv,
+  mai in log). Entrambi sono client puri del contratto esistente di
+  imgauth: nessun endpoint nuovo, nessuna modifica al device flow, zero
+  segreti sul lato server.
+
+  Due bug reali corretti nel percorso, non previsti dal design originale:
+  (1) la CLI 0.3.0 non partiva mai se installata da npm su Linux/macOS —
+  la guardia d'ingresso confrontava `import.meta.url` con
+  `process.argv[1]` senza risolvere i symlink (npm collega i bin come
+  symlink su quelle piattaforme, uno shim `.cmd` su Windows nascondeva il
+  problema in sviluppo); usciva silenziosamente senza stampare nulla.
+  Scoperto dal self-test dell'action, non da un test locale su Windows.
+  Fix in 0.3.1 (`realpathSync`) e nuova CI (`packaged-bins`) che installa
+  il tarball impacchettato e verifica l'output dei comandi, non solo
+  l'exit code. (2) `attest` da solo non archiviava nulla — il link `/c/`
+  che l'action pubblicizzava come "Verifica" restava 404. Deciso con il
+  gestore di emettere sempre il certificato PDF (`action.yml` chiama
+  sempre `--pdf`, file temporaneo cancellato a meno che
+  `download-pdf: true`); il self-test verifica ora che la pagina di
+  verifica risponda 200, non solo che gli output non siano vuoti.
+consequences: >
+  Uno sviluppatore arriva da `/developer/` alla prima attestazione da
+  terminale e al primo workflow CI in pochi minuti, senza leggere altro
+  che il README. Nessuna nuova superficie privacy: la CLI e l'action
+  calcolano l'hash in locale/sul runner esattamente come `attest-mcp` —
+  confermato, non assunto, con lo stesso principio applicato in P26. Zero
+  modifiche a imgauth/authweb: entrambi i repo sono client puri, come
+  attest-mcp/attest-bot/attest-mcp-remote. Nessun nuovo rischio o
+  controllo: la CLI e l'action riusano interamente `CTL-agent-access`
+  (bearer token P21), già presente nel registro.
+affects: [CTL-agent-access]
+visibility: public

@@ -1,0 +1,6 @@
+id: IMP-attest-cli
+title: "CLI sg-attest (terzo bin di attest-mcp) e GitHub Action attest-action (P39)"
+repo: attest-mcp
+ref: "src/cli.js — terzo bin `sg-attest` (authorize/attest/verify/status), stessi moduli condivisi api.js/hash.js/config.js del server MCP stdio, hash locale streaming; pubblicato npm @spazio-genesi/attest-mcp 0.3.1. Repo pubblico separato SPAZIO-GENESI/attest-action (action.yml composite, tag v1.1.0) — YAML sottile sopra la CLI per attestare artefatti in CI, chiave passata via env mai su argv"
+supports: [CTL-agent-access]
+visibility: public
