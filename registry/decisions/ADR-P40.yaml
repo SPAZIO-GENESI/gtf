@@ -1,0 +1,59 @@
+id: ADR-P40
+title: "P40 — Eseguibili standalone della CLI sg-attest (Windows/macOS/Linux)"
+date: 2026-07-23
+status: accepted
+context: >
+  Seguito naturale di P39 (CLI `sg-attest` + `attest-action`): il gestore ha
+  chiesto se, oltre a `npx`, fosse possibile distribuire anche un pacchetto
+  binario (node → exe) — per macchine o runner senza Node.js installato. La
+  logica del percorso CLI (`src/cli.js`) non ha dipendenze esterne (solo
+  moduli nativi Node e i moduli interni condivisi con il server MCP), il che
+  la rende compilabile senza bundling complesso.
+decision: >
+  Compilazione con **Bun `--compile`** (cross-compilazione da un solo runner
+  CI, sei target: linux-x64/arm64, macos-x64/arm64, windows-x64/arm64 — il
+  sesto è un bonus scoperto disponibile solo in fase di ricognizione, non
+  previsto nel piano originale). Due blocker di compilazione risolti in
+  `src/cli.js` senza toccare il percorso npm: lettura versione con fallback a
+  un identificatore iniettato a compile-time (`bun build --define`), e guardia
+  d'ingresso estesa a riconoscere `import.meta.main` (vero sotto Bun). Nuovo
+  workflow `release-binaries.yml` in attest-mcp: ad ogni tag `v*`, compila
+  tutti i target, genera `SHA256SUMS.txt` e pubblica una GitHub Release con i
+  binari allegati — nessun segreto nuovo (solo `GITHUB_TOKEN` automatico).
+
+  **Firma del codice esplicitamente rinviata per v1**: si accetta l'avviso
+  "editore sconosciuto" di Windows SmartScreen/macOS Gatekeeper, con il
+  checksum SHA-256 come garanzia d'integrità alternativa — la spesa reale
+  (bassa, macOS verosimilmente gratis per l'ETS via la fee waiver Apple per
+  no-profit) resta una decisione di spesa separata, non presa in questo giro.
+  Auto-attestazione dei binari sul servizio stesso (idea coerente con
+  l'ethos del progetto, come il whitepaper P38) valutata ma **rinviata
+  esplicitamente**: richiede una credenziale reale con autorizzazione umana
+  (Turnstile), non automatizzabile senza esporre una chiave in CI.
+
+  Due bug reali scoperti nel primo rilascio taggato (`v0.4.0`), non previsti
+  dal design: (1) il primo push di un tag non attivava alcun workflow
+  (nessuna consegna del webhook per un commit già presente su `main`) —
+  risolto cancellando e ripushando il tag; (2) `softprops/action-gh-release`
+  crea una Release come **bozza non pubblica** per default se non si passa
+  `draft: false` esplicito — scoperto perché l'endpoint pubblico della
+  Release rispondeva 404 nonostante il workflow avesse riportato successo;
+  corretto pubblicandola a mano e fissando il workflow per i tag successivi.
+
+  Nuova pagina pubblica `attestazione.spaziogenesi.org/developer/cli/`
+  (tabella di download per OS/architettura con link "latest" sempre
+  aggiornati, istruzioni di verifica checksum, spiegazione dell'avviso
+  editore-sconosciuto), linkata dal blocco CLI di `/developer/` e aggiunta
+  come terza voce della colonna Sviluppatori nel footer di tutte le pagine
+  del sito di attestazione.
+consequences: >
+  Un canale di distribuzione in più (binario), non una sostituzione: `npx`/
+  `npm` restano il percorso primario e quello usato da `attest-action` in
+  CI. Nessuna nuova superficie privacy o dato trattato: il binario è lo
+  stesso sorgente `src/cli.js` compilato, stessa impronta locale, stesso
+  HMAC, stessa firma, stesso ancoraggio Bitcoin — nessun endpoint nuovo,
+  nessuna modifica al device flow, zero segreti server-side aggiuntivi.
+  Nessun nuovo rischio o controllo: la CLI compilata riusa interamente
+  `CTL-agent-access` (bearer token P21), già presente nel registro.
+affects: [CTL-agent-access]
+visibility: public

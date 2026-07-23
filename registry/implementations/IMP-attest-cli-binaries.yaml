@@ -1,0 +1,6 @@
+id: IMP-attest-cli-binaries
+title: "Eseguibili standalone di sg-attest via Bun --compile (P40)"
+repo: attest-mcp
+ref: "scripts/build-binaries.mjs + .github/workflows/release-binaries.yml — compila src/cli.js con `bun build --compile` per sei target (linux-x64/arm64, macos-x64/arm64, windows-x64/arm64); ad ogni tag v* pubblica una GitHub Release con i binari e SHA256SUMS.txt. Pagina pubblica attestazione.spaziogenesi.org/developer/cli/ con istruzioni download e verifica"
+supports: [CTL-agent-access]
+visibility: public
