@@ -1,0 +1,236 @@
+{
+  "ok": true,
+  "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml/runs?per_page=20&branch=main",
+  "data": [
+    {
+      "run_id": 30116383986,
+      "created_at": "2026-07-24T18:18:11Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 30114988265,
+      "created_at": "2026-07-24T17:56:46Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 30092803329,
+      "created_at": "2026-07-24T12:21:44Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 30078954864,
+      "created_at": "2026-07-24T08:26:53Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
+      "run_id": 30075524810,
+      "created_at": "2026-07-24T07:27:31Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 30074844433,
+      "created_at": "2026-07-24T07:15:08Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 30014227672,
+      "created_at": "2026-07-23T14:06:00Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29835932684,
+      "created_at": "2026-07-21T13:45:50Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29820376818,
+      "created_at": "2026-07-21T09:58:13Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29724834209,
+      "created_at": "2026-07-20T07:30:33Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29678761424,
+      "created_at": "2026-07-19T07:49:50Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29677615804,
+      "created_at": "2026-07-19T07:09:02Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29676291321,
+      "created_at": "2026-07-19T06:20:43Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29661791440,
+      "created_at": "2026-07-18T21:32:35Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29661336058,
+      "created_at": "2026-07-18T21:17:54Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29660728753,
+      "created_at": "2026-07-18T20:58:41Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29657134029,
+      "created_at": "2026-07-18T19:05:40Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29656825374,
+      "created_at": "2026-07-18T18:56:09Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 29656795721,
+      "created_at": "2026-07-18T18:55:15Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
+      "run_id": 29638207838,
+      "created_at": "2026-07-18T08:52:52Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    }
+  ]
+}
