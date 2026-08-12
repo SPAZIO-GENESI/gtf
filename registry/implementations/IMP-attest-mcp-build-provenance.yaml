@@ -1,0 +1,6 @@
+id: IMP-attest-mcp-build-provenance
+title: "Attestazione di provenienza SLSA sui sei binari standalone (job release)"
+repo: attest-mcp
+ref: ".github/workflows/release-binaries.yml, job `release`, step \"Attesta la provenienza dei binari\" (actions/attest-build-provenance@v4, subject-path: 'dist/*') — collocato dopo il download degli artefatti Linux/macOS e Windows e PRIMA della generazione di SHA256SUMS.txt, così il glob non include mai il file di checksum derivato; permessi `id-token: write` + `attestations: write` aggiunti al solo job `release` (non a livello di workflow)"
+supports: [CTL-build-provenance]
+visibility: public

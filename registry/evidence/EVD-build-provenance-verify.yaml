@@ -1,0 +1,24 @@
+id: EVD-build-provenance-verify
+title: "Verifica reale dell'attestazione di provenienza su un binario scaricato dalla Release pubblica"
+location: { system: attest-mcp, ref: "tag v0.4.2, binario sg-attest-linux-x64 scaricato da https://github.com/SPAZIO-GENESI/attest-mcp/releases/tag/v0.4.2 (non dagli artefatti di CI)", public_via: "gh attestation verify sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp" }
+produced_by: IMP-attest-mcp-build-provenance
+collection: manual
+integrity: >
+  Verificato manualmente il 2026-08-12: `gh attestation verify
+  sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp` su un binario
+  scaricato dalla pagina Release pubblica del tag v0.4.2 termina con
+  successo (exit 0), esito JSON con predicato SLSA che referenzia il
+  commit ffb5d30, il workflow `release-binaries.yml` e `refs/tags/v0.4.2`.
+  Caso negativo provato: alterando anche un solo byte del file scaricato
+  la stessa verifica fallisce. Verificato inoltre, e registrato in
+  ADR-A1: il comando richiede una sessione `gh` autenticata (senza
+  `gh auth login`/`GH_TOKEN`, `gh attestation verify` e `gh attestation
+  download` rispondono con errore, exit 4) anche su questo repository
+  pubblico — un limite del client `gh`, non del dato: l'endpoint REST
+  sottostante (`GET api.github.com/repos/.../attestations/<digest>`)
+  risponde 200 senza alcuna autenticazione, verificato con `curl` puro.
+  Collezione manuale perché il collettore automatico del GTF
+  (`collect-evidence.mjs`) non dispone di una sessione `gh` autenticata;
+  automatizzarla richiederebbe un token dedicato in CI, non presente oggi.
+supports: [CTL-build-provenance]
+visibility: public
