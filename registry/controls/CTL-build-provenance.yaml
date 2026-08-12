@@ -3,33 +3,41 @@ title: "Attestazione di provenienza SLSA/in-toto sui binari standalone di sg-att
 status: draft
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
-implemented_by: [IMP-attest-mcp-build-provenance, IMP-imgauthweb-cli-provenance-docs]
-evidenced_by: [EVD-build-provenance-verify]
+implemented_by: [IMP-attest-mcp-build-provenance, IMP-imgauthweb-cli-provenance-docs, IMP-attest-mcp-verify-provenance-script]
+evidenced_by: [EVD-build-provenance-verify, EVD-build-provenance-script-verify]
 verify_howto: >
-  Scarica un binario dalla pagina Release pubblica di attest-mcp (es.
-  `sg-attest-linux-x64` dal tag `v0.4.2`,
-  https://github.com/SPAZIO-GENESI/attest-mcp/releases) ed esegui:
+  Procedura senza alcuna credenziale (chiude il gap PRN-08 descritto in
+  ADR-A1): clona il repository pubblico, installa le dipendenze di
+  sviluppo ed esegui lo script di verifica indipendente su un binario
+  scaricato dalla pagina Release pubblica (es. `sg-attest-linux-x64` dal
+  tag `v0.4.2`, https://github.com/SPAZIO-GENESI/attest-mcp/releases):
 
-  `gh attestation verify sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp`
+  `git clone https://github.com/SPAZIO-GENESI/attest-mcp && cd attest-mcp
+  && npm install && node scripts/verify-provenance.mjs
+  ./sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp --tag v0.4.2`
 
   Esito atteso: verifica riuscita (exit 0), con un predicato SLSA che
-  referenzia il commit, il workflow `release-binaries.yml` e il tag. La
-  stessa verifica su un file alterato di un solo byte fallisce — provato.
+  referenzia il commit, il workflow `release-binaries.yml` e il tag. Lo
+  script interroga solo l'endpoint REST pubblico delle attestazioni
+  GitHub (nessun header Authorization, verificato) e verifica il bundle
+  Sigstore con la libreria npm `sigstore` contro l'infrastruttura
+  pubblica di Sigstore (Rekor/Fulcio/TUF, nessun account). La stessa
+  verifica su un file alterato di un solo byte fallisce (il digest
+  cambia, quindi cambia la chiave stessa con cui si cerca l'attestazione)
+  — provato, così come il caso di un file rinominato ma con contenuto
+  intatto (verifica riuscita con avviso, perché il legame è sul digest
+  del subject in-toto, non sul nome file).
 
-  **Nota onesta su PRN-08 (Open Verification), vedi ADR-A1**: questo
-  comando richiede la GitHub CLI **autenticata** (`gh auth login` o
-  `GH_TOKEN`, un account GitHub gratuito basta) — verificato: senza
-  sessione autenticata `gh attestation verify` e `gh attestation download`
-  rispondono con errore (exit 4, "please run gh auth login"), anche su
-  questo repository pubblico. Il dato sottostante è comunque pubblico
-  (l'endpoint REST `GET api.github.com/repos/<owner>/<repo>/attestations/
-  <digest>` risponde 200 senza alcuna autenticazione, verificato con
-  `curl` puro senza header), ma non esiste oggi una procedura a comando
-  singolo, senza `gh` autenticato, che porti dallo stesso binario
-  scaricato a un esito verificato senza ricostruire a mano il bundle
-  Sigstore. Questo controllo **non soddisfa PRN-08 alla lettera**
-  ("senza credenziali"): richiede un account GitHub gratuito, non un
-  segreto del progetto. Dichiarato, non nascosto.
+  In alternativa, per chi ha già `gh` autenticato: `gh attestation verify
+  sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp` fa la stessa
+  verifica, ma **richiede** una sessione GitHub autenticata anche su
+  questo repository pubblico (verificato: senza `gh auth login`/
+  `GH_TOKEN`, sia `gh attestation verify` sia `gh attestation download`
+  rispondono exit 4, "please run gh auth login") — un limite del client,
+  non del dato: l'endpoint REST sottostante è pubblico. Vedi ADR-A1 per
+  la cronologia completa: il gap era nel client `gh`, non nella
+  disponibilità del dato, e ora esiste una procedura equivalente che non
+  ne eredita il limite.
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-08-12

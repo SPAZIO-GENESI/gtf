@@ -11,8 +11,8 @@
     {
       "id": "MET-integrity",
       "label": "Integrità",
-      "value": 100,
-      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W30) + ancoraggi dogfooding onorati (1/1 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"
+      "value": 83,
+      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W33) + ancoraggi dogfooding onorati (1/2 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"
     },
     {
       "id": "MET-traceability",
@@ -27,19 +27,19 @@
     {
       "id": "MET-automation",
       "label": "Automazione",
-      "value": 63
+      "value": 59
     },
     {
       "id": "MET-audit",
       "label": "Audit",
       "value": 100,
-      "note": "revisione: ultima il 2026-07-19 (5/90 giorni); ACT: nessuna ancora risolta"
+      "note": "revisione: ultima il 2026-07-19 (24/90 giorni); ACT: nessuna ancora risolta"
     },
     {
       "id": "MET-conservation",
       "label": "Conservazione",
-      "value": 69,
-      "note": "snapshot 3/8 settimane + drill: riuscito il 2026-07-19 (5 giorni fa)"
+      "value": 88,
+      "note": "snapshot 6/8 settimane + drill: riuscito il 2026-07-19 (24 giorni fa)"
     },
     {
       "id": "MET-reproducibility",
@@ -50,14 +50,14 @@
       "id": "MET-privacy",
       "label": "Privacy",
       "value": 100,
-      "note": "scanner su imgauth@v1.24.0: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"
+      "note": "scanner su imgauth@v1.34.1: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"
     },
     {
       "id": "MET-governance",
       "label": "Governance",
-      "value": 90,
-      "note": "validate 30/30 + gate 16/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
+      "value": 95,
+      "note": "validate 30/30 + gate 18/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
     }
   ],
-  "computed_at": "2026-07-24T12:31:19.655Z"
+  "computed_at": "2026-08-12T19:22:40.282Z"
 }

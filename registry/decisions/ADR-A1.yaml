@@ -88,6 +88,59 @@ decision: >
   `REQ-27001-inspiration-01` (sicurezza delle operazioni/CI, la stessa
   famiglia di `CTL-cicd-pipeline`), coerente con l'uso "a ispirazione"
   già stabilito per quel requisito.
+
+  **Seguito, stesso giorno: il gap PRN-08 era del client, non del dato —
+  chiuso.** Il punto 1 sopra lasciava un residuo dichiarato ma non
+  risolto. Scritto e collaudato `attest-mcp/scripts/verify-provenance.mjs`
+  (PR attest-mcp #2): interroga l'endpoint REST pubblico delle
+  attestazioni GitHub (nessun header Authorization, confermato con
+  `curl` a env pulito) e verifica il bundle Sigstore con la libreria npm
+  `sigstore`, che a sua volta verifica contro l'infrastruttura pubblica
+  di Sigstore (Rekor, Fulcio, TUF) — nessun account da nessuna parte
+  nella catena. `sigstore` è stata aggiunta come **devDependency**
+  esplicita (autorizzata dal gestore per questo giro, scelta motivata
+  sotto), non come dipendenza del pacchetto pubblicato: non tocca
+  `src/*`, la CLI/il server MCP restano privi di dipendenze esterne
+  oltre a quelle già presenti, coerente con la preferenza del progetto.
+
+  Scelta **sigstore (libreria npm) invece di cosign (binario Go)**: il
+  progetto è interamente Node/Bun, e `sigstore` permette uno script
+  auto-contenuto eseguibile con solo `npm install`, senza chiedere a chi
+  verifica di installare un secondo binario per piattaforma — la stessa
+  frizione che si voleva ridurre rispetto a `gh`. `sigstore` è inoltre
+  la libreria con cui GitHub stessa costruisce le attestazioni
+  (`@actions/attest-build-provenance`), non un'implementazione terza.
+
+  Collaudato con dati reali, non solo scritto: sui sei binari del tag
+  v0.4.2, scaricati dalla Release pubblica — file autentico → verifica
+  riuscita; stessa copia rinominata → verifica riuscita con avviso (il
+  legame è sul digest del subject in-toto, non sul nome file); copia
+  con un byte alterato → fallita (il digest cambia, quindi cambia la
+  chiave stessa con cui si interroga l'endpoint, che risponde 404).
+  Dettagli in `EVD-build-provenance-script-verify`.
+
+  **Sorpresa emersa scrivendo lo script, non dal solo design**:
+  `sigstore.verify(bundle, data, options)` — la funzione di verifica
+  della libreria — **non lega da sé l'artefatto al subject** per un
+  bundle DSSE (un'attestazione, a differenza di una firma di
+  messaggio): passare bytes completamente estranei come `data` non fa
+  fallire la verifica crittografica (provato con un test dedicato,
+  leggendo poi il sorgente della libreria per capire perché: per le
+  buste DSSE il confronto interno è fra il payload e la propria firma,
+  non fra l'artefatto e il payload). Un'implementazione che si fidasse
+  del parametro `data` per il legame sarebbe silenziosamente insicura:
+  accetterebbe qualunque file locale purché esistesse UNA attestazione
+  valida per quel repository/workflow/tag. Lo script fa quindi il
+  legame esplicitamente, leggendo il predicato in-toto e cercando un
+  subject il cui digest coincide con quello calcolato sul file locale.
+
+  **Conseguenza per il registro**: `CTL-build-provenance.verify_howto`
+  riscritto con la nuova procedura come percorso primario (soddisfa
+  PRN-08 alla lettera: nessuna credenziale in nessun passo); `gh
+  attestation verify` resta documentato come alternativa per chi ha già
+  `gh` autenticato, con il suo limite dichiarato invariato. Il controllo
+  resta **`draft`**: la promozione ad `active` non è autorità di questa
+  sessione (vedi `consequences`).
 consequences: >
   `CTL-build-provenance` nasce **`draft`**: collaudato con dati reali
   (tag v0.4.2, verifica positiva e negativa), ma la promozione ad
@@ -97,6 +150,13 @@ consequences: >
   binari) non ha oggi un record dedicato nel registro — lasciato come
   domanda aperta al gestore, non deciso qui, perché introdurre un
   rischio nuovo è una decisione più grande di quanto A1 richieda.
+
+  Aggiornamento, stesso giorno: il gap PRN-08 dichiarato al punto 1 è
+  **chiuso** (`scripts/verify-provenance.mjs`, vedi sopra) — resta
+  comunque **`draft`**, perché PRN-08 e la promozione `draft`→`active`
+  sono due questioni distinte: la seconda richiede una decisione
+  esplicita del gestore, non la sola disponibilità tecnica di una
+  procedura corretta.
 
   Fuori scopo, come da design doc: attestazione del pacchetto npm
   (pubblicato a mano, non da CI, verificato in FASE 0); SLSA build

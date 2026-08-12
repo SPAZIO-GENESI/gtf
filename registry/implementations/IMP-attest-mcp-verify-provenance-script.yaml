@@ -1,0 +1,6 @@
+id: IMP-attest-mcp-verify-provenance-script
+title: "Verificatore indipendente dell'attestazione di provenienza, senza gh autenticato"
+repo: attest-mcp
+ref: "scripts/verify-provenance.mjs — legge il bundle Sigstore dall'endpoint REST pubblico `GET api.github.com/repos/<owner>/<repo>/attestations/sha256:<digest>` (nessuna autenticazione), lo verifica con la libreria npm `sigstore` (Rekor/Fulcio/TUF pubblici), e lega esplicitamente l'artefatto al subject in-toto per digest (sigstore.verify() non lo fa da sé sui bundle DSSE). `sigstore` è una devDependency di package.json, non importata da src/*"
+supports: [CTL-build-provenance]
+visibility: public
