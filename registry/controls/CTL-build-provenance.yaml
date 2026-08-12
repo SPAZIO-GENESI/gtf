@@ -1,0 +1,35 @@
+id: CTL-build-provenance
+title: "Attestazione di provenienza SLSA/in-toto sui binari standalone di sg-attest (A1)"
+status: draft
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+implemented_by: [IMP-attest-mcp-build-provenance, IMP-imgauthweb-cli-provenance-docs]
+evidenced_by: [EVD-build-provenance-verify]
+verify_howto: >
+  Scarica un binario dalla pagina Release pubblica di attest-mcp (es.
+  `sg-attest-linux-x64` dal tag `v0.4.2`,
+  https://github.com/SPAZIO-GENESI/attest-mcp/releases) ed esegui:
+
+  `gh attestation verify sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp`
+
+  Esito atteso: verifica riuscita (exit 0), con un predicato SLSA che
+  referenzia il commit, il workflow `release-binaries.yml` e il tag. La
+  stessa verifica su un file alterato di un solo byte fallisce — provato.
+
+  **Nota onesta su PRN-08 (Open Verification), vedi ADR-A1**: questo
+  comando richiede la GitHub CLI **autenticata** (`gh auth login` o
+  `GH_TOKEN`, un account GitHub gratuito basta) — verificato: senza
+  sessione autenticata `gh attestation verify` e `gh attestation download`
+  rispondono con errore (exit 4, "please run gh auth login"), anche su
+  questo repository pubblico. Il dato sottostante è comunque pubblico
+  (l'endpoint REST `GET api.github.com/repos/<owner>/<repo>/attestations/
+  <digest>` risponde 200 senza alcuna autenticazione, verificato con
+  `curl` puro senza header), ma non esiste oggi una procedura a comando
+  singolo, senza `gh` autenticato, che porti dallo stesso binario
+  scaricato a un esito verificato senza ricostruire a mano il bundle
+  Sigstore. Questo controllo **non soddisfa PRN-08 alla lettera**
+  ("senza credenziali"): richiede un account GitHub gratuito, non un
+  segreto del progetto. Dichiarato, non nascosto.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-08-12

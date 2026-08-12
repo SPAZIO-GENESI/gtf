@@ -1,0 +1,105 @@
+id: ADR-A1
+title: "A1 — Provenienza di build firmata sugli artefatti rilasciati (attest-mcp)"
+date: 2026-08-12
+status: accepted
+context: >
+  La catena «sorgente pubblico → binario scaricato» dei sei eseguibili
+  standalone di `sg-attest` (ADR-P40) si reggeva sul solo
+  `SHA256SUMS.txt`, generato dallo stesso workflow che produce il
+  binario: un checksum dimostra che il file non è cambiato dopo la
+  build, non che sia stato costruito da quel sorgente, da quel commit,
+  da quel workflow. Per un servizio la cui tesi pubblica è che la
+  fiducia si dimostra invece di dichiararla, era l'anello più debole
+  rimasto nella distribuzione — un residuo implicitamente accettato da
+  ADR-P40 nello scegliere il checksum come garanzia alternativa alla
+  firma del codice (quest'ultima rimandata, vedi voce A2 dello stesso
+  piano).
+
+  Nota di coerenza con ADR-P37, che aveva scartato **Sigstore** per
+  attestare le OPERE digitali (categoria sbagliata: è firma keyless di
+  artefatti software, non di opere). Qui il dominio è l'opposto: si
+  firma un artefatto software — il binario CLI — che è esattamente il
+  caso d'uso proprio di quella tecnologia. Non è una riapertura della
+  decisione P37, ne è il complemento naturale.
+decision: >
+  Attivato **GitHub Artifact Attestations**
+  (`actions/attest-build-provenance@v4`) sul job `release` di
+  `attest-mcp/.github/workflows/release-binaries.yml`: firma con
+  identità OIDC effimera i sei binari esatti pubblicati sulla Release
+  (subject-path `dist/*`, collocato PRIMA della generazione di
+  `SHA256SUMS.txt` così il checksum derivato non viene mai attestato),
+  registrata in un transparency log pubblico. Permessi
+  `id-token: write` + `attestations: write` aggiunti al solo job
+  `release`, non a livello di workflow. Costo umano ricorrente: zero,
+  gira ad ogni tag senza intervento.
+
+  Verificato **due volte**, non solo scritto: (1) primo tag reale
+  attraverso il workflow modificato (v0.4.2, merge PR #1, commit
+  b6d271e); (2) `gh attestation verify` su un binario scaricato dalla
+  **pagina Release pubblica** (non dagli artefatti di CI) con esito
+  positivo, e sullo stesso file alterato di un byte con esito negativo
+  — un test che non prova il fallimento non prova niente.
+  `/developer/cli/` (repo imgauthweb, IT+EN sincronizzati) estende la
+  sezione «Verifica l'integrità» col comando, spiegando la differenza
+  fra le due domande (integrità vs provenienza) senza sostituire il
+  checksum. Dettagli in `EVD-build-provenance-verify`.
+
+  **Due punti da registrare esplicitamente, emersi dalla verifica reale
+  e non dal solo design doc:**
+
+  1. **`gh attestation verify` richiede una sessione GitHub autenticata**
+  (`gh auth login` o `GH_TOKEN`; un account gratuito basta), **anche su
+  un repository pubblico** — confermato empiricamente: senza
+  autenticazione, sia `gh attestation verify` sia `gh attestation
+  download` rispondono con errore (exit 4, "please run gh auth login").
+  Il dato sottostante è comunque pubblico — l'endpoint REST
+  `GET api.github.com/repos/<owner>/<repo>/attestations/<digest>`
+  risponde 200 senza alcuna autenticazione, verificato con `curl` puro
+  — ma non esiste oggi una procedura a comando singolo, senza `gh`
+  autenticato, che porti dallo stesso binario scaricato a un esito
+  verificato: servirebbe ricostruire a mano il bundle Sigstore dalla
+  risposta JSON. **Conseguenza per il registro**: `CTL-build-provenance`
+  **non soddisfa PRN-08 alla lettera** ("verificabile da un terzo senza
+  credenziali") — il suo `verify_howto` lo dichiara esplicitamente
+  invece di sorvolare, distinguendo "richiede un account GitHub
+  gratuito" (vero, limite del client `gh`) da "richiede un segreto del
+  progetto" (falso, il dato è pubblico). Non è stato scritto un
+  `verify_howto` che finge un requisito diverso da quello reale.
+
+  2. **In A2 (firma del codice, non ancora eseguita) l'ordine dei passi
+  è vincolante**: la firma del codice deve avvenire **prima** dello
+  step di attestazione di provenienza, non dopo. `subject-path: 'dist/*'`
+  attesta i byte esatti del file al momento in cui gira lo step — se A2
+  aggiungesse una firma *dopo* l'attestazione corrente, il binario
+  firmato sarebbe un file diverso da quello attestato e l'attestazione
+  risulterebbe orfana (o, peggio, verificherebbe un file che l'utente
+  non riceve più). L'ordine corretto nel job `release` è: build → firma
+  del codice (A2) → attestazione di provenienza sul binario *firmato* →
+  checksum → pubblicazione Release. Chi esegue A2 deve riposizionare lo
+  step di attestazione esistente dopo la firma, non aggiungerne uno
+  nuovo accanto.
+
+  **Nota su un collegamento non ovvio, per PRN-06**: il design doc
+  proponeva come candidato `REQ-27037-pres-01` per l'aggancio in
+  Compliance Map. Verificato che è la scelta sbagliata: quel requisito
+  copre la conservazione delle **prove delle opere attestate**
+  (certificato, ancoraggio), un dominio diverso dalla provenienza di un
+  **artefatto software distribuito**. Collegato invece a
+  `REQ-27001-inspiration-01` (sicurezza delle operazioni/CI, la stessa
+  famiglia di `CTL-cicd-pipeline`), coerente con l'uso "a ispirazione"
+  già stabilito per quel requisito.
+consequences: >
+  `CTL-build-provenance` nasce **`draft`**: collaudato con dati reali
+  (tag v0.4.2, verifica positiva e negativa), ma la promozione ad
+  `active` resta una decisione del gestore, non mia (invariante
+  vincolante del progetto). Nessun nuovo `RSK` creato in questo giro:
+  un candidato naturale (manomissione della catena di distribuzione dei
+  binari) non ha oggi un record dedicato nel registro — lasciato come
+  domanda aperta al gestore, non deciso qui, perché introdurre un
+  rischio nuovo è una decisione più grande di quanto A1 richieda.
+
+  Fuori scopo, come da design doc: attestazione del pacchetto npm
+  (pubblicato a mano, non da CI, verificato in FASE 0); SLSA build
+  level 3; qualunque modifica al motore `imgauth`.
+affects: [CTL-build-provenance]
+visibility: public

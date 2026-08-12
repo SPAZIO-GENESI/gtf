@@ -1,0 +1,6 @@
+id: IMP-imgauthweb-cli-provenance-docs
+title: "/developer/cli/ — sezione verifica estesa con l'attestazione di provenienza"
+repo: imgauthweb
+ref: "developer/cli/index.html + en/developer/cli/index.html, sezione «Verifica l'integrità»: estesa (non sostituita) con il comando `gh attestation verify` accanto al checksum esistente, spiegando che rispondono a domande diverse (integrità del file vs provenienza dal sorgente/workflow) e dichiarando il requisito di autenticazione GitHub CLI (vedi CTL-build-provenance.verify_howto e ADR-A1); coppia IT/EN sincronizzata via i18n/pairs.json (guardia .github/workflows/i18n-drift.yml)"
+supports: [CTL-build-provenance]
+visibility: public
