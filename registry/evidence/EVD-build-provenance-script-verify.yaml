@@ -1,0 +1,31 @@
+id: EVD-build-provenance-script-verify
+title: "Verifica reale, senza credenziali, dell'attestazione di provenienza via scripts/verify-provenance.mjs"
+location: { system: attest-mcp, ref: "tag v0.4.2, tutti e sei i binari scaricati dalla Release pubblica https://github.com/SPAZIO-GENESI/attest-mcp/releases/tag/v0.4.2 (non dagli artefatti di CI)", public_via: "node scripts/verify-provenance.mjs <binario> --repo SPAZIO-GENESI/attest-mcp --tag v0.4.2" }
+produced_by: IMP-attest-mcp-verify-provenance-script
+collection: manual
+integrity: >
+  Verificato manualmente il 2026-08-12, con dati reali e senza alcuna
+  credenziale in nessun passo (confermato: nessun header Authorization
+  inviato all'endpoint GitHub, nessuna variabile GH_TOKEN/GITHUB_TOKEN
+  letta). Tre scenari, tutti eseguiti su `sg-attest-linux-x64` del tag
+  v0.4.2 scaricato dalla pagina Release pubblica:
+  (1) file autentico, nome originale — verifica riuscita, exit 0,
+  identità certificato e issuer OIDC stampati e corretti
+  (`https://github.com/SPAZIO-GENESI/attest-mcp/.github/workflows/
+  release-binaries.yml@refs/tags/v0.4.2`,
+  `https://token.actions.githubusercontent.com`);
+  (2) stessa copia rinominata — verifica riuscita, exit 0, con avviso
+  esplicito sul nome non corrispondente (il legame è sul digest del
+  subject in-toto, non sul nome file);
+  (3) copia con un byte alterato — fallita, exit 1: il digest cambia e
+  quindi cambia la chiave stessa con cui si interroga l'endpoint delle
+  attestazioni, che risponde 404.
+  Verificato inoltre, con un test dedicato, che `sigstore.verify(bundle,
+  data, options)` NON lega da sé l'artefatto al subject per un bundle
+  DSSE (attestazione) — passando bytes completamente estranei come
+  "data" la verifica crittografica riesce comunque: il legame nello
+  script è quindi un controllo esplicito e necessario, non ridondante.
+  Collezione manuale perché il collettore automatico del GTF non
+  scarica/esegue script Node arbitrari da altri repository.
+supports: [CTL-build-provenance]
+visibility: public
