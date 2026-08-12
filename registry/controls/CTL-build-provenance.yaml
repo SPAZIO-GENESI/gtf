@@ -1,6 +1,6 @@
 id: CTL-build-provenance
 title: "Attestazione di provenienza SLSA/in-toto sui binari standalone di sg-attest (A1)"
-status: draft
+status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
 implemented_by: [IMP-attest-mcp-build-provenance, IMP-imgauthweb-cli-provenance-docs, IMP-attest-mcp-verify-provenance-script]
