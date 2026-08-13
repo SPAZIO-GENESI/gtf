@@ -33,6 +33,8 @@ jobs:
         run: npm run scan-privacy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Legge il punteggio OpenSSF Scorecard pubblico dei tre repo (A3)
+        run: npm run scan-scorecard
       - name: Controlla le cadenze ricorrenti (revisioni, drill, ancoraggio) e avvisa su Telegram se qualcosa è scaduto
         run: npm run check-cadences
         env:
