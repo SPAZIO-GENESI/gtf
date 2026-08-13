@@ -1,0 +1,98 @@
+id: ADR-B3
+title: "B3 — Il rischio dell'indisponibilità del maintainer, reso visibile nel registro"
+date: 2026-08-13
+status: accepted
+context: >
+  ADR-GTF-011 ha emendato la formula di MET-governance perché il progetto
+  ha un solo maintainer e la revisione tra pari via pull request non si
+  applica: con la formula originale lo score sarebbe sceso da 90 a circa
+  77 per un motivo che non riguarda la qualità del lavoro, ma la sua
+  struttura organizzativa. La decisione era metodologicamente corretta —
+  0 sarebbe stato un numero falso.
+
+  Perché questo rischio mancava dal registro, esplicitamente: la formula
+  emendata di MET-governance misura la qualità del processo di rilascio
+  (quota di run verdi di validate.yml, quota di gate umano approvato in
+  P24) — un dato sulla robustezza del PROCESSO. Non misura, e non era mai
+  stato pensato per misurare, la continuità della PERSONA che lo gestisce.
+  Sono due domande diverse, e nessuna delle due copriva l'altra: un
+  processo di rilascio robusto (CI + gate) non implica che esista un
+  secondo umano in grado di approvarlo se il primo sparisce. Il rischio è
+  concreto, non astratto: la fascia Professionale (P27) vende una garanzia
+  contrattuale di custodia dei certificati a cinque anni, un impegno
+  pluriennale verso terzi paganti sostenuto oggi dalla disponibilità
+  continuativa di una sola persona.
+decision: >
+  Aperti in questo giro `RSK-maintainer-unavailability` (likelihood
+  medium, impact high — dichiarato onestamente, non addolcito: nessun
+  secondo referente tecnico risulta individuato oggi) e
+  `CTL-maintainer-succession`, che nasce **`draft`** e referenzia
+  `piano-2026/umano/procedura-successione.md` (repo privato img-auth-hub).
+  Collegato a `REQ-27037-pres-01` (conservazione delle prove nel tempo,
+  non `REQ-27043-ir-01`: il punto di leva di questo controllo è la
+  garanzia residua del §6 della procedura — la prova sopravvive
+  all'ente — non la gestione dell'incidente in sé).
+
+  In questa stessa sessione: (1) ricostruito un inventario delle risorse
+  operative del progetto (account Cloudflare, Azure, organizzazione
+  GitHub, npm, Stripe, backup offsite, bot Telegram, registrar del
+  dominio) leggendo i repo invece che affidandosi alla memoria di
+  qualcuno — tre fatti confermati con verifiche dirette e read-only
+  (`gh auth status`/`gh api`, `wrangler whoami`, `az account show`), il
+  resto marcato esplicitamente "da confermare col gestore" dove nessun
+  file lo documentava (in particolare: registrar del dominio, account
+  Stripe, account BotFather del bot Telegram — nessuna deduzione). (2)
+  Verificate nel codice, non copiate dalla bozza, le due affermazioni
+  tecniche del §6 della procedura: il file `.ots` prodotto da
+  `imgauth/worker.js` (`createOtsProof`) è un `DetachedTimestampFile`
+  standard che commit-ta l'operazione OpSHA256 sul digest reale
+  dell'opera (non su un artefatto interno), verificabile con qualunque
+  client OpenTimestamps indipendente dai server di Spazio Genesi; il
+  certificato PDF porta davvero una marca temporale di terza parte
+  (`authart/signer_app/app.py`, `HTTPTimeStamper` su `TSA_URL`, default
+  DigiCert, radice AATL — dichiarato anche nel commento del codice
+  sorgente). Un terzo elemento che la bozza dava per scontato — un
+  verificatore offline dell'integrità del certificato — è risultato NON
+  ancora esistente (voce A4 dello stesso piano, `status: da fare`): la
+  procedura finale lo dichiara esplicitamente come parte futura della
+  garanzia, non presente. (3) Preparato (non configurato) il codice per
+  un secondo destinatario dell'allarme Telegram di `CTL-cadence-monitoring`
+  (`gtf/generators/check-cadences.mjs`, nuovo parametro opzionale
+  `TELEGRAM_CHAT_ID_SECONDARY` — nessun comportamento cambia finché il
+  secret non viene creato: chi sarà il secondo destinatario è una
+  decisione del gestore, non presa qui).
+
+  Nota per PRN-02 ("ogni CTL che scrivi referenzia almeno una EVD con
+  freshness dichiarata"): questo CTL non referenzia oggi alcuna EVD,
+  deliberatamente. Non esiste ancora un'evidenza reale da citare — nessun
+  secondo referente è stato individuato, nessun collaudo del recupero
+  segreti da parte di terzi è stato eseguito, la procedura non è
+  pubblicata — e inventarne una avrebbe violato l'invariante più
+  vincolante del progetto (CLAUDE.md §2: mai scrivere un dato non
+  verificato). Lo schema del registro non richiede `evidenced_by` per un
+  controllo `draft`, solo per uno `active`. La prima `EVD` reale arriverà
+  dal collaudo del recupero segreti da parte di una persona diversa dal
+  gestore (§4/§7 della procedura) — un'azione umana, elencata in
+  `STATO.md`.
+consequences: >
+  `CTL-maintainer-succession` nasce **`draft`**: la promozione ad `active`
+  non è autorità di questa sessione (invariante vincolante del progetto,
+  CLAUDE.md §2) e comunque non sarebbe onesta oggi — nessuno dei passaggi
+  umani che chiudono davvero questa voce (secondo referente, collaudo
+  dell'escrow da parte di terzi, delibera, pubblicazione) è avvenuto.
+
+  Elenco delle azioni che restano solo al gestore, dettagliato in
+  `STATO.md` (repo privato img-auth-hub): individuare un secondo
+  referente tecnico o dichiarare per iscritto che non esiste; far provare
+  a una persona diversa da sé il recupero dei segreti seguendo la
+  procedura scritta, senza aiuto, e registrarne l'esito come `EVD`;
+  compilare le voci marcate "da confermare col gestore" nell'inventario;
+  portare la procedura all'organo competente e ottenere delibera;
+  pubblicarla; decidere il secondo destinatario dell'allarme di cadenza.
+
+  Fuori scopo, come da design doc: qualunque modifica alla gestione reale
+  dei segreti; la configurazione effettiva del secondo destinatario
+  dell'allarme; la delibera; la pubblicazione; la promozione del
+  controllo ad `active`.
+affects: [CTL-maintainer-succession]
+visibility: public

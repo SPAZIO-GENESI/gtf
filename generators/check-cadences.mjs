@@ -32,23 +32,32 @@ function latestAnchor() {
   }
 }
 
+// B3 (voce del piano 2026, img-auth-hub): un allarme che raggiunge solo il
+// gestore non è un allarme se il gestore è la persona indisponibile. Secondo
+// destinatario opzionale — nessun comportamento cambia finché il secondo
+// secret non viene configurato (variabile assente = stringa vuota = nessun
+// invio aggiuntivo, come oggi). Il destinatario reale è una decisione umana
+// (chi sarà il secondo referente tecnico), non presa qui — vedi
+// piano-2026/umano/procedura-successione.md §3 e §7.
 async function sendTelegram(text) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) {
+  const chatIds = [process.env.TELEGRAM_CHAT_ID, process.env.TELEGRAM_CHAT_ID_SECONDARY].filter(Boolean);
+  if (!token || chatIds.length === 0) {
     console.log("TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID assenti: nessun invio, solo log.");
     console.log(text);
     return;
   }
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML", disable_web_page_preview: true }),
-    });
-    if (!res.ok) console.error(`Invio Telegram fallito: ${res.status} ${await res.text()}`);
-  } catch (e) {
-    console.error(`Invio Telegram fallito: ${e.message}`);
+  for (const chatId of chatIds) {
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML", disable_web_page_preview: true }),
+      });
+      if (!res.ok) console.error(`Invio Telegram fallito (chat ${chatId}): ${res.status} ${await res.text()}`);
+    } catch (e) {
+      console.error(`Invio Telegram fallito (chat ${chatId}): ${e.message}`);
+    }
   }
 }
 
