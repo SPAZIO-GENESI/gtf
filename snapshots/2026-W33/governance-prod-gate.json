@@ -3,6 +3,20 @@
   "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml/runs?per_page=20&branch=main",
   "data": [
     {
+      "run_id": 31702424694,
+      "created_at": "2026-08-13T12:56:14Z",
+      "has_job": true,
+      "job_conclusion": null,
+      "approvals": null
+    },
+    {
+      "run_id": 31702419604,
+      "created_at": "2026-08-13T12:56:11Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
       "run_id": 30116383986,
       "created_at": "2026-07-24T18:18:11Z",
       "has_job": true,
@@ -204,25 +218,6 @@
     {
       "run_id": 29656825374,
       "created_at": "2026-07-18T18:56:09Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29656795721,
-      "created_at": "2026-07-18T18:55:15Z",
-      "has_job": true,
-      "job_conclusion": "cancelled",
-      "approvals": []
-    },
-    {
-      "run_id": 29638207838,
-      "created_at": "2026-07-18T08:52:52Z",
       "has_job": true,
       "job_conclusion": "success",
       "approvals": [
