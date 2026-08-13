@@ -1,6 +1,6 @@
 id: CTL-static-analysis
 title: "Analisi statica del codice (CodeQL) e aggiornamento automatico delle dipendenze (Dependabot) (A3)"
-status: draft
+status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
 implemented_by: [IMP-imgauth-codeql-dependabot, IMP-imgauthweb-codeql-dependabot, IMP-attest-mcp-codeql-dependabot, IMP-attest-bot-codeql-dependabot, IMP-attest-mcp-remote-codeql-dependabot]
