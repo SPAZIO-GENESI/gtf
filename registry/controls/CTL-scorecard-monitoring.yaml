@@ -1,0 +1,29 @@
+id: CTL-scorecard-monitoring
+title: "Monitoraggio pubblico della postura di sicurezza via OpenSSF Scorecard (A3)"
+status: draft
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+implemented_by: [IMP-imgauth-scorecard, IMP-imgauthweb-scorecard, IMP-autart-signer-scorecard]
+evidenced_by: [EVD-scorecard-scores]
+verify_howto: >
+  Senza alcuna credenziale: `curl
+  https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth`
+  (e allo stesso modo per `/SPAZIO-GENESI/imgauthweb` e
+  `/SPAZIO-GENESI/autart-signer`) restituisce il punteggio pubblico
+  OpenSSF Scorecard più recente con la scomposizione per singolo check
+  (Dependency-Update-Tool, Maintained, Dangerous-Workflow,
+  Token-Permissions, Pinned-Dependencies, ecc.). Primo dato reale
+  raccolto il 2026-08-13: imgauth 5.7/10, imgauthweb 5.4/10, autart-signer
+  2.9/10. Ogni repo ha un workflow schedulato settimanale
+  (`scorecard.yml`, `workflow_dispatch` per un run manuale) che pubblica
+  il risultato anche sul tab "Security → Code scanning" di GitHub — quella
+  pagina però **richiede una sessione GitHub autenticata anche su repository
+  pubblici** (verificato: `curl` a `github.com/.../security/code-scanning`
+  senza credenziali risponde 404, e l'endpoint REST equivalente
+  `api.github.com/.../code-scanning/alerts` risponde 401) — stesso tipo di
+  limite del client `gh` già documentato in `CTL-build-provenance`/ADR-A1.
+  L'API pubblica di securityscorecards.dev, usata sopra, non ha questo
+  limite ed è la via primaria di verifica di questo controllo.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-08-13

@@ -1,0 +1,11 @@
+id: EVD-scorecard-scores
+title: Punteggio pubblico OpenSSF Scorecard sui tre repo principali
+location:
+  system: "OpenSSF Scorecard, API pubblica"
+  ref: "snapshots/2026-W33/scorecard.json (gtf) — imgauth 5.7, imgauthweb 5.4, autart-signer 2.9, con la scomposizione per singolo check"
+  public_via: "https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth (e /imgauthweb, /autart-signer)"
+collection: auto
+last_seen: 2026-08-13
+integrity: "raccolta settimanale (generators/scan-scorecard.mjs, step del workflow collect-evidence.yml): interroga l'API pubblica di securityscorecards.dev per i tre repo e scrive lo snapshot; primo dato reale ottenuto il 2026-08-13 lanciando a mano il workflow scorecard.yml sui tre repo (nessun trigger push, i workflow sono solo schedulati/manuali) seguito da collect-evidence.yml — verificabile da chiunque interrogando le stesse tre URL pubbliche, senza credenziali"
+supports: [CTL-scorecard-monitoring]
+visibility: public

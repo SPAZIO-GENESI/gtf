@@ -1,0 +1,19 @@
+id: EVD-codeql-runs-green
+title: Run pubblici di CodeQL verdi sui cinque repo con codice JS reale
+location:
+  system: "GitHub Actions, cinque repo pubblici (imgauth, imgauthweb, attest-mcp, attest-bot, attest-mcp-remote)"
+  ref: "workflow .github/workflows/codeql.yml su ciascun repo — job Analyze, linguaggio javascript-typescript"
+  public_via: "https://api.github.com/repos/SPAZIO-GENESI/<repo>/actions/workflows/codeql.yml/runs (REST pubblico, nessuna autenticazione)"
+collection: auto
+last_seen: 2026-08-13
+integrity: >
+  Verificato il 2026-08-13, dopo il merge delle 10 PR di A3: `gh run list
+  --repo SPAZIO-GENESI/<repo> --workflow codeql.yml` mostra l'ultimo run
+  `completed`/`success` su tutti e cinque i repo (scattato da solo al
+  push su main, poi rilanciato da Dependabot). CodeQL gira automaticamente
+  a ogni push/PR su main più settimanale, quindi l'evidenza si rigenera da
+  sé senza intervento umano. Endpoint verificato pubblico senza
+  autenticazione con `curl` a ambiente pulito (200, nessun header
+  Authorization).
+supports: [CTL-static-analysis]
+visibility: public
