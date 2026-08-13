@@ -1,6 +1,6 @@
 id: CTL-scorecard-monitoring
 title: "Monitoraggio pubblico della postura di sicurezza via OpenSSF Scorecard (A3)"
-status: draft
+status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
 implemented_by: [IMP-imgauth-scorecard, IMP-imgauthweb-scorecard, IMP-autart-signer-scorecard]
