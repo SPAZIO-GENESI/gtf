@@ -1,0 +1,8 @@
+id: PRC-security-alert-triage
+title: Triage settimanale degli alert di sicurezza (CodeQL, Dependabot)
+owner: it@spaziogenesi.org
+trigger: "Cadenza fissa settimanale, non un evento: Federico Battisti (Presidente, secondo referente tecnico dell'ente — vedi B3/piano P43) controlla la scheda Security > Code scanning e Dependabot di imgauth, imgauthweb, attest-mcp, attest-bot, attest-mcp-remote. Alert nel suo raggio di competenza tecnica: chiude o corregge direttamente. Alert critici o fuori portata: escalation al gestore (it@spaziogenesi.org)."
+output: "Ogni alert aperto ha un esito entro la settimana successiva — chiuso, corretto, o segnalato al gestore con una ACT (PRN-09) — mai lasciato silenzioso."
+human_cost_minutes_month: 60
+frequency_days: 7
+visibility: public
