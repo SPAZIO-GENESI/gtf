@@ -38,6 +38,11 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # B3: secondo recapito opzionale (secondo referente tecnico), non
+          # ancora configurato — un secret assente resta una stringa vuota,
+          # nessun invio in più finché qualcuno non lo imposta. Vedi
+          # piano-2026/umano/procedura-successione.md nel repo img-auth-hub.
+          TELEGRAM_CHAT_ID_SECONDARY: ${{ secrets.TELEGRAM_CHAT_ID_SECONDARY }}
           TEST_TELEGRAM: ${{ inputs.test_telegram }}
       - name: Commit lo snapshot e l'aggiornamento di last_seen, se cambia qualcosa
         run: |

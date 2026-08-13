@@ -1,0 +1,28 @@
+id: CTL-maintainer-succession
+title: "Procedura di successione tecnica, con garanzia residua verificabile indipendentemente dall'ente"
+status: draft
+visibility: public
+satisfies: [REQ-27037-pres-01]
+mitigates: [RSK-maintainer-unavailability]
+verify_howto: >
+  Due cose distinte sono verificabili oggi, senza credenziali, da chiunque
+  — e vanno tenute separate. (1) La garanzia residua per chi possiede un
+  certificato è verificabile ORA, in produzione, indipendentemente da
+  questo documento: prendi un file attestato, il suo certificato PDF e il
+  file .ots scaricato dopo l'emissione; verifica il file .ots con un
+  client OpenTimestamps pubblico (es. https://opentimestamps.org, oppure
+  il comando `ots verify` del client ufficiale) contro la blockchain
+  Bitcoin — nessun server di Spazio Genesi coinvolto; apri il certificato
+  PDF in un lettore PAdES conforme (es. Adobe Acrobat Reader) e verifica
+  che la marca temporale risulti di terza parte attendibile (radice
+  DigiCert nella Adobe Approved Trust List). (2) La procedura di
+  successione stessa (piano-2026/umano/procedura-successione.md, repo
+  privato img-auth-hub) NON è oggi pubblicata: è una bozza completata ma
+  non ancora deliberata né pubblicata dall'organo competente. Il
+  controllo resta "draft" anche per questo motivo, oltre che per
+  l'assenza di un collaudo del recupero segreti da parte di una persona
+  diversa dal maintainer (vedi ADR-B3). Diventerà verificabile per intero
+  solo quando la procedura sarà pubblicata.
+owner: it@spaziogenesi.org
+review_every_days: 365
+last_reviewed: 2026-08-13

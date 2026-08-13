@@ -1,0 +1,22 @@
+id: RSK-maintainer-unavailability
+title: Indisponibilità temporanea o permanente dell'unico maintainer tecnico
+description: >
+  Il progetto ha un solo maintainer tecnico con accesso operativo a tutti
+  gli account e i segreti critici: Cloudflare (Worker, D1, R2, Access, zona
+  DNS), Azure (firmatario), organizzazione GitHub, npm, Stripe, backup
+  offsite, bot Telegram. ADR-GTF-011 ha emendato la formula di
+  MET-governance per lo stesso motivo di fondo — un maintainer singolo non
+  ha una revisione tra pari via pull request — ma quell'emendamento misura
+  la qualità del processo di rilascio (CI più gate umano), non la
+  continuità della persona che lo gestisce: nessun altro record del
+  registro copriva, prima di questo, l'indisponibilità della persona in sé.
+  Il rischio non è teorico: la fascia Professionale (P27) vende una
+  garanzia contrattuale di custodia dei certificati a cinque anni, un
+  impegno pluriennale verso terzi paganti sostenuto oggi dalla
+  disponibilità continuativa di una sola persona. Alla data di apertura di
+  questo record (2026-08-13) non risulta individuato alcun secondo
+  referente tecnico con accesso operativo.
+likelihood: medium
+impact: high
+mitigated_by: [CTL-maintainer-succession]
+visibility: public
