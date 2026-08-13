@@ -3,11 +3,51 @@
   "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml/runs?per_page=20&branch=main",
   "data": [
     {
+      "run_id": 31711896403,
+      "created_at": "2026-08-13T14:47:34Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 31711513862,
+      "created_at": "2026-08-13T14:43:59Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
+      "run_id": 31711505897,
+      "created_at": "2026-08-13T14:43:54Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
+      "run_id": 31711200409,
+      "created_at": "2026-08-13T14:39:00Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
+      "run_id": 31711181739,
+      "created_at": "2026-08-13T14:38:44Z",
+      "has_job": true,
+      "job_conclusion": "cancelled",
+      "approvals": []
+    },
+    {
       "run_id": 31702424694,
       "created_at": "2026-08-13T12:56:14Z",
       "has_job": true,
-      "job_conclusion": null,
-      "approvals": null
+      "job_conclusion": "cancelled",
+      "approvals": []
     },
     {
       "run_id": 31702419604,
@@ -158,66 +198,6 @@
     {
       "run_id": 29676291321,
       "created_at": "2026-07-19T06:20:43Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29661791440,
-      "created_at": "2026-07-18T21:32:35Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29661336058,
-      "created_at": "2026-07-18T21:17:54Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29660728753,
-      "created_at": "2026-07-18T20:58:41Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29657134029,
-      "created_at": "2026-07-18T19:05:40Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29656825374,
-      "created_at": "2026-07-18T18:56:09Z",
       "has_job": true,
       "job_conclusion": "success",
       "approvals": [

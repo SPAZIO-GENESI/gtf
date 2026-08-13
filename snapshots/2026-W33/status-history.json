@@ -1,9 +1,9 @@
 {
   "ok": true,
   "data": {
-    "updated": "2026-08-13T13:00:36.655Z",
+    "updated": "2026-08-13T15:16:45.941Z",
     "window_days": 90,
-    "overall": "ok",
+    "overall": "down",
     "components": [
       {
         "key": "worker",
@@ -509,10 +509,10 @@
             "d": "2026-08-13",
             "s": "ok",
             "b": {
-              "ok": 31,
+              "ok": 35,
               "degraded": 0,
               "down": 0,
-              "n": 31
+              "n": 35
             }
           }
         ]
@@ -520,7 +520,7 @@
       {
         "key": "signer",
         "label": "Firma del certificato (PDF)",
-        "current": "ok",
+        "current": "down",
         "uptime": 99.9,
         "days": [
           {
@@ -1019,12 +1019,12 @@
           },
           {
             "d": "2026-08-13",
-            "s": "ok",
+            "s": "down",
             "b": {
-              "ok": 31,
+              "ok": 34,
               "degraded": 0,
-              "down": 0,
-              "n": 31
+              "down": 1,
+              "n": 35
             }
           }
         ]
@@ -1533,10 +1533,10 @@
             "d": "2026-08-13",
             "s": "ok",
             "b": {
-              "ok": 31,
+              "ok": 35,
               "degraded": 0,
               "down": 0,
-              "n": 31
+              "n": 35
             }
           }
         ]
@@ -2045,10 +2045,10 @@
             "d": "2026-08-13",
             "s": "ok",
             "b": {
-              "ok": 31,
+              "ok": 35,
               "degraded": 0,
               "down": 0,
-              "n": 31
+              "n": 35
             }
           }
         ]

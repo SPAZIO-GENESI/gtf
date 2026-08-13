@@ -3,7 +3,7 @@
     "ok": true,
     "data": {
       "day": "2026-08-13",
-      "count": 36,
+      "count": 41,
       "events": [
         {
           "ts": 1786572046412,
@@ -327,6 +327,51 @@
           "latency": 344,
           "check": "archive",
           "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786627837132,
+          "iso": "2026-08-13T13:30:37.132Z",
+          "status": "ok",
+          "latency": 1383,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786629637035,
+          "iso": "2026-08-13T14:00:37.035Z",
+          "status": "ok",
+          "latency": 1441,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786631437251,
+          "iso": "2026-08-13T14:30:37.251Z",
+          "status": "ok",
+          "latency": 1441,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786633243905,
+          "iso": "2026-08-13T15:00:43.905Z",
+          "status": "error",
+          "latency": 8000,
+          "check": "signer",
+          "cause": "timeout",
+          "detail": null
+        },
+        {
+          "ts": 1786633504536,
+          "iso": "2026-08-13T15:05:04.536Z",
+          "status": "error",
+          "latency": 8000,
+          "check": "signer",
+          "cause": "timeout",
           "detail": null
         }
       ]
