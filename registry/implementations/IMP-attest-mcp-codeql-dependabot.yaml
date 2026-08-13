@@ -1,0 +1,6 @@
+id: IMP-attest-mcp-codeql-dependabot
+title: "CodeQL (javascript-typescript) + Dependabot (npm, github-actions)"
+repo: attest-mcp
+ref: ".github/workflows/codeql.yml + .github/dependabot.yml (commit eb376bf) — CodeQL su push/PR/main + settimanale + manuale, permessi minimi; Dependabot su npm e github-actions"
+supports: [CTL-static-analysis]
+visibility: public

@@ -1,0 +1,31 @@
+id: CTL-static-analysis
+title: "Analisi statica del codice (CodeQL) e aggiornamento automatico delle dipendenze (Dependabot) (A3)"
+status: draft
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+implemented_by: [IMP-imgauth-codeql-dependabot, IMP-imgauthweb-codeql-dependabot, IMP-attest-mcp-codeql-dependabot, IMP-attest-bot-codeql-dependabot, IMP-attest-mcp-remote-codeql-dependabot]
+evidenced_by: [EVD-codeql-runs-green]
+verify_howto: >
+  Senza alcuna credenziale: `curl
+  https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/codeql.yml/runs?per_page=1`
+  (endpoint REST pubblico, nessuna autenticazione — verificato) restituisce
+  l'esito dell'ultimo run di CodeQL su main; ripetibile per gli altri
+  quattro repo con codice JavaScript/TypeScript reale (imgauthweb,
+  attest-mcp, attest-bot, attest-mcp-remote). ⚠️ Correzione rispetto al
+  design doc originario: il tab web "Security → Code scanning" di GitHub
+  **non è raggiungibile senza login anche su repository pubblici**
+  (verificato il 2026-08-13: `curl` senza credenziali su
+  `github.com/.../security/code-scanning` risponde 404, l'endpoint REST
+  equivalente `api.github.com/.../code-scanning/alerts` risponde 401) —
+  non è quindi utilizzabile come verify_howto per PRN-08. L'endpoint dei
+  run del workflow, usato sopra, non ha questo limite. Verificato dal vivo
+  il 2026-08-13, dopo il merge delle 10 PR di A3: CodeQL verde
+  (`completed`/`success`) su tutti e cinque i repo. Dependabot ha aperto
+  24 pull request automatiche di aggiornamento dipendenze sullo stesso
+  giro (visibili pubblicamente sulla tab Pull Requests di ciascun repo,
+  `state=all` incluso via API senza autenticazione); il triage umano di
+  questi alert è un processo ricorrente separato, già registrato come
+  `PRC-security-alert-triage` (Federico Battisti, cadenza settimanale).
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-08-13

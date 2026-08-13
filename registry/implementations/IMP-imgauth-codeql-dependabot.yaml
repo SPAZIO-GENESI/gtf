@@ -1,0 +1,6 @@
+id: IMP-imgauth-codeql-dependabot
+title: "CodeQL (javascript-typescript) + Dependabot (npm, github-actions)"
+repo: imgauth
+ref: ".github/workflows/codeql.yml + .github/dependabot.yml (commit 111cca9) — CodeQL su push/PR/main + settimanale + manuale, permessi minimi; Dependabot su npm e github-actions"
+supports: [CTL-static-analysis]
+visibility: public

@@ -1,0 +1,6 @@
+id: IMP-imgauthweb-scorecard
+title: "OpenSSF Scorecard: analisi settimanale + manuale, pubblicata su GitHub code scanning"
+repo: imgauthweb
+ref: ".github/workflows/scorecard.yml (commit e2802e9) — schedulato settimanale + workflow_dispatch, permessi minimi (security-events: write, id-token: write, contents: read), publish_results: true"
+supports: [CTL-scorecard-monitoring]
+visibility: public

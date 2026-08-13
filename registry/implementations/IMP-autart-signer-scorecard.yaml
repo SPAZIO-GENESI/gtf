@@ -1,0 +1,6 @@
+id: IMP-autart-signer-scorecard
+title: "OpenSSF Scorecard: analisi settimanale + manuale, pubblicata su GitHub code scanning"
+repo: autart-signer
+ref: ".github/workflows/scorecard.yml (commit c4f60fa) — schedulato settimanale + workflow_dispatch, permessi minimi (security-events: write, id-token: write, contents: read), publish_results: true"
+supports: [CTL-scorecard-monitoring]
+visibility: public
