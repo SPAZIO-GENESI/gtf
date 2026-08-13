@@ -14,7 +14,18 @@ verify_howto: >
   (Dependency-Update-Tool, Maintained, Dangerous-Workflow,
   Token-Permissions, Pinned-Dependencies, ecc.). Primo dato reale
   raccolto il 2026-08-13: imgauth 5.7/10, imgauthweb 5.4/10, autart-signer
-  2.9/10. Ogni repo ha un workflow schedulato settimanale
+  2.9/10. Stesso giorno, in un secondo giro: branch protection attivata sui
+  tre repo (no force-push, no cancellazione branch, status check `check`
+  richiesto dove esiste — imgauth/imgauthweb; assente su autart-signer, che
+  non ha alcun workflow su `pull_request`) e fine-grained PAT
+  (`SCORECARD_TOKEN`, solo `Administration:Read-only`) aggiunto a
+  `scorecard.yml` perché il `GITHUB_TOKEN` di default non può leggere le
+  regole di branch protection — senza, il check Branch-Protection andava in
+  errore (-1, escluso dal punteggio) invece di essere valutato. Con il
+  fix: imgauth 7.6/10, imgauthweb 7.6/10, autart-signer 5.6/10,
+  Branch-Protection 3/10 su tutti e tre ("not maximal": manca la PR
+  obbligatoria, scartata di proposito perché il flusso di lavoro reale è a
+  push diretto su main). Ogni repo ha un workflow schedulato settimanale
   (`scorecard.yml`, `workflow_dispatch` per un run manuale) che pubblica
   il risultato anche sul tab "Security → Code scanning" di GitHub — quella
   pagina però **richiede una sessione GitHub autenticata anche su repository
@@ -27,3 +38,6 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-08-13
+# 2026-08-13, secondo giro: branch protection + fine-grained PAT
+# SCORECARD_TOKEN aggiunti (vedi verify_howto). Aggiornamento di
+# evidenza su un controllo già active, non una promozione.
