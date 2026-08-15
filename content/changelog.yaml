@@ -21,6 +21,28 @@
 
 entries:
   - date: 2026-08-15
+    component: core
+    version: null
+    public: false
+    title: Il collettore settimanale era rotto da F3, e nessuno se ne era accorto
+    body: >
+      Il lancio manuale del collettore prescritto da F6 (l'unico modo di
+      verificarlo senza aspettare il lunedi) lo ha trovato rosso:
+      scan-privacy.mjs cercava privacy-map.json in generators/lib/, il
+      percorso precedente allo spostamento del motore dentro core/ fatto da
+      F3. Invisibile fino a oggi perche' scan-privacy non fa parte di npm run
+      build ma solo del collettore, che non era piu' stato eseguito dopo F3:
+      il lunedi successivo la raccolta di evidenze sarebbe fallita in
+      silenzio, con MET-privacy e MET-automation che si sarebbero degradati
+      per freschezza scaduta senza che la causa fosse evidente. Corretto
+      risolvendo il percorso da import.meta.url invece che dalla radice del
+      repo, cosi' l'estrazione futura di core/ come pacchetto (P48) non lo
+      rompe una terza volta. Verificati in locale anche gli step successivi,
+      che il job non aveva mai raggiunto: scan-privacy (14 flussi, 10
+      coperti, 0 non coperti) e scan-scorecard (7.6/7.6/5.6), entrambi
+      scrivono nei percorsi nuovi del tenant. Lezione: uno spostamento di
+      cartelle va verificato anche sugli script che nessun gate esegue.
+  - date: 2026-08-15
     component: framework
     version: null
     public: false

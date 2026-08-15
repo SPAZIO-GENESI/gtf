@@ -1,9 +1,17 @@
 import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from "node:fs";
-import { join } from "node:path";
-import { ROOT } from "./lib/registry.mjs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 
 const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
+
+// privacy-map.json vive accanto a questo modulo (lib/), non in una posizione
+// derivata dalla radice del repo: risolverlo da import.meta.url lo rende
+// immune a spostamenti della cartella del motore. Ricostruirlo da ROOT si era
+// gia' rotto una volta — F3 ha spostato generators/ dentro core/ e questo
+// percorso e' rimasto indietro, invisibile perche' scan-privacy non fa parte
+// di `npm run build` ma solo del collettore settimanale.
+const GENERATORS_DIR = dirname(fileURLToPath(import.meta.url));
 
 // Stesso pattern di latestWeek()/readJsonSnapshot() in score.mjs: legge solo
 // snapshot già committati, mai stato in memoria tra script diversi.
@@ -94,7 +102,7 @@ async function main() {
   const repoLabel = ps.code_repo.split("/").pop();
   const sensitiveColumn = new RegExp(ps.sensitive_column_pattern, "i");
   const storagePrefixes = ps.storage_prefixes.map((p) => ({ id: p.id, pattern: new RegExp(p.pattern) }));
-  const mapFile = join(ROOT, "generators", "lib", ps.map_file);
+  const mapFile = join(GENERATORS_DIR, "lib", ps.map_file);
 
   const ghHeaders = process.env.GITHUB_TOKEN
     ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" }
