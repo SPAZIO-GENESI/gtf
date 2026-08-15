@@ -119,5 +119,6 @@ export const STYLE = `
   .footer-col h3 { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; margin: 0 0 0.6rem; }
   .footer-col a { display: block; margin: 0.35rem 0; font-size: 0.85rem; }
   .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  .footer-version { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted); margin: 0.6rem 0 0; }
   @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
 `;

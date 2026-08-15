@@ -122,6 +122,7 @@
   .footer-col h3 { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; margin: 0 0 0.6rem; }
   .footer-col a { display: block; margin: 0.35rem 0; font-size: 0.85rem; }
   .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  .footer-version { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted); margin: 0.6rem 0 0; }
   @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
 </style>
 </head>
@@ -708,6 +709,15 @@
     <h2>Decisioni</h2>
     <div class="journal">
       <details class="entry">
+        <summary><span class="entry-date">2026-08-15</span><span class="entry-title">Isolamento core ↔ tenant e versione per componente</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>Il motore del Genesis Trust Framework aveva un solo progetto cablato dentro ai suoi generatori: 67 riferimenti al progetto attestazione, distribuiti su sette file, mescolavano struttura del registro e dati di un singolo tenant. Applicare il framework a un secondo progetto (RADART, P46) avrebbe richiesto un fork del motore, non un secondo pacchetto di configurazione.</p>
+          <p><strong>Decisione:</strong> Separare motore e dati in due alberi distinti dentro lo stesso repository (P44): il motore agnostico in core/ (schemi, generatori, guardia di isolamento) e i dati di ogni progetto in tenants/&lt;id&gt;/ (registro, snapshot, configurazione). Una guardia CI (check-core-isolation.mjs) impedisce che nomi di progetto rientrino in core/. Ogni componente ha ora una propria versione SemVer: il motore (core/package.json) e ogni pacchetto tenant (tenants/&lt;id&gt;/tenant.config.json), mostrate entrambe nel footer del Trust Center.</p>
+          <p><strong>Conseguenze:</strong> Un secondo tenant è ora un pacchetto di configurazione da aggiungere, non un fork del motore da mantenere. Il punteggio resta calcolato con la stessa formula per tutti i tenant. Nessun controllo di sicurezza nuovo: è una decisione di struttura, non di rischio. Nulla di pubblicato cambia di sostanza (stesso dominio, stessi record, stesso punteggio) tranne la nuova pagina changelog (F4) e i due numeri di versione nel footer (F5).</p>
+          <p class="tag-line"><span class="tag">ADR-GTF-014</span></p>
+        </div>
+      </details>
+      <details class="entry">
         <summary><span class="entry-date">2026-08-13</span><span class="entry-title">B3 — Il rischio dell'indisponibilità del maintainer, reso visibile nel registro</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">
           <p>ADR-GTF-011 ha emendato la formula di MET-governance perché il progetto ha un solo maintainer e la revisione tra pari via pull request non si applica: con la formula originale lo score sarebbe sceso da 90 a circa 77 per un motivo che non riguarda la qualità del lavoro, ma la sua struttura organizzativa. La decisione era metodologicamente corretta — 0 sarebbe stato un numero falso. Perché questo rischio mancava dal registro, esplicitamente: la formula emendata di MET-governance misura la qualità del processo di rilascio (quota di run verdi di validate.yml, quota di gate umano approvato in P24) — un dato sulla robustezza del PROCESSO. Non misura, e non era mai stato pensato per misurare, la continuità della PERSONA che lo gestisce. Sono due domande diverse, e nessuna delle due copriva l'altra: un processo di rilascio robusto (CI + gate) non implica che esista un secondo umano in grado di approvarlo se il primo sparisce. Il rischio è concreto, non astratto: la fascia Professionale (P27) vende una garanzia contrattuale di custodia dei certificati a cinque anni, un impegno pluriennale verso terzi paganti sostenuto oggi dalla disponibilità continuativa di una sola persona.</p>
@@ -1247,6 +1257,7 @@
       <a href="https://github.com/SPAZIO-GENESI/gtf">registro pubblico</a> —
       nessun testo di questa pagina è scritto a mano (principio PRN-03).
       <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+      <p class="footer-version">motore v0.2.0 · pacchetto attestazione v1.0.0</p>
     </div>
   </footer>
 </body>

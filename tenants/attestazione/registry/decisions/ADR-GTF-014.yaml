@@ -1,0 +1,27 @@
+id: ADR-GTF-014
+title: "Isolamento core ↔ tenant e versione per componente"
+date: 2026-08-15
+status: accepted
+context: >
+  Il motore del Genesis Trust Framework aveva un solo progetto cablato dentro
+  ai suoi generatori: 67 riferimenti al progetto attestazione, distribuiti
+  su sette file, mescolavano struttura del registro e dati di un singolo
+  tenant. Applicare il framework a un secondo progetto (RADART, P46) avrebbe
+  richiesto un fork del motore, non un secondo pacchetto di configurazione.
+decision: >
+  Separare motore e dati in due alberi distinti dentro lo stesso repository
+  (P44): il motore agnostico in core/ (schemi, generatori, guardia di
+  isolamento) e i dati di ogni progetto in tenants/<id>/ (registro,
+  snapshot, configurazione). Una guardia CI (check-core-isolation.mjs)
+  impedisce che nomi di progetto rientrino in core/. Ogni componente ha ora
+  una propria versione SemVer: il motore (core/package.json) e ogni
+  pacchetto tenant (tenants/<id>/tenant.config.json), mostrate entrambe nel
+  footer del Trust Center.
+consequences: >
+  Un secondo tenant è ora un pacchetto di configurazione da aggiungere, non
+  un fork del motore da mantenere. Il punteggio resta calcolato con la
+  stessa formula per tutti i tenant. Nessun controllo di sicurezza nuovo:
+  è una decisione di struttura, non di rischio. Nulla di pubblicato cambia
+  di sostanza (stesso dominio, stessi record, stesso punteggio) tranne la
+  nuova pagina changelog (F4) e i due numeri di versione nel footer (F5).
+visibility: public

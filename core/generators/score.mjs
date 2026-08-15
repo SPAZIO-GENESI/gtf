@@ -6,6 +6,7 @@ import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 const SITE_DIR = join(ROOT, "site");
 const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
+const CORE_VERSION = JSON.parse(readFileSync(join(ROOT, "core", "package.json"), "utf8")).version;
 
 // Settimana più recente raccolta dal collettore (generators/collect-evidence.mjs).
 // Le cartelle YYYY-Www ordinano correttamente in lessicografico (settimana a 2 cifre);
@@ -344,6 +345,8 @@ function main() {
     overall,
     available_count: available.length,
     total: indicators.length,
+    core_version: CORE_VERSION,
+    tenant: { id: cfg.id, version: cfg.version },
     indicators,
     computed_at: new Date().toISOString(),
   };

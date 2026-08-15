@@ -23,6 +23,19 @@ entries:
   - date: 2026-08-15
     component: framework
     version: null
+    public: true
+    title: Il Trust Framework diventa applicabile a più progetti
+    body: >
+      Il registro pubblico che alimenta questo Trust Center è ora costruito
+      da un motore agnostico separato dai dati del progetto a cui si
+      applica (ADR-GTF-014). L'attestazione delle opere digitali è la prima
+      applicazione dichiarata; il punteggio, i controlli e le evidenze che
+      leggi qui restano calcolati esattamente come prima, con la stessa
+      formula. Il footer mostra ora due numeri di versione: quello del
+      motore e quello del pacchetto di dati di questo progetto.
+  - date: 2026-08-15
+    component: framework
+    version: null
     public: false
     title: Il changelog a doppia resa esiste davvero
     body: >

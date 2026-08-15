@@ -123,6 +123,7 @@
   .footer-col h3 { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; margin: 0 0 0.6rem; }
   .footer-col a { display: block; margin: 0.35rem 0; font-size: 0.85rem; }
   .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  .footer-version { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted); margin: 0.6rem 0 0; }
   @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
 </style>
 </head>
@@ -143,7 +144,12 @@
   <section id="changelog" class="folio" data-folio="LOG">
     <h2>Changelog</h2>
     <div class="journal">
-      <p class="empty">Ancora nessuna novità pubblica.</p>
+      <details class="entry">
+        <summary><span class="entry-date">2026-08-15</span><span class="entry-title">Il Trust Framework diventa applicabile a più progetti</span><span class="entry-status">framework</span></summary>
+        <div class="entry-body">
+          <p>Il registro pubblico che alimenta questo Trust Center è ora costruito da un motore agnostico separato dai dati del progetto a cui si applica (ADR-GTF-014). L'attestazione delle opere digitali è la prima applicazione dichiarata; il punteggio, i controlli e le evidenze che leggi qui restano calcolati esattamente come prima, con la stessa formula. Il footer mostra ora due numeri di versione: quello del motore e quello del pacchetto di dati di questo progetto.</p>
+        </div>
+      </details>
     </div>
   </section>
   </main>

@@ -243,6 +243,7 @@ ${renderFooterColumns(cfg)}
     <div class="footer-bottom">
       ${cfg.site.footer_note_html}
       <br><img src="/badge.svg" alt="${cfg.site.badge_alt}" height="20" style="margin-top:0.5rem;">
+      <p class="footer-version">motore v${esc(score.core_version)} · pacchetto ${esc(cfg.id)} v${esc(cfg.version)}</p>
     </div>
   </footer>
 </body>

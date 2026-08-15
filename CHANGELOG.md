@@ -4,6 +4,11 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-15
 
+### Il Trust Framework diventa applicabile a più progetti
+*framework*
+
+Il registro pubblico che alimenta questo Trust Center è ora costruito da un motore agnostico separato dai dati del progetto a cui si applica (ADR-GTF-014). L'attestazione delle opere digitali è la prima applicazione dichiarata; il punteggio, i controlli e le evidenze che leggi qui restano calcolati esattamente come prima, con la stessa formula. Il footer mostra ora due numeri di versione: quello del motore e quello del pacchetto di dati di questo progetto.
+
 ### Il changelog a doppia resa esiste davvero
 *framework*
 
