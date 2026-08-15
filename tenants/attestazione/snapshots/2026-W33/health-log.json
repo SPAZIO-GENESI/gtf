@@ -1,9 +1,668 @@
 {
+  "2026-08-15": {
+    "ok": true,
+    "data": {
+      "day": "2026-08-15",
+      "count": 22,
+      "events": [
+        {
+          "ts": 1786744837489,
+          "iso": "2026-08-14T22:00:37.489Z",
+          "status": "ok",
+          "latency": 1305,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786746636990,
+          "iso": "2026-08-14T22:30:36.990Z",
+          "status": "ok",
+          "latency": 1306,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786748437021,
+          "iso": "2026-08-14T23:00:37.021Z",
+          "status": "ok",
+          "latency": 1332,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786750236857,
+          "iso": "2026-08-14T23:30:36.857Z",
+          "status": "ok",
+          "latency": 1282,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786752036973,
+          "iso": "2026-08-15T00:00:36.973Z",
+          "status": "ok",
+          "latency": 1298,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786753836759,
+          "iso": "2026-08-15T00:30:36.759Z",
+          "status": "ok",
+          "latency": 1296,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786755637045,
+          "iso": "2026-08-15T01:00:37.045Z",
+          "status": "ok",
+          "latency": 1342,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786757437002,
+          "iso": "2026-08-15T01:30:37.002Z",
+          "status": "ok",
+          "latency": 1364,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786759237494,
+          "iso": "2026-08-15T02:00:37.494Z",
+          "status": "ok",
+          "latency": 1348,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786761037072,
+          "iso": "2026-08-15T02:30:37.072Z",
+          "status": "ok",
+          "latency": 1361,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786762837020,
+          "iso": "2026-08-15T03:00:37.020Z",
+          "status": "ok",
+          "latency": 1356,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786764637150,
+          "iso": "2026-08-15T03:30:37.150Z",
+          "status": "ok",
+          "latency": 1308,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786766437019,
+          "iso": "2026-08-15T04:00:37.019Z",
+          "status": "ok",
+          "latency": 1302,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786768237392,
+          "iso": "2026-08-15T04:30:37.392Z",
+          "status": "ok",
+          "latency": 1330,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786770037296,
+          "iso": "2026-08-15T05:00:37.296Z",
+          "status": "ok",
+          "latency": 1372,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786771837430,
+          "iso": "2026-08-15T05:30:37.430Z",
+          "status": "ok",
+          "latency": 1400,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786773636955,
+          "iso": "2026-08-15T06:00:36.955Z",
+          "status": "ok",
+          "latency": 1303,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786775436986,
+          "iso": "2026-08-15T06:30:36.986Z",
+          "status": "ok",
+          "latency": 1406,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786777236979,
+          "iso": "2026-08-15T07:00:36.979Z",
+          "status": "ok",
+          "latency": 1308,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786779038175,
+          "iso": "2026-08-15T07:30:38.175Z",
+          "status": "ok",
+          "latency": 611,
+          "check": "archive",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786779038411,
+          "iso": "2026-08-15T07:30:38.411Z",
+          "status": "ok",
+          "latency": 1426,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786819265234,
+          "iso": "2026-08-15T18:41:05.234Z",
+          "status": "ok",
+          "latency": 396,
+          "check": "archive",
+          "cause": "slow",
+          "detail": null
+        }
+      ]
+    },
+    "url": "https://imgauth.spaziogenesi.org/api/health-log?day=2026-08-15"
+  },
+  "2026-08-14": {
+    "ok": true,
+    "data": {
+      "day": "2026-08-14",
+      "count": 49,
+      "events": [
+        {
+          "ts": 1786658436990,
+          "iso": "2026-08-13T22:00:36.990Z",
+          "status": "ok",
+          "latency": 1389,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786660237520,
+          "iso": "2026-08-13T22:30:37.520Z",
+          "status": "ok",
+          "latency": 1283,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786662036976,
+          "iso": "2026-08-13T23:00:36.976Z",
+          "status": "ok",
+          "latency": 1368,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786663837484,
+          "iso": "2026-08-13T23:30:37.484Z",
+          "status": "ok",
+          "latency": 1419,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786665637020,
+          "iso": "2026-08-14T00:00:37.020Z",
+          "status": "ok",
+          "latency": 1366,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786667437415,
+          "iso": "2026-08-14T00:30:37.415Z",
+          "status": "ok",
+          "latency": 1297,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786669236996,
+          "iso": "2026-08-14T01:00:36.996Z",
+          "status": "ok",
+          "latency": 1356,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786671036868,
+          "iso": "2026-08-14T01:30:36.868Z",
+          "status": "ok",
+          "latency": 1321,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786672836986,
+          "iso": "2026-08-14T02:00:36.986Z",
+          "status": "ok",
+          "latency": 1342,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786674636999,
+          "iso": "2026-08-14T02:30:36.999Z",
+          "status": "ok",
+          "latency": 1341,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786676437007,
+          "iso": "2026-08-14T03:00:37.007Z",
+          "status": "ok",
+          "latency": 1361,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786678236977,
+          "iso": "2026-08-14T03:30:36.977Z",
+          "status": "ok",
+          "latency": 1289,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786680037647,
+          "iso": "2026-08-14T04:00:37.647Z",
+          "status": "ok",
+          "latency": 1469,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786681837484,
+          "iso": "2026-08-14T04:30:37.484Z",
+          "status": "ok",
+          "latency": 1358,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786683637012,
+          "iso": "2026-08-14T05:00:37.012Z",
+          "status": "ok",
+          "latency": 1363,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786685437042,
+          "iso": "2026-08-14T05:30:37.042Z",
+          "status": "ok",
+          "latency": 1376,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786687236989,
+          "iso": "2026-08-14T06:00:36.989Z",
+          "status": "ok",
+          "latency": 1368,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786689036911,
+          "iso": "2026-08-14T06:30:36.911Z",
+          "status": "ok",
+          "latency": 1366,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786690837994,
+          "iso": "2026-08-14T07:00:37.994Z",
+          "status": "ok",
+          "latency": 1364,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786692637321,
+          "iso": "2026-08-14T07:30:37.321Z",
+          "status": "ok",
+          "latency": 1415,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786694437069,
+          "iso": "2026-08-14T08:00:37.069Z",
+          "status": "ok",
+          "latency": 1394,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786696237010,
+          "iso": "2026-08-14T08:30:37.010Z",
+          "status": "ok",
+          "latency": 1321,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786698037031,
+          "iso": "2026-08-14T09:00:37.031Z",
+          "status": "ok",
+          "latency": 1360,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786699837906,
+          "iso": "2026-08-14T09:30:37.906Z",
+          "status": "ok",
+          "latency": 1353,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786701637148,
+          "iso": "2026-08-14T10:00:37.148Z",
+          "status": "ok",
+          "latency": 1373,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786703436913,
+          "iso": "2026-08-14T10:30:36.913Z",
+          "status": "ok",
+          "latency": 1354,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786705237207,
+          "iso": "2026-08-14T11:00:37.207Z",
+          "status": "ok",
+          "latency": 1368,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786707037068,
+          "iso": "2026-08-14T11:30:37.068Z",
+          "status": "ok",
+          "latency": 1296,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786708837067,
+          "iso": "2026-08-14T12:00:37.067Z",
+          "status": "ok",
+          "latency": 1397,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786710636376,
+          "iso": "2026-08-14T12:30:36.376Z",
+          "status": "ok",
+          "latency": 1294,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786712437495,
+          "iso": "2026-08-14T13:00:37.495Z",
+          "status": "ok",
+          "latency": 1305,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786714237413,
+          "iso": "2026-08-14T13:30:37.413Z",
+          "status": "ok",
+          "latency": 1337,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786716037232,
+          "iso": "2026-08-14T14:00:37.232Z",
+          "status": "ok",
+          "latency": 1318,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786717837284,
+          "iso": "2026-08-14T14:30:37.284Z",
+          "status": "ok",
+          "latency": 1359,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786719636982,
+          "iso": "2026-08-14T15:00:36.982Z",
+          "status": "ok",
+          "latency": 1332,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786721437672,
+          "iso": "2026-08-14T15:30:37.672Z",
+          "status": "ok",
+          "latency": 1373,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786723237151,
+          "iso": "2026-08-14T16:00:37.151Z",
+          "status": "ok",
+          "latency": 1409,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786725036549,
+          "iso": "2026-08-14T16:30:36.549Z",
+          "status": "ok",
+          "latency": 1450,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786726836683,
+          "iso": "2026-08-14T17:00:36.683Z",
+          "status": "ok",
+          "latency": 1306,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786728637630,
+          "iso": "2026-08-14T17:30:37.630Z",
+          "status": "ok",
+          "latency": 1368,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786728790973,
+          "iso": "2026-08-14T17:33:10.973Z",
+          "status": "ok",
+          "latency": 442,
+          "check": "archive",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786730437079,
+          "iso": "2026-08-14T18:00:37.079Z",
+          "status": "ok",
+          "latency": 1339,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786732237100,
+          "iso": "2026-08-14T18:30:37.100Z",
+          "status": "ok",
+          "latency": 1353,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786734036863,
+          "iso": "2026-08-14T19:00:36.863Z",
+          "status": "ok",
+          "latency": 1338,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786735837041,
+          "iso": "2026-08-14T19:30:37.041Z",
+          "status": "ok",
+          "latency": 1376,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786737637154,
+          "iso": "2026-08-14T20:00:37.154Z",
+          "status": "ok",
+          "latency": 1355,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786739437028,
+          "iso": "2026-08-14T20:30:37.028Z",
+          "status": "ok",
+          "latency": 1325,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786741237403,
+          "iso": "2026-08-14T21:00:37.403Z",
+          "status": "ok",
+          "latency": 1341,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786743037306,
+          "iso": "2026-08-14T21:30:37.306Z",
+          "status": "ok",
+          "latency": 1338,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        }
+      ]
+    },
+    "url": "https://imgauth.spaziogenesi.org/api/health-log?day=2026-08-14"
+  },
   "2026-08-13": {
     "ok": true,
     "data": {
       "day": "2026-08-13",
-      "count": 41,
+      "count": 54,
       "events": [
         {
           "ts": 1786572046412,
@@ -372,6 +1031,123 @@
           "latency": 8000,
           "check": "signer",
           "cause": "timeout",
+          "detail": null
+        },
+        {
+          "ts": 1786635037104,
+          "iso": "2026-08-13T15:30:37.104Z",
+          "status": "ok",
+          "latency": 1418,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786636837403,
+          "iso": "2026-08-13T16:00:37.403Z",
+          "status": "ok",
+          "latency": 1406,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786638637277,
+          "iso": "2026-08-13T16:30:37.277Z",
+          "status": "ok",
+          "latency": 1349,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786640437113,
+          "iso": "2026-08-13T17:00:37.113Z",
+          "status": "ok",
+          "latency": 1339,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786642237027,
+          "iso": "2026-08-13T17:30:37.027Z",
+          "status": "ok",
+          "latency": 1476,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786644037247,
+          "iso": "2026-08-13T18:00:37.247Z",
+          "status": "ok",
+          "latency": 1373,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786645836887,
+          "iso": "2026-08-13T18:30:36.887Z",
+          "status": "ok",
+          "latency": 1303,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786647637444,
+          "iso": "2026-08-13T19:00:37.444Z",
+          "status": "ok",
+          "latency": 1319,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786649437124,
+          "iso": "2026-08-13T19:30:37.124Z",
+          "status": "ok",
+          "latency": 1363,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786651237105,
+          "iso": "2026-08-13T20:00:37.105Z",
+          "status": "ok",
+          "latency": 1297,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786653036874,
+          "iso": "2026-08-13T20:30:36.874Z",
+          "status": "ok",
+          "latency": 1308,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786654837097,
+          "iso": "2026-08-13T21:00:37.097Z",
+          "status": "ok",
+          "latency": 1398,
+          "check": "signer",
+          "cause": "slow",
+          "detail": null
+        },
+        {
+          "ts": 1786656636811,
+          "iso": "2026-08-13T21:30:36.811Z",
+          "status": "ok",
+          "latency": 1299,
+          "check": "signer",
+          "cause": "slow",
           "detail": null
         }
       ]
@@ -2217,142 +2993,5 @@
       ]
     },
     "url": "https://imgauth.spaziogenesi.org/api/health-log?day=2026-08-09"
-  },
-  "2026-08-08": {
-    "ok": true,
-    "data": {
-      "day": "2026-08-08",
-      "count": 11,
-      "events": [
-        {
-          "ts": 1786150021560,
-          "iso": "2026-08-08T00:47:01.560Z",
-          "status": "ok",
-          "latency": 355,
-          "check": "archive",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786184705235,
-          "iso": "2026-08-08T10:25:05.235Z",
-          "status": "ok",
-          "latency": 1348,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786210230580,
-          "iso": "2026-08-08T17:30:30.580Z",
-          "status": "ok",
-          "latency": 1356,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786212031046,
-          "iso": "2026-08-08T18:00:31.046Z",
-          "status": "ok",
-          "latency": 1349,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786213830349,
-          "iso": "2026-08-08T18:30:30.349Z",
-          "status": "ok",
-          "latency": 1337,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786215630148,
-          "iso": "2026-08-08T19:00:30.148Z",
-          "status": "ok",
-          "latency": 1319,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786217430591,
-          "iso": "2026-08-08T19:30:30.591Z",
-          "status": "ok",
-          "latency": 1299,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786219230360,
-          "iso": "2026-08-08T20:00:30.360Z",
-          "status": "ok",
-          "latency": 1406,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786221030239,
-          "iso": "2026-08-08T20:30:30.239Z",
-          "status": "ok",
-          "latency": 1361,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786222830890,
-          "iso": "2026-08-08T21:00:30.890Z",
-          "status": "ok",
-          "latency": 1334,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786224617839,
-          "iso": "2026-08-08T21:30:17.839Z",
-          "status": "ok",
-          "latency": 1348,
-          "check": "signer",
-          "cause": "slow",
-          "detail": null
-        }
-      ]
-    },
-    "url": "https://imgauth.spaziogenesi.org/api/health-log?day=2026-08-08"
-  },
-  "2026-08-07": {
-    "ok": true,
-    "data": {
-      "day": "2026-08-07",
-      "count": 2,
-      "events": [
-        {
-          "ts": 1786122180944,
-          "iso": "2026-08-07T17:03:00.944Z",
-          "status": "ok",
-          "latency": 381,
-          "check": "archive",
-          "cause": "slow",
-          "detail": null
-        },
-        {
-          "ts": 1786131241439,
-          "iso": "2026-08-07T19:34:01.439Z",
-          "status": "ok",
-          "latency": 456,
-          "check": "archive",
-          "cause": "slow",
-          "detail": null
-        }
-      ]
-    },
-    "url": "https://imgauth.spaziogenesi.org/api/health-log?day=2026-08-07"
   }
 }

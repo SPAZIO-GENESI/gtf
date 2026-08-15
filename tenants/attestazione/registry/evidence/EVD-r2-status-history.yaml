@@ -3,7 +3,7 @@ title: Rollup dello stato dei servizi a 48 fasce da 30 min (90 giorni)
 location: { system: cloudflare-r2, ref: "imgauth-pdf-archive/status/history.json", public_via: "GET /api/status-history" }
 produced_by: PRC-status-sampling
 collection: auto
-last_seen: 2026-08-13
+last_seen: 2026-08-15
 freshness_max_days: 8 # cadenza del collettore settimanale + 1 giorno di margine (il dato live si osserva su /api/status; qui conta la freschezza dello snapshot committato)
 integrity: >
   dalla 1.30.0 (P36-B, 2026-07-21): mappa di 48 fasce da 30 min per

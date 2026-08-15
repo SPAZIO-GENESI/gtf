@@ -2,6 +2,257 @@
   "ok": true,
   "data": [
     {
+      "sha": "e528091d4d640b851cd22da05752d62b8fc2e2f1",
+      "node_id": "C_kwDOTTUHPtoAKGU1MjgwOTFkNGQ2NDBiODUxY2QyMmRhMDU3NTJkNjJiOGZjMmUyZjE",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-08-13T16:23:05Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-08-13T16:23:05Z"
+        },
+        "message": "scorecard.yml: usa un fine-grained PAT per leggere la branch protection\n\nStesso fix di imgauth/imgauthweb: il GITHUB_TOKEN di default non può\nleggere le regole di branch protection appena attivate (check\nBranch-Protection in errore, -1, escluso dal punteggio). repo_token\nda SCORECARD_TOKEN (fine-grained PAT, Administration:Read-only).",
+        "tree": {
+          "sha": "4b709b35f52fc1c8c54514dd0bfb86c3f4fc4f8e",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/4b709b35f52fc1c8c54514dd0bfb86c3f4fc4f8e"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/e528091d4d640b851cd22da05752d62b8fc2e2f1",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/e528091d4d640b851cd22da05752d62b8fc2e2f1",
+      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/e528091d4d640b851cd22da05752d62b8fc2e2f1",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/e528091d4d640b851cd22da05752d62b8fc2e2f1/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "057e8e2e40cfbcbca12a2dc450418fa253e63e19",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/057e8e2e40cfbcbca12a2dc450418fa253e63e19",
+          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/057e8e2e40cfbcbca12a2dc450418fa253e63e19"
+        }
+      ]
+    },
+    {
+      "sha": "057e8e2e40cfbcbca12a2dc450418fa253e63e19",
+      "node_id": "C_kwDOTTUHPtoAKDA1N2U4ZTJlNDBjZmJjYmNhMTJhMmRjNDUwNDE4ZmEyNTNlNjNlMTk",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@outlook.it",
+          "date": "2026-08-13T15:39:15Z"
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "date": "2026-08-13T15:39:15Z"
+        },
+        "message": "Merge pull request #10 from SPAZIO-GENESI/scorecard-badge\n\nREADME: badge OpenSSF Scorecard",
+        "tree": {
+          "sha": "690b70817c674b01052320846beea53fdd8d6eb4",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/690b70817c674b01052320846beea53fdd8d6eb4"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/057e8e2e40cfbcbca12a2dc450418fa253e63e19",
+        "comment_count": 0,
+        "verification": {
+          "verified": true,
+          "reason": "valid",
+          "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqfeUjCRC1aQ7uu5UhlAAAaswQAFMcI8HYW2ibpSMvBAXjrzx/\nK+SkXcFpij4dbJ753CHZEAJLQE31GOUdQZBuA4A4g4RdXddXgvpq5X5fnI0Oyod6\nF1b1VVVPRbLWubB/Ov9Em3kQOL6JX/Jb3STTI9nMQq6O8SlIfvpswD7RQHQAkFjf\nQXO1mNDZVNzVQojTOLcI1kRrnFvU9IHonHPx7AaOPSqjIGJ3CjtbooKT31FM0Y3+\n7PThIR7iebPA10/9uTrjcvaDoyIjzgVVPn4D24VXFsNCiJBdA6jFwEAvSaRHeY8r\nf1tNI/6S4Lo1hwUO/24opwf4PsgSdYtihlOt7T/YdJPJqgsns9BUDrSv3Z9w0ZPN\nIRfTrRW2oLXspOd97KZU8w5ih4oYQemiU9KsgN4jxG7Vai8X/Cec08X96nb4qkZQ\nPHM7gpuyuZHag1Q7EYi//xnc5ScCYKQvqMtdyPEpAx93mnXGTsQs78TLYSoFKqrm\n9YezpE+7jkxFedChioOBkfhFgPDO8ac1OAkwlXfvF77q0YZoe8p55a+F8BgdbjCU\nv1sfYbMStXPfDoJqOtJFR+2W/94Mo0fVCoWc/2kyzY7aFvQhuZWXDwTCzhI8tPvQ\nR36hnJcTK5YM4+XgewJD7MNI1cX62CcsvVLqvFhYWP3PmVJEE2PBeiPpaAUORCQN\nJY6U1hMN4/fW3R0N4prd\n=NE02\n-----END PGP SIGNATURE-----\n",
+          "payload": "tree 690b70817c674b01052320846beea53fdd8d6eb4\nparent c4e9cdea2dc12e773ca518788b196862d9dc09e9\nparent 48bcac9066b1bb0bf91ce9715a2e02002f40a083\nauthor maxAlone <mascam64@outlook.it> 1786635555 +0200\ncommitter GitHub <noreply@github.com> 1786635555 +0200\n\nMerge pull request #10 from SPAZIO-GENESI/scorecard-badge\n\nREADME: badge OpenSSF Scorecard",
+          "verified_at": "2026-08-13T15:41:37Z"
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/057e8e2e40cfbcbca12a2dc450418fa253e63e19",
+      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/057e8e2e40cfbcbca12a2dc450418fa253e63e19",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/057e8e2e40cfbcbca12a2dc450418fa253e63e19/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/web-flow",
+        "html_url": "https://github.com/web-flow",
+        "followers_url": "https://api.github.com/users/web-flow/followers",
+        "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+        "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+        "organizations_url": "https://api.github.com/users/web-flow/orgs",
+        "repos_url": "https://api.github.com/users/web-flow/repos",
+        "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/web-flow/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "c4e9cdea2dc12e773ca518788b196862d9dc09e9",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/c4e9cdea2dc12e773ca518788b196862d9dc09e9",
+          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/c4e9cdea2dc12e773ca518788b196862d9dc09e9"
+        },
+        {
+          "sha": "48bcac9066b1bb0bf91ce9715a2e02002f40a083",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/48bcac9066b1bb0bf91ce9715a2e02002f40a083",
+          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/48bcac9066b1bb0bf91ce9715a2e02002f40a083"
+        }
+      ]
+    },
+    {
+      "sha": "48bcac9066b1bb0bf91ce9715a2e02002f40a083",
+      "node_id": "C_kwDOTTUHPtoAKDQ4YmNhYzkwNjZiMWJiMGJmOTFjZTk3MTVhMmUwMjAwMmY0MGEwODM",
+      "commit": {
+        "author": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-08-13T15:39:00Z"
+        },
+        "committer": {
+          "name": "maxAlone",
+          "email": "mascam64@gmail.com",
+          "date": "2026-08-13T15:39:00Z"
+        },
+        "message": "README: badge OpenSSF Scorecard (punteggio 5.3/10, verificato reale)",
+        "tree": {
+          "sha": "690b70817c674b01052320846beea53fdd8d6eb4",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/690b70817c674b01052320846beea53fdd8d6eb4"
+        },
+        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/48bcac9066b1bb0bf91ce9715a2e02002f40a083",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/48bcac9066b1bb0bf91ce9715a2e02002f40a083",
+      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/48bcac9066b1bb0bf91ce9715a2e02002f40a083",
+      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/48bcac9066b1bb0bf91ce9715a2e02002f40a083/comments",
+      "author": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "maxalone",
+        "id": 28682199,
+        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/maxalone",
+        "html_url": "https://github.com/maxalone",
+        "followers_url": "https://api.github.com/users/maxalone/followers",
+        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
+        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
+        "organizations_url": "https://api.github.com/users/maxalone/orgs",
+        "repos_url": "https://api.github.com/users/maxalone/repos",
+        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/maxalone/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "c4e9cdea2dc12e773ca518788b196862d9dc09e9",
+          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/c4e9cdea2dc12e773ca518788b196862d9dc09e9",
+          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/c4e9cdea2dc12e773ca518788b196862d9dc09e9"
+        }
+      ]
+    },
+    {
       "sha": "c4e9cdea2dc12e773ca518788b196862d9dc09e9",
       "node_id": "C_kwDOTTUHPtoAKGM0ZTljZGVhMmRjMTJlNzczY2E1MTg3ODhiMTk2ODYyZDlkYzA5ZTk",
       "commit": {
@@ -167,267 +418,6 @@
           "sha": "d447e8dc4af88fbc870d46e0d35b609653045fbc",
           "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/d447e8dc4af88fbc870d46e0d35b609653045fbc",
           "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/d447e8dc4af88fbc870d46e0d35b609653045fbc"
-        }
-      ]
-    },
-    {
-      "sha": "d447e8dc4af88fbc870d46e0d35b609653045fbc",
-      "node_id": "C_kwDOTTUHPtoAKGQ0NDdlOGRjNGFmODhmYmM4NzBkNDZlMGQzNWI2MDk2NTMwNDVmYmM",
-      "commit": {
-        "author": {
-          "name": "maxAlone",
-          "email": "mascam64@outlook.it",
-          "date": "2026-08-13T15:02:50Z"
-        },
-        "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "date": "2026-08-13T15:02:50Z"
-        },
-        "message": "Merge pull request #7 from SPAZIO-GENESI/dependabot/github_actions/actions/upload-artifact-7\n\nBump actions/upload-artifact from 4 to 7",
-        "tree": {
-          "sha": "923d54f617fd51ad613ab0ba9e7de184e870c819",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/923d54f617fd51ad613ab0ba9e7de184e870c819"
-        },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/d447e8dc4af88fbc870d46e0d35b609653045fbc",
-        "comment_count": 0,
-        "verification": {
-          "verified": true,
-          "reason": "valid",
-          "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqfdyaCRC1aQ7uu5UhlAAA2pYQAF13DPQh3tg2VaLsCdFIUj/W\nHnEzxZSkslsE0hwe8bYIALZDHDAFNT5iEMi3qFrYo0Lq2EFRKgApEg7Mt03EMTXo\nwyGTk5reYFZQSkRON1eTagpyTLG8XjTlon8CEtSETi+TXcMOAWPDAu6r4L1ytL1v\nbB6ZboqFF5tcsfCjcgpwE7Q9/7w5ONIQqLtiYvIMoylwTe0P8OFPkW4ligS3jNnY\nUKD54dEdROdMkCS29uYL5DejxRKrOgesnOeHn++d0c/mVeKA0VMx1A06PLpxZvEp\nW9LBqQZwJis77QqFMuSHRXa5BANXHv+SXfse/euak/0r7CjgSYbzzPYGK5BTt8Y4\nQp0lGEkq9iXAvnv8xizVxrHxrjjtQi/sCrerKzCiAeZEM3ZRMd/nOQtjKrNX/hWp\njGrK9g2E1/BEZOfwz4M2lJpwsSgbgawbQeNDVoqWvKpe/VPfz3m7/5Gs1inJSnp3\nRdeuxDeJi4Fok+x1bsTaF7hn0khwwmFTFtYb6A+2QjWqOsSqEarI6N3HwWTvqpaz\npEZqFY2hi9yeCzAPNmzB8FNdvgCEDfca0tlwNrTnJMlbo0LB92S584/Br5cX2iH8\nkMgU/yXwZXTYub7tnkIG2QezF1bh5gu8C1N/PUmhgt+47YUV/auSxDRpNazha8/c\nfzf3krMLkmBPX7Q2MGuA\n=EN2g\n-----END PGP SIGNATURE-----\n",
-          "payload": "tree 923d54f617fd51ad613ab0ba9e7de184e870c819\nparent e7890958269e8b930e4044b787c81fcfa2f8c8cd\nparent 6e330bf4787fed45bc19e80d4cbaa571bb3440b6\nauthor maxAlone <mascam64@outlook.it> 1786633370 +0200\ncommitter GitHub <noreply@github.com> 1786633370 +0200\n\nMerge pull request #7 from SPAZIO-GENESI/dependabot/github_actions/actions/upload-artifact-7\n\nBump actions/upload-artifact from 4 to 7",
-          "verified_at": "2026-08-13T15:05:24Z"
-        }
-      },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/d447e8dc4af88fbc870d46e0d35b609653045fbc",
-      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/d447e8dc4af88fbc870d46e0d35b609653045fbc",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/d447e8dc4af88fbc870d46e0d35b609653045fbc/comments",
-      "author": {
-        "login": "maxalone",
-        "id": 28682199,
-        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
-        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/maxalone",
-        "html_url": "https://github.com/maxalone",
-        "followers_url": "https://api.github.com/users/maxalone/followers",
-        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
-        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
-        "organizations_url": "https://api.github.com/users/maxalone/orgs",
-        "repos_url": "https://api.github.com/users/maxalone/repos",
-        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/maxalone/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "committer": {
-        "login": "web-flow",
-        "id": 19864447,
-        "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
-        "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/web-flow",
-        "html_url": "https://github.com/web-flow",
-        "followers_url": "https://api.github.com/users/web-flow/followers",
-        "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
-        "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
-        "organizations_url": "https://api.github.com/users/web-flow/orgs",
-        "repos_url": "https://api.github.com/users/web-flow/repos",
-        "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/web-flow/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "parents": [
-        {
-          "sha": "e7890958269e8b930e4044b787c81fcfa2f8c8cd",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/e7890958269e8b930e4044b787c81fcfa2f8c8cd",
-          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/e7890958269e8b930e4044b787c81fcfa2f8c8cd"
-        },
-        {
-          "sha": "6e330bf4787fed45bc19e80d4cbaa571bb3440b6",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/6e330bf4787fed45bc19e80d4cbaa571bb3440b6",
-          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/6e330bf4787fed45bc19e80d4cbaa571bb3440b6"
-        }
-      ]
-    },
-    {
-      "sha": "e7890958269e8b930e4044b787c81fcfa2f8c8cd",
-      "node_id": "C_kwDOTTUHPtoAKGU3ODkwOTU4MjY5ZThiOTMwZTQwNDRiNzg3YzgxZmNmYTJmOGM4Y2Q",
-      "commit": {
-        "author": {
-          "name": "maxAlone",
-          "email": "mascam64@outlook.it",
-          "date": "2026-08-13T15:02:47Z"
-        },
-        "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "date": "2026-08-13T15:02:47Z"
-        },
-        "message": "Merge pull request #6 from SPAZIO-GENESI/dependabot/github_actions/actions/checkout-7\n\nBump actions/checkout from 4 to 7",
-        "tree": {
-          "sha": "f31d36276278d15e0a81c6c1195996d52e22221d",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/f31d36276278d15e0a81c6c1195996d52e22221d"
-        },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/e7890958269e8b930e4044b787c81fcfa2f8c8cd",
-        "comment_count": 0,
-        "verification": {
-          "verified": true,
-          "reason": "valid",
-          "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqfdyXCRC1aQ7uu5UhlAAAwYgQAGgmq5Il8EWGux4VyvQTjE8+\nqsMDhj8pvft1jekwL/rLp3QNiajjP82xImAJ6CvHdvF8MndHBb1+43QuSAdW0JAQ\nht502OxUylmMZuptXN6lkJfmDJzMuoYVyqwiNuvqDBrf3xqEyrO+rDL6a0g3LlnG\naJVbBcsdN2lzWwko6TBqC7Glqom30gHE3Eaao0H1yV0nTZoSJhevTOUb4cfJXeDf\nymp8s0wgJ0vXF5g3H1JqRJxS6WnwOwl7MxPoh/PtgaSlhj1mXJelsheENE7Imc0i\nBkAiqm+LT3VSkAZSwYiZ4d1eNMzbJnxZcUyPQYOihh9MeAgo2ngXiODrQ44MFa6F\np+ZqAj+RG+JoNNGsaFUc9Ajlv4UYijJWeA5R0HnC3NloWCfXFqDTU85+h1fv2pf4\n0GY1OxyMjb2Ey+ESNO31XXaZWpxapVTbkNO+vEnm4cKPM5KHnGbXoE11Yf8z3sMQ\npiSx8TiOa6QxK1kGAG7aIL6D0TtmVCoaovgPR9Fw8kVrfxLw1tZ7C92XHC9cTL1T\nrUwmVwQmVUdBpkBz/N3TpExc2OmJ3BFD/ZrSVWFbTamlQCbxwFkNJumz7aqnzTOP\nZZ8HRQOUnovkKFiyjIyBPjnfitmxRSokt1XYt3NerP3gFc0typIsCqO3Te4TbNAT\n525vkzUCpalbTdju1rzB\n=Tnnm\n-----END PGP SIGNATURE-----\n",
-          "payload": "tree f31d36276278d15e0a81c6c1195996d52e22221d\nparent d31a54925542f09ead110d9c1156567636615573\nparent 283b76d81c6a07593aea7a5e240c35c8993367c1\nauthor maxAlone <mascam64@outlook.it> 1786633367 +0200\ncommitter GitHub <noreply@github.com> 1786633367 +0200\n\nMerge pull request #6 from SPAZIO-GENESI/dependabot/github_actions/actions/checkout-7\n\nBump actions/checkout from 4 to 7",
-          "verified_at": "2026-08-13T15:17:08Z"
-        }
-      },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/e7890958269e8b930e4044b787c81fcfa2f8c8cd",
-      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/e7890958269e8b930e4044b787c81fcfa2f8c8cd",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/e7890958269e8b930e4044b787c81fcfa2f8c8cd/comments",
-      "author": {
-        "login": "maxalone",
-        "id": 28682199,
-        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
-        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/maxalone",
-        "html_url": "https://github.com/maxalone",
-        "followers_url": "https://api.github.com/users/maxalone/followers",
-        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
-        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
-        "organizations_url": "https://api.github.com/users/maxalone/orgs",
-        "repos_url": "https://api.github.com/users/maxalone/repos",
-        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/maxalone/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "committer": {
-        "login": "web-flow",
-        "id": 19864447,
-        "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
-        "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/web-flow",
-        "html_url": "https://github.com/web-flow",
-        "followers_url": "https://api.github.com/users/web-flow/followers",
-        "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
-        "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
-        "organizations_url": "https://api.github.com/users/web-flow/orgs",
-        "repos_url": "https://api.github.com/users/web-flow/repos",
-        "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/web-flow/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "parents": [
-        {
-          "sha": "d31a54925542f09ead110d9c1156567636615573",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/d31a54925542f09ead110d9c1156567636615573",
-          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/d31a54925542f09ead110d9c1156567636615573"
-        },
-        {
-          "sha": "283b76d81c6a07593aea7a5e240c35c8993367c1",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/283b76d81c6a07593aea7a5e240c35c8993367c1",
-          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/283b76d81c6a07593aea7a5e240c35c8993367c1"
-        }
-      ]
-    },
-    {
-      "sha": "d31a54925542f09ead110d9c1156567636615573",
-      "node_id": "C_kwDOTTUHPtoAKGQzMWE1NDkyNTU0MmYwOWVhZDExMGQ5YzExNTY1Njc2MzY2MTU1NzM",
-      "commit": {
-        "author": {
-          "name": "maxAlone",
-          "email": "mascam64@outlook.it",
-          "date": "2026-08-13T15:02:43Z"
-        },
-        "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "date": "2026-08-13T15:02:43Z"
-        },
-        "message": "Merge pull request #5 from SPAZIO-GENESI/dependabot/github_actions/actions/setup-python-7\n\nBump actions/setup-python from 5 to 7",
-        "tree": {
-          "sha": "2fdfdc72e8b831cd417ebe9a549e86f067e5e419",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/trees/2fdfdc72e8b831cd417ebe9a549e86f067e5e419"
-        },
-        "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/git/commits/d31a54925542f09ead110d9c1156567636615573",
-        "comment_count": 0,
-        "verification": {
-          "verified": true,
-          "reason": "valid",
-          "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqfdyTCRC1aQ7uu5UhlAAALY8QAJ2nXBoXx/NSqMIxcXkNGtVr\nYJ1YwfC9qxAmXaqon78j12gqhMTZs1g3Bo7SXR0oNGAN2I17/6jJPOMBh3rrm5Z4\nB6rHoVkxDEO1c0DHPK2SCCSwf3Xwp9pLKqxXgttCWPbMkguE6OrqnYsFsdyMZ/Xx\nB2kNwsep/be6y9PNKYGWJF1Lzsa1K3XYldhmXK8qNWuC1SXxgL/1gF7Xq2baxmYH\nMgGa3fJ594maGjK8o0/LQ1A2CFyOd0TfPM2WyK1/1pbtlxzWA8w2EpheaMDU3nPV\nOutnncma8KdBD3IBD3lm1N6i/Py+8KdEHrVyMSmCrVlSFALyUKJe/T0BC8Wl9lhh\nnRLSL0LWGWzYY/QIryjVsoi60/iurtedtHPAgtV/9eX3fg0RGDTnF2xuXuO7rYe/\nkMBiReW8/797t2HowRUemug9plHIzGfTdnSX1lYgFDVVBS37whXVeUNXaETOX/zn\nUtOH4V6ZpCkzeKtIAl674uZCaTwgj2NxAi0GHPM795GrLyU2qGtCEJYhuwvtn2uE\n8iVQuzYczTWRu5lCvbUKEHpJXp8wx7u3dXy7Ourc8YB8fme2FnluISmWG2V0pP5T\nS37ZTG8nHME3CHyH0joR09GRNmUb4Nr4eQpcgyja2IBRS4cFTgXFyyAAye8VmX+D\ngQBZ+MvU0hbp++JE6S+8\n=6ToE\n-----END PGP SIGNATURE-----\n",
-          "payload": "tree 2fdfdc72e8b831cd417ebe9a549e86f067e5e419\nparent 24984dce866aa98e425f384b277d602883519323\nparent c0c502f0ae9c9eb63c69853b56675ef91eee853c\nauthor maxAlone <mascam64@outlook.it> 1786633363 +0200\ncommitter GitHub <noreply@github.com> 1786633363 +0200\n\nMerge pull request #5 from SPAZIO-GENESI/dependabot/github_actions/actions/setup-python-7\n\nBump actions/setup-python from 5 to 7",
-          "verified_at": "2026-08-13T15:17:08Z"
-        }
-      },
-      "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/d31a54925542f09ead110d9c1156567636615573",
-      "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/d31a54925542f09ead110d9c1156567636615573",
-      "comments_url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/d31a54925542f09ead110d9c1156567636615573/comments",
-      "author": {
-        "login": "maxalone",
-        "id": 28682199,
-        "node_id": "MDQ6VXNlcjI4NjgyMTk5",
-        "avatar_url": "https://avatars.githubusercontent.com/u/28682199?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/maxalone",
-        "html_url": "https://github.com/maxalone",
-        "followers_url": "https://api.github.com/users/maxalone/followers",
-        "following_url": "https://api.github.com/users/maxalone/following{/other_user}",
-        "gists_url": "https://api.github.com/users/maxalone/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/maxalone/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/maxalone/subscriptions",
-        "organizations_url": "https://api.github.com/users/maxalone/orgs",
-        "repos_url": "https://api.github.com/users/maxalone/repos",
-        "events_url": "https://api.github.com/users/maxalone/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/maxalone/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "committer": {
-        "login": "web-flow",
-        "id": 19864447,
-        "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
-        "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/web-flow",
-        "html_url": "https://github.com/web-flow",
-        "followers_url": "https://api.github.com/users/web-flow/followers",
-        "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
-        "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
-        "organizations_url": "https://api.github.com/users/web-flow/orgs",
-        "repos_url": "https://api.github.com/users/web-flow/repos",
-        "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/web-flow/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "parents": [
-        {
-          "sha": "24984dce866aa98e425f384b277d602883519323",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/24984dce866aa98e425f384b277d602883519323",
-          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/24984dce866aa98e425f384b277d602883519323"
-        },
-        {
-          "sha": "c0c502f0ae9c9eb63c69853b56675ef91eee853c",
-          "url": "https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits/c0c502f0ae9c9eb63c69853b56675ef91eee853c",
-          "html_url": "https://github.com/SPAZIO-GENESI/autart-signer/commit/c0c502f0ae9c9eb63c69853b56675ef91eee853c"
         }
       ]
     }

@@ -6,23 +6,27 @@
       "repo": "SPAZIO-GENESI/imgauth",
       "ok": true,
       "score": 7.6,
-      "date": "2026-08-13T16:23:31Z",
+      "date": "2026-08-15T02:00:26Z",
       "checks": [
-        {
-          "name": "Dangerous-Workflow",
-          "score": 10
-        },
         {
           "name": "Maintained",
           "score": 10
         },
         {
-          "name": "Code-Review",
-          "score": 0
+          "name": "Packaging",
+          "score": -1
+        },
+        {
+          "name": "Dangerous-Workflow",
+          "score": 10
         },
         {
           "name": "Dependency-Update-Tool",
           "score": 10
+        },
+        {
+          "name": "Code-Review",
+          "score": 0
         },
         {
           "name": "Security-Policy",
@@ -33,10 +37,6 @@
           "score": 10
         },
         {
-          "name": "Packaging",
-          "score": -1
-        },
-        {
           "name": "Token-Permissions",
           "score": 10
         },
@@ -45,32 +45,32 @@
           "score": 10
         },
         {
-          "name": "Vulnerabilities",
-          "score": 10
-        },
-        {
           "name": "CII-Best-Practices",
           "score": 0
         },
         {
-          "name": "SAST",
-          "score": 9
+          "name": "Vulnerabilities",
+          "score": 10
         },
         {
           "name": "Signed-Releases",
           "score": -1
         },
         {
+          "name": "SAST",
+          "score": 9
+        },
+        {
           "name": "Branch-Protection",
           "score": 3
         },
         {
-          "name": "Fuzzing",
-          "score": 0
-        },
-        {
           "name": "License",
           "score": 10
+        },
+        {
+          "name": "Fuzzing",
+          "score": 0
         },
         {
           "name": "Contributors",
@@ -86,7 +86,7 @@
       "repo": "SPAZIO-GENESI/imgauthweb",
       "ok": true,
       "score": 7.6,
-      "date": "2026-08-13T16:23:32Z",
+      "date": "2026-08-15T01:58:41Z",
       "checks": [
         {
           "name": "Code-Review",
@@ -97,23 +97,7 @@
           "score": 10
         },
         {
-          "name": "Security-Policy",
-          "score": 10
-        },
-        {
-          "name": "Binary-Artifacts",
-          "score": 10
-        },
-        {
-          "name": "Dangerous-Workflow",
-          "score": 10
-        },
-        {
           "name": "Dependency-Update-Tool",
-          "score": 10
-        },
-        {
-          "name": "Pinned-Dependencies",
           "score": 10
         },
         {
@@ -121,20 +105,32 @@
           "score": -1
         },
         {
+          "name": "Dangerous-Workflow",
+          "score": 10
+        },
+        {
+          "name": "Binary-Artifacts",
+          "score": 10
+        },
+        {
+          "name": "Security-Policy",
+          "score": 10
+        },
+        {
           "name": "Token-Permissions",
+          "score": 10
+        },
+        {
+          "name": "Pinned-Dependencies",
+          "score": 10
+        },
+        {
+          "name": "Vulnerabilities",
           "score": 10
         },
         {
           "name": "CII-Best-Practices",
           "score": 0
-        },
-        {
-          "name": "Signed-Releases",
-          "score": -1
-        },
-        {
-          "name": "Vulnerabilities",
-          "score": 10
         },
         {
           "name": "SAST",
@@ -145,12 +141,16 @@
           "score": 10
         },
         {
-          "name": "Branch-Protection",
-          "score": 3
-        },
-        {
           "name": "Fuzzing",
           "score": 0
+        },
+        {
+          "name": "Signed-Releases",
+          "score": -1
+        },
+        {
+          "name": "Branch-Protection",
+          "score": 3
         },
         {
           "name": "Contributors",
@@ -166,10 +166,10 @@
       "repo": "SPAZIO-GENESI/autart-signer",
       "ok": true,
       "score": 5.6,
-      "date": "2026-08-13T16:23:35Z",
+      "date": "2026-08-15T01:58:15Z",
       "checks": [
         {
-          "name": "Dependency-Update-Tool",
+          "name": "Binary-Artifacts",
           "score": 10
         },
         {
@@ -181,20 +181,12 @@
           "score": 10
         },
         {
-          "name": "Maintained",
-          "score": 0
-        },
-        {
-          "name": "Binary-Artifacts",
-          "score": 10
-        },
-        {
-          "name": "Packaging",
-          "score": -1
-        },
-        {
           "name": "Security-Policy",
           "score": 10
+        },
+        {
+          "name": "Maintained",
+          "score": 0
         },
         {
           "name": "Pinned-Dependencies",
@@ -205,6 +197,14 @@
           "score": 9
         },
         {
+          "name": "Packaging",
+          "score": -1
+        },
+        {
+          "name": "Dependency-Update-Tool",
+          "score": 10
+        },
+        {
           "name": "Signed-Releases",
           "score": -1
         },
@@ -213,8 +213,12 @@
           "score": 0
         },
         {
-          "name": "Fuzzing",
-          "score": 0
+          "name": "Branch-Protection",
+          "score": 3
+        },
+        {
+          "name": "License",
+          "score": 10
         },
         {
           "name": "Vulnerabilities",
@@ -225,12 +229,8 @@
           "score": 0
         },
         {
-          "name": "License",
-          "score": 10
-        },
-        {
-          "name": "Branch-Protection",
-          "score": 3
+          "name": "Fuzzing",
+          "score": 0
         },
         {
           "name": "Contributors",
