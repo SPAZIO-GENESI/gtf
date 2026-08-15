@@ -6,7 +6,7 @@
   "properties": {
     "id": { "type": "string", "pattern": "^IMP-[\\w-]+$" },
     "title": { "type": "string" },
-    "repo": { "type": "string", "description": "Repository che ospita l'implementazione (es. imgauth)" },
+    "repo": { "type": "string", "description": "Repository che ospita l'implementazione" },
     "ref": { "type": "string", "description": "Puntatore versionato: file#anchor o chiave di config" },
     "supports": { "type": "array", "items": { "type": "string" } },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },

@@ -5,8 +5,8 @@ on:
     branches: [main]
     paths:
       - "tenants/**"
-      - "schemas/**"
-      - "generators/**"
+      - "core/**"
+      - "default-tenant.json"
       - "site/**"
       - "package.json"
       - ".github/workflows/publish.yml"

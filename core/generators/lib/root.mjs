@@ -5,4 +5,6 @@ import { fileURLToPath } from "node:url";
 // da tenant.mjs, e tenant.mjs importava ROOT da registry.mjs — un ciclo che
 // in ESM lascia ROOT non inizializzato al momento in cui tenant.mjs lo usa
 // (TDZ). Questo modulo non dipende da nessuno dei due, quindi rompe il ciclo.
-export const ROOT = join(fileURLToPath(import.meta.url), "..", "..", "..");
+// F3: il file è sceso di un livello (generators/lib/ → core/generators/lib/),
+// quindi risalire alla radice del repo richiede un ".." in più (4, non 3).
+export const ROOT = join(fileURLToPath(import.meta.url), "..", "..", "..", "..");

@@ -5,15 +5,16 @@
   "type": "module",
   "description": "Genesis Trust Framework — registro, schemi e generatori del Trust Center di Spazio Genesi ETS",
   "scripts": {
-    "validate": "node generators/validate.mjs",
-    "collect-evidence": "node generators/collect-evidence.mjs",
-    "scan-privacy": "node generators/scan-privacy.mjs",
-    "scan-scorecard": "node generators/scan-scorecard.mjs",
-    "anchor-monthly": "node generators/anchor-monthly.mjs",
-    "check-cadences": "node generators/check-cadences.mjs",
-    "score": "node generators/score.mjs",
-    "build-site": "node generators/build-site.mjs",
-    "build": "npm run validate && npm run score && npm run build-site"
+    "validate": "node core/generators/validate.mjs",
+    "collect-evidence": "node core/generators/collect-evidence.mjs",
+    "scan-privacy": "node core/generators/scan-privacy.mjs",
+    "scan-scorecard": "node core/generators/scan-scorecard.mjs",
+    "anchor-monthly": "node core/generators/anchor-monthly.mjs",
+    "check-cadences": "node core/generators/check-cadences.mjs",
+    "check-core": "node core/generators/check-core-isolation.mjs",
+    "score": "node core/generators/score.mjs",
+    "build-site": "node core/generators/build-site.mjs",
+    "build": "npm run validate && npm run check-core && npm run score && npm run build-site"
   },
   "license": "MIT",
   "dependencies": {

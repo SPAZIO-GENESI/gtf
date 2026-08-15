@@ -6,7 +6,7 @@ import { TENANT_REGISTRY_DIR } from "./tenant.mjs";
 
 export { ROOT };
 export const REGISTRY_DIR = TENANT_REGISTRY_DIR;
-export const SCHEMAS_DIR = join(ROOT, "schemas");
+export const SCHEMAS_DIR = join(ROOT, "core", "schemas");
 
 export const FOLDER_SCHEMA = {
   principles: "principle.schema.json",
