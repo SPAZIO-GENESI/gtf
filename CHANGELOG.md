@@ -4,6 +4,11 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-15
 
+### Documentazione allineata al motore multi-progetto
+*framework*
+
+F6 di P44_isolamento_core_tenant.md (parte scrittura): ARCHITECTURE.md passa a 0.2.0 con una nuova sezione 15 (Multi-progetto: cos'e un tenant, cosa puo stare in core/, la guardia, il versioning per componente) e riferimenti aggiornati in 4 (topologia repo), 7 (Trust Center per tenant) e 12 (nuova riga di roadmap M5). README.md riscritto sulla struttura reale post F0-F5 (core/, tenants/<id>/, content/, default-tenant.json) con il comando GTF_TENANT=... al posto di quello ormai obsoleto. site/README.md aggiorna l'elenco dei file generati con changelog.html. Due righe aggiunte alla sezione P20 di img-auth-hub/CLAUDE.md, senza riscrivere la sua storia. Resta da fare il push (Opus, e' un rilascio in produzione: ripubblica trust.spaziogenesi.org).
+
 ### Il Trust Framework diventa applicabile a più progetti
 *framework*
 

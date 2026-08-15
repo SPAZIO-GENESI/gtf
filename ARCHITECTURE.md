@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.1.3 · **Data**: 2026-07-19 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.2.0 · **Data**: 2026-08-15 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -240,11 +240,16 @@ una-tantum come ADR retroattive con `evidence: [EVD-git-*]` (§12, fase M1).
 
 | Repo | Visibilità | Ruolo nel GTF |
 |---|---|---|
-| `gtf` (nuovo) | **pubblico** | SSOT: registro + schemi + generatori + Trust Center + score |
+| `gtf` (nuovo) | **pubblico** | SSOT: motore + pacchetti tenant + Trust Center + score (dal 2026-08-15, P44: nasce la distinzione core/tenant — vedi §15) |
 | `imgauth` | pubblico (AGPL) | L4; le sue Actions producono evidenze (monitor); `IMP-*` puntano qui |
 | `imgauthweb` | pubblico (MIT) | L4/L6; ospita il link al Trust Center; `IMP-*` puntano qui |
 | `autart-signer` | pubblico (AGPL, dal 2026-07-09) | L4; firma PAdES/TSA — codice ispezionabile |
 | `img-auth-hub` | privato | Officina interna: bozze, marketing, materiale operativo. NON è SSOT di nulla che sia pubblico: ciò che matura migra in `gtf` |
+
+Dentro `gtf`, dal 2026-08-15 (P44), la stessa distinzione si ripete **a un livello
+più fine**: il motore generico (`core/`) e i dati di ciascun progetto applicato
+(`tenants/<id>/`) sono repo-in-repo isolati da una guardia CI, non solo cartelle
+per convenzione. Dettagli in §15.
 
 **Flussi tra repo** (tutti via GitHub Actions, nessun servizio nuovo):
 - `imgauth`/`imgauthweb`/`autart-signer` → `gtf`: un workflow `repository_dispatch` notifica
@@ -387,6 +392,13 @@ puro, zero framework, zero CDN terzi, accessibile WCAG AA, lessico onesto). Sorg
 `gtf/site/`, dati in JSON generati dal registro a ogni merge (§11.2). Nessun backend nuovo:
 i dati live (status, score corrente) arrivano dalle API già esistenti + un file JSON statico
 rigenerato dalla CI.
+
+**Dal 2026-08-15 (P44) il Trust Center è per tenant**: ogni pagina è generata leggendo un
+solo pacchetto `tenants/<id>/` alla volta (`GTF_TENANT`, §15) — testi, URL esterni, elenco
+repo di codice e footer vengono dal `tenant.config.json` del tenant attivo, mai da una
+costante nel motore. Un solo tenant è pubblicato oggi (`attestazione`, su
+`trust.spaziogenesi.org`); un secondo tenant pubblicato in futuro (P46, RADART) sarebbe un
+altro sito statico generato dallo stesso `core/`, con il proprio dominio.
 
 ### 7.1 Mappa delle sezioni → sorgente dati
 
@@ -563,6 +575,7 @@ Fasi incrementali; ogni fase lascia il sistema **coerente e pubblicabile** (mai 
 | **M2 — Compliance Map** (≈2-3 sett.) | REQ dalle 7 fonti normative (§5), posizionamento eIDAS pubblicato, registro DAT, RSK principali | matrice Norma→…→Evidenza generata | ogni REQ ha stato e giustificazione; §5.2 online |
 | **M3 — Trust Center + Score** (≈2-3 sett.) | `site/`, generatori, `publish.yml`, `score.json` + badge, collettore §6.3 | `/trust/` pubblico con score calcolato | uno sconosciuto risponde alle domande di §13 senza chiedere nulla a nessuno |
 | **M4 — Ciclo vivo** (continuo) | ancora dogfooding mensile, restore drill, review esterna annuale, canary HMAC (P17-B), pubblicazione autart-signer (P11) | primo bundle ancorato; primo verbale di drill | lo score riflette un ciclo completo di cadenze §9.3 |
+| **M5 — Multi-progetto** (dal 2026-08-15, P44 in corso) | isolamento `core/`↔`tenants/<id>/` con guardia CI, versioning per componente, changelog a doppia resa; P45 (domini), P46 (secondo tenant, RADART), P47-P48 a seguire | motore riusabile da un secondo progetto senza toccarne il codice | §15; dettagli fase per fase in `gtf/docs/ROADMAP-trust-multiprogetto.md` |
 
 Dipendenze esterne già note: P11 (repo authart pubblico) condiziona il CTL "codice interamente
 pubblico"; P17-B (canary) condiziona l'indicatore Integrità pieno. Entrambe già in backlog:
@@ -606,6 +619,65 @@ Se una di queste domande richiede più di due click dal Trust Center, è un bug 
 
 ---
 
+## 15. Multi-progetto — `core/` e `tenants/<id>/`
+
+Dal 2026-08-15 (P44, `P44_isolamento_core_tenant.md`) il repo `gtf` smette di essere il
+registro di un solo progetto e diventa un motore riusabile che sa costruire lo stesso
+Trust Center per progetti diversi. La distinzione non è organizzativa (cartelle per
+comodità): è **strutturale**, imposta da una guardia CI. Il nome con cui il motore sarà
+eventualmente presentato come prodotto a sé è una decisione ancora aperta (rinviata a dopo
+P47, vedi `gtf/docs/ROADMAP-trust-multiprogetto.md` §5, D3): questa sezione descrive solo
+ciò che è già costruito, non un posizionamento di marchio.
+
+**Cos'è un tenant.** Un tenant è un progetto a cui il framework viene applicato: il proprio
+registro (record YAML — principi, requisiti, controlli, evidenze, rischi, decisioni…), i
+propri snapshot settimanali, la propria configurazione (`tenant.config.json`: testi del Trust
+Center, URL esterni, elenco dei repo di codice, endpoint del collettore). Vive interamente
+sotto `tenants/<id>/` (`registry/`, `snapshots/`, `tenant.config.json`). Il primo tenant
+dichiarato è **`attestazione`** (il servizio descritto in questo stesso documento); il secondo
+previsto è RADART (P46). L'id del tenant attivo viene da `GTF_TENANT`, con fallback a
+`default-tenant.json` alla radice del repo — configurazione di bootstrap, non logica del
+motore, per questo vive fuori da `core/`.
+
+**Cosa può stare in `core/`.** Solo ciò che vale per **qualunque** tenant: gli schemi JSON del
+registro (`core/schemas/`), i generatori (`core/generators/`: `validate.mjs`,
+`collect-evidence.mjs`, `score.mjs`, `build-site.mjs`, `build-changelog.mjs`,
+`check-cadences.mjs`, `anchor-monthly.mjs`, `scan-privacy.mjs`, `scan-scorecard.mjs`,
+`check-core-isolation.mjs` — la guardia stessa) e le librerie condivise
+(`core/generators/lib/`: `root.mjs`, `registry.mjs`, `tenant.mjs`, `render.mjs`, `style.mjs`).
+Nessun nome di progetto, dominio, repository o organizzazione (né "spaziogenesi",
+"attestazione", "imgauth", "SPAZIO-GENESI", …) può comparire in `core/**`: quei valori vivono
+solo in `tenants/<id>/tenant.config.json` e nei record YAML del registro di ciascun tenant.
+`core/package.json` è solo un manifesto di versione (nessuna dipendenza propria): le librerie
+npm usate dai generatori restano nel `package.json` alla radice del repo.
+
+**La guardia.** `core/generators/check-core-isolation.mjs` (`npm run check-core`) scandisce
+`core/**` (esclusi `node_modules` e i `.md`, che possono nominare esempi a scopo didattico) e
+fallisce elencando file e riga se trova uno dei nomi vietati. Gira sia in `npm run build` sia
+nel workflow `validate.yml`, a ogni push/PR: una contaminazione (un nome di tenant infilato
+per comodità in un generatore) blocca il merge invece di scoprirsi al primo secondo tenant.
+
+**Il resto del prodotto** (fuori da `core/` e da `tenants/`): `content/` (testi curati non
+derivati dal registro — oggi solo `changelog.yaml`, sorgente unica a doppia resa: `CHANGELOG.md`
+alla radice per chi sviluppa, `site/changelog.html` sul Trust Center per le sole voci
+`public: true`) e `site/` (Trust Center generato, invariato nella sua natura di output puro,
+§7).
+
+**Versioning per componente.** Il motore e ogni pacchetto tenant hanno un numero di versione
+indipendente, letto dai rispettivi manifesti (`core/package.json` → `version`;
+`tenants/<id>/tenant.config.json` → `version`) e mostrato nel footer del Trust Center generato
+("motore vX.Y.Z · pacchetto \<tenant\> vX.Y.Z", ADR-GTF-014) — lo stesso principio già in uso
+per imgauth/authweb/authart (§ Versioning di `img-auth-hub/CLAUDE.md`), applicato ora anche al
+framework che li descrive.
+
+Questa sezione descrive lo stato raggiunto da P44; i piani successivi (domini per tenant,
+secondo tenant RADART, eventuale estrazione del prodotto in un repo a sé) vivono in
+`gtf/docs/ROADMAP-trust-multiprogetto.md` e nei rispettivi `Pnn_*.md` — non duplicati qui per
+evitare la stessa doppia fonte di verità che il framework impone di non avere altrove (PRN-03).
+
+---
+
 *Questo documento vive nel repo `spazio-genesi/gtf` come record governato dal framework che
-descrive (registro decisioni, ADR-GTF-001..004). Nato come bozza in `img-auth-hub` (repo
-privato di lavorazione) e migrato qui in fase M0 secondo il piano che esso stesso definiva.*
+descrive (registro decisioni, ADR-GTF-001..004, ADR-GTF-014). Nato come bozza in `img-auth-hub`
+(repo privato di lavorazione) e migrato qui in fase M0 secondo il piano che esso stesso
+definiva.*
