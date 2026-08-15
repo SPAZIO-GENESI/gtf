@@ -1,10 +1,11 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, basename, extname } from "node:path";
-import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
+import { ROOT } from "./root.mjs";
+import { TENANT_REGISTRY_DIR } from "./tenant.mjs";
 
-export const ROOT = join(fileURLToPath(import.meta.url), "..", "..", "..");
-export const REGISTRY_DIR = join(ROOT, "registry");
+export { ROOT };
+export const REGISTRY_DIR = TENANT_REGISTRY_DIR;
 export const SCHEMAS_DIR = join(ROOT, "schemas");
 
 export const FOLDER_SCHEMA = {

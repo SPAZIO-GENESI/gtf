@@ -4,11 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - "registry/**"
+      - "tenants/**"
       - "schemas/**"
       - "generators/**"
       - "site/**"
-      - "snapshots/**"
       - "package.json"
       - ".github/workflows/publish.yml"
   workflow_dispatch:
