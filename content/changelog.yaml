@@ -1,0 +1,76 @@
+# Changelog del Trust Framework — SORGENTE UNICA.
+#
+# Da qui si generano DUE rese (generatore: P44 F4, core/generators/build-changelog.mjs):
+#   - CHANGELOG.md          alla radice del repo — TUTTE le voci, per chi sviluppa
+#   - site/changelog.html   sul sito pubblico    — SOLO le voci con public: true
+#
+# Non scrivere a mano né CHANGELOG.md né la pagina del sito: verrebbero
+# sovrascritti al prossimo build (stesso principio di site/index.html, PRN-03).
+#
+# Campi di una voce:
+#   date       YYYY-MM-DD, obbligatorio
+#   component  core | tenant:<id> | site | framework   (framework = governance, docs, processo)
+#   version    versione del componente dopo questa voce, oppure null se non la cambia
+#   public     true  -> compare sul sito pubblico: scrivila per chi legge da fuori
+#              false -> resta solo nel CHANGELOG.md interno
+#   title      una riga, senza punto finale
+#   body       prosa breve; per le voci pubbliche: cosa cambia per chi usa il servizio,
+#              non quale file è stato toccato
+#
+# Ordine: dalla più recente alla più vecchia.
+
+entries:
+  - date: 2026-08-15
+    component: framework
+    version: null
+    public: false
+    title: I sette generatori non sanno piu nulla del tenant
+    body: >
+      F1 di P44_isolamento_core_tenant.md eseguita: creato
+      tenants/attestazione/tenant.config.json (copia esatta della bozza del
+      piano) e generators/lib/tenant.mjs (loadTenant, default "attestazione"
+      via GTF_TENANT). I sette generatori (build-site, collect-evidence,
+      score, scan-privacy, scan-scorecard, anchor-monthly, check-cadences)
+      riscritti per leggere URL, repo e testi dal config del tenant invece
+      di averli hardcoded. Gate byte-identico verde a ogni file (index.html
+      e badge.svg identici, score.json identico a meno di computed_at).
+      grep delle costanti di progetto su generators/ pulito, con una sola
+      eccezione intenzionale: il default "attestazione" nel loader stesso
+      (richiesto esplicitamente da F1.2, serve da bootstrap finche esiste
+      un solo tenant). Nessun file di dati spostato (resta per F2).
+  - date: 2026-08-15
+    component: framework
+    version: null
+    public: false
+    title: Baseline congelata per l'isolamento core/tenant
+    body: >
+      F0 di P44_isolamento_core_tenant.md eseguita: npm run validate conferma 252
+      record e 0 errori, npm run build conferma il punteggio 91/100 con 10/10
+      indicatori disponibili. site/index.html, site/score.json e site/badge.svg
+      congelati in .baseline/ (cartella locale, ignorata da git) come riferimento
+      per il gate byte-identico delle fasi F1-F3.
+
+  - date: 2026-08-15
+    component: framework
+    version: null
+    public: false
+    title: Avvio della trasformazione multi-progetto
+    body: >
+      Scritta la roadmap docs/ROADMAP-trust-multiprogetto.md (P44 -> P48) e il primo
+      piano eseguibile P44_isolamento_core_tenant.md. Misurato l'accoppiamento reale al
+      progetto attestazione: 67 riferimenti nei generatori, concentrati in
+      collect-evidence.mjs, build-site.mjs, scan-privacy.mjs e score.mjs; schemi,
+      validate.mjs e lib/registry.mjs risultano gia agnostici. Quattro decisioni
+      lasciate aperte al gestore (repo unico o separati, come ottenere i sottodomini,
+      nome del prodotto, licenza). Nessuna modifica al motore, ai dati o al sito.
+
+  - date: 2026-08-15
+    component: framework
+    version: null
+    public: false
+    title: Nasce il changelog a doppia resa
+    body: >
+      Questo file diventa la sorgente unica del changelog. Da qui in avanti ogni passo
+      si annota qui, non nella cronologia di una sessione: le sessioni si azzerano, il
+      repo no. La resa pubblica sul sito e quella interna in CHANGELOG.md arrivano con
+      P44 F4; fino ad allora questo file si legge cosi com'e.

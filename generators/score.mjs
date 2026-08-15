@@ -1,14 +1,11 @@
 import { writeFileSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 
 const SITE_DIR = join(ROOT, "site");
-const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
-
-// Mese di nascita del GTF (ARCHITECTURE.md): da qui parte l'attesa di un
-// ancoraggio dogfooding al mese (CTL-dogfooding-anchor).
-const GTF_BIRTH_MONTH = "2026-07";
 
 // Settimana più recente raccolta dal collettore (generators/collect-evidence.mjs).
 // Le cartelle YYYY-Www ordinano correttamente in lessicografico (settimana a 2 cifre);
@@ -40,13 +37,13 @@ function latestSnapshotWorkerStatus(week) {
   return { week, worker: wrapper.data.worker };
 }
 
-// Quota di repo pubblici (imgauth, imgauthweb, autart-signer) con almeno un
+// Quota di repo pubblici del tenant (cfg.score.release_tag_repos) con almeno un
 // tag di release (convenzione vX.Y.Z, PRC-release-coordinata). Proxy semplice:
 // non conta ancora quante versioni storiche sono taggate, solo se la pratica
 // è adottata per repo — si raffina quando esisterà più storico.
-function releaseTagRatio(week) {
+function releaseTagRatio(week, cfg) {
   if (!week) return { ratio: null, tagged: 0, total: 0 };
-  const repos = ["imgauth", "imgauthweb", "autart-signer"];
+  const repos = cfg.score.release_tag_repos;
   const checked = repos
     .map((repo) => readJsonSnapshot(week, `tags-${repo}.json`))
     .filter((r) => r?.ok);
@@ -56,12 +53,12 @@ function releaseTagRatio(week) {
 }
 
 // Governance (MET-governance, ADR-GTF-011): media di validazione CI del
-// registro (quota run success di validate.yml su gtf/main) e gate umano P24
-// sui rilasci di produzione (quota run ci.yml su imgauth/main il cui job
-// deploy-production è concluso con un record di approvazione). I run senza
-// quel job (path-ignore, fallimento a monte) sono esclusi dal denominatore,
-// non contati come mancate approvazioni.
-function governanceRatio(week) {
+// registro (quota run success del workflow di validate su main) e gate umano
+// P24 sui rilasci di produzione (quota run del workflow di gate sul repo di
+// produzione del tenant il cui job di gate è concluso con un record di
+// approvazione). I run senza quel job (path-ignore, fallimento a monte) sono
+// esclusi dal denominatore, non contati come mancate approvazioni.
+function governanceRatio(week, cfg) {
   if (!week) return { ratio: null, note: null };
   const validateSnap = readJsonSnapshot(week, "governance-validate-runs.json");
   const gateSnap = readJsonSnapshot(week, "governance-prod-gate.json");
@@ -91,7 +88,7 @@ function governanceRatio(week) {
   const components = [validateRatio, gateRatio].filter((v) => v !== null);
   if (components.length === 0) return { ratio: null, note: null };
   const ratio = Math.round(components.reduce((a, b) => a + b, 0) / components.length);
-  const note = `${validateNote} + ${gateNote} — quota PR esclusa (maintainer singolo, ADR-GTF-011)`;
+  const note = `${validateNote} + ${gateNote} — quota PR esclusa (maintainer singolo, ${cfg.score.governance_note_reference})`;
   return { ratio, note };
 }
 
@@ -99,7 +96,7 @@ function governanceRatio(week) {
 // scanner (generators/scan-privacy.mjs, snapshot privacy-scan.json) che
 // hanno un DAT corrispondente nel mapping, al netto dei falsi positivi
 // dichiarati. Snapshot assente/fallito → null, mai un valore inventato.
-function privacyRatio(week) {
+function privacyRatio(week, cfg) {
   if (!week) return { ratio: null, note: null };
   const scan = readJsonSnapshot(week, "privacy-scan.json");
   if (!scan?.ok || !Array.isArray(scan.flows)) return { ratio: null, note: null };
@@ -111,7 +108,7 @@ function privacyRatio(week) {
   if (denom <= 0) return { ratio: null, note: "nessun flusso rilevato dallo scanner al netto dei falsi positivi" };
 
   const ratio = pct(covered, denom);
-  const note = `scanner su imgauth@${scan.tag ?? "n/d"}: ${covered}/${denom} flussi mappati a un DAT (${falsePositives} falsi positivi dichiarati esclusi${notCovered > 0 ? `, ${notCovered} non coperti` : ""}) — non copre repo client (es. bot Telegram)`;
+  const note = `scanner su ${cfg.score.privacy_repo_label}@${scan.tag ?? "n/d"}: ${covered}/${denom} flussi mappati a un DAT (${falsePositives} falsi positivi dichiarati esclusi${notCovered > 0 ? `, ${notCovered} non coperti` : ""}) — ${cfg.score.privacy_note_scope}`;
   return { ratio, note };
 }
 
@@ -226,16 +223,16 @@ function pct(numerator, denominator) {
 
 // Quota di ancoraggi dogfooding mensili riusciti su quelli attesi da quando
 // il GTF esiste (un bundle <YYYY-MM>-bundle.json committato = un mese onorato).
-function dogfoodingAnchorRatio() {
+function dogfoodingAnchorRatio(cfg) {
   if (!existsSync(ANCHORS_DIR)) return { ratio: null, done: 0, expected: 0 };
   const done = readdirSync(ANCHORS_DIR).filter((f) => /^\d{4}-\d{2}-bundle\.json$/.test(f)).length;
-  const [birthYear, birthMonth] = GTF_BIRTH_MONTH.split("-").map(Number);
+  const [birthYear, birthMonth] = cfg.score.birth_month.split("-").map(Number);
   const now = new Date();
   const expected = (now.getUTCFullYear() - birthYear) * 12 + (now.getUTCMonth() + 1 - birthMonth) + 1;
   return { ratio: pct(Math.min(done, expected), expected), done, expected };
 }
 
-function computeIndicators(records) {
+function computeIndicators(records, cfg) {
   const all = [...records.values()].map((r) => r.record);
   const ctl = byFolder(records, "controls");
   const ctlActive = ctl.filter((c) => c.status === "active");
@@ -275,8 +272,8 @@ function computeIndicators(records) {
   const snap = latestSnapshotWorkerStatus(week);
   const WORKER_SCORE = { ok: 100, degraded: 50, down: 0 };
   const workerComponent = snap ? WORKER_SCORE[snap.worker] ?? null : null;
-  const anchor = dogfoodingAnchorRatio();
-  const tags = releaseTagRatio(week);
+  const anchor = dogfoodingAnchorRatio(cfg);
+  const tags = releaseTagRatio(week, cfg);
   const integrityComponents = [workerComponent, anchor.ratio, tags.ratio].filter((v) => v !== null);
   const integrity =
     integrityComponents.length > 0
@@ -284,11 +281,11 @@ function computeIndicators(records) {
       : null;
   const integrityNote =
     integrityComponents.length > 0
-      ? `sonda HMAC (${snap ? `componente "worker", snapshot ${snap.week}` : "nessuno snapshot"}) + ancoraggi dogfooding onorati (${anchor.done}/${anchor.expected} mesi da ${GTF_BIRTH_MONTH}) + repo con tag di release (${tags.tagged}/${tags.total || "n/d"}) — proxy iniziale, non ancora la quota storica di versioni taggate`
+      ? `sonda HMAC (${snap ? `componente "worker", snapshot ${snap.week}` : "nessuno snapshot"}) + ancoraggi dogfooding onorati (${anchor.done}/${anchor.expected} mesi da ${cfg.score.birth_month}) + repo con tag di release (${tags.tagged}/${tags.total || "n/d"}) — proxy iniziale, non ancora la quota storica di versioni taggate`
       : "richiede almeno uno snapshot dal collettore di evidenze, un ancoraggio dogfooding o dati sui tag (nessuno ancora raccolto)";
 
-  const governance = governanceRatio(week);
-  const privacy = privacyRatio(week);
+  const governance = governanceRatio(week, cfg);
+  const privacy = privacyRatio(week, cfg);
   const conservation = conservationRatio(records);
   const audit = auditRatio(records);
 
@@ -337,8 +334,9 @@ function buildBadgeSvg(overall, available, total) {
 }
 
 function main() {
+  const cfg = loadTenant();
   const records = loadRegistry();
-  const indicators = computeIndicators(records);
+  const indicators = computeIndicators(records, cfg);
   const available = indicators.filter((i) => i.value !== null);
   const overall = available.length > 0 ? Math.round(available.reduce((s, i) => s + i.value, 0) / available.length) : null;
 

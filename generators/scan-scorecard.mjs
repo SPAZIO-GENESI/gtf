@@ -1,13 +1,8 @@
 import { writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { ROOT } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 
-const SNAPSHOTS_DIR = join(ROOT, "snapshots");
-
-// I tre repo con scorecard.yml attivo (A3 del piano P43, parte 1). Elenco
-// statico: aggiungerne uno significa toccare questo file, non una
-// scoperta automatica — stesso principio di R2_PREFIXES in scan-privacy.mjs.
-const REPOS = ["SPAZIO-GENESI/imgauth", "SPAZIO-GENESI/imgauthweb", "SPAZIO-GENESI/autart-signer"];
+const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 
 const API_BASE = "https://api.securityscorecards.dev/projects/github.com";
 
@@ -55,13 +50,14 @@ function writeSnapshot(week, result) {
 }
 
 async function main() {
+  const cfg = loadTenant();
   const week = latestWeek();
   if (!week) {
     console.log("scan-scorecard: nessuno snapshot settimanale ancora creato, nulla da scrivere.");
     return;
   }
 
-  const repos = await Promise.all(REPOS.map(fetchScorecard));
+  const repos = await Promise.all(cfg.scorecard.repos.map(fetchScorecard));
   const result = { week, ok: true, repos };
   writeSnapshot(week, result);
 

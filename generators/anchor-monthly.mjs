@@ -1,9 +1,9 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
-import { ROOT } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 
-const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
 
 function sha256(text) {
@@ -19,6 +19,7 @@ function monthKey(date) {
 // dogfooding copre tutta la storia accumulata fino a oggi; i successivi,
 // mensili, copriranno il periodo dall'ultimo ancoraggio).
 function main() {
+  const cfg = loadTenant();
   const now = new Date();
   const period = monthKey(now);
 
@@ -63,8 +64,8 @@ function main() {
   console.log(`Settimane incluse: ${entries.map((e) => e.week).join(", ")}`);
   console.log("");
   console.log("Prossimo passo (manuale, richiede un umano per Turnstile):");
-  console.log("1. Trascina questo file su attestazione.spaziogenesi.org, scheda Attesta");
-  console.log("2. Genera l'attestazione E scarica il PDF (solo /api/cert-pdf innesca");
+  console.log(`1. Trascina questo file su ${cfg.operations.attestation_site}, scheda Attesta`);
+  console.log("2. Genera il certificato E scarica il PDF (solo /api/cert-pdf innesca");
   console.log("   l'ancoraggio OpenTimestamps reale, /api/hash da solo no)");
   console.log("3. Condividi qui l'impronta e il link permanente /c/<hash>");
 }

@@ -1,8 +1,9 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
+import { loadRegistry, byFolder } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 
-const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
 
 // Data di nascita del GTF: baseline per i processi mai eseguiti finora
@@ -71,6 +72,7 @@ async function main() {
     return;
   }
 
+  const cfg = loadTenant();
   const records = loadRegistry();
   const overdue = [];
 
@@ -81,7 +83,7 @@ async function main() {
       id: "CTL-dogfooding-anchor",
       title: "Ancoraggio dogfooding mensile",
       days: anchorDays,
-      hint: "npm run anchor-monthly, poi attesta il bundle su attestazione.spaziogenesi.org",
+      hint: `npm run anchor-monthly, poi attesta il bundle su ${cfg.operations.attestation_site}`,
     });
   }
 
@@ -109,7 +111,7 @@ async function main() {
   );
   const text =
     `Genesis Trust Framework — processi in scadenza:\n\n${lines.join("\n")}\n\n` +
-    `Dettagli: https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/processes`;
+    `Dettagli: ${cfg.operations.processes_url}`;
 
   console.log(text.replace(/<\/?b>/g, ""));
   await sendTelegram(text);

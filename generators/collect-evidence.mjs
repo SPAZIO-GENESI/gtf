@@ -1,11 +1,11 @@
 import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { ROOT } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR, TENANT_REGISTRY_DIR } from "./lib/tenant.mjs";
 
-const SNAPSHOTS_DIR = join(ROOT, "snapshots");
+const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
-const REGISTRY_EVIDENCE_DIR = join(ROOT, "registry", "evidence");
+const REGISTRY_EVIDENCE_DIR = join(TENANT_REGISTRY_DIR, "evidence");
 
 function isoWeek(date) {
   const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
@@ -92,6 +92,8 @@ function updateLastSeen(evdId, dateStr) {
 }
 
 async function main() {
+  const cfg = loadTenant();
+  const c = cfg.collector;
   const ghHeaders = process.env.GITHUB_TOKEN
     ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" }
     : { Accept: "application/vnd.github+json" };
@@ -104,10 +106,10 @@ async function main() {
   const results = {};
   const evdHits = new Set();
 
-  results.status = await fetchJson("https://imgauth.spaziogenesi.org/api/status");
+  results.status = await fetchJson(`${c.api_base}/api/status`);
   if (results.status.ok) evdHits.add("EVD-status-live");
 
-  results["status-history"] = await fetchJson("https://imgauth.spaziogenesi.org/api/status-history");
+  results["status-history"] = await fetchJson(`${c.api_base}/api/status-history`);
   if (results["status-history"].ok) evdHits.add("EVD-r2-status-history");
 
   const healthLog = {};
@@ -115,39 +117,35 @@ async function main() {
     const d = new Date(today);
     d.setUTCDate(d.getUTCDate() - i);
     const day = d.toISOString().slice(0, 10);
-    healthLog[day] = await fetchJson(`https://imgauth.spaziogenesi.org/api/health-log?day=${day}`);
+    healthLog[day] = await fetchJson(`${c.api_base}/api/health-log?day=${day}`);
   }
   results["health-log"] = healthLog;
   if (Object.values(healthLog).some((r) => r.ok)) evdHits.add("EVD-d1-health-log");
 
-  results["ping-imgauth"] = await fetchJson("https://imgauth.spaziogenesi.org/ping");
-  if (results["ping-imgauth"].ok) evdHits.add("EVD-versions-live");
+  results.ping = await fetchJson(`${c.api_base}/ping`);
+  if (results.ping.ok) evdHits.add("EVD-versions-live");
 
   results["monitor-issues"] = await fetchJson(
-    "https://api.github.com/repos/SPAZIO-GENESI/imgauth/issues?labels=status-alert&state=all&per_page=20",
+    `https://api.github.com/repos/${c.github_owner}/${c.monitor_repo}/issues?labels=${c.monitor_label}&state=all&per_page=20`,
     ghHeaders
   );
   if (results["monitor-issues"].ok) evdHits.add("EVD-monitor-issues");
 
-  results["git-imgauth"] = await fetchJson("https://api.github.com/repos/SPAZIO-GENESI/imgauth/commits?per_page=5", ghHeaders);
-  if (results["git-imgauth"].ok) evdHits.add("EVD-git-imgauth");
-
-  results["git-imgauthweb"] = await fetchJson("https://api.github.com/repos/SPAZIO-GENESI/imgauthweb/commits?per_page=5", ghHeaders);
-  if (results["git-imgauthweb"].ok) evdHits.add("EVD-git-imgauthweb");
-
-  results["git-authart"] = await fetchJson("https://api.github.com/repos/SPAZIO-GENESI/autart-signer/commits?per_page=5", ghHeaders);
-  if (results["git-authart"].ok) evdHits.add("EVD-git-authart");
+  for (const item of c.code_repos) {
+    results[item.snapshot] = await fetchJson(`https://api.github.com/repos/${c.github_owner}/${item.repo}/commits?per_page=5`, ghHeaders);
+    if (results[item.snapshot].ok) evdHits.add(item.evidence);
+  }
 
   // Tag di release (convenzione vX.Y.Z, vedi PRC-release-coordinata): alimentano
   // il terzo componente di MET-integrity ("quota di release con tag git").
-  for (const repo of ["imgauth", "imgauthweb", "autart-signer"]) {
-    results[`tags-${repo}`] = await fetchJson(`https://api.github.com/repos/SPAZIO-GENESI/${repo}/tags?per_page=30`, ghHeaders);
+  for (const repo of c.tag_repos) {
+    results[`tags-${repo}`] = await fetchJson(`https://api.github.com/repos/${c.github_owner}/${repo}/tags?per_page=30`, ghHeaders);
   }
 
   // Governance (MET-governance, P32/ADR-GTF-011): validazione CI del registro —
   // ultimi 30 run di validate.yml su gtf/main, campi minimi (id/conclusion/data).
   const validateRunsRaw = await fetchJson(
-    "https://api.github.com/repos/SPAZIO-GENESI/gtf/actions/workflows/validate.yml/runs?per_page=30&branch=main",
+    `https://api.github.com/repos/${c.github_owner}/${c.registry_repo}/actions/workflows/validate.yml/runs?per_page=30&branch=main`,
     ghHeaders
   );
   results["governance-validate-runs"] = validateRunsRaw.ok
@@ -165,25 +163,28 @@ async function main() {
   // Governance: quota di PR sul registro gtf (termine NON usato dalla formula
   // v1 — un maintainer singolo non fa revisione tra pari — ma tenuto
   // verificabile nel tempo per trasparenza sul perché è escluso).
-  const prsRaw = await fetchJson("https://api.github.com/search/issues?q=repo:SPAZIO-GENESI/gtf+is:pr", ghHeaders);
+  const prsRaw = await fetchJson(`https://api.github.com/search/issues?q=repo:${c.github_owner}/${c.registry_repo}+is:pr`, ghHeaders);
   results["governance-prs"] = prsRaw.ok
     ? { ok: true, url: prsRaw.url, data: { total_count: prsRaw.data.total_count } }
     : prsRaw;
 
-  // Governance: gate umano sui rilasci di produzione (P24) — ultimi 20 run di
-  // ci.yml su imgauth/main; per ciascuno, il job deploy-production e, se
-  // concluso, il record di approvazione ridotto a {login, state} (nessun
-  // altro campo personale). Run senza quel job (path-ignore, fallito prima)
-  // restano con has_job:false: il denominatore li esclude in score.mjs.
+  // Governance: gate umano sui rilasci di produzione (P24) — ultimi 20 run del
+  // workflow di gate sul repo di produzione del tenant; per ciascuno, il job
+  // di gate e, se concluso, il record di approvazione ridotto a {login, state}
+  // (nessun altro campo personale). Run senza quel job (path-ignore, fallito
+  // prima) restano con has_job:false: il denominatore li esclude in score.mjs.
   const prodGateRunsRaw = await fetchJson(
-    "https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml/runs?per_page=20&branch=main",
+    `https://api.github.com/repos/${c.github_owner}/${c.prod_gate_repo}/actions/workflows/${c.prod_gate_workflow}/runs?per_page=20&branch=main`,
     ghHeaders
   );
   const prodGateEntries = [];
   if (prodGateRunsRaw.ok) {
     for (const run of prodGateRunsRaw.data.workflow_runs ?? []) {
-      const jobsRes = await fetchJson(`https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/runs/${run.id}/jobs`, ghHeaders);
-      const job = jobsRes.ok ? (jobsRes.data.jobs ?? []).find((j) => j.name === "deploy-production") : null;
+      const jobsRes = await fetchJson(
+        `https://api.github.com/repos/${c.github_owner}/${c.prod_gate_repo}/actions/runs/${run.id}/jobs`,
+        ghHeaders
+      );
+      const job = jobsRes.ok ? (jobsRes.data.jobs ?? []).find((j) => j.name === c.prod_gate_job) : null;
       const entry = {
         run_id: run.id,
         created_at: run.created_at,
@@ -193,7 +194,7 @@ async function main() {
       };
       if (job && job.conclusion) {
         const approvalsRes = await fetchJson(
-          `https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/runs/${run.id}/approvals`,
+          `https://api.github.com/repos/${c.github_owner}/${c.prod_gate_repo}/actions/runs/${run.id}/approvals`,
           ghHeaders
         );
         entry.approvals =
@@ -207,37 +208,39 @@ async function main() {
   results["governance-prod-gate"] = { ok: prodGateRunsRaw.ok, url: prodGateRunsRaw.url, data: prodGateEntries };
 
   // EVD-cicd-staging-runs (P32/C2): riusa il fetch di sopra, zero chiamate in
-  // più — la sola visibilità pubblica dei run di ci.yml è ciò che l'evidenza
-  // dichiara ("verificabile aprendo la tab Actions del repo pubblico imgauth").
+  // più — la sola visibilità pubblica dei run del workflow di gate è ciò che
+  // l'evidenza dichiara ("verificabile aprendo la tab Actions del repo di
+  // produzione, pubblico").
   if (prodGateRunsRaw.ok) evdHits.add("EVD-cicd-staging-runs");
 
   // EVD-changelog-user (P32/C2): la pagina pubblica del changelog risponde.
-  // GET, non HEAD: GitHub Pages lo supporta comunque, ma il Worker imgauth
+  // GET, non HEAD: GitHub Pages lo supporta comunque, ma il Worker applicativo
   // (sotto) risponde 404 a HEAD (router interno, non instrada quel verbo).
-  results["changelog-user"] = await fetchMeta("https://attestazione.spaziogenesi.org/changelog/");
+  results["changelog-user"] = await fetchMeta(c.changelog_url);
   if (results["changelog-user"].ok && results["changelog-user"].status === 200) evdHits.add("EVD-changelog-user");
 
   // EVD-cloudflare-access-admin (P32/C2): /admin non autenticato deve
   // reindirizzare al login di Cloudflare Access, mai rispondere direttamente.
-  results["cloudflare-access-admin"] = await fetchMeta("https://imgauth.spaziogenesi.org/admin", { redirect: "manual" });
+  results["cloudflare-access-admin"] = await fetchMeta(c.admin_url, { redirect: "manual" });
   {
     const r = results["cloudflare-access-admin"];
-    if (r.ok && r.status >= 300 && r.status < 400 && (r.location ?? "").includes("cloudflareaccess.com")) {
+    if (r.ok && r.status >= 300 && r.status < 400 && (r.location ?? "").includes(c.admin_expected_redirect)) {
       evdHits.add("EVD-cloudflare-access-admin");
     }
   }
 
   // EVD-edge-security-headers (P32/C2): CSP+HSTS+Permissions-Policy presenti
-  // sui due host esposti (attestazione via GitHub Pages+edge, imgauth Worker).
-  // GET, non HEAD: il router del Worker imgauth risponde 404 a HEAD (verbo
-  // non instradato) pur restituendo comunque gli header di sicurezza edge —
-  // usare GET ovunque evita di dipendere da quel dettaglio di implementazione.
-  results["edge-security-headers"] = {
-    attestazione: await fetchMeta("https://attestazione.spaziogenesi.org/"),
-    imgauth: await fetchMeta("https://imgauth.spaziogenesi.org/ping"),
-  };
+  // sui host esposti dichiarati dal tenant (front-end statico + Worker
+  // applicativo). GET, non HEAD: il router del Worker può rispondere 404 a
+  // HEAD (verbo non instradato) pur restituendo comunque gli header di
+  // sicurezza edge — usare GET ovunque evita di dipendere da quel dettaglio
+  // di implementazione.
+  results["edge-security-headers"] = {};
+  for (const [key, url] of Object.entries(c.security_headers_urls)) {
+    results["edge-security-headers"][key] = await fetchMeta(url);
+  }
   {
-    const edgeOk = ["attestazione", "imgauth"].every((k) => {
+    const edgeOk = Object.keys(c.security_headers_urls).every((k) => {
       const r = results["edge-security-headers"][k];
       return Boolean(
         r.ok &&
@@ -262,8 +265,8 @@ async function main() {
   if (anchorFiles.length > 0) {
     const latestAnchor = anchorFiles[anchorFiles.length - 1];
     const bundleHash = sha256(readFileSync(join(ANCHORS_DIR, latestAnchor)));
-    const badgeRes = await fetchText(`https://imgauth.spaziogenesi.org/api/badge?hash=${bundleHash}`);
-    const anchored = badgeRes.ok && badgeRes.text.includes("✓ opera attestata");
+    const badgeRes = await fetchText(c.badge_url_template.replace("{hash}", bundleHash));
+    const anchored = badgeRes.ok && badgeRes.text.includes(c.badge_ok_marker);
     results["dogfooding-anchor"] = { file: latestAnchor, hash: bundleHash, ok: badgeRes.ok, anchored };
     if (anchored) evdHits.add("EVD-dogfooding-anchor");
   } else {
@@ -271,12 +274,12 @@ async function main() {
   }
 
   // EVD-security-txt (P37): security.txt raggiungibile e non scaduto su
-  // entrambi i domini. GET, non HEAD (il Worker imgauth non risponde a
-  // HEAD, memoria gtf-collector-network-gotchas).
-  results["security-txt"] = {
-    attestazione: await fetchText("https://attestazione.spaziogenesi.org/.well-known/security.txt"),
-    imgauth: await fetchText("https://imgauth.spaziogenesi.org/.well-known/security.txt"),
-  };
+  // tutti i domini dichiarati dal tenant. GET, non HEAD (il Worker applicativo
+  // può non rispondere a HEAD, memoria gtf-collector-network-gotchas).
+  results["security-txt"] = {};
+  for (const [key, url] of Object.entries(c.security_txt_urls)) {
+    results["security-txt"][key] = await fetchText(url);
+  }
   {
     const notExpired = (text) => {
       const m = /^Expires:\s*(.+)$/m.exec(text ?? "");
@@ -284,7 +287,7 @@ async function main() {
       const d = new Date(m[1].trim());
       return !Number.isNaN(d.getTime()) && d.getTime() > today.getTime();
     };
-    const securityTxtOk = ["attestazione", "imgauth"].every((k) => {
+    const securityTxtOk = Object.keys(c.security_txt_urls).every((k) => {
       const r = results["security-txt"][k];
       return Boolean(r.ok && r.text.includes("Contact:") && notExpired(r.text));
     });
@@ -295,8 +298,8 @@ async function main() {
   // bit-per-bit identico all'impronta attestata (ADR-P38) — è dichiarato
   // immutabile per design. GET, non HEAD (stesso gotcha di rete di sopra).
   {
-    const WHITEPAPER_SHA256 = "898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452";
-    const pdfRes = await fetchBytes("https://trust.spaziogenesi.org/whitepaper-v1.0.pdf");
+    const WHITEPAPER_SHA256 = c.whitepaper.sha256;
+    const pdfRes = await fetchBytes(c.whitepaper.url);
     const liveHash = pdfRes.ok ? sha256(pdfRes.bytes) : null;
     const matches = liveHash === WHITEPAPER_SHA256;
     results["whitepaper-integrity"] = { ok: pdfRes.ok, sha256: liveHash, expected: WHITEPAPER_SHA256, matches };

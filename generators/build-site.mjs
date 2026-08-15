@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
+import { loadTenant } from "./lib/tenant.mjs";
 
 const SITE_DIR = join(ROOT, "site");
 
@@ -52,7 +53,7 @@ function phaseNumber(id) {
   return m ? parseInt(m[1], 10) : Infinity;
 }
 
-function renderLedger(score) {
+function renderLedger(score, cfg) {
   const hasPartial = score.indicators.some((i) => i.value !== null && i.note);
   const rows = score.indicators
     .map((i) => {
@@ -72,7 +73,7 @@ ${rows}
           <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">${score.overall}<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
-      <p class="ledger-note">${score.available_count} di ${score.total} indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero.${hasPartial ? " * = valore parziale, passa il mouse per i dettagli." : ""} <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula di ciascuno</a>.</p>
+      <p class="ledger-note">${score.available_count} di ${score.total} indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero.${hasPartial ? " * = valore parziale, passa il mouse per i dettagli." : ""} <a href="${cfg.site.metrics_url}">Formula di ciascuno</a>.</p>
     </div>`;
 }
 
@@ -332,7 +333,27 @@ const STYLE = `
   @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
 `;
 
-function renderPage(records, score) {
+// Le voci "esterne" della barra di navigazione (dopo le cinque ancore
+// interne, sempre le stesse: struttura del report, non del tenant).
+function renderNavExternal(cfg) {
+  return cfg.site.nav_external.map((item) => `      <li><a href="${item.href}">${item.label}</a></li>`).join("\n");
+}
+
+// Le colonne del footer: interpolazione grezza (non esc()), le etichette
+// arrivano già in HTML valido dal config (es. "API &amp; MCP" già escapata).
+function renderFooterColumns(cfg) {
+  return cfg.site.footer_columns
+    .map((col) => {
+      const links = col.links.map((l) => `        <a href="${l.href}">${l.label}</a>`).join("\n");
+      return `      <div class="footer-col">
+        <h3>${col.heading}</h3>
+${links}
+      </div>`;
+    })
+    .join("\n");
+}
+
+function renderPage(records, score, cfg) {
   const body = [
     renderMission(records),
     renderEidas(records),
@@ -342,20 +363,19 @@ function renderPage(records, score) {
   ].join("\n\n");
 
   return `<!doctype html>
-<html lang="it">
+<html lang="${cfg.language}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trust Center — Genesis Trust Framework</title>
+<title>${cfg.site.title}</title>
 <style>${STYLE}</style>
 </head>
 <body>
   <header class="hero">
-    <p class="eyebrow">Genesis Trust Framework</p>
-    <h1>Il registro della fiducia di Spazio Genesi ETS</h1>
-    <p class="thesis">Perché <a href="https://attestazione.spaziogenesi.org">attestazione.spaziogenesi.org</a>
-    merita fiducia — con evidenze verificabili, non dichiarazioni.</p>
-${renderLedger(score)}
+    <p class="eyebrow">${cfg.site.eyebrow}</p>
+    <h1>${cfg.site.heading}</h1>
+    <p class="thesis">${cfg.site.thesis_html}</p>
+${renderLedger(score, cfg)}
   </header>
 
   <nav class="spine">
@@ -365,8 +385,7 @@ ${renderLedger(score)}
       <li><a href="#compliance">Compliance Map</a></li>
       <li><a href="#rischi">Rischi</a></li>
       <li><a href="#decisioni">Decisioni</a></li>
-      <li><a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi ↗</a></li>
-      <li><a href="https://attestazione.spaziogenesi.org/changelog/">Changelog ↗</a></li>
+${renderNavExternal(cfg)}
     </ul>
   </nav>
 
@@ -376,35 +395,11 @@ ${body}
 
   <footer>
     <nav class="footer-cols" aria-label="Collegamenti del footer">
-      <div class="footer-col">
-        <h3>Il registro</h3>
-        <a href="https://github.com/SPAZIO-GENESI/gtf">Codice sorgente (GTF)</a>
-        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry">Registro pubblico</a>
-        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula del punteggio</a>
-        <a href="/devops.html">DevOps e rilasci</a>
-        <a href="/whitepaper.html">Whitepaper tecnico</a>
-      </div>
-      <div class="footer-col">
-        <h3>Il servizio di attestazione</h3>
-        <a href="https://attestazione.spaziogenesi.org">Attesta e verifica</a>
-        <a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi</a>
-        <a href="https://attestazione.spaziogenesi.org/changelog/">Cronologia dei miglioramenti</a>
-        <a href="https://attestazione.spaziogenesi.org/developer/">Sviluppatori: API &amp; MCP</a>
-        <a href="https://attestazione.spaziogenesi.org/privacy.html">Privacy</a>
-      </div>
-      <div class="footer-col">
-        <h3>Codice open source</h3>
-        <a href="https://github.com/SPAZIO-GENESI/imgauth">imgauth (motore)</a>
-        <a href="https://github.com/SPAZIO-GENESI/imgauthweb">imgauthweb (interfaccia)</a>
-        <a href="https://github.com/SPAZIO-GENESI/autart-signer">autart-signer (firma)</a>
-        <a href="https://github.com/SPAZIO-GENESI/attest-mcp">attest-mcp (server MCP)</a>
-      </div>
+${renderFooterColumns(cfg)}
     </nav>
     <div class="footer-bottom">
-      Genesis Trust Framework · pagina generata automaticamente dal
-      <a href="https://github.com/SPAZIO-GENESI/gtf">registro pubblico</a> —
-      nessun testo di questa pagina è scritto a mano (principio PRN-03).
-      <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+      ${cfg.site.footer_note_html}
+      <br><img src="/badge.svg" alt="${cfg.site.badge_alt}" height="20" style="margin-top:0.5rem;">
     </div>
   </footer>
 </body>
@@ -413,9 +408,10 @@ ${body}
 }
 
 function main() {
+  const cfg = loadTenant();
   const records = loadRegistry();
   const score = JSON.parse(readFileSync(join(SITE_DIR, "score.json"), "utf8"));
-  writeFileSync(join(SITE_DIR, "index.html"), renderPage(records, score));
+  writeFileSync(join(SITE_DIR, "index.html"), renderPage(records, score, cfg));
   console.log("site/index.html generato.");
 }
 

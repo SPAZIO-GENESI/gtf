@@ -1,27 +1,9 @@
 import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
 
-const SNAPSHOTS_DIR = join(ROOT, "snapshots");
-const MAP_FILE = join(ROOT, "generators", "lib", "privacy-map.json");
-const IMGAUTH_REPO = "SPAZIO-GENESI/imgauth";
-
-// Alto recall deliberato (P32/ADR-GTF-012): qualunque colonna SQL il cui
-// nome somigli a un dato personale finisce nel mapping, dove si dichiara
-// coperta, falso positivo o non coperta — mai filtrata prima.
-const SENSITIVE_COLUMN = /email|owner|member|name|user|phone|address|customer/i;
-
-// Prefissi R2 noti (letti a mano dal codice, non generati dinamicamente):
-// scritture personali (pdf/ots/meta/cert/integrations) e non personali
-// (status/meta-counters, dichiarate falso positivo nel mapping).
-const R2_PREFIXES = [
-  { id: "r2:pdf", pattern: /`pdf\// },
-  { id: "r2:ots", pattern: /`ots\// },
-  { id: "r2:meta/cert", pattern: /`meta\/cert\// },
-  { id: "r2:integrations", pattern: /`integrations\// },
-  { id: "r2:status", pattern: /["'`]status\// },
-  { id: "r2:meta-counters", pattern: /["'`]meta\/(agent-403-count|cert-count)["'`]/ },
-];
+const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 
 // Stesso pattern di latestWeek()/readJsonSnapshot() in score.mjs: legge solo
 // snapshot già committati, mai stato in memoria tra script diversi.
@@ -54,8 +36,8 @@ async function fetchText(url, headers = {}) {
   }
 }
 
-async function listSchemaFiles(tag, headers) {
-  const url = `https://api.github.com/repos/${IMGAUTH_REPO}/contents/schema?ref=${tag}`;
+async function listSchemaFiles(repo, schemaDir, tag, headers) {
+  const url = `https://api.github.com/repos/${repo}/contents/${schemaDir}?ref=${tag}`;
   try {
     const res = await fetch(url, { headers, signal: AbortSignal.timeout(15000) });
     if (!res.ok) return { ok: false, status: res.status, url };
@@ -70,7 +52,7 @@ async function listSchemaFiles(tag, headers) {
 // Estrae, per tabella, l'unione delle colonne da CREATE TABLE e ALTER TABLE
 // ADD COLUMN (regex deliberatamente semplice, non un parser SQL) — poi
 // filtra alle sole tabelle con almeno una colonna dal nome sensibile.
-function extractSqlFlows(schemaTexts) {
+function extractSqlFlows(schemaTexts, sensitiveColumn) {
   const columnsByTable = new Map();
   for (const text of schemaTexts) {
     for (const m of text.matchAll(/ALTER TABLE\s+(\w+)\s+ADD COLUMN\s+(\w+)/gi)) {
@@ -89,14 +71,14 @@ function extractSqlFlows(schemaTexts) {
   }
   const hits = [];
   for (const [table, columns] of columnsByTable) {
-    const sensitive = [...columns].filter((c) => SENSITIVE_COLUMN.test(c));
+    const sensitive = [...columns].filter((c) => sensitiveColumn.test(c));
     if (sensitive.length > 0) hits.push({ id: `sql:${table}`, columns: sensitive });
   }
   return hits.sort((a, b) => a.id.localeCompare(b.id));
 }
 
-function extractR2Flows(workerText) {
-  return R2_PREFIXES.filter((p) => p.pattern.test(workerText)).map((p) => ({ id: p.id }));
+function extractR2Flows(workerText, storagePrefixes) {
+  return storagePrefixes.filter((p) => p.pattern.test(workerText)).map((p) => ({ id: p.id }));
 }
 
 function writeSnapshot(week, result) {
@@ -107,6 +89,13 @@ function writeSnapshot(week, result) {
 }
 
 async function main() {
+  const cfg = loadTenant();
+  const ps = cfg.privacy_scan;
+  const repoLabel = ps.code_repo.split("/").pop();
+  const sensitiveColumn = new RegExp(ps.sensitive_column_pattern, "i");
+  const storagePrefixes = ps.storage_prefixes.map((p) => ({ id: p.id, pattern: new RegExp(p.pattern) }));
+  const mapFile = join(ROOT, "generators", "lib", ps.map_file);
+
   const ghHeaders = process.env.GITHUB_TOKEN
     ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" }
     : { Accept: "application/vnd.github+json" };
@@ -115,16 +104,16 @@ async function main() {
   // Riusa il tag già raccolto da collect-evidence.mjs nello stesso giro
   // settimanale (deve girare dopo, nello stesso job): zero fetch API in più
   // solo per sapere qual è l'ultimo tag.
-  const tagsSnap = week ? readJsonSnapshot(week, "tags-imgauth.json") : null;
+  const tagsSnap = week ? readJsonSnapshot(week, ps.tags_snapshot) : null;
   const tag = tagsSnap?.ok && Array.isArray(tagsSnap.data) && tagsSnap.data.length > 0 ? tagsSnap.data[0].name : null;
 
   if (!tag) {
-    writeSnapshot(week, { week, tag: null, ok: false, error: "nessun tag imgauth nello snapshot della settimana" });
-    console.log("scan-privacy: nessun tag imgauth disponibile, indicatore resterà null.");
+    writeSnapshot(week, { week, tag: null, ok: false, error: `nessun tag ${repoLabel} nello snapshot della settimana` });
+    console.log(`scan-privacy: nessun tag ${repoLabel} disponibile, indicatore resterà null.`);
     return;
   }
 
-  const listing = await listSchemaFiles(tag, ghHeaders);
+  const listing = await listSchemaFiles(ps.code_repo, ps.schema_dir, tag, ghHeaders);
   if (!listing.ok) {
     writeSnapshot(week, { week, tag, ok: false, error: `listing schema fallito (status ${listing.status ?? listing.error})` });
     console.log(`scan-privacy: listing schema fallito per tag ${tag}, indicatore resterà null.`);
@@ -133,14 +122,17 @@ async function main() {
 
   const schemaTexts = [];
   for (const file of listing.files) {
-    const r = await fetchText(`https://raw.githubusercontent.com/${IMGAUTH_REPO}/${tag}/schema/${file}`);
+    const r = await fetchText(`https://raw.githubusercontent.com/${ps.code_repo}/${tag}/${ps.schema_dir}/${file}`);
     if (r.ok) schemaTexts.push(r.text);
   }
-  const workerRes = await fetchText(`https://raw.githubusercontent.com/${IMGAUTH_REPO}/${tag}/worker.js`);
+  const workerRes = await fetchText(`https://raw.githubusercontent.com/${ps.code_repo}/${tag}/${ps.worker_file}`);
 
-  const detected = [...extractSqlFlows(schemaTexts), ...(workerRes.ok ? extractR2Flows(workerRes.text) : [])];
+  const detected = [
+    ...extractSqlFlows(schemaTexts, sensitiveColumn),
+    ...(workerRes.ok ? extractR2Flows(workerRes.text, storagePrefixes) : []),
+  ];
 
-  const map = JSON.parse(readFileSync(MAP_FILE, "utf8")).flows;
+  const map = JSON.parse(readFileSync(mapFile, "utf8")).flows;
   const flows = detected.map((h) => {
     const entry = map[h.id];
     if (!entry) {
@@ -163,7 +155,7 @@ async function main() {
   const falsePos = flows.filter((f) => f.status === "false_positive").length;
   const notCovered = flows.filter((f) => f.status === "not_covered").length;
   console.log(
-    `scan-privacy: imgauth@${tag}, ${detected.length} flussi rilevati — ${covered} coperti, ${falsePos} falsi positivi, ${notCovered} non coperti.`
+    `scan-privacy: ${repoLabel}@${tag}, ${detected.length} flussi rilevati — ${covered} coperti, ${falsePos} falsi positivi, ${notCovered} non coperti.`
   );
 }
 

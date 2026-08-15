@@ -1,0 +1,122 @@
+{
+  "id": "attestazione",
+  "version": "1.0.0",
+  "name": "Attestazione delle opere digitali",
+  "owner": "Spazio Genesi ETS",
+  "language": "it",
+
+  "site": {
+    "title": "Trust Center — Genesis Trust Framework",
+    "eyebrow": "Genesis Trust Framework",
+    "heading": "Il registro della fiducia di Spazio Genesi ETS",
+    "thesis_html": "Perché <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    merita fiducia — con evidenze verificabili, non dichiarazioni.",
+    "metrics_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics",
+    "badge_alt": "Genesis Trust Score",
+    "nav_external": [
+      { "label": "Stato dei servizi ↗", "href": "https://attestazione.spaziogenesi.org/status/" },
+      { "label": "Changelog ↗", "href": "https://attestazione.spaziogenesi.org/changelog/" }
+    ],
+    "footer_columns": [
+      {
+        "heading": "Il registro",
+        "links": [
+          { "label": "Codice sorgente (GTF)", "href": "https://github.com/SPAZIO-GENESI/gtf" },
+          { "label": "Registro pubblico", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry" },
+          { "label": "Formula del punteggio", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics" },
+          { "label": "DevOps e rilasci", "href": "/devops.html" },
+          { "label": "Whitepaper tecnico", "href": "/whitepaper.html" }
+        ]
+      },
+      {
+        "heading": "Il servizio di attestazione",
+        "links": [
+          { "label": "Attesta e verifica", "href": "https://attestazione.spaziogenesi.org" },
+          { "label": "Stato dei servizi", "href": "https://attestazione.spaziogenesi.org/status/" },
+          { "label": "Cronologia dei miglioramenti", "href": "https://attestazione.spaziogenesi.org/changelog/" },
+          { "label": "Sviluppatori: API &amp; MCP", "href": "https://attestazione.spaziogenesi.org/developer/" },
+          { "label": "Privacy", "href": "https://attestazione.spaziogenesi.org/privacy.html" }
+        ]
+      },
+      {
+        "heading": "Codice open source",
+        "links": [
+          { "label": "imgauth (motore)", "href": "https://github.com/SPAZIO-GENESI/imgauth" },
+          { "label": "imgauthweb (interfaccia)", "href": "https://github.com/SPAZIO-GENESI/imgauthweb" },
+          { "label": "autart-signer (firma)", "href": "https://github.com/SPAZIO-GENESI/autart-signer" },
+          { "label": "attest-mcp (server MCP)", "href": "https://github.com/SPAZIO-GENESI/attest-mcp" }
+        ]
+      }
+    ],
+    "footer_note_html": "Genesis Trust Framework · pagina generata automaticamente dal\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">registro pubblico</a> —\n      nessun testo di questa pagina è scritto a mano (principio PRN-03)."
+  },
+
+  "score": {
+    "birth_month": "2026-07",
+    "release_tag_repos": ["imgauth", "imgauthweb", "autart-signer"],
+    "governance_note_reference": "ADR-GTF-011",
+    "privacy_repo_label": "imgauth",
+    "privacy_note_scope": "non copre repo client (es. bot Telegram)"
+  },
+
+  "collector": {
+    "api_base": "https://imgauth.spaziogenesi.org",
+    "site_base": "https://attestazione.spaziogenesi.org",
+    "trust_base": "https://trust.spaziogenesi.org",
+    "github_owner": "SPAZIO-GENESI",
+    "registry_repo": "gtf",
+    "code_repos": [
+      { "repo": "imgauth", "snapshot": "git-imgauth", "evidence": "EVD-git-imgauth" },
+      { "repo": "imgauthweb", "snapshot": "git-imgauthweb", "evidence": "EVD-git-imgauthweb" },
+      { "repo": "autart-signer", "snapshot": "git-authart", "evidence": "EVD-git-authart" }
+    ],
+    "tag_repos": ["imgauth", "imgauthweb", "autart-signer"],
+    "monitor_repo": "imgauth",
+    "monitor_label": "status-alert",
+    "prod_gate_repo": "imgauth",
+    "prod_gate_workflow": "ci.yml",
+    "prod_gate_job": "deploy-production",
+    "changelog_url": "https://attestazione.spaziogenesi.org/changelog/",
+    "admin_url": "https://imgauth.spaziogenesi.org/admin",
+    "admin_expected_redirect": "cloudflareaccess.com",
+    "security_headers_urls": {
+      "attestazione": "https://attestazione.spaziogenesi.org/",
+      "imgauth": "https://imgauth.spaziogenesi.org/ping"
+    },
+    "security_txt_urls": {
+      "attestazione": "https://attestazione.spaziogenesi.org/.well-known/security.txt",
+      "imgauth": "https://imgauth.spaziogenesi.org/.well-known/security.txt"
+    },
+    "badge_url_template": "https://imgauth.spaziogenesi.org/api/badge?hash={hash}",
+    "badge_ok_marker": "✓ opera attestata",
+    "whitepaper": {
+      "url": "https://trust.spaziogenesi.org/whitepaper-v1.0.pdf",
+      "sha256": "898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452"
+    }
+  },
+
+  "privacy_scan": {
+    "code_repo": "SPAZIO-GENESI/imgauth",
+    "schema_dir": "schema",
+    "worker_file": "worker.js",
+    "tags_snapshot": "tags-imgauth.json",
+    "map_file": "privacy-map.json",
+    "sensitive_column_pattern": "email|owner|member|name|user|phone|address|customer",
+    "storage_prefixes": [
+      { "id": "r2:pdf", "pattern": "`pdf\\/" },
+      { "id": "r2:ots", "pattern": "`ots\\/" },
+      { "id": "r2:meta/cert", "pattern": "`meta\\/cert\\/" },
+      { "id": "r2:integrations", "pattern": "`integrations\\/" },
+      { "id": "r2:status", "pattern": "[\"'`]status\\/" },
+      { "id": "r2:meta-counters", "pattern": "[\"'`]meta\\/(agent-403-count|cert-count)[\"'`]" }
+    ]
+  },
+
+  "scorecard": {
+    "repos": ["SPAZIO-GENESI/imgauth", "SPAZIO-GENESI/imgauthweb", "SPAZIO-GENESI/autart-signer"]
+  },
+
+  "operations": {
+    "attestation_site": "attestazione.spaziogenesi.org",
+    "processes_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/processes"
+  }
+}
