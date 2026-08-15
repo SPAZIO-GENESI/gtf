@@ -24,7 +24,8 @@
           { "label": "Registro pubblico", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry" },
           { "label": "Formula del punteggio", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics" },
           { "label": "DevOps e rilasci", "href": "/devops.html" },
-          { "label": "Whitepaper tecnico", "href": "/whitepaper.html" }
+          { "label": "Whitepaper tecnico", "href": "/whitepaper.html" },
+          { "label": "Changelog", "href": "/changelog.html" }
         ]
       },
       {

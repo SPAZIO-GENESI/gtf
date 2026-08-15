@@ -14,7 +14,8 @@
     "check-core": "node core/generators/check-core-isolation.mjs",
     "score": "node core/generators/score.mjs",
     "build-site": "node core/generators/build-site.mjs",
-    "build": "npm run validate && npm run check-core && npm run score && npm run build-site"
+    "build-changelog": "node core/generators/build-changelog.mjs",
+    "build": "npm run validate && npm run check-core && npm run score && npm run build-site && npm run build-changelog"
   },
   "license": "MIT",
   "dependencies": {
