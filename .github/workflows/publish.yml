@@ -6,6 +6,7 @@ on:
     paths:
       - "tenants/**"
       - "core/**"
+      - "content/**"
       - "default-tenant.json"
       - "site/**"
       - "package.json"
@@ -36,6 +37,10 @@ jobs:
       - run: npm run validate
       - run: npm run score
       - run: npm run build-site
+      # Rigenera site/changelog.html da content/changelog.yaml: senza questo
+      # step il sito pubblicherebbe la sola copia rigenerata a mano in locale,
+      # e un changelog dimenticato non farebbe diventare rosso nulla.
+      - run: npm run build-changelog
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

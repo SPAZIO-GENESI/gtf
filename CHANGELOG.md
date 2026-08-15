@@ -4,6 +4,11 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-15
 
+### Due falle nella pipeline di pubblicazione del changelog
+*framework*
+
+Trovate dai controlli pre-push di F6, non dal design doc, ed entrambe nate con F4. (A) content/** non era nei filtri paths: di publish.yml: una modifica alla sola sorgente del changelog non avrebbe fatto partire il deploy - la trappola numero 1 del piano (il sito resta indietro e nessun workflow diventa rosso), applicata al percorso nuovo introdotto da F4 stessa. (B) il job non eseguiva npm run build-changelog: a differenza di index.html, score.json e badge.svg, la pagina del changelog non veniva rigenerata in CI ma pubblicata dalla sola copia committata a mano, quindi un build locale dimenticato avrebbe messo online un changelog vecchio in silenzio. Corrette entrambe prima del push. Lezione: quando una fase introduce un percorso nuovo, i filtri paths: e gli step del job vanno riletti nello stesso giro, non alla fase dopo.
+
 ### Documentazione allineata al motore multi-progetto
 *framework*
 
