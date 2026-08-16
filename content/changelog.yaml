@@ -24,6 +24,60 @@ entries:
     component: framework
     version: null
     public: false
+    title: "P45 F3: il Trust Center dell'attestazione ha un repo di pubblicazione proprio"
+    body: >
+      Creato il repository pubblico SPAZIO-GENESI/trust-attestazione, di sola
+      pubblicazione: il contenuto e' generato da qui e sovrascritto a ogni
+      deploy (avvertenza esplicita nel suo README). Esiste perche' GitHub Pages
+      ammette un solo dominio custom per repository, e questo repo pubblica
+      gia' la radice. Il bersaglio si legge da tenant.config.json
+      (site.publish_repo), non e' scritto nel workflow: al secondo tenant
+      bastera' un altro pacchetto. Nuovo step in publish.yml che pubblica
+      tenants/<id>/site/ con git push diretto (PAT dedicato, nessuna action di
+      terze parti), sostituzione completa via rsync --delete; fallisce
+      rumorosamente se il secret manca. Il file CNAME non si scrive ancora:
+      con un dominio custom che non risolve, Pages redirigerebbe anche l'URL
+      *.github.io e il sito sarebbe irraggiungibile — arriva in F4 col DNS.
+      Verificato: spazio-genesi.github.io/trust-attestazione/ risponde 200 con
+      overall 91 e 10/10 indicatori; i quattro percorsi assoluti del footer
+      danno 404 (atteso su sottopercorso: /badge.svg si risolve col dominio
+      custom in F4, gli altri tre in F6.1). trust.spaziogenesi.org invariato:
+      sette URL a 200, badge ancora 91/100, SHA-256 del whitepaper
+      898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452.
+
+  - date: 2026-08-16
+    component: framework
+    version: null
+    public: false
+    title: "P45 F2: la radice ha un sito proprio, non ancora pubblicato"
+    body: >
+      Nuovo core/generators/build-root.mjs (scandito dalla guardia di
+      isolamento, nessun nome di progetto hardcoded): legge
+      content/site.config.json, enumera i tenant e ne legge lo score.json per
+      un riepilogo a schede (nome, punteggio, indicatori, versione, link al
+      proprio Trust Center). Copia badge.svg e score.json dal tenant dichiarato
+      in compat verso la radice: e' un impegno pubblico verso i 22 riferimenti
+      esterni al badge, non un dettaglio implementativo. Nulla di pubblicato
+      cambia: la radice online resta il Trust Center fino a F5.
+
+  - date: 2026-08-16
+    component: framework
+    version: null
+    public: false
+    title: "P45 F1: l'output del tenant si sposta in tenants/<id>/site/"
+    body: >
+      index.html, score.json e badge.svg rinominati con git mv; changelog.html
+      resta in site/ perche' e' del prodotto, non del tenant (commentato nel
+      generatore, o la prossima sessione lo "corregge" per simmetria). Nuovo
+      TENANT_SITE_DIR in tenant.mjs, senza fallback silenzioso alla vecchia
+      cartella. Step di assemblaggio transitorio in publish.yml (muore in F5)
+      perche' il deploy continui a pubblicare il tenant sulla radice. Gate
+      byte-identico verde, punteggio invariato 91/100 con 10/10 indicatori.
+
+  - date: 2026-08-16
+    component: framework
+    version: null
+    public: false
     title: "P45 F0: baseline congelata prima di separare radice e sottodominio"
     body: >
       npm run validate (253 record, 0 errori) e npm run build verdi da
