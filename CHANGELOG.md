@@ -4,6 +4,11 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-16
 
+### P47 F7: pubblicazione e chiusura
+*framework*
+
+Le sei fasi di P47, fino a qui solo locali su tre repo, sono in produzione. Verificato dal vivo: i quattordici URL che dovevano restare in piedi rispondono tutti, l'unico 404 è quello deciso (il PDF del whitepaper sulla radice, che ora vive solo sul Trust Center dell'attestazione), i tre shim portano davvero dove dichiarano e i link del footer di entrambe le pagine — eseguiti, non letti — rispondono tutti, compresi i tre che erano rotti da P44. Il PDF riscaricato dal nuovo indirizzo ha l'impronta identica a quella attestata. Il collettore è stato eseguito per davvero: EVD-whitepaper-integrity è verde sul nuovo URL. Punteggio invariato, 91/100 e 10/10 indicatori su entrambi gli host.
+
 ### Whitepaper e processo di rilascio: ognuno sul proprio indirizzo
 *framework*
 
