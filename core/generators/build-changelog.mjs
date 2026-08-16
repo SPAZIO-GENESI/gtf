@@ -119,7 +119,7 @@ ${renderFooterColumns({ site: cfg })}
 // site/devops.html (P47 F1/F2). site/changelog.html restava un file reale
 // finché non aveva un clean URL; con F3.2 diventa un cartello verso
 // /changelog/ — nessuno stile, nessun footer, solo il redirect.
-function buildChangelogShim() {
+function buildChangelogShim(cfg) {
   return `<!doctype html>
 <html lang="it">
 <head>
@@ -139,6 +139,7 @@ function buildChangelogShim() {
   a { color: #5a3d10; }
   @media (prefers-color-scheme: dark) { body { color: #ece4d3; background: #17140f; } a { color: #d1a969; } }
 </style>
+${renderMatomo(cfg.matomo)}
 </head>
 <body>
   <p>Il changelog ha un nuovo indirizzo: <a href="/changelog/">/changelog/</a>.</p>
@@ -163,7 +164,7 @@ function main() {
   const changelogDir = join(ROOT, "site", "changelog");
   mkdirSync(changelogDir, { recursive: true });
   writeFileSync(join(changelogDir, "index.html"), buildChangelogPage(publicEntries, cfg));
-  writeFileSync(join(ROOT, "site", "changelog.html"), buildChangelogShim());
+  writeFileSync(join(ROOT, "site", "changelog.html"), buildChangelogShim(cfg));
   console.log(`site/changelog/index.html generato (${publicEntries.length} voci pubbliche); site/changelog.html è lo shim.`);
 }
 
