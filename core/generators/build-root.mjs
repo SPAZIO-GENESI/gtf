@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { ROOT } from "./lib/root.mjs";
 import { STYLE } from "./lib/style.mjs";
 import { esc, renderFooterColumns } from "./lib/render.mjs";
+import { loadSiteConfig } from "./lib/site-config.mjs";
 
 // P45 F2: questo generatore scrive site/index.html — la pagina del
 // *prodotto* (il framework), non di un tenant. Vive in core/ ed è
@@ -12,11 +13,6 @@ import { esc, renderFooterColumns } from "./lib/render.mjs";
 const SITE_DIR = join(ROOT, "site");
 const TENANTS_DIR = join(ROOT, "tenants");
 const CORE_VERSION = JSON.parse(readFileSync(join(ROOT, "core", "package.json"), "utf8")).version;
-
-function loadSiteConfig() {
-  const file = join(ROOT, "content", "site.config.json");
-  return JSON.parse(readFileSync(file, "utf8"));
-}
 
 function listTenantIds() {
   return readdirSync(TENANTS_DIR, { withFileTypes: true })

@@ -1,9 +1,10 @@
+<!-- File generato da content/changelog.yaml — non modificarlo a mano. -->
 <!doctype html>
 <html lang="it">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Genesis Trust Framework</title>
+<title>Changelog — Genesis Trust Framework</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -129,47 +130,32 @@
 <body>
   <header class="hero">
     <p class="eyebrow">Genesis Trust Framework</p>
-    <h1>Un registro pubblico che dimostra la fiducia, non la dichiara</h1>
-    <p class="thesis">Un framework di trasparenza applicabile a più progetti digitali: principi,
-    requisiti, controlli, evidenze, rischi e decisioni pubblicati come record
-    verificabili — non come promesse. Ogni progetto che lo applica ha il
-    proprio Trust Center, con un punteggio calcolato soltanto dal suo registro.</p>
+    <h1>Changelog</h1>
+    <p class="thesis">Le novità del framework, generate dallo stesso registro pubblico che alimenta la pagina principale.</p>
   </header>
 
+  <nav class="spine">
+    <ul>
+      <li><a href="/">← Il framework</a></li>
+    </ul>
+  </nav>
+
   <main>
-  <section class="folio" data-folio="TRUST">
-    <h2>Cosa dimostra</h2>
-    <p>Il framework struttura la fiducia in record tipizzati e validati contro uno
-      schema: principi, requisiti normativi, controlli, evidenze, rischi e
-      decisioni. Ogni controllo dichiarato attivo deve poter essere verificato
-      da chiunque, con istruzioni pubblicate — non un'affermazione, un modo di
-      controllarla. Da questi record, e solo da questi, si calcola l'Open
-      Trust Score: dieci indicatori, ciascuno <em>n/d</em> finché non esistono
-      i dati per calcolarlo davvero, mai stimato.</p>
-  </section>
-
-  <section class="folio" data-folio="TRUST">
-    <h2>Come funziona</h2>
-    <p>Un motore generico (<code>core/</code>) e un registro separato per ciascun
-      progetto che lo applica (<code>tenants/&lt;id&gt;/</code>): stessi
-      schemi, stesse formule, stesso generatore — dati diversi. Nessuna pagina
-      di questo sito è scritta a mano: sia la pagina che stai leggendo sia il
-      Trust Center di ogni progetto sono generati da un registro e da una
-      configurazione pubblici, verificabili nel
-      <a href="https://github.com/SPAZIO-GENESI/gtf">codice sorgente</a>.</p>
-  </section>
-
-  <section id="progetti" class="folio" data-folio="TNT">
-    <h2>I progetti che lo applicano</h2>
-    <div class="record-grid">
-      <article class="record">
-        <p class="tag">attestazione</p>
-        <h3><a href="https://attestazione.trust.spaziogenesi.org">Attestazione delle opere digitali</a></h3>
-        <p>Spazio Genesi ETS</p>
-        <p><span class="pill pill-sage">91/100</span> ·
-          10/10 indicatori · v1.0.0</p>
-        <p class="rule"><a href="https://attestazione.trust.spaziogenesi.org">Apri il Trust Center →</a></p>
-      </article>
+  <section id="changelog" class="folio" data-folio="LOG">
+    <h2>Changelog</h2>
+    <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-08-16</span><span class="entry-title">Il registro della fiducia ha un indirizzo per progetto</span><span class="entry-status">framework</span></summary>
+        <div class="entry-body">
+          <p>trust.spaziogenesi.org è ora la pagina del Genesis Trust Framework: cos'è, come funziona, e un riepilogo dei progetti a cui si applica. Il registro completo dell'attestazione — principi, controlli, evidenze, rischi, decisioni, il punteggio calcolato — vive ora al suo indirizzo proprio, attestazione.trust.spaziogenesi.org. Nulla di ciò che quel registro dimostra è cambiato: stessi record, stessa formula, stesso punteggio, verificabile come prima con gli stessi strumenti pubblici. È il passo che rende possibile applicare lo stesso framework a un secondo progetto senza confondere i due Trust Center sotto un solo indirizzo.</p>
+        </div>
+      </details>
+      <details class="entry">
+        <summary><span class="entry-date">2026-08-15</span><span class="entry-title">Il Trust Framework diventa applicabile a più progetti</span><span class="entry-status">framework</span></summary>
+        <div class="entry-body">
+          <p>Il registro pubblico che alimenta questo Trust Center è ora costruito da un motore agnostico separato dai dati del progetto a cui si applica (ADR-GTF-014). L'attestazione delle opere digitali è la prima applicazione dichiarata; il punteggio, i controlli e le evidenze che leggi qui restano calcolati esattamente come prima, con la stessa formula. Il footer mostra ora due numeri di versione: quello del motore e quello del pacchetto di dati di questo progetto.</p>
+        </div>
+      </details>
     </div>
   </section>
   </main>
@@ -189,7 +175,6 @@
       progetti — vedi il
       <a href="https://github.com/SPAZIO-GENESI/gtf">codice sorgente</a>.
       <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
-      <p class="footer-version">motore v0.2.0 · sito prodotto v1.0.0</p>
     </div>
   </footer>
 </body>

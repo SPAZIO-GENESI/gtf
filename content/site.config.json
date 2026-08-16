@@ -29,9 +29,7 @@
       "links": [
         { "label": "Codice sorgente (GTF)", "href": "https://github.com/SPAZIO-GENESI/gtf" },
         { "label": "Schemi dei record", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/core/schemas" },
-        { "label": "Changelog", "href": "/changelog.html" },
-        { "label": "Whitepaper tecnico", "href": "/whitepaper.html" },
-        { "label": "DevOps e rilasci", "href": "/devops.html" }
+        { "label": "Changelog", "href": "/changelog/" }
       ]
     }
   ],

@@ -1,8 +1,8 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import yaml from "js-yaml";
 import { ROOT } from "./lib/root.mjs";
-import { loadTenant } from "./lib/tenant.mjs";
+import { loadSiteConfig } from "./lib/site-config.mjs";
 import { STYLE } from "./lib/style.mjs";
 import { esc, para, renderFooterColumns } from "./lib/render.mjs";
 
@@ -75,19 +75,19 @@ function buildChangelogPage(publicEntries, cfg) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Changelog — ${cfg.site.title}</title>
+<title>Changelog — ${esc(cfg.title)}</title>
 <style>${STYLE}</style>
 </head>
 <body>
   <header class="hero">
-    <p class="eyebrow">${cfg.site.eyebrow}</p>
+    <p class="eyebrow">${cfg.eyebrow}</p>
     <h1>Changelog</h1>
-    <p class="thesis">Le novità di questo Trust Center, generate dallo stesso registro pubblico che alimenta la pagina principale.</p>
+    <p class="thesis">Le novità del framework, generate dallo stesso registro pubblico che alimenta la pagina principale.</p>
   </header>
 
   <nav class="spine">
     <ul>
-      <li><a href="/">← Trust Center</a></li>
+      <li><a href="/">← Il framework</a></li>
     </ul>
   </nav>
 
@@ -102,11 +102,11 @@ ${items}
 
   <footer>
     <nav class="footer-cols" aria-label="Collegamenti del footer">
-${renderFooterColumns(cfg)}
+${renderFooterColumns({ site: cfg })}
     </nav>
     <div class="footer-bottom">
-      ${cfg.site.footer_note_html}
-      <br><img src="/badge.svg" alt="${cfg.site.badge_alt}" height="20" style="margin-top:0.5rem;">
+      ${cfg.footer_note_html}
+      <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
     </div>
   </footer>
 </body>
@@ -114,8 +114,40 @@ ${renderFooterColumns(cfg)}
 `;
 }
 
+// Shim, non contenuto: stesso pattern di site/whitepaper.html e
+// site/devops.html (P47 F1/F2). site/changelog.html restava un file reale
+// finché non aveva un clean URL; con F3.2 diventa un cartello verso
+// /changelog/ — nessuno stile, nessun footer, solo il redirect.
+function buildChangelogShim() {
+  return `<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<!--
+  Shim, non contenuto. Il changelog del framework ha ora un clean URL
+  (P47 F3.2): /changelog/ invece di /changelog.html. Questo file resta qui
+  solo per chi arriva dal vecchio indirizzo. Non aggiornare il contenuto
+  qui: la pagina vera è generata su site/changelog/index.html.
+-->
+<meta http-equiv="refresh" content="0; url=/changelog/">
+<link rel="canonical" href="/changelog/">
+<title>Changelog — si è spostato</title>
+<meta name="robots" content="noindex">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; max-width: 34rem; margin: 4rem auto; padding: 0 1.5rem; line-height: 1.6; color: #221c14; background: #FBFAF6; }
+  a { color: #5a3d10; }
+  @media (prefers-color-scheme: dark) { body { color: #ece4d3; background: #17140f; } a { color: #d1a969; } }
+</style>
+</head>
+<body>
+  <p>Il changelog ha un nuovo indirizzo: <a href="/changelog/">/changelog/</a>.</p>
+</body>
+</html>
+`;
+}
+
 function main() {
-  const cfg = loadTenant();
+  const cfg = loadSiteConfig();
   const entries = loadEntries();
 
   writeFileSync(join(ROOT, "CHANGELOG.md"), buildMarkdown(entries));
@@ -124,9 +156,14 @@ function main() {
   const publicEntries = entries.filter((e) => e.public);
   // Resta su ROOT/site apposta (F1, P45): il changelog è del prodotto
   // (content/changelog.yaml), non del tenant — non spostarlo per simmetria
-  // con build-site.mjs/score.mjs.
-  writeFileSync(join(ROOT, "site", "changelog.html"), buildChangelogPage(publicEntries, cfg));
-  console.log(`site/changelog.html generato (${publicEntries.length} voci pubbliche).`);
+  // con build-site.mjs/score.mjs. Dalla P47 F3.2 ha un clean URL
+  // (site/changelog/index.html) e site/changelog.html è solo lo shim verso
+  // di esso — la ragione di restare sulla radice non cambia, il percorso sì.
+  const changelogDir = join(ROOT, "site", "changelog");
+  mkdirSync(changelogDir, { recursive: true });
+  writeFileSync(join(changelogDir, "index.html"), buildChangelogPage(publicEntries, cfg));
+  writeFileSync(join(ROOT, "site", "changelog.html"), buildChangelogShim());
+  console.log(`site/changelog/index.html generato (${publicEntries.length} voci pubbliche); site/changelog.html è lo shim.`);
 }
 
 main();
