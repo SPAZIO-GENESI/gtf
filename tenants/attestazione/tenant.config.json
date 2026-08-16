@@ -93,7 +93,7 @@
     "badge_url_template": "https://imgauth.spaziogenesi.org/api/badge?hash={hash}",
     "badge_ok_marker": "✓ opera attestata",
     "whitepaper": {
-      "url": "https://trust.spaziogenesi.org/whitepaper-v1.0.pdf",
+      "url": "https://attestazione.trust.spaziogenesi.org/whitepaper-v1.0.pdf",
       "sha256": "898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452"
     }
   },

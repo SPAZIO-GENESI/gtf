@@ -1,6 +1,6 @@
 id: EVD-whitepaper-integrity
 title: "Il whitepaper pubblicato coincide, byte per byte, con l'impronta attestata"
-location: { system: gtf-site, ref: "GET https://trust.spaziogenesi.org/whitepaper-v1.0.pdf", public_via: "GET /c/898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452 (pagina pubblica di verifica su attestazione.spaziogenesi.org)" }
+location: { system: gtf-site, ref: "GET https://attestazione.trust.spaziogenesi.org/whitepaper-v1.0.pdf", public_via: "GET /c/898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452 (pagina pubblica di verifica su attestazione.spaziogenesi.org)" }
 collection: auto
 freshness_max_days: 8
 last_seen: 2026-08-16
