@@ -4,6 +4,11 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-16
 
+### P45 F5: la radice passa al prodotto
+*framework*
+
+trust.spaziogenesi.org non pubblica piu' il Trust Center di un progetto ma la pagina del framework, con il riepilogo dei punteggi dei progetti che lo applicano. Rimosso da publish.yml lo step di assemblaggio transitorio nato in F1, che ricopiava l'output del tenant sulla radice. Gli URL che altri consumano non si sono mossi, per impegno esplicito: /badge.svg e /score.json restano sulla radice come copie generate da build-root.mjs (22 punti pubblici incorporano quel badge), e whitepaper-v1.0.pdf, whitepaper.html, devops.html e changelog.html non sono mai stati spostati. Bug reale trovato prima di pubblicare, non previsto dal piano: publish.yml non eseguiva build-root, quindi la radice avrebbe pubblicato le sole copie committate e il badge si sarebbe congelato in silenzio al valore dell'ultimo commit invece di seguire il punteggio reale — stessa falla gia' trovata su build-changelog in P44 F6. Aggiunto lo step mancante.
+
 ### P45 F4: il Trust Center dell'attestazione risponde sul suo sottodominio
 *framework*
 

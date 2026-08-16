@@ -37,14 +37,17 @@ jobs:
       - run: npm run validate
       - run: npm run score
       - run: npm run build-site
+      # P45 F5 — genera il sito della RADICE (la pagina del prodotto) e le sue
+      # copie di compatibilità site/badge.svg e site/score.json. Senza questo
+      # step la radice pubblicherebbe le sole copie committate: il badge, che
+      # 22 punti pubblici incorporano, si congelerebbe in silenzio al valore
+      # dell'ultimo commit invece di seguire il punteggio reale. Stessa falla
+      # già trovata su build-changelog in P44 F6.
+      - run: npm run build-root
       # Rigenera site/changelog.html da content/changelog.yaml: senza questo
       # step il sito pubblicherebbe la sola copia rigenerata a mano in locale,
       # e un changelog dimenticato non farebbe diventare rosso nulla.
       - run: npm run build-changelog
-      # Transitorio F1→F5 (P45): l'output del tenant ora vive in
-      # tenants/attestazione/site/, ma finché la radice non ha un sito
-      # proprio (F2) il deploy continua a pubblicare il tenant. Questo step
-      # muore in F5, quando site/index.html sarà generato da build-root.mjs.
       # P45 F3 — pubblica il Trust Center del tenant sul suo repo Pages sottile.
       # Esiste perché GitHub Pages ammette un solo dominio custom per
       # repository: il sottodominio del tenant non è ottenibile da questo repo,
@@ -89,11 +92,13 @@ jobs:
           git commit -m "deploy: Trust Center ${TENANT} da gtf@${{ github.sha }}" || echo "Nessuna modifica da pubblicare."
           git push origin main
 
-      - name: "Assembla il sito da pubblicare (transitorio: F1→F5)"
-        run: |
-          cp tenants/attestazione/site/index.html  site/index.html
-          cp tenants/attestazione/site/score.json  site/score.json
-          cp tenants/attestazione/site/badge.svg   site/badge.svg
+      # P45 F5 — la radice pubblica ora il sito del PRODOTTO. ./site contiene
+      # l'index.html scritto da build-root.mjs, le copie di compatibilità
+      # badge.svg e score.json (impegno pubblico: quegli URL non si spostano),
+      # il changelog generato e le pagine statiche mai spostate
+      # (devops.html, whitepaper.html, whitepaper-v1.0.pdf, la verifica motori).
+      # Il Trust Center del tenant vive sul suo host, pubblicato dallo step qui
+      # sopra. Lo step di assemblaggio transitorio F1→F5 è stato rimosso qui.
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
