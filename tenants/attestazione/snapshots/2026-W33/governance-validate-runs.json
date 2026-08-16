@@ -3,6 +3,11 @@
   "url": "https://api.github.com/repos/SPAZIO-GENESI/gtf/actions/workflows/validate.yml/runs?per_page=30&branch=main",
   "data": [
     {
+      "id": 31949470580,
+      "conclusion": "success",
+      "created_at": "2026-08-16T13:19:01Z"
+    },
+    {
       "id": 31937321746,
       "conclusion": "success",
       "created_at": "2026-08-16T08:46:47Z"
@@ -146,11 +151,6 @@
       "id": 29699737423,
       "conclusion": "success",
       "created_at": "2026-07-19T18:59:46Z"
-    },
-    {
-      "id": 29699066670,
-      "conclusion": "success",
-      "created_at": "2026-07-19T18:38:43Z"
     }
   ]
 }
