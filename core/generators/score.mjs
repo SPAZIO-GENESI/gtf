@@ -1,9 +1,9 @@
 import { writeFileSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
-import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
+import { loadTenant, TENANT_SNAPSHOTS_DIR, TENANT_SITE_DIR } from "./lib/tenant.mjs";
 
-const SITE_DIR = join(ROOT, "site");
+const SITE_DIR = TENANT_SITE_DIR;
 const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
 const CORE_VERSION = JSON.parse(readFileSync(join(ROOT, "core", "package.json"), "utf8")).version;

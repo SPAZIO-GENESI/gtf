@@ -122,6 +122,9 @@ function main() {
   console.log(`CHANGELOG.md generato (${entries.length} voci).`);
 
   const publicEntries = entries.filter((e) => e.public);
+  // Resta su ROOT/site apposta (F1, P45): il changelog è del prodotto
+  // (content/changelog.yaml), non del tenant — non spostarlo per simmetria
+  // con build-site.mjs/score.mjs.
   writeFileSync(join(ROOT, "site", "changelog.html"), buildChangelogPage(publicEntries, cfg));
   console.log(`site/changelog.html generato (${publicEntries.length} voci pubbliche).`);
 }

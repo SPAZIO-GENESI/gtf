@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT } from "./root.mjs";
 
@@ -41,3 +41,10 @@ if (!existsSync(TENANT_DIR)) {
 
 export const TENANT_REGISTRY_DIR = join(TENANT_DIR, "registry");
 export const TENANT_SNAPSHOTS_DIR = join(TENANT_DIR, "snapshots");
+
+// F1 (P45): l'output pubblicato del tenant vive qui, non più in ROOT/site
+// (quella cartella ora è l'output della radice — il prodotto, non il tenant).
+export const TENANT_SITE_DIR = join(TENANT_DIR, "site");
+if (!existsSync(TENANT_SITE_DIR)) {
+  mkdirSync(TENANT_SITE_DIR, { recursive: true });
+}

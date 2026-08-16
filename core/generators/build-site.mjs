@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { ROOT, loadRegistry, byFolder } from "./lib/registry.mjs";
-import { loadTenant } from "./lib/tenant.mjs";
+import { loadRegistry, byFolder } from "./lib/registry.mjs";
+import { loadTenant, TENANT_SITE_DIR } from "./lib/tenant.mjs";
 import { STYLE } from "./lib/style.mjs";
 import { esc, para, renderFooterColumns } from "./lib/render.mjs";
 
-const SITE_DIR = join(ROOT, "site");
+const SITE_DIR = TENANT_SITE_DIR;
 
 // low/full → salvia, medium/partial → ambra, high → sigillo, resto → neutro
 function pillClass(value) {

@@ -41,6 +41,15 @@ jobs:
       # step il sito pubblicherebbe la sola copia rigenerata a mano in locale,
       # e un changelog dimenticato non farebbe diventare rosso nulla.
       - run: npm run build-changelog
+      # Transitorio F1→F5 (P45): l'output del tenant ora vive in
+      # tenants/attestazione/site/, ma finché la radice non ha un sito
+      # proprio (F2) il deploy continua a pubblicare il tenant. Questo step
+      # muore in F5, quando site/index.html sarà generato da build-root.mjs.
+      - name: "Assembla il sito da pubblicare (transitorio: F1→F5)"
+        run: |
+          cp tenants/attestazione/site/index.html  site/index.html
+          cp tenants/attestazione/site/score.json  site/score.json
+          cp tenants/attestazione/site/badge.svg   site/badge.svg
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
