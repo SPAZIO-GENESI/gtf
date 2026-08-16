@@ -1,0 +1,36 @@
+id: ADR-GTF-015
+title: "Un host per tenant, la radice al prodotto"
+date: 2026-08-16
+status: accepted
+context: >
+  Un solo host (trust.spaziogenesi.org) serviva due cose diverse: era, fino
+  al 15 agosto 2026, il Trust Center del solo progetto attestazione. Con un
+  secondo tenant in vista (RADART, P46) la radice non poteva restare
+  identificata con uno solo di essi. GitHub Pages ammette un solo dominio
+  custom per repository, quindi il sottodominio di un tenant non è
+  ottenibile dal solo repo gtf, che deve continuare a servire la radice.
+decision: >
+  La radice (trust.spaziogenesi.org) diventa la pagina del prodotto: cos'è
+  il Genesis Trust Framework, come funziona, un riepilogo dei punteggi dei
+  progetti che lo applicano — pubblicata direttamente da GitHub Pages del
+  repo gtf. Ogni tenant ottiene un sottodominio proprio pubblicato da un
+  repo Pages sottile dedicato, di sola pubblicazione (per l'attestazione,
+  SPAZIO-GENESI/trust-attestazione → attestazione.trust.spaziogenesi.org),
+  alimentato da un git push diretto con un PAT fine-grained scoped su quel
+  solo repo. Il record DNS del sottodominio resta DNS-only, mai proxato su
+  Cloudflare (quarto livello, fuori dalla copertura a un livello
+  dell'Universal SSL). Un insieme di URL pubblici già consumati esternamente
+  (badge.svg, whitepaper-v1.0.pdf, whitepaper.html, devops.html,
+  changelog.html) resta fisicamente sulla radice per non rompere nulla: con
+  GitHub Pages non esistono redirect server-side.
+consequences: >
+  Un secondo tenant costa un repo Pages sottile e un record DNS in più da
+  mantenere, non una modifica al motore. devops.html e whitepaper.html
+  restano un'incoerenza concettuale dichiarata (contenuto del tenant ospitato
+  sul dominio del prodotto): sanabile in P47, quando l'astrazione sarà
+  corretta dal secondo tenant. Nessun record del registro, nessuna formula,
+  nessun controllo di sicurezza è cambiato: è una decisione di topologia di
+  pubblicazione, il punteggio dell'attestazione resta 91/100 con 10/10
+  indicatori prima e dopo.
+affects: [EVD-gtf-site-public, CTL-eidas-honest-positioning]
+visibility: public

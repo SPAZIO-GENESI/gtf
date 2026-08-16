@@ -2,7 +2,15 @@
 
 Applicazione statica (HTML/CSS/JS puro, stessa filosofia di authweb: zero
 framework, zero CDN di terze parti) generata a ogni merge in `main`, pubblicata
-su `trust.spaziogenesi.org`. Vedi GTF-ARCH §7.
+**direttamente da questo repo** (GitHub Pages di `gtf`) su
+`trust.spaziogenesi.org`. Vedi GTF-ARCH §7 e §15.
+
+Il Trust Center di un tenant (`tenants/<id>/site/`) NON viene pubblicato da
+qui: dal 16 agosto 2026 (P45) esce con un `git push` diretto verso un **repo
+Pages sottile dedicato** (per l'attestazione, `SPAZIO-GENESI/trust-attestazione`
+— di sola pubblicazione, sovrascritto per intero a ogni deploy), perché
+GitHub Pages ammette un solo dominio custom per repository e questo repo
+già serve la radice. Vedi `tenants/attestazione/site/README.md`.
 
 **Dal P45**: questa cartella è l'output della **radice** — la pagina del
 prodotto (`index.html`, generato da `core/generators/build-root.mjs` a

@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.2.0 · **Data**: 2026-08-15 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.3.0 · **Data**: 2026-08-16 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -241,6 +241,7 @@ una-tantum come ADR retroattive con `evidence: [EVD-git-*]` (§12, fase M1).
 | Repo | Visibilità | Ruolo nel GTF |
 |---|---|---|
 | `gtf` (nuovo) | **pubblico** | SSOT: motore + pacchetti tenant + Trust Center + score (dal 2026-08-15, P44: nasce la distinzione core/tenant — vedi §15) |
+| `trust-attestazione` | pubblico, sola pubblicazione | Repo Pages sottile: ospita SOLO l'output generato del tenant `attestazione` (`tenants/attestazione/site/`), riscritto per intero a ogni deploy da `gtf`. Esiste perché GitHub Pages ammette un solo dominio custom per repository (dal 2026-08-16, P45 — vedi §15) |
 | `imgauth` | pubblico (AGPL) | L4; le sue Actions producono evidenze (monitor); `IMP-*` puntano qui |
 | `imgauthweb` | pubblico (MIT) | L4/L6; ospita il link al Trust Center; `IMP-*` puntano qui |
 | `autart-signer` | pubblico (AGPL, dal 2026-07-09) | L4; firma PAdES/TSA — codice ispezionabile |
@@ -255,11 +256,14 @@ per convenzione. Dettagli in §15.
 - `imgauth`/`imgauthweb`/`autart-signer` → `gtf`: un workflow `repository_dispatch` notifica
   release/tag; il collector (§6.3) legge comunque tutto via API pubbliche (pull, non push,
   per minimizzare i segreti cross-repo).
-- `gtf` → pubblicazione: GitHub Pages del repo `gtf` (Trust Center), raggiungibile come
-  `attestazione.spaziogenesi.org/trust/` tramite **route Cloudflare + Worker proxy leggero**
-  (stesso pattern già rodato di `/c/*`) *oppure* sottodominio `trust.spaziogenesi.org`
-  (CNAME Pages). Decisione da prendere come ADR-GTF-002; il pattern `/c/*` esistente
-  suggerisce la prima (un solo dominio user-facing).
+- `gtf` → pubblicazione, **due bersagli distinti dal 2026-08-16 (P45)**: la radice
+  (`site/`, la pagina del prodotto) va direttamente su GitHub Pages del repo `gtf`,
+  dominio `trust.spaziogenesi.org`; l'output di ciascun tenant (`tenants/<id>/site/`) viene
+  spinto con `git push` (PAT fine-grained dedicato) in un **repo Pages sottile per tenant**
+  (`SPAZIO-GENESI/trust-attestazione` per l'attestazione), che pubblica sul proprio
+  sottodominio (`attestazione.trust.spaziogenesi.org`). Dettagli e motivazione in §15.
+  ADR-GTF-002 (URL del Trust Center) è risolta da questa architettura: nessun Worker proxy,
+  nessuna route Cloudflare — due siti GitHub Pages, due domini DNS-only.
 
 ---
 
@@ -396,9 +400,12 @@ rigenerato dalla CI.
 **Dal 2026-08-15 (P44) il Trust Center è per tenant**: ogni pagina è generata leggendo un
 solo pacchetto `tenants/<id>/` alla volta (`GTF_TENANT`, §15) — testi, URL esterni, elenco
 repo di codice e footer vengono dal `tenant.config.json` del tenant attivo, mai da una
-costante nel motore. Un solo tenant è pubblicato oggi (`attestazione`, su
-`trust.spaziogenesi.org`); un secondo tenant pubblicato in futuro (P46, RADART) sarebbe un
-altro sito statico generato dallo stesso `core/`, con il proprio dominio.
+costante nel motore. **Dal 2026-08-16 (P45) ha anche un host proprio**: il Trust Center
+dell'attestazione (missione, Compliance Map, rischi, decisioni, il suo `score.json`/
+`badge.svg`) è pubblicato su `attestazione.trust.spaziogenesi.org` da un repo Pages sottile
+dedicato; `trust.spaziogenesi.org` (la radice) non è più questa pagina, ma quella del
+prodotto (§15). Un secondo tenant pubblicato in futuro (P46, RADART) sarebbe un altro sito
+statico generato dallo stesso `core/`, con il proprio sottodominio e il proprio repo sottile.
 
 ### 7.1 Mappa delle sezioni → sorgente dati
 
@@ -670,14 +677,58 @@ indipendente, letto dai rispettivi manifesti (`core/package.json` → `version`;
 per imgauth/authweb/authart (§ Versioning di `img-auth-hub/CLAUDE.md`), applicato ora anche al
 framework che li descrive.
 
-Questa sezione descrive lo stato raggiunto da P44; i piani successivi (domini per tenant,
-secondo tenant RADART, eventuale estrazione del prodotto in un repo a sé) vivono in
+### 15.1 Topologia dei siti (dal 2026-08-16, P45)
+
+Un solo host serviva due cose diverse: `trust.spaziogenesi.org` era, fino al 15 agosto, il
+Trust Center di un unico progetto. Con un secondo tenant in vista (RADART, P46) la radice
+doveva smettere di appartenere a uno solo di essi. Decisione (`ADR-GTF-015`,
+`P45_domini_e_siti_separati.md`):
+
+- **`trust.spaziogenesi.org` (la radice)** è ora **la pagina del prodotto**: cos'è il
+  Genesis Trust Framework, come funziona, e un riepilogo dei punteggi dei progetti che lo
+  applicano — generata da `core/generators/build-root.mjs` a partire da
+  `content/site.config.json`, pubblicata direttamente dal repo `gtf` su GitHub Pages.
+- **Ogni tenant ha un sottodominio proprio**: quello dell'attestazione è
+  `attestazione.trust.spaziogenesi.org`, pubblicato da un **repo Pages sottile dedicato**
+  (`SPAZIO-GENESI/trust-attestazione`, di sola pubblicazione — sovrascritto per intero a
+  ogni deploy con un `git push` diretto, PAT fine-grained scoped su quel solo repo). Il repo
+  sottile esiste perché **GitHub Pages ammette un solo dominio custom per repository**: il
+  sottodominio del tenant non è ottenibile dal solo repo `gtf`, che già pubblica la radice.
+  Record DNS `attestazione.trust` → `spazio-genesi.github.io`, **DNS-only** (mai proxato:
+  è un dominio di quarto livello e l'Universal SSL di Cloudflare copre un solo livello).
+- **Compatibilità**: `badge.svg` e `score.json` del tenant dichiarato in
+  `content/site.config.json` › `compat` restano pubblicati anche sulla radice (copia
+  generata da `build-root.mjs`) — impegno pubblico verso i punti esterni che li consumano
+  da lì (§15.2), non un dettaglio implementativo.
+
+**Tabella degli URL immobili** — con GitHub Pages non esiste un redirect server-side: un
+file o risponde a quell'URL, o è rotto. Prima di spostare qualunque percorso, verificare
+questa tabella.
+
+| URL | Consumatori | Regola |
+|---|---|---|
+| `trust.spaziogenesi.org/badge.svg` | 18 pagine authweb (IT+EN), template `imgauthweb/scripts/build-integrazioni.mjs`, README di `imgauth`/`imgauthweb`/`gtf` (22 punti pubblici) | resta sulla radice, copia generata dal tenant indicato in `compat` |
+| `trust.spaziogenesi.org/whitepaper-v1.0.pdf` | `EVD-whitepaper-integrity` (ricalcolo settimanale), pagina di verifica `/c/898ec9…`, README `attest-mcp` | resta sulla radice, file statico committato, mai duplicato né rigenerato |
+| `trust.spaziogenesi.org/whitepaper.html`, `/devops.html`, `/changelog.html` | footer del Trust Center di tenant, link esterni | restano sulla radice — debito dichiarato: sono contenuto del tenant ospitato sul dominio del prodotto (sanabile in P47) |
+| `trust.spaziogenesi.org/score.json` | copia di compatibilità, nessun consumatore esterno noto | resta sulla radice |
+| `attestazione.trust.spaziogenesi.org/` | link dalla radice, footer authweb (verifica, whitepaper eIDAS §5.2) | Trust Center completo del tenant attestazione |
+
+### 15.2 Cosa resta fuori da P45
+
+Secondo tenant RADART e policy di visibilità per repo privati (P46); correzione
+dell'astrazione dopo il secondo tenant, incluso lo spostamento di `devops.html`/
+`whitepaper.html` sul sottodominio (P47); estrazione di `core/` come pacchetto (P48);
+generalizzazione di `collect-evidence.yml` (oggi ancora hardcoded su
+`tenants/attestazione/`); traduzione inglese del Trust Center.
+
+Questa sezione descrive lo stato raggiunto da P44/P45; i piani successivi (secondo tenant
+RADART, eventuale estrazione del prodotto in un repo a sé) vivono in
 `gtf/docs/ROADMAP-trust-multiprogetto.md` e nei rispettivi `Pnn_*.md` — non duplicati qui per
 evitare la stessa doppia fonte di verità che il framework impone di non avere altrove (PRN-03).
 
 ---
 
 *Questo documento vive nel repo `spazio-genesi/gtf` come record governato dal framework che
-descrive (registro decisioni, ADR-GTF-001..004, ADR-GTF-014). Nato come bozza in `img-auth-hub`
-(repo privato di lavorazione) e migrato qui in fase M0 secondo il piano che esso stesso
-definiva.*
+descrive (registro decisioni, ADR-GTF-001..004, ADR-GTF-014, ADR-GTF-015). Nato come bozza in
+`img-auth-hub` (repo privato di lavorazione) e migrato qui in fase M0 secondo il piano che
+esso stesso definiva.*

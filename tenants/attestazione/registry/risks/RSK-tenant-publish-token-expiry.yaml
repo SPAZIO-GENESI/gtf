@@ -1,0 +1,17 @@
+id: RSK-tenant-publish-token-expiry
+title: Scadenza del token di pubblicazione del Trust Center di tenant senza rinnovo
+description: >
+  Dal 16 agosto 2026 (P45, ADR-GTF-015) il Trust Center dell'attestazione è
+  pubblicato da un git push automatico verso un repo Pages sottile dedicato
+  (SPAZIO-GENESI/trust-attestazione), autenticato da un PAT fine-grained con
+  scadenza a un anno (annotato nel caveau segreti). Se il token scade senza
+  essere rinnovato, il job di pubblicazione fallisce in modo rumoroso (il
+  workflow esce con errore esplicito se il secret manca o è rifiutato) ma il
+  sottodominio del tenant smette silenziosamente di aggiornarsi finché
+  qualcuno non nota il run rosso: nessun controllo del registro oggi
+  sorveglia questa scadenza in modo proattivo, a differenza delle cadenze
+  ricorrenti già coperte da CTL-cadence-monitoring. Un secondo tenant (P46)
+  raddoppierebbe l'esposizione con un secondo token e un secondo repo.
+likelihood: low
+impact: low
+visibility: public

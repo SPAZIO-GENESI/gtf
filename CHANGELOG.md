@@ -4,6 +4,16 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-16
 
+### Il registro della fiducia ha un indirizzo per progetto
+*framework*
+
+trust.spaziogenesi.org è ora la pagina del Genesis Trust Framework: cos'è, come funziona, e un riepilogo dei progetti a cui si applica. Il registro completo dell'attestazione — principi, controlli, evidenze, rischi, decisioni, il punteggio calcolato — vive ora al suo indirizzo proprio, attestazione.trust.spaziogenesi.org. Nulla di ciò che quel registro dimostra è cambiato: stessi record, stessa formula, stesso punteggio, verificabile come prima con gli stessi strumenti pubblici. È il passo che rende possibile applicare lo stesso framework a un secondo progetto senza confondere i due Trust Center sotto un solo indirizzo.
+
+### P45 F7: documentazione e chiusura
+*framework*
+
+ARCHITECTURE.md passa a 0.3.0 con la topologia dei due siti in §15 (radice al prodotto, un sottodominio con repo Pages sottile per tenant, e la tabella degli URL che non si possono spostare) e §4/§7 aggiornati di conseguenza; nuova riga per il repo trust-attestazione nella topologia dei repository. README.md e site/README.md riscritti sulla struttura reale (site/ e' ora l'output della radice, non del tenant); nuovo tenants/attestazione/site/README.md per l'output del tenant e il perche' di un repo a se. Due righe aggiunte alla sezione P20 di img-auth-hub/CLAUDE.md, senza riscrivere la sua storia. Nuovo ADR-GTF-015 (un host per tenant, la radice al prodotto) e RSK-tenant-publish-token-expiry (il nuovo PAT di pubblicazione scade e nessun controllo oggi ne sorveglia il rinnovo in modo proattivo, a differenza delle cadenze gia' coperte da CTL-cadence-monitoring) — aggiunto perche' e' un rischio reale, non per completezza formale. Punteggio invariato 91/100, 10/10 indicatori. Resta il push (Opus, e' un rilascio in produzione: ripubblica entrambi gli host).
+
 ### P45 F6: consumatori ed evidenze allineati ai due host
 *framework*
 

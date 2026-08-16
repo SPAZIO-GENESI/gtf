@@ -40,20 +40,49 @@ attestazione è su
 - `tenants/<id>/` — i dati di un progetto applicato: `registry/` (i record
   YAML veri e propri), `snapshots/` (evidenze raccolte settimanalmente,
   ADR-GTF-004), `tenant.config.json` (testi del Trust Center, URL esterni,
-  elenco repo di codice, endpoint del collettore). Un solo tenant esiste
-  oggi: `tenants/attestazione/`.
+  elenco repo di codice, endpoint del collettore), `site/` (il Trust Center
+  **di quel tenant**, generato — `index.html`, `score.json`, `badge.svg`).
+  Un solo tenant esiste oggi: `tenants/attestazione/`.
 - `content/` — testi curati del prodotto, non derivati dal registro
-  (`changelog.yaml`, sorgente unica a doppia resa).
-- `site/` — Trust Center pubblico, generato — non modificarlo a mano.
+  (`changelog.yaml`, sorgente unica a doppia resa; `site.config.json`, testi
+  e riepilogo tenant della radice).
+- `site/` — **dal 16 agosto 2026 (P45), l'output della radice**: la pagina
+  del prodotto (`index.html`, `content/site.config.json` + riepilogo dei
+  tenant, generata da `build-root.mjs`), `changelog.html` (del prodotto, non
+  di un tenant), più le copie di compatibilità `badge.svg`/`score.json` del
+  tenant indicato in `compat` (22 punti pubblici esterni li consumano da
+  qui) e i file statici mantenuti a mano (`devops.html`, `whitepaper.html`,
+  `whitepaper-v1.0.pdf`). Tutto generato, non modificarlo a mano — dettagli
+  in `site/README.md`.
 - `default-tenant.json` — quale tenant usare se `GTF_TENANT` non è
   impostata (configurazione di bootstrap, fuori da `core/` apposta).
+
+## Due siti, due domini, un solo motore
+
+Dal 16 agosto 2026 (P45, `ADR-GTF-015`) il repo `gtf` pubblica **due bersagli**:
+
+- **`site/`** (la radice) va direttamente su GitHub Pages di questo repo →
+  [trust.spaziogenesi.org](https://trust.spaziogenesi.org) — la pagina del
+  framework.
+- **`tenants/<id>/site/`** (il Trust Center di ciascun tenant) viene spinto
+  con `git push` (PAT dedicato) in un **repo Pages sottile per tenant** —
+  per l'attestazione, `SPAZIO-GENESI/trust-attestazione` →
+  [attestazione.trust.spaziogenesi.org](https://attestazione.trust.spaziogenesi.org).
+  Il repo sottile esiste perché GitHub Pages ammette **un solo dominio
+  custom per repository**: il sottodominio del tenant non è ottenibile dal
+  solo repo `gtf`, che già pubblica la radice. Il repo sottile è di **sola
+  pubblicazione** — non modificarlo lì, il contenuto è sovrascritto a ogni
+  deploy.
+
+Dettagli, tabella degli URL che non si possono spostare, e motivazione
+completa in [ARCHITECTURE.md §15](./ARCHITECTURE.md#15-multi-progetto--core-e-tenantsid).
 
 ## Sviluppo locale
 
 ```bash
 npm install
 GTF_TENANT=attestazione npm run validate   # schema, integrità dei riferimenti, anti-segreti
-GTF_TENANT=attestazione npm run build      # validate + check-core + score + build-site + build-changelog (come in CI)
+GTF_TENANT=attestazione npm run build      # validate + check-core + score + build-site + build-root + build-changelog (come in CI)
 ```
 
 `GTF_TENANT` è facoltativa finché esiste un solo tenant (`default-tenant.json`
