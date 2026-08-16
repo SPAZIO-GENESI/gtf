@@ -6,6 +6,7 @@
   "language": "it",
 
   "site": {
+    "public_url": "https://attestazione.trust.spaziogenesi.org",
     "title": "Trust Center — Genesis Trust Framework",
     "eyebrow": "Genesis Trust Framework",
     "heading": "Il registro della fiducia di Spazio Genesi ETS",
