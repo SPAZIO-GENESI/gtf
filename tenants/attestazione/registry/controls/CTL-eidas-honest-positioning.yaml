@@ -17,11 +17,13 @@ mitigates: [RSK-overclaim-eidas]
 implemented_by: [IMP-gtf-site-eidas-disclosure]
 evidenced_by: [EVD-gtf-site-public]
 verify_howto: >
-  Consulta https://trust.spaziogenesi.org, sezione "Cosa NON è questo
-  servizio": il testo dichiara esplicitamente la natura non qualificata
-  dell'attestazione. Se il testo dovesse sparire o essere annacquato in
-  una futura revisione, il registro GTF lo renderebbe visibile (il record
-  sorgente di questo controllo resta pubblico e versionato).
+  Consulta https://attestazione.trust.spaziogenesi.org (il Trust Center
+  dell'attestazione, dal 16 agosto 2026 su questo sottodominio — la radice
+  trust.spaziogenesi.org ospita ora la pagina del framework), sezione "Cosa
+  NON è questo servizio": il testo dichiara esplicitamente la natura non
+  qualificata dell'attestazione. Se il testo dovesse sparire o essere
+  annacquato in una futura revisione, il registro GTF lo renderebbe visibile
+  (il record sorgente di questo controllo resta pubblico e versionato).
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09

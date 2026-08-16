@@ -45,6 +45,15 @@ consequences: >
   simulata) sia dal vivo in produzione (11 pagine reali, CSP genuina già
   attiva): zero violazioni, zero errori JS in entrambi i giri. Nessuna
   decisione aperta residua su questo controllo.
+
+  Aggiornamento 2026-08-16 (P45): trust.spaziogenesi.org non pubblica più il
+  Trust Center di un progetto ma la pagina del framework (la radice); il
+  Trust Center dell'attestazione è ora su
+  attestazione.trust.spaziogenesi.org. Entrambi restano DNS-only per lo
+  stesso motivo tecnico di questo controllo (quarto livello, Universal SSL
+  copre un solo livello) e quindi entrambi restano fuori da questi header —
+  la conclusione del controllo non cambia, cambia solo quale contenuto vive
+  su quale host.
 affects: [CTL-edge-security-headers]
 evidence: [EVD-edge-security-headers]
 visibility: public

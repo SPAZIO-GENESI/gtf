@@ -14,8 +14,11 @@ Trust Center, matrice di conformità e punteggio (Open Trust Score) è
 **generato** dai registri in `tenants/<id>/registry/`, mai scritto a mano.
 
 Leggi prima [ARCHITECTURE.md](./ARCHITECTURE.md): non è documentazione del
-servizio, è il progetto del sistema che la produce. Il Trust Center pubblico
-è su [trust.spaziogenesi.org](https://trust.spaziogenesi.org).
+servizio, è il progetto del sistema che la produce. Dal 16 agosto 2026 (P45)
+[trust.spaziogenesi.org](https://trust.spaziogenesi.org) è la pagina del
+framework, con un riepilogo dei tenant; il Trust Center pubblico di
+attestazione è su
+[attestazione.trust.spaziogenesi.org](https://attestazione.trust.spaziogenesi.org).
 
 ## Struttura
 

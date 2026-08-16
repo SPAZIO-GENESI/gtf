@@ -24,6 +24,30 @@ entries:
     component: framework
     version: null
     public: false
+    title: "P45 F6: consumatori ed evidenze allineati ai due host"
+    body: >
+      Ora che entrambi gli host rispondono (radice = prodotto, sottodominio =
+      Trust Center dell'attestazione), allineati i riferimenti interni. Nel
+      footer del tenant, i tre link che erano percorsi assoluti
+      (/devops.html, /whitepaper.html, /changelog.html — vivono sulla
+      radice) sono diventati URL assolute verso trust.spaziogenesi.org, e
+      aggiunto un link "Il framework" verso la radice; /badge.svg resta
+      relativo di proposito (il badge del tenant vive accanto alla sua
+      pagina). Il link dalla radice al Trust Center di ciascun tenant
+      esisteva gia' da F2. Nel registro: il verify_howto di
+      CTL-eidas-honest-positioning e la location di EVD-gtf-site-public
+      puntavano ancora a trust.spaziogenesi.org come Trust Center
+      dell'attestazione — corretti verso il sottodominio, perche' un
+      registro che descrive male come funziona un controllo perde valore.
+      EVD-whitepaper-integrity non si e' toccata: quell'URL non si e' mai
+      mosso. Il collettore settimanale eseguito per davvero (non solo
+      letto, lezione di P44 F6): verde, 15 evidenze aggiornate. Punteggio
+      invariato 91/100, 10/10 indicatori.
+
+  - date: 2026-08-16
+    component: framework
+    version: null
+    public: false
     title: "P45 F5: la radice passa al prodotto"
     body: >
       trust.spaziogenesi.org non pubblica piu' il Trust Center di un progetto ma
