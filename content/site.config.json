@@ -17,6 +17,11 @@
     }
   ],
 
+  "matomo": {
+    "url": "https://sg-matomo.azurewebsites.net/",
+    "site_id": "2"
+  },
+
   "compat": {
     "_comment": "Impegno pubblico, non dettaglio implementativo: badge.svg e score.json restano sulla radice per compatibilità con 22 riferimenti pubblici esterni (vedi P45 §2). Finché esiste un solo tenant, la radice mostra il suo punteggio; con un secondo tenant la scelta andrà rivista esplicitamente, non ereditata per default.",
     "badge_from_tenant": "attestazione",

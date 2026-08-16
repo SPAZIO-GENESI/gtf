@@ -2,7 +2,7 @@ import { readFileSync, readdirSync, existsSync, writeFileSync, copyFileSync } fr
 import { join } from "node:path";
 import { ROOT } from "./lib/root.mjs";
 import { STYLE } from "./lib/style.mjs";
-import { esc, renderFooterColumns } from "./lib/render.mjs";
+import { esc, renderFooterColumns, renderMatomo } from "./lib/render.mjs";
 import { loadSiteConfig } from "./lib/site-config.mjs";
 
 // P45 F2: questo generatore scrive site/index.html — la pagina del
@@ -81,6 +81,7 @@ function renderPage(cfg, tenants) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(cfg.title)}</title>
 <style>${STYLE}</style>
+${renderMatomo(cfg.matomo)}
 </head>
 <body>
   <header class="hero">

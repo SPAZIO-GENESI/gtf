@@ -14,6 +14,10 @@
     "thesis_html": "Perché <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    merita fiducia — con evidenze verificabili, non dichiarazioni.",
     "metrics_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics",
     "badge_alt": "Genesis Trust Score",
+    "matomo": {
+      "url": "https://sg-matomo.azurewebsites.net/",
+      "site_id": "2"
+    },
     "nav_external": [
       { "label": "Stato dei servizi ↗", "href": "https://attestazione.spaziogenesi.org/status/" },
       { "label": "Changelog ↗", "href": "https://attestazione.spaziogenesi.org/changelog/" }

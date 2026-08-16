@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import { ROOT } from "./lib/root.mjs";
 import { loadSiteConfig } from "./lib/site-config.mjs";
 import { STYLE } from "./lib/style.mjs";
-import { esc, para, renderFooterColumns } from "./lib/render.mjs";
+import { esc, para, renderFooterColumns, renderMatomo } from "./lib/render.mjs";
 
 const CHANGELOG_SOURCE = join(ROOT, "content", "changelog.yaml");
 const REQUIRED_FIELDS = ["date", "component", "title"];
@@ -77,6 +77,7 @@ function buildChangelogPage(publicEntries, cfg) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Changelog — ${esc(cfg.title)}</title>
 <style>${STYLE}</style>
+${renderMatomo(cfg.matomo)}
 </head>
 <body>
   <header class="hero">
