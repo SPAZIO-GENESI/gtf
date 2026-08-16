@@ -12,7 +12,7 @@
     "eyebrow": "Genesis Trust Framework",
     "heading": "Il registro della fiducia di Spazio Genesi ETS",
     "thesis_html": "Perché <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    merita fiducia — con evidenze verificabili, non dichiarazioni.",
-    "metrics_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics",
+    "metrics_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics",
     "badge_alt": "Genesis Trust Score",
     "nav_external": [
       { "label": "Stato dei servizi ↗", "href": "https://attestazione.spaziogenesi.org/status/" },
@@ -23,12 +23,10 @@
         "heading": "Il registro",
         "links": [
           { "label": "Il framework ↗", "href": "https://trust.spaziogenesi.org/" },
-          { "label": "Codice sorgente (GTF)", "href": "https://github.com/SPAZIO-GENESI/gtf" },
-          { "label": "Registro pubblico", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry" },
-          { "label": "Formula del punteggio", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics" },
-          { "label": "DevOps e rilasci ↗", "href": "https://trust.spaziogenesi.org/devops.html" },
-          { "label": "Whitepaper tecnico ↗", "href": "https://trust.spaziogenesi.org/whitepaper.html" },
-          { "label": "Changelog ↗", "href": "https://trust.spaziogenesi.org/changelog.html" }
+          { "label": "Registro pubblico", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry" },
+          { "label": "Formula del punteggio", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics" },
+          { "label": "DevOps e rilasci", "href": "/devops/" },
+          { "label": "Whitepaper tecnico", "href": "/whitepaper.html" }
         ]
       },
       {
