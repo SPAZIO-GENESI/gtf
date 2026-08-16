@@ -53,10 +53,12 @@ jobs:
       # riassume i punteggi dei tenant, quindi il tenant si aggiorna per primo.
       # ⚠️ Niente action di terze parti: git push diretto col PAT, stesso
       # schema di deploy-staging.yml in imgauthweb.
-      # ⚠️ Il file CNAME (dominio custom del sottodominio) NON si scrive qui
-      # finché il record DNS non esiste: arriva in F4 insieme al DNS. Con un
-      # CNAME verso un host che non risolve, GitHub Pages redirige anche
-      # l'URL spazio-genesi.github.io/... e il sito diventa irraggiungibile.
+      # ⚠️ Il file CNAME (dominio custom del sottodominio) è scritto qui da
+      # P45 F4, dopo che il record DNS esiste: GitHub Pages da branch legge il
+      # CNAME nella cartella pubblicata, e senza di esso il rsync --delete
+      # cancellerebbe quello scritto da GitHub, perdendo il dominio custom al
+      # primo deploy. L'host si ricava da tenant.config.json › site.public_url,
+      # così un nuovo tenant (P46) non deve toccare questo workflow.
       - name: Pubblica il Trust Center del tenant sul suo repo Pages
         env:
           TRUST_TENANT_DEPLOY_TOKEN: ${{ secrets.TRUST_TENANT_DEPLOY_TOKEN }}
@@ -70,7 +72,9 @@ jobs:
           SRC="tenants/${TENANT}/site"
           REPO="$(node -p "require('./tenants/${TENANT}/tenant.config.json').site.publish_repo")"
           test -f "${SRC}/index.html"
-          echo "Pubblico ${SRC} su ${REPO}"
+          HOST="$(node -p "new URL(require('./tenants/${TENANT}/tenant.config.json').site.public_url).hostname")"
+          echo "$HOST" > "${SRC}/CNAME"
+          echo "Pubblico ${SRC} su ${REPO} (dominio custom ${HOST})"
           rm -rf /tmp/trust-tenant
           git clone --depth 1 "https://x-access-token:${TRUST_TENANT_DEPLOY_TOKEN}@github.com/${REPO}.git" /tmp/trust-tenant
           # Sostituzione completa, non un merge: un file rimasto da un build

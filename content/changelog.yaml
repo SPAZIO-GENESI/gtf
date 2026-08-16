@@ -24,6 +24,28 @@ entries:
     component: framework
     version: null
     public: false
+    title: "P45 F4: il Trust Center dell'attestazione risponde sul suo sottodominio"
+    body: >
+      attestazione.trust.spaziogenesi.org e' in linea: record CNAME verso
+      spazio-genesi.github.io in DNS-only (mai proxato — e' un quarto livello e
+      l'Universal SSL di Cloudflare ne copre uno solo; in DNS-only il
+      certificato lo emette GitHub), dominio custom impostato sulle Pages del
+      repo sottile, Enforce HTTPS attivo. Da ora il file CNAME e' scritto dal
+      job di pubblicazione ricavando l'host da tenant.config.json
+      (site.public_url): senza, il rsync --delete cancellerebbe quello scritto
+      da GitHub e il dominio custom andrebbe perso al primo deploy. Verificato
+      dal vivo: /, /badge.svg e /score.json a 200 con il punteggio 91/100 e
+      10/10 indicatori, stile corretto (i percorsi assoluti ora risolvono).
+      /devops.html, /whitepaper.html e /changelog.html rispondono 404 su questo
+      host: sono contenuti che vivono sulla radice, atteso qui e corretto in
+      F6.1. La radice resta invariata — sette URL a 200 e impronta del
+      whitepaper 898ec9…de452 — quindi il Trust Center risponde ora su due
+      host: e' la finestra sicura in cui F5 puo' spostare la radice.
+
+  - date: 2026-08-16
+    component: framework
+    version: null
+    public: false
     title: "P45 F3: il Trust Center dell'attestazione ha un repo di pubblicazione proprio"
     body: >
       Creato il repository pubblico SPAZIO-GENESI/trust-attestazione, di sola
