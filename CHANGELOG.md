@@ -2,6 +2,13 @@
 
 File generato da `content/changelog.yaml` — non modificarlo a mano.
 
+## 2026-08-16
+
+### P45 F0: baseline congelata prima di separare radice e sottodominio
+*framework*
+
+npm run validate (253 record, 0 errori) e npm run build verdi da albero pulito; score invariato 91/100, 10/10 indicatori. Congelati in .baseline/ i quattro file generati del tenant attestazione (index.html, score.json, badge.svg, changelog.html). Verificati dal vivo gli otto URL pubblici di trust.spaziogenesi.org (/, /badge.svg, /score.json, /changelog.html, /devops.html, /whitepaper.html, /whitepaper-v1.0.pdf, il file di verifica per i motori di ricerca): tutti 200. SHA-256 di whitepaper-v1.0.pdf invariato (898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452). Questo e' il termine di paragone per le fasi successive di P45.
+
 ## 2026-08-15
 
 ### Il collettore settimanale era rotto da F3, e nessuno se ne era accorto
