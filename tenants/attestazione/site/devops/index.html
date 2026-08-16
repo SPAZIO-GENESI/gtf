@@ -131,10 +131,10 @@
   <header class="hero">
     <p class="eyebrow">Genesis Trust Framework · documento operativo</p>
     <h1>DevOps e rilasci</h1>
-    <p class="thesis">Come i servizi di Spazio Genesi ETS — il sistema di
+    <p class="thesis">Come il sistema di
     <a href="https://attestazione.spaziogenesi.org">attestazione delle opere digitali</a>
-    e la piattaforma RADART — vengono sviluppati, verificati e rilasciati
-    senza mettere a rischio l'unico ambiente che gli utenti usano.</p>
+    di Spazio Genesi ETS viene sviluppato, verificato e rilasciato senza
+    mettere a rischio l'unico ambiente che gli utenti usano.</p>
     <p class="hero-note">⚠️ <b>Stato: in implementazione progressiva.</b>
     Questo documento descrive il processo <em>adottato come progetto</em>; la
     tabella <a href="#stato">Stato di attuazione</a> dice, fase per fase, cosa
@@ -181,6 +181,9 @@
         blocco <code>[env.staging]</code>): ogni modifica tocca entrambi
         nello stesso commit, il drift è strutturalmente impossibile.</li>
     </ol>
+    <p style="font-size:0.85rem; color:var(--ink-muted); margin-top:1rem;">
+    Lo stesso processo — staging replicato, CI, gate umano, rollback in
+    secondi — è adottato anche per gli altri servizi dell'ente.</p>
   </section>
 
   <section id="ambienti" class="folio" data-folio="ENV">
@@ -197,15 +200,12 @@
         <!-- PRODUZIONE: interfacce -->
         <rect x="28" y="54" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
         <text x="44" y="78" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">INTERFACCE</text>
-        <text x="44" y="100" font-size="13.5" fill="var(--ink)">attestazione.spaziogenesi.org <tspan fill="var(--ink-muted)">(GitHub Pages)</tspan></text>
-        <text x="44" y="122" font-size="13.5" fill="var(--ink)">radart-web <tspan fill="var(--ink-muted)">(Cloudflare Pages)</tspan></text>
+        <text x="44" y="104" font-size="13.5" fill="var(--ink)">attestazione.spaziogenesi.org <tspan fill="var(--ink-muted)">(GitHub Pages)</tspan></text>
 
         <!-- PRODUZIONE: worker -->
         <rect x="28" y="168" width="360" height="108" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
         <text x="44" y="192" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">WORKER (Cloudflare)</text>
-        <text x="44" y="214" font-size="13.5" fill="var(--ink)">imgauth <tspan fill="var(--ink-muted)">— motore di attestazione</tspan></text>
-        <text x="44" y="236" font-size="13.5" fill="var(--ink)">radart-api → graph · semantic · ingest</text>
-        <text x="44" y="258" font-size="12" fill="var(--ink-muted)">collegati tra loro con service binding</text>
+        <text x="44" y="220" font-size="13.5" fill="var(--ink)">imgauth <tspan fill="var(--ink-muted)">— motore di attestazione</tspan></text>
 
         <!-- PRODUZIONE: dati -->
         <rect x="28" y="304" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
@@ -223,15 +223,12 @@
         <!-- STAGING: interfacce -->
         <rect x="492" y="54" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
         <text x="508" y="78" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">INTERFACCE</text>
-        <text x="508" y="100" font-size="13.5" fill="var(--ink)">sito di prova <tspan fill="var(--ink-muted)">(generato dallo stesso sorgente)</tspan></text>
-        <text x="508" y="122" font-size="13.5" fill="var(--ink)">preview per-branch <tspan fill="var(--ink-muted)">(native di Pages)</tspan></text>
+        <text x="508" y="104" font-size="13.5" fill="var(--ink)">sito di prova <tspan fill="var(--ink-muted)">(generato dallo stesso sorgente)</tspan></text>
 
         <!-- STAGING: worker -->
         <rect x="492" y="168" width="360" height="108" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
         <text x="508" y="192" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">WORKER GEMELLI</text>
-        <text x="508" y="214" font-size="13.5" fill="var(--ink)">imgauth-staging <tspan fill="var(--ink-muted)">(solo workers.dev)</tspan></text>
-        <text x="508" y="236" font-size="13.5" fill="var(--ink)">radart-api-staging → gemelli -staging</text>
-        <text x="508" y="258" font-size="12" fill="var(--ink-muted)">stessi service binding, rimappati sui gemelli</text>
+        <text x="508" y="220" font-size="13.5" fill="var(--ink)">imgauth-staging <tspan fill="var(--ink-muted)">(solo workers.dev)</tspan></text>
 
         <!-- STAGING: dati -->
         <rect x="492" y="304" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
@@ -271,8 +268,6 @@
         <tr><td>Firma PDF (authart)</td><td>Azure, marca temporale TSA</td><td>non replicata in v1: PDF non firmato</td></tr>
         <tr><td>Anti-bot / notifiche</td><td>Turnstile reale · Telegram</td><td>chiavi di test · silenzioso</td></tr>
         <tr><td>authweb (interfaccia)</td><td>GitHub Pages · attestazione.spaziogenesi.org</td><td>copia generata dal medesimo sorgente, puntata allo staging</td></tr>
-        <tr><td>RADART (4 worker)</td><td>risorse proprie per modulo</td><td>gemelli <code>-staging</code>, service binding rimappati</td></tr>
-        <tr><td>radart-web</td><td>Cloudflare Pages</td><td>preview per-branch native, env "Preview" → api-staging</td></tr>
       </tbody>
     </table>
     </div>
@@ -395,8 +390,6 @@
       <li><b>La firma PDF non ha replica in v1</b>: lo staging emette PDF non
         firmati, identici nel contenuto. La replica del firmatario è rinviata
         alla prossima modifica sostanziale di quel componente.</li>
-      <li><b>Lo staging RADART usa un servizio di produzione in sola lettura</b>
-        (risoluzione dei nomi degli artisti): documentato, a basso rischio, rivedibile.</li>
       <li><b>Il flusso OAuth self-service non è attivo in staging</b>: i
         provider richiederebbero redirect URI dedicati; i bottoni restano
         assenti per design fail-closed.</li>
@@ -416,8 +409,6 @@
         <tr><td>2</td><td>Staging del motore di attestazione</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
         <tr><td>3</td><td>CI (check su PR, staging automatico + smoke)</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
         <tr><td>4</td><td>Gate di produzione (approvazione, preview 0%, rollback provato)</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
-        <tr><td>5</td><td>Staging RADART (4 worker + preview Pages)</td><td><span class="pill pill-muted">⏳ da eseguire</span></td></tr>
-        <tr><td>6</td><td>CI RADART</td><td><span class="pill pill-muted">⏳ da eseguire</span></td></tr>
         <tr><td>7</td><td>Interfaccia web di staging</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
         <tr><td>8</td><td>Pubblicazione della documentazione + registrazione nel GTF</td><td><span class="pill pill-amber">🔶 doc pubblicata 2026-07-11, registrazione finale in corso</span></td></tr>
       </tbody>
@@ -440,8 +431,8 @@
         <h3>Il registro</h3>
         <a href="/">Trust Center</a>
         <a href="https://github.com/SPAZIO-GENESI/gtf">Codice sorgente (GTF)</a>
-        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry">Registro pubblico</a>
-        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/metrics">Formula del punteggio</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry">Registro pubblico</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics">Formula del punteggio</a>
       </div>
       <div class="footer-col">
         <h3>Il servizio di attestazione</h3>
