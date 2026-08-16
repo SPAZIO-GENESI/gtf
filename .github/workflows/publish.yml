@@ -45,6 +45,46 @@ jobs:
       # tenants/attestazione/site/, ma finché la radice non ha un sito
       # proprio (F2) il deploy continua a pubblicare il tenant. Questo step
       # muore in F5, quando site/index.html sarà generato da build-root.mjs.
+      # P45 F3 — pubblica il Trust Center del tenant sul suo repo Pages sottile.
+      # Esiste perché GitHub Pages ammette un solo dominio custom per
+      # repository: il sottodominio del tenant non è ottenibile da questo repo,
+      # che pubblica già la radice trust.spaziogenesi.org.
+      # Sta PRIMA della pubblicazione della radice di proposito: la radice
+      # riassume i punteggi dei tenant, quindi il tenant si aggiorna per primo.
+      # ⚠️ Niente action di terze parti: git push diretto col PAT, stesso
+      # schema di deploy-staging.yml in imgauthweb.
+      # ⚠️ Il file CNAME (dominio custom del sottodominio) NON si scrive qui
+      # finché il record DNS non esiste: arriva in F4 insieme al DNS. Con un
+      # CNAME verso un host che non risolve, GitHub Pages redirige anche
+      # l'URL spazio-genesi.github.io/... e il sito diventa irraggiungibile.
+      - name: Pubblica il Trust Center del tenant sul suo repo Pages
+        env:
+          TRUST_TENANT_DEPLOY_TOKEN: ${{ secrets.TRUST_TENANT_DEPLOY_TOKEN }}
+        run: |
+          set -e
+          if [ -z "$TRUST_TENANT_DEPLOY_TOKEN" ]; then
+            echo "::error::Secret TRUST_TENANT_DEPLOY_TOKEN mancante: il Trust Center del tenant non verrebbe pubblicato."
+            exit 1
+          fi
+          TENANT="${GTF_TENANT:-$(node -p "require('./default-tenant.json').id")}"
+          SRC="tenants/${TENANT}/site"
+          REPO="$(node -p "require('./tenants/${TENANT}/tenant.config.json').site.publish_repo")"
+          test -f "${SRC}/index.html"
+          echo "Pubblico ${SRC} su ${REPO}"
+          rm -rf /tmp/trust-tenant
+          git clone --depth 1 "https://x-access-token:${TRUST_TENANT_DEPLOY_TOKEN}@github.com/${REPO}.git" /tmp/trust-tenant
+          # Sostituzione completa, non un merge: un file rimasto da un build
+          # precedente non sparirebbe mai. README.md è escluso perché è
+          # l'avvertenza "non modificare qui" del repo, non contenuto
+          # pubblicato (Pages serve index.html, non il README).
+          rsync -a --delete --exclude='.git' --exclude='README.md' "${SRC}/" /tmp/trust-tenant/
+          cd /tmp/trust-tenant
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "deploy: Trust Center ${TENANT} da gtf@${{ github.sha }}" || echo "Nessuna modifica da pubblicare."
+          git push origin main
+
       - name: "Assembla il sito da pubblicare (transitorio: F1→F5)"
         run: |
           cp tenants/attestazione/site/index.html  site/index.html
