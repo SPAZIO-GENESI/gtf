@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.3.0 · **Data**: 2026-08-16 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.4.0 · **Data**: 2026-08-16 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -677,6 +677,15 @@ indipendente, letto dai rispettivi manifesti (`core/package.json` → `version`;
 per imgauth/authweb/authart (§ Versioning di `img-auth-hub/CLAUDE.md`), applicato ora anche al
 framework che li descrive.
 
+**Licenze (dal 2026-08-16, P47).** Attribuzione del motore, non rebranding: il nome del
+prodotto resta "Genesis Trust Framework" (la decisione sul nome è D3, rinviata — vedi sopra).
+Il motore in `core/` è coperto da `core/LICENSE` (MIT, `Copyright (c) 2026 Tangram.page`): ne è
+l'autore. Spazio Genesi ETS compare come consumatore e partner tecnologico che fornisce
+l'infrastruttura su cui gira, non come titolare del codice del motore. La `LICENSE` alla radice
+(MIT, `Copyright (c) 2026 Spazio Genesi ETS`) copre invece il resto del repository — i registri
+dei tenant, i contenuti, la configurazione — con una nota che rimanda a `core/LICENSE` per il
+motore. `core/package.json` dichiara `"author": "Tangram.page"`.
+
 ### 15.1 Topologia dei siti (dal 2026-08-16, P45)
 
 Un solo host serviva due cose diverse: `trust.spaziogenesi.org` era, fino al 15 agosto, il
@@ -708,18 +717,19 @@ questa tabella.
 | URL | Consumatori | Regola |
 |---|---|---|
 | `trust.spaziogenesi.org/badge.svg` | 18 pagine authweb (IT+EN), template `imgauthweb/scripts/build-integrazioni.mjs`, README di `imgauth`/`imgauthweb`/`gtf` (22 punti pubblici) | resta sulla radice, copia generata dal tenant indicato in `compat` |
-| `trust.spaziogenesi.org/whitepaper-v1.0.pdf` | `EVD-whitepaper-integrity` (ricalcolo settimanale), pagina di verifica `/c/898ec9…`, README `attest-mcp` | resta sulla radice, file statico committato, mai duplicato né rigenerato |
-| `trust.spaziogenesi.org/whitepaper.html`, `/devops.html`, `/changelog.html` | footer del Trust Center di tenant, link esterni | restano sulla radice — debito dichiarato: sono contenuto del tenant ospitato sul dominio del prodotto (sanabile in P47) |
+| `trust.spaziogenesi.org/whitepaper-v1.0.pdf` | — (nessuno: vedi sotto) | **404 dal 2026-08-16 (P47), per decisione del gestore** — revisione dichiarata della riga precedente ("resta sulla radice, mai duplicato"): il file vive ora solo su `attestazione.trust.spaziogenesi.org/whitepaper-v1.0.pdf`, spostato con `git mv` (byte invariati, impronta ancora `898ec9…de452`). Nessun consumatore esterno immutabile punta all'URL del PDF (il README `attest-mcp` linka la pagina, non il file); `EVD-whitepaper-integrity` è stata riconfigurata sul nuovo URL nello stesso commit dello spostamento |
+| `trust.spaziogenesi.org/whitepaper.html`, `/devops.html` | shim minimale sulla radice → README `attest-mcp` (npm, immutabile), `imgauth/docs/DEVOPS.md` | dal 2026-08-16 (P47) il contenuto vive su `attestazione.trust.spaziogenesi.org/whitepaper.html` e `/devops/`: sono contenuto del tenant attestazione (whitepaper e processo di rilascio del *servizio*), non del prodotto. L'URL vecchio resta un cartello di redirect (meta-refresh + link visibile), non contenuto mantenuto |
+| `trust.spaziogenesi.org/changelog.html` → `/changelog/` | shim su `.html`, contenuto su clean URL | changelog del **prodotto** (framework), non del tenant: resta sulla radice, ma dal 2026-08-16 (P47) con clean URL — il generatore (`build-changelog.mjs`) legge ora `content/site.config.json`, non più la configurazione del tenant |
 | `trust.spaziogenesi.org/score.json` | copia di compatibilità, nessun consumatore esterno noto | resta sulla radice |
 | `attestazione.trust.spaziogenesi.org/` | link dalla radice, footer authweb (verifica, whitepaper eIDAS §5.2) | Trust Center completo del tenant attestazione |
 
-### 15.2 Cosa resta fuori da P45
+### 15.2 Cosa resta fuori da P45/P47
 
-Secondo tenant RADART e policy di visibilità per repo privati (P46); correzione
-dell'astrazione dopo il secondo tenant, incluso lo spostamento di `devops.html`/
-`whitepaper.html` sul sottodominio (P47); estrazione di `core/` come pacchetto (P48);
-generalizzazione di `collect-evidence.yml` (oggi ancora hardcoded su
-`tenants/attestazione/`); traduzione inglese del Trust Center.
+Secondo tenant RADART e policy di visibilità per repo privati (P46); estrazione di `core/`
+come pacchetto (P48); generalizzazione di `collect-evidence.yml` (oggi ancora hardcoded su
+`tenants/attestazione/`); traduzione inglese del Trust Center; risoluzione della duplicazione
+fra la pagina DevOps mantenuta a mano e `imgauth/docs/DEVOPS.md` — P47 ha spostato e sfrondato
+la pagina, non ha eliminato la doppia fonte di verità; decisione D3 sul nome del prodotto.
 
 Questa sezione descrive lo stato raggiunto da P44/P45; i piani successivi (secondo tenant
 RADART, eventuale estrazione del prodotto in un repo a sé) vivono in

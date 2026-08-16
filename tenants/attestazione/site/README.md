@@ -1,11 +1,27 @@
 # site/ — Trust Center del tenant `attestazione`
 
-Sorgente **generata**, non scritta a mano: `index.html`, `score.json` e
-`badge.svg` escono da `core/generators/build-site.mjs` e `score.mjs`,
-letti dal registro in `tenants/attestazione/registry/` e dalla
-configurazione in `tenants/attestazione/tenant.config.json`. Rigenerali con
+Da qui esce sia contenuto **generato** sia contenuto **statico mantenuto a
+mano**: dal P47 (16 agosto 2026) questa cartella non è più solo output di
+build (vedi sotto).
+
+`index.html`, `score.json` e `badge.svg` sono **generati**: escono da
+`core/generators/build-site.mjs` e `score.mjs`, letti dal registro in
+`tenants/attestazione/registry/` e dalla configurazione in
+`tenants/attestazione/tenant.config.json`. Rigenerali con
 `GTF_TENANT=attestazione npm run build` dalla radice del repo — modificarli
 qui direttamente non serve a nulla, il prossimo build li sovrascrive.
+
+`whitepaper.html`, `whitepaper-v1.0.pdf` e `devops/index.html` sono
+**statici, mantenuti a mano** — non prodotti da alcun generatore. Sono il
+whitepaper tecnico e la pagina sul processo di rilascio del servizio di
+attestazione, spostati qui da `site/` (la radice del framework) in P47
+perché descrivono questo progetto, non il prodotto che lo ospita. Il PDF in
+particolare **non si rigenera e non si tocca mai**: la sua impronta
+(`898ec9…de452`) è attestata pubblicamente, cambiarne anche un byte la
+invaliderebbe. `publish.yml` pubblica `rsync -a --delete`: un file rimosso
+da qui sparisce dal sito pubblicato, e viceversa un file statico aggiunto
+qui viene pubblicato automaticamente al prossimo giro — non serve
+toccare il workflow per aggiungerne altri.
 
 ## Dove finisce questo output
 

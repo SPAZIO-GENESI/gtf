@@ -44,19 +44,25 @@ attestazione è su
   YAML veri e propri), `snapshots/` (evidenze raccolte settimanalmente,
   ADR-GTF-004), `tenant.config.json` (testi del Trust Center, URL esterni,
   elenco repo di codice, endpoint del collettore), `site/` (il Trust Center
-  **di quel tenant**, generato — `index.html`, `score.json`, `badge.svg`).
-  Un solo tenant esiste oggi: `tenants/attestazione/`.
+  **di quel tenant** — `index.html`, `score.json`, `badge.svg` generati, più
+  — dal P47 — i contenuti statici mantenuti a mano del tenant: whitepaper e
+  pagina DevOps del servizio, non più output di build soltanto). Un solo
+  tenant esiste oggi: `tenants/attestazione/`.
 - `content/` — testi curati del prodotto, non derivati dal registro
   (`changelog.yaml`, sorgente unica a doppia resa; `site.config.json`, testi
   e riepilogo tenant della radice).
 - `site/` — **dal 16 agosto 2026 (P45), l'output della radice**: la pagina
   del prodotto (`index.html`, `content/site.config.json` + riepilogo dei
-  tenant, generata da `build-root.mjs`), `changelog.html` (del prodotto, non
-  di un tenant), più le copie di compatibilità `badge.svg`/`score.json` del
-  tenant indicato in `compat` (22 punti pubblici esterni li consumano da
-  qui) e i file statici mantenuti a mano (`devops.html`, `whitepaper.html`,
-  `whitepaper-v1.0.pdf`). Tutto generato, non modificarlo a mano — dettagli
-  in `site/README.md`.
+  tenant, generata da `build-root.mjs`), `changelog/index.html` (del
+  prodotto, non di un tenant — clean URL dal P47), più le copie di
+  compatibilità `badge.svg`/`score.json` del tenant indicato in `compat`
+  (22 punti pubblici esterni li consumano da qui) e il file di verifica
+  motori di ricerca. Tutto generato, non modificarlo a mano — dettagli in
+  `site/README.md`. **Dal P47**: `devops.html`, `whitepaper.html` e
+  `whitepaper-v1.0.pdf` non sono più qui — sono contenuto del tenant
+  attestazione (vedi sotto), e la radice ospita solo tre **shim** statici
+  (`whitepaper.html`, `devops.html`, `changelog.html`) che rimandano al
+  posto giusto per chi ha ancora l'indirizzo vecchio.
 - `default-tenant.json` — quale tenant usare se `GTF_TENANT` non è
   impostata (configurazione di bootstrap, fuori da `core/` apposta).
 

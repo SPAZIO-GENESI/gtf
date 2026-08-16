@@ -4,6 +4,11 @@ File generato da `content/changelog.yaml` — non modificarlo a mano.
 
 ## 2026-08-16
 
+### Whitepaper e processo di rilascio: ognuno sul proprio indirizzo
+*framework*
+
+Il whitepaper tecnico e la pagina sul processo di rilascio (DevOps) del sistema di attestazione vivono ora sul Trust Center di quel progetto, attestazione.trust.spaziogenesi.org, invece che sulla pagina del framework. I vecchi indirizzi continuano a portare al posto giusto. Il documento del whitepaper è lo stesso file, con la stessa impronta digitale già attestata: ogni verifica fatta finora resta valida. Il motore che genera questo Trust Center è un prodotto di Tangram.page, che Spazio Genesi ETS applica ai propri servizi come partner tecnologico fornendo l'infrastruttura su cui gira.
+
 ### Il registro della fiducia ha un indirizzo per progetto
 *framework*
 

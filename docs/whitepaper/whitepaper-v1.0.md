@@ -1025,7 +1025,7 @@ del file esistente. Le versioni precedenti restano pubblicate.
 stata a sua volta attestata sul servizio che questo documento descrive.
 L'impronta e il link alla pagina pubblica di verifica sono pubblicati
 sulla pagina di accompagnamento di questo documento
-(`trust.spaziogenesi.org/whitepaper.html`) — non qui, per una ragione
+(`attestazione.trust.spaziogenesi.org/whitepaper.html`) — non qui, per una ragione
 tecnica precisa: un PDF non può contenere l'impronta di sé stesso, perché
 aggiungerla ne cambierebbe il contenuto e quindi l'impronta stessa.
 Chiunque può scaricare questo PDF, ricalcolarne l'impronta in autonomia
