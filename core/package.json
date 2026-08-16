@@ -2,5 +2,7 @@
   "name": "@gtf/core",
   "version": "0.2.0",
   "private": true,
-  "description": "Genesis Trust Framework — motore generico: schemi, generatori, guardia di isolamento. Nessuna dipendenza propria: le librerie sono nel package.json alla radice del repo (unico npm ci)."
+  "description": "Genesis Trust Framework — motore generico: schemi, generatori, guardia di isolamento. Nessuna dipendenza propria: le librerie sono nel package.json alla radice del repo (unico npm ci).",
+  "author": "Tangram.page (https://tangram.page)",
+  "license": "MIT"
 }

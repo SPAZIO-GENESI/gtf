@@ -34,5 +34,5 @@
     }
   ],
 
-  "footer_note_html": "Genesis Trust Framework · pagina generata automaticamente da\n      <code>content/site.config.json</code> e dal riepilogo dei registri dei\n      progetti — vedi il\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">codice sorgente</a>."
+  "footer_note_html": "Il Genesis Trust Framework è un motore sviluppato da\n      <a href=\"https://tangram.page\">Tangram.page</a>; Spazio Genesi ETS lo\n      applica ai propri servizi come partner tecnologico, fornendo\n      l'infrastruttura su cui gira. Questa pagina è generata automaticamente\n      da <code>content/site.config.json</code> e dal riepilogo dei registri\n      dei progetti — vedi il\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">codice sorgente</a>."
 }

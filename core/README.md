@@ -5,6 +5,11 @@ Questa cartella è il **motore generico**: schemi (`schemas/`) e generatori
 Trust Center a partire da un registro di record YAML. Non sa nulla di alcun
 progetto specifico.
 
+Il motore è un prodotto sviluppato da **Tangram.page**, coperto dalla licenza
+in [`LICENSE`](./LICENSE) (MIT). Spazio Genesi ETS lo applica ai propri
+servizi come partner tecnologico e ne fornisce l'infrastruttura, ma non ne è
+l'autore.
+
 ## Cosa può stare qui
 
 - Codice che vale per **qualunque** tenant: parsing, validazione, calcolo del

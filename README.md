@@ -5,6 +5,9 @@
 Motore e registri attraverso cui **Spazio Genesi ETS** dimostra pubblicamente
 perché il servizio [attestazione.spaziogenesi.org](https://attestazione.spaziogenesi.org)
 merita fiducia — con evidenze verificabili da chiunque, non con dichiarazioni.
+Il motore (`core/`) è un prodotto sviluppato da **Tangram.page**
+(vedi [core/LICENSE](./core/LICENSE)); Spazio Genesi ETS lo applica ai propri
+servizi come partner tecnologico e ne cura i registri (vedi [LICENSE](./LICENSE)).
 Il motore è generico (nessun nome di progetto al suo interno, vedi §15 di
 ARCHITECTURE.md): questo repo ospita oggi un solo pacchetto di dati
 (`attestazione`), ma è costruito per applicarsi a più di un progetto.
@@ -109,4 +112,6 @@ Dettagli fase per fase in [ARCHITECTURE.md §12](./ARCHITECTURE.md#12-roadmap--w
 
 ## Licenza
 
-MIT.
+MIT. Il motore in `core/` è coperto da [core/LICENSE](./core/LICENSE)
+(Tangram.page); il resto del repository — i registri dei tenant — da
+[LICENSE](./LICENSE) (Spazio Genesi ETS).

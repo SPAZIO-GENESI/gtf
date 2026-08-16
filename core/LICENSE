@@ -1,12 +1,6 @@
-Questo repository contiene due parti con titolarità distinte: il motore in
-`core/` è coperto dalla licenza in `core/LICENSE` (Tangram.page); la licenza
-qui sotto copre il resto del repository, cioè i registri dei tenant.
-
----
-
 MIT License
 
-Copyright (c) 2026 Spazio Genesi ETS
+Copyright (c) 2026 Tangram.page
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
