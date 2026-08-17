@@ -13,9 +13,13 @@ context: >
 
   La ricognizione ha anche misurato due vincoli reali, entrambi indipendenti da
   questo lavoro: la zona è su un piano gratuito, quindi la conversione automatica
-  delle pagine in Markdown offerta dal provider non è disponibile; e DNSSEC è
-  attivo lato provider ma **inerte**, perché manca il record DS presso il
-  registrar — il DNS del servizio oggi non è autenticato.
+  delle pagine in Markdown offerta dal provider non è disponibile; e **il DNS del
+  servizio non è autenticato**, perché DNSSEC non è attivo (verificato sia sul
+  registro `.org`, che riporta `delegationSigned: false`, sia nel pannello del
+  provider DNS). ⚠️ Una prima lettura aveva interpretato come "già configurato a
+  metà" la presenza di record DNSKEY nelle risposte DNS: sono invece le chiavi
+  **condivise** dell'infrastruttura del provider, restituite anche per le zone
+  non firmate, e non provano che la zona sia firmata. Rettificato prima di agire.
 decision: >
   Pubblicare, come file statici, i descrittori che corrispondono a capacità
   **realmente esistenti**: preferenze sull'uso AI dei contenuti in `robots.txt`,
@@ -73,10 +77,11 @@ consequences: >
   personali resta invariato.
 
   Due questioni restano aperte e registrate come tali, entrambe preesistenti:
-  completare DNSSEC aggiungendo il record DS presso il registrar (coerente con un
-  ente che pubblica un registro di trasparenza, ma con un margine d'errore che
-  renderebbe l'intero dominio irrisolvibile per i resolver validanti, quindi da
-  eseguire in una sessione dedicata), e il fatto che le pagine pubbliche carichino
+  **attivare DNSSEC** — accenderlo sul provider DNS e poi registrare il record DS
+  presso il registrar (coerente con un ente che pubblica un registro di
+  trasparenza, ma con un margine d'errore che renderebbe l'intero dominio
+  irrisolvibile per i resolver validanti, posta compresa, quindi da eseguire con
+  verifica immediata) — e il fatto che le pagine pubbliche carichino
   i propri caratteri tipografici da un fornitore terzo — cosa che espone l'IP di
   ogni visitatore a quel fornitore, mentre altre dipendenze di terze parti sono
   state auto-ospitate proprio per evitarlo.
