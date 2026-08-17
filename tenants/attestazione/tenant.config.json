@@ -97,6 +97,15 @@
     "whitepaper": {
       "url": "https://attestazione.trust.spaziogenesi.org/whitepaper-v1.0.pdf",
       "sha256": "898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452"
+    },
+
+    "agent_discovery": {
+      "robots_txt": "https://attestazione.spaziogenesi.org/robots.txt",
+      "api_catalog": "https://attestazione.spaziogenesi.org/.well-known/api-catalog",
+      "mcp_server_card": "https://attestazione.spaziogenesi.org/.well-known/mcp/server-card.json",
+      "agent_skills_index": "https://attestazione.spaziogenesi.org/.well-known/agent-skills/index.json",
+      "auth_md": "https://attestazione.spaziogenesi.org/auth.md",
+      "llms_txt": "https://attestazione.spaziogenesi.org/llms.txt"
     }
   },
 

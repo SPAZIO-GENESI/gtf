@@ -306,6 +306,56 @@ async function main() {
     if (matches) evdHits.add("EVD-whitepaper-integrity");
   }
 
+  // EVD-agent-discovery (P50): i documenti di scopribilità per agenti devono
+  // essere raggiungibili E coerenti. Il controllo che conta davvero è l'ultimo:
+  // l'indice delle skill dichiara lo SHA-256 di ogni SKILL.md, quindi si
+  // riscarica ogni skill dal vivo e si ricalcola — così un deploy parziale o un
+  // digest non riallineato vengono scoperti dal registro, non da un agente che
+  // scarta la skill in silenzio. GET, mai HEAD (stesso gotcha di rete di sopra).
+  if (c.agent_discovery) {
+    const d = c.agent_discovery;
+    const got = {};
+    for (const [key, url] of Object.entries(d)) got[key] = await fetchText(url);
+
+    const parse = (r) => {
+      if (!r.ok) return null;
+      try { return JSON.parse(r.text); } catch { return null; }
+    };
+
+    const catalog = parse(got.api_catalog);
+    const card = parse(got.mcp_server_card);
+    const index = parse(got.agent_skills_index);
+
+    const checks = {
+      robots_content_signal: Boolean(got.robots_txt?.ok && /^Content-Signal:/m.test(got.robots_txt.text)),
+      api_catalog_linkset: Array.isArray(catalog?.linkset) && catalog.linkset.length > 0,
+      mcp_card_complete: Boolean(card?.serverInfo?.name && card?.serverInfo?.version && card?.transport?.endpoint),
+      auth_md_heading: Boolean(got.auth_md?.ok && /^#\s*auth\.md/mi.test(got.auth_md.text)),
+      llms_txt_present: Boolean(got.llms_txt?.ok && got.llms_txt.text.trim().length > 0),
+      skills_index_valid: Array.isArray(index?.skills) && index.skills.length > 0,
+    };
+
+    // Verifica dei digest: ogni skill dichiarata viene riscaricata e ricalcolata.
+    const skills = [];
+    if (checks.skills_index_valid) {
+      for (const s of index.skills) {
+        const res = await fetchBytes(s.url);
+        const live = res.ok ? "sha256:" + sha256(res.bytes) : null;
+        skills.push({ name: s.name, url: s.url, ok: res.ok, declared: s.digest, live, matches: live === s.digest });
+      }
+    }
+    checks.skills_digests_match = skills.length > 0 && skills.every((s) => s.matches);
+
+    const allOk = Object.values(checks).every(Boolean);
+    results["agent-discovery"] = {
+      reachable: Object.fromEntries(Object.entries(got).map(([k, v]) => [k, Boolean(v.ok)])),
+      checks,
+      skills,
+      ok: allOk,
+    };
+    if (allOk) evdHits.add("EVD-agent-discovery");
+  }
+
   const manifest = { collected_at: today.toISOString(), week, files: {} };
   for (const [name, data] of Object.entries(results)) {
     const filename = `${name}.json`;

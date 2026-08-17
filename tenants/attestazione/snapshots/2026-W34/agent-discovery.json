@@ -1,0 +1,38 @@
+{
+  "reachable": {
+    "robots_txt": true,
+    "api_catalog": true,
+    "mcp_server_card": true,
+    "agent_skills_index": true,
+    "auth_md": true,
+    "llms_txt": true
+  },
+  "checks": {
+    "robots_content_signal": true,
+    "api_catalog_linkset": true,
+    "mcp_card_complete": true,
+    "auth_md_heading": true,
+    "llms_txt_present": true,
+    "skills_index_valid": true,
+    "skills_digests_match": true
+  },
+  "skills": [
+    {
+      "name": "attest-a-file",
+      "url": "https://attestazione.spaziogenesi.org/.well-known/agent-skills/attest-a-file/SKILL.md",
+      "ok": true,
+      "declared": "sha256:df7592c6f7cea31503a2bbc99a8ff2a71e76df29b778e9b2451cc87d1773726f",
+      "live": "sha256:df7592c6f7cea31503a2bbc99a8ff2a71e76df29b778e9b2451cc87d1773726f",
+      "matches": true
+    },
+    {
+      "name": "verify-an-attestation",
+      "url": "https://attestazione.spaziogenesi.org/.well-known/agent-skills/verify-an-attestation/SKILL.md",
+      "ok": true,
+      "declared": "sha256:9ba45c741edcb8fb6cd853539696ef629f3465eeb27bc009981ee852549c20bb",
+      "live": "sha256:9ba45c741edcb8fb6cd853539696ef629f3465eeb27bc009981ee852549c20bb",
+      "matches": true
+    }
+  ],
+  "ok": true
+}

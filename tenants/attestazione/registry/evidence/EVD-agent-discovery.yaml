@@ -1,0 +1,9 @@
+id: EVD-agent-discovery
+title: "Documenti di scopribilità per agenti raggiungibili e coerenti, con i digest delle skill verificati dal vivo"
+location: { system: authweb, ref: "GET su robots.txt, /.well-known/api-catalog, /.well-known/mcp/server-card.json, /.well-known/agent-skills/index.json, /auth.md, /llms.txt" }
+collection: auto
+freshness_max_days: 8
+last_seen: 2026-08-17
+integrity: "raccolta settimanale (collect-evidence.mjs): GET (mai HEAD) sui sei documenti, poi verifiche di coerenza — Content-Signal presente in robots.txt, linkset non vuoto nell'api-catalog, serverInfo.name/version + transport.endpoint nella MCP Server Card, intestazione '# auth.md', indice delle skill con almeno una voce. Il controllo determinante è l'ultimo: ogni SKILL.md dichiarato viene RISCARICATO dal vivo e il suo SHA-256 ricalcolato e confrontato con il digest pubblicato nell'indice, così un deploy parziale o un digest non riallineato emergono qui invece di far scartare la skill in silenzio a un agente. NON valida la conformità formale agli standard citati (RFC 9727, SEP-1649, Agent Skills Discovery RFC), che sono in parte bozze in movimento, né il merito del contenuto delle istruzioni."
+supports: [CTL-agent-access]
+visibility: public
