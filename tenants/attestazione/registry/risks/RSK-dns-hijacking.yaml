@@ -1,0 +1,33 @@
+id: RSK-dns-hijacking
+title: "Dirottamento o falsificazione delle risposte DNS del dominio di verifica"
+description: >
+  Tutta la fiducia nel servizio passa per i suoi nomi di dominio: chi visita
+  `attestazione.spaziogenesi.org/c/<impronta>` per controllare un certificato si
+  affida al fatto che quel nome porti davvero ai nostri sistemi. Un attaccante in
+  grado di falsificare le risposte DNS (avvelenamento della cache di un resolver,
+  risposte contraffatte su una tratta di rete) potrebbe dirottare i visitatori su
+  una pagina di verifica falsa che dichiara autentico un certificato manomesso, o
+  intercettare la posta del dominio. È un rischio particolarmente rilevante per un
+  servizio la cui funzione è **dire la verità su un documento**: qui la pagina di
+  verifica non è un accessorio, è il prodotto.
+
+  **Mitigato dal 17/08/2026** con l'attivazione di DNSSEC sulla zona
+  `spaziogenesi.org` (CTL-dnssec): un resolver validante rileva e scarta le
+  risposte contraffatte. HSTS, già attivo (CTL-edge-security-headers), copre il
+  livello successivo impedendo il declassamento a HTTP.
+
+  **Residuo dichiarato**: DNSSEC autentica i dati che vivono nella nostra zona,
+  non quelli delle zone di destinazione. I sottodomini serviti da GitHub Pages in
+  modalità DNS-only (`trust.spaziogenesi.org`,
+  `attestazione.trust.spaziogenesi.org`) espongono un CNAME **firmato da noi**
+  verso `spazio-genesi.github.io`, ma quella zona non è firmata con DNSSEC: la
+  risposta finale non risulta quindi autenticata. I sottodomini **proxati** da
+  Cloudflare — compreso `attestazione.spaziogenesi.org`, il dominio di verifica,
+  cioè quello che conta di più — non hanno questo residuo, perché gli indirizzi
+  restituiti restano dentro la nostra zona firmata. Attivare il proxy anche sui
+  due host DNS-only chiuderebbe il residuo e, nello stesso giro, farebbe arrivare
+  loro anche gli header di sicurezza dell'edge, che oggi non ricevono.
+likelihood: low
+impact: medium
+mitigated_by: [CTL-dnssec, CTL-edge-security-headers]
+visibility: public

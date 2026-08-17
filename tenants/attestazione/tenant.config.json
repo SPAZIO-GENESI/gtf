@@ -99,6 +99,24 @@
       "sha256": "898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452"
     },
 
+    "dnssec": {
+      "zone": "spaziogenesi.org",
+      "rdap_url": "https://rdap.publicinterestregistry.org/rdap/domain/spaziogenesi.org",
+      "doh_template": "https://dns.google/resolve?name={name}&type={type}",
+      "expected_ds": {
+        "keyTag": 2371,
+        "algorithm": 13,
+        "digestType": 2,
+        "digest": "BAE1CDC458B6996CB181B627DC1963550F1F200FDD90CAD60207E87362C062BC"
+      },
+      "authenticated_names": [
+        "spaziogenesi.org",
+        "attestazione.spaziogenesi.org",
+        "imgauth.spaziogenesi.org"
+      ],
+      "authenticated_mx": "spaziogenesi.org"
+    },
+
     "agent_discovery": {
       "robots_txt": "https://attestazione.spaziogenesi.org/robots.txt",
       "api_catalog": "https://attestazione.spaziogenesi.org/.well-known/api-catalog",

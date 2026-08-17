@@ -1,0 +1,9 @@
+id: EVD-dnssec-chain
+title: "Catena di fiducia DNSSEC chiusa: delega firmata al registro, DS visibile e risposte autenticate"
+location: { system: dns, ref: "RDAP del registro .org + query DoH per DS/A/MX su resolver validanti" }
+collection: auto
+freshness_max_days: 8
+last_seen: 2026-08-17
+integrity: "⚠️ Prima osservazione (2026-08-17) verificata **in diretta** durante l'attivazione, non dal collettore: registro `.org` con delega firmata e DS corrispondente, DS visibile via DNS, e flag AD confermato su nove nomi e sui sei record MX — il controllo automatico entra in servizio dal giro successivo. Nella finestra di transizione di una delega (fino a ~1 ora) le risposte alternano fra istanze del resolver con cache indipendenti, quindi un singolo campionamento può risultare falso: per questo il controllo campiona ogni nome fino a tre volte, e lo snapshot di quel giorno riporta onestamente una lettura ancora instabile. Da qui in avanti: raccolta settimanale (collect-evidence.mjs), tre prove indipendenti: (1) il registro `.org` via RDAP dichiara `secureDNS.delegationSigned: true` e un `dsData` che combacia con il DS atteso (keyTag 2371, algorithm 13, digestType 2, digest BAE1CDC4…62C062BC); (2) una query DoH per il tipo DS restituisce il record e la risposta porta il flag AD (dato autenticato); (3) il dominio di verifica, l'host dell'API e i record MX del dominio risultano anch'essi autenticati. NON verifica la firma crittografica in autonomia — si affida alla validazione dei resolver pubblici interrogati — e NON copre i sottodomini DNS-only il cui CNAME punta a una zona non firmata (residuo dichiarato in RSK-dns-hijacking). ⚠️ La presenza di record DNSKEY non è considerata una prova: i provider le restituiscono anche per zone non firmate."
+supports: [CTL-dnssec]
+visibility: public

@@ -306,6 +306,69 @@ async function main() {
     if (matches) evdHits.add("EVD-whitepaper-integrity");
   }
 
+  // EVD-dnssec-chain: la catena di fiducia DNSSEC deve restare chiusa. Tre
+  // prove indipendenti: il registro (RDAP) dichiara la delega firmata con il DS
+  // atteso; il DS è visibile via DNS e la risposta risulta autenticata (AD);
+  // i nomi che contano — dominio di verifica e posta — risultano autenticati.
+  // ⚠️ La presenza di DNSKEY NON è una prova: i provider restituiscono le chiavi
+  // condivise della propria infrastruttura anche per zone non firmate.
+  if (c.dnssec) {
+    const dc = c.dnssec;
+    const doh = (name, type) =>
+      fetchText(dc.doh_template.replace("{name}", name).replace("{type}", type))
+        .then((r) => { try { return r.ok ? JSON.parse(r.text) : null; } catch { return null; } });
+
+    const rdapRes = await fetchText(dc.rdap_url);
+    let delegationSigned = false, dsMatches = false;
+    try {
+      const s = JSON.parse(rdapRes.text).secureDNS || {};
+      delegationSigned = s.delegationSigned === true;
+      dsMatches = (s.dsData || []).some((d) =>
+        d.keyTag === dc.expected_ds.keyTag &&
+        d.algorithm === dc.expected_ds.algorithm &&
+        d.digestType === dc.expected_ds.digestType &&
+        String(d.digest).toUpperCase() === dc.expected_ds.digest.toUpperCase());
+    } catch { /* rdap non parsabile: resta false */ }
+
+    // Stesso campionamento ripetuto dei nomi (vedi commento sotto): anche la
+    // query DS alterna fra istanze del resolver nelle ore dopo un cambio.
+    let dsVisible = false, dsAuthenticated = false;
+    for (let attempt = 0; attempt < 3 && !(dsVisible && dsAuthenticated); attempt++) {
+      const dsAnswer = await doh(dc.zone, "DS");
+      if (dsAnswer && (dsAnswer.Answer || []).some((x) => x.type === 43)) dsVisible = true;
+      if (dsAnswer && dsAnswer.AD === true) dsAuthenticated = true;
+    }
+
+    // Un resolver pubblico è un insieme di istanze con cache indipendenti: nelle
+    // ore successive a un cambio di delega alcune rispondono ancora da una voce
+    // memorizzata prima della firma, e lo stesso nome alterna AD=true/false. Si
+    // campiona più volte e basta un AD=true a considerare il nome autenticato:
+    // riduce il rumore di campionamento, non allenta il controllo (un AD=true
+    // non può provenire da una zona non validata).
+    const names = {};
+    for (const n of dc.authenticated_names || []) {
+      let ok = false;
+      for (let attempt = 0; attempt < 3 && !ok; attempt++) {
+        const a = await doh(n, "A");
+        ok = Boolean(a && a.Status === 0 && a.AD === true);
+      }
+      names[n] = ok;
+    }
+    let mxAuthenticated = null;
+    if (dc.authenticated_mx) {
+      const mx = await doh(dc.authenticated_mx, "MX");
+      mxAuthenticated = Boolean(mx && mx.Status === 0 && mx.AD === true &&
+        (mx.Answer || []).some((x) => x.type === 15));
+    }
+
+    const checks = { delegationSigned, dsMatches, dsVisible, dsAuthenticated,
+      namesAuthenticated: Object.values(names).every(Boolean),
+      mxAuthenticated: mxAuthenticated !== false };
+    const allOk = Object.values(checks).every(Boolean);
+    results["dnssec-chain"] = { zone: dc.zone, checks, names, mxAuthenticated, ok: allOk };
+    if (allOk) evdHits.add("EVD-dnssec-chain");
+  }
+
   // EVD-agent-discovery (P50): i documenti di scopribilità per agenti devono
   // essere raggiungibili E coerenti. Il controllo che conta davvero è l'ultimo:
   // l'indice delle skill dichiara lo SHA-256 di ogni SKILL.md, quindi si

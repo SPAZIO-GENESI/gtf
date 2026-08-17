@@ -1,0 +1,40 @@
+id: CTL-dnssec
+title: "DNSSEC attivo sulla zona spaziogenesi.org, con catena di fiducia chiusa fino al registro .org"
+status: active
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+implemented_by: [IMP-dnssec]
+evidenced_by: [EVD-dnssec-chain]
+verify_howto: >
+  Tre controlli, tutti eseguibili da chiunque senza credenziali.
+
+  (1) Il registro `.org` deve dichiarare la delega firmata: interrogando
+  `https://rdap.publicinterestregistry.org/rdap/domain/spaziogenesi.org` il campo
+  `secureDNS.delegationSigned` deve essere `true`, con `dsData` che riporta
+  `keyTag 2371, algorithm 13 (ECDSAP256SHA256), digestType 2 (SHA-256)`.
+
+  (2) Il record DS deve essere visibile via DNS e la firma deve validare: una
+  query per il tipo `DS` su `spaziogenesi.org` presso un resolver validante
+  (8.8.8.8, 1.1.1.1) deve restituire il record **e** il flag `AD` (Authenticated
+  Data) a `true`. Lo stesso `AD=true` deve comparire sui nomi proxati, in
+  particolare sul dominio di verifica `attestazione.spaziogenesi.org` e sui record
+  `MX` del dominio.
+
+  (3) La zona deve essere effettivamente firmata: una query con il bit DNSSEC
+  attivo (`do=1`) deve restituire una `RRSIG` per ogni insieme di record, con
+  `signer` uguale a `spaziogenesi.org.`, algoritmo 13, key tag della ZSK
+  pubblicata, e una finestra di validità che comprende il momento del controllo.
+
+  ⚠️ Atteso e non un difetto: `AD=false` su `trust.spaziogenesi.org` e
+  `attestazione.trust.spaziogenesi.org`. Sono in modalità DNS-only e il loro CNAME
+  — **firmato da noi** — punta a `spazio-genesi.github.io`, zona priva di DS e
+  quindi non firmata: l'autenticazione non si eredita per dati che vivono in una
+  zona non firmata. Vedi il residuo dichiarato in RSK-dns-hijacking.
+
+  ⚠️ Da non confondere: la presenza di record `DNSKEY` in risposta a una query
+  **non** prova che la zona sia firmata — il provider restituisce le chiavi
+  condivise della propria infrastruttura anche per zone non firmate. La prova è
+  la `RRSIG` più il `DS` al genitore.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-08-17

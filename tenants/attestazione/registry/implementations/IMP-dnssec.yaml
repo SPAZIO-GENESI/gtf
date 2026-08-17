@@ -1,0 +1,6 @@
+id: IMP-dnssec
+title: "Attivazione DNSSEC su Cloudflare e registrazione del record DS presso il registrar"
+repo: img-auth-hub
+ref: "Configurazione lato pannelli, non versionata in alcun repo (stessa classe di IMP-edge-security-headers e IMP-cloudflare-access-admin). Due passi eseguiti dal gestore il 2026-08-17: (1) DNS → Settings → DNSSEC → Enable su Cloudflare, che avvia la firma della zona ed è di per sé reversibile e invisibile agli utenti finché il genitore non pubblica il DS; (2) inserimento del record DS (keyTag 2371, algorithm 13, digestType 2) nel pannello DNSSEC di Squarespace Domains, il registrar — che ammette record DS per nameserver esterni, fino a otto. ⚠️ NON è stata usata la protezione DNSSEC 'automatica' del registrar, che vale solo per chi usa i suoi nameserver. Prima di toccare il registrar il DS atteso è stato ricalcolato in autonomia dalle DNSKEY pubblicate (nome in wire-format + RDATA → SHA-256) e confrontato alla cieca con quello mostrato dal provider: identico. Catena verificata chiusa 4 minuti dopo l'inserimento. Procedura e valori in img-auth-hub/docs/STATO.md."
+supports: [CTL-dnssec]
+visibility: public

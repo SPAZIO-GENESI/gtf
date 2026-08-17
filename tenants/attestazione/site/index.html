@@ -154,7 +154,7 @@
         <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W34) + ancoraggi dogfooding onorati (2/2 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">62</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">63</td></tr>
         <tr class="is-counted is-partial" title="revisione: ultima il 2026-07-19 (29/90 giorni); ACT: nessuna ancora risolta"><td class="ledger-label">Audit *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted is-partial" title="snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (29 giorni fa)"><td class="ledger-label">Conservazione *</td><td class="ledger-value">94</td></tr>
         <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">97</td></tr>
@@ -558,6 +558,21 @@
           <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-dev-selfservice-signup-abuse</span></p>
+      </article>
+      <article class="norm-card">
+        <header>
+          <div class="risk-pills">
+            <span class="pill pill-sage">probabilità: low</span>
+            <span class="pill pill-amber">impatto: medium</span>
+          </div>
+          <h3>Dirottamento o falsificazione delle risposte DNS del dominio di verifica</h3>
+        </header>
+        <p class="ref">Mitigato da</p>
+        <ul class="ctl-list">
+          <li><span class="tag">CTL-dnssec</span> <span class="pill pill-sage status-badge">attivo</span> DNSSEC attivo sulla zona spaziogenesi.org, con catena di fiducia chiusa fino al registro .org</li>
+          <li><span class="tag">CTL-edge-security-headers</span> <span class="pill pill-sage status-badge">attivo</span> Header di sicurezza HTTP (HSTS, CSP, Permissions-Policy) all'edge Cloudflare</li>
+        </ul>
+        <p class="tag-line"><span class="tag">RSK-dns-hijacking</span></p>
       </article>
       <article class="norm-card">
         <header>
