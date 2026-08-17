@@ -59,16 +59,33 @@ decision: >
   cambia senza che il digest venga riallineato, e un'evidenza settimanale che
   riscarica le skill dal vivo e ricalcola i digest.
 consequences: >
-  Il livello misurato dal rilevatore esterno passa da 1 a 2, con sette controlli
-  soddisfatti. Il livello successivo dipende da **un solo requisito**, la
-  negoziazione di contenuto in Markdown, e si è deciso di **non** inseguirlo: non
-  solo perché richiederebbe un piano a pagamento o mettere la pagina più visitata
-  dietro un servizio applicativo (un rischio di disponibilità per un controllo di
-  comodità), ma perché misurerebbe la conversione automatica delle pagine HTML —
-  che per un agente è il contenuto meno utile disponibile, dato che le istruzioni
-  scritte apposta, il contratto API e la mappa dei link esistono già in forma
-  nativa per macchine. Un punteggio più alto non renderebbe il servizio più
-  usabile da un solo agente in più.
+  Il livello misurato dal rilevatore esterno passa da 1 al **massimo previsto
+  dalla scala** (nessun livello ulteriore dichiarato), con **11 controlli
+  soddisfatti su 15**.
+
+  ⚠️ **Rettifica di una valutazione sbagliata, registrata perché il ragionamento
+  errato è istruttivo.** Una prima analisi aveva concluso di **non** perseguire la
+  negoziazione di contenuto in Markdown, per due motivi entrambi rivelatisi
+  infondati: (a) si riteneva richiedesse un piano a pagamento o l'esposizione
+  della pagina più visitata dietro un servizio applicativo, mentre esiste una via
+  gratuita e a rischio nullo — una regola di riscrittura all'edge che, **solo**
+  quando la richiesta dichiara `Accept: text/markdown`, riscrive il percorso verso
+  una versione Markdown generata dalla pagina (nessun browser invia
+  quell'intestazione, quindi il percorso normale non viene mai toccato, e la
+  riscrittura precede la cache: le due versioni non possono mescolarsi); (b) si
+  riteneva che il beneficio fosse marginale perché la conversione riguarda le
+  pagine HTML, contenuto meno utile a un agente delle istruzioni scritte apposta.
+  Il punto (b) resta vero nel merito, ma la conclusione era sbagliata: quel
+  singolo controllo separava dal livello massimo, non da un gradino. La lezione
+  registrata è metodologica — una soluzione va scartata dopo aver verificato le
+  alternative, non dopo averne immaginate due.
+
+  Il gemello Markdown è **generato** dalla pagina, mai scritto a mano, con una
+  guardia di CI che blocca la pubblicazione se i due divergono: un gemello fermo a
+  una versione vecchia descriverebbe agli agenti un servizio che non esiste più.
+  Deliberatamente **non** viene dichiarato il conteggio di token opzionale: un
+  numero fisso sarebbe falso dal primo cambiamento del contenuto — stesso criterio
+  dei descrittori rifiutati.
 
   Nessun controllo, rischio o trattamento nuovo entra nel registro: sono documenti
   di descrizione, non meccanismi di sicurezza, e non raccolgono nulla. Gli
