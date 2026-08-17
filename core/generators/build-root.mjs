@@ -87,6 +87,7 @@ ${renderMatomo(cfg.matomo)}
   <header class="hero">
     <p class="eyebrow">${cfg.eyebrow}</p>
     <h1>${cfg.heading}</h1>
+    <p class="tagline">${cfg.tagline_html}</p>
     <p class="thesis">${cfg.thesis_html}</p>
   </header>
 

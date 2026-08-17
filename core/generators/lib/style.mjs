@@ -51,6 +51,7 @@ export const STYLE = `
   .hero { padding: 3rem 0 1.5rem; }
   .eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 0.4rem; }
   .hero h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 600; margin: 0 0 0.6rem; }
+  .tagline { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 38rem; margin: 0 0 1rem; }
   .thesis { max-width: 38rem; margin: 0 0 2rem; }
 
   .ledger { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 1.2rem 0; }

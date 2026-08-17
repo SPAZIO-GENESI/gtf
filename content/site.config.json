@@ -2,8 +2,9 @@
   "version": "1.0.0",
   "language": "it",
   "title": "Genesis Trust Framework",
-  "eyebrow": "Genesis Trust Framework",
-  "heading": "Un registro pubblico che dimostra la fiducia, non la dichiara",
+  "eyebrow": "Registro pubblico di trasparenza",
+  "heading": "Genesis Trust Framework",
+  "tagline_html": "Un registro pubblico che dimostra la fiducia, non la dichiara.",
   "thesis_html": "Un framework di trasparenza applicabile a più progetti digitali: principi,\n    requisiti, controlli, evidenze, rischi e decisioni pubblicati come record\n    verificabili — non come promesse. Ogni progetto che lo applica ha il\n    proprio Trust Center, con un punteggio calcolato soltanto dal suo registro.",
 
   "sections": [
