@@ -41,3 +41,39 @@ last_reviewed: 2026-08-13
 # 2026-08-13, secondo giro: branch protection + fine-grained PAT
 # SCORECARD_TOKEN aggiunti (vedi verify_howto). Aggiornamento di
 # evidenza su un controllo già active, non una promozione.
+i18n:
+  en:
+    title: "Public monitoring of security posture via OpenSSF Scorecard (A3)"
+    verify_howto: >
+      Without any credential: `curl
+      https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth`
+      (and likewise for `/SPAZIO-GENESI/imgauthweb` and
+      `/SPAZIO-GENESI/autart-signer`) returns the most recent public
+      OpenSSF Scorecard score with the per-check breakdown
+      (Dependency-Update-Tool, Maintained, Dangerous-Workflow,
+      Token-Permissions, Pinned-Dependencies, etc.). First real data
+      collected on 2026-08-13: imgauth 5.7/10, imgauthweb 5.4/10,
+      autart-signer 2.9/10. Same day, in a second pass: branch
+      protection enabled on all three repos (no force-push, no branch
+      deletion, `check` status check required where it exists —
+      imgauth/imgauthweb; absent on autart-signer, which has no workflow
+      on `pull_request`) and a fine-grained PAT (`SCORECARD_TOKEN`,
+      `Administration:Read-only` only) added to `scorecard.yml` because
+      the default `GITHUB_TOKEN` cannot read branch protection rules —
+      without it, the Branch-Protection check errored out (-1, excluded
+      from the score) instead of being evaluated. With the fix: imgauth
+      7.6/10, imgauthweb 7.6/10, autart-signer 5.6/10, Branch-Protection
+      3/10 on all three ("not maximal": mandatory PR review is missing,
+      deliberately skipped because the actual workflow is direct push to
+      main). Every repo has a weekly scheduled workflow (`scorecard.yml`,
+      `workflow_dispatch` for a manual run) that also publishes the
+      result on GitHub's "Security → Code scanning" tab — that page,
+      however, **requires an authenticated GitHub session even on
+      public repositories** (verified: `curl` on
+      `github.com/.../security/code-scanning` without credentials
+      returns 404, and the equivalent REST endpoint
+      `api.github.com/.../code-scanning/alerts` returns 401) — the same
+      kind of client limitation already documented in
+      `CTL-build-provenance`/ADR-A1. The public securityscorecards.dev
+      API used above does not have this limitation and is the primary
+      way to verify this control.

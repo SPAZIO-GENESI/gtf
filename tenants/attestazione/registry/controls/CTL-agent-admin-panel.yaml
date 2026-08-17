@@ -16,3 +16,14 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 90
 last_reviewed: 2026-07-19
+i18n:
+  en:
+    title: "Agent credential admin panel: list/issue/revoke/quota with restricted access"
+    verify_howto: >
+      Access to the panel and its management functions is restricted to
+      the maintainer and defense-in-depth protected (Cloudflare Access
+      upstream plus application-level protection — see
+      CTL-cloudflare-access-admin and ADR-P21-admin-cfaccess). The effect
+      of management operations is observable indirectly: an issued
+      credential authenticates on /api/hash, a revoked one gets 403. The
+      perimeter never touches certificate issuance in any way.

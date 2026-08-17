@@ -13,3 +13,10 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Anti-bot challenge before any attestation is issued"
+    verify_howto: >
+      Call /api/hash without a turnstile_token: 400 response. With a
+      fake token: 403. The widget is visible above "Generate
+      attestation" on attestazione.spaziogenesi.org.

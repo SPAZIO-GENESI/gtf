@@ -6,3 +6,9 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-r2-eu-archive, CTL-ots-anchor, CTL-dogfooding-anchor, CTL-iso27037-honest-positioning, CTL-r2-offsite-backup, CTL-maintainer-succession]
 visibility: public
+i18n:
+  en:
+    source_ref: "principles of digital evidence preservation"
+    statement: >
+      Evidence (certificate, anchor) must be preserved with demonstrable
+      integrity and must not be silently alterable over time.

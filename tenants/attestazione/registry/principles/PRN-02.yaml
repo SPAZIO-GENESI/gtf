@@ -10,3 +10,12 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      No claim without evidence to support it; expired evidence silently
+      degrades the control that depends on it, never the status quo.
+    rule: >
+      Every control (CTL) references ≥1 evidence (EVD) with a declared
+      `freshness`; expired evidence → the control moves to `stale`, the
+      score drops.

@@ -13,3 +13,10 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Per-IP rate limiting on certificate issuance and hash/verify"
+    verify_howto: >
+      Send more than 10 requests in 60s to /api/cert-pdf (or more than
+      60 to /api/hash|/api/verify) from the same IP: requests over the
+      threshold get 429.

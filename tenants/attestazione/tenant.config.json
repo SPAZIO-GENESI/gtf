@@ -54,7 +54,54 @@
         ]
       }
     ],
-    "footer_note_html": "Genesis Trust Framework · pagina generata automaticamente dal\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">registro pubblico</a> —\n      nessun testo di questa pagina è scritto a mano (principio PRN-03)."
+    "footer_note_html": "Genesis Trust Framework · pagina generata automaticamente dal\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">registro pubblico</a> —\n      nessun testo di questa pagina è scritto a mano (principio PRN-03).",
+
+    "i18n": {
+      "en": {
+        "title": "Trust Center — Genesis Trust Framework",
+        "eyebrow": "Genesis Trust Framework",
+        "heading": "Spazio Genesi ETS's trust registry",
+        "thesis_html": "Why <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    deserves trust — with verifiable evidence, not declarations.",
+        "badge_alt": "Genesis Trust Score",
+        "decisions_note": "This log is kept in Italian only for now — the underlying decisions are still verifiable in the source registry.",
+        "nav_external": [
+          { "label": "Service status ↗", "href": "https://attestazione.spaziogenesi.org/status/" },
+          { "label": "Changelog ↗", "href": "https://attestazione.spaziogenesi.org/changelog/" }
+        ],
+        "footer_columns": [
+          {
+            "heading": "The registry",
+            "links": [
+              { "label": "The framework ↗", "href": "https://trust.spaziogenesi.org/en/" },
+              { "label": "Public registry", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry" },
+              { "label": "Score formula", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics" },
+              { "label": "DevOps and releases (IT)", "href": "/devops/" },
+              { "label": "Technical whitepaper (IT)", "href": "/whitepaper.html" }
+            ]
+          },
+          {
+            "heading": "The attestation service",
+            "links": [
+              { "label": "Attest and verify", "href": "https://attestazione.spaziogenesi.org" },
+              { "label": "Service status", "href": "https://attestazione.spaziogenesi.org/status/" },
+              { "label": "Changelog", "href": "https://attestazione.spaziogenesi.org/changelog/" },
+              { "label": "Developers: API &amp; MCP", "href": "https://attestazione.spaziogenesi.org/developer/" },
+              { "label": "Privacy", "href": "https://attestazione.spaziogenesi.org/privacy.html" }
+            ]
+          },
+          {
+            "heading": "Open source code",
+            "links": [
+              { "label": "imgauth (engine)", "href": "https://github.com/SPAZIO-GENESI/imgauth" },
+              { "label": "imgauthweb (interface)", "href": "https://github.com/SPAZIO-GENESI/imgauthweb" },
+              { "label": "autart-signer (signing)", "href": "https://github.com/SPAZIO-GENESI/autart-signer" },
+              { "label": "attest-mcp (MCP server)", "href": "https://github.com/SPAZIO-GENESI/attest-mcp" }
+            ]
+          }
+        ],
+        "footer_note_html": "Genesis Trust Framework · this page is generated automatically from the\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">public registry</a> —\n      no text on this page is written by hand (principle PRN-03)."
+      }
+    }
   },
 
   "score": {

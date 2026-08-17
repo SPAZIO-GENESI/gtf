@@ -15,3 +15,6 @@ likelihood: low
 impact: low
 mitigated_by: [CTL-agent-admin-panel, CTL-cloudflare-access-admin, CTL-rate-limiting]
 visibility: public
+i18n:
+  en:
+    title: "Agent credential admin panel: defense-in-depth access"

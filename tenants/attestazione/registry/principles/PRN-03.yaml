@@ -10,3 +10,13 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      No public document in the Trust Center is written by hand: it is
+      always generated from the registry, so it can never diverge from
+      what is true.
+    rule: >
+      No document in the Trust Center is written by hand: everything is
+      generated from the registry; CI fails if a published file has no
+      source record.

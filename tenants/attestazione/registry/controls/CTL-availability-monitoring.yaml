@@ -15,3 +15,12 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-21
+i18n:
+  en:
+    title: "Public traffic-light status of services, with proportional history and daily drill-down"
+    verify_howto: >
+      Check https://attestazione.spaziogenesi.org/status/: live status,
+      90-day bars with uptime % weighted by time (P36, 2026-07-21: a brief
+      outage now shows a mark proportional to its actual duration, not the
+      whole day colored anymore), drill-down into the fine-grained events
+      of each day (even the "green" ones) with an honest impact box.

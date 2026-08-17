@@ -11,3 +11,12 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      The framework must be sustainable by a volunteer organization:
+      every recurring process declares its own human cost, and the
+      system has a cap.
+    rule: >
+      Every new process declares `human_cost_minutes_month`; the system
+      total has a cap (budget 8 h/month) visible in the Trust Center.

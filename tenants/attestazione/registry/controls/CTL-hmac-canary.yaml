@@ -19,3 +19,6 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "External canary that detects a botched HMAC secret rotation"

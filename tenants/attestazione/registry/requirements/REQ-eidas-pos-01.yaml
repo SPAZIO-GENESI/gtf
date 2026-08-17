@@ -7,3 +7,9 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-eidas-honest-positioning]
 visibility: public
+i18n:
+  en:
+    source_ref: "art. 46-equivalent — non-discrimination of the legal effects of unqualified electronic evidence"
+    statement: >
+      The service must truthfully inform users of the level of assurance
+      it offers, without implying an eIDAS qualification it does not hold.

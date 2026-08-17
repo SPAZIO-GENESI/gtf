@@ -12,7 +12,12 @@
     "derives_from": { "type": "string", "description": "ID della missione da cui il principio discende (MSN-01)" },
     "status": { "type": "string", "enum": ["active", "retired"], "default": "active" },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
-    "why_not_public": { "type": "string" }
+    "why_not_public": { "type": "string" },
+    "i18n": {
+      "type": "object",
+      "description": "Traduzioni opzionali per lingua: i18n.<locale>.<campo> sovrascrive il campo italiano quando la pagina è generata in quella lingua.",
+      "additionalProperties": { "type": "object", "additionalProperties": { "type": "string" } }
+    }
   },
   "required": ["id", "type", "title", "statement"],
   "allOf": [

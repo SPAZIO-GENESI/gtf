@@ -12,3 +12,10 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "The fingerprint is computed in the browser; the file never leaves the device"
+    verify_howto: >
+      Open attestazione.spaziogenesi.org with DevTools › Network, attest
+      a file: the request to /api/hash contains only
+      {sha256,name,type,size}, no bytes of the file.

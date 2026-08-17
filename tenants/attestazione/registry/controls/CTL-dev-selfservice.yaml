@@ -24,3 +24,23 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-12
+i18n:
+  en:
+    title: "Self-service API key with one-shot OAuth email verification (Google/Microsoft/LinkedIn), post-moderation"
+    verify_howto: >
+      Open attestazione.spaziogenesi.org/developer/keys/ (P29: static
+      page on authweb, the three "Continue with
+      Google/Microsoft/LinkedIn" buttons are now fixed in the HTML — an
+      accepted trade-off from PHASE 3, they no longer reflect the
+      provider's runtime configuration on imgauth): shows the short
+      privacy notice before the redirect (LinkedIn since 2026-07-12,
+      imgauth 1.20.0, ADR-P25-linkedin). After login, the OAuth callback
+      redirects with the sg_k_… key ONLY in the URL fragment (`#sgk=…`,
+      never in an HTML response from the server, P29), shown once by
+      client-side JS and usable on /api/hash like any other API key. A
+      second request with the same email does not issue a second key
+      (`#sgstate=gia-attiva` fragment).
+      In the /admin panel the key shows a Holder column (email +
+      provider); revoking it shows "Forget holder" for immediate
+      anonymization (otherwise automatic 180 days after revocation, via
+      cron).

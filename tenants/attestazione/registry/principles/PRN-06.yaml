@@ -10,3 +10,12 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Every change to the registry goes through review; non-obvious
+      decisions leave an explicit trace, not just a commit.
+    rule: >
+      Every change to the registry goes through a PR; non-obvious
+      decisions require a mandatory ADR (the `needs-adr` label blocks the
+      merge until one exists).

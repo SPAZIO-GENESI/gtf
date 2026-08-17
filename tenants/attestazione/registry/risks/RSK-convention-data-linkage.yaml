@@ -15,3 +15,6 @@ likelihood: low
 impact: medium
 mitigated_by: [CTL-convention-accounting]
 visibility: public
+i18n:
+  en:
+    title: "The convention log links a person (email) to the works they attest"

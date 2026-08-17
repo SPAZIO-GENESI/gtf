@@ -28,3 +28,6 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-12
+i18n:
+  en:
+    title: "Email-domain conventions: organization's monthly pool, degrade never block, log minimized to taxed issuances only"

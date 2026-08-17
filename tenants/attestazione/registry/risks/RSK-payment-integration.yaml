@@ -28,3 +28,6 @@ likelihood: low
 impact: medium
 mitigated_by: [CTL-pro-subscription, CTL-cicd-pipeline]
 visibility: public
+i18n:
+  en:
+    title: "Dependence on Stripe for the entire payment lifecycle; state drift on lost or delayed webhook events"

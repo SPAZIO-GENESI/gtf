@@ -42,3 +42,42 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-18
+i18n:
+  en:
+    title: "Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1"
+    verify_howto: >
+      Open attestazione.spaziogenesi.org/profilo/ (P29: static shell on
+      authweb, fetching from imgauth), sign in with a one-shot OAuth
+      login (Google/Microsoft/LinkedIn — same mechanism as
+      CTL-dev-selfservice and CTL-site-voucher-auth, no password, no
+      account). Without a subscription: the active price list is shown
+      dynamically (never hardcoded) with a Checkout button that opens a
+      hosted Stripe page — no card field ever appears on
+      imgauth.spaziogenesi.org. With an active subscription: status,
+      expiry, top-up log, this month's usage, a certificate archive with
+      production channel (web/api/mcp/telegram), a "Manage or cancel
+      subscription" button that opens the hosted Stripe Customer Portal
+      (invoices, payment method, cancellation — never on this Worker).
+      Cancelling from the Portal (default behavior for annual
+      subscriptions: stays active until the already-paid expiry) shows a
+      "cancellation scheduled" banner without losing the tier. The
+      convention→professional→developer→base precedence chain never
+      blocks: an exhausted quota or subscription degrades to Base with
+      an explicit reason (`fascia_motivo`), the same logic already
+      verified for CTL-convention-accounting. The price list and
+      discount codes are managed from the /admin panel (Professional
+      tab): rows with validity windows (a past amount is never edited,
+      it is closed and a new one created) and percentage/fixed
+      discounts, even reserved to a single email.
+      ✅ Tested with a **real, paid subscription** (€1, not synthetic
+      data) end-to-end in production on 17-18 July 2026 — see
+      EVD-pro-subscription-live-test: checkout → attestation from the
+      site recognized at the professional tier → archive with channel →
+      cancellation from the Customer Portal → refund. The test surfaced
+      and fixed three real defects never encountered in local tests (the
+      account's Stripe API shape, `cancel_at_period_end` always `false`,
+      a duplicate Customer Portal event for one click) — see ADR-P27. It
+      is born directly `active`, the same criterion already applied to
+      CTL-cicd-pipeline, CTL-site-voucher-auth and
+      CTL-convention-accounting: a control tested with real data, not
+      just declared.

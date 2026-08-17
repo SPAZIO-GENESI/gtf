@@ -20,3 +20,18 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-11
+i18n:
+  en:
+    title: "Telegram channel (attest-bot): blocking disclosure, streaming hash, quotas, and retention"
+    verify_howto: >
+      Open @SGAttestBot on Telegram and send a file as the first
+      message: the bot replies with the warning about the file's
+      transit BEFORE downloading anything (no call to getFile until you
+      accept). After accepting, an attested file produces a fingerprint
+      identical to the one computed by hand on the same file (no
+      alteration in transit). A photo (not a document) is rejected with
+      the recompression warning, with no download at all. Sixth
+      attestation file on the same day (or twenty-first verification) →
+      quota message, no call to imgauth. Writing to
+      info@spaziogenesi.org lets you request early deletion of your
+      user id and usage counters.

@@ -45,3 +45,43 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 90
 last_reviewed: 2026-07-19
+i18n:
+  en:
+    title: "Release chain: replicated staging + CI + production gate with human approval (P24)"
+    verify_howto: >
+      Status as of today (2026-07-11, PHASE 0-4 and 7 of 8 completed —
+      see https://trust.spaziogenesi.org/devops.html for the full
+      table): every pull request on the public imgauth repo
+      automatically runs syntax/contract/build checks (Actions tab, "CI"
+      workflow); merging into main automatically updates the staging
+      environment (`imgauth-staging`, workers.dev, never production data
+      or secrets) and verifies it with an end-to-end smoke test (ping,
+      status, full attestation → certificate → retrieval round trip).
+      The **production gate with human approval is active**: a
+      dedicated job (`deploy-production`) stays WAITING until a required
+      reviewer (GitHub Environment "production") approves from the
+      GitHub interface — no deploy step starts before that. After
+      approval: `wrangler versions upload` (new version at 0% traffic)
+      followed by `wrangler versions deploy` (promotion to 100%), then a
+      read-only smoke test on `/ping`. Verifiable by opening a public run
+      that went through the whole path, e.g.
+      https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055
+      (the project's first gated release, 2026-07-11): the
+      `deploy-production` job shows "waiting" status until approval,
+      then the upload/promotion/smoke steps, all green. Rollback
+      (`wrangler rollback <version-id> --yes`, seconds, no rebuild) has
+      been tested live on staging, never in production for a test.
+
+      The **staging interface** (public repo `attestazione-staging`,
+      GitHub Pages on `*.github.io`, no custom domain) is generated from
+      imgauthweb's `staging` branch and tested with a real browser test
+      (Playwright, not just curl): footer with the engine version read
+      from `imgauth-staging` (CORS confirmation), full attestation with
+      a test Turnstile, unsigned PDF downloaded and verified, permanent
+      link present. Anyone can repeat the test by opening
+      https://spazio-genesi.github.io/attestazione-staging/ and
+      attesting a test file.
+
+      RADART has its own staging/CI planned but not yet run (PHASE 5-6)
+      — this control currently covers imgauth and authweb, not yet
+      RADART.

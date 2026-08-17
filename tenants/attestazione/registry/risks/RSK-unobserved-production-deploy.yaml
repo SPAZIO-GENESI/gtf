@@ -12,3 +12,6 @@ likelihood: medium
 impact: medium
 mitigated_by: [CTL-cicd-pipeline]
 visibility: public
+i18n:
+  en:
+    title: "A change deployed to production without ever being observed \"live\""

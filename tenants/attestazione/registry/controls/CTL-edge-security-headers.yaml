@@ -18,3 +18,17 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-14
+i18n:
+  en:
+    title: "HTTP security headers (HSTS, CSP, Permissions-Policy) at the Cloudflare edge"
+    verify_howto: >
+      Inspect the response headers of spaziogenesi.org or
+      attestazione.spaziogenesi.org (e.g. curl -I or
+      securityheaders.com): Strict-Transport-Security (max-age one year,
+      includeSubDomains), Content-Security-Policy (script-src 'self'
+      https:, WITHOUT 'unsafe-inline' since 2026-07-14 — see
+      ADR-edge-security-headers for how it was removed) and
+      Permissions-Policy must all be present; GitHub Pages'
+      Access-Control-Allow-Origin: * must be absent on the Pages hosts
+      only (spaziogenesi.org, www., attestazione.), NEVER on
+      imgauth.spaziogenesi.org where CORS remains necessary.

@@ -11,3 +11,13 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Whatever can be collected automatically is collected automatically;
+      manual collection is the exception that must be justified, not the
+      norm.
+    rule: >
+      Field `collection: auto|manual` on every evidence (EVD); the `auto`
+      percentage is a score indicator; new `manual` EVDs require
+      justification.

@@ -15,3 +15,13 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "PAdES B-LT signature with an RFC 3161 timestamp from a recognized TSA (Adobe AATL)"
+    verify_howto: >
+      Open an issued PDF certificate in Adobe Acrobat (or a
+      PAdES-compliant reader): the signature panel shows the timestamp
+      from a trusted third party (Adobe AATL), verifiable without
+      trusting the service. Since 2026-07-09 the code that generates the
+      signature is also directly inspectable:
+      github.com/SPAZIO-GENESI/autart-signer (AGPL-3.0).

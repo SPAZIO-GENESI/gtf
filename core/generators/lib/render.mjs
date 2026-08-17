@@ -28,6 +28,17 @@ export function para(str) {
   return linkifyUrls(esc(str).trim().replace(/\n\s*/g, " "));
 }
 
+// Legge un campo di un record rispettando la lingua: record.i18n.<locale>.<field>
+// sovrascrive record.<field> quando esiste, altrimenti ricade sull'italiano.
+// locale "it" non guarda mai i18n — l'italiano è sempre il campo diretto.
+export function L(record, field, locale) {
+  if (locale && locale !== "it") {
+    const translated = record?.i18n?.[locale]?.[field];
+    if (translated) return translated;
+  }
+  return record?.[field];
+}
+
 // Analytics Matomo: URL e siteId sono valori di un tenant, non del motore
 // (vedi core/README.md "Cosa NON può stare qui" — nessun default che assuma
 // quale installazione è quella vera). Il chiamante passa cfg.matomo /

@@ -14,3 +14,11 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "HMAC token binding the hash, server-side timestamp, and declared metadata"
+    verify_howto: >
+      Try calling /api/cert-pdf with a hash or timestamp different from
+      the one returned by /api/hash: the request is rejected (400/403).
+      The "worker" component's status on /api/status also reflects the
+      outcome of the internal HMAC probe.

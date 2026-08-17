@@ -16,3 +16,14 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-19
+i18n:
+  en:
+    title: "Offsite backup of the certificate archive, verified with a real restore drill"
+    verify_howto: >
+      Public report of the latest restore test in
+      gtf/docs/verbali/2026-07-restore-drill.md: samples restored from
+      the backup (not from the primary archive) and verified with the
+      standard public tools (HMAC signature via /api/verify, Bitcoin
+      anchor, archive badge). The backup's operational details
+      (provider, region, names) are not public by choice — see
+      ADR-GTF-013.

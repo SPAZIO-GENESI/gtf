@@ -12,3 +12,10 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Public, up-to-date privacy notice"
+    verify_howto: >
+      Check privacy.html on attestazione.spaziogenesi.org: it describes
+      what is processed, that the file never leaves the device, the
+      legal bases, and the data subject's rights.

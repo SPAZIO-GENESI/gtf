@@ -8,3 +8,6 @@ likelihood: low
 impact: high
 mitigated_by: [CTL-hmac-signing, CTL-pades-blt-tsa, CTL-cert-pdf-verification]
 visibility: public
+i18n:
+  en:
+    title: "Certificate forgery (fake hash or backdated date)"

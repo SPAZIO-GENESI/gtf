@@ -16,3 +16,6 @@ likelihood: low
 impact: low
 mitigated_by: [CTL-dev-selfservice, CTL-hmac-signing, CTL-rate-limiting]
 visibility: public
+i18n:
+  en:
+    title: "Automated or repeated issuance of self-service keys (signup abuse)"

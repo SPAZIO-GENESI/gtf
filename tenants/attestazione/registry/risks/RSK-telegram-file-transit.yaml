@@ -21,3 +21,6 @@ likelihood: low
 impact: low
 mitigated_by: [CTL-telegram-channel, CTL-hmac-signing, CTL-rate-limiting]
 visibility: public
+i18n:
+  en:
+    title: "The work's file in transit over third-party infrastructure (Telegram) and the bot's Worker"

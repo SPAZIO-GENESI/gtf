@@ -19,7 +19,12 @@
     "justification": { "type": "string" },
     "satisfied_by": { "type": "array", "items": { "type": "string" } },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
-    "why_not_public": { "type": "string" }
+    "why_not_public": { "type": "string" },
+    "i18n": {
+      "type": "object",
+      "description": "Traduzioni opzionali per lingua: i18n.<locale>.<campo> sovrascrive il campo italiano quando la pagina è generata in quella lingua.",
+      "additionalProperties": { "type": "object", "additionalProperties": { "type": "string" } }
+    }
   },
   "required": ["id", "source", "statement", "applicability"],
   "allOf": [

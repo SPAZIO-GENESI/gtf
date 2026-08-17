@@ -15,3 +15,6 @@ description: >
 likelihood: low
 impact: low
 visibility: public
+i18n:
+  en:
+    title: "Expiry of a tenant Trust Center's publish token without renewal"

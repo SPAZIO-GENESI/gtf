@@ -20,3 +20,6 @@ likelihood: low
 impact: low
 mitigated_by: [CTL-pro-subscription]
 visibility: public
+i18n:
+  en:
+    title: "Optional profiling (segment/region, application/OS/environment) — data beyond the minimum necessary to deliver the service"

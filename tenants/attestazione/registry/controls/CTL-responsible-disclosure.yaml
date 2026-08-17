@@ -20,3 +20,21 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 330
 last_reviewed: 2026-07-21
+i18n:
+  en:
+    title: "security.txt (RFC 9116) + public responsible disclosure policy"
+    verify_howto: >
+      `curl
+      https://attestazione.spaziogenesi.org/.well-known/security.txt`
+      and `curl
+      https://imgauth.spaziogenesi.org/.well-known/security.txt` both
+      respond 200 with `Contact: mailto:it@spaziogenesi.org`, a future
+      `Expires`, and `Policy:
+      https://attestazione.spaziogenesi.org/sicurezza/`. That page lists
+      the scope (the two domains, the workers.dev services
+      attest-bot/attest-mcp-remote, the organization's public GitHub
+      repos), a safe-harbor commitment for good-faith research,
+      acknowledgment within 5 business days, explicit limits (no DoS,
+      social engineering, physical access, real third-party data), and
+      an English summary. `Expires` renewal is tracked by
+      PRC-security-txt-renewal.

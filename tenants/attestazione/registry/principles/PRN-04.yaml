@@ -10,3 +10,11 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Every security control is anchored to a real implementation and a
+      declared threat: no "cosmetic" measures.
+    rule: >
+      Every security CTL references its implementation (IMP → file/line/
+      config) and the risk (RSK) it mitigates.

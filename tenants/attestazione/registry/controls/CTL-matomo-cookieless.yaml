@@ -12,3 +12,10 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Cookieless analytics, no persistent identifier"
+    verify_howto: >
+      Inspect the cookies set by attestazione.spaziogenesi.org with the
+      browser's developer tools: no Matomo cookie; consistently, there
+      is no cookie consent banner.

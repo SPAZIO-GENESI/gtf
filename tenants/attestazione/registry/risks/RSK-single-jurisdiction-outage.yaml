@@ -8,3 +8,6 @@ likelihood: medium
 impact: medium
 mitigated_by: [CTL-availability-monitoring]
 visibility: public
+i18n:
+  en:
+    title: "Outage of a critical component (Azure authart, R2, Cloudflare Worker)"

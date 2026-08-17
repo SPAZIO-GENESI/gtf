@@ -26,3 +26,26 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 365
 last_reviewed: 2026-08-13
+i18n:
+  en:
+    title: "Technical succession procedure, with a residual guarantee independently verifiable from the organization"
+    verify_howto: >
+      Two distinct things are verifiable today, without credentials, by
+      anyone — and must be kept separate. (1) The residual guarantee for
+      whoever holds a certificate is verifiable NOW, in production,
+      independently of this document: take an attested file, its PDF
+      certificate and the .ots file downloaded after issuance; verify
+      the .ots file with a public OpenTimestamps client (e.g.
+      https://opentimestamps.org, or the official client's `ots verify`
+      command) against the Bitcoin blockchain — no Spazio Genesi server
+      involved; open the PDF certificate in a PAdES-compliant reader
+      (e.g. Adobe Acrobat Reader) and check that the timestamp comes
+      from a trusted third party (DigiCert root in the Adobe Approved
+      Trust List). (2) The succession procedure itself
+      (piano-2026/umano/procedura-successione.md, private img-auth-hub
+      repo) is NOT published today: it is a completed draft, not yet
+      resolved or published by the competent body. The control stays
+      "draft" for this reason too, in addition to the lack of a
+      secret-recovery test carried out by someone other than the
+      maintainer (see ADR-B3). It will become fully verifiable only once
+      the procedure is published.

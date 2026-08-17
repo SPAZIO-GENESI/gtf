@@ -8,3 +8,6 @@ likelihood: medium
 impact: high
 mitigated_by: [CTL-eidas-honest-positioning]
 visibility: public
+i18n:
+  en:
+    title: "Communicating to the public a level of legal assurance higher than the real one"

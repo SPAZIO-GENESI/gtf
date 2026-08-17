@@ -14,3 +14,6 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-10
+i18n:
+  en:
+    title: "Cloudflare Access (Zero Trust) in front of the agent credential admin panel"

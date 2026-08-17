@@ -19,3 +19,16 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-10
+i18n:
+  en:
+    title: "Agent access: D1-backed bearer token (API key + device flow), bypasses only Turnstile"
+    verify_howto: >
+      Call POST /api/hash with a valid Authorization: Bearer
+      sg_(k|s)_<id>_<secret> header and no turnstile_token: the request
+      succeeds (no challenge required). With an unknown/malformed/revoked
+      credential → 403; with quota exhausted → 429; without an
+      Authorization header the Turnstile path stays exactly as before
+      (unchanged). For the device flow: POST /api/agent/authorize returns
+      a code, GET /agent/authorize?code= serves the authorization page on
+      the public domain, GET /api/agent/token?code= delivers the session
+      token once, after approval.

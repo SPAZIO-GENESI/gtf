@@ -29,3 +29,33 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel, CTL-pro-subscription, CTL-integrations-showcase]
 visibility: public
+i18n:
+  en:
+    source_ref: "artt. 15-22 — data subject rights (access, erasure, objection...)"
+    statement: >
+      Data subjects must be able to exercise their rights over the data
+      processed. Partial applicability: for anyone attesting a work, the
+      service creates no account, does not process the original file
+      (never sent to the server), and analytics carries no persistent
+      identifiers — most of the classic rights (access to one's own
+      profile, portability of account data) do not apply simply because
+      the data does not exist, not by a choice of non-compliance. Since
+      P22 (2026-07-10) a second category of data subjects exists with
+      real data to manage: developers who request a self-service API key
+      (email + OAuth provider). For them the right to erasure is
+      self-service-adjacent (request to the maintainer → immediate
+      anonymization from the admin panel) and in any case automatic 180
+      days after the key is revoked. Since P23 (2026-07-11) a third
+      category exists: users of the Telegram bot (user id + usage
+      counters). Here too, erasure is on request to the maintainer and in
+      any case automatic after 90 days. Since P27 (2026-07-17/18) a
+      fourth category exists: subscribers to the Professional plan
+      (email, provider, Stripe subscription references, attestation
+      logs, optional profiling). Data subjects can independently manage
+      optional profiling from the `/profilo` page (save/remove, no
+      request to the maintainer needed) and request early deletion of
+      subscription data — with an explicit, declared trade-off: they
+      lose access to their browsable archive (certificates remain valid
+      and retrievable by fingerprint regardless, as for anyone), and
+      they can also request deletion of archived PDFs not shared with
+      other attestations.

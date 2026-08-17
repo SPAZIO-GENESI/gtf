@@ -8,3 +8,6 @@ likelihood: medium
 impact: medium
 mitigated_by: [CTL-turnstile-antibot, CTL-rate-limiting]
 visibility: public
+i18n:
+  en:
+    title: "Automated abuse of the service (attestation spam)"

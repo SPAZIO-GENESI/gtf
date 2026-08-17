@@ -27,3 +27,25 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Explicit, stable statement: unqualified attestation, not a qualified eIDAS service"
+    statement: >
+      The service produces unqualified proof-of-existence attestations:
+      an advanced electronic signature with a self-signed certificate,
+      plus an RFC 3161 timestamp (TSA on the Adobe AATL) and a Bitcoin
+      anchor (OpenTimestamps). It is not a qualified eIDAS trust
+      service. Unqualified electronic evidence cannot be denied legal
+      effect solely because it is in electronic form or unqualified; its
+      evidentiary weight is for a judge to determine. Upgrading to a
+      qualified seal is on the public roadmap, conditional on the
+      organization's financial sustainability.
+    verify_howto: >
+      Check https://attestazione.trust.spaziogenesi.org (the attestation
+      Trust Center, on this subdomain since 16 August 2026 — the root
+      trust.spaziogenesi.org now hosts the framework's own page),
+      section "What this service is NOT": the text explicitly states the
+      unqualified nature of the attestation. Should this text ever
+      disappear or be watered down in a future revision, the GTF
+      registry would make that visible (this control's source record
+      remains public and versioned).

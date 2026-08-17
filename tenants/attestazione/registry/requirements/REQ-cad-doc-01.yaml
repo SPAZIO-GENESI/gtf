@@ -6,3 +6,10 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-pades-blt-tsa]
 visibility: public
+i18n:
+  en:
+    source_norm: "CAD (Italian Digital Administration Code) + AgID guidelines"
+    source_ref: "formation of the electronic document: integrity and legally opposable timestamp"
+    statement: >
+      The certificate, as an electronic document, must have a signature
+      and a timestamp that make its integrity legally opposable over time.

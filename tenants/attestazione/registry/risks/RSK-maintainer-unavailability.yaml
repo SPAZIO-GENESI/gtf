@@ -20,3 +20,6 @@ likelihood: medium
 impact: high
 mitigated_by: [CTL-maintainer-succession]
 visibility: public
+i18n:
+  en:
+    title: "Temporary or permanent unavailability of the sole technical maintainer"

@@ -29,3 +29,29 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-08-13
+i18n:
+  en:
+    title: "Static code analysis (CodeQL) and automatic dependency updates (Dependabot) (A3)"
+    verify_howto: >
+      Without any credential: `curl
+      https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/codeql.yml/runs?per_page=1`
+      (public REST endpoint, no authentication — verified) returns the
+      outcome of the latest CodeQL run on main; repeatable for the other
+      four repos with real JavaScript/TypeScript code (imgauthweb,
+      attest-mcp, attest-bot, attest-mcp-remote). ⚠️ Correction to the
+      original design doc: GitHub's "Security → Code scanning" web tab
+      **is not reachable without login, even on public repositories**
+      (verified on 2026-08-13: `curl` without credentials on
+      `github.com/.../security/code-scanning` returns 404, the
+      equivalent REST endpoint
+      `api.github.com/.../code-scanning/alerts` returns 401) — so it
+      cannot be used as the verify_howto for PRN-08. The workflow-runs
+      endpoint used above does not have this limitation. Verified live
+      on 2026-08-13, after merging A3's 10 PRs: CodeQL green
+      (`completed`/`success`) on all five repos. Dependabot opened 24
+      automatic dependency-update pull requests in the same pass
+      (publicly visible on each repo's Pull Requests tab, `state=all`
+      included via the API without authentication); human triage of
+      these alerts is a separate recurring process, already registered
+      as `PRC-security-alert-triage` (Federico Battisti, weekly
+      cadence).

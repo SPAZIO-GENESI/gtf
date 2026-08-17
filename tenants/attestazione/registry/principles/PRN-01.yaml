@@ -10,3 +10,12 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Every element of the system is visible by default; anything that
+      isn't must explicitly justify why.
+    rule: >
+      Every registry record has `visibility: public|internal|secret`;
+      default `public`; `internal`/`secret` require the `why_not_public`
+      field filled in.

@@ -35,3 +35,6 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-12
+i18n:
+  en:
+    title: "Stateless signed voucher for email access from the site (\"attest with your email\")"

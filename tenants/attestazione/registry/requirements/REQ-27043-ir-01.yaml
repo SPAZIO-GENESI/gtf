@@ -6,3 +6,9 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-availability-monitoring, CTL-responsible-disclosure]
 visibility: public
+i18n:
+  en:
+    source_ref: "incident investigation and response processes"
+    statement: >
+      There must be a defined and tested process for detecting and
+      responding to failures/incidents, not just an ad hoc reaction.

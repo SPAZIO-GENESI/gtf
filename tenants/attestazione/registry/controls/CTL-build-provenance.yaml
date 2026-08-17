@@ -41,3 +41,41 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-08-12
+i18n:
+  en:
+    title: "SLSA/in-toto provenance attestation on sg-attest standalone binaries (A1)"
+    verify_howto: >
+      Credential-free procedure (closes the PRN-08 gap described in
+      ADR-A1): clone the public repository, install the dev dependencies
+      and run the independent verification script on a binary downloaded
+      from the public Release page (e.g. `sg-attest-linux-x64` from tag
+      `v0.4.2`, https://github.com/SPAZIO-GENESI/attest-mcp/releases):
+
+      `git clone https://github.com/SPAZIO-GENESI/attest-mcp && cd
+      attest-mcp && npm install && node scripts/verify-provenance.mjs
+      ./sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp --tag v0.4.2`
+
+      Expected outcome: verification succeeds (exit 0), with an SLSA
+      predicate referencing the commit, the `release-binaries.yml`
+      workflow and the tag. The script only queries the public REST
+      endpoint of GitHub attestations (no Authorization header, verified)
+      and checks the Sigstore bundle with the npm `sigstore` library
+      against Sigstore's public infrastructure (Rekor/Fulcio/TUF, no
+      account needed). The same verification on a file altered by a
+      single byte fails (the digest changes, so the very key used to
+      look up the attestation changes) — tested, as is the case of a
+      renamed file with intact content (verification succeeds with a
+      warning, because the binding is on the in-toto subject's digest,
+      not the file name).
+
+      Alternatively, for those who already have `gh` authenticated: `gh
+      attestation verify sg-attest-linux-x64 --repo
+      SPAZIO-GENESI/attest-mcp` performs the same verification, but
+      **requires** an authenticated GitHub session even on this public
+      repository (verified: without `gh auth login`/`GH_TOKEN`, both `gh
+      attestation verify` and `gh attestation download` return exit 4,
+      "please run gh auth login") — a client limitation, not a data one:
+      the underlying REST endpoint is public. See ADR-A1 for the full
+      history: the gap was in the `gh` client, not in data availability,
+      and there is now an equivalent procedure that does not inherit
+      that limitation.

@@ -24,3 +24,24 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Dogfooding anchor: the GTF's own evidence history is attested and anchored in Bitcoin with its own service"
+    verify_howto: >
+      Monthly: since 2026-08-17 (P49, ADR-P49) building the bundle is a
+      GitHub button (.github/workflows/anchor-monthly.yml,
+      workflow_dispatch), no longer a terminal command.
+      generators/anchor-monthly.mjs concatenates the manifest.json files
+      of weekly snapshots not yet covered into a deterministic bundle
+      (committed under snapshots/anchors/) and refuses to overwrite one
+      that already exists for the same month; a human downloads the
+      file from the run summary, drags it onto
+      attestazione.spaziogenesi.org, generates the attestation and
+      downloads the PDF (only /api/cert-pdf triggers the real
+      OpenTimestamps anchoring — this remains the only human step by
+      choice, not by technical limitation). Anyone can recompute the
+      bundle's hash in the gtf repo, compare it against the one printed
+      on the certificate, and independently verify the .ots proof on
+      opentimestamps.org. First anchor: period 2026-07 (bundle
+      snapshots/anchors/2026-07-bundle.json, hash
+      cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).

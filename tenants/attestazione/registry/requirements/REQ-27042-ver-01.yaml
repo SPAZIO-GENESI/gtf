@@ -7,3 +7,10 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-cert-pdf-verification]
 visibility: public
+i18n:
+  en:
+    source_ref: "analysis and interpretation of digital evidence"
+    statement: >
+      There must be a way for a third party to analyze and interpret the
+      authenticity of a piece of evidence (the certificate) without having
+      to blindly trust whoever issued it.

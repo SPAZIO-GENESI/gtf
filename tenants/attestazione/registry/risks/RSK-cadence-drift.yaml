@@ -11,3 +11,6 @@ likelihood: medium
 impact: medium
 mitigated_by: [CTL-cadence-monitoring]
 visibility: public
+i18n:
+  en:
+    title: "A declared recurring process stops running without anyone noticing"

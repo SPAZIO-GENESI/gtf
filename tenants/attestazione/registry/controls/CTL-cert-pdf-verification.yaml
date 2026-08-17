@@ -14,3 +14,12 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Independent verification of a certificate's authenticity from the PDF alone"
+    verify_howto: >
+      Drag an issued PDF certificate onto the "Verify" tab of
+      attestazione.spaziogenesi.org: the traffic-light indicator shows
+      the match, the signature's authenticity, data integrity, and the
+      Bitcoin anchor status — without having to trust the service's word
+      alone.

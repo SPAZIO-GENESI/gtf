@@ -10,3 +10,11 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Every personal data flow is mapped, with legal basis and retention
+      declared, before it is even built — not after.
+    rule: >
+      Every data flow has a DAT record (data, legal basis, retention); a
+      flow without a DAT fails the build.

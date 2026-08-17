@@ -12,3 +12,11 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "CORS restricted to the user interface's domain only"
+    verify_howto: >
+      Call an imgauth endpoint from an origin other than
+      attestazione.spaziogenesi.org in a browser: the CORS response
+      denies the origin. Note: this is a browser-side defense only, not
+      against direct clients.

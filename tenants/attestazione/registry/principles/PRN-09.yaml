@@ -10,3 +10,11 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      An incident without a corrective action is an incident bound to
+      repeat; the system does not let this happen without flagging it.
+    rule: >
+      Every incident (INC) produces ≥1 action (ACT) with a deadline;
+      overdue and still-open ACTs show a banner in the Trust Center.

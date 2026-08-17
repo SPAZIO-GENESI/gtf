@@ -6,3 +6,9 @@ statement: >
 applicability: full
 satisfied_by: [CTL-privacy-policy-public, CTL-dev-selfservice, CTL-telegram-channel, CTL-pro-subscription, CTL-integrations-showcase]
 visibility: public
+i18n:
+  en:
+    source_ref: "art. 13/14 — information to the data subject"
+    statement: >
+      Anyone using the service must be able to clearly read what data is
+      processed, on what legal basis, and for how long.

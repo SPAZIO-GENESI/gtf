@@ -7,3 +7,6 @@ likelihood: low
 impact: high
 mitigated_by: [CTL-r2-eu-archive, CTL-ots-anchor, CTL-dogfooding-anchor, CTL-r2-offsite-backup]
 visibility: public
+i18n:
+  en:
+    title: "Tampering with archived certificates or the issuance history"

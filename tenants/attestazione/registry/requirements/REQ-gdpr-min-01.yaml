@@ -4,3 +4,7 @@ statement: "Trattare solo i dati strettamente necessari alla finalità di attest
 applicability: full
 satisfied_by: [CTL-hash-client-side, CTL-matomo-cookieless, CTL-dev-selfservice, CTL-telegram-channel, CTL-pro-subscription, CTL-integrations-showcase]
 visibility: public
+i18n:
+  en:
+    source_ref: "art. 5(1)(c) — data minimization"
+    statement: "Process only the data strictly necessary for the attestation purpose"

@@ -33,3 +33,32 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-18
+i18n:
+  en:
+    title: "Public Integrations showcase (pre-moderated) + software-house partner conventions with a monthly pool"
+    verify_howto: >
+      Open attestazione.spaziogenesi.org/integrazioni/ (P29: static page
+      on authweb, regenerated on-event by imgauth): public showcase,
+      only approved submissions appear (logo, name, description,
+      `rel="noopener nofollow"` link), with a total count and an honest
+      note that presence is not a certification of the software. Anyone
+      with an active API key or a Professional subscription can submit
+      their own application from the "Your integration" section of
+      attestazione.spaziogenesi.org/profilo/ (same one-shot OAuth login
+      as CTL-dev-selfservice and CTL-pro-subscription): the submission
+      is immediately `pending`, never public until the maintainer
+      approves it from the /admin panel (Integrations tab) —
+      pre-moderation, unlike every other self-service flow in the
+      system. Any later change — name, URL, description, or just the
+      logo — sends the status back to `pending`: there is no channel to
+      silently change what is already live. The logo, if present, is
+      served only for approved submissions (`GET
+      /integrazioni/logo/<id>`, 404 otherwise) and was validated on
+      upload against magic bytes (PNG/JPEG/WebP, never SVG, never the
+      declared Content-Type). Software houses attesting on behalf of
+      their own users use a convention with a dedicated monthly pool
+      (`convention_id` on the key, `domains` placeholder that can never
+      match a real email) — the same mechanism as
+      CTL-convention-accounting, reused with no new engine code. The
+      admin panel's GDPR "forget" also anonymizes a submission's holder
+      and withdraws it from the showcase.

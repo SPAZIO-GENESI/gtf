@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
 <link rel="alternate" hreflang="it" href="https://attestazione.trust.spaziogenesi.org/">
 <link rel="alternate" hreflang="en" href="https://attestazione.trust.spaziogenesi.org/en/">
 <link rel="alternate" hreflang="x-default" href="https://attestazione.trust.spaziogenesi.org/">
-<link rel="canonical" href="https://attestazione.trust.spaziogenesi.org/">
+<link rel="canonical" href="https://attestazione.trust.spaziogenesi.org/en/">
 <style>
   :root {
     color-scheme: light dark;
@@ -153,115 +153,115 @@
 </head>
 <body>
   <header class="hero">
-    <p class="lang-switch"><a href="/" aria-current="page">IT</a><span class="sep">·</span><a href="/en/" data-lang="en">EN</a></p>
+    <p class="lang-switch"><a href="/" data-lang="it">IT</a><span class="sep">·</span><a href="/en/" aria-current="page">EN</a></p>
     <p class="eyebrow">Genesis Trust Framework</p>
-    <h1>Il registro della fiducia di Spazio Genesi ETS</h1>
-    <p class="thesis">Perché <a href="https://attestazione.spaziogenesi.org">attestazione.spaziogenesi.org</a>
-    merita fiducia — con evidenze verificabili, non dichiarazioni.</p>
-    <div class="ledger" role="group" aria-label="Punteggio di maturità calcolato dal registro pubblico">
+    <h1>Spazio Genesi ETS's trust registry</h1>
+    <p class="thesis">Why <a href="https://attestazione.spaziogenesi.org">attestazione.spaziogenesi.org</a>
+    deserves trust — with verifiable evidence, not declarations.</p>
+    <div class="ledger" role="group" aria-label="Maturity score computed from the public registry">
       <table class="ledger-table">
         <tbody>
-        <tr class="is-counted"><td class="ledger-label">Trasparenza</td><td class="ledger-value">97</td></tr>
-        <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W34) + ancoraggi dogfooding onorati (2/2 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">63</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Transparency</td><td class="ledger-value">97</td></tr>
+        <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W34) + ancoraggi dogfooding onorati (2/2 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrity *</td><td class="ledger-value">100</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Traceability</td><td class="ledger-value">100</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Documentation</td><td class="ledger-value">100</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Automation</td><td class="ledger-value">63</td></tr>
         <tr class="is-counted is-partial" title="revisione: ultima il 2026-07-19 (29/90 giorni); ACT: nessuna ancora risolta"><td class="ledger-label">Audit *</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted is-partial" title="snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (29 giorni fa)"><td class="ledger-label">Conservazione *</td><td class="ledger-value">94</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">97</td></tr>
+        <tr class="is-counted is-partial" title="snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (29 giorni fa)"><td class="ledger-label">Preservation *</td><td class="ledger-value">94</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Reproducibility</td><td class="ledger-value">97</td></tr>
         <tr class="is-counted is-partial" title="scanner su imgauth@v1.34.1: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"><td class="ledger-label">Privacy *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted is-partial" title="validate 30/30 + gate 12/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"><td class="ledger-label">Governance *</td><td class="ledger-value">80</td></tr>
-          <tr class="ledger-total"><td class="ledger-label">Saldo</td><td class="ledger-value">93<span class="unit">/100</span></td></tr>
+          <tr class="ledger-total"><td class="ledger-label">Total</td><td class="ledger-value">93<span class="unit">/100</span></td></tr>
         </tbody>
       </table>
-      <p class="ledger-note">10 di 10 indicatori disponibili — i restanti non sono stimati: restano <em>n/d</em> finché non esisteranno i dati per calcolarli davvero. * = valore parziale, passa il mouse per i dettagli. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics">Formula di ciascuno</a>.</p>
+      <p class="ledger-note">10 of 10 indicators available — the rest are not estimated: they stay <em>n/a</em> until the data to compute them actually exists. * = partial value, hover for details. <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics">Formula for each</a>.</p>
     </div>
   </header>
 
   <nav class="spine">
     <ul>
-      <li><a href="#missione">Missione</a></li>
-      <li><a href="#eidas">Posizionamento eIDAS</a></li>
+      <li><a href="#missione">Mission</a></li>
+      <li><a href="#eidas">eIDAS positioning</a></li>
       <li><a href="#compliance">Compliance Map</a></li>
-      <li><a href="#rischi">Rischi</a></li>
-      <li><a href="#decisioni">Decisioni</a></li>
-      <li><a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi ↗</a></li>
+      <li><a href="#rischi">Risks</a></li>
+      <li><a href="#decisioni">Decisions</a></li>
+      <li><a href="https://attestazione.spaziogenesi.org/status/">Service status ↗</a></li>
       <li><a href="https://attestazione.spaziogenesi.org/changelog/">Changelog ↗</a></li>
     </ul>
   </nav>
 
   <main>
   <section id="missione" class="folio" data-folio="MSN · PRN">
-    <h2>Missione e principi</h2>
-    <p class="lede">Spazio Genesi ETS costruisce un servizio di attestazione digitale (attestazione.spaziogenesi.org) capace di dimostrare pubblicamente, con evidenze verificabili da chiunque, perché merita fiducia — senza mai chiedere a nessuno di crederci sulla parola. La fiducia non si dichiara, si dimostra.</p>
+    <h2>Mission and principles</h2>
+    <p class="lede">Spazio Genesi ETS builds a digital attestation service (attestazione.spaziogenesi.org) able to publicly demonstrate, with evidence anyone can verify, why it deserves trust — without ever asking anyone to take its word for it. Trust is not declared, it is demonstrated.</p>
     <div class="record-grid">
       <article class="record">
         <p class="tag">PRN-01</p>
         <h3>Transparency by Design</h3>
-        <p>Ogni elemento del sistema è visibile per default; ciò che non lo è deve giustificare esplicitamente perché.</p>
-        <p class="rule">Regola verificabile: Ogni record del registro ha `visibility: public|internal|secret`; default `public`; `internal`/`secret` richiedono il campo `why_not_public` compilato.</p>
+        <p>Every element of the system is visible by default; anything that isn't must explicitly justify why.</p>
+        <p class="rule">Verifiable rule: Every registry record has `visibility: public|internal|secret`; default `public`; `internal`/`secret` require the `why_not_public` field filled in.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-02</p>
         <h3>Evidence by Design</h3>
-        <p>Nessuna affermazione senza un'evidenza che la sostenga; un'evidenza scaduta degrada silenziosamente il controllo che dipende da lei, mai lo status quo.</p>
-        <p class="rule">Regola verificabile: Ogni controllo (CTL) referenzia ≥1 evidenza (EVD) con `freshness` dichiarata; evidenza scaduta → controllo passa a `stale`, lo score scende.</p>
+        <p>No claim without evidence to support it; expired evidence silently degrades the control that depends on it, never the status quo.</p>
+        <p class="rule">Verifiable rule: Every control (CTL) references ≥1 evidence (EVD) with a declared `freshness`; expired evidence → the control moves to `stale`, the score drops.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-03</p>
         <h3>Documentation by Design</h3>
-        <p>Nessun documento pubblico si scrive a mano nel Trust Center: si genera dal registro, sempre, così non può mai divergere da ciò che è vero.</p>
-        <p class="rule">Regola verificabile: Nessun documento scritto a mano nel Trust Center: tutto generato dal registro; la CI fallisce se un file pubblicato non ha un record sorgente.</p>
+        <p>No public document in the Trust Center is written by hand: it is always generated from the registry, so it can never diverge from what is true.</p>
+        <p class="rule">Verifiable rule: No document in the Trust Center is written by hand: everything is generated from the registry; CI fails if a published file has no source record.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-04</p>
         <h3>Security by Design</h3>
-        <p>Ogni controllo di sicurezza è ancorato a un'implementazione reale e a una minaccia dichiarata: nessuna misura &quot;di facciata&quot;.</p>
-        <p class="rule">Regola verificabile: Ogni CTL di sicurezza referenzia l'implementazione (IMP → file/riga/config) e il rischio (RSK) che mitiga.</p>
+        <p>Every security control is anchored to a real implementation and a declared threat: no &quot;cosmetic&quot; measures.</p>
+        <p class="rule">Verifiable rule: Every security CTL references its implementation (IMP → file/line/ config) and the risk (RSK) it mitigates.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-05</p>
         <h3>Privacy by Design</h3>
-        <p>Ogni flusso di dati personali è mappato, con base giuridica e retention dichiarate, prima ancora di essere costruito — non dopo.</p>
-        <p class="rule">Regola verificabile: Ogni flusso di dati ha un record DAT (dato, base giuridica, retention); un flusso senza DAT fa fallire la build.</p>
+        <p>Every personal data flow is mapped, with legal basis and retention declared, before it is even built — not after.</p>
+        <p class="rule">Verifiable rule: Every data flow has a DAT record (data, legal basis, retention); a flow without a DAT fails the build.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-06</p>
         <h3>Governance by Design</h3>
-        <p>Ogni modifica al registro passa da revisione; le decisioni non ovvie lasciano una traccia esplicita, non solo un commit.</p>
-        <p class="rule">Regola verificabile: Ogni modifica al registro passa da PR; le decisioni non ovvie richiedono un'ADR obbligatoria (l'etichetta `needs-adr` blocca il merge finché non c'è).</p>
+        <p>Every change to the registry goes through review; non-obvious decisions leave an explicit trace, not just a commit.</p>
+        <p class="rule">Verifiable rule: Every change to the registry goes through a PR; non-obvious decisions require a mandatory ADR (the `needs-adr` label blocks the merge until one exists).</p>
       </article>
       <article class="record">
         <p class="tag">PRN-07</p>
         <h3>Automation by Design</h3>
-        <p>Ciò che si può raccogliere automaticamente si raccoglie automaticamente; la raccolta manuale è l'eccezione da giustificare, non la norma.</p>
-        <p class="rule">Regola verificabile: Campo `collection: auto|manual` su ogni evidenza (EVD); la percentuale `auto` è un indicatore dello score; nuove EVD `manual` richiedono giustificazione.</p>
+        <p>Whatever can be collected automatically is collected automatically; manual collection is the exception that must be justified, not the norm.</p>
+        <p class="rule">Verifiable rule: Field `collection: auto|manual` on every evidence (EVD); the `auto` percentage is a score indicator; new `manual` EVDs require justification.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-08</p>
         <h3>Open Verification</h3>
-        <p>Ogni affermazione pubblica porta con sé il modo per un terzo di verificarla da solo, senza credenziali e senza doverci credere.</p>
-        <p class="rule">Regola verificabile: Per ogni affermazione pubblica esiste uno script o una procedura eseguibile da terzi senza credenziali (`verify_howto` obbligatorio sui controlli pubblici).</p>
+        <p>Every public claim carries with it a way for a third party to verify it independently, without credentials and without having to take it on faith.</p>
+        <p class="rule">Verifiable rule: For every public claim there is a script or procedure a third party can run without credentials (`verify_howto` is mandatory on public controls).</p>
       </article>
       <article class="record">
         <p class="tag">PRN-09</p>
         <h3>Continuous Improvement</h3>
-        <p>Un incidente senza un'azione correttiva è un incidente destinato a ripetersi; il sistema non permette che accada senza segnalarlo.</p>
-        <p class="rule">Regola verificabile: Ogni incidente (INC) produce ≥1 azione (ACT) con scadenza; le ACT scadute e ancora aperte mostrano un banner nel Trust Center.</p>
+        <p>An incident without a corrective action is an incident bound to repeat; the system does not let this happen without flagging it.</p>
+        <p class="rule">Verifiable rule: Every incident (INC) produces ≥1 action (ACT) with a deadline; overdue and still-open ACTs show a banner in the Trust Center.</p>
       </article>
       <article class="record">
         <p class="tag">PRN-10</p>
         <h3>Least Complexity</h3>
-        <p>Il framework deve essere sostenibile da un'organizzazione di volontari: ogni processo ricorrente dichiara il proprio costo umano, e il sistema ha un tetto.</p>
-        <p class="rule">Regola verificabile: Ogni nuovo processo dichiara `human_cost_minutes_month`; il totale di sistema ha un tetto (budget 8 h/mese) visibile nel Trust Center.</p>
+        <p>The framework must be sustainable by a volunteer organization: every recurring process declares its own human cost, and the system has a cap.</p>
+        <p class="rule">Verifiable rule: Every new process declares `human_cost_minutes_month`; the system total has a cap (budget 8 h/month) visible in the Trust Center.</p>
       </article>
     </div>
   </section>
 
   <section id="eidas" class="folio" data-folio="CTL">
-    <h2>Cosa NON è questo servizio</h2>
-    <p>Il servizio produce attestazioni di esistenza non qualificate: firma elettronica avanzata con certificato self-signed, più marca temporale RFC 3161 (TSA in Adobe AATL) e ancoraggio Bitcoin (OpenTimestamps). Non è un servizio fiduciario qualificato eIDAS. Alle prove elettroniche non qualificate non possono essere negati effetti giuridici per il solo motivo della forma elettronica o della non-qualificazione; il valore probatorio è rimesso al giudice. L'upgrade a sigillo qualificato è nella roadmap pubblica, condizionato alla sostenibilità economica dell'organizzazione.</p>
-    <p class="tag-line"><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span></p>
+    <h2>What this service is NOT</h2>
+    <p>The service produces unqualified proof-of-existence attestations: an advanced electronic signature with a self-signed certificate, plus an RFC 3161 timestamp (TSA on the Adobe AATL) and a Bitcoin anchor (OpenTimestamps). It is not a qualified eIDAS trust service. Unqualified electronic evidence cannot be denied legal effect solely because it is in electronic form or unqualified; its evidentiary weight is for a judge to determine. Upgrading to a qualified seal is on the public roadmap, conditional on the organization's financial sustainability.</p>
+    <p class="tag-line"><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">active</span></p>
   </section>
 
   <section id="compliance" class="folio" data-folio="REQ · CTL · EVD">
@@ -271,28 +271,28 @@
         <header>
           <span class="pill pill-muted">inspiration</span>
           <h3>ISO/IEC 27001</h3>
-          <p class="ref">controlli Annex A pertinenti alla scala dell'organizzazione</p>
+          <p class="ref">Annex A controls relevant to the organization's scale</p>
         </header>
-        <p>I controlli Annex A applicabili a un'organizzazione di volontari senza infrastruttura propria (controllo accessi, crittografia, sicurezza delle operazioni, gestione degli incidenti) sono adottati per ispirazione, non per certificazione formale: la certificazione è insostenibile per un ETS di questa scala, ma i controlli pertinenti sono comunque implementati e verificabili uno per uno.</p>
+        <p>The Annex A controls applicable to a volunteer organization with no infrastructure of its own (access control, cryptography, operations security, incident management) are adopted for inspiration, not for formal certification: certification is unsustainable for a nonprofit of this scale, but the relevant controls are implemented and verifiable one by one regardless.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati<details><summary>come verificare</summary><p>Prova a chiamare /api/cert-pdf con un hash o timestamp diverso da quello restituito da /api/hash: la richiesta viene rifiutata (400/403). Lo stato del componente &quot;worker&quot; su /api/status riflette anche l'esito della sonda HMAC interna.</p></details></li>
-          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify<details><summary>come verificare</summary><p>Invia più di 10 richieste in 60s a /api/cert-pdf (o più di 60 a /api/hash|/api/verify) dallo stesso IP: le richieste oltre soglia ricevono 429.</p></details></li>
-          <li><span class="tag">CTL-turnstile-antibot</span> <span class="pill pill-sage status-badge">attivo</span> Challenge anti-bot prima di qualunque emissione di attestazione<details><summary>come verificare</summary><p>Chiama /api/hash senza turnstile_token: risposta 400. Con un token fasullo: 403. Il widget è visibile sopra &quot;Genera attestazione&quot; su attestazione.spaziogenesi.org.</p></details></li>
-          <li><span class="tag">CTL-cors-restricted</span> <span class="pill pill-sage status-badge">attivo</span> CORS ristretto al solo dominio dell'interfaccia utente<details><summary>come verificare</summary><p>Chiama un endpoint di imgauth da un'origine diversa da attestazione.spaziogenesi.org in un browser: la risposta CORS nega l'origine. Nota: è una difesa solo lato browser, non contro client diretti.</p></details></li>
-          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
-          <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">attivo</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
-          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico proporzionale e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta <a href="https://attestazione.spaziogenesi.org/status/" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/status/</a>: stato live, barre 90 giorni con uptime % pesato sul tempo (P36, 2026-07-21: un disservizio breve mostra una tacca proporzionale alla sua durata reale, non più l'intera giornata colorata), drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;) con un riquadro d'impatto onesto.</p></details></li>
-          <li><span class="tag">CTL-agent-access</span> <span class="pill pill-sage status-badge">attivo</span> Accesso agenti: bearer token D1-backed (API key + device flow), bypass del solo Turnstile<details><summary>come verificare</summary><p>Chiama POST /api/hash con un header Authorization: Bearer sg_(k|s)_&lt;id&gt;_&lt;secret&gt; valido e senza turnstile_token: la richiesta va a buon fine (nessuna challenge richiesta). Con credenziale sconosciuta/malformata/revocata → 403; con quota esaurita → 429; senza header Authorization il percorso Turnstile resta identico a prima (invariato). Per il device flow: POST /api/agent/authorize restituisce un codice, GET /agent/authorize?code= serve la pagina di autorizzazione sul dominio pubblico, GET /api/agent/token?code= consegna il session token una sola volta dopo l'approvazione.</p></details></li>
-          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota con accesso riservato<details><summary>come verificare</summary><p>L'accesso al pannello e alle sue funzioni di gestione è riservato al gestore e protetto in profondità (Cloudflare Access a monte più protezione applicativa — vedi CTL-cloudflare-access-admin e ADR-P21-admin-cfaccess). L'effetto delle operazioni di gestione è osservabile in modo indiretto: una credenziale emessa autentica su /api/hash, una revocata riceve 403. Il perimetro non tocca in alcun caso l'emissione dei certificati.</p></details></li>
-          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">attivo</span> Self-service API key con verifica email OAuth one-shot (Google/Microsoft/LinkedIn), post-moderazione<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/developer/keys/ (P29: pagina statica su authweb, tre bottoni &quot;Continua con Google/Microsoft/LinkedIn&quot; ora fissi nell'HTML — trade-off accettato in FASE 3, non riflettono più la configurazione runtime del provider su imgauth): mostra l'informativa privacy sintetica prima del redirect (LinkedIn dal 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). Dopo il login, la callback OAuth reindirizza con la chiave sg_k_… SOLO nel fragment dell'URL (`#sgk=…`, mai in una risposta HTML del server, P29), mostrata una sola volta dal JS lato client e usabile su /api/hash come qualunque altra API key. Una seconda richiesta con la stessa email non emette una seconda chiave (fragment `#sgstate=gia-attiva`). Nel pannello /admin la chiave compare con colonna Titolare (email + provider); revocandola compare &quot;Dimentica titolare&quot; per l'anonimizzazione immediata (altrimenti automatica dopo 180 giorni dalla revoca, via cron).</p></details></li>
-          <li><span class="tag">CTL-cicd-pipeline</span> <span class="pill pill-sage status-badge">attivo</span> Catena di rilascio: staging replicato + CI + gate di produzione con approvazione umana (P24)<details><summary>come verificare</summary><p>Stato ad oggi (2026-07-11, FASE 0-4 e 7 di 8 completate — vedi <a href="https://trust.spaziogenesi.org/devops.html" target="_blank" rel="noopener">https://trust.spaziogenesi.org/devops.html</a> per la tabella completa): ogni pull request sul repo pubblico imgauth fa girare automaticamente check di sintassi/contratto/build (tab Actions, workflow &quot;CI&quot;); il merge in main aggiorna da solo l'ambiente di staging (`imgauth-staging`, workers.dev, mai dati o segreti di produzione) e lo verifica con uno smoke test end-to-end (ping, stato, giro completo attestazione → certificato → recupero). Il **gate di produzione con approvazione umana è attivo**: un job dedicato (`deploy-production`) resta IN ATTESA finché un required reviewer (GitHub Environment &quot;production&quot;) non approva dall'interfaccia GitHub — nessuno step del deploy parte prima. Dopo l'approvazione: `wrangler versions upload` (nuova versione a 0% traffico) seguito da `wrangler versions deploy` (promozione al 100%), poi uno smoke di sola lettura su `/ping`. Verificabile aprendo un run pubblico che ha attraversato l'intero percorso, es. <a href="https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055" target="_blank" rel="noopener">https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055</a> (primo rilascio gated della storia del progetto, 2026-07-11): il job `deploy-production` mostra lo stato &quot;waiting&quot; fino all'approvazione, poi i passi di upload/promozione/smoke, tutti verdi. Il rollback (`wrangler rollback &lt;version-id&gt; --yes`, secondi, senza rebuild) è stato collaudato dal vivo su staging, mai in produzione per un test. L'**interfaccia di staging** (repo pubblico `attestazione-staging`, GitHub Pages su `*.github.io`, nessun dominio custom) è generata dal branch `staging` di imgauthweb e collaudata con un test browser reale (Playwright, non solo curl): footer con versione del motore letta da `imgauth-staging` (conferma CORS), attestazione completa con Turnstile di test, PDF non firmato scaricato e verificato, link permanente presente. Chiunque può ripetere il collaudo aprendo <a href="https://spazio-genesi.github.io/attestazione-staging/" target="_blank" rel="noopener">https://spazio-genesi.github.io/attestazione-staging/</a> e attestando un file di prova. RADART ha il proprio staging/CI pianificato ma non ancora eseguito (FASE 5-6) — questo controllo copre oggi imgauth e authweb, non ancora RADART.</p></details></li>
-          <li><span class="tag">CTL-edge-security-headers</span> <span class="pill pill-sage status-badge">attivo</span> Header di sicurezza HTTP (HSTS, CSP, Permissions-Policy) all'edge Cloudflare<details><summary>come verificare</summary><p>Interroga gli header di risposta di spaziogenesi.org o attestazione.spaziogenesi.org (es. curl -I o securityheaders.com): devono comparire Strict-Transport-Security (max-age un anno, includeSubDomains), Content-Security-Policy (script-src 'self' https:, SENZA 'unsafe-inline' dal 2026-07-14 — vedi ADR-edge-security-headers per come si è arrivati a rimuoverlo) e Permissions-Policy; l' Access-Control-Allow-Origin: * di GitHub Pages deve essere assente sui soli host Pages (spaziogenesi.org, www., attestazione.), MAI su imgauth.spaziogenesi.org dove il CORS resta necessario.</p></details></li>
-          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">attivo</span> Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/profilo/ (P29: guscio statico su authweb, fetch verso imgauth), accedi con un login OAuth one-shot (Google/Microsoft/LinkedIn — stesso meccanismo di CTL-dev-selfservice e CTL-site-voucher-auth, nessuna password, nessun account). Senza abbonamento: prezzo del listino attivo mostrato dinamicamente (mai hardcodato) e bottone Checkout, che apre una pagina Stripe hosted — nessun campo carta compare mai su imgauth.spaziogenesi.org. Con un abbonamento attivo: stato, scadenza, log ricariche, consumo del mese, archivio dei certificati con canale di produzione (web/api/mcp/telegram), bottone &quot;Gestisci o cessa l'abbonamento&quot; che apre lo Stripe Customer Portal hosted (fatture, metodo di pagamento, cessazione — mai su questo Worker). Una cessazione dal Portal (comportamento di default per abbonamenti annuali: resta attivo fino alla scadenza già pagata) mostra un banner &quot;cessazione programmata&quot; senza perdere la fascia. La catena di precedenza convenzione→professionale→sviluppatore→base non blocca mai: quota o abbonamento esauriti degradano a Base con motivo esplicito (`fascia_motivo`), stessa logica già verificata per CTL-convention-accounting. Il listino e i codici sconto si gestiscono dal pannello /admin (scheda Professionale): righe con finestre di validità (mai si modifica un importo passato, si chiude e se ne crea una nuova) e sconti percentuali/fissi, anche riservati a una singola email. ✅ Collaudato con un **abbonamento reale a pagamento** (1€, non un dato sintetico) end-to-end in produzione il 17-18 luglio 2026 — vedi EVD-pro-subscription-live-test: checkout → attestazione dal sito riconosciuta in fascia professionale → archivio con canale → cessazione dal Customer Portal → rimborso. Nel collaudo emersi e corretti tre difetti reali mai incontrati nei test locali (shape dell'API Stripe dell'account, `cancel_at_period_end` sempre `false`, doppio evento del Customer Portal per un click) — vedi ADR-P27. Nasce direttamente `active`, stesso criterio già applicato a CTL-cicd-pipeline, CTL-site-voucher-auth e CTL-convention-accounting: un controllo collaudato con dati reali, non solo dichiarato.</p></details></li>
-          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">attivo</span> Vetrina pubblica Integrazioni (pre-moderata) + convenzioni partner software house con pool mensile<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/integrazioni/ (P29: pagina statica su authweb, rigenerata a evento da imgauth): vetrina pubblica, solo le candidature approvate compaiono (logo, nome, descrizione, link `rel=&quot;noopener nofollow&quot;`), con conteggio totale e spiegazione onesta che la presenza non è una certificazione del software. Chi ha una chiave API attiva o un abbonamento Professionale può candidare la propria applicazione dalla sezione &quot;La tua integrazione&quot; di attestazione.spaziogenesi.org/profilo/ (stesso login OAuth one-shot di CTL-dev-selfservice e CTL-pro-subscription): la candidatura risulta subito `pending`, mai pubblica finché il gestore non la approva dal pannello /admin (scheda Integrazioni) — pre-moderazione, a differenza di ogni altro flusso self-service del sistema. Qualunque modifica successiva — nome, URL, descrizione o solo il logo — riporta lo stato a `pending`: non esiste un canale per cambiare silenziosamente ciò che è già online. Il logo, se presente, è servito solo per le candidature approvate (`GET /integrazioni/logo/&lt;id&gt;`, 404 altrimenti) ed è stato validato all'upload sui magic bytes (PNG/JPEG/WebP, mai SVG, mai il Content-Type dichiarato). Le software house che attestano per conto dei propri utenti usano una convenzione con pool mensile dedicato (`convention_id` sulla chiave, `domains` placeholder che non può mai combaciare con un'email reale) — stesso meccanismo di CTL-convention-accounting, riusato senza nuovo codice sul motore. Il &quot;forget&quot; GDPR del pannello admin anonimizza anche il titolare di una candidatura e la ritira dalla vetrina.</p></details></li>
-          <li><span class="tag">CTL-responsible-disclosure</span> <span class="pill pill-sage status-badge">attivo</span> security.txt (RFC 9116) + policy pubblica di responsible disclosure<details><summary>come verificare</summary><p>`curl <a href="https://attestazione.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/.well-known/security.txt`</a> e `curl <a href="https://imgauth.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://imgauth.spaziogenesi.org/.well-known/security.txt`</a> rispondono entrambi 200 con `Contact: mailto:it@spaziogenesi.org`, un `Expires` nel futuro e `Policy: <a href="https://attestazione.spaziogenesi.org/sicurezza/`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/sicurezza/`</a>. Quella pagina elenca l'ambito (i due domini, i servizi workers.dev attest-bot/attest-mcp-remote, i repo GitHub pubblici dell'organizzazione), l'impegno di safe harbor per la ricerca in buona fede, la presa in carico entro 5 giorni lavorativi, i limiti espliciti (niente DoS, social engineering, accesso fisico, dati reali di terzi) e un riepilogo in inglese. Il rinnovo di `Expires` è tracciato da PRC-security-txt-renewal.</p></details></li>
-          <li><span class="tag">CTL-build-provenance</span> <span class="pill pill-sage status-badge">attivo</span> Attestazione di provenienza SLSA/in-toto sui binari standalone di sg-attest (A1)<details><summary>come verificare</summary><p>Procedura senza alcuna credenziale (chiude il gap PRN-08 descritto in ADR-A1): clona il repository pubblico, installa le dipendenze di sviluppo ed esegui lo script di verifica indipendente su un binario scaricato dalla pagina Release pubblica (es. `sg-attest-linux-x64` dal tag `v0.4.2`, <a href="https://github.com/SPAZIO-GENESI/attest-mcp/releases" target="_blank" rel="noopener">https://github.com/SPAZIO-GENESI/attest-mcp/releases</a>): `git clone <a href="https://github.com/SPAZIO-GENESI/attest-mcp" target="_blank" rel="noopener">https://github.com/SPAZIO-GENESI/attest-mcp</a> &amp;&amp; cd attest-mcp &amp;&amp; npm install &amp;&amp; node scripts/verify-provenance.mjs ./sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp --tag v0.4.2` Esito atteso: verifica riuscita (exit 0), con un predicato SLSA che referenzia il commit, il workflow `release-binaries.yml` e il tag. Lo script interroga solo l'endpoint REST pubblico delle attestazioni GitHub (nessun header Authorization, verificato) e verifica il bundle Sigstore con la libreria npm `sigstore` contro l'infrastruttura pubblica di Sigstore (Rekor/Fulcio/TUF, nessun account). La stessa verifica su un file alterato di un solo byte fallisce (il digest cambia, quindi cambia la chiave stessa con cui si cerca l'attestazione) — provato, così come il caso di un file rinominato ma con contenuto intatto (verifica riuscita con avviso, perché il legame è sul digest del subject in-toto, non sul nome file). In alternativa, per chi ha già `gh` autenticato: `gh attestation verify sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp` fa la stessa verifica, ma **richiede** una sessione GitHub autenticata anche su questo repository pubblico (verificato: senza `gh auth login`/ `GH_TOKEN`, sia `gh attestation verify` sia `gh attestation download` rispondono exit 4, &quot;please run gh auth login&quot;) — un limite del client, non del dato: l'endpoint REST sottostante è pubblico. Vedi ADR-A1 per la cronologia completa: il gap era nel client `gh`, non nella disponibilità del dato, e ora esiste una procedura equivalente che non ne eredita il limite.</p></details></li>
-          <li><span class="tag">CTL-scorecard-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Monitoraggio pubblico della postura di sicurezza via OpenSSF Scorecard (A3)<details><summary>come verificare</summary><p>Senza alcuna credenziale: `curl <a href="https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth`" target="_blank" rel="noopener">https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth`</a> (e allo stesso modo per `/SPAZIO-GENESI/imgauthweb` e `/SPAZIO-GENESI/autart-signer`) restituisce il punteggio pubblico OpenSSF Scorecard più recente con la scomposizione per singolo check (Dependency-Update-Tool, Maintained, Dangerous-Workflow, Token-Permissions, Pinned-Dependencies, ecc.). Primo dato reale raccolto il 2026-08-13: imgauth 5.7/10, imgauthweb 5.4/10, autart-signer 2.9/10. Stesso giorno, in un secondo giro: branch protection attivata sui tre repo (no force-push, no cancellazione branch, status check `check` richiesto dove esiste — imgauth/imgauthweb; assente su autart-signer, che non ha alcun workflow su `pull_request`) e fine-grained PAT (`SCORECARD_TOKEN`, solo `Administration:Read-only`) aggiunto a `scorecard.yml` perché il `GITHUB_TOKEN` di default non può leggere le regole di branch protection — senza, il check Branch-Protection andava in errore (-1, escluso dal punteggio) invece di essere valutato. Con il fix: imgauth 7.6/10, imgauthweb 7.6/10, autart-signer 5.6/10, Branch-Protection 3/10 su tutti e tre (&quot;not maximal&quot;: manca la PR obbligatoria, scartata di proposito perché il flusso di lavoro reale è a push diretto su main). Ogni repo ha un workflow schedulato settimanale (`scorecard.yml`, `workflow_dispatch` per un run manuale) che pubblica il risultato anche sul tab &quot;Security → Code scanning&quot; di GitHub — quella pagina però **richiede una sessione GitHub autenticata anche su repository pubblici** (verificato: `curl` a `github.com/.../security/code-scanning` senza credenziali risponde 404, e l'endpoint REST equivalente `api.github.com/.../code-scanning/alerts` risponde 401) — stesso tipo di limite del client `gh` già documentato in `CTL-build-provenance`/ADR-A1. L'API pubblica di securityscorecards.dev, usata sopra, non ha questo limite ed è la via primaria di verifica di questo controllo.</p></details></li>
-          <li><span class="tag">CTL-static-analysis</span> <span class="pill pill-sage status-badge">attivo</span> Analisi statica del codice (CodeQL) e aggiornamento automatico delle dipendenze (Dependabot) (A3)<details><summary>come verificare</summary><p>Senza alcuna credenziale: `curl <a href="https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/codeql.yml/runs?per_page=1`" target="_blank" rel="noopener">https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/codeql.yml/runs?per_page=1`</a> (endpoint REST pubblico, nessuna autenticazione — verificato) restituisce l'esito dell'ultimo run di CodeQL su main; ripetibile per gli altri quattro repo con codice JavaScript/TypeScript reale (imgauthweb, attest-mcp, attest-bot, attest-mcp-remote). ⚠️ Correzione rispetto al design doc originario: il tab web &quot;Security → Code scanning&quot; di GitHub **non è raggiungibile senza login anche su repository pubblici** (verificato il 2026-08-13: `curl` senza credenziali su `github.com/.../security/code-scanning` risponde 404, l'endpoint REST equivalente `api.github.com/.../code-scanning/alerts` risponde 401) — non è quindi utilizzabile come verify_howto per PRN-08. L'endpoint dei run del workflow, usato sopra, non ha questo limite. Verificato dal vivo il 2026-08-13, dopo il merge delle 10 PR di A3: CodeQL verde (`completed`/`success`) su tutti e cinque i repo. Dependabot ha aperto 24 pull request automatiche di aggiornamento dipendenze sullo stesso giro (visibili pubblicamente sulla tab Pull Requests di ciascun repo, `state=all` incluso via API senza autenticazione); il triage umano di questi alert è un processo ricorrente separato, già registrato come `PRC-security-alert-triage` (Federico Battisti, cadenza settimanale).</p></details></li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">active</span> HMAC token binding the hash, server-side timestamp, and declared metadata<details><summary>how to verify</summary><p>Try calling /api/cert-pdf with a hash or timestamp different from the one returned by /api/hash: the request is rejected (400/403). The &quot;worker&quot; component's status on /api/status also reflects the outcome of the internal HMAC probe.</p></details></li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">active</span> Per-IP rate limiting on certificate issuance and hash/verify<details><summary>how to verify</summary><p>Send more than 10 requests in 60s to /api/cert-pdf (or more than 60 to /api/hash|/api/verify) from the same IP: requests over the threshold get 429.</p></details></li>
+          <li><span class="tag">CTL-turnstile-antibot</span> <span class="pill pill-sage status-badge">active</span> Anti-bot challenge before any attestation is issued<details><summary>how to verify</summary><p>Call /api/hash without a turnstile_token: 400 response. With a fake token: 403. The widget is visible above &quot;Generate attestation&quot; on attestazione.spaziogenesi.org.</p></details></li>
+          <li><span class="tag">CTL-cors-restricted</span> <span class="pill pill-sage status-badge">active</span> CORS restricted to the user interface's domain only<details><summary>how to verify</summary><p>Call an imgauth endpoint from an origin other than attestazione.spaziogenesi.org in a browser: the CORS response denies the origin. Note: this is a browser-side defense only, not against direct clients.</p></details></li>
+          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">active</span> Certificate archive in EU jurisdiction, retrievable only by whoever knows the hash<details><summary>how to verify</summary><p>GET /api/cert?hash=&lt;sha256&gt; returns the archived PDF for that hash; a malformed or missing hash responds 400/404, never another certificate's content.</p></details></li>
+          <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">active</span> Recovery of critical secrets possible without depending solely on the maintainer's memory</li>
+          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">active</span> Public traffic-light status of services, with proportional history and daily drill-down<details><summary>how to verify</summary><p>Check <a href="https://attestazione.spaziogenesi.org/status/" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/status/</a>: live status, 90-day bars with uptime % weighted by time (P36, 2026-07-21: a brief outage now shows a mark proportional to its actual duration, not the whole day colored anymore), drill-down into the fine-grained events of each day (even the &quot;green&quot; ones) with an honest impact box.</p></details></li>
+          <li><span class="tag">CTL-agent-access</span> <span class="pill pill-sage status-badge">active</span> Agent access: D1-backed bearer token (API key + device flow), bypasses only Turnstile<details><summary>how to verify</summary><p>Call POST /api/hash with a valid Authorization: Bearer sg_(k|s)_&lt;id&gt;_&lt;secret&gt; header and no turnstile_token: the request succeeds (no challenge required). With an unknown/malformed/revoked credential → 403; with quota exhausted → 429; without an Authorization header the Turnstile path stays exactly as before (unchanged). For the device flow: POST /api/agent/authorize returns a code, GET /agent/authorize?code= serves the authorization page on the public domain, GET /api/agent/token?code= delivers the session token once, after approval.</p></details></li>
+          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">active</span> Agent credential admin panel: list/issue/revoke/quota with restricted access<details><summary>how to verify</summary><p>Access to the panel and its management functions is restricted to the maintainer and defense-in-depth protected (Cloudflare Access upstream plus application-level protection — see CTL-cloudflare-access-admin and ADR-P21-admin-cfaccess). The effect of management operations is observable indirectly: an issued credential authenticates on /api/hash, a revoked one gets 403. The perimeter never touches certificate issuance in any way.</p></details></li>
+          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">active</span> Self-service API key with one-shot OAuth email verification (Google/Microsoft/LinkedIn), post-moderation<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/developer/keys/ (P29: static page on authweb, the three &quot;Continue with Google/Microsoft/LinkedIn&quot; buttons are now fixed in the HTML — an accepted trade-off from PHASE 3, they no longer reflect the provider's runtime configuration on imgauth): shows the short privacy notice before the redirect (LinkedIn since 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). After login, the OAuth callback redirects with the sg_k_… key ONLY in the URL fragment (`#sgk=…`, never in an HTML response from the server, P29), shown once by client-side JS and usable on /api/hash like any other API key. A second request with the same email does not issue a second key (`#sgstate=gia-attiva` fragment). In the /admin panel the key shows a Holder column (email + provider); revoking it shows &quot;Forget holder&quot; for immediate anonymization (otherwise automatic 180 days after revocation, via cron).</p></details></li>
+          <li><span class="tag">CTL-cicd-pipeline</span> <span class="pill pill-sage status-badge">active</span> Release chain: replicated staging + CI + production gate with human approval (P24)<details><summary>how to verify</summary><p>Status as of today (2026-07-11, PHASE 0-4 and 7 of 8 completed — see <a href="https://trust.spaziogenesi.org/devops.html" target="_blank" rel="noopener">https://trust.spaziogenesi.org/devops.html</a> for the full table): every pull request on the public imgauth repo automatically runs syntax/contract/build checks (Actions tab, &quot;CI&quot; workflow); merging into main automatically updates the staging environment (`imgauth-staging`, workers.dev, never production data or secrets) and verifies it with an end-to-end smoke test (ping, status, full attestation → certificate → retrieval round trip). The **production gate with human approval is active**: a dedicated job (`deploy-production`) stays WAITING until a required reviewer (GitHub Environment &quot;production&quot;) approves from the GitHub interface — no deploy step starts before that. After approval: `wrangler versions upload` (new version at 0% traffic) followed by `wrangler versions deploy` (promotion to 100%), then a read-only smoke test on `/ping`. Verifiable by opening a public run that went through the whole path, e.g. <a href="https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055" target="_blank" rel="noopener">https://github.com/SPAZIO-GENESI/imgauth/actions/runs/29153958055</a> (the project's first gated release, 2026-07-11): the `deploy-production` job shows &quot;waiting&quot; status until approval, then the upload/promotion/smoke steps, all green. Rollback (`wrangler rollback &lt;version-id&gt; --yes`, seconds, no rebuild) has been tested live on staging, never in production for a test. The **staging interface** (public repo `attestazione-staging`, GitHub Pages on `*.github.io`, no custom domain) is generated from imgauthweb's `staging` branch and tested with a real browser test (Playwright, not just curl): footer with the engine version read from `imgauth-staging` (CORS confirmation), full attestation with a test Turnstile, unsigned PDF downloaded and verified, permanent link present. Anyone can repeat the test by opening <a href="https://spazio-genesi.github.io/attestazione-staging/" target="_blank" rel="noopener">https://spazio-genesi.github.io/attestazione-staging/</a> and attesting a test file. RADART has its own staging/CI planned but not yet run (PHASE 5-6) — this control currently covers imgauth and authweb, not yet RADART.</p></details></li>
+          <li><span class="tag">CTL-edge-security-headers</span> <span class="pill pill-sage status-badge">active</span> HTTP security headers (HSTS, CSP, Permissions-Policy) at the Cloudflare edge<details><summary>how to verify</summary><p>Inspect the response headers of spaziogenesi.org or attestazione.spaziogenesi.org (e.g. curl -I or securityheaders.com): Strict-Transport-Security (max-age one year, includeSubDomains), Content-Security-Policy (script-src 'self' https:, WITHOUT 'unsafe-inline' since 2026-07-14 — see ADR-edge-security-headers for how it was removed) and Permissions-Policy must all be present; GitHub Pages' Access-Control-Allow-Origin: * must be absent on the Pages hosts only (spaziogenesi.org, www., attestazione.), NEVER on imgauth.spaziogenesi.org where CORS remains necessary.</p></details></li>
+          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">active</span> Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/profilo/ (P29: static shell on authweb, fetching from imgauth), sign in with a one-shot OAuth login (Google/Microsoft/LinkedIn — same mechanism as CTL-dev-selfservice and CTL-site-voucher-auth, no password, no account). Without a subscription: the active price list is shown dynamically (never hardcoded) with a Checkout button that opens a hosted Stripe page — no card field ever appears on imgauth.spaziogenesi.org. With an active subscription: status, expiry, top-up log, this month's usage, a certificate archive with production channel (web/api/mcp/telegram), a &quot;Manage or cancel subscription&quot; button that opens the hosted Stripe Customer Portal (invoices, payment method, cancellation — never on this Worker). Cancelling from the Portal (default behavior for annual subscriptions: stays active until the already-paid expiry) shows a &quot;cancellation scheduled&quot; banner without losing the tier. The convention→professional→developer→base precedence chain never blocks: an exhausted quota or subscription degrades to Base with an explicit reason (`fascia_motivo`), the same logic already verified for CTL-convention-accounting. The price list and discount codes are managed from the /admin panel (Professional tab): rows with validity windows (a past amount is never edited, it is closed and a new one created) and percentage/fixed discounts, even reserved to a single email. ✅ Tested with a **real, paid subscription** (€1, not synthetic data) end-to-end in production on 17-18 July 2026 — see EVD-pro-subscription-live-test: checkout → attestation from the site recognized at the professional tier → archive with channel → cancellation from the Customer Portal → refund. The test surfaced and fixed three real defects never encountered in local tests (the account's Stripe API shape, `cancel_at_period_end` always `false`, a duplicate Customer Portal event for one click) — see ADR-P27. It is born directly `active`, the same criterion already applied to CTL-cicd-pipeline, CTL-site-voucher-auth and CTL-convention-accounting: a control tested with real data, not just declared.</p></details></li>
+          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">active</span> Public Integrations showcase (pre-moderated) + software-house partner conventions with a monthly pool<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/integrazioni/ (P29: static page on authweb, regenerated on-event by imgauth): public showcase, only approved submissions appear (logo, name, description, `rel=&quot;noopener nofollow&quot;` link), with a total count and an honest note that presence is not a certification of the software. Anyone with an active API key or a Professional subscription can submit their own application from the &quot;Your integration&quot; section of attestazione.spaziogenesi.org/profilo/ (same one-shot OAuth login as CTL-dev-selfservice and CTL-pro-subscription): the submission is immediately `pending`, never public until the maintainer approves it from the /admin panel (Integrations tab) — pre-moderation, unlike every other self-service flow in the system. Any later change — name, URL, description, or just the logo — sends the status back to `pending`: there is no channel to silently change what is already live. The logo, if present, is served only for approved submissions (`GET /integrazioni/logo/&lt;id&gt;`, 404 otherwise) and was validated on upload against magic bytes (PNG/JPEG/WebP, never SVG, never the declared Content-Type). Software houses attesting on behalf of their own users use a convention with a dedicated monthly pool (`convention_id` on the key, `domains` placeholder that can never match a real email) — the same mechanism as CTL-convention-accounting, reused with no new engine code. The admin panel's GDPR &quot;forget&quot; also anonymizes a submission's holder and withdraws it from the showcase.</p></details></li>
+          <li><span class="tag">CTL-responsible-disclosure</span> <span class="pill pill-sage status-badge">active</span> security.txt (RFC 9116) + public responsible disclosure policy<details><summary>how to verify</summary><p>`curl <a href="https://attestazione.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/.well-known/security.txt`</a> and `curl <a href="https://imgauth.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://imgauth.spaziogenesi.org/.well-known/security.txt`</a> both respond 200 with `Contact: mailto:it@spaziogenesi.org`, a future `Expires`, and `Policy: <a href="https://attestazione.spaziogenesi.org/sicurezza/`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/sicurezza/`</a>. That page lists the scope (the two domains, the workers.dev services attest-bot/attest-mcp-remote, the organization's public GitHub repos), a safe-harbor commitment for good-faith research, acknowledgment within 5 business days, explicit limits (no DoS, social engineering, physical access, real third-party data), and an English summary. `Expires` renewal is tracked by PRC-security-txt-renewal.</p></details></li>
+          <li><span class="tag">CTL-build-provenance</span> <span class="pill pill-sage status-badge">active</span> SLSA/in-toto provenance attestation on sg-attest standalone binaries (A1)<details><summary>how to verify</summary><p>Credential-free procedure (closes the PRN-08 gap described in ADR-A1): clone the public repository, install the dev dependencies and run the independent verification script on a binary downloaded from the public Release page (e.g. `sg-attest-linux-x64` from tag `v0.4.2`, <a href="https://github.com/SPAZIO-GENESI/attest-mcp/releases" target="_blank" rel="noopener">https://github.com/SPAZIO-GENESI/attest-mcp/releases</a>): `git clone <a href="https://github.com/SPAZIO-GENESI/attest-mcp" target="_blank" rel="noopener">https://github.com/SPAZIO-GENESI/attest-mcp</a> &amp;&amp; cd attest-mcp &amp;&amp; npm install &amp;&amp; node scripts/verify-provenance.mjs ./sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp --tag v0.4.2` Expected outcome: verification succeeds (exit 0), with an SLSA predicate referencing the commit, the `release-binaries.yml` workflow and the tag. The script only queries the public REST endpoint of GitHub attestations (no Authorization header, verified) and checks the Sigstore bundle with the npm `sigstore` library against Sigstore's public infrastructure (Rekor/Fulcio/TUF, no account needed). The same verification on a file altered by a single byte fails (the digest changes, so the very key used to look up the attestation changes) — tested, as is the case of a renamed file with intact content (verification succeeds with a warning, because the binding is on the in-toto subject's digest, not the file name). Alternatively, for those who already have `gh` authenticated: `gh attestation verify sg-attest-linux-x64 --repo SPAZIO-GENESI/attest-mcp` performs the same verification, but **requires** an authenticated GitHub session even on this public repository (verified: without `gh auth login`/`GH_TOKEN`, both `gh attestation verify` and `gh attestation download` return exit 4, &quot;please run gh auth login&quot;) — a client limitation, not a data one: the underlying REST endpoint is public. See ADR-A1 for the full history: the gap was in the `gh` client, not in data availability, and there is now an equivalent procedure that does not inherit that limitation.</p></details></li>
+          <li><span class="tag">CTL-scorecard-monitoring</span> <span class="pill pill-sage status-badge">active</span> Public monitoring of security posture via OpenSSF Scorecard (A3)<details><summary>how to verify</summary><p>Without any credential: `curl <a href="https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth`" target="_blank" rel="noopener">https://api.securityscorecards.dev/projects/github.com/SPAZIO-GENESI/imgauth`</a> (and likewise for `/SPAZIO-GENESI/imgauthweb` and `/SPAZIO-GENESI/autart-signer`) returns the most recent public OpenSSF Scorecard score with the per-check breakdown (Dependency-Update-Tool, Maintained, Dangerous-Workflow, Token-Permissions, Pinned-Dependencies, etc.). First real data collected on 2026-08-13: imgauth 5.7/10, imgauthweb 5.4/10, autart-signer 2.9/10. Same day, in a second pass: branch protection enabled on all three repos (no force-push, no branch deletion, `check` status check required where it exists — imgauth/imgauthweb; absent on autart-signer, which has no workflow on `pull_request`) and a fine-grained PAT (`SCORECARD_TOKEN`, `Administration:Read-only` only) added to `scorecard.yml` because the default `GITHUB_TOKEN` cannot read branch protection rules — without it, the Branch-Protection check errored out (-1, excluded from the score) instead of being evaluated. With the fix: imgauth 7.6/10, imgauthweb 7.6/10, autart-signer 5.6/10, Branch-Protection 3/10 on all three (&quot;not maximal&quot;: mandatory PR review is missing, deliberately skipped because the actual workflow is direct push to main). Every repo has a weekly scheduled workflow (`scorecard.yml`, `workflow_dispatch` for a manual run) that also publishes the result on GitHub's &quot;Security → Code scanning&quot; tab — that page, however, **requires an authenticated GitHub session even on public repositories** (verified: `curl` on `github.com/.../security/code-scanning` without credentials returns 404, and the equivalent REST endpoint `api.github.com/.../code-scanning/alerts` returns 401) — the same kind of client limitation already documented in `CTL-build-provenance`/ADR-A1. The public securityscorecards.dev API used above does not have this limitation and is the primary way to verify this control.</p></details></li>
+          <li><span class="tag">CTL-static-analysis</span> <span class="pill pill-sage status-badge">active</span> Static code analysis (CodeQL) and automatic dependency updates (Dependabot) (A3)<details><summary>how to verify</summary><p>Without any credential: `curl <a href="https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/codeql.yml/runs?per_page=1`" target="_blank" rel="noopener">https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/codeql.yml/runs?per_page=1`</a> (public REST endpoint, no authentication — verified) returns the outcome of the latest CodeQL run on main; repeatable for the other four repos with real JavaScript/TypeScript code (imgauthweb, attest-mcp, attest-bot, attest-mcp-remote). ⚠️ Correction to the original design doc: GitHub's &quot;Security → Code scanning&quot; web tab **is not reachable without login, even on public repositories** (verified on 2026-08-13: `curl` without credentials on `github.com/.../security/code-scanning` returns 404, the equivalent REST endpoint `api.github.com/.../code-scanning/alerts` returns 401) — so it cannot be used as the verify_howto for PRN-08. The workflow-runs endpoint used above does not have this limitation. Verified live on 2026-08-13, after merging A3's 10 PRs: CodeQL green (`completed`/`success`) on all five repos. Dependabot opened 24 automatic dependency-update pull requests in the same pass (publicly visible on each repo's Pull Requests tab, `state=all` included via the API without authentication); human triage of these alerts is a separate recurring process, already registered as `PRC-security-alert-triage` (Federico Battisti, weekly cadence).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27001-inspiration-01</span></p>
       </article>
@@ -300,12 +300,12 @@
         <header>
           <span class="pill pill-amber">partial</span>
           <h3>ISO/IEC 27037</h3>
-          <p class="ref">principi di identificazione e acquisizione della prova digitale</p>
+          <p class="ref">principles of digital evidence identification and acquisition</p>
         </header>
-        <p>L'acquisizione dell'impronta digitale dell'opera deve essere documentata e riproducibile: algoritmo dichiarato, implementazione ispezionabile.</p>
+        <p>Acquisition of the work's digital fingerprint must be documented and reproducible: declared algorithm, inspectable implementation.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
-          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena<details><summary>come verificare</summary><p>Confronta i due requisiti collegati (REQ-27037-acq-01, REQ-27037-pres-01): entrambi dichiarano applicability &quot;partial&quot;, mai &quot;full&quot;. Il codice di acquisizione (hash client-side) e i tre meccanismi di conservazione (R2 immutabile, HMAC, TSA, OTS) sono verificabili nei repo pubblici imgauth/imgauthweb; l'assenza di log di catena di custodia consultabile e di ruoli forensi formalizzati è un gap dichiarato, non nascosto.</p></details></li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">active</span> The fingerprint is computed in the browser; the file never leaves the device<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org with DevTools › Network, attest a file: the request to /api/hash contains only {sha256,name,type,size}, no bytes of the file.</p></details></li>
+          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">active</span> Explicit statement: partial, inspiration-only application of ISO/IEC 27037, not full forensic conformance<details><summary>how to verify</summary><p>Compare the two linked requirements (REQ-27037-acq-01, REQ-27037-pres-01): both declare applicability &quot;partial&quot;, never &quot;full&quot;. The acquisition code (client-side hashing) and the three preservation mechanisms (immutable R2, HMAC, TSA, OTS) are verifiable in the public imgauth/imgauthweb repos; the absence of an inspectable chain-of-custody log and of formalized forensic roles is a declared gap, not a hidden one.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-acq-01</span></p>
       </article>
@@ -313,16 +313,16 @@
         <header>
           <span class="pill pill-amber">partial</span>
           <h3>ISO/IEC 27037</h3>
-          <p class="ref">principi di conservazione della prova digitale</p>
+          <p class="ref">principles of digital evidence preservation</p>
         </header>
-        <p>Le prove (certificato, ancoraggio) devono essere conservate con integrità dimostrabile e non alterabile silenziosamente nel tempo.</p>
+        <p>Evidence (certificate, anchor) must be preserved with demonstrable integrity and must not be silently alterable over time.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash<details><summary>come verificare</summary><p>GET /api/cert?hash=&lt;sha256&gt; restituisce il PDF archiviato per quell'hash; un hash malformato o assente risponde 400/404, mai il contenuto di un altro certificato.</p></details></li>
-          <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar<details><summary>come verificare</summary><p>Scarica la prova da /api/ots?hash=&lt;sha256&gt; e verificala con un client OTS pubblico o su opentimestamps.org, indipendentemente da questo servizio.</p></details></li>
-          <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio<details><summary>come verificare</summary><p>Mensile: dal 2026-08-17 (P49, ADR-P49) la costruzione del bundle è un pulsante GitHub (.github/workflows/anchor-monthly.yml, workflow_dispatch), non più un comando da terminale. generators/anchor-monthly.mjs concatena i manifest.json degli snapshot settimanali non ancora coperti in un bundle deterministico (committato in snapshots/anchors/) e rifiuta di sovrascriverlo se esiste già per lo stesso mese; un umano scarica il file dal riepilogo del run, lo trascina su attestazione.spaziogenesi.org, genera l'attestazione e scarica il PDF (solo /api/cert-pdf innesca l'ancoraggio OpenTimestamps reale — resta l'unico passo umano per scelta, non per limite tecnico). Chiunque può ricalcolare l'hash del bundle nel repo gtf, confrontarlo con quello stampato sul certificato, e verificare la prova .ots indipendentemente su opentimestamps.org. Primo ancoraggio: periodo 2026-07 (bundle snapshots/anchors/2026-07-bundle.json, hash cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).</p></details></li>
-          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena<details><summary>come verificare</summary><p>Confronta i due requisiti collegati (REQ-27037-acq-01, REQ-27037-pres-01): entrambi dichiarano applicability &quot;partial&quot;, mai &quot;full&quot;. Il codice di acquisizione (hash client-side) e i tre meccanismi di conservazione (R2 immutabile, HMAC, TSA, OTS) sono verificabili nei repo pubblici imgauth/imgauthweb; l'assenza di log di catena di custodia consultabile e di ruoli forensi formalizzati è un gap dichiarato, non nascosto.</p></details></li>
-          <li><span class="tag">CTL-r2-offsite-backup</span> <span class="pill pill-sage status-badge">attivo</span> Backup offsite dell'archivio certificati, verificato con un restore drill reale<details><summary>come verificare</summary><p>Verbale pubblico dell'ultima prova di ripristino in gtf/docs/verbali/2026-07-restore-drill.md: campioni ripristinati dal backup (non dall'archivio primario) e verificati con gli strumenti pubblici standard (firma HMAC via /api/verify, ancoraggio Bitcoin, badge d'archivio). I dettagli operativi del backup (provider, regione, nomi) non sono pubblici per scelta — vedi ADR-GTF-013.</p></details></li>
-          <li><span class="tag">CTL-maintainer-succession</span> <span class="pill pill-amber status-badge">bozza</span> Procedura di successione tecnica, con garanzia residua verificabile indipendentemente dall'ente<details><summary>come verificare</summary><p>Due cose distinte sono verificabili oggi, senza credenziali, da chiunque — e vanno tenute separate. (1) La garanzia residua per chi possiede un certificato è verificabile ORA, in produzione, indipendentemente da questo documento: prendi un file attestato, il suo certificato PDF e il file .ots scaricato dopo l'emissione; verifica il file .ots con un client OpenTimestamps pubblico (es. <a href="https://opentimestamps.org" target="_blank" rel="noopener">https://opentimestamps.org</a>, oppure il comando `ots verify` del client ufficiale) contro la blockchain Bitcoin — nessun server di Spazio Genesi coinvolto; apri il certificato PDF in un lettore PAdES conforme (es. Adobe Acrobat Reader) e verifica che la marca temporale risulti di terza parte attendibile (radice DigiCert nella Adobe Approved Trust List). (2) La procedura di successione stessa (piano-2026/umano/procedura-successione.md, repo privato img-auth-hub) NON è oggi pubblicata: è una bozza completata ma non ancora deliberata né pubblicata dall'organo competente. Il controllo resta &quot;draft&quot; anche per questo motivo, oltre che per l'assenza di un collaudo del recupero segreti da parte di una persona diversa dal maintainer (vedi ADR-B3). Diventerà verificabile per intero solo quando la procedura sarà pubblicata.</p></details></li>
+          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">active</span> Certificate archive in EU jurisdiction, retrievable only by whoever knows the hash<details><summary>how to verify</summary><p>GET /api/cert?hash=&lt;sha256&gt; returns the archived PDF for that hash; a malformed or missing hash responds 400/404, never another certificate's content.</p></details></li>
+          <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">active</span> Independent Bitcoin anchor (OpenTimestamps), redundant across 4 calendars<details><summary>how to verify</summary><p>Download the proof from /api/ots?hash=&lt;sha256&gt; and verify it with a public OTS client or on opentimestamps.org, independently of this service.</p></details></li>
+          <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">active</span> Dogfooding anchor: the GTF's own evidence history is attested and anchored in Bitcoin with its own service<details><summary>how to verify</summary><p>Monthly: since 2026-08-17 (P49, ADR-P49) building the bundle is a GitHub button (.github/workflows/anchor-monthly.yml, workflow_dispatch), no longer a terminal command. generators/anchor-monthly.mjs concatenates the manifest.json files of weekly snapshots not yet covered into a deterministic bundle (committed under snapshots/anchors/) and refuses to overwrite one that already exists for the same month; a human downloads the file from the run summary, drags it onto attestazione.spaziogenesi.org, generates the attestation and downloads the PDF (only /api/cert-pdf triggers the real OpenTimestamps anchoring — this remains the only human step by choice, not by technical limitation). Anyone can recompute the bundle's hash in the gtf repo, compare it against the one printed on the certificate, and independently verify the .ots proof on opentimestamps.org. First anchor: period 2026-07 (bundle snapshots/anchors/2026-07-bundle.json, hash cd57b5d3a96947a2264cbb237b3c8eb26cb130e2703838e0597d7b3189e5629b).</p></details></li>
+          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">active</span> Explicit statement: partial, inspiration-only application of ISO/IEC 27037, not full forensic conformance<details><summary>how to verify</summary><p>Compare the two linked requirements (REQ-27037-acq-01, REQ-27037-pres-01): both declare applicability &quot;partial&quot;, never &quot;full&quot;. The acquisition code (client-side hashing) and the three preservation mechanisms (immutable R2, HMAC, TSA, OTS) are verifiable in the public imgauth/imgauthweb repos; the absence of an inspectable chain-of-custody log and of formalized forensic roles is a declared gap, not a hidden one.</p></details></li>
+          <li><span class="tag">CTL-r2-offsite-backup</span> <span class="pill pill-sage status-badge">active</span> Offsite backup of the certificate archive, verified with a real restore drill<details><summary>how to verify</summary><p>Public report of the latest restore test in gtf/docs/verbali/2026-07-restore-drill.md: samples restored from the backup (not from the primary archive) and verified with the standard public tools (HMAC signature via /api/verify, Bitcoin anchor, archive badge). The backup's operational details (provider, region, names) are not public by choice — see ADR-GTF-013.</p></details></li>
+          <li><span class="tag">CTL-maintainer-succession</span> <span class="pill pill-amber status-badge">draft</span> Technical succession procedure, with a residual guarantee independently verifiable from the organization<details><summary>how to verify</summary><p>Two distinct things are verifiable today, without credentials, by anyone — and must be kept separate. (1) The residual guarantee for whoever holds a certificate is verifiable NOW, in production, independently of this document: take an attested file, its PDF certificate and the .ots file downloaded after issuance; verify the .ots file with a public OpenTimestamps client (e.g. <a href="https://opentimestamps.org" target="_blank" rel="noopener">https://opentimestamps.org</a>, or the official client's `ots verify` command) against the Bitcoin blockchain — no Spazio Genesi server involved; open the PDF certificate in a PAdES-compliant reader (e.g. Adobe Acrobat Reader) and check that the timestamp comes from a trusted third party (DigiCert root in the Adobe Approved Trust List). (2) The succession procedure itself (piano-2026/umano/procedura-successione.md, private img-auth-hub repo) is NOT published today: it is a completed draft, not yet resolved or published by the competent body. The control stays &quot;draft&quot; for this reason too, in addition to the lack of a secret-recovery test carried out by someone other than the maintainer (see ADR-B3). It will become fully verifiable only once the procedure is published.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27037-pres-01</span></p>
       </article>
@@ -330,11 +330,11 @@
         <header>
           <span class="pill pill-amber">partial</span>
           <h3>ISO/IEC 27042</h3>
-          <p class="ref">analisi e interpretazione della prova digitale</p>
+          <p class="ref">analysis and interpretation of digital evidence</p>
         </header>
-        <p>Deve esistere un modo per un terzo di analizzare e interpretare l'autenticità di una prova (il certificato) senza doversi fidare ciecamente di chi l'ha emessa.</p>
+        <p>There must be a way for a third party to analyze and interpret the authenticity of a piece of evidence (the certificate) without having to blindly trust whoever issued it.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-cert-pdf-verification</span> <span class="pill pill-sage status-badge">attivo</span> Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF<details><summary>come verificare</summary><p>Trascina un certificato PDF emesso nella scheda &quot;Verifica&quot; di attestazione.spaziogenesi.org: il semaforo mostra corrispondenza, autenticità della firma, integrità dei dati e stato dell'ancoraggio Bitcoin — senza dover fidarsi della sola parola del servizio.</p></details></li>
+          <li><span class="tag">CTL-cert-pdf-verification</span> <span class="pill pill-sage status-badge">active</span> Independent verification of a certificate's authenticity from the PDF alone<details><summary>how to verify</summary><p>Drag an issued PDF certificate onto the &quot;Verify&quot; tab of attestazione.spaziogenesi.org: the traffic-light indicator shows the match, the signature's authenticity, data integrity, and the Bitcoin anchor status — without having to trust the service's word alone.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27042-ver-01</span></p>
       </article>
@@ -342,24 +342,24 @@
         <header>
           <span class="pill pill-amber">partial</span>
           <h3>ISO/IEC 27043</h3>
-          <p class="ref">processi di investigazione e risposta agli incidenti</p>
+          <p class="ref">incident investigation and response processes</p>
         </header>
-        <p>Deve esistere un processo definito e provato di rilevazione e risposta ai guasti/incidenti, non solo una reazione ad hoc.</p>
+        <p>There must be a defined and tested process for detecting and responding to failures/incidents, not just an ad hoc reaction.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico proporzionale e drill-down giornaliero<details><summary>come verificare</summary><p>Consulta <a href="https://attestazione.spaziogenesi.org/status/" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/status/</a>: stato live, barre 90 giorni con uptime % pesato sul tempo (P36, 2026-07-21: un disservizio breve mostra una tacca proporzionale alla sua durata reale, non più l'intera giornata colorata), drill-down sugli eventi fini di ogni giornata (anche quelle &quot;verdi&quot;) con un riquadro d'impatto onesto.</p></details></li>
-          <li><span class="tag">CTL-responsible-disclosure</span> <span class="pill pill-sage status-badge">attivo</span> security.txt (RFC 9116) + policy pubblica di responsible disclosure<details><summary>come verificare</summary><p>`curl <a href="https://attestazione.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/.well-known/security.txt`</a> e `curl <a href="https://imgauth.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://imgauth.spaziogenesi.org/.well-known/security.txt`</a> rispondono entrambi 200 con `Contact: mailto:it@spaziogenesi.org`, un `Expires` nel futuro e `Policy: <a href="https://attestazione.spaziogenesi.org/sicurezza/`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/sicurezza/`</a>. Quella pagina elenca l'ambito (i due domini, i servizi workers.dev attest-bot/attest-mcp-remote, i repo GitHub pubblici dell'organizzazione), l'impegno di safe harbor per la ricerca in buona fede, la presa in carico entro 5 giorni lavorativi, i limiti espliciti (niente DoS, social engineering, accesso fisico, dati reali di terzi) e un riepilogo in inglese. Il rinnovo di `Expires` è tracciato da PRC-security-txt-renewal.</p></details></li>
+          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">active</span> Public traffic-light status of services, with proportional history and daily drill-down<details><summary>how to verify</summary><p>Check <a href="https://attestazione.spaziogenesi.org/status/" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/status/</a>: live status, 90-day bars with uptime % weighted by time (P36, 2026-07-21: a brief outage now shows a mark proportional to its actual duration, not the whole day colored anymore), drill-down into the fine-grained events of each day (even the &quot;green&quot; ones) with an honest impact box.</p></details></li>
+          <li><span class="tag">CTL-responsible-disclosure</span> <span class="pill pill-sage status-badge">active</span> security.txt (RFC 9116) + public responsible disclosure policy<details><summary>how to verify</summary><p>`curl <a href="https://attestazione.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/.well-known/security.txt`</a> and `curl <a href="https://imgauth.spaziogenesi.org/.well-known/security.txt`" target="_blank" rel="noopener">https://imgauth.spaziogenesi.org/.well-known/security.txt`</a> both respond 200 with `Contact: mailto:it@spaziogenesi.org`, a future `Expires`, and `Policy: <a href="https://attestazione.spaziogenesi.org/sicurezza/`" target="_blank" rel="noopener">https://attestazione.spaziogenesi.org/sicurezza/`</a>. That page lists the scope (the two domains, the workers.dev services attest-bot/attest-mcp-remote, the organization's public GitHub repos), a safe-harbor commitment for good-faith research, acknowledgment within 5 business days, explicit limits (no DoS, social engineering, physical access, real third-party data), and an English summary. `Expires` renewal is tracked by PRC-security-txt-renewal.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-27043-ir-01</span></p>
       </article>
       <article class="norm-card">
         <header>
           <span class="pill pill-amber">partial</span>
-          <h3>CAD + Linee guida AgID</h3>
-          <p class="ref">formazione del documento informatico: integrità e riferimento temporale opponibile</p>
+          <h3>CAD (Italian Digital Administration Code) + AgID guidelines</h3>
+          <p class="ref">formation of the electronic document: integrity and legally opposable timestamp</p>
         </header>
-        <p>Il certificato, come documento informatico, deve avere una firma e un riferimento temporale che ne rendano opponibile l'integrità nel tempo.</p>
+        <p>The certificate, as an electronic document, must have a signature and a timestamp that make its integrity legally opposable over time.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-pades-blt-tsa</span> <span class="pill pill-sage status-badge">attivo</span> Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)<details><summary>come verificare</summary><p>Apri un certificato PDF emesso in Adobe Acrobat (o un lettore PAdES conforme): il pannello firme mostra la marca temporale da terza parte attendibile (Adobe AATL), verificabile senza fidarsi del servizio. Dal 2026-07-09 il codice che genera la firma è anche direttamente ispezionabile: github.com/SPAZIO-GENESI/autart-signer (AGPL-3.0).</p></details></li>
+          <li><span class="tag">CTL-pades-blt-tsa</span> <span class="pill pill-sage status-badge">active</span> PAdES B-LT signature with an RFC 3161 timestamp from a recognized TSA (Adobe AATL)<details><summary>how to verify</summary><p>Open an issued PDF certificate in Adobe Acrobat (or a PAdES-compliant reader): the signature panel shows the timestamp from a trusted third party (Adobe AATL), verifiable without trusting the service. Since 2026-07-09 the code that generates the signature is also directly inspectable: github.com/SPAZIO-GENESI/autart-signer (AGPL-3.0).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-cad-doc-01</span></p>
       </article>
@@ -367,11 +367,11 @@
         <header>
           <span class="pill pill-amber">partial</span>
           <h3>eIDAS 2.0</h3>
-          <p class="ref">art. 46-equivalente — non discriminazione degli effetti giuridici delle prove elettroniche non qualificate</p>
+          <p class="ref">art. 46-equivalent — non-discrimination of the legal effects of unqualified electronic evidence</p>
         </header>
-        <p>Il servizio deve informare in modo veritiero sul livello di garanzia offerto, senza lasciar intendere una qualificazione eIDAS che non possiede.</p>
+        <p>The service must truthfully inform users of the level of assurance it offers, without implying an eIDAS qualification it does not hold.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato<details><summary>come verificare</summary><p>Consulta <a href="https://attestazione.trust.spaziogenesi.org" target="_blank" rel="noopener">https://attestazione.trust.spaziogenesi.org</a> (il Trust Center dell'attestazione, dal 16 agosto 2026 su questo sottodominio — la radice trust.spaziogenesi.org ospita ora la pagina del framework), sezione &quot;Cosa NON è questo servizio&quot;: il testo dichiara esplicitamente la natura non qualificata dell'attestazione. Se il testo dovesse sparire o essere annacquato in una futura revisione, il registro GTF lo renderebbe visibile (il record sorgente di questo controllo resta pubblico e versionato).</p></details></li>
+          <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">active</span> Explicit, stable statement: unqualified attestation, not a qualified eIDAS service<details><summary>how to verify</summary><p>Check <a href="https://attestazione.trust.spaziogenesi.org" target="_blank" rel="noopener">https://attestazione.trust.spaziogenesi.org</a> (the attestation Trust Center, on this subdomain since 16 August 2026 — the root trust.spaziogenesi.org now hosts the framework's own page), section &quot;What this service is NOT&quot;: the text explicitly states the unqualified nature of the attestation. Should this text ever disappear or be watered down in a future revision, the GTF registry would make that visible (this control's source record remains public and versioned).</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-eidas-pos-01</span></p>
       </article>
@@ -379,15 +379,15 @@
         <header>
           <span class="pill pill-sage">full</span>
           <h3>GDPR</h3>
-          <p class="ref">art. 13/14 — informativa all'interessato</p>
+          <p class="ref">art. 13/14 — information to the data subject</p>
         </header>
-        <p>Chi usa il servizio deve poter leggere in modo chiaro cosa viene trattato, con quale base giuridica e per quanto tempo.</p>
+        <p>Anyone using the service must be able to clearly read what data is processed, on what legal basis, and for how long.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-privacy-policy-public</span> <span class="pill pill-sage status-badge">attivo</span> Informativa privacy pubblica e aggiornata<details><summary>come verificare</summary><p>Consulta privacy.html su attestazione.spaziogenesi.org: descrive cosa viene trattato, che il file non lascia mai il dispositivo, le basi giuridiche e i diritti dell'interessato.</p></details></li>
-          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">attivo</span> Self-service API key con verifica email OAuth one-shot (Google/Microsoft/LinkedIn), post-moderazione<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/developer/keys/ (P29: pagina statica su authweb, tre bottoni &quot;Continua con Google/Microsoft/LinkedIn&quot; ora fissi nell'HTML — trade-off accettato in FASE 3, non riflettono più la configurazione runtime del provider su imgauth): mostra l'informativa privacy sintetica prima del redirect (LinkedIn dal 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). Dopo il login, la callback OAuth reindirizza con la chiave sg_k_… SOLO nel fragment dell'URL (`#sgk=…`, mai in una risposta HTML del server, P29), mostrata una sola volta dal JS lato client e usabile su /api/hash come qualunque altra API key. Una seconda richiesta con la stessa email non emette una seconda chiave (fragment `#sgstate=gia-attiva`). Nel pannello /admin la chiave compare con colonna Titolare (email + provider); revocandola compare &quot;Dimentica titolare&quot; per l'anonimizzazione immediata (altrimenti automatica dopo 180 giorni dalla revoca, via cron).</p></details></li>
-          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">attivo</span> Canale Telegram (attest-bot): disclosure bloccante, hash in streaming, quote e retention<details><summary>come verificare</summary><p>Apri @SGAttestBot su Telegram e invia un file come primo messaggio: il bot risponde con l'avvertenza sul transito del file PRIMA di scaricare qualunque cosa (nessuna chiamata a getFile finché non accetti). Dopo l'accettazione, un file attestato produce un'impronta identica a quella calcolata a mano sullo stesso file (nessuna alterazione in transito). Una foto (non un documento) viene rifiutata con l'avviso sulla ricompressione, senza alcun download. Sesto file di attestazione nello stesso giorno (o ventunesima verifica) → messaggio di quota, nessuna chiamata a imgauth. Scrivendo a info@spaziogenesi.org si può chiedere la cancellazione anticipata dell'id utente e dei contatori d'uso.</p></details></li>
-          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">attivo</span> Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/profilo/ (P29: guscio statico su authweb, fetch verso imgauth), accedi con un login OAuth one-shot (Google/Microsoft/LinkedIn — stesso meccanismo di CTL-dev-selfservice e CTL-site-voucher-auth, nessuna password, nessun account). Senza abbonamento: prezzo del listino attivo mostrato dinamicamente (mai hardcodato) e bottone Checkout, che apre una pagina Stripe hosted — nessun campo carta compare mai su imgauth.spaziogenesi.org. Con un abbonamento attivo: stato, scadenza, log ricariche, consumo del mese, archivio dei certificati con canale di produzione (web/api/mcp/telegram), bottone &quot;Gestisci o cessa l'abbonamento&quot; che apre lo Stripe Customer Portal hosted (fatture, metodo di pagamento, cessazione — mai su questo Worker). Una cessazione dal Portal (comportamento di default per abbonamenti annuali: resta attivo fino alla scadenza già pagata) mostra un banner &quot;cessazione programmata&quot; senza perdere la fascia. La catena di precedenza convenzione→professionale→sviluppatore→base non blocca mai: quota o abbonamento esauriti degradano a Base con motivo esplicito (`fascia_motivo`), stessa logica già verificata per CTL-convention-accounting. Il listino e i codici sconto si gestiscono dal pannello /admin (scheda Professionale): righe con finestre di validità (mai si modifica un importo passato, si chiude e se ne crea una nuova) e sconti percentuali/fissi, anche riservati a una singola email. ✅ Collaudato con un **abbonamento reale a pagamento** (1€, non un dato sintetico) end-to-end in produzione il 17-18 luglio 2026 — vedi EVD-pro-subscription-live-test: checkout → attestazione dal sito riconosciuta in fascia professionale → archivio con canale → cessazione dal Customer Portal → rimborso. Nel collaudo emersi e corretti tre difetti reali mai incontrati nei test locali (shape dell'API Stripe dell'account, `cancel_at_period_end` sempre `false`, doppio evento del Customer Portal per un click) — vedi ADR-P27. Nasce direttamente `active`, stesso criterio già applicato a CTL-cicd-pipeline, CTL-site-voucher-auth e CTL-convention-accounting: un controllo collaudato con dati reali, non solo dichiarato.</p></details></li>
-          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">attivo</span> Vetrina pubblica Integrazioni (pre-moderata) + convenzioni partner software house con pool mensile<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/integrazioni/ (P29: pagina statica su authweb, rigenerata a evento da imgauth): vetrina pubblica, solo le candidature approvate compaiono (logo, nome, descrizione, link `rel=&quot;noopener nofollow&quot;`), con conteggio totale e spiegazione onesta che la presenza non è una certificazione del software. Chi ha una chiave API attiva o un abbonamento Professionale può candidare la propria applicazione dalla sezione &quot;La tua integrazione&quot; di attestazione.spaziogenesi.org/profilo/ (stesso login OAuth one-shot di CTL-dev-selfservice e CTL-pro-subscription): la candidatura risulta subito `pending`, mai pubblica finché il gestore non la approva dal pannello /admin (scheda Integrazioni) — pre-moderazione, a differenza di ogni altro flusso self-service del sistema. Qualunque modifica successiva — nome, URL, descrizione o solo il logo — riporta lo stato a `pending`: non esiste un canale per cambiare silenziosamente ciò che è già online. Il logo, se presente, è servito solo per le candidature approvate (`GET /integrazioni/logo/&lt;id&gt;`, 404 altrimenti) ed è stato validato all'upload sui magic bytes (PNG/JPEG/WebP, mai SVG, mai il Content-Type dichiarato). Le software house che attestano per conto dei propri utenti usano una convenzione con pool mensile dedicato (`convention_id` sulla chiave, `domains` placeholder che non può mai combaciare con un'email reale) — stesso meccanismo di CTL-convention-accounting, riusato senza nuovo codice sul motore. Il &quot;forget&quot; GDPR del pannello admin anonimizza anche il titolare di una candidatura e la ritira dalla vetrina.</p></details></li>
+          <li><span class="tag">CTL-privacy-policy-public</span> <span class="pill pill-sage status-badge">active</span> Public, up-to-date privacy notice<details><summary>how to verify</summary><p>Check privacy.html on attestazione.spaziogenesi.org: it describes what is processed, that the file never leaves the device, the legal bases, and the data subject's rights.</p></details></li>
+          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">active</span> Self-service API key with one-shot OAuth email verification (Google/Microsoft/LinkedIn), post-moderation<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/developer/keys/ (P29: static page on authweb, the three &quot;Continue with Google/Microsoft/LinkedIn&quot; buttons are now fixed in the HTML — an accepted trade-off from PHASE 3, they no longer reflect the provider's runtime configuration on imgauth): shows the short privacy notice before the redirect (LinkedIn since 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). After login, the OAuth callback redirects with the sg_k_… key ONLY in the URL fragment (`#sgk=…`, never in an HTML response from the server, P29), shown once by client-side JS and usable on /api/hash like any other API key. A second request with the same email does not issue a second key (`#sgstate=gia-attiva` fragment). In the /admin panel the key shows a Holder column (email + provider); revoking it shows &quot;Forget holder&quot; for immediate anonymization (otherwise automatic 180 days after revocation, via cron).</p></details></li>
+          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">active</span> Telegram channel (attest-bot): blocking disclosure, streaming hash, quotas, and retention<details><summary>how to verify</summary><p>Open @SGAttestBot on Telegram and send a file as the first message: the bot replies with the warning about the file's transit BEFORE downloading anything (no call to getFile until you accept). After accepting, an attested file produces a fingerprint identical to the one computed by hand on the same file (no alteration in transit). A photo (not a document) is rejected with the recompression warning, with no download at all. Sixth attestation file on the same day (or twenty-first verification) → quota message, no call to imgauth. Writing to info@spaziogenesi.org lets you request early deletion of your user id and usage counters.</p></details></li>
+          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">active</span> Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/profilo/ (P29: static shell on authweb, fetching from imgauth), sign in with a one-shot OAuth login (Google/Microsoft/LinkedIn — same mechanism as CTL-dev-selfservice and CTL-site-voucher-auth, no password, no account). Without a subscription: the active price list is shown dynamically (never hardcoded) with a Checkout button that opens a hosted Stripe page — no card field ever appears on imgauth.spaziogenesi.org. With an active subscription: status, expiry, top-up log, this month's usage, a certificate archive with production channel (web/api/mcp/telegram), a &quot;Manage or cancel subscription&quot; button that opens the hosted Stripe Customer Portal (invoices, payment method, cancellation — never on this Worker). Cancelling from the Portal (default behavior for annual subscriptions: stays active until the already-paid expiry) shows a &quot;cancellation scheduled&quot; banner without losing the tier. The convention→professional→developer→base precedence chain never blocks: an exhausted quota or subscription degrades to Base with an explicit reason (`fascia_motivo`), the same logic already verified for CTL-convention-accounting. The price list and discount codes are managed from the /admin panel (Professional tab): rows with validity windows (a past amount is never edited, it is closed and a new one created) and percentage/fixed discounts, even reserved to a single email. ✅ Tested with a **real, paid subscription** (€1, not synthetic data) end-to-end in production on 17-18 July 2026 — see EVD-pro-subscription-live-test: checkout → attestation from the site recognized at the professional tier → archive with channel → cancellation from the Customer Portal → refund. The test surfaced and fixed three real defects never encountered in local tests (the account's Stripe API shape, `cancel_at_period_end` always `false`, a duplicate Customer Portal event for one click) — see ADR-P27. It is born directly `active`, the same criterion already applied to CTL-cicd-pipeline, CTL-site-voucher-auth and CTL-convention-accounting: a control tested with real data, not just declared.</p></details></li>
+          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">active</span> Public Integrations showcase (pre-moderated) + software-house partner conventions with a monthly pool<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/integrazioni/ (P29: static page on authweb, regenerated on-event by imgauth): public showcase, only approved submissions appear (logo, name, description, `rel=&quot;noopener nofollow&quot;` link), with a total count and an honest note that presence is not a certification of the software. Anyone with an active API key or a Professional subscription can submit their own application from the &quot;Your integration&quot; section of attestazione.spaziogenesi.org/profilo/ (same one-shot OAuth login as CTL-dev-selfservice and CTL-pro-subscription): the submission is immediately `pending`, never public until the maintainer approves it from the /admin panel (Integrations tab) — pre-moderation, unlike every other self-service flow in the system. Any later change — name, URL, description, or just the logo — sends the status back to `pending`: there is no channel to silently change what is already live. The logo, if present, is served only for approved submissions (`GET /integrazioni/logo/&lt;id&gt;`, 404 otherwise) and was validated on upload against magic bytes (PNG/JPEG/WebP, never SVG, never the declared Content-Type). Software houses attesting on behalf of their own users use a convention with a dedicated monthly pool (`convention_id` on the key, `domains` placeholder that can never match a real email) — the same mechanism as CTL-convention-accounting, reused with no new engine code. The admin panel's GDPR &quot;forget&quot; also anonymizes a submission's holder and withdraws it from the showcase.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-gdpr-info-01</span></p>
       </article>
@@ -395,16 +395,16 @@
         <header>
           <span class="pill pill-sage">full</span>
           <h3>GDPR</h3>
-          <p class="ref">art. 5(1)(c) — minimizzazione</p>
+          <p class="ref">art. 5(1)(c) — data minimization</p>
         </header>
-        <p>Trattare solo i dati strettamente necessari alla finalità di attestazione</p>
+        <p>Process only the data strictly necessary for the attestation purpose</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
-          <li><span class="tag">CTL-matomo-cookieless</span> <span class="pill pill-sage status-badge">attivo</span> Analytics senza cookie, nessun identificatore persistente<details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></li>
-          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">attivo</span> Self-service API key con verifica email OAuth one-shot (Google/Microsoft/LinkedIn), post-moderazione<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/developer/keys/ (P29: pagina statica su authweb, tre bottoni &quot;Continua con Google/Microsoft/LinkedIn&quot; ora fissi nell'HTML — trade-off accettato in FASE 3, non riflettono più la configurazione runtime del provider su imgauth): mostra l'informativa privacy sintetica prima del redirect (LinkedIn dal 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). Dopo il login, la callback OAuth reindirizza con la chiave sg_k_… SOLO nel fragment dell'URL (`#sgk=…`, mai in una risposta HTML del server, P29), mostrata una sola volta dal JS lato client e usabile su /api/hash come qualunque altra API key. Una seconda richiesta con la stessa email non emette una seconda chiave (fragment `#sgstate=gia-attiva`). Nel pannello /admin la chiave compare con colonna Titolare (email + provider); revocandola compare &quot;Dimentica titolare&quot; per l'anonimizzazione immediata (altrimenti automatica dopo 180 giorni dalla revoca, via cron).</p></details></li>
-          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">attivo</span> Canale Telegram (attest-bot): disclosure bloccante, hash in streaming, quote e retention<details><summary>come verificare</summary><p>Apri @SGAttestBot su Telegram e invia un file come primo messaggio: il bot risponde con l'avvertenza sul transito del file PRIMA di scaricare qualunque cosa (nessuna chiamata a getFile finché non accetti). Dopo l'accettazione, un file attestato produce un'impronta identica a quella calcolata a mano sullo stesso file (nessuna alterazione in transito). Una foto (non un documento) viene rifiutata con l'avviso sulla ricompressione, senza alcun download. Sesto file di attestazione nello stesso giorno (o ventunesima verifica) → messaggio di quota, nessuna chiamata a imgauth. Scrivendo a info@spaziogenesi.org si può chiedere la cancellazione anticipata dell'id utente e dei contatori d'uso.</p></details></li>
-          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">attivo</span> Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/profilo/ (P29: guscio statico su authweb, fetch verso imgauth), accedi con un login OAuth one-shot (Google/Microsoft/LinkedIn — stesso meccanismo di CTL-dev-selfservice e CTL-site-voucher-auth, nessuna password, nessun account). Senza abbonamento: prezzo del listino attivo mostrato dinamicamente (mai hardcodato) e bottone Checkout, che apre una pagina Stripe hosted — nessun campo carta compare mai su imgauth.spaziogenesi.org. Con un abbonamento attivo: stato, scadenza, log ricariche, consumo del mese, archivio dei certificati con canale di produzione (web/api/mcp/telegram), bottone &quot;Gestisci o cessa l'abbonamento&quot; che apre lo Stripe Customer Portal hosted (fatture, metodo di pagamento, cessazione — mai su questo Worker). Una cessazione dal Portal (comportamento di default per abbonamenti annuali: resta attivo fino alla scadenza già pagata) mostra un banner &quot;cessazione programmata&quot; senza perdere la fascia. La catena di precedenza convenzione→professionale→sviluppatore→base non blocca mai: quota o abbonamento esauriti degradano a Base con motivo esplicito (`fascia_motivo`), stessa logica già verificata per CTL-convention-accounting. Il listino e i codici sconto si gestiscono dal pannello /admin (scheda Professionale): righe con finestre di validità (mai si modifica un importo passato, si chiude e se ne crea una nuova) e sconti percentuali/fissi, anche riservati a una singola email. ✅ Collaudato con un **abbonamento reale a pagamento** (1€, non un dato sintetico) end-to-end in produzione il 17-18 luglio 2026 — vedi EVD-pro-subscription-live-test: checkout → attestazione dal sito riconosciuta in fascia professionale → archivio con canale → cessazione dal Customer Portal → rimborso. Nel collaudo emersi e corretti tre difetti reali mai incontrati nei test locali (shape dell'API Stripe dell'account, `cancel_at_period_end` sempre `false`, doppio evento del Customer Portal per un click) — vedi ADR-P27. Nasce direttamente `active`, stesso criterio già applicato a CTL-cicd-pipeline, CTL-site-voucher-auth e CTL-convention-accounting: un controllo collaudato con dati reali, non solo dichiarato.</p></details></li>
-          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">attivo</span> Vetrina pubblica Integrazioni (pre-moderata) + convenzioni partner software house con pool mensile<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/integrazioni/ (P29: pagina statica su authweb, rigenerata a evento da imgauth): vetrina pubblica, solo le candidature approvate compaiono (logo, nome, descrizione, link `rel=&quot;noopener nofollow&quot;`), con conteggio totale e spiegazione onesta che la presenza non è una certificazione del software. Chi ha una chiave API attiva o un abbonamento Professionale può candidare la propria applicazione dalla sezione &quot;La tua integrazione&quot; di attestazione.spaziogenesi.org/profilo/ (stesso login OAuth one-shot di CTL-dev-selfservice e CTL-pro-subscription): la candidatura risulta subito `pending`, mai pubblica finché il gestore non la approva dal pannello /admin (scheda Integrazioni) — pre-moderazione, a differenza di ogni altro flusso self-service del sistema. Qualunque modifica successiva — nome, URL, descrizione o solo il logo — riporta lo stato a `pending`: non esiste un canale per cambiare silenziosamente ciò che è già online. Il logo, se presente, è servito solo per le candidature approvate (`GET /integrazioni/logo/&lt;id&gt;`, 404 altrimenti) ed è stato validato all'upload sui magic bytes (PNG/JPEG/WebP, mai SVG, mai il Content-Type dichiarato). Le software house che attestano per conto dei propri utenti usano una convenzione con pool mensile dedicato (`convention_id` sulla chiave, `domains` placeholder che non può mai combaciare con un'email reale) — stesso meccanismo di CTL-convention-accounting, riusato senza nuovo codice sul motore. Il &quot;forget&quot; GDPR del pannello admin anonimizza anche il titolare di una candidatura e la ritira dalla vetrina.</p></details></li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">active</span> The fingerprint is computed in the browser; the file never leaves the device<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org with DevTools › Network, attest a file: the request to /api/hash contains only {sha256,name,type,size}, no bytes of the file.</p></details></li>
+          <li><span class="tag">CTL-matomo-cookieless</span> <span class="pill pill-sage status-badge">active</span> Cookieless analytics, no persistent identifier<details><summary>how to verify</summary><p>Inspect the cookies set by attestazione.spaziogenesi.org with the browser's developer tools: no Matomo cookie; consistently, there is no cookie consent banner.</p></details></li>
+          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">active</span> Self-service API key with one-shot OAuth email verification (Google/Microsoft/LinkedIn), post-moderation<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/developer/keys/ (P29: static page on authweb, the three &quot;Continue with Google/Microsoft/LinkedIn&quot; buttons are now fixed in the HTML — an accepted trade-off from PHASE 3, they no longer reflect the provider's runtime configuration on imgauth): shows the short privacy notice before the redirect (LinkedIn since 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). After login, the OAuth callback redirects with the sg_k_… key ONLY in the URL fragment (`#sgk=…`, never in an HTML response from the server, P29), shown once by client-side JS and usable on /api/hash like any other API key. A second request with the same email does not issue a second key (`#sgstate=gia-attiva` fragment). In the /admin panel the key shows a Holder column (email + provider); revoking it shows &quot;Forget holder&quot; for immediate anonymization (otherwise automatic 180 days after revocation, via cron).</p></details></li>
+          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">active</span> Telegram channel (attest-bot): blocking disclosure, streaming hash, quotas, and retention<details><summary>how to verify</summary><p>Open @SGAttestBot on Telegram and send a file as the first message: the bot replies with the warning about the file's transit BEFORE downloading anything (no call to getFile until you accept). After accepting, an attested file produces a fingerprint identical to the one computed by hand on the same file (no alteration in transit). A photo (not a document) is rejected with the recompression warning, with no download at all. Sixth attestation file on the same day (or twenty-first verification) → quota message, no call to imgauth. Writing to info@spaziogenesi.org lets you request early deletion of your user id and usage counters.</p></details></li>
+          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">active</span> Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/profilo/ (P29: static shell on authweb, fetching from imgauth), sign in with a one-shot OAuth login (Google/Microsoft/LinkedIn — same mechanism as CTL-dev-selfservice and CTL-site-voucher-auth, no password, no account). Without a subscription: the active price list is shown dynamically (never hardcoded) with a Checkout button that opens a hosted Stripe page — no card field ever appears on imgauth.spaziogenesi.org. With an active subscription: status, expiry, top-up log, this month's usage, a certificate archive with production channel (web/api/mcp/telegram), a &quot;Manage or cancel subscription&quot; button that opens the hosted Stripe Customer Portal (invoices, payment method, cancellation — never on this Worker). Cancelling from the Portal (default behavior for annual subscriptions: stays active until the already-paid expiry) shows a &quot;cancellation scheduled&quot; banner without losing the tier. The convention→professional→developer→base precedence chain never blocks: an exhausted quota or subscription degrades to Base with an explicit reason (`fascia_motivo`), the same logic already verified for CTL-convention-accounting. The price list and discount codes are managed from the /admin panel (Professional tab): rows with validity windows (a past amount is never edited, it is closed and a new one created) and percentage/fixed discounts, even reserved to a single email. ✅ Tested with a **real, paid subscription** (€1, not synthetic data) end-to-end in production on 17-18 July 2026 — see EVD-pro-subscription-live-test: checkout → attestation from the site recognized at the professional tier → archive with channel → cancellation from the Customer Portal → refund. The test surfaced and fixed three real defects never encountered in local tests (the account's Stripe API shape, `cancel_at_period_end` always `false`, a duplicate Customer Portal event for one click) — see ADR-P27. It is born directly `active`, the same criterion already applied to CTL-cicd-pipeline, CTL-site-voucher-auth and CTL-convention-accounting: a control tested with real data, not just declared.</p></details></li>
+          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">active</span> Public Integrations showcase (pre-moderated) + software-house partner conventions with a monthly pool<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/integrazioni/ (P29: static page on authweb, regenerated on-event by imgauth): public showcase, only approved submissions appear (logo, name, description, `rel=&quot;noopener nofollow&quot;` link), with a total count and an honest note that presence is not a certification of the software. Anyone with an active API key or a Professional subscription can submit their own application from the &quot;Your integration&quot; section of attestazione.spaziogenesi.org/profilo/ (same one-shot OAuth login as CTL-dev-selfservice and CTL-pro-subscription): the submission is immediately `pending`, never public until the maintainer approves it from the /admin panel (Integrations tab) — pre-moderation, unlike every other self-service flow in the system. Any later change — name, URL, description, or just the logo — sends the status back to `pending`: there is no channel to silently change what is already live. The logo, if present, is served only for approved submissions (`GET /integrazioni/logo/&lt;id&gt;`, 404 otherwise) and was validated on upload against magic bytes (PNG/JPEG/WebP, never SVG, never the declared Content-Type). Software houses attesting on behalf of their own users use a convention with a dedicated monthly pool (`convention_id` on the key, `domains` placeholder that can never match a real email) — the same mechanism as CTL-convention-accounting, reused with no new engine code. The admin panel's GDPR &quot;forget&quot; also anonymizes a submission's holder and withdraws it from the showcase.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-gdpr-min-01</span></p>
       </article>
@@ -412,16 +412,16 @@
         <header>
           <span class="pill pill-amber">partial</span>
           <h3>GDPR</h3>
-          <p class="ref">artt. 15-22 — diritti dell'interessato (accesso, cancellazione, opposizione...)</p>
+          <p class="ref">artt. 15-22 — data subject rights (access, erasure, objection...)</p>
         </header>
-        <p>L'interessato deve poter esercitare i propri diritti sui dati trattati. Applicabilità parziale: per chi attesta un'opera, il servizio non crea account, non tratta il file originale (mai inviato al server) e l'analytics è senza identificatori persistenti — la maggior parte dei diritti classici (accesso al proprio profilo, portabilità di dati account) non si applica per assenza stessa del dato, non per una scelta di non conformità. Dalla P22 (2026-07-10) esiste una seconda categoria di interessati con dati reali da gestire: gli sviluppatori che richiedono una chiave API self-service (email + provider OAuth). Per loro il diritto di cancellazione è self-service-adiacente (richiesta al gestore → anonimizzazione immediata dal pannello admin) e comunque automatico dopo 180 giorni dalla revoca della chiave. Dalla P23 (2026-07-11) esiste una terza categoria: chi usa il bot Telegram (id utente + contatori d'uso). Anche qui la cancellazione è su richiesta al gestore e comunque automatica dopo 90 giorni. Dalla P27 (2026-07-17/18) esiste una quarta categoria: chi sottoscrive l'abbonamento Professionale (email, provider, riferimenti abbonamento Stripe, log delle attestazioni, profilazione facoltativa). L'interessato può gestire in autonomia dalla pagina `/profilo` la profilazione facoltativa (salvataggio/rimozione, nessuna richiesta al gestore necessaria) e chiedere la cancellazione anticipata dei dati dell'abbonamento — con un trade-off esplicito e dichiarato: perde l'accesso al proprio archivio consultabile (i certificati restano comunque validi e recuperabili per impronta, come per chiunque), e può chiedere anche l'eliminazione dei PDF archiviati non condivisi con altre attestazioni.</p>
+        <p>Data subjects must be able to exercise their rights over the data processed. Partial applicability: for anyone attesting a work, the service creates no account, does not process the original file (never sent to the server), and analytics carries no persistent identifiers — most of the classic rights (access to one's own profile, portability of account data) do not apply simply because the data does not exist, not by a choice of non-compliance. Since P22 (2026-07-10) a second category of data subjects exists with real data to manage: developers who request a self-service API key (email + OAuth provider). For them the right to erasure is self-service-adjacent (request to the maintainer → immediate anonymization from the admin panel) and in any case automatic 180 days after the key is revoked. Since P23 (2026-07-11) a third category exists: users of the Telegram bot (user id + usage counters). Here too, erasure is on request to the maintainer and in any case automatic after 90 days. Since P27 (2026-07-17/18) a fourth category exists: subscribers to the Professional plan (email, provider, Stripe subscription references, attestation logs, optional profiling). Data subjects can independently manage optional profiling from the `/profilo` page (save/remove, no request to the maintainer needed) and request early deletion of subscription data — with an explicit, declared trade-off: they lose access to their browsable archive (certificates remain valid and retrievable by fingerprint regardless, as for anyone), and they can also request deletion of archived PDFs not shared with other attestations.</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org con DevTools › Network, attesta un file: la richiesta a /api/hash contiene solo {sha256,name,type,size}, nessun byte del file.</p></details></li>
-          <li><span class="tag">CTL-matomo-cookieless</span> <span class="pill pill-sage status-badge">attivo</span> Analytics senza cookie, nessun identificatore persistente<details><summary>come verificare</summary><p>Ispeziona i cookie impostati da attestazione.spaziogenesi.org con gli strumenti sviluppatore del browser: nessun cookie Matomo; coerentemente non è presente alcun banner di consenso cookie.</p></details></li>
-          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">attivo</span> Self-service API key con verifica email OAuth one-shot (Google/Microsoft/LinkedIn), post-moderazione<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/developer/keys/ (P29: pagina statica su authweb, tre bottoni &quot;Continua con Google/Microsoft/LinkedIn&quot; ora fissi nell'HTML — trade-off accettato in FASE 3, non riflettono più la configurazione runtime del provider su imgauth): mostra l'informativa privacy sintetica prima del redirect (LinkedIn dal 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). Dopo il login, la callback OAuth reindirizza con la chiave sg_k_… SOLO nel fragment dell'URL (`#sgk=…`, mai in una risposta HTML del server, P29), mostrata una sola volta dal JS lato client e usabile su /api/hash come qualunque altra API key. Una seconda richiesta con la stessa email non emette una seconda chiave (fragment `#sgstate=gia-attiva`). Nel pannello /admin la chiave compare con colonna Titolare (email + provider); revocandola compare &quot;Dimentica titolare&quot; per l'anonimizzazione immediata (altrimenti automatica dopo 180 giorni dalla revoca, via cron).</p></details></li>
-          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">attivo</span> Canale Telegram (attest-bot): disclosure bloccante, hash in streaming, quote e retention<details><summary>come verificare</summary><p>Apri @SGAttestBot su Telegram e invia un file come primo messaggio: il bot risponde con l'avvertenza sul transito del file PRIMA di scaricare qualunque cosa (nessuna chiamata a getFile finché non accetti). Dopo l'accettazione, un file attestato produce un'impronta identica a quella calcolata a mano sullo stesso file (nessuna alterazione in transito). Una foto (non un documento) viene rifiutata con l'avviso sulla ricompressione, senza alcun download. Sesto file di attestazione nello stesso giorno (o ventunesima verifica) → messaggio di quota, nessuna chiamata a imgauth. Scrivendo a info@spaziogenesi.org si può chiedere la cancellazione anticipata dell'id utente e dei contatori d'uso.</p></details></li>
-          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">attivo</span> Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/profilo/ (P29: guscio statico su authweb, fetch verso imgauth), accedi con un login OAuth one-shot (Google/Microsoft/LinkedIn — stesso meccanismo di CTL-dev-selfservice e CTL-site-voucher-auth, nessuna password, nessun account). Senza abbonamento: prezzo del listino attivo mostrato dinamicamente (mai hardcodato) e bottone Checkout, che apre una pagina Stripe hosted — nessun campo carta compare mai su imgauth.spaziogenesi.org. Con un abbonamento attivo: stato, scadenza, log ricariche, consumo del mese, archivio dei certificati con canale di produzione (web/api/mcp/telegram), bottone &quot;Gestisci o cessa l'abbonamento&quot; che apre lo Stripe Customer Portal hosted (fatture, metodo di pagamento, cessazione — mai su questo Worker). Una cessazione dal Portal (comportamento di default per abbonamenti annuali: resta attivo fino alla scadenza già pagata) mostra un banner &quot;cessazione programmata&quot; senza perdere la fascia. La catena di precedenza convenzione→professionale→sviluppatore→base non blocca mai: quota o abbonamento esauriti degradano a Base con motivo esplicito (`fascia_motivo`), stessa logica già verificata per CTL-convention-accounting. Il listino e i codici sconto si gestiscono dal pannello /admin (scheda Professionale): righe con finestre di validità (mai si modifica un importo passato, si chiude e se ne crea una nuova) e sconti percentuali/fissi, anche riservati a una singola email. ✅ Collaudato con un **abbonamento reale a pagamento** (1€, non un dato sintetico) end-to-end in produzione il 17-18 luglio 2026 — vedi EVD-pro-subscription-live-test: checkout → attestazione dal sito riconosciuta in fascia professionale → archivio con canale → cessazione dal Customer Portal → rimborso. Nel collaudo emersi e corretti tre difetti reali mai incontrati nei test locali (shape dell'API Stripe dell'account, `cancel_at_period_end` sempre `false`, doppio evento del Customer Portal per un click) — vedi ADR-P27. Nasce direttamente `active`, stesso criterio già applicato a CTL-cicd-pipeline, CTL-site-voucher-auth e CTL-convention-accounting: un controllo collaudato con dati reali, non solo dichiarato.</p></details></li>
-          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">attivo</span> Vetrina pubblica Integrazioni (pre-moderata) + convenzioni partner software house con pool mensile<details><summary>come verificare</summary><p>Apri attestazione.spaziogenesi.org/integrazioni/ (P29: pagina statica su authweb, rigenerata a evento da imgauth): vetrina pubblica, solo le candidature approvate compaiono (logo, nome, descrizione, link `rel=&quot;noopener nofollow&quot;`), con conteggio totale e spiegazione onesta che la presenza non è una certificazione del software. Chi ha una chiave API attiva o un abbonamento Professionale può candidare la propria applicazione dalla sezione &quot;La tua integrazione&quot; di attestazione.spaziogenesi.org/profilo/ (stesso login OAuth one-shot di CTL-dev-selfservice e CTL-pro-subscription): la candidatura risulta subito `pending`, mai pubblica finché il gestore non la approva dal pannello /admin (scheda Integrazioni) — pre-moderazione, a differenza di ogni altro flusso self-service del sistema. Qualunque modifica successiva — nome, URL, descrizione o solo il logo — riporta lo stato a `pending`: non esiste un canale per cambiare silenziosamente ciò che è già online. Il logo, se presente, è servito solo per le candidature approvate (`GET /integrazioni/logo/&lt;id&gt;`, 404 altrimenti) ed è stato validato all'upload sui magic bytes (PNG/JPEG/WebP, mai SVG, mai il Content-Type dichiarato). Le software house che attestano per conto dei propri utenti usano una convenzione con pool mensile dedicato (`convention_id` sulla chiave, `domains` placeholder che non può mai combaciare con un'email reale) — stesso meccanismo di CTL-convention-accounting, riusato senza nuovo codice sul motore. Il &quot;forget&quot; GDPR del pannello admin anonimizza anche il titolare di una candidatura e la ritira dalla vetrina.</p></details></li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">active</span> The fingerprint is computed in the browser; the file never leaves the device<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org with DevTools › Network, attest a file: the request to /api/hash contains only {sha256,name,type,size}, no bytes of the file.</p></details></li>
+          <li><span class="tag">CTL-matomo-cookieless</span> <span class="pill pill-sage status-badge">active</span> Cookieless analytics, no persistent identifier<details><summary>how to verify</summary><p>Inspect the cookies set by attestazione.spaziogenesi.org with the browser's developer tools: no Matomo cookie; consistently, there is no cookie consent banner.</p></details></li>
+          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">active</span> Self-service API key with one-shot OAuth email verification (Google/Microsoft/LinkedIn), post-moderation<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/developer/keys/ (P29: static page on authweb, the three &quot;Continue with Google/Microsoft/LinkedIn&quot; buttons are now fixed in the HTML — an accepted trade-off from PHASE 3, they no longer reflect the provider's runtime configuration on imgauth): shows the short privacy notice before the redirect (LinkedIn since 2026-07-12, imgauth 1.20.0, ADR-P25-linkedin). After login, the OAuth callback redirects with the sg_k_… key ONLY in the URL fragment (`#sgk=…`, never in an HTML response from the server, P29), shown once by client-side JS and usable on /api/hash like any other API key. A second request with the same email does not issue a second key (`#sgstate=gia-attiva` fragment). In the /admin panel the key shows a Holder column (email + provider); revoking it shows &quot;Forget holder&quot; for immediate anonymization (otherwise automatic 180 days after revocation, via cron).</p></details></li>
+          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">active</span> Telegram channel (attest-bot): blocking disclosure, streaming hash, quotas, and retention<details><summary>how to verify</summary><p>Open @SGAttestBot on Telegram and send a file as the first message: the bot replies with the warning about the file's transit BEFORE downloading anything (no call to getFile until you accept). After accepting, an attested file produces a fingerprint identical to the one computed by hand on the same file (no alteration in transit). A photo (not a document) is rejected with the recompression warning, with no download at all. Sixth attestation file on the same day (or twenty-first verification) → quota message, no call to imgauth. Writing to info@spaziogenesi.org lets you request early deletion of your user id and usage counters.</p></details></li>
+          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">active</span> Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/profilo/ (P29: static shell on authweb, fetching from imgauth), sign in with a one-shot OAuth login (Google/Microsoft/LinkedIn — same mechanism as CTL-dev-selfservice and CTL-site-voucher-auth, no password, no account). Without a subscription: the active price list is shown dynamically (never hardcoded) with a Checkout button that opens a hosted Stripe page — no card field ever appears on imgauth.spaziogenesi.org. With an active subscription: status, expiry, top-up log, this month's usage, a certificate archive with production channel (web/api/mcp/telegram), a &quot;Manage or cancel subscription&quot; button that opens the hosted Stripe Customer Portal (invoices, payment method, cancellation — never on this Worker). Cancelling from the Portal (default behavior for annual subscriptions: stays active until the already-paid expiry) shows a &quot;cancellation scheduled&quot; banner without losing the tier. The convention→professional→developer→base precedence chain never blocks: an exhausted quota or subscription degrades to Base with an explicit reason (`fascia_motivo`), the same logic already verified for CTL-convention-accounting. The price list and discount codes are managed from the /admin panel (Professional tab): rows with validity windows (a past amount is never edited, it is closed and a new one created) and percentage/fixed discounts, even reserved to a single email. ✅ Tested with a **real, paid subscription** (€1, not synthetic data) end-to-end in production on 17-18 July 2026 — see EVD-pro-subscription-live-test: checkout → attestation from the site recognized at the professional tier → archive with channel → cancellation from the Customer Portal → refund. The test surfaced and fixed three real defects never encountered in local tests (the account's Stripe API shape, `cancel_at_period_end` always `false`, a duplicate Customer Portal event for one click) — see ADR-P27. It is born directly `active`, the same criterion already applied to CTL-cicd-pipeline, CTL-site-voucher-auth and CTL-convention-accounting: a control tested with real data, not just declared.</p></details></li>
+          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">active</span> Public Integrations showcase (pre-moderated) + software-house partner conventions with a monthly pool<details><summary>how to verify</summary><p>Open attestazione.spaziogenesi.org/integrazioni/ (P29: static page on authweb, regenerated on-event by imgauth): public showcase, only approved submissions appear (logo, name, description, `rel=&quot;noopener nofollow&quot;` link), with a total count and an honest note that presence is not a certification of the software. Anyone with an active API key or a Professional subscription can submit their own application from the &quot;Your integration&quot; section of attestazione.spaziogenesi.org/profilo/ (same one-shot OAuth login as CTL-dev-selfservice and CTL-pro-subscription): the submission is immediately `pending`, never public until the maintainer approves it from the /admin panel (Integrations tab) — pre-moderation, unlike every other self-service flow in the system. Any later change — name, URL, description, or just the logo — sends the status back to `pending`: there is no channel to silently change what is already live. The logo, if present, is served only for approved submissions (`GET /integrazioni/logo/&lt;id&gt;`, 404 otherwise) and was validated on upload against magic bytes (PNG/JPEG/WebP, never SVG, never the declared Content-Type). Software houses attesting on behalf of their own users use a convention with a dedicated monthly pool (`convention_id` on the key, `domains` placeholder that can never match a real email) — the same mechanism as CTL-convention-accounting, reused with no new engine code. The admin panel's GDPR &quot;forget&quot; also anonymizes a submission's holder and withdraws it from the showcase.</p></details></li>
         </ul>
         <p class="tag-line"><span class="tag">REQ-gdpr-rights-01</span></p>
       </article>
@@ -429,331 +429,331 @@
   </section>
 
   <section id="rischi" class="folio" data-folio="RSK">
-    <h2>Rischi</h2>
+    <h2>Risks</h2>
     <div class="norm-grid">
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>Pannello admin credenziali agente: accesso protetto in profondità</h3>
+          <h3>Agent credential admin panel: defense-in-depth access</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">attivo</span> Pannello admin credenziali agente: elenco/emissione/revoca/quota con accesso riservato</li>
-          <li><span class="tag">CTL-cloudflare-access-admin</span> <span class="pill pill-sage status-badge">attivo</span> Cloudflare Access (Zero Trust) davanti al pannello admin credenziali agente</li>
-          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
+          <li><span class="tag">CTL-agent-admin-panel</span> <span class="pill pill-sage status-badge">active</span> Agent credential admin panel: list/issue/revoke/quota with restricted access</li>
+          <li><span class="tag">CTL-cloudflare-access-admin</span> <span class="pill pill-sage status-badge">active</span> Cloudflare Access (Zero Trust) in front of the agent credential admin panel</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">active</span> Per-IP rate limiting on certificate issuance and hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-admin-panel-weak-auth</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>Abuso di una credenziale agente valida (partner o sessione compromessa)</h3>
+          <h3>Abuse of a valid agent credential (partner or compromised session)</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-agent-access</span> <span class="pill pill-sage status-badge">attivo</span> Accesso agenti: bearer token D1-backed (API key + device flow), bypass del solo Turnstile</li>
-          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati</li>
-          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
-          <li><span class="tag">CTL-site-voucher-auth</span> <span class="pill pill-sage status-badge">attivo</span> Voucher stateless firmato per l'accesso email dal sito (&quot;attesta con la tua email&quot;)</li>
+          <li><span class="tag">CTL-agent-access</span> <span class="pill pill-sage status-badge">active</span> Agent access: D1-backed bearer token (API key + device flow), bypasses only Turnstile</li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">active</span> HMAC token binding the hash, server-side timestamp, and declared metadata</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">active</span> Per-IP rate limiting on certificate issuance and hash/verify</li>
+          <li><span class="tag">CTL-site-voucher-auth</span> <span class="pill pill-sage status-badge">active</span> Stateless signed voucher for email access from the site (&quot;attest with your email&quot;)</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-agent-credential-abuse</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-seal">impatto: high</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-seal">impact: high</span>
           </div>
-          <h3>Alterazione dei certificati archiviati o della cronologia di emissione</h3>
+          <h3>Tampering with archived certificates or the issuance history</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">attivo</span> Archivio certificati in giurisdizione EU, recuperabile solo da chi conosce l'hash</li>
-          <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio indipendente in Bitcoin (OpenTimestamps), ridondato su 4 calendar</li>
-          <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">attivo</span> Ancoraggio dogfooding: lo storico di evidenze del GTF è attestato e ancorato in Bitcoin col proprio servizio</li>
-          <li><span class="tag">CTL-r2-offsite-backup</span> <span class="pill pill-sage status-badge">attivo</span> Backup offsite dell'archivio certificati, verificato con un restore drill reale</li>
+          <li><span class="tag">CTL-r2-eu-archive</span> <span class="pill pill-sage status-badge">active</span> Certificate archive in EU jurisdiction, retrievable only by whoever knows the hash</li>
+          <li><span class="tag">CTL-ots-anchor</span> <span class="pill pill-sage status-badge">active</span> Independent Bitcoin anchor (OpenTimestamps), redundant across 4 calendars</li>
+          <li><span class="tag">CTL-dogfooding-anchor</span> <span class="pill pill-sage status-badge">active</span> Dogfooding anchor: the GTF's own evidence history is attested and anchored in Bitcoin with its own service</li>
+          <li><span class="tag">CTL-r2-offsite-backup</span> <span class="pill pill-sage status-badge">active</span> Offsite backup of the certificate archive, verified with a real restore drill</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-archive-tampering</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-amber">probabilità: medium</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-amber">likelihood: medium</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Abuso automatizzato del servizio (spam di attestazioni)</h3>
+          <h3>Automated abuse of the service (attestation spam)</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-turnstile-antibot</span> <span class="pill pill-sage status-badge">attivo</span> Challenge anti-bot prima di qualunque emissione di attestazione</li>
-          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
+          <li><span class="tag">CTL-turnstile-antibot</span> <span class="pill pill-sage status-badge">active</span> Anti-bot challenge before any attestation is issued</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">active</span> Per-IP rate limiting on certificate issuance and hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-bot-abuse</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-amber">probabilità: medium</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-amber">likelihood: medium</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Un processo ricorrente dichiarato smette di essere eseguito senza che nessuno se ne accorga</h3>
+          <h3>A declared recurring process stops running without anyone noticing</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-cadence-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Controllo automatico delle cadenze ricorrenti (revisioni, drill, ancoraggio) con avviso Telegram</li>
+          <li><span class="tag">CTL-cadence-monitoring</span> <span class="pill pill-sage status-badge">active</span> Automatic monitoring of recurring cadences (reviews, drills, anchoring) with a Telegram alert</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-cadence-drift</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-seal">impatto: high</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-seal">impact: high</span>
           </div>
-          <h3>Falsificazione di un certificato (hash falso o data retrodatata)</h3>
+          <h3>Certificate forgery (fake hash or backdated date)</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati</li>
-          <li><span class="tag">CTL-pades-blt-tsa</span> <span class="pill pill-sage status-badge">attivo</span> Firma PAdES B-LT con marca temporale RFC 3161 da TSA riconosciuta (Adobe AATL)</li>
-          <li><span class="tag">CTL-cert-pdf-verification</span> <span class="pill pill-sage status-badge">attivo</span> Verifica indipendente dell'autenticità di un certificato a partire dal solo PDF</li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">active</span> HMAC token binding the hash, server-side timestamp, and declared metadata</li>
+          <li><span class="tag">CTL-pades-blt-tsa</span> <span class="pill pill-sage status-badge">active</span> PAdES B-LT signature with an RFC 3161 timestamp from a recognized TSA (Adobe AATL)</li>
+          <li><span class="tag">CTL-cert-pdf-verification</span> <span class="pill pill-sage status-badge">active</span> Independent verification of a certificate's authenticity from the PDF alone</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-cert-forgery</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Il log delle convenzioni associa una persona (email) alle opere che attesta</h3>
+          <h3>The convention log links a person (email) to the works they attest</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-convention-accounting</span> <span class="pill pill-sage status-badge">attivo</span> Convenzioni per dominio email: pool mensile dell'ente, degrado mai blocco, log minimizzato alle sole emissioni tassate</li>
+          <li><span class="tag">CTL-convention-accounting</span> <span class="pill pill-sage status-badge">active</span> Email-domain conventions: organization's monthly pool, degrade never block, log minimized to taxed issuances only</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-convention-data-linkage</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-seal">impatto: high</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-seal">impact: high</span>
           </div>
-          <h3>Invio non necessario del file originale dell'utente al server</h3>
+          <h3>Unnecessary transmission of the user's original file to the server</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">attivo</span> L'impronta è calcolata nel browser; il file non lascia il dispositivo</li>
+          <li><span class="tag">CTL-hash-client-side</span> <span class="pill pill-sage status-badge">active</span> The fingerprint is computed in the browser; the file never leaves the device</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-data-exfiltration</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>Emissione automatizzata o ripetuta di chiavi self-service (signup abuse)</h3>
+          <h3>Automated or repeated issuance of self-service keys (signup abuse)</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">attivo</span> Self-service API key con verifica email OAuth one-shot (Google/Microsoft/LinkedIn), post-moderazione</li>
-          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati</li>
-          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
+          <li><span class="tag">CTL-dev-selfservice</span> <span class="pill pill-sage status-badge">active</span> Self-service API key with one-shot OAuth email verification (Google/Microsoft/LinkedIn), post-moderation</li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">active</span> HMAC token binding the hash, server-side timestamp, and declared metadata</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">active</span> Per-IP rate limiting on certificate issuance and hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-dev-selfservice-signup-abuse</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Dirottamento o falsificazione delle risposte DNS del dominio di verifica</h3>
+          <h3>Hijacking or spoofing of DNS responses for the verification domain</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-dnssec</span> <span class="pill pill-sage status-badge">attivo</span> DNSSEC attivo sulla zona spaziogenesi.org, con catena di fiducia chiusa fino al registro .org</li>
-          <li><span class="tag">CTL-edge-security-headers</span> <span class="pill pill-sage status-badge">attivo</span> Header di sicurezza HTTP (HSTS, CSP, Permissions-Policy) all'edge Cloudflare</li>
+          <li><span class="tag">CTL-dnssec</span> <span class="pill pill-sage status-badge">active</span> DNSSEC active on the spaziogenesi.org zone, with a closed trust chain up to the .org registry</li>
+          <li><span class="tag">CTL-edge-security-headers</span> <span class="pill pill-sage status-badge">active</span> HTTP security headers (HSTS, CSP, Permissions-Policy) at the Cloudflare edge</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-dns-hijacking</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-amber">probabilità: medium</span>
-            <span class="pill pill-seal">impatto: high</span>
+            <span class="pill pill-amber">likelihood: medium</span>
+            <span class="pill pill-seal">impact: high</span>
           </div>
-          <h3>Indisponibilità temporanea o permanente dell'unico maintainer tecnico</h3>
+          <h3>Temporary or permanent unavailability of the sole technical maintainer</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-maintainer-succession</span> <span class="pill pill-amber status-badge">bozza</span> Procedura di successione tecnica, con garanzia residua verificabile indipendentemente dall'ente</li>
+          <li><span class="tag">CTL-maintainer-succession</span> <span class="pill pill-amber status-badge">draft</span> Technical succession procedure, with a residual guarantee independently verifiable from the organization</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-maintainer-unavailability</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-amber">probabilità: medium</span>
-            <span class="pill pill-seal">impatto: high</span>
+            <span class="pill pill-amber">likelihood: medium</span>
+            <span class="pill pill-seal">impact: high</span>
           </div>
-          <h3>Comunicare al pubblico un livello di garanzia legale superiore a quello reale</h3>
+          <h3>Communicating to the public a level of legal assurance higher than the real one</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita e stabile: attestazione non qualificata, non un servizio eIDAS qualificato</li>
+          <li><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">active</span> Explicit, stable statement: unqualified attestation, not a qualified eIDAS service</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-overclaim-eidas</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Far intendere una piena conformità forense ISO/IEC 27037 che non esiste</h3>
+          <h3>Implying full ISO/IEC 27037 forensic conformance that does not exist</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">attivo</span> Dichiarazione esplicita: applicazione parziale e per ispirazione di ISO/IEC 27037, non conformità forense piena</li>
+          <li><span class="tag">CTL-iso27037-honest-positioning</span> <span class="pill pill-sage status-badge">active</span> Explicit statement: partial, inspiration-only application of ISO/IEC 27037, not full forensic conformance</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-overclaim-iso27037</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Dipendenza da Stripe per l'intero ciclo di vita del pagamento; disallineamento di stato su eventi webhook persi o in ritardo</h3>
+          <h3>Dependence on Stripe for the entire payment lifecycle; state drift on lost or delayed webhook events</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">attivo</span> Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1</li>
-          <li><span class="tag">CTL-cicd-pipeline</span> <span class="pill pill-sage status-badge">attivo</span> Catena di rilascio: staging replicato + CI + gate di produzione con approvazione umana (P24)</li>
+          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">active</span> Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1</li>
+          <li><span class="tag">CTL-cicd-pipeline</span> <span class="pill pill-sage status-badge">active</span> Release chain: replicated staging + CI + production gate with human approval (P24)</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-payment-integration</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>Profilazione facoltativa (segmento/regione, applicazione/OS/ambiente) — dato aggiuntivo oltre il minimo necessario all'erogazione del servizio</h3>
+          <h3>Optional profiling (segment/region, application/OS/environment) — data beyond the minimum necessary to deliver the service</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">attivo</span> Fascia Professionale: abbonamento Stripe (Checkout/Portal hosted, nessun dato di carta sul Worker), pagina profilo, listino/sconti gestiti in D1</li>
+          <li><span class="tag">CTL-pro-subscription</span> <span class="pill pill-sage status-badge">active</span> Professional tier: Stripe subscription (hosted Checkout/Portal, no card data on the Worker), profile page, pricing/discounts managed in D1</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-profiling-data</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-seal">impatto: high</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-seal">impact: high</span>
           </div>
-          <h3>Compromissione o perdita di HMAC_SECRET / SIGN_SECRET</h3>
+          <h3>Compromise or loss of HMAC_SECRET / SIGN_SECRET</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">attivo</span> Recupero possibile dei segreti critici senza dipendere dalla sola memoria del maintainer</li>
-          <li><span class="tag">CTL-hmac-canary</span> <span class="pill pill-sage status-badge">attivo</span> Canary esterno che rileva una rotazione errata del segreto HMAC</li>
+          <li><span class="tag">CTL-secrets-escrow</span> <span class="pill pill-sage status-badge">active</span> Recovery of critical secrets possible without depending solely on the maintainer's memory</li>
+          <li><span class="tag">CTL-hmac-canary</span> <span class="pill pill-sage status-badge">active</span> External canary that detects a botched HMAC secret rotation</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-secret-compromise</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-amber">probabilità: medium</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-amber">likelihood: medium</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Interruzione di un componente critico (Azure authart, R2, Worker Cloudflare)</h3>
+          <h3>Outage of a critical component (Azure authart, R2, Cloudflare Worker)</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">attivo</span> Stato semaforico pubblico dei servizi, con storico proporzionale e drill-down giornaliero</li>
+          <li><span class="tag">CTL-availability-monitoring</span> <span class="pill pill-sage status-badge">active</span> Public traffic-light status of services, with proportional history and daily drill-down</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-single-jurisdiction-outage</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>File dell'opera in transito su infrastruttura terza (Telegram) e sul Worker del bot</h3>
+          <h3>The work's file in transit over third-party infrastructure (Telegram) and the bot's Worker</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">attivo</span> Canale Telegram (attest-bot): disclosure bloccante, hash in streaming, quote e retention</li>
-          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">attivo</span> Token HMAC che vincola hash, timestamp server-side e metadati dichiarati</li>
-          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">attivo</span> Rate limiting per-IP su emissione certificati e hash/verify</li>
+          <li><span class="tag">CTL-telegram-channel</span> <span class="pill pill-sage status-badge">active</span> Telegram channel (attest-bot): blocking disclosure, streaming hash, quotas, and retention</li>
+          <li><span class="tag">CTL-hmac-signing</span> <span class="pill pill-sage status-badge">active</span> HMAC token binding the hash, server-side timestamp, and declared metadata</li>
+          <li><span class="tag">CTL-rate-limiting</span> <span class="pill pill-sage status-badge">active</span> Per-IP rate limiting on certificate issuance and hash/verify</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-telegram-file-transit</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>Scadenza del token di pubblicazione del Trust Center di tenant senza rinnovo</h3>
+          <h3>Expiry of a tenant Trust Center's publish token without renewal</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li class="empty">nessuna mitigazione collegata ancora</li>
+          <li class="empty">no mitigation linked yet</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-tenant-publish-token-expiry</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-sage">impatto: low</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-sage">impact: low</span>
           </div>
-          <h3>Contenuto di terzi (nome, URL, logo) pubblicato nella vetrina Integrazioni sotto il nome Spazio Genesi</h3>
+          <h3>Third-party content (name, URL, logo) published in the Integrations showcase under the Spazio Genesi name</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">attivo</span> Vetrina pubblica Integrazioni (pre-moderata) + convenzioni partner software house con pool mensile</li>
+          <li><span class="tag">CTL-integrations-showcase</span> <span class="pill pill-sage status-badge">active</span> Public Integrations showcase (pre-moderated) + software-house partner conventions with a monthly pool</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-third-party-content</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-sage">probabilità: low</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-sage">likelihood: low</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Una vulnerabilità reale non viene mai segnalata, o viene resa pubblica senza coordinamento</h3>
+          <h3>A real vulnerability is never reported, or is disclosed publicly without coordination</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-responsible-disclosure</span> <span class="pill pill-sage status-badge">attivo</span> security.txt (RFC 9116) + policy pubblica di responsible disclosure</li>
+          <li><span class="tag">CTL-responsible-disclosure</span> <span class="pill pill-sage status-badge">active</span> security.txt (RFC 9116) + public responsible disclosure policy</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-undisclosed-vulnerability</span></p>
       </article>
       <article class="norm-card">
         <header>
           <div class="risk-pills">
-            <span class="pill pill-amber">probabilità: medium</span>
-            <span class="pill pill-amber">impatto: medium</span>
+            <span class="pill pill-amber">likelihood: medium</span>
+            <span class="pill pill-amber">impact: medium</span>
           </div>
-          <h3>Modifica deployata in produzione senza mai essere stata osservata &quot;dal vivo&quot;</h3>
+          <h3>A change deployed to production without ever being observed &quot;live&quot;</h3>
         </header>
-        <p class="ref">Mitigato da</p>
+        <p class="ref">Mitigated by</p>
         <ul class="ctl-list">
-          <li><span class="tag">CTL-cicd-pipeline</span> <span class="pill pill-sage status-badge">attivo</span> Catena di rilascio: staging replicato + CI + gate di produzione con approvazione umana (P24)</li>
+          <li><span class="tag">CTL-cicd-pipeline</span> <span class="pill pill-sage status-badge">active</span> Release chain: replicated staging + CI + production gate with human approval (P24)</li>
         </ul>
         <p class="tag-line"><span class="tag">RSK-unobserved-production-deploy</span></p>
       </article>
@@ -761,8 +761,8 @@
   </section>
 
   <section id="decisioni" class="folio" data-folio="ADR">
-    <h2>Decisioni</h2>
-
+    <h2>Decisions</h2>
+<p class="rule">This log is kept in Italian only for now — the underlying decisions are still verifiable in the source registry.</p>
     <div class="journal">
       <details class="entry">
         <summary><span class="entry-date">2026-08-17</span><span class="entry-title">P50 — Scopribilità per agenti AI: dichiarare quello che c'è, e non dichiarare quello che non c'è</span><span class="entry-status">accepted</span></summary>
@@ -1309,37 +1309,37 @@
   </main>
 
   <footer>
-    <nav class="footer-cols" aria-label="Collegamenti del footer">
+    <nav class="footer-cols" aria-label="Footer links">
       <div class="footer-col">
-        <h3>Il registro</h3>
-        <a href="https://trust.spaziogenesi.org/">Il framework ↗</a>
-        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry">Registro pubblico</a>
-        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics">Formula del punteggio</a>
-        <a href="/devops/">DevOps e rilasci</a>
-        <a href="/whitepaper.html">Whitepaper tecnico</a>
+        <h3>The registry</h3>
+        <a href="https://trust.spaziogenesi.org/en/">The framework ↗</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry">Public registry</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics">Score formula</a>
+        <a href="/devops/">DevOps and releases (IT)</a>
+        <a href="/whitepaper.html">Technical whitepaper (IT)</a>
       </div>
       <div class="footer-col">
-        <h3>Il servizio di attestazione</h3>
-        <a href="https://attestazione.spaziogenesi.org">Attesta e verifica</a>
-        <a href="https://attestazione.spaziogenesi.org/status/">Stato dei servizi</a>
-        <a href="https://attestazione.spaziogenesi.org/changelog/">Cronologia dei miglioramenti</a>
-        <a href="https://attestazione.spaziogenesi.org/developer/">Sviluppatori: API &amp; MCP</a>
+        <h3>The attestation service</h3>
+        <a href="https://attestazione.spaziogenesi.org">Attest and verify</a>
+        <a href="https://attestazione.spaziogenesi.org/status/">Service status</a>
+        <a href="https://attestazione.spaziogenesi.org/changelog/">Changelog</a>
+        <a href="https://attestazione.spaziogenesi.org/developer/">Developers: API &amp; MCP</a>
         <a href="https://attestazione.spaziogenesi.org/privacy.html">Privacy</a>
       </div>
       <div class="footer-col">
-        <h3>Codice open source</h3>
-        <a href="https://github.com/SPAZIO-GENESI/imgauth">imgauth (motore)</a>
-        <a href="https://github.com/SPAZIO-GENESI/imgauthweb">imgauthweb (interfaccia)</a>
-        <a href="https://github.com/SPAZIO-GENESI/autart-signer">autart-signer (firma)</a>
-        <a href="https://github.com/SPAZIO-GENESI/attest-mcp">attest-mcp (server MCP)</a>
+        <h3>Open source code</h3>
+        <a href="https://github.com/SPAZIO-GENESI/imgauth">imgauth (engine)</a>
+        <a href="https://github.com/SPAZIO-GENESI/imgauthweb">imgauthweb (interface)</a>
+        <a href="https://github.com/SPAZIO-GENESI/autart-signer">autart-signer (signing)</a>
+        <a href="https://github.com/SPAZIO-GENESI/attest-mcp">attest-mcp (MCP server)</a>
       </div>
     </nav>
     <div class="footer-bottom">
-      Genesis Trust Framework · pagina generata automaticamente dal
-      <a href="https://github.com/SPAZIO-GENESI/gtf">registro pubblico</a> —
-      nessun testo di questa pagina è scritto a mano (principio PRN-03).
+      Genesis Trust Framework · this page is generated automatically from the
+      <a href="https://github.com/SPAZIO-GENESI/gtf">public registry</a> —
+      no text on this page is written by hand (principle PRN-03).
       <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
-      <p class="footer-version">motore v0.2.0 · pacchetto attestazione v1.0.0</p>
+      <p class="footer-version">engine v0.2.0 · package attestazione v1.0.0</p>
     </div>
   </footer>
 </body>

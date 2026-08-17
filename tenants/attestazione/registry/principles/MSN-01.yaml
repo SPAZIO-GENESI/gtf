@@ -9,3 +9,11 @@ statement: >
   si dimostra.
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Spazio Genesi ETS builds a digital attestation service
+      (attestazione.spaziogenesi.org) able to publicly demonstrate, with
+      evidence anyone can verify, why it deserves trust — without ever
+      asking anyone to take its word for it. Trust is not declared, it is
+      demonstrated.

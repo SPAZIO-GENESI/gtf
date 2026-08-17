@@ -14,3 +14,6 @@ likelihood: low
 impact: medium
 mitigated_by: [CTL-iso27037-honest-positioning]
 visibility: public
+i18n:
+  en:
+    title: "Implying full ISO/IEC 27037 forensic conformance that does not exist"

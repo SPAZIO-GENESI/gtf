@@ -20,3 +20,6 @@ likelihood: low
 impact: low
 mitigated_by: [CTL-integrations-showcase]
 visibility: public
+i18n:
+  en:
+    title: "Third-party content (name, URL, logo) published in the Integrations showcase under the Spazio Genesi name"

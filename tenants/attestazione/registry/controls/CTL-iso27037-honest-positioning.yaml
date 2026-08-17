@@ -31,3 +31,30 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-10
+i18n:
+  en:
+    title: "Explicit statement: partial, inspiration-only application of ISO/IEC 27037, not full forensic conformance"
+    statement: >
+      The service applies, for inspiration, the ISO/IEC 27037 principles
+      of digital evidence acquisition and preservation relevant to its
+      own model: client-side computed fingerprint with a declared
+      algorithm and inspectable code (reproducible acquisition), an
+      immutable-by-convention archive with three independent anchors —
+      server HMAC, TSA timestamp, Bitcoin anchor (preservation with
+      demonstrable integrity without having to trust internal logs
+      alone). What it does not offer, however — because the model is
+      self-service, not forensic — is a per-item chain-of-custody log
+      the user can inspect, formalized roles (Digital Evidence First
+      Responder/Specialist), or tool validation reports in the classic
+      investigative sense: ISO 27037 was written for those handling
+      other people's evidence in a legal proceeding, not for a service
+      where the author self-attests their own work. Applicability is
+      declared "partial", never "full", on both linked requirements.
+    verify_howto: >
+      Compare the two linked requirements (REQ-27037-acq-01,
+      REQ-27037-pres-01): both declare applicability "partial", never
+      "full". The acquisition code (client-side hashing) and the three
+      preservation mechanisms (immutable R2, HMAC, TSA, OTS) are
+      verifiable in the public imgauth/imgauthweb repos; the absence of
+      an inspectable chain-of-custody log and of formalized forensic
+      roles is a declared gap, not a hidden one.

@@ -6,3 +6,9 @@ statement: >
 applicability: partial
 satisfied_by: [CTL-hash-client-side, CTL-iso27037-honest-positioning]
 visibility: public
+i18n:
+  en:
+    source_ref: "principles of digital evidence identification and acquisition"
+    statement: >
+      Acquisition of the work's digital fingerprint must be documented and
+      reproducible: declared algorithm, inspectable implementation.

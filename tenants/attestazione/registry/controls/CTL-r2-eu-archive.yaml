@@ -13,3 +13,10 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-07-09
+i18n:
+  en:
+    title: "Certificate archive in EU jurisdiction, retrievable only by whoever knows the hash"
+    verify_howto: >
+      GET /api/cert?hash=<sha256> returns the archived PDF for that
+      hash; a malformed or missing hash responds 400/404, never another
+      certificate's content.

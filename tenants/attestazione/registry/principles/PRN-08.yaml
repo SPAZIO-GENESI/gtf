@@ -11,3 +11,13 @@ rule: >
 derives_from: MSN-01
 status: active
 visibility: public
+i18n:
+  en:
+    statement: >
+      Every public claim carries with it a way for a third party to
+      verify it independently, without credentials and without having to
+      take it on faith.
+    rule: >
+      For every public claim there is a script or procedure a third
+      party can run without credentials (`verify_howto` is mandatory on
+      public controls).

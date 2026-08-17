@@ -31,3 +31,6 @@ likelihood: low
 impact: medium
 mitigated_by: [CTL-dnssec, CTL-edge-security-headers]
 visibility: public
+i18n:
+  en:
+    title: "Hijacking or spoofing of DNS responses for the verification domain"

@@ -8,3 +8,6 @@ likelihood: low
 impact: high
 mitigated_by: [CTL-hash-client-side]
 visibility: public
+i18n:
+  en:
+    title: "Unnecessary transmission of the user's original file to the server"
