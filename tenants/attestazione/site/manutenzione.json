@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T08:51:34.353Z",
+  "generated_at": "2026-08-17T08:59:55.616Z",
   "registry_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
   "items": [
     {
@@ -14,11 +14,16 @@
       "next_due": "2026-08-13",
       "steps": [
         {
-          "do": "Nella cartella del registro, esegui: npm run anchor-monthly",
-          "note": "Crea il pacchetto del mese e stampa a schermo il nome del file e la sua impronta. Tieni da parte quell'impronta: serve al passo 4."
+          "do": "Ogni mese il registro raccoglie una fotografia delle proprie evidenze, una per settimana. Questa procedura le mette insieme in un unico file e le fa attestare dal servizio stesso: da quel momento nessuno — noi compresi — può modificarle a posteriori senza che si veda.",
+          "note": "Non è un passo da eseguire, è cosa stai per fare. I passi veri sono i quattro qui sotto."
         },
         {
-          "do": "Apri il servizio di attestazione, scheda Attesta, e scegli il file appena creato in tenants/attestazione/snapshots/anchors/.",
+          "do": "Crea il file del mese. Sul computer del gestore, apri il Terminale, entra nella cartella del repository gtf ed esegui il comando: npm run anchor-monthly",
+          "note": "La cartella giusta è quella che contiene il file package.json e la cartella tenants; sul computer del gestore è dentro spazio_genesi. Se non ce l'hai in locale, la scarichi con: git clone https://github.com/SPAZIO-GENESI/gtf.git — e la prima volta, dentro la cartella, esegui anche: npm install. Il comando non manda niente a nessuno e non modifica il registro: crea solo un file nuovo dentro tenants/attestazione/snapshots/anchors/, con nome tipo 2026-08-bundle.json. A schermo stampa il nome del file e la sua impronta: copiala, serve al passo 4."
+        },
+        {
+          "do": "Attesta quel file. Apri il servizio, scheda Attesta, e scegli il file appena creato.",
+          "note": "Questo passo non richiede competenze tecniche: è lo stesso identico giro che fa un utente qualsiasi col proprio lavoro. Serve una persona in carne e ossa perché c'è la verifica anti-robot.",
           "links": [
             {
               "url": "https://attestazione.spaziogenesi.org",
@@ -28,14 +33,20 @@
         },
         {
           "do": "Genera l'attestazione e scarica il certificato PDF.",
-          "note": "Scaricare il PDF non è un passaggio facoltativo: è quello che innesca davvero l'ancoraggio in Bitcoin. Fermarsi all'attestazione non conta come fatto."
+          "note": "Scaricare il PDF non è facoltativo: è il download che fa partire l'ancoraggio in Bitcoin. Fermarsi all'attestazione non conta come fatto."
         },
         {
-          "do": "Controlla che l'impronta stampata sul certificato sia identica a quella stampata al passo 1."
+          "do": "Controlla che l'impronta stampata sul certificato sia identica a quella copiata al passo 2."
         },
         {
-          "do": "Committa il pacchetto nel registro e riporta impronta e link permanente del certificato in EVD-dogfooding-anchor.",
-          "note": "Da qui in poi chiunque può ricalcolare l'impronta del file nel repository, confrontarla col certificato e verificare la prova su opentimestamps.org senza chiedere niente a noi. È il motivo per cui questa procedura esiste."
+          "do": "Salva il file nel registro (git add, commit e push) e riporta impronta e link permanente del certificato nell'evidenza EVD-dogfooding-anchor.",
+          "note": "Da qui in poi chiunque può ricalcolare l'impronta del file nel repository, confrontarla col certificato e verificare la prova su opentimestamps.org senza chiedere niente a noi. È il motivo per cui questa procedura esiste.",
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/evidence/EVD-dogfooding-anchor.yaml",
+              "label": "L'evidenza da aggiornare"
+            }
+          ]
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-dogfooding-anchor.yaml"
