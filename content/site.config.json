@@ -1,6 +1,7 @@
 {
   "version": "1.0.0",
   "language": "it",
+  "canonical_base": "https://trust.spaziogenesi.org",
   "title": "Genesis Trust Framework",
   "eyebrow": "Registro pubblico di trasparenza",
   "heading": "Genesis Trust Framework",
@@ -27,6 +28,16 @@
     "_comment": "Impegno pubblico, non dettaglio implementativo: badge.svg e score.json restano sulla radice per compatibilità con 22 riferimenti pubblici esterni (vedi P45 §2). Finché esiste un solo tenant, la radice mostra il suo punteggio; con un secondo tenant la scelta andrà rivista esplicitamente, non ereditata per default.",
     "badge_from_tenant": "attestazione",
     "score_from_tenant": "attestazione"
+  },
+
+  "ui": {
+    "projects_heading": "I progetti che lo applicano",
+    "no_projects": "Nessun progetto disponibile ancora.",
+    "open_trust_center": "Apri il Trust Center →",
+    "indicators": "indicatori",
+    "footer_nav_label": "Collegamenti del footer",
+    "engine": "motore",
+    "product_site": "sito prodotto"
   },
 
   "footer_columns": [

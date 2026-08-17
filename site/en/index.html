@@ -1,7 +1,14 @@
-// Estratto da build-site.mjs in P44 F4: build-changelog.mjs riusa lo stesso
-// foglio di stile, così le due pagine del Trust Center restano un unico
-// sistema visivo invece di due copie che divergono (lezione di beta.html).
-export const STYLE = `
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genesis Trust Framework</title>
+<link rel="alternate" hreflang="it" href="https://trust.spaziogenesi.org/">
+<link rel="alternate" hreflang="en" href="https://trust.spaziogenesi.org/en/">
+<link rel="alternate" hreflang="x-default" href="https://trust.spaziogenesi.org/">
+<link rel="canonical" href="https://trust.spaziogenesi.org/en/">
+<style>
   :root {
     color-scheme: light dark;
     --paper: #FBFAF6;
@@ -126,4 +133,94 @@ export const STYLE = `
   .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
   .footer-version { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted); margin: 0.6rem 0 0; }
   @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
-`;
+</style>
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://sg-matomo.azurewebsites.net/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo -->
+<script src="/lang.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <p class="lang-switch"><a href="/" data-lang="it">IT</a><span class="sep">·</span><a href="/en/" aria-current="page">EN</a></p>
+    <p class="eyebrow">A public transparency registry</p>
+    <h1>Genesis Trust Framework</h1>
+    <p class="tagline">A public registry that demonstrates trust, not one that declares it.</p>
+    <p class="thesis">A transparency framework applicable to multiple digital projects: principles,
+    requirements, controls, evidence, risks and decisions published as
+    verifiable records — not as promises. Each project that applies it has
+    its own Trust Center, with a score computed solely from its own registry.</p>
+  </header>
+
+  <main>
+  <section class="folio" data-folio="TRUST">
+    <h2>What it demonstrates</h2>
+    <p>The framework structures trust into typed records validated against a
+      schema: principles, regulatory requirements, controls, evidence, risks
+      and decisions. Every control declared active must be verifiable by
+      anyone, with published instructions — not a claim, but a way to check
+      it. From these records, and only from these, the Open Trust Score is
+      computed: ten indicators, each <em>n/a</em> until the data to compute
+      it actually exists, never estimated.</p>
+  </section>
+
+  <section class="folio" data-folio="TRUST">
+    <h2>How it works</h2>
+    <p>A generic engine (<code>core/</code>) and a separate registry for each
+      project that applies it (<code>tenants/&lt;id&gt;/</code>): same
+      schemas, same formulas, same generator — different data. No page on
+      this site is written by hand: both the page you are reading and each
+      project's Trust Center are generated from a public registry and a
+      public configuration, verifiable in the
+      <a href="https://github.com/SPAZIO-GENESI/gtf">source code</a>.</p>
+  </section>
+
+  <section id="progetti" class="folio" data-folio="TNT">
+    <h2>Projects that apply it</h2>
+    <div class="record-grid">
+      <article class="record">
+        <p class="tag">attestazione</p>
+        <h3><a href="https://attestazione.trust.spaziogenesi.org">Digital work attestation</a></h3>
+        <p>Spazio Genesi ETS</p>
+        <p><span class="pill pill-sage">93/100</span> ·
+          10/10 indicators · v1.0.0</p>
+        <p class="rule"><a href="https://attestazione.trust.spaziogenesi.org">Open the Trust Center →</a></p>
+      </article>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <nav class="footer-cols" aria-label="Footer links">
+      <div class="footer-col">
+        <h3>The framework</h3>
+        <a href="https://github.com/SPAZIO-GENESI/gtf">Source code (GTF)</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/core/schemas">Record schemas</a>
+        <a href="/changelog/">Changelog (IT)</a>
+      </div>
+    </nav>
+    <div class="footer-bottom">
+      Genesis Trust Framework is an engine developed by
+      <a href="https://tangram.page">Tangram.page</a>; Spazio Genesi ETS
+      applies it to its own services as a technology partner, providing the
+      infrastructure it runs on. This page is generated automatically from
+      <code>content/site.config.en.json</code> and a summary of each
+      project's registry — see the
+      <a href="https://github.com/SPAZIO-GENESI/gtf">source code</a>.
+      <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+      <p class="footer-version">engine v0.2.0 · product site v1.0.0</p>
+    </div>
+  </footer>
+</body>
+</html>

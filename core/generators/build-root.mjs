@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, existsSync, writeFileSync, copyFileSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT } from "./lib/root.mjs";
 import { STYLE } from "./lib/style.mjs";
@@ -9,10 +9,13 @@ import { loadSiteConfig } from "./lib/site-config.mjs";
 // *prodotto* (il framework), non di un tenant. Vive in core/ ed è
 // scandito dalla guardia di isolamento: nessun nome di progetto qui
 // dentro, tutto arriva da content/site.config.json o dai
-// tenant.config.json (vedi P45_domini_e_siti_separati.md §F2.2).
+// tenant.config.json (vedi P45_domini_e_siti_separati.md §F2.2). Il dominio
+// del prodotto stesso non fa eccezione: viene da cfg.canonical_base, non
+// hardcoded qui (check-core-isolation.mjs lo boccerebbe comunque).
 const SITE_DIR = join(ROOT, "site");
 const TENANTS_DIR = join(ROOT, "tenants");
 const CORE_VERSION = JSON.parse(readFileSync(join(ROOT, "core", "package.json"), "utf8")).version;
+const LOCALES = ["it", "en"];
 
 function listTenantIds() {
   return readdirSync(TENANTS_DIR, { withFileTypes: true })
@@ -23,7 +26,9 @@ function listTenantIds() {
 
 // Un tenant appena creato (senza ancora uno score.json pubblicato) non deve
 // rompere la radice: si salta con un avviso su stderr, non un errore.
-function loadTenantSummary(id) {
+// name_<locale> è opzionale (P48): un tenant senza traduzione del nome
+// ricade sul name italiano, non deve bloccare le altre lingue.
+function loadTenantSummary(id, locale = "it") {
   const cfgFile = join(TENANTS_DIR, id, "tenant.config.json");
   const cfg = JSON.parse(readFileSync(cfgFile, "utf8"));
 
@@ -40,7 +45,8 @@ function loadTenantSummary(id) {
   }
 
   const score = JSON.parse(readFileSync(scoreFile, "utf8"));
-  return { id: cfg.id, name: cfg.name, owner: cfg.owner, version: cfg.version, publicUrl, score };
+  const name = (locale !== "it" && cfg[`name_${locale}`]) || cfg.name;
+  return { id: cfg.id, name, owner: cfg.owner, version: cfg.version, publicUrl, score };
 }
 
 function scorePill(overall) {
@@ -50,15 +56,15 @@ function scorePill(overall) {
   return "pill pill-seal";
 }
 
-function renderTenantCard(t) {
+function renderTenantCard(t, ui) {
   const overall = t.score.overall;
   return `      <article class="record">
         <p class="tag">${esc(t.id)}</p>
         <h3><a href="${esc(t.publicUrl)}">${esc(t.name)}</a></h3>
         <p>${esc(t.owner)}</p>
         <p><span class="${scorePill(overall)}">${esc(overall ?? "n/d")}/100</span> ·
-          ${esc(t.score.available_count)}/${esc(t.score.total)} indicatori · v${esc(t.version)}</p>
-        <p class="rule"><a href="${esc(t.publicUrl)}">Apri il Trust Center →</a></p>
+          ${esc(t.score.available_count)}/${esc(t.score.total)} ${esc(ui.indicators)} · v${esc(t.version)}</p>
+        <p class="rule"><a href="${esc(t.publicUrl)}">${esc(ui.open_trust_center)}</a></p>
       </article>`;
 }
 
@@ -69,10 +75,33 @@ function renderSection(s) {
   </section>`;
 }
 
-function renderPage(cfg, tenants) {
+// Coppia IT/EN sempre entrambe presenti, quella corrente marcata
+// aria-current: mai fidarsi solo dell'auto-detect in lang.js, l'uscita
+// manuale deve restare a un click su ogni pagina.
+function renderLangSwitch(locale) {
+  return LOCALES.map((code) => {
+    const href = code === "it" ? "/" : `/${code}/`;
+    return code === locale
+      ? `<a href="${href}" aria-current="page">${code.toUpperCase()}</a>`
+      : `<a href="${href}" data-lang="${code}">${code.toUpperCase()}</a>`;
+  }).join(`<span class="sep">·</span>`);
+}
+
+function renderHreflang(base, path) {
+  const links = LOCALES.map((code) => {
+    const href = code === "it" ? `${base}/` : `${base}/${code}/`;
+    return `<link rel="alternate" hreflang="${code}" href="${href}">`;
+  });
+  links.push(`<link rel="alternate" hreflang="x-default" href="${base}/">`);
+  links.push(`<link rel="canonical" href="${base}${path}">`);
+  return links.join("\n");
+}
+
+function renderPage(cfg, tenants, path) {
   const sections = cfg.sections.map(renderSection).join("\n\n");
-  const cards = tenants.map(renderTenantCard).join("\n");
-  const cardsBlock = cards || `      <p class="rule">Nessun progetto disponibile ancora.</p>`;
+  const ui = cfg.ui;
+  const cards = tenants.map((t) => renderTenantCard(t, ui)).join("\n");
+  const cardsBlock = cards || `      <p class="rule">${esc(ui.no_projects)}</p>`;
 
   return `<!doctype html>
 <html lang="${cfg.language}">
@@ -80,11 +109,14 @@ function renderPage(cfg, tenants) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(cfg.title)}</title>
+${renderHreflang(cfg.canonical_base, path)}
 <style>${STYLE}</style>
 ${renderMatomo(cfg.matomo)}
+<script src="/lang.js" defer></script>
 </head>
 <body>
   <header class="hero">
+    <p class="lang-switch">${renderLangSwitch(cfg.language)}</p>
     <p class="eyebrow">${cfg.eyebrow}</p>
     <h1>${cfg.heading}</h1>
     <p class="tagline">${cfg.tagline_html}</p>
@@ -95,7 +127,7 @@ ${renderMatomo(cfg.matomo)}
 ${sections}
 
   <section id="progetti" class="folio" data-folio="TNT">
-    <h2>I progetti che lo applicano</h2>
+    <h2>${esc(ui.projects_heading)}</h2>
     <div class="record-grid">
 ${cardsBlock}
     </div>
@@ -103,13 +135,13 @@ ${cardsBlock}
   </main>
 
   <footer>
-    <nav class="footer-cols" aria-label="Collegamenti del footer">
+    <nav class="footer-cols" aria-label="${esc(ui.footer_nav_label)}">
 ${renderFooterColumns({ site: cfg })}
     </nav>
     <div class="footer-bottom">
       ${cfg.footer_note_html}
       <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
-      <p class="footer-version">motore v${esc(CORE_VERSION)} · sito prodotto v${esc(cfg.version)}</p>
+      <p class="footer-version">${esc(ui.engine)} v${esc(CORE_VERSION)} · ${esc(ui.product_site)} v${esc(cfg.version)}</p>
     </div>
   </footer>
 </body>
@@ -144,15 +176,23 @@ function copyCompatFiles(cfg) {
 }
 
 function main() {
-  const cfg = loadSiteConfig();
-  const tenants = listTenantIds()
-    .map(loadTenantSummary)
-    .filter((t) => t !== null);
+  const tenantIds = listTenantIds();
+  let tenantCount = 0;
 
-  writeFileSync(join(SITE_DIR, "index.html"), renderPage(cfg, tenants));
-  copyCompatFiles(cfg);
+  for (const locale of LOCALES) {
+    const cfg = loadSiteConfig(locale);
+    const tenants = tenantIds.map((id) => loadTenantSummary(id, locale)).filter((t) => t !== null);
+    tenantCount = tenants.length;
 
-  console.log(`site/index.html (radice) generato — ${tenants.length} progetto/i nel riepilogo.`);
+    const dir = locale === "it" ? SITE_DIR : join(SITE_DIR, locale);
+    const path = locale === "it" ? "/" : `/${locale}/`;
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, "index.html"), renderPage(cfg, tenants, path));
+
+    if (locale === "it") copyCompatFiles(cfg);
+  }
+
+  console.log(`site/index.html + site/{${LOCALES.filter((l) => l !== "it").join(",")}}/index.html generati — ${tenantCount} progetto/i nel riepilogo.`);
 }
 
 main();

@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Genesis Trust Framework</title>
+<link rel="alternate" hreflang="it" href="https://trust.spaziogenesi.org/">
+<link rel="alternate" hreflang="en" href="https://trust.spaziogenesi.org/en/">
+<link rel="alternate" hreflang="x-default" href="https://trust.spaziogenesi.org/">
+<link rel="canonical" href="https://trust.spaziogenesi.org/">
 <style>
   :root {
     color-scheme: light dark;
@@ -52,6 +56,10 @@
   a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
   .hero { padding: 3rem 0 1.5rem; }
+  .lang-switch { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; margin: 0 0 1.2rem; }
+  .lang-switch a { text-decoration: none; color: var(--ink-muted); }
+  .lang-switch a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .lang-switch .sep { color: var(--ink-muted); margin: 0 0.4em; }
   .eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 0.4rem; }
   .hero h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 600; margin: 0 0 0.6rem; }
   .tagline { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 38rem; margin: 0 0 1rem; }
@@ -141,9 +149,11 @@
   })();
 </script>
 <!-- End Matomo -->
+<script src="/lang.js" defer></script>
 </head>
 <body>
   <header class="hero">
+    <p class="lang-switch"><a href="/" aria-current="page">IT</a><span class="sep">·</span><a href="/en/" data-lang="en">EN</a></p>
     <p class="eyebrow">Registro pubblico di trasparenza</p>
     <h1>Genesis Trust Framework</h1>
     <p class="tagline">Un registro pubblico che dimostra la fiducia, non la dichiara.</p>

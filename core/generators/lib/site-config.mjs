@@ -9,7 +9,8 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT } from "./root.mjs";
 
-export function loadSiteConfig() {
-  const file = join(ROOT, "content", "site.config.json");
+export function loadSiteConfig(locale = "it") {
+  const filename = locale === "it" ? "site.config.json" : `site.config.${locale}.json`;
+  const file = join(ROOT, "content", filename);
   return JSON.parse(readFileSync(file, "utf8"));
 }

@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "language": "en",
+  "canonical_base": "https://trust.spaziogenesi.org",
+  "title": "Genesis Trust Framework",
+  "eyebrow": "A public transparency registry",
+  "heading": "Genesis Trust Framework",
+  "tagline_html": "A public registry that demonstrates trust, not one that declares it.",
+  "thesis_html": "A transparency framework applicable to multiple digital projects: principles,\n    requirements, controls, evidence, risks and decisions published as\n    verifiable records — not as promises. Each project that applies it has\n    its own Trust Center, with a score computed solely from its own registry.",
+
+  "sections": [
+    {
+      "heading": "What it demonstrates",
+      "body_html": "The framework structures trust into typed records validated against a\n      schema: principles, regulatory requirements, controls, evidence, risks\n      and decisions. Every control declared active must be verifiable by\n      anyone, with published instructions — not a claim, but a way to check\n      it. From these records, and only from these, the Open Trust Score is\n      computed: ten indicators, each <em>n/a</em> until the data to compute\n      it actually exists, never estimated."
+    },
+    {
+      "heading": "How it works",
+      "body_html": "A generic engine (<code>core/</code>) and a separate registry for each\n      project that applies it (<code>tenants/&lt;id&gt;/</code>): same\n      schemas, same formulas, same generator — different data. No page on\n      this site is written by hand: both the page you are reading and each\n      project's Trust Center are generated from a public registry and a\n      public configuration, verifiable in the\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">source code</a>."
+    }
+  ],
+
+  "matomo": {
+    "url": "https://sg-matomo.azurewebsites.net/",
+    "site_id": "2"
+  },
+
+  "compat": {
+    "_comment": "Same tenant references as the Italian config: badge.svg and score.json are locale-independent.",
+    "badge_from_tenant": "attestazione",
+    "score_from_tenant": "attestazione"
+  },
+
+  "ui": {
+    "projects_heading": "Projects that apply it",
+    "no_projects": "No projects available yet.",
+    "open_trust_center": "Open the Trust Center →",
+    "indicators": "indicators",
+    "footer_nav_label": "Footer links",
+    "engine": "engine",
+    "product_site": "product site"
+  },
+
+  "footer_columns": [
+    {
+      "heading": "The framework",
+      "links": [
+        { "label": "Source code (GTF)", "href": "https://github.com/SPAZIO-GENESI/gtf" },
+        { "label": "Record schemas", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/core/schemas" },
+        { "label": "Changelog (IT)", "href": "/changelog/" }
+      ]
+    }
+  ],
+
+  "footer_note_html": "Genesis Trust Framework is an engine developed by\n      <a href=\"https://tangram.page\">Tangram.page</a>; Spazio Genesi ETS\n      applies it to its own services as a technology partner, providing the\n      infrastructure it runs on. This page is generated automatically from\n      <code>content/site.config.en.json</code> and a summary of each\n      project's registry — see the\n      <a href=\"https://github.com/SPAZIO-GENESI/gtf\">source code</a>."
+}
