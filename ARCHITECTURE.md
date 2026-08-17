@@ -1,7 +1,7 @@
 # Genesis Trust Framework (GTF) — Architettura del Digital Trust Operating System
 
 **Servizio**: attestazione.spaziogenesi.org · **Titolare**: Spazio Genesi ETS
-**Documento**: GTF-ARCH · **Versione**: 0.4.0 · **Data**: 2026-08-16 · **Stato**: bozza per revisione
+**Documento**: GTF-ARCH · **Versione**: 0.4.1 · **Data**: 2026-08-17 · **Stato**: bozza per revisione
 **Natura**: questo documento NON è documentazione del servizio. È il progetto del **sistema che
 produce, collega e mantiene** tutta la documentazione, le evidenze e la fiducia del servizio.
 È scritto per essere eseguibile da modelli AI diversi in modo indipendente e coerente.
@@ -379,6 +379,20 @@ tra bundle mensili onorati e mesi trascorsi da `GTF_BIRTH_MONTH` è incorporato 
 (§9.3). Sorvegliato da `CTL-cadence-monitoring`: un avviso Telegram scatta se il mese successivo
 non produce un nuovo bundle entro la finestra di grazia.
 
+**Dal 2026-08-17 (P49, ADR-P49) la parte deterministica è un pulsante, non un terminale.** La
+costruzione del bundle (`generators/anchor-monthly.mjs`) è innescata dal workflow
+`.github/workflows/anchor-monthly.yml` (`workflow_dispatch` soltanto — niente cron: un bundle
+creato da solo e mai attestato non prova niente, il segnale di scadenza resta l'avviso
+settimanale di `CTL-cadence-monitoring`). Chi preme il pulsante trova impronta e i link "scarica"/
+"attesta" già pronti nel riepilogo del run e su Telegram; il generatore stesso rifiuta di
+riscrivere un bundle già esistente (idempotente per mese, `--force` esplicito per il caso raro
+in cui serva rifarlo prima di un'attestazione). Resta umano, per scelta esplicita e non per
+limite tecnico, solo il gesto che **non sarebbe onesto automatizzare**: l'attestazione sul
+servizio, dove la verifica anti-robot richiede una persona in carne e ossa. `PRC-dogfooding-anchor`
+è quindi `needs_technical: false` — la procedura mensile più frequente del framework, ora
+eseguibile da chiunque abbia accesso a GitHub e al servizio, non solo da chi sa aprire un
+terminale.
+
 ### 6.5 Conservazione e catena di custodia (ISO 27037 applicata a noi stessi)
 
 - Evidenze d'opera (cert, `.ots`): R2 EU, chiavi immutabili per convenzione (prima prova mai
@@ -561,7 +575,7 @@ score prima del merge — feedback loop immediato).
 2. deploy su GitHub Pages; 3. tag `registry-vX.Y.Z` (SemVer del registro: MAJOR = cambia uno
    schema, MINOR = nuovi record, PATCH = correzioni).
 
-### 11.3 `collect-evidence.yml` — settimanale (§6.3) · `anchor.yml` — mensile (§6.4)
+### 11.3 `collect-evidence.yml` — settimanale (§6.3) · `anchor-monthly.yml` — a pulsante, `workflow_dispatch` (§6.4, P49)
 
 ### 11.4 Integrazioni esistenti (nessuna modifica invasiva)
 - `monitor.yml` (imgauth) resta com'è: le sue issue SONO evidenze; il collettore le legge.

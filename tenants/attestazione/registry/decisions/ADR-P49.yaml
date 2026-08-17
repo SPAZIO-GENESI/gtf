@@ -1,0 +1,66 @@
+id: ADR-P49
+title: "P49 — L'ancoraggio mensile diventa un pulsante"
+date: 2026-08-17
+status: accepted
+context: >
+  `PRC-dogfooding-anchor` (§6.4) è l'unica delle sei manutenzioni ricorrenti del
+  framework che un non tecnico non poteva iniziare, e proprio quella che torna
+  ogni mese — la più frequente dopo il triage settimanale. Il comando che
+  costruisce il pacchetto mensile (`generators/anchor-monthly.mjs`) è però
+  deterministico e senza scelte: legge le fotografie settimanali già committate,
+  le impacchetta, scrive un file, stampa un'impronta. Non decide niente — un
+  lavoro così non ha bisogno di un umano al terminale, ha bisogno di un umano
+  che decida quando farlo e che poi attesti il risultato dal sito, dove serve
+  davvero una persona per la verifica anti-robot.
+decision: >
+  Portata la parte automatica su un pulsante GitHub (`workflow_dispatch`
+  soltanto, niente cron: un pacchetto creato da solo e mai attestato non
+  proverebbe niente, e il segnale di scadenza esiste già nell'avviso
+  settimanale di `CTL-cadence-monitoring`). Il riepilogo del run e un
+  messaggio Telegram mostrano subito impronta, link per scaricare il file e
+  link per attestarlo. `PRC-dogfooding-anchor` passa a `needs_technical: false`
+  e diventa eseguibile da chiunque abbia accesso a GitHub e al servizio, non
+  solo dal gestore.
+
+  Chiusa prima la trappola più seria del piano: `anchor-monthly.mjs`
+  riscriveva senza chiedere il pacchetto del mese corrente a ogni esecuzione,
+  e ogni riscrittura cambia `generated_at` → cambia l'impronta del file. Con
+  un pulsante alla portata di chiunque, una seconda pressione dopo
+  l'attestazione avrebbe scollegato il certificato dal file (impronta
+  attestata vecchia, pacchetto nel registro nuovo, verifica pubblica rotta) —
+  il collettore settimanale se ne sarebbe accorto, ma solo dopo giorni. Il
+  generatore ora rifiuta di sovrascrivere un pacchetto già esistente per lo
+  stesso periodo (esce con codice 0, non un errore: rieseguire non è uno
+  sbaglio, è cosa farà chi ha perso l'impronta e la vuole rivedere) e ammette
+  una forzatura esplicita `--force`, con avviso, per il solo caso in cui il
+  pacchetto vada rifatto prima di essere stato attestato.
+
+  Non-obiettivo esplicito, non un limite tecnico: l'attestazione resta un
+  gesto umano. È il punto stesso del controllo Turnstile — un'attestazione
+  emessa da una macchina senza nessuno che la guardi non proverebbe la stessa
+  cosa. Le altre tre manutenzioni tecniche ricorrenti (restore drill,
+  revisione trimestrale, rinnovo di security.txt) restano `needs_technical:
+  true` per lo stesso motivo che vale qui al contrario: richiedono giudizio
+  umano, non solo esecuzione, e non sono candidate a un pulsante.
+consequences: >
+  Nessun controllo nuovo nel registro: `CTL-dogfooding-anchor` esiste già e
+  non cambia natura, cambia lo strumento con cui il suo passo deterministico
+  viene innescato — restano identici il modello di fiducia (attestazione
+  umana + prova OpenTimestamps verificabile da chiunque) e i criteri con cui
+  il collettore settimanale conferma che il bundle del mese è stato attestato.
+  Nessun indicatore nuovo nello score, coerente con l'assenza di un controllo
+  nuovo. Nessuna modifica a imgauth, imgauthweb o authart: solo repo `gtf`,
+  nessun deploy Cloudflare, nessun segreto nuovo, nessun contratto API
+  toccato.
+
+  Fuori perimetro, per scelta e non per dimenticanza: l'aggiornamento
+  automatico di `EVD-dogfooding-anchor` con impronta e link del certificato
+  del mese (il collettore già ricalcola l'impronta del bundle più recente e
+  verifica il badge — un secondo pulsante di conferma aggiungerebbe una cosa
+  da ricordare in cambio di poco, da riprendere solo se si vorrà il link
+  permanente di ogni certificato mensile dentro l'evidenza) e un cron che
+  crei il pacchetto da solo (abituerebbe a un file che compare senza che
+  nessuno lo attesti — l'effetto collaterale opposto a quello voluto).
+affects: [CTL-dogfooding-anchor]
+evidence: [EVD-dogfooding-anchor]
+visibility: public
