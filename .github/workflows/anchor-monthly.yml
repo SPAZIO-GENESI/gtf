@@ -104,7 +104,11 @@ jobs:
           FILE_NAME: ${{ steps.bundle.outputs.file_name }}
           CHANGED: ${{ steps.commit.outputs.changed }}
         run: |
-          node -e '
+          # Lo script va scritto su file con un heredoc quotato, non passato a
+          # `node -e '...'`: il testo del messaggio contiene apostrofi (l'ancoraggio)
+          # e dentro gli apici singoli di bash chiudono la stringa — errore di
+          # sintassi della shell, invio mai tentato (bug reale del primo run, P49 F4).
+          cat > /tmp/notify-anchor.mjs <<'NODE_SCRIPT'
             const token = process.env.TELEGRAM_BOT_TOKEN;
             const chatIds = [process.env.TELEGRAM_CHAT_ID, process.env.TELEGRAM_CHAT_ID_SECONDARY].filter(Boolean);
             if (!token || chatIds.length === 0) {
@@ -130,4 +134,5 @@ jobs:
                 }
               }
             })();
-          '
+          NODE_SCRIPT
+          node /tmp/notify-anchor.mjs
