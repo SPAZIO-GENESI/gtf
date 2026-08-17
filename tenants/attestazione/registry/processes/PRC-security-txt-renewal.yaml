@@ -16,9 +16,11 @@ steps:
     note: "Devono restare identici: sono due copie di una sola dichiarazione, e una data diversa fra i due farebbe sembrare scaduta la policy su uno dei due domini."
   - do: "Rilascia l'interfaccia (push) e il motore (staging, poi approvazione del gate di produzione)."
   - do: "Controlla dal vivo che entrambi gli indirizzi rispondano con la data nuova."
-    link: "https://attestazione.spaziogenesi.org/.well-known/security.txt"
-    link_label: "Apri il security.txt pubblico"
+    links:
+      - url: "https://attestazione.spaziogenesi.org/.well-known/security.txt"
+        label: "Apri il security.txt pubblico"
   - do: "Aggiorna last_run e last_outcome in questo file."
-    link: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml"
-    link_label: "Apri il file da aggiornare"
+    links:
+      - url: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml"
+        label: "Apri il file da aggiornare"
 visibility: public

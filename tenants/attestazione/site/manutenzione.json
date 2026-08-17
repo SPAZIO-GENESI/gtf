@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T08:24:25.796Z",
+  "generated_at": "2026-08-17T08:51:34.353Z",
   "registry_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
   "items": [
     {
@@ -19,8 +19,12 @@
         },
         {
           "do": "Apri il servizio di attestazione, scheda Attesta, e scegli il file appena creato in tenants/attestazione/snapshots/anchors/.",
-          "link": "https://attestazione.spaziogenesi.org",
-          "link_label": "Vai ad attestare"
+          "links": [
+            {
+              "url": "https://attestazione.spaziogenesi.org",
+              "label": "Vai ad attestare"
+            }
+          ]
         },
         {
           "do": "Genera l'attestazione e scarica il certificato PDF.",
@@ -48,14 +52,56 @@
       "next_due": "2026-08-24",
       "steps": [
         {
-          "do": "Apri il quadro degli avvisi di sicurezza dell'organizzazione.",
-          "note": "Se GitHub chiede di accedere, usa il tuo account personale: sei già amministratore e vedi tutto.",
-          "link": "https://github.com/orgs/SPAZIO-GENESI/security",
-          "link_label": "Avvisi di sicurezza su GitHub"
+          "do": "Apri, uno alla volta, gli avvisi sul nostro codice dei cinque programmi.",
+          "note": "I link sono già filtrati: mostrano solo gli avvisi del controllo automatico del codice. Le voci con la sigla Scorecard restano fuori — sono suggerimenti di buone pratiche, non difetti, e le gestisce il gestore. Non esiste una pagina unica che li raccolga tutti: richiede un piano GitHub a pagamento che non abbiamo.",
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/imgauth/security/code-scanning?query=is%3Aopen+tool%3ACodeQL",
+              "label": "imgauth (il motore)"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/imgauthweb/security/code-scanning?query=is%3Aopen+tool%3ACodeQL",
+              "label": "imgauthweb (il sito)"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/attest-mcp/security/code-scanning?query=is%3Aopen+tool%3ACodeQL",
+              "label": "attest-mcp"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/attest-bot/security/code-scanning?query=is%3Aopen+tool%3ACodeQL",
+              "label": "attest-bot (il bot Telegram)"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/attest-mcp-remote/security/code-scanning?query=is%3Aopen+tool%3ACodeQL",
+              "label": "attest-mcp-remote"
+            }
+          ]
         },
         {
-          "do": "Guarda solo due elenchi: Code scanning e Dependabot.",
-          "note": "Le voci con la sigla Scorecard non sono difetti del nostro codice: sono suggerimenti di buone pratiche e le gestisce il gestore. Ignorale."
+          "do": "Apri poi gli avvisi sulle librerie di altri che usiamo, sempre nei cinque programmi.",
+          "note": "Questi sono di solito i più seri: segnalano che una libreria scritta da altri, e che noi usiamo, ha un difetto di sicurezza già noto al mondo. La sorveglianza è accesa su tutti e cinque, quindi un elenco vuoto significa davvero che non c'è niente.",
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/imgauth/security/dependabot?q=is%3Aopen",
+              "label": "imgauth (il motore)"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/imgauthweb/security/dependabot?q=is%3Aopen",
+              "label": "imgauthweb (il sito)"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/attest-mcp/security/dependabot?q=is%3Aopen",
+              "label": "attest-mcp"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/attest-bot/security/dependabot?q=is%3Aopen",
+              "label": "attest-bot (il bot Telegram)"
+            },
+            {
+              "url": "https://github.com/SPAZIO-GENESI/attest-mcp-remote/security/dependabot?q=is%3Aopen",
+              "label": "attest-mcp-remote"
+            }
+          ]
         },
         {
           "do": "Se non è comparso niente di nuovo rispetto alla settimana scorsa, hai finito: salta all'ultimo passo."
@@ -67,8 +113,12 @@
         {
           "do": "Segna che l'hai fatto: apri il file qui sotto, tocca l'icona della matita in alto a destra, cambia la data della riga last_run con quella di oggi (nella forma 2026-08-17) e salva col pulsante verde Commit changes.",
           "note": "È l'unico modo per fermare l'avviso settimanale su Telegram: finché la data resta vecchia, il bot continua a segnalare la scadenza.",
-          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-alert-triage.yaml",
-          "link_label": "Apri il file da aggiornare"
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-alert-triage.yaml",
+              "label": "Apri il file da aggiornare"
+            }
+          ]
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-security-alert-triage.yaml"
@@ -100,8 +150,12 @@
         {
           "do": "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file.",
           "note": "Il verbale va scritto anche se non ci sono rilievi: 'nessun rilievo' è un esito, il silenzio no.",
-          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml",
-          "link_label": "Apri il file da aggiornare"
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml",
+              "label": "Apri il file da aggiornare"
+            }
+          ]
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
@@ -133,8 +187,12 @@
         {
           "do": "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file.",
           "note": "Il verbale va scritto anche quando è andato tutto bene: una prova senza verbale non è dimostrabile a nessuno.",
-          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml",
-          "link_label": "Apri il file da aggiornare"
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml",
+              "label": "Apri il file da aggiornare"
+            }
+          ]
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml"
@@ -159,13 +217,21 @@
         },
         {
           "do": "Controlla dal vivo che entrambi gli indirizzi rispondano con la data nuova.",
-          "link": "https://attestazione.spaziogenesi.org/.well-known/security.txt",
-          "link_label": "Apri il security.txt pubblico"
+          "links": [
+            {
+              "url": "https://attestazione.spaziogenesi.org/.well-known/security.txt",
+              "label": "Apri il security.txt pubblico"
+            }
+          ]
         },
         {
           "do": "Aggiorna last_run e last_outcome in questo file.",
-          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml",
-          "link_label": "Apri il file da aggiornare"
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml",
+              "label": "Apri il file da aggiornare"
+            }
+          ]
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml"
@@ -184,8 +250,12 @@
         {
           "do": "Scrivi a Radixia proponendo la finestra della revisione.",
           "note": "Il piano operativo è già scritto e concordato: non va reinventato ogni anno.",
-          "link": "https://github.com/SPAZIO-GENESI/gtf/blob/main/docs/piano-review-esterna-2026.md",
-          "link_label": "Apri il piano della revisione"
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/docs/piano-review-esterna-2026.md",
+              "label": "Apri il piano della revisione"
+            }
+          ]
         },
         {
           "do": "Dai al revisore accesso in lettura al registro e alle evidenze e concorda una data di consegna."
@@ -196,8 +266,12 @@
         },
         {
           "do": "Apri un'azione correttiva per ogni rilievo e aggiorna last_run e last_outcome in questo file.",
-          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml",
-          "link_label": "Apri il file da aggiornare"
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml",
+              "label": "Apri il file da aggiornare"
+            }
+          ]
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml"

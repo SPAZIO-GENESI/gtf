@@ -19,6 +19,7 @@ steps:
   - do: "Cancella i file ripristinati: non devono finire in nessun repository."
   - do: "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file."
     note: "Il verbale va scritto anche quando è andato tutto bene: una prova senza verbale non è dimostrabile a nessuno."
-    link: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml"
-    link_label: "Apri il file da aggiornare"
+    links:
+      - url: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml"
+        label: "Apri il file da aggiornare"
 visibility: public

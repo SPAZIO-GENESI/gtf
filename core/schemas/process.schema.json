@@ -27,8 +27,19 @@
         "properties": {
           "do": { "type": "string", "description": "L'azione, all'imperativo: cosa fare, non perché." },
           "note": { "type": "string", "description": "Facoltativa: l'unica cosa che serve sapere per non sbagliare il passo." },
-          "link": { "type": "string", "format": "uri" },
-          "link_label": { "type": "string" }
+          "links": {
+            "type": "array",
+            "description": "Le destinazioni del passo. È un elenco e non un solo indirizzo perché un passo può riguardare più repository: senza un piano GitHub a pagamento non esiste una pagina unica che raccolga gli avvisi di tutti, e obbligare chi esegue a cercarseli è il modo più sicuro per far saltare il giro.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": { "type": "string", "format": "uri" },
+                "label": { "type": "string" }
+              },
+              "required": ["url", "label"],
+              "additionalProperties": false
+            }
+          }
         },
         "required": ["do"],
         "additionalProperties": false

@@ -12,8 +12,9 @@ steps:
   - do: "Nella cartella del registro, esegui: npm run anchor-monthly"
     note: "Crea il pacchetto del mese e stampa a schermo il nome del file e la sua impronta. Tieni da parte quell'impronta: serve al passo 4."
   - do: "Apri il servizio di attestazione, scheda Attesta, e scegli il file appena creato in tenants/attestazione/snapshots/anchors/."
-    link: "https://attestazione.spaziogenesi.org"
-    link_label: "Vai ad attestare"
+    links:
+      - url: "https://attestazione.spaziogenesi.org"
+        label: "Vai ad attestare"
   - do: "Genera l'attestazione e scarica il certificato PDF."
     note: "Scaricare il PDF non è un passaggio facoltativo: è quello che innesca davvero l'ancoraggio in Bitcoin. Fermarsi all'attestazione non conta come fatto."
   - do: "Controlla che l'impronta stampata sul certificato sia identica a quella stampata al passo 1."

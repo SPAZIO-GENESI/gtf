@@ -19,6 +19,7 @@ steps:
   - do: "Controlla le azioni correttive aperte: chiuse, ancora valide, o da riformulare."
   - do: "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file."
     note: "Il verbale va scritto anche se non ci sono rilievi: 'nessun rilievo' è un esito, il silenzio no."
-    link: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
-    link_label: "Apri il file da aggiornare"
+    links:
+      - url: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
+        label: "Apri il file da aggiornare"
 visibility: public
