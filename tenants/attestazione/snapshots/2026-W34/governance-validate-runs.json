@@ -3,6 +3,36 @@
   "url": "https://api.github.com/repos/SPAZIO-GENESI/gtf/actions/workflows/validate.yml/runs?per_page=30&branch=main",
   "data": [
     {
+      "id": 32018507555,
+      "conclusion": "success",
+      "created_at": "2026-08-17T10:06:03Z"
+    },
+    {
+      "id": 32017655489,
+      "conclusion": "success",
+      "created_at": "2026-08-17T09:55:44Z"
+    },
+    {
+      "id": 32017374894,
+      "conclusion": "success",
+      "created_at": "2026-08-17T09:52:17Z"
+    },
+    {
+      "id": 32013041853,
+      "conclusion": "success",
+      "created_at": "2026-08-17T09:00:14Z"
+    },
+    {
+      "id": 32012464141,
+      "conclusion": "success",
+      "created_at": "2026-08-17T08:53:01Z"
+    },
+    {
+      "id": 32011530145,
+      "conclusion": "success",
+      "created_at": "2026-08-17T08:41:06Z"
+    },
+    {
       "id": 31952602469,
       "conclusion": "success",
       "created_at": "2026-08-16T14:24:15Z"
@@ -121,36 +151,6 @@
       "id": 30117755150,
       "conclusion": "success",
       "created_at": "2026-07-24T18:39:05Z"
-    },
-    {
-      "id": 30093579250,
-      "conclusion": "success",
-      "created_at": "2026-07-24T12:34:29Z"
-    },
-    {
-      "id": 29998028242,
-      "conclusion": "success",
-      "created_at": "2026-07-23T10:06:24Z"
-    },
-    {
-      "id": 29897104523,
-      "conclusion": "success",
-      "created_at": "2026-07-22T06:32:54Z"
-    },
-    {
-      "id": 29862003589,
-      "conclusion": "success",
-      "created_at": "2026-07-21T19:33:20Z"
-    },
-    {
-      "id": 29861667837,
-      "conclusion": "success",
-      "created_at": "2026-07-21T19:28:40Z"
-    },
-    {
-      "id": 29860341175,
-      "conclusion": "success",
-      "created_at": "2026-07-21T19:09:57Z"
     }
   ]
 }

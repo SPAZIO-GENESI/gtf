@@ -3,6 +3,30 @@
   "url": "https://api.github.com/repos/SPAZIO-GENESI/imgauth/actions/workflows/ci.yml/runs?per_page=20&branch=main",
   "data": [
     {
+      "run_id": 32012505108,
+      "created_at": "2026-08-17T08:53:30Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
+      "run_id": 32011553178,
+      "created_at": "2026-08-17T08:41:24Z",
+      "has_job": true,
+      "job_conclusion": "success",
+      "approvals": [
+        {
+          "login": "maxalone",
+          "state": "approved"
+        }
+      ]
+    },
+    {
       "run_id": 31872503645,
       "created_at": "2026-08-15T07:39:25Z",
       "has_job": true,
@@ -169,30 +193,6 @@
     {
       "run_id": 30014227672,
       "created_at": "2026-07-23T14:06:00Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29835932684,
-      "created_at": "2026-07-21T13:45:50Z",
-      "has_job": true,
-      "job_conclusion": "success",
-      "approvals": [
-        {
-          "login": "maxalone",
-          "state": "approved"
-        }
-      ]
-    },
-    {
-      "run_id": 29820376818,
-      "created_at": "2026-07-21T09:58:13Z",
       "has_job": true,
       "job_conclusion": "success",
       "approvals": [
