@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-17T08:59:55.616Z",
+  "generated_at": "2026-08-17T09:55:08.553Z",
   "registry_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
   "items": [
     {
       "id": "PRC-dogfooding-anchor",
       "title": "Ancoraggio mensile del registro delle evidenze in Bitcoin",
-      "who": "Il gestore per la parte tecnica; l'attestazione sul sito può farla chiunque abbia accesso al pannello",
-      "needs_technical": true,
+      "who": "Chiunque abbia accesso a GitHub e al servizio; l'attestazione sul sito può farla chiunque abbia accesso al pannello",
+      "needs_technical": false,
       "duration_minutes": 20,
       "frequency_days": null,
       "last_done": "2026-07-09",
@@ -15,14 +15,24 @@
       "steps": [
         {
           "do": "Ogni mese il registro raccoglie una fotografia delle proprie evidenze, una per settimana. Questa procedura le mette insieme in un unico file e le fa attestare dal servizio stesso: da quel momento nessuno — noi compresi — può modificarle a posteriori senza che si veda.",
-          "note": "Non è un passo da eseguire, è cosa stai per fare. I passi veri sono i quattro qui sotto."
+          "note": "Non è un passo da eseguire, è cosa stai per fare. I passi veri sono i cinque qui sotto."
         },
         {
-          "do": "Crea il file del mese. Sul computer del gestore, apri il Terminale, entra nella cartella del repository gtf ed esegui il comando: npm run anchor-monthly",
-          "note": "La cartella giusta è quella che contiene il file package.json e la cartella tenants; sul computer del gestore è dentro spazio_genesi. Se non ce l'hai in locale, la scarichi con: git clone https://github.com/SPAZIO-GENESI/gtf.git — e la prima volta, dentro la cartella, esegui anche: npm install. Il comando non manda niente a nessuno e non modifica il registro: crea solo un file nuovo dentro tenants/attestazione/snapshots/anchors/, con nome tipo 2026-08-bundle.json. A schermo stampa il nome del file e la sua impronta: copiala, serve al passo 4."
+          "do": "Premi il pulsante che crea il pacchetto del mese.",
+          "note": "Sulla pagina che si apre, il pulsante verde 'Run workflow' sta in alto a destra: premilo, poi conferma. Il giro dura un paio di minuti. Se GitHub Actions non fosse disponibile, in alternativa si può eseguire da terminale il comando npm run anchor-monthly nella cartella del repository gtf — ma è un ripiego, non il percorso normale.",
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/actions/workflows/anchor-monthly.yml",
+              "label": "Crea il pacchetto del mese"
+            }
+          ]
         },
         {
-          "do": "Attesta quel file. Apri il servizio, scheda Attesta, e scegli il file appena creato.",
+          "do": "Quando il giro è finito, apri il riepilogo del run e scarica il file: il link è già pronto lì dentro, insieme all'impronta del pacchetto.",
+          "note": "Se il pacchetto di questo mese esisteva già, il riepilogo lo dice e mostra comunque l'impronta e il link: va bene lo stesso, non è stato riscritto niente."
+        },
+        {
+          "do": "Attesta quel file. Apri il servizio, scheda Attesta, e scegli il file appena scaricato.",
           "note": "Questo passo non richiede competenze tecniche: è lo stesso identico giro che fa un utente qualsiasi col proprio lavoro. Serve una persona in carne e ossa perché c'è la verifica anti-robot.",
           "links": [
             {
@@ -36,17 +46,8 @@
           "note": "Scaricare il PDF non è facoltativo: è il download che fa partire l'ancoraggio in Bitcoin. Fermarsi all'attestazione non conta come fatto."
         },
         {
-          "do": "Controlla che l'impronta stampata sul certificato sia identica a quella copiata al passo 2."
-        },
-        {
-          "do": "Salva il file nel registro (git add, commit e push) e riporta impronta e link permanente del certificato nell'evidenza EVD-dogfooding-anchor.",
-          "note": "Da qui in poi chiunque può ricalcolare l'impronta del file nel repository, confrontarla col certificato e verificare la prova su opentimestamps.org senza chiedere niente a noi. È il motivo per cui questa procedura esiste.",
-          "links": [
-            {
-              "url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/evidence/EVD-dogfooding-anchor.yaml",
-              "label": "L'evidenza da aggiornare"
-            }
-          ]
+          "do": "Controlla che l'impronta stampata sul certificato sia identica a quella del riepilogo.",
+          "note": "Da qui in poi chiunque può ricalcolare l'impronta del file nel repository, confrontarla col certificato e verificare la prova su opentimestamps.org senza chiedere niente a noi. È il motivo per cui questa procedura esiste. Il collettore settimanale si accorge da sé che il pacchetto è stato attestato: non serve aggiornare a mano l'evidenza EVD-dogfooding-anchor."
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-dogfooding-anchor.yaml"
