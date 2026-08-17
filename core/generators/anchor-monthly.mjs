@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readdirSync, readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
@@ -22,6 +22,25 @@ function main() {
   const cfg = loadTenant();
   const now = new Date();
   const period = monthKey(now);
+  const force = process.argv.includes("--force");
+
+  mkdirSync(ANCHORS_DIR, { recursive: true });
+  const outFile = join(ANCHORS_DIR, `${period}-bundle.json`);
+
+  // Ogni rigenerazione cambia generated_at, quindi cambia l'impronta: se il
+  // pacchetto del mese esiste già ed è stato eventualmente già attestato,
+  // riscriverlo scollegherebbe il certificato dal file. Senza --force, una
+  // nuova esecuzione nello stesso mese si limita a rileggere quello che c'è.
+  if (existsSync(outFile) && !force) {
+    const existing = readFileSync(outFile, "utf8");
+    const digest = sha256(existing);
+    console.log(`Il pacchetto "${period}" esiste già in snapshots/anchors/${period}-bundle.json`);
+    console.log(`SHA-256 del file: ${digest}`);
+    console.log("");
+    console.log("Non è stato riscritto: se lo hai già attestato, questa è l'impronta da usare.");
+    console.log("Per rifarlo davvero (solo se creato per errore e NON ancora attestato), rilancia con --force.");
+    return;
+  }
 
   const weeks = readdirSync(SNAPSHOTS_DIR, { withFileTypes: true })
     .filter((d) => d.isDirectory() && d.name !== "anchors")
@@ -45,6 +64,12 @@ function main() {
     process.exit(1);
   }
 
+  if (force && existsSync(outFile)) {
+    console.log(`--force: il pacchetto "${period}" esiste già e verrà riscritto.`);
+    console.log("L'impronta cambierà: un eventuale certificato già emesso non corrisponderà più al nuovo file.");
+    console.log("");
+  }
+
   const bundle = {
     type: "genesis-trust-framework-dogfooding-bundle",
     period,
@@ -55,8 +80,6 @@ function main() {
   const text = JSON.stringify(bundle, null, 2) + "\n";
   const digest = sha256(text);
 
-  mkdirSync(ANCHORS_DIR, { recursive: true });
-  const outFile = join(ANCHORS_DIR, `${period}-bundle.json`);
   writeFileSync(outFile, text);
 
   console.log(`Bundle "${period}" scritto in snapshots/anchors/${period}-bundle.json`);
