@@ -1,0 +1,22 @@
+id: PRC-dogfooding-anchor
+title: Ancoraggio mensile del registro delle evidenze in Bitcoin
+owner: it@spaziogenesi.org
+who: Il gestore per la parte tecnica; l'attestazione sul sito può farla chiunque abbia accesso al pannello
+needs_technical: true
+duration_minutes: 20
+trigger: "Cadenza mensile (CTL-dogfooding-anchor). La scadenza non si legge da last_run ma dal pacchetto più recente in snapshots/anchors/: è il pacchetto stesso la prova che il mese è stato coperto, quindi non c'è una data da aggiornare a mano e non può divergere dalla realtà."
+output: "Un pacchetto <periodo>-bundle.json committato nel registro, attestato sul servizio e ancorato in Bitcoin via OpenTimestamps; impronta e link permanente riportati in EVD-dogfooding-anchor."
+produces_evidence: [EVD-dogfooding-anchor]
+human_cost_minutes_month: 20
+steps:
+  - do: "Nella cartella del registro, esegui: npm run anchor-monthly"
+    note: "Crea il pacchetto del mese e stampa a schermo il nome del file e la sua impronta. Tieni da parte quell'impronta: serve al passo 4."
+  - do: "Apri il servizio di attestazione, scheda Attesta, e scegli il file appena creato in tenants/attestazione/snapshots/anchors/."
+    link: "https://attestazione.spaziogenesi.org"
+    link_label: "Vai ad attestare"
+  - do: "Genera l'attestazione e scarica il certificato PDF."
+    note: "Scaricare il PDF non è un passaggio facoltativo: è quello che innesca davvero l'ancoraggio in Bitcoin. Fermarsi all'attestazione non conta come fatto."
+  - do: "Controlla che l'impronta stampata sul certificato sia identica a quella stampata al passo 1."
+  - do: "Committa il pacchetto nel registro e riporta impronta e link permanente del certificato in EVD-dogfooding-anchor."
+    note: "Da qui in poi chiunque può ricalcolare l'impronta del file nel repository, confrontarla col certificato e verificare la prova su opentimestamps.org senza chiedere niente a noi. È il motivo per cui questa procedura esiste."
+visibility: public

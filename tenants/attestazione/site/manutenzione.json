@@ -1,0 +1,206 @@
+{
+  "generated_at": "2026-08-17T08:24:25.796Z",
+  "registry_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
+  "items": [
+    {
+      "id": "PRC-dogfooding-anchor",
+      "title": "Ancoraggio mensile del registro delle evidenze in Bitcoin",
+      "who": "Il gestore per la parte tecnica; l'attestazione sul sito può farla chiunque abbia accesso al pannello",
+      "needs_technical": true,
+      "duration_minutes": 20,
+      "frequency_days": null,
+      "last_done": "2026-07-09",
+      "never_run": false,
+      "next_due": "2026-08-13",
+      "steps": [
+        {
+          "do": "Nella cartella del registro, esegui: npm run anchor-monthly",
+          "note": "Crea il pacchetto del mese e stampa a schermo il nome del file e la sua impronta. Tieni da parte quell'impronta: serve al passo 4."
+        },
+        {
+          "do": "Apri il servizio di attestazione, scheda Attesta, e scegli il file appena creato in tenants/attestazione/snapshots/anchors/.",
+          "link": "https://attestazione.spaziogenesi.org",
+          "link_label": "Vai ad attestare"
+        },
+        {
+          "do": "Genera l'attestazione e scarica il certificato PDF.",
+          "note": "Scaricare il PDF non è un passaggio facoltativo: è quello che innesca davvero l'ancoraggio in Bitcoin. Fermarsi all'attestazione non conta come fatto."
+        },
+        {
+          "do": "Controlla che l'impronta stampata sul certificato sia identica a quella stampata al passo 1."
+        },
+        {
+          "do": "Committa il pacchetto nel registro e riporta impronta e link permanente del certificato in EVD-dogfooding-anchor.",
+          "note": "Da qui in poi chiunque può ricalcolare l'impronta del file nel repository, confrontarla col certificato e verificare la prova su opentimestamps.org senza chiedere niente a noi. È il motivo per cui questa procedura esiste."
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-dogfooding-anchor.yaml"
+    },
+    {
+      "id": "PRC-security-alert-triage",
+      "title": "Triage settimanale degli alert di sicurezza (CodeQL, Dependabot)",
+      "who": "Federico Battisti — presidente",
+      "needs_technical": false,
+      "duration_minutes": 15,
+      "frequency_days": 7,
+      "last_done": "2026-08-17",
+      "never_run": false,
+      "next_due": "2026-08-24",
+      "steps": [
+        {
+          "do": "Apri il quadro degli avvisi di sicurezza dell'organizzazione.",
+          "note": "Se GitHub chiede di accedere, usa il tuo account personale: sei già amministratore e vedi tutto.",
+          "link": "https://github.com/orgs/SPAZIO-GENESI/security",
+          "link_label": "Avvisi di sicurezza su GitHub"
+        },
+        {
+          "do": "Guarda solo due elenchi: Code scanning e Dependabot.",
+          "note": "Le voci con la sigla Scorecard non sono difetti del nostro codice: sono suggerimenti di buone pratiche e le gestisce il gestore. Ignorale."
+        },
+        {
+          "do": "Se non è comparso niente di nuovo rispetto alla settimana scorsa, hai finito: salta all'ultimo passo."
+        },
+        {
+          "do": "Se è comparso qualcosa di nuovo, non chiuderlo e non toccare il codice: copia il titolo dell'avviso e il nome del programma, e mandali al gestore su Telegram.",
+          "note": "Chiudere un avviso senza aver capito cosa dice è l'unico errore davvero costoso: sparisce dall'elenco e nessuno lo guarda più."
+        },
+        {
+          "do": "Segna che l'hai fatto: apri il file qui sotto, tocca l'icona della matita in alto a destra, cambia la data della riga last_run con quella di oggi (nella forma 2026-08-17) e salva col pulsante verde Commit changes.",
+          "note": "È l'unico modo per fermare l'avviso settimanale su Telegram: finché la data resta vecchia, il bot continua a segnalare la scadenza.",
+          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-alert-triage.yaml",
+          "link_label": "Apri il file da aggiornare"
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-security-alert-triage.yaml"
+    },
+    {
+      "id": "PRC-review-trimestrale",
+      "title": "Revisione interna trimestrale dei controlli e delle azioni correttive",
+      "who": "Il gestore",
+      "needs_technical": true,
+      "duration_minutes": 120,
+      "frequency_days": 90,
+      "last_done": "2026-07-19",
+      "never_run": false,
+      "next_due": "2026-10-17",
+      "steps": [
+        {
+          "do": "Elenca i controlli la cui data di revisione scade entro il trimestre."
+        },
+        {
+          "do": "Per ognuno, riverifica che quanto dichiarato sia ancora vero nella realtà, poi aggiorna la data.",
+          "note": "Riverificare, non ridatare: cambiare la data senza aver riprovato il controllo trasforma il registro in una dichiarazione, che è esattamente ciò che il framework esiste per evitare."
+        },
+        {
+          "do": "Rileggi i rischi a impatto medio e alto e controlla che la descrizione corrisponda ancora a com'è fatto oggi il sistema."
+        },
+        {
+          "do": "Controlla le azioni correttive aperte: chiuse, ancora valide, o da riformulare."
+        },
+        {
+          "do": "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file.",
+          "note": "Il verbale va scritto anche se non ci sono rilievi: 'nessun rilievo' è un esito, il silenzio no.",
+          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml",
+          "link_label": "Apri il file da aggiornare"
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
+    },
+    {
+      "id": "PRC-restore-drill",
+      "title": "Prova periodica di ripristino da backup",
+      "who": "Il gestore",
+      "needs_technical": true,
+      "duration_minutes": 90,
+      "frequency_days": 180,
+      "last_done": "2026-07-19",
+      "never_run": false,
+      "next_due": "2027-01-15",
+      "steps": [
+        {
+          "do": "Scegli tre opere già attestate di periodi diversi: una recente, una dei primi mesi, una con l'ancoraggio Bitcoin ormai maturo."
+        },
+        {
+          "do": "Scarica quelle tre dal backup esterno (non dall'archivio di produzione: è il backup che si sta provando)."
+        },
+        {
+          "do": "Su ciascuna, verifica tre cose indipendenti: che la firma estratta dal certificato sia valida, che la prova di ancoraggio regga contro un blocco Bitcoin reale, e che il badge pubblico dell'opera risulti verde.",
+          "note": "Se una sola delle tre fallisce, la prova è fallita: va scritto così nel verbale, non ammorbidito."
+        },
+        {
+          "do": "Cancella i file ripristinati: non devono finire in nessun repository."
+        },
+        {
+          "do": "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file.",
+          "note": "Il verbale va scritto anche quando è andato tutto bene: una prova senza verbale non è dimostrabile a nessuno.",
+          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml",
+          "link_label": "Apri il file da aggiornare"
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-restore-drill.yaml"
+    },
+    {
+      "id": "PRC-security-txt-renewal",
+      "title": "Rinnovo annuale del campo Expires di security.txt",
+      "who": "Il gestore",
+      "needs_technical": true,
+      "duration_minutes": 30,
+      "frequency_days": 330,
+      "last_done": "2026-07-21",
+      "never_run": false,
+      "next_due": "2027-06-16",
+      "steps": [
+        {
+          "do": "Sposta la data del campo Expires avanti di un anno in ENTRAMBI i file security.txt: quello dell'interfaccia e quello del motore.",
+          "note": "Devono restare identici: sono due copie di una sola dichiarazione, e una data diversa fra i due farebbe sembrare scaduta la policy su uno dei due domini."
+        },
+        {
+          "do": "Rilascia l'interfaccia (push) e il motore (staging, poi approvazione del gate di produzione)."
+        },
+        {
+          "do": "Controlla dal vivo che entrambi gli indirizzi rispondano con la data nuova.",
+          "link": "https://attestazione.spaziogenesi.org/.well-known/security.txt",
+          "link_label": "Apri il security.txt pubblico"
+        },
+        {
+          "do": "Aggiorna last_run e last_outcome in questo file.",
+          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml",
+          "link_label": "Apri il file da aggiornare"
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml"
+    },
+    {
+      "id": "PRC-review-esterna-annuale",
+      "title": "Revisione esterna annuale del registro e dei controlli",
+      "who": "Radixia srl, revisore esterno indipendente — il gestore si occupa di avviarla",
+      "needs_technical": false,
+      "duration_minutes": 60,
+      "frequency_days": 365,
+      "last_done": null,
+      "never_run": true,
+      "next_due": "2027-07-09",
+      "steps": [
+        {
+          "do": "Scrivi a Radixia proponendo la finestra della revisione.",
+          "note": "Il piano operativo è già scritto e concordato: non va reinventato ogni anno.",
+          "link": "https://github.com/SPAZIO-GENESI/gtf/blob/main/docs/piano-review-esterna-2026.md",
+          "link_label": "Apri il piano della revisione"
+        },
+        {
+          "do": "Dai al revisore accesso in lettura al registro e alle evidenze e concorda una data di consegna."
+        },
+        {
+          "do": "Pubblica il verbale della revisione in docs/verbali/, rilievi compresi.",
+          "note": "Anche i rilievi negativi vanno pubblicati: una revisione esterna che pubblica solo gli esiti buoni non è una revisione esterna."
+        },
+        {
+          "do": "Apri un'azione correttiva per ogni rilievo e aggiorna last_run e last_outcome in questo file.",
+          "link": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml",
+          "link_label": "Apri il file da aggiornare"
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml"
+    }
+  ]
+}

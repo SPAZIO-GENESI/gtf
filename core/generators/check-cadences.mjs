@@ -1,37 +1,6 @@
-import { readFileSync, readdirSync, existsSync } from "node:fs";
-import { join } from "node:path";
-import { loadRegistry, byFolder } from "./lib/registry.mjs";
-import { loadTenant, TENANT_SNAPSHOTS_DIR } from "./lib/tenant.mjs";
-
-const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
-const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
-
-// Data di nascita del GTF: baseline per i processi mai eseguiti finora
-// (nessun last_run dichiarato) e per l'attesa del primo ancoraggio dogfooding.
-const GTF_BIRTH = "2026-07-09";
-
-// Grazia oltre il mese per il ciclo dogfooding (cadenza mensile, GTF-ARCH §6.4).
-const DOGFOODING_GRACE_DAYS = 35;
-
-function daysSince(dateStr) {
-  return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
-}
-
-// Ultimo bundle dogfooding committato (fonte di verità unica: nessun campo
-// da aggiornare a mano, a differenza dei PRC qui sotto — vedi CTL-dogfooding-anchor).
-function latestAnchor() {
-  if (!existsSync(ANCHORS_DIR)) return null;
-  const bundles = readdirSync(ANCHORS_DIR)
-    .filter((f) => /^\d{4}-\d{2}-bundle\.json$/.test(f))
-    .sort();
-  if (bundles.length === 0) return null;
-  try {
-    const data = JSON.parse(readFileSync(join(ANCHORS_DIR, bundles[bundles.length - 1]), "utf8"));
-    return data.generated_at ?? null;
-  } catch {
-    return null;
-  }
-}
+import { loadRegistry } from "./lib/registry.mjs";
+import { loadTenant } from "./lib/tenant.mjs";
+import { computeCadences, overdueOnly } from "./lib/cadences.mjs";
 
 // B3 (voce del piano 2026, img-auth-hub): un allarme che raggiunge solo il
 // gestore non è un allarme se il gestore è la persona indisponibile. Secondo
@@ -63,6 +32,8 @@ async function sendTelegram(text) {
 }
 
 async function main() {
+  const cfg = loadTenant();
+
   if (process.env.TEST_TELEGRAM === "true") {
     await sendTelegram(
       "Genesis Trust Framework — messaggio di prova (check-cadences.mjs, avviato manualmente con test_telegram). " +
@@ -72,46 +43,30 @@ async function main() {
     return;
   }
 
-  const cfg = loadTenant();
-  const records = loadRegistry();
-  const overdue = [];
-
-  const anchorDate = latestAnchor();
-  const anchorDays = anchorDate ? daysSince(anchorDate) : null;
-  if (!anchorDate || anchorDays > DOGFOODING_GRACE_DAYS) {
-    overdue.push({
-      id: "CTL-dogfooding-anchor",
-      title: "Ancoraggio dogfooding mensile",
-      days: anchorDays,
-      hint: `npm run anchor-monthly, poi attesta il bundle su ${cfg.operations.attestation_site}`,
-    });
-  }
-
-  const prc = byFolder(records, "processes").filter((p) => p.frequency_days);
-  for (const p of prc) {
-    const ref = p.last_run ?? GTF_BIRTH;
-    const days = daysSince(ref);
-    if (days > p.frequency_days) {
-      overdue.push({
-        id: p.id,
-        title: p.title,
-        days,
-        hint: p.last_run ? `ultima esecuzione dichiarata: ${p.last_run}` : "mai eseguito da quando il GTF esiste (nessun last_run nel registro)",
-      });
-    }
-  }
+  const overdue = overdueOnly(computeCadences(cfg, loadRegistry()));
 
   if (overdue.length === 0) {
     console.log("Nessun processo ricorrente scaduto.");
     return;
   }
 
-  const lines = overdue.map(
-    (o) => `- <b>${o.title}</b> (${o.id}) — ${o.days !== null ? `${o.days} giorni` : "mai eseguito"}. ${o.hint}`
-  );
+  // Il messaggio dice chi deve agire e manda in UN posto solo, dove i passi
+  // sono scritti per esteso. Prima elencava i comandi da dare: chi li riceveva
+  // senza essere tecnico non poteva farci niente, e chi li riceveva da tecnico
+  // doveva comunque ricostruire il resto della procedura a memoria.
+  const lines = overdue.map((o) => {
+    const chi = o.who ? ` — se ne occupa: ${o.who}` : "";
+    const da = o.never_run ? "mai eseguito finora" : `in ritardo di ${o.overdue_days} giorni`;
+    return `- <b>${o.title}</b> (${da})${chi}`;
+  });
+
+  const panel = cfg.operations?.panel_url;
   const text =
-    `Genesis Trust Framework — processi in scadenza:\n\n${lines.join("\n")}\n\n` +
-    `Dettagli: ${cfg.operations.processes_url}`;
+    `Genesis Trust Framework — manutenzioni da fare:\n\n${lines.join("\n")}\n\n` +
+    (panel
+      ? `Cosa fare, passo per passo: ${panel}\n(${cfg.operations.panel_label ?? "pannello di gestione"})\n\n`
+      : "") +
+    `Registro dei processi: ${cfg.operations.processes_url}`;
 
   console.log(text.replace(/<\/?b>/g, ""));
   await sendTelegram(text);

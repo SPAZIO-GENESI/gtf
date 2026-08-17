@@ -37,6 +37,12 @@ jobs:
       - run: npm run validate
       - run: npm run score
       - run: npm run build-site
+      # Rigenera manutenzione.json, che il pannello di gestione legge per dire
+      # a chi lo apre cosa c'è da fare. Sta qui e non solo nel giro settimanale
+      # delle evidenze perché i passi delle procedure vivono nel registro: una
+      # correzione a un passo deve arrivare al pannello col push che la fa, non
+      # il lunedì dopo.
+      - run: npm run build-cadences
       # P45 F5 — genera il sito della RADICE (la pagina del prodotto) e le sue
       # copie di compatibilità site/badge.svg e site/score.json. Senza questo
       # step la radice pubblicherebbe le sole copie committate: il badge, che

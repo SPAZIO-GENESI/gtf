@@ -15,7 +15,25 @@
     "last_run": { "type": "string", "format": "date", "description": "Data dell'ultima esecuzione, aggiornata a mano dal maintainer dopo averla svolta" },
     "last_outcome": { "type": "string", "enum": ["ok", "failed"], "description": "Esito dell'esecuzione registrata in last_run" },
     "visibility": { "type": "string", "enum": ["public", "internal", "secret"], "default": "public" },
-    "why_not_public": { "type": "string" }
+    "why_not_public": { "type": "string" },
+    "who": { "type": "string", "description": "Chi esegue il processo, in chiaro e per esteso — a differenza di owner, che è un indirizzo o un ruolo. Mostrato a chi apre la scheda Manutenzione del pannello: serve a capire in un colpo d'occhio se una scadenza è propria o di qualcun altro." },
+    "needs_technical": { "type": "boolean", "description": "true se il processo richiede terminale, repository o credenziali tecniche. La scheda Manutenzione lo usa per dire a un non tecnico di girare la scadenza al gestore invece di provarci." },
+    "duration_minutes": { "type": "integer", "minimum": 1, "description": "Quanto dura una singola esecuzione, non il costo mensile (per quello c'è human_cost_minutes_month)." },
+    "steps": {
+      "type": "array",
+      "description": "Passi in lingua piana, nell'ordine in cui vanno eseguiti, scritti per chi non conosce il sistema. Sono la sorgente unica della guida mostrata nella scheda Manutenzione del pannello admin: la scheda non contiene testo scritto a mano (principio PRN-03).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "do": { "type": "string", "description": "L'azione, all'imperativo: cosa fare, non perché." },
+          "note": { "type": "string", "description": "Facoltativa: l'unica cosa che serve sapere per non sbagliare il passo." },
+          "link": { "type": "string", "format": "uri" },
+          "link_label": { "type": "string" }
+        },
+        "required": ["do"],
+        "additionalProperties": false
+      }
+    }
   },
   "required": ["id", "title", "owner", "trigger", "output", "human_cost_minutes_month"],
   "allOf": [

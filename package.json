@@ -11,12 +11,13 @@
     "scan-scorecard": "node core/generators/scan-scorecard.mjs",
     "anchor-monthly": "node core/generators/anchor-monthly.mjs",
     "check-cadences": "node core/generators/check-cadences.mjs",
+    "build-cadences": "node core/generators/build-cadences.mjs",
     "check-core": "node core/generators/check-core-isolation.mjs",
     "score": "node core/generators/score.mjs",
     "build-site": "node core/generators/build-site.mjs",
     "build-root": "node core/generators/build-root.mjs",
     "build-changelog": "node core/generators/build-changelog.mjs",
-    "build": "npm run validate && npm run check-core && npm run score && npm run build-site && npm run build-root && npm run build-changelog"
+    "build": "npm run validate && npm run check-core && npm run score && npm run build-site && npm run build-cadences && npm run build-root && npm run build-changelog"
   },
   "license": "MIT",
   "dependencies": {

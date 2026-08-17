@@ -123,6 +123,11 @@
 
   "operations": {
     "attestation_site": "attestazione.spaziogenesi.org",
-    "processes_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/registry/processes"
+    "processes_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
+    "registry_blob_base": "https://github.com/SPAZIO-GENESI/gtf/blob/main",
+    "birth_date": "2026-07-09",
+    "anchor_process_id": "PRC-dogfooding-anchor",
+    "panel_url": "https://imgauth.spaziogenesi.org/admin",
+    "panel_label": "pannello di gestione, scheda Manutenzione"
   }
 }

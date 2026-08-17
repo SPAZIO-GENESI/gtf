@@ -6,4 +6,18 @@ output: "verbale pubblico di revisione esterna, con eventuali rilievi e azioni c
 produces_evidence: []
 human_cost_minutes_month: 5
 frequency_days: 365
+who: Radixia srl, revisore esterno indipendente — il gestore si occupa di avviarla
+needs_technical: false
+duration_minutes: 60
+steps:
+  - do: "Scrivi a Radixia proponendo la finestra della revisione."
+    note: "Il piano operativo è già scritto e concordato: non va reinventato ogni anno."
+    link: "https://github.com/SPAZIO-GENESI/gtf/blob/main/docs/piano-review-esterna-2026.md"
+    link_label: "Apri il piano della revisione"
+  - do: "Dai al revisore accesso in lettura al registro e alle evidenze e concorda una data di consegna."
+  - do: "Pubblica il verbale della revisione in docs/verbali/, rilievi compresi."
+    note: "Anche i rilievi negativi vanno pubblicati: una revisione esterna che pubblica solo gli esiti buoni non è una revisione esterna."
+  - do: "Apri un'azione correttiva per ogni rilievo e aggiorna last_run e last_outcome in questo file."
+    link: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml"
+    link_label: "Apri il file da aggiornare"
 visibility: public

@@ -8,4 +8,17 @@ human_cost_minutes_month: 20
 frequency_days: 90
 last_run: "2026-07-19"
 last_outcome: ok
+who: Il gestore
+needs_technical: true
+duration_minutes: 120
+steps:
+  - do: "Elenca i controlli la cui data di revisione scade entro il trimestre."
+  - do: "Per ognuno, riverifica che quanto dichiarato sia ancora vero nella realtà, poi aggiorna la data."
+    note: "Riverificare, non ridatare: cambiare la data senza aver riprovato il controllo trasforma il registro in una dichiarazione, che è esattamente ciò che il framework esiste per evitare."
+  - do: "Rileggi i rischi a impatto medio e alto e controlla che la descrizione corrisponda ancora a com'è fatto oggi il sistema."
+  - do: "Controlla le azioni correttive aperte: chiuse, ancora valide, o da riformulare."
+  - do: "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file."
+    note: "Il verbale va scritto anche se non ci sono rilievi: 'nessun rilievo' è un esito, il silenzio no."
+    link: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
+    link_label: "Apri il file da aggiornare"
 visibility: public

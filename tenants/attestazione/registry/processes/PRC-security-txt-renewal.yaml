@@ -8,4 +8,17 @@ human_cost_minutes_month: 2
 frequency_days: 330
 last_run: "2026-07-21"
 last_outcome: ok
+who: Il gestore
+needs_technical: true
+duration_minutes: 30
+steps:
+  - do: "Sposta la data del campo Expires avanti di un anno in ENTRAMBI i file security.txt: quello dell'interfaccia e quello del motore."
+    note: "Devono restare identici: sono due copie di una sola dichiarazione, e una data diversa fra i due farebbe sembrare scaduta la policy su uno dei due domini."
+  - do: "Rilascia l'interfaccia (push) e il motore (staging, poi approvazione del gate di produzione)."
+  - do: "Controlla dal vivo che entrambi gli indirizzi rispondano con la data nuova."
+    link: "https://attestazione.spaziogenesi.org/.well-known/security.txt"
+    link_label: "Apri il security.txt pubblico"
+  - do: "Aggiorna last_run e last_outcome in questo file."
+    link: "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-security-txt-renewal.yaml"
+    link_label: "Apri il file da aggiornare"
 visibility: public
