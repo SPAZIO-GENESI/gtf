@@ -409,11 +409,44 @@ async function main() {
     }
     checks.skills_digests_match = skills.length > 0 && skills.every((s) => s.matches);
 
+    // Record DNS-AID (SVCB sotto _agents): devono esistere con i parametri
+    // dichiarati — e, altrettanto importante, NON devono comparire quelli che
+    // abbiamo scelto di non pubblicare. Il controllo `must_not_exist` sorveglia
+    // una promessa che abbiamo fatto pubblicamente (nessuna dichiarazione di
+    // agente A2A, che non esiste): se un giorno qualcuno lo aggiungesse senza
+    // costruire l'agente, il registro se ne accorge invece di scoprirlo un
+    // client che fallisce l'handshake.
+    let dnsAid = null;
+    if (c.dns_aid) {
+      const svcb = async (name) => {
+        const r = await fetchText(c.dns_aid.doh_template.replace("{name}", name));
+        try {
+          const j = JSON.parse(r.text);
+          return (j.Answer || []).filter((x) => x.type === 64).map((x) => x.data);
+        } catch { return null; }
+      };
+      const present = [];
+      for (const rec of c.dns_aid.records || []) {
+        const data = await svcb(rec.name);
+        const joined = (data || []).join(" ");
+        const missing = (rec.must_contain || []).filter((m) => !joined.includes(m));
+        present.push({ name: rec.name, found: Boolean(data && data.length), data, missing, ok: Boolean(data && data.length) && missing.length === 0 });
+      }
+      const absent = [];
+      for (const name of c.dns_aid.must_not_exist || []) {
+        const data = await svcb(name);
+        absent.push({ name, declared: Boolean(data && data.length), ok: !(data && data.length) });
+      }
+      dnsAid = { present, absent, ok: present.every((x) => x.ok) && absent.every((x) => x.ok) };
+      checks.dns_aid_records = dnsAid.ok;
+    }
+
     const allOk = Object.values(checks).every(Boolean);
     results["agent-discovery"] = {
       reachable: Object.fromEntries(Object.entries(got).map(([k, v]) => [k, Boolean(v.ok)])),
       checks,
       skills,
+      dnsAid,
       ok: allOk,
     };
     if (allOk) evdHits.add("EVD-agent-discovery");

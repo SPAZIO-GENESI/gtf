@@ -124,6 +124,16 @@
       "agent_skills_index": "https://attestazione.spaziogenesi.org/.well-known/agent-skills/index.json",
       "auth_md": "https://attestazione.spaziogenesi.org/auth.md",
       "llms_txt": "https://attestazione.spaziogenesi.org/llms.txt"
+    },
+
+    "dns_aid": {
+      "doh_template": "https://cloudflare-dns.com/dns-query?name={name}&type=SVCB",
+      "records": [
+        { "name": "_index._agents.attestazione.spaziogenesi.org", "must_contain": ["attestazione.spaziogenesi.org", "port=443"] },
+        { "name": "_mcp._agents.attestazione.spaziogenesi.org", "must_contain": ["attest-mcp-remote.it-e3f.workers.dev", "alpn=mcp", "port=443"] },
+        { "name": "_index._agents.spaziogenesi.org", "must_contain": ["attestazione.spaziogenesi.org", "port=443"] }
+      ],
+      "must_not_exist": ["_a2a._agents.attestazione.spaziogenesi.org", "_a2a._agents.spaziogenesi.org"]
     }
   },
 

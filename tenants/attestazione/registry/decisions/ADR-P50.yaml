@@ -87,6 +87,20 @@ consequences: >
   numero fisso sarebbe falso dal primo cambiamento del contenuto — stesso criterio
   dei descrittori rifiutati.
 
+  Pubblicati anche i record DNS-AID (SVCB sotto `_agents`) per la scopribilità via
+  DNS: un indice a livello di organizzazione e uno sul dominio del servizio, più
+  un record per il server MCP realmente in esercizio — con l'etichetta di
+  protocollo corrispondente, non generica. ⚠️ **Nessun record `_a2a`**, per la
+  stessa ragione per cui non esiste l'Agent Card: non abbiamo un agente A2A.
+  L'assenza di quel record è verificata attivamente dall'evidenza settimanale,
+  non solo omessa. La scelta è una scommessa dichiarata: il documento di
+  riferimento è un Internet-Draft individuale, esplicitamente non avallato
+  dall'IETF e in scadenza a fine novembre 2026 — la data è annotata nel commento
+  di ogni record, così chi li ritrova sa quando riverificarli. Non è stato creato
+  un processo ricorrente di revisione: sarebbe un promemoria periodico per un
+  rischio la cui conseguenza peggiore è che i record vengano semplicemente
+  ignorati.
+
   Nessun controllo, rischio o trattamento nuovo entra nel registro: sono documenti
   di descrizione, non meccanismi di sicurezza, e non raccolgono nulla. Gli
   strumenti WebMCP chiamano solo endpoint pubblici già esistenti, non
