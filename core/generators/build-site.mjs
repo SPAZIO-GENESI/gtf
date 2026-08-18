@@ -261,7 +261,7 @@ ${renderMatomo(cfg.site.matomo)}
     <p class="lang-switch">${switchLinks}</p>
     <p class="eyebrow">${cfg.site.eyebrow}</p>
     <h1>${cfg.site.heading}</h1>
-    <p class="thesis">${cfg.site.thesis_html}</p>
+    <p class="tagline">${cfg.site.tagline_html}</p>
 ${renderLedger(score, cfg, ui, locale)}
   </header>
 

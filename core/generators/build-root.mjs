@@ -46,7 +46,12 @@ function loadTenantSummary(id, locale = "it") {
 
   const score = JSON.parse(readFileSync(scoreFile, "utf8"));
   const name = (locale !== "it" && cfg[`name_${locale}`]) || cfg.name;
-  return { id: cfg.id, name, owner: cfg.owner, version: cfg.version, publicUrl, score };
+  // Punta alla versione del tenant nella stessa lingua, ma solo se esiste
+  // (cfg.site.i18n.<locale>): altrimenti la card resterebbe coerente col
+  // nome tradotto ma userebbe un link che sbarca in italiano.
+  const hasLocalePage = locale !== "it" && cfg.site?.i18n?.[locale];
+  const tenantUrl = hasLocalePage ? `${publicUrl}/${locale}/` : publicUrl;
+  return { id: cfg.id, name, owner: cfg.owner, version: cfg.version, publicUrl: tenantUrl, score };
 }
 
 function scorePill(overall) {

@@ -11,8 +11,8 @@
     "publish_repo": "SPAZIO-GENESI/trust-attestazione",
     "title": "Trust Center — Genesis Trust Framework",
     "eyebrow": "Genesis Trust Framework",
-    "heading": "Il registro della fiducia di Spazio Genesi ETS",
-    "thesis_html": "Perché <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    merita fiducia — con evidenze verificabili, non dichiarazioni.",
+    "heading": "Attestazione delle opere digitali",
+    "tagline_html": "Perché <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    merita fiducia — con evidenze verificabili, non dichiarazioni.",
     "metrics_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics",
     "badge_alt": "Genesis Trust Score",
     "matomo": {
@@ -60,8 +60,8 @@
       "en": {
         "title": "Trust Center — Genesis Trust Framework",
         "eyebrow": "Genesis Trust Framework",
-        "heading": "Spazio Genesi ETS's trust registry",
-        "thesis_html": "Why <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    deserves trust — with verifiable evidence, not declarations.",
+        "heading": "Digital work attestation",
+        "tagline_html": "Why <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    deserves trust — with verifiable evidence, not declarations.",
         "badge_alt": "Genesis Trust Score",
         "decisions_note": "This log is kept in Italian only for now — the underlying decisions are still verifiable in the source registry.",
         "nav_external": [
