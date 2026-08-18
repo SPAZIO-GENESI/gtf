@@ -1,0 +1,13 @@
+Genesis Trust Framework
+=======================
+
+Questo repository contiene due parti con titolarità distinte, entrambe
+rilasciate con licenza MIT:
+
+- il motore in `core/` è un prodotto di Tangram.page — vedi `core/LICENSE`;
+- il resto del repository (i registri dei tenant, i contenuti, la
+  configurazione) è di Spazio Genesi ETS — vedi `LICENSE`.
+
+La premessa che descriveva questa distinzione stava in testa a `LICENSE` e
+impediva ai rilevatori automatici di licenza (GitHub, scanner SPDX) di
+riconoscere il file come MIT: è stata spostata qui, dove non interferisce.

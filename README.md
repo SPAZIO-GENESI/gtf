@@ -118,6 +118,6 @@ Dettagli fase per fase in [ARCHITECTURE.md §12](./ARCHITECTURE.md#12-roadmap--w
 
 ## Licenza
 
-MIT. Il motore in `core/` è coperto da [core/LICENSE](./core/LICENSE)
+MIT — vedi anche [NOTICE](./NOTICE). Il motore in `core/` è coperto da [core/LICENSE](./core/LICENSE)
 (Tangram.page); il resto del repository — i registri dei tenant — da
 [LICENSE](./LICENSE) (Spazio Genesi ETS).
