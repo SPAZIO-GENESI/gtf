@@ -83,14 +83,27 @@
   nav.spine a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; }
   nav.spine a:hover, nav.spine a:focus-visible { border-bottom-color: var(--gold); }
 
-  section.folio { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.6rem 1.6rem 1.8rem; margin: 1.6rem 0; scroll-margin-top: 4rem; }
-  section.folio::before {
+  .folio { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.6rem 1.6rem 1.8rem; margin: 1.6rem 0; scroll-margin-top: 4rem; }
+  .folio::before {
     content: attr(data-folio);
     position: absolute; top: 0.7rem; right: 1rem;
     font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em;
     color: var(--ink-muted); opacity: 0.7;
   }
-  section.folio h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1rem; }
+  .folio h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1rem; }
+
+  /* Sezioni apribili: <details>/<summary> nativi, nessun JS (CLAUDE.md, invariante 7). */
+  /* Freccetta disegnata coi bordi (stesso trucco già usato per nascondere il marker di .journal). */
+  .folio > summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; }
+  .folio > summary::-webkit-details-marker { display: none; }
+  .folio > summary h2 { margin: 0; }
+  .folio > summary::after {
+    content: ""; flex: 0 0 auto; width: 0.55rem; height: 0.55rem;
+    border-right: 2px solid var(--ink-muted); border-bottom: 2px solid var(--ink-muted);
+    transform: rotate(-45deg); transition: transform 0.15s ease;
+  }
+  .folio[open] > summary::after { border-color: var(--gold); transform: rotate(45deg); }
+  .folio[open] > summary { margin-bottom: 1rem; }
 
   .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.01em; padding: 1px 6px; border: 1px solid var(--rule); border-radius: 3px; color: var(--ink-muted); background: var(--paper); white-space: nowrap; }
   .tag-line { margin: 0.6rem 0 0; }
@@ -191,8 +204,8 @@
   </nav>
 
   <main>
-  <section id="missione" class="folio" data-folio="MSN · PRN">
-    <h2>Mission and principles</h2>
+  <details id="missione" class="folio" data-folio="MSN · PRN">
+    <summary><h2>Mission and principles</h2></summary>
     <p class="lede">Spazio Genesi ETS builds a digital attestation service (attestazione.spaziogenesi.org) able to publicly demonstrate, with evidence anyone can verify, why it deserves trust — without ever asking anyone to take its word for it. Trust is not declared, it is demonstrated.</p>
     <div class="record-grid">
       <article class="record">
@@ -256,16 +269,16 @@
         <p class="rule">Verifiable rule: Every new process declares `human_cost_minutes_month`; the system total has a cap (budget 8 h/month) visible in the Trust Center.</p>
       </article>
     </div>
-  </section>
+  </details>
 
-  <section id="eidas" class="folio" data-folio="CTL">
-    <h2>What this service is NOT</h2>
+  <details id="eidas" class="folio" data-folio="CTL">
+    <summary><h2>What this service is NOT</h2></summary>
     <p>The service produces unqualified proof-of-existence attestations: an advanced electronic signature with a self-signed certificate, plus an RFC 3161 timestamp (TSA on the Adobe AATL) and a Bitcoin anchor (OpenTimestamps). It is not a qualified eIDAS trust service. Unqualified electronic evidence cannot be denied legal effect solely because it is in electronic form or unqualified; its evidentiary weight is for a judge to determine. Upgrading to a qualified seal is on the public roadmap, conditional on the organization's financial sustainability.</p>
     <p class="tag-line"><span class="tag">CTL-eidas-honest-positioning</span> <span class="pill pill-sage status-badge">active</span></p>
-  </section>
+  </details>
 
-  <section id="compliance" class="folio" data-folio="REQ · CTL · EVD">
-    <h2>Compliance Map</h2>
+  <details id="compliance" class="folio" data-folio="REQ · CTL · EVD">
+    <summary><h2>Compliance Map</h2></summary>
     <div class="norm-grid">
       <article class="norm-card">
         <header>
@@ -426,10 +439,10 @@
         <p class="tag-line"><span class="tag">REQ-gdpr-rights-01</span></p>
       </article>
     </div>
-  </section>
+  </details>
 
-  <section id="rischi" class="folio" data-folio="RSK">
-    <h2>Risks</h2>
+  <details id="rischi" class="folio" data-folio="RSK">
+    <summary><h2>Risks</h2></summary>
     <div class="norm-grid">
       <article class="norm-card">
         <header>
@@ -758,10 +771,10 @@
         <p class="tag-line"><span class="tag">RSK-unobserved-production-deploy</span></p>
       </article>
     </div>
-  </section>
+  </details>
 
-  <section id="decisioni" class="folio" data-folio="ADR">
-    <h2>Decisions</h2>
+  <details id="decisioni" class="folio" data-folio="ADR">
+    <summary><h2>Decisions</h2></summary>
 <p class="rule">This log is kept in Italian only for now — the underlying decisions are still verifiable in the source registry.</p>
     <div class="journal">
       <details class="entry">
@@ -1305,7 +1318,7 @@
         </div>
       </details>
     </div>
-  </section>
+  </details>
   </main>
 
   <footer>
@@ -1339,7 +1352,7 @@
       <a href="https://github.com/SPAZIO-GENESI/gtf">public registry</a> —
       no text on this page is written by hand (principle PRN-03).
       <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
-      <p class="footer-version">engine v0.2.0 · package attestazione v1.0.0</p>
+      <p class="footer-version">engine v0.2.1 · package attestazione v1.0.0</p>
     </div>
   </footer>
 </body>

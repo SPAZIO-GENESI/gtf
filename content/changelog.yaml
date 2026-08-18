@@ -20,6 +20,19 @@
 # Ordine: dalla più recente alla più vecchia.
 
 entries:
+  - date: 2026-08-18
+    component: core
+    version: 0.2.1
+    public: true
+    title: Le sezioni del Trust Center si aprono a richiesta
+    body: >
+      Missione e principi, Compliance Map, Rischi e Decisioni erano sempre distese
+      in pagina: ora partono chiuse e si aprono una per una con un click
+      sull'intestazione (freccetta che ruota, meccanismo nativo del browser,
+      nessuno script). Il punteggio resta sempre visibile in cima, senza dover
+      aprire nulla. Vale per entrambe le lingue e per ogni Trust Center di tenant
+      che usa questo motore.
+
   - date: 2026-08-16
     component: framework
     version: null

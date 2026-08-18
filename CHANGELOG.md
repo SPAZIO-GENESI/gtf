@@ -2,6 +2,13 @@
 
 File generato da `content/changelog.yaml` — non modificarlo a mano.
 
+## 2026-08-18
+
+### Le sezioni del Trust Center si aprono a richiesta
+*core · v0.2.1*
+
+Missione e principi, Compliance Map, Rischi e Decisioni erano sempre distese in pagina: ora partono chiuse e si aprono una per una con un click sull'intestazione (freccetta che ruota, meccanismo nativo del browser, nessuno script). Il punteggio resta sempre visibile in cima, senza dover aprire nulla. Vale per entrambe le lingue e per ogni Trust Center di tenant che usa questo motore.
+
 ## 2026-08-16
 
 ### P47 F7: pubblicazione e chiusura

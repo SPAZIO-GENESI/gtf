@@ -76,14 +76,27 @@ export const STYLE = `
   nav.spine a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; }
   nav.spine a:hover, nav.spine a:focus-visible { border-bottom-color: var(--gold); }
 
-  section.folio { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.6rem 1.6rem 1.8rem; margin: 1.6rem 0; scroll-margin-top: 4rem; }
-  section.folio::before {
+  .folio { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.6rem 1.6rem 1.8rem; margin: 1.6rem 0; scroll-margin-top: 4rem; }
+  .folio::before {
     content: attr(data-folio);
     position: absolute; top: 0.7rem; right: 1rem;
     font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em;
     color: var(--ink-muted); opacity: 0.7;
   }
-  section.folio h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1rem; }
+  .folio h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1rem; }
+
+  /* Sezioni apribili: <details>/<summary> nativi, nessun JS (CLAUDE.md, invariante 7). */
+  /* Freccetta disegnata coi bordi (stesso trucco già usato per nascondere il marker di .journal). */
+  .folio > summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; }
+  .folio > summary::-webkit-details-marker { display: none; }
+  .folio > summary h2 { margin: 0; }
+  .folio > summary::after {
+    content: ""; flex: 0 0 auto; width: 0.55rem; height: 0.55rem;
+    border-right: 2px solid var(--ink-muted); border-bottom: 2px solid var(--ink-muted);
+    transform: rotate(-45deg); transition: transform 0.15s ease;
+  }
+  .folio[open] > summary::after { border-color: var(--gold); transform: rotate(45deg); }
+  .folio[open] > summary { margin-bottom: 1rem; }
 
   .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.01em; padding: 1px 6px; border: 1px solid var(--rule); border-radius: 3px; color: var(--ink-muted); background: var(--paper); white-space: nowrap; }
   .tag-line { margin: 0.6rem 0 0; }

@@ -82,22 +82,22 @@ function renderMission(records, locale, ui) {
       </article>`
     )
     .join("\n");
-  return `  <section id="missione" class="folio" data-folio="MSN · PRN">
-    <h2>${esc(ui.missioneHeading)}</h2>
+  return `  <details id="missione" class="folio" data-folio="MSN · PRN">
+    <summary><h2>${esc(ui.missioneHeading)}</h2></summary>
     <p class="lede">${para(L(msn, "statement", locale))}</p>
     <div class="record-grid">
 ${items}
     </div>
-  </section>`;
+  </details>`;
 }
 
 function renderEidas(records, locale, ui) {
   const ctl = records.get("CTL-eidas-honest-positioning")?.record;
-  return `  <section id="eidas" class="folio" data-folio="CTL">
-    <h2>${esc(ui.eidasHeading)}</h2>
+  return `  <details id="eidas" class="folio" data-folio="CTL">
+    <summary><h2>${esc(ui.eidasHeading)}</h2></summary>
     <p>${para(L(ctl, "statement", locale))}</p>
     <p class="tag-line"><span class="tag">${esc(ctl?.id)}</span> ${ctlStatusBadge(ctl?.status, ui)}</p>
-  </section>`;
+  </details>`;
 }
 
 function renderComplianceMap(records, locale, ui) {
@@ -131,12 +131,12 @@ ${ctlItems || `          <li class="empty">${esc(ui.nessunControllo)}</li>`}
       </article>`;
     })
     .join("\n");
-  return `  <section id="compliance" class="folio" data-folio="REQ · CTL · EVD">
-    <h2>${esc(ui.complianceHeading)}</h2>
+  return `  <details id="compliance" class="folio" data-folio="REQ · CTL · EVD">
+    <summary><h2>${esc(ui.complianceHeading)}</h2></summary>
     <div class="norm-grid">
 ${cards}
     </div>
-  </section>`;
+  </details>`;
 }
 
 function renderRisks(records, locale, ui) {
@@ -165,12 +165,12 @@ ${mitigations || `          <li class="empty">${esc(ui.nessunaMitigazione)}</li>
       </article>`;
     })
     .join("\n");
-  return `  <section id="rischi" class="folio" data-folio="RSK">
-    <h2>${esc(ui.rischiHeading)}</h2>
+  return `  <details id="rischi" class="folio" data-folio="RSK">
+    <summary><h2>${esc(ui.rischiHeading)}</h2></summary>
     <div class="norm-grid">
 ${cards}
     </div>
-  </section>`;
+  </details>`;
 }
 
 // Le 60 decisioni pubbliche non sono tradotte (scope P48): restano in
@@ -202,13 +202,13 @@ function renderDecisions(records, locale, ui, decisionsNote) {
     )
     .join("\n");
   const note = locale !== "it" && decisionsNote ? `<p class="rule">${esc(decisionsNote)}</p>` : "";
-  return `  <section id="decisioni" class="folio" data-folio="ADR">
-    <h2>${esc(ui.decisioniHeading)}</h2>
+  return `  <details id="decisioni" class="folio" data-folio="ADR">
+    <summary><h2>${esc(ui.decisioniHeading)}</h2></summary>
 ${note}
     <div class="journal">
 ${items}
     </div>
-  </section>`;
+  </details>`;
 }
 
 // Le voci "esterne" della barra di navigazione (dopo le cinque ancore
