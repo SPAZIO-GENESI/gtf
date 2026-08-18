@@ -61,12 +61,12 @@
         "title": "Trust Center — Genesis Trust Framework",
         "eyebrow": "Genesis Trust Framework",
         "heading": "Digital work attestation",
-        "tagline_html": "Why <a href=\"https://attestazione.spaziogenesi.org\">attestazione.spaziogenesi.org</a>\n    deserves trust — with verifiable evidence, not declarations.",
+        "tagline_html": "Why <a href=\"https://attestazione.spaziogenesi.org/en/\">attestazione.spaziogenesi.org</a>\n    deserves trust — with verifiable evidence, not declarations.",
         "badge_alt": "Genesis Trust Score",
         "decisions_note": "This log is kept in Italian only for now — the underlying decisions are still verifiable in the source registry.",
         "nav_external": [
-          { "label": "Service status ↗", "href": "https://attestazione.spaziogenesi.org/status/" },
-          { "label": "Changelog ↗", "href": "https://attestazione.spaziogenesi.org/changelog/" }
+          { "label": "Service status (IT) ↗", "href": "https://attestazione.spaziogenesi.org/status/" },
+          { "label": "Changelog (IT) ↗", "href": "https://attestazione.spaziogenesi.org/changelog/" }
         ],
         "footer_columns": [
           {
@@ -82,11 +82,11 @@
           {
             "heading": "The attestation service",
             "links": [
-              { "label": "Attest and verify", "href": "https://attestazione.spaziogenesi.org" },
-              { "label": "Service status", "href": "https://attestazione.spaziogenesi.org/status/" },
-              { "label": "Changelog", "href": "https://attestazione.spaziogenesi.org/changelog/" },
-              { "label": "Developers: API &amp; MCP", "href": "https://attestazione.spaziogenesi.org/developer/" },
-              { "label": "Privacy", "href": "https://attestazione.spaziogenesi.org/privacy.html" }
+              { "label": "Attest and verify", "href": "https://attestazione.spaziogenesi.org/en/" },
+              { "label": "Service status (IT)", "href": "https://attestazione.spaziogenesi.org/status/" },
+              { "label": "Changelog (IT)", "href": "https://attestazione.spaziogenesi.org/changelog/" },
+              { "label": "Developers: API &amp; MCP", "href": "https://attestazione.spaziogenesi.org/en/developer/" },
+              { "label": "Privacy", "href": "https://attestazione.spaziogenesi.org/en/privacy.html" }
             ]
           },
           {
