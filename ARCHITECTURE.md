@@ -596,7 +596,7 @@ Fasi incrementali; ogni fase lascia il sistema **coerente e pubblicabile** (mai 
 | **M2 — Compliance Map** (≈2-3 sett.) | REQ dalle 7 fonti normative (§5), posizionamento eIDAS pubblicato, registro DAT, RSK principali | matrice Norma→…→Evidenza generata | ogni REQ ha stato e giustificazione; §5.2 online |
 | **M3 — Trust Center + Score** (≈2-3 sett.) | `site/`, generatori, `publish.yml`, `score.json` + badge, collettore §6.3 | `/trust/` pubblico con score calcolato | uno sconosciuto risponde alle domande di §13 senza chiedere nulla a nessuno |
 | **M4 — Ciclo vivo** (continuo) | ancora dogfooding mensile, restore drill, review esterna annuale, canary HMAC (P17-B), pubblicazione autart-signer (P11) | primo bundle ancorato; primo verbale di drill | lo score riflette un ciclo completo di cadenze §9.3 |
-| **M5 — Multi-progetto** (dal 2026-08-15, P44 in corso) | isolamento `core/`↔`tenants/<id>/` con guardia CI, versioning per componente, changelog a doppia resa; P45 (domini), P46 (secondo tenant, RADART), P47-P48 a seguire | motore riusabile da un secondo progetto senza toccarne il codice | §15; dettagli fase per fase in `gtf/docs/ROADMAP-trust-multiprogetto.md` |
+| **M5 — Multi-progetto** (dal 2026-08-15, P44 in corso) | isolamento `core/`↔`tenants/<id>/` con guardia CI, versioning per componente, changelog a doppia resa; P45 (domini), P46 (secondo tenant, RADART), P47 e P52 a seguire | motore riusabile da un secondo progetto senza toccarne il codice | §15; dettagli fase per fase in `gtf/docs/ROADMAP-trust-multiprogetto.md` |
 
 Dipendenze esterne già note: P11 (repo authart pubblico) condiziona il CTL "codice interamente
 pubblico"; P17-B (canary) condiziona l'indicatore Integrità pieno. Entrambe già in backlog:
@@ -740,7 +740,7 @@ questa tabella.
 ### 15.2 Cosa resta fuori da P45/P47
 
 Secondo tenant RADART e policy di visibilità per repo privati (P46); estrazione di `core/`
-come pacchetto (P48); generalizzazione di `collect-evidence.yml` (oggi ancora hardcoded su
+come pacchetto (P52); generalizzazione di `collect-evidence.yml` (oggi ancora hardcoded su
 `tenants/attestazione/`); traduzione inglese del Trust Center; risoluzione della duplicazione
 fra la pagina DevOps mantenuta a mano e `imgauth/docs/DEVOPS.md` — P47 ha spostato e sfrondato
 la pagina, non ha eliminato la doppia fonte di verità; decisione D3 sul nome del prodotto.

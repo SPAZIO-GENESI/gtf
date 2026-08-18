@@ -77,11 +77,21 @@ fretta qualcuno riscrive una costante nel motore e siamo daccapo.
 | **P45** — Domini e siti separati | `trust.spaziogenesi.org` = prodotto · `attestazione.trust.spaziogenesi.org` = Trust Center dell'attestazione | **medio-alto** (DNS, badge, whitepaper — vedi §4) | sì, molto |
 | **P46** — Secondo tenant: RADART | Pacchetto `tenants/radart`, registro seed, policy di visibilità per repo privati | medio | sì (nuovo sottodominio) |
 | **P47** — Correzione dell'astrazione | Ciò che RADART rivela di sbagliato nel core torna nel core. **Nessuna estrazione prima di questo passo** | basso | no |
-| **P48** — Estrazione del prodotto Tangram | `core/` esce come repo/pacchetto proprio, i tenant lo consumano a versione | medio | no |
+| **P52** — Estrazione del prodotto Tangram | `core/` esce come repo/pacchetto proprio, i tenant lo consumano a versione | medio | no |
+
+> ⚠️ **L'estrazione era numerata P48 fino al 18 agosto 2026.** Il numero 48 era
+> stato assegnato in parallelo, lo stesso giorno, a due lavori poi realmente
+> eseguiti e pubblicati (le manutenzioni ricorrenti del registro, e la versione
+> inglese del Trust Center). Poiché quelli sono citati in `STORIA.md`, nel design
+> di P49 e in tag di release già pushati, il numero resta a loro: l'estrazione —
+> mai iniziata, quindi senza traccia immutabile — si sposta a **P52**. I piani
+> già chiusi (P44, P45, P47) e le voci di changelog continuano a dire "→ P48"
+> perché sono registrazioni datate e non si riscrivono: leggi lì "P52".
+> L'elenco autorevole dei numeri è la tabella in `img-auth-hub/docs/STATO.md`.
 
 **Perché in quest'ordine.** P44 è dovuto in ogni caso, qualunque decisione si
 prenda dopo: separare motore e dati è il prerequisito di tutto e non pregiudica
-nulla. P48 (l'estrazione vera del prodotto) va **dopo** il secondo tenant, non
+nulla. P52 (l'estrazione vera del prodotto) va **dopo** il secondo tenant, non
 prima: un'astrazione con un solo consumatore è una scommessa, con due è una
 constatazione. Estrarre adesso significherebbe versionare e mantenere un
 pacchetto la cui interfaccia scopriremo sbagliata al primo uso reale.
@@ -163,9 +173,9 @@ Verificate nel codice e nella configurazione, non ricordate.
 
 | # | Decisione | Opzioni | Raccomandazione | Quando serve |
 |---|---|---|---|---|
-| **D1** | Repo unico o repo separati | monorepo con confine duro · split immediato core/tenant | **Monorepo con confine duro adesso, split a P48** — l'isolamento di dati e codice si ottiene con directory + config + guardia CI, senza il costo di tre repo da tenere allineati prima di sapere se l'interfaccia è giusta | non blocca P44 |
+| **D1** | Repo unico o repo separati | monorepo con confine duro · split immediato core/tenant | **Monorepo con confine duro adesso, split a P52** — l'isolamento di dati e codice si ottiene con directory + config + guardia CI, senza il costo di tre repo da tenere allineati prima di sapere se l'interfaccia è giusta | non blocca P44 |
 | **D2** | Come ottenere i sottodomini | repo Pages sottili · Cloudflare · percorsi | **repo Pages sottili** (§4.1) | prima di P45 |
-| **D3** | Nome del prodotto | "Genesis Trust Framework" resta · nome neutro Tangram, con GTF come istanza Spazio Genesi | **Rinviare il rebranding a dopo P47**, ma da P44 il core smette comunque di nominare Spazio Genesi. Rinominare tocca badge, whitepaper, ADR-GTF-001 e cinque README: è un lavoro a sé, non una nota a margine | prima di P48 |
+| **D3** | Nome del prodotto | "Genesis Trust Framework" resta · nome neutro Tangram, con GTF come istanza Spazio Genesi | **Rinviare il rebranding a dopo P47**, ma da P44 il core smette comunque di nominare Spazio Genesi. Rinominare tocca badge, whitepaper, ADR-GTF-001 e cinque README: è un lavoro a sé, non una nota a margine | prima di P52 |
 | **D4** | Licenza | tutto MIT come oggi · core MIT + pacchetti tenant riservati | **core MIT** (è ciò che rende adottabile un framework di fiducia) **+ pacchetto tenant con la licenza del progetto** — RADART è già "tutti i diritti riservati" | prima di P46 |
 
 ---
