@@ -35,12 +35,24 @@ verify_howto: >
   limite del client `gh` già documentato in `CTL-build-provenance`/ADR-A1.
   L'API pubblica di securityscorecards.dev, usata sopra, non ha questo
   limite ed è la via primaria di verifica di questo controllo.
+
+  **Aggiornamento 2026-08-19 (P54/F8)**: la protezione base (no
+  force-push, no cancellazione branch) è stata estesa da questi tre repo
+  ad `attest-mcp`, `attest-bot`, `attest-mcp-remote` — verificato con
+  `curl` che tutti e sei ora hanno la stessa configurazione. **Nessuna PR
+  obbligatoria su nessuno dei sei**: il gestore, ririchiesto
+  esplicitamente vista la scelta del 13/08, ha confermato di voler
+  mantenere il push diretto su main. Gli alert Scorecard
+  `BranchProtectionID`/`CodeReviewID` restano quindi aperti per scelta
+  dichiarata su tutti e sei i repo, non solo sui tre originari.
 owner: it@spaziogenesi.org
 review_every_days: 180
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-19
 # 2026-08-13, secondo giro: branch protection + fine-grained PAT
 # SCORECARD_TOKEN aggiunti (vedi verify_howto). Aggiornamento di
 # evidenza su un controllo già active, non una promozione.
+# 2026-08-19 (P54/F8): stessa protezione base estesa ad attest-mcp,
+# attest-bot, attest-mcp-remote — vedi ADR-P54.
 i18n:
   en:
     title: "Public monitoring of security posture via OpenSSF Scorecard (A3)"
@@ -77,3 +89,13 @@ i18n:
       `CTL-build-provenance`/ADR-A1. The public securityscorecards.dev
       API used above does not have this limitation and is the primary
       way to verify this control.
+
+      **2026-08-19 update (P54/F8)**: baseline protection (no force-push,
+      no branch deletion) was extended from these three repos to
+      `attest-mcp`, `attest-bot`, `attest-mcp-remote` — verified with
+      `curl` that all six now share the same configuration. **No PR is
+      required on any of the six**: the maintainer, asked again
+      explicitly given the 08-13 choice, confirmed wanting to keep
+      direct pushes to main. The Scorecard `BranchProtectionID`/
+      `CodeReviewID` alerts therefore stay open by declared choice on
+      all six repos, not just the original three.
