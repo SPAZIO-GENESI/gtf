@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevOps and releases — Genesis Trust Framework</title>
+<meta name="description" content="How Spazio Genesi ETS services are developed, verified and released without putting the production environment at risk: replicated staging, CI, human gate, rollback.">
+<link rel="alternate" hreflang="it" href="https://attestazione.trust.spaziogenesi.org/devops/">
+<link rel="alternate" hreflang="en" href="https://attestazione.trust.spaziogenesi.org/en/devops/">
+<link rel="alternate" hreflang="x-default" href="https://attestazione.trust.spaziogenesi.org/devops/">
+<link rel="canonical" href="https://attestazione.trust.spaziogenesi.org/en/devops/">
+<style>
+  :root {
+    color-scheme: light dark;
+    --paper: #FBFAF6;
+    --card: #F3EEE1;
+    --ink: #221c14;
+    --ink-muted: #6b6152;
+    --rule: #ddd2ba;
+    --gold: #5a3d10;
+    --sage-bg: #dde8d5; --sage-fg: #2f4a2a;
+    --amber-bg: #f3e3ab; --amber-fg: #6b4a10;
+    --seal-bg: #f2cdcd; --seal-fg: #7a2020;
+    --muted-bg: #eae5d8; --muted-fg: #6b6152;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17140f;
+      --card: #201b13;
+      --ink: #ece4d3;
+      --ink-muted: #a89a80;
+      --rule: #3a3324;
+      --gold: #d1a969;
+      --sage-bg: #24301f; --sage-fg: #a8c49c;
+      --amber-bg: #3a2c14; --amber-fg: #d9b273;
+      --seal-bg: #3a1f1f; --seal-fg: #d99a9a;
+      --muted-bg: #2a2518; --muted-fg: #a89a80;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  a { color: var(--gold); }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .lang-switch { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; margin: 1.4rem 0 0; }
+  .lang-switch a { text-decoration: none; color: var(--ink-muted); }
+  .lang-switch a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .lang-switch .sep { color: var(--ink-muted); margin: 0 0.4em; }
+
+  .hero { padding: 3rem 0 1.5rem; }
+  .eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 0.4rem; }
+  .hero h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 600; margin: 0 0 0.6rem; }
+  .thesis { max-width: 40rem; margin: 0 0 1.4rem; }
+  .hero-note { font-size: 0.85rem; color: var(--ink-muted); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.8rem 0; max-width: 40rem; }
+
+  nav.spine { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 0.7rem 0; margin-bottom: 1rem; }
+  nav.spine ul { display: flex; flex-wrap: wrap; gap: 1.3rem; padding: 0; margin: 0; list-style: none; }
+  nav.spine a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; }
+  nav.spine a:hover, nav.spine a:focus-visible { border-bottom-color: var(--gold); }
+
+  section.folio { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.6rem 1.6rem 1.8rem; margin: 1.6rem 0; scroll-margin-top: 4rem; }
+  section.folio::before {
+    content: attr(data-folio);
+    position: absolute; top: 0.7rem; right: 1rem;
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em;
+    color: var(--ink-muted); opacity: 0.7;
+  }
+  section.folio h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1rem; }
+  section.folio h3 { font-size: 1rem; margin: 1.2rem 0 0.4rem; }
+
+  .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.01em; padding: 1px 6px; border: 1px solid var(--rule); border-radius: 3px; color: var(--ink-muted); background: var(--paper); white-space: nowrap; }
+  .pill { display: inline-block; font-size: 0.72rem; padding: 2px 9px; border-radius: 999px; font-weight: 600; }
+  .pill-sage { background: var(--sage-bg); color: var(--sage-fg); }
+  .pill-amber { background: var(--amber-bg); color: var(--amber-fg); }
+  .pill-muted { background: var(--muted-bg); color: var(--muted-fg); }
+
+  ol.principles { padding-left: 1.3rem; margin: 0; }
+  ol.principles li { margin-bottom: 0.7rem; }
+  ol.principles b { font-weight: 600; }
+
+  .table-wrap { overflow-x: auto; }
+  table.doc { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table.doc th { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-muted); text-align: left; font-weight: 600; padding: 0.45rem 0.7rem 0.45rem 0; border-bottom: 2px solid var(--rule); }
+  table.doc td { padding: 0.5rem 0.7rem 0.5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  table.doc tr:last-child td { border-bottom: none; }
+  table.doc code, .mono { font-family: var(--font-mono); font-size: 0.85em; }
+
+  figure.diagram { margin: 1.2rem 0 0.4rem; }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram figcaption { font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.5rem; }
+
+  .runbook details { border-bottom: 1px solid var(--rule); padding: 0.55rem 0; }
+  .runbook details:last-child { border-bottom: none; }
+  .runbook summary { cursor: pointer; font-weight: 600; list-style: none; }
+  .runbook summary::-webkit-details-marker { display: none; }
+  .runbook summary::before { content: "› "; color: var(--gold); }
+  .runbook details[open] summary::before { content: "⌄ "; }
+  .runbook ol, .runbook ul { margin: 0.5rem 0 0.3rem; }
+  .runbook pre { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 0.6rem 0.9rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.82rem; margin: 0.5rem 0; }
+
+  footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--ink-muted); }
+  .footer-cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.6rem 2.6rem; margin: 0 0 1.5rem; }
+  .footer-col { min-width: 12rem; }
+  .footer-col h3 { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; margin: 0 0 0.6rem; }
+  .footer-col a { display: block; margin: 0.35rem 0; font-size: 0.85rem; }
+  .footer-bottom { padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+  @media (max-width: 40rem) { .footer-cols { justify-content: flex-start; } }
+</style>
+  <!-- Matomo (sg-matomo) -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://sg-matomo.azurewebsites.net/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '2']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Genesis Trust Framework · operational document</p>
+    <h1>DevOps and releases</h1>
+    <p class="thesis">How Spazio Genesi ETS's
+    <a href="https://attestazione.spaziogenesi.org/en/">digital work attestation</a>
+    system is developed, verified and released without putting at risk the
+    single environment users depend on.</p>
+    <p class="hero-note">⚠️ <b>Status: progressive implementation.</b>
+    This document describes the process <em>as adopted by design</em>; the
+    <a href="#status">Implementation status</a> table states, phase by
+    phase, what is already running and what isn't. Consistent with the
+    registry's principle (evidence, not declarations), nothing here is
+    presented as active before it is.</p>
+    <p class="lang-switch"><a href="/devops/">IT</a><span class="sep">·</span><a href="/en/devops/" aria-current="page">EN</a></p>
+  </header>
+
+  <nav class="spine">
+    <ul>
+      <li><a href="/en/">← Trust Center</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#environments">Environments</a></li>
+      <li><a href="#flow">Release flow</a></li>
+      <li><a href="#runbook">Runbook</a></li>
+      <li><a href="#limits">Declared limits</a></li>
+      <li><a href="#status">Implementation status</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+  <section id="principles" class="folio" data-folio="PRC · CTL">
+    <h2>Principles</h2>
+    <ol class="principles">
+      <li><b>A single production environment, never an unobserved bundle.</b>
+        Every change passes through a replica (staging) or a zero-traffic
+        preview of production itself, before a user ever sees it.</li>
+      <li><b>The gate is human and tracked.</b> No production release
+        without the maintainer's explicit approval, recorded on GitHub
+        (a <code>production</code> environment with a required reviewer).</li>
+      <li><b>Rollback in seconds, without a rebuild.</b> Cloudflare Workers
+        keeps previous versions: <code>wrangler rollback</code> reverts
+        immediately.</li>
+      <li><b>Staging never holds real data.</b> Staging databases are born
+        from the schemas versioned in the repo plus synthetic data: copying
+        production data would be a GDPR-relevant processing with no purpose.</li>
+      <li><b>Production secrets never leave their perimeter.</b>
+        Staging has its own secrets, generated for the purpose. In
+        particular the secret that signs attestations — never rotated for
+        this project — exists only in production and in the escrow vault.</li>
+      <li><b>Config cannot drift.</b> Production and staging live in the
+        same configuration file (<code>wrangler.toml</code>, an
+        <code>[env.staging]</code> block): every configuration change
+        touches both in the same commit, drift is structurally impossible.</li>
+    </ol>
+    <p style="font-size:0.85rem; color:var(--ink-muted); margin-top:1rem;">
+    The same process — replicated staging, CI, human gate, rollback in
+    seconds — is also adopted for the organization's other services.</p>
+  </section>
+
+  <section id="environments" class="folio" data-folio="ENV">
+    <h2>The parts: production and replica</h2>
+
+    <figure class="diagram" role="img" aria-label="Diagram of the two environments: the production column with real interfaces, worker, data and external services; the staging column with the -staging twins, synthetic data and simulated external services. In the middle: same wrangler.toml, always different secrets, never real data.">
+      <svg viewBox="0 0 880 560" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+        <!-- lanes -->
+        <rect x="8" y="34" width="400" height="518" rx="10" fill="none" stroke="var(--rule)" stroke-width="1.5"/>
+        <rect x="472" y="34" width="400" height="518" rx="10" fill="none" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="none"/>
+        <text x="208" y="22" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="2" fill="var(--ink)">PRODUCTION</text>
+        <text x="672" y="22" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="2" fill="var(--ink)">STAGING (replica)</text>
+
+        <!-- PRODUCTION: interfaces -->
+        <rect x="28" y="54" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="44" y="78" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">INTERFACES</text>
+        <text x="44" y="104" font-size="13.5" fill="var(--ink)">attestazione.spaziogenesi.org <tspan fill="var(--ink-muted)">(GitHub Pages)</tspan></text>
+
+        <!-- PRODUCTION: worker -->
+        <rect x="28" y="168" width="360" height="108" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="44" y="192" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">WORKER (Cloudflare)</text>
+        <text x="44" y="220" font-size="13.5" fill="var(--ink)">imgauth <tspan fill="var(--ink-muted)">— attestation engine</tspan></text>
+
+        <!-- PRODUCTION: data -->
+        <rect x="28" y="304" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="44" y="328" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">DATA</text>
+        <text x="44" y="350" font-size="13.5" fill="var(--ink)">D1 <tspan fill="var(--ink-muted)">(database)</tspan> · R2 <tspan fill="var(--ink-muted)">(archive, EU jurisdiction)</tspan></text>
+        <text x="44" y="372" font-size="12" fill="var(--ink-muted)">real data, including developer emails (GDPR)</text>
+
+        <!-- PRODUCTION: external -->
+        <rect x="28" y="418" width="360" height="112" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="44" y="442" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">EXTERNAL SERVICES</text>
+        <text x="44" y="464" font-size="13.5" fill="var(--ink)">PDF signing <tspan fill="var(--ink-muted)">(authart on Azure)</tspan></text>
+        <text x="44" y="486" font-size="13.5" fill="var(--ink)">real Turnstile · Telegram notifications</text>
+        <text x="44" y="508" font-size="13.5" fill="var(--ink)">Bitcoin anchoring <tspan fill="var(--ink-muted)">(OpenTimestamps)</tspan></text>
+
+        <!-- STAGING: interfaces -->
+        <rect x="492" y="54" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="508" y="78" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">INTERFACES</text>
+        <text x="508" y="104" font-size="13.5" fill="var(--ink)">test site <tspan fill="var(--ink-muted)">(generated from the same source)</tspan></text>
+
+        <!-- STAGING: worker -->
+        <rect x="492" y="168" width="360" height="108" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="508" y="192" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">TWIN WORKERS</text>
+        <text x="508" y="220" font-size="13.5" fill="var(--ink)">imgauth-staging <tspan fill="var(--ink-muted)">(workers.dev only)</tspan></text>
+
+        <!-- STAGING: data -->
+        <rect x="492" y="304" width="360" height="86" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="508" y="328" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">DATA</text>
+        <text x="508" y="350" font-size="13.5" fill="var(--ink)">D1 / R2 <tspan font-family="ui-monospace,Consolas,monospace">-staging</tspan> <tspan fill="var(--ink-muted)">(EU)</tspan></text>
+        <text x="508" y="372" font-size="12" fill="var(--ink-muted)">born from the schemas in the repo + synthetic data</text>
+
+        <!-- STAGING: external -->
+        <rect x="492" y="418" width="360" height="112" rx="7" fill="var(--paper)" stroke="var(--rule)" stroke-dasharray="5 4"/>
+        <text x="508" y="442" font-size="11" fill="var(--ink-muted)" font-family="ui-monospace,Consolas,monospace" letter-spacing="1">EXTERNAL SERVICES (simulated)</text>
+        <text x="508" y="464" font-size="13.5" fill="var(--ink)">no signature → identical PDF, unsigned</text>
+        <text x="508" y="486" font-size="13.5" fill="var(--ink)">test Turnstile · no notifications</text>
+        <text x="508" y="508" font-size="13.5" fill="var(--ink)">real anchoring <tspan fill="var(--ink-muted)">(free, harmless)</tspan></text>
+
+        <!-- central annotations -->
+        <g font-size="11" font-family="ui-monospace,Consolas,monospace" fill="var(--gold)" text-anchor="middle">
+          <text x="440" y="200">⟷ same</text>
+          <text x="440" y="216">wrangler.toml</text>
+          <text x="440" y="342">✕ never real</text>
+          <text x="440" y="358">data</text>
+          <text x="440" y="468">✕ always different</text>
+          <text x="440" y="484">secrets</text>
+        </g>
+      </svg>
+      <figcaption>Every production Worker has a <span class="mono">-staging</span> twin
+      with its own resources, declared in the same configuration file. Staging lives only
+      on <span class="mono">workers.dev</span>: no routes on public domains.</figcaption>
+    </figure>
+
+    <h3>Detailed map</h3>
+    <div class="table-wrap">
+    <table class="doc">
+      <thead><tr><th>Component</th><th>Production</th><th>Staging</th></tr></thead>
+      <tbody>
+        <tr><td>imgauth (engine)</td><td>Worker <code>imgauth</code> · imgauth.spaziogenesi.org</td><td><code>imgauth-staging</code> · workers.dev only</td></tr>
+        <tr><td>Database / archive</td><td><code>imgauth-health</code> · <code>imgauth-pdf-archive</code> (EU)</td><td><code>-staging</code> twins, no real data</td></tr>
+        <tr><td>PDF signing (authart)</td><td>Azure, TSA timestamp</td><td>not replicated in v1: unsigned PDF</td></tr>
+        <tr><td>Anti-bot / notifications</td><td>real Turnstile · Telegram</td><td>test keys · silent</td></tr>
+        <tr><td>authweb (interface)</td><td>GitHub Pages · attestazione.spaziogenesi.org</td><td>copy generated from the same source, pointed at staging</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section id="flow" class="folio" data-folio="PRC">
+    <h2>Release flow</h2>
+
+    <figure class="diagram" role="img" aria-label="Release flow diagram: pull request with automated checks, merge, automatic staging deploy with smoke test, maintainer approval, version upload at zero percent traffic, promotion to one hundred percent. If something goes wrong, rollback to the previous version in seconds.">
+      <svg viewBox="0 0 880 610" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+        <defs>
+          <marker id="arrEn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink-muted)"/>
+          </marker>
+          <marker id="arrGoldEn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--gold)"/>
+          </marker>
+        </defs>
+
+        <!-- 1. PR -->
+        <rect x="230" y="14" width="420" height="66" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="440" y="41" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--ink)">Pull request</text>
+        <text x="440" y="63" text-anchor="middle" font-size="12" fill="var(--ink-muted)">automated checks: syntax · OpenAPI contract · build · CodeQL</text>
+        <line x1="440" y1="80" x2="440" y2="104" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrEn)"/>
+
+        <!-- 2. merge -->
+        <rect x="230" y="108" width="420" height="46" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="440" y="137" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--ink)">Merge to main</text>
+        <line x1="440" y1="154" x2="440" y2="178" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrEn)"/>
+
+        <!-- 3. staging -->
+        <rect x="230" y="182" width="420" height="66" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="440" y="209" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--ink)">Deploy STAGING — automatic</text>
+        <text x="440" y="231" text-anchor="middle" font-size="12" fill="var(--ink-muted)">smoke test: ping · status · attestation → certificate → retrieval</text>
+        <line x1="440" y1="248" x2="440" y2="272" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrEn)"/>
+
+        <!-- 4. gate -->
+        <rect x="230" y="276" width="420" height="66" rx="7" fill="var(--amber-bg)" stroke="var(--amber-fg)" stroke-width="1.5"/>
+        <text x="440" y="303" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--amber-fg)">⛔ Maintainer approval</text>
+        <text x="440" y="325" text-anchor="middle" font-size="12" fill="var(--amber-fg)">GitHub environment «production» · required reviewer · tracked</text>
+        <line x1="440" y1="342" x2="440" y2="366" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrEn)"/>
+
+        <!-- 5. versions upload -->
+        <rect x="230" y="370" width="420" height="66" rx="7" fill="var(--paper)" stroke="var(--rule)"/>
+        <text x="440" y="397" text-anchor="middle" font-size="14.5" font-weight="600" fill="var(--ink)">Version uploaded to production — 0% traffic</text>
+        <text x="440" y="419" text-anchor="middle" font-size="12" fill="var(--ink-muted)">preview URL of the exact version, no user sees it</text>
+        <line x1="440" y1="436" x2="440" y2="460" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrEn)"/>
+
+        <!-- 6. promotion -->
+        <rect x="230" y="464" width="420" height="66" rx="7" fill="var(--sage-bg)" stroke="var(--sage-fg)" stroke-width="1.5"/>
+        <text x="440" y="491" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--sage-fg)">Promotion to 100% — LIVE</text>
+        <text x="440" y="513" text-anchor="middle" font-size="12" fill="var(--sage-fg)">production smoke · release tag vX.Y.Z</text>
+
+        <!-- rollback -->
+        <path d="M 650 497 C 760 497, 760 403, 656 403" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrGoldEn)"/>
+        <text x="782" y="440" text-anchor="middle" font-size="12" font-weight="600" fill="var(--gold)">rollback</text>
+        <text x="782" y="457" text-anchor="middle" font-size="11" fill="var(--gold)">in seconds,</text>
+        <text x="782" y="472" text-anchor="middle" font-size="11" fill="var(--gold)">no rebuild</text>
+
+        <!-- time lanes -->
+        <g font-size="10.5" font-family="ui-monospace,Consolas,monospace" fill="var(--ink-muted)">
+          <text x="14" y="47">AUTOMATIC</text>
+          <text x="14" y="309" fill="var(--amber-fg)">HUMAN</text>
+          <text x="14" y="401">AUTOMATIC</text>
+        </g>
+
+        <!-- closing note -->
+        <text x="440" y="576" text-anchor="middle" font-size="12" fill="var(--ink-muted)">An urgent hotfix follows the same chain: automatic staging + one approval click.</text>
+        <text x="440" y="594" text-anchor="middle" font-size="12" fill="var(--ink-muted)">If production is already broken, rollback is faster than any fix written in a hurry.</text>
+      </svg>
+      <figcaption>Production never receives an unobserved bundle: first the replica,
+      then the 0%-traffic preview, and only after human approval the promotion.</figcaption>
+    </figure>
+  </section>
+
+  <section id="runbook" class="folio" data-folio="RUN">
+    <h2>Runbook</h2>
+    <div class="runbook">
+      <details>
+        <summary>Ordinary release</summary>
+        <ol>
+          <li>PR with the change → checks must be green.</li>
+          <li>Merge to <code>main</code> → staging updates itself; check the smoke test.</li>
+          <li>Manual test on staging if the change is UI/flow-related.</li>
+          <li>Approve the <code>production</code> job on GitHub → 0% preview → promotion.</li>
+          <li>Production smoke: <code>/ping</code> (expected version), <code>/api/status</code> all green.</li>
+          <li>Tag <code>vX.Y.Z</code> if there's a version bump; documentation per convention.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>Urgent hotfix</summary>
+        <p>Identical to an ordinary release — the chain IS the fast path (automatic
+        staging + one approval click). Skipping staging is not supported: if
+        production is already broken, rollback is faster than any fix written
+        in a hurry.</p>
+      </details>
+      <details>
+        <summary>Rollback</summary>
+        <pre>npx wrangler rollback   # choose the previous version</pre>
+        <p>Then: production smoke, a note on what went wrong, a calm fix
+        through the normal chain.</p>
+      </details>
+      <details>
+        <summary>Adding staging to a new module</summary>
+        <ol>
+          <li>Create the module's <code>-staging</code> D1/R2 (EU where relevant).</li>
+          <li>An <code>[env.staging]</code> block in <code>wrangler.toml</code>:
+            <b>redeclare all bindings</b> (wrangler envs don't inherit from the top level).</li>
+          <li>Schemas applied to the staging D1, new secrets with <code>--env staging</code>.</li>
+          <li>Smoke test, then CI following the reference model (imgauth's workflow).</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <section id="limits" class="folio" data-folio="RSK">
+    <h2>Declared limits</h2>
+    <p>Honesty about the process: what the replica <em>doesn't</em> cover, by documented choice.</p>
+    <ul>
+      <li><b>PDF signing has no replica in v1</b>: staging issues unsigned
+        PDFs, identical in content. Replicating the signer is deferred to
+        that component's next substantial change.</li>
+      <li><b>The self-service OAuth flow isn't active in staging</b>: the
+        providers would require dedicated redirect URIs; the buttons stay
+        absent by fail-closed design.</li>
+      <li><b>v1 promotion is 0% → 100% after approval</b>; gradual
+        percentage rollout is a later refinement.</li>
+    </ul>
+  </section>
+
+  <section id="status" class="folio" data-folio="P24">
+    <h2>Implementation status</h2>
+    <div class="table-wrap">
+    <table class="doc">
+      <thead><tr><th>Phase</th><th>Content</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Inventory and prerequisites</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+        <tr><td>1</td><td>Engine code ready for multi-environment</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+        <tr><td>2</td><td>Attestation engine staging</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+        <tr><td>3</td><td>CI (PR checks, automatic staging + smoke)</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+        <tr><td>4</td><td>Production gate (approval, 0% preview, rollback tested)</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+        <tr><td>7</td><td>Staging web interface</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+        <tr><td>8</td><td>Documentation publication + registration in the GTF</td><td><span class="pill pill-sage">✅ 2026-07-11</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--ink-muted); margin-top:0.8rem;">
+    The table is updated when each phase closes (date + outcome). The
+    process is registered in the GTF registry as a decision, process and
+    control (<span class="tag">ADR-P24</span> <span class="tag">CTL-cicd-pipeline</span>,
+    <code>status: active</code> since 2026-07-11) with verifiable evidence:
+    CI runs are public on the GitHub repos — anyone can check that the
+    declared process is the one actually practiced. Only PHASE 5-6
+    (replicated staging for RADART) remain to run: they require 4 new
+    workers and new D1/R2 resources, not yet created.</p>
+  </section>
+
+  </main>
+
+  <footer>
+    <nav class="footer-cols" aria-label="Footer links">
+      <div class="footer-col">
+        <h3>The registry</h3>
+        <a href="/en/">Trust Center</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf">Source code (GTF)</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry">Public registry</a>
+        <a href="https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics">Score formula</a>
+      </div>
+      <div class="footer-col">
+        <h3>The attestation service</h3>
+        <a href="https://attestazione.spaziogenesi.org/en/">Attest and verify</a>
+        <a href="https://attestazione.spaziogenesi.org/status/">Service status (IT)</a>
+        <a href="https://attestazione.spaziogenesi.org/changelog/">Changelog (IT)</a>
+        <a href="https://attestazione.spaziogenesi.org/en/developer/">Developers: API &amp; MCP</a>
+        <a href="https://attestazione.spaziogenesi.org/en/privacy.html">Privacy</a>
+      </div>
+      <div class="footer-col">
+        <h3>Open source code</h3>
+        <a href="https://github.com/SPAZIO-GENESI/imgauth">imgauth (engine)</a>
+        <a href="https://github.com/SPAZIO-GENESI/imgauthweb">imgauthweb (interface)</a>
+        <a href="https://github.com/SPAZIO-GENESI/autart-signer">autart-signer (signing)</a>
+        <a href="https://github.com/SPAZIO-GENESI/attest-mcp">attest-mcp (MCP server)</a>
+      </div>
+    </nav>
+    <div class="footer-bottom">
+      DevOps operational document · unlike the
+      <a href="/en/">Trust Center</a> (generated from the registry), this
+      page is maintained by hand alongside project P24 and updated whenever
+      a phase closes.
+      <br><img src="/badge.svg" alt="Genesis Trust Score" height="20" style="margin-top:0.5rem;">
+    </div>
+  </footer>
+</body>
+</html>

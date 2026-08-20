@@ -75,7 +75,7 @@
               { "label": "The framework ↗", "href": "https://trust.spaziogenesi.org/en/" },
               { "label": "Public registry", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry" },
               { "label": "Score formula", "href": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/metrics" },
-              { "label": "DevOps and releases (IT)", "href": "/devops/" },
+              { "label": "DevOps and releases", "href": "/en/devops/" },
               { "label": "Technical whitepaper (IT)", "href": "/whitepaper.html" }
             ]
           },

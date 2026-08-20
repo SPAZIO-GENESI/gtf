@@ -7,10 +7,12 @@ mitigates: [RSK-unobserved-production-deploy]
 implemented_by: [IMP-imgauth-cicd, IMP-imgauthweb-staging]
 evidenced_by: [EVD-cicd-staging-runs]
 verify_howto: >
-  Stato ad oggi (2026-07-11, FASE 0-4 e 7 di 8 completate — vedi
-  https://trust.spaziogenesi.org/devops.html per la tabella completa):
-  ogni pull request sul repo pubblico imgauth fa girare automaticamente
-  check di sintassi/contratto/build (tab Actions, workflow "CI"); il merge
+  Stato ad oggi (FASE 0-4, 7 e 8 completate; solo la FASE 5-6 RADART resta
+  da eseguire — vedi https://attestazione.trust.spaziogenesi.org/devops/
+  per la tabella completa): ogni pull request sul repo pubblico imgauth fa
+  girare automaticamente check di sintassi/contratto/build (tab Actions,
+  workflow "CI") più l'analisi statica CodeQL (workflow separato, stesso
+  trigger su push/PR — vedi CTL-static-analysis); il merge
   in main aggiorna da solo l'ambiente di staging (`imgauth-staging`,
   workers.dev, mai dati o segreti di produzione) e lo verifica con uno
   smoke test end-to-end (ping, stato, giro completo attestazione →
@@ -44,16 +46,19 @@ verify_howto: >
   RADART.
 owner: it@spaziogenesi.org
 review_every_days: 90
-last_reviewed: 2026-07-19
+last_reviewed: 2026-08-20
 i18n:
   en:
     title: "Release chain: replicated staging + CI + production gate with human approval (P24)"
     verify_howto: >
-      Status as of today (2026-07-11, PHASE 0-4 and 7 of 8 completed —
-      see https://trust.spaziogenesi.org/devops.html for the full
+      Status as of today (PHASE 0-4, 7 and 8 completed; only RADART's
+      PHASE 5-6 remains to be run — see
+      https://attestazione.trust.spaziogenesi.org/en/devops/ for the full
       table): every pull request on the public imgauth repo
       automatically runs syntax/contract/build checks (Actions tab, "CI"
-      workflow); merging into main automatically updates the staging
+      workflow) plus CodeQL static analysis (separate workflow, same
+      push/PR trigger — see CTL-static-analysis); merging into main
+      automatically updates the staging
       environment (`imgauth-staging`, workers.dev, never production data
       or secrets) and verifies it with an end-to-end smoke test (ping,
       status, full attestation → certificate → retrieval round trip).
