@@ -43,5 +43,5 @@ nel pacchetto di un singolo tenant.
 GitHub Pages ammette un solo dominio custom per repository. Il repo `gtf`
 serve già `trust.spaziogenesi.org` (la radice, la pagina del prodotto): il
 sottodominio di questo tenant non è ottenibile dallo stesso repo, da qui il
-repo sottile dedicato. Un secondo tenant (RADART, P46) avrebbe il proprio
+repo sottile dedicato. Un secondo tenant avrebbe il proprio
 pacchetto sotto `tenants/<id>/site/` e il proprio repo Pages sottile.

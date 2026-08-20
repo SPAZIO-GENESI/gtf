@@ -5,7 +5,7 @@ status: accepted
 context: >
   Un solo host (trust.spaziogenesi.org) serviva due cose diverse: era, fino
   al 15 agosto 2026, il Trust Center del solo progetto attestazione. Con un
-  secondo tenant in vista (RADART, P46) la radice non poteva restare
+  secondo tenant in vista la radice non poteva restare
   identificata con uno solo di essi. GitHub Pages ammette un solo dominio
   custom per repository, quindi il sottodominio di un tenant non è
   ottenibile dal solo repo gtf, che deve continuare a servire la radice.

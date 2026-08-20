@@ -25,8 +25,8 @@ decision: >
   completo in `P24-DESIGN-devops-cicd.md`, hub privato), ciascuna con
   criteri di accettazione concreti prima di procedere alla successiva.
 consequences: >
-  FASE 0-4 e 7 completate il 2026-07-11 (FASE 7 eseguita prima di 5-6
-  RADART su richiesta esplicita — nessuna dipendenza tra le due): inventario,
+  FASE 0-4 e 7 completate il 2026-07-11 (FASE 7 eseguita prima delle 5-6
+  su richiesta esplicita — nessuna dipendenza tra le due): inventario,
   codice imgauth reso multi-ambiente (CORS configurabile), staging
   `imgauth-staging` in funzione (D1/R2/secret propri, cron disattivato), CI
   collaudata end-to-end su run reali pubblici (push diretto, PR normale,
@@ -56,9 +56,8 @@ consequences: >
   Il controllo pubblico collegato (CTL-cicd-pipeline) è stato promosso da
   `status: draft` a **`active`**: il gate di produzione è ora collaudato
   quanto lo staging, non solo dichiarato — coerente con il principio del
-  registro (evidenze, non dichiarazioni). RADART ha il proprio staging/CI
-  pianificato (FASE 5-6) ma non ancora eseguito: il controllo copre oggi
-  imgauth e authweb, non ancora RADART.
+  registro (evidenze, non dichiarazioni). Il controllo copre imgauth e
+  authweb.
 affects: [CTL-cicd-pipeline]
 evidence: [EVD-cicd-staging-runs]
 visibility: public

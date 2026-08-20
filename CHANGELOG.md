@@ -2,6 +2,13 @@
 
 File generato da `content/changelog.yaml` — non modificarlo a mano.
 
+## 2026-08-20
+
+### Tolti dal Trust Center dell'attestazione i riferimenti a un altro progetto
+*tenant:attestazione*
+
+Il Trust Center su attestazione.trust.spaziogenesi.org parla del solo progetto attestazione, ma quattro testi del registro (CTL-cicd-pipeline, ADR-P24, ADR-GTF-014, ADR-GTF-015), la pagina DevOps in entrambe le lingue e il README del pacchetto sito citavano ancora RADART, che ha un proprio percorso e non appartiene a questo perimetro. Le frasi sono state riformulate senza cambiare la sostanza di ciò che i controlli dichiarano: il controllo della catena di rilascio copre imgauth e authweb, e le fasi 5-6 del piano P24 sono indicate come esterne a questo percorso invece di essere attribuite per nome. Le pagine sono state rigenerate dal registro; il punteggio resta 93/100.
+
 ## 2026-08-18
 
 ### Le sezioni del Trust Center si aprono a richiesta

@@ -6,7 +6,7 @@ context: >
   Il motore del Genesis Trust Framework aveva un solo progetto cablato dentro
   ai suoi generatori: 67 riferimenti al progetto attestazione, distribuiti
   su sette file, mescolavano struttura del registro e dati di un singolo
-  tenant. Applicare il framework a un secondo progetto (RADART, P46) avrebbe
+  tenant. Applicare il framework a un secondo progetto avrebbe
   richiesto un fork del motore, non un secondo pacchetto di configurazione.
 decision: >
   Separare motore e dati in due alberi distinti dentro lo stesso repository
