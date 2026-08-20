@@ -3,70 +3,51 @@ title: "P25 (B) — Convenzioni per dominio email: pool mensile dell'ente, degra
 date: 2026-07-12
 status: accepted
 context: >
-  Il primo design P25 (2026-07-11) prevedeva una quota INDIVIDUALE per
-  membro di convenzione (`student_quota` per-chiave). In revisione il
-  modello è stato corretto: un ente ragiona per **monte collettivo mensile**
-  dell'istituzione, non per persona — la contabilità giusta è un pool
-  mensile condiviso tra tutti i membri dell'ente, con un tetto individuale
-  come secondo argine anti-drenaggio, non come unità di misura primaria.
-  Restava da decidere il comportamento a pool o tetto esauriti — bloccare
-  l'utente (con il rischio di fermare uno studente a metà di una sessione
-  d'esame) oppure degradare con avviso: scelto il degrado — e quanto
-  loggare per rendere possibile un report all'ente senza trasformare in
-  tracciamento esteso un sistema oggi a zero dati personali per chi attesta
-  dal percorso anonimo.
+  Il design iniziale prevedeva una quota individuale per membro di
+  convenzione. Corretto in revisione: un ente ragiona per monte
+  collettivo mensile, non per persona — pool mensile condiviso con un
+  tetto individuale come secondo argine anti-drenaggio, non come unità di
+  misura primaria. Da decidere anche il comportamento a pool/tetto
+  esauriti (scelto il degrado, mai il blocco) e quanto loggare per
+  rendere possibile un report all'ente senza estendere il tracciamento su
+  un sistema oggi a zero dati personali per chi attesta anonimo.
 decision: >
   Contabilità a **pool mensile dell'ente** (`conventions.monthly_quota`,
-  contato con `COUNT(*)` su `convention_attestations` filtrato per
-  `(convention_id, ym)`, `ym` in Europe/Rome) più un **tetto individuale**
-  anti-drenaggio (`member_cap`, default 50/mese — la stessa soglia del
-  self-service ordinario, così la convenzione non è mai percepita come un
-  downgrade del gratuito). Esaurito l'uno o l'altro, l'emissione **degrada
-  silenziosamente alla fascia Base** (certificato comunque emesso, con
-  avviso esplicito nella risposta — `fascia_motivo: 'pool_esaurito'` o
-  `'tetto_individuale'`): mai un 429, mai un blocco. Il log
-  `convention_attestations` (convenzione→membro→impronta) si scrive SOLO
-  per le emissioni effettivamente taggate in convenzione — non per il
-  self-service individuale né per il percorso anonimo — perché è l'unica
-  associazione identità→opere dell'intero sistema e la sua esistenza va
-  giustificata caso per caso (garanzia di persistenza contrattuale,
-  contabilità del pool, report all'ente), non generalizzata.
-  Nello stesso giro è stata **varata `/condizioni/`** (pagina pubblica
-  delle fasce, `attestazione.spaziogenesi.org/condizioni/`): pubblicata
-  `noindex` l'11/7 in attesa di una delibera assembleare, linkata e
-  indicizzata il 12/7 senza attendere quella delibera — scelta esplicita di
-  rendere pubbliche le regole prima ancora che il meccanismo di convenzione
-  sottostante fosse deployato, sui contenuti già scritti (nessuna modifica
-  ai numeri).
+  `COUNT(*)` su `convention_attestations` per `(convention_id, ym)`,
+  Europe/Rome) più **tetto individuale** anti-drenaggio (`member_cap`,
+  default 50/mese, stessa soglia del self-service ordinario). Esaurito
+  l'uno o l'altro: emissione degradata silenziosamente alla fascia Base
+  (certificato comunque emesso, `fascia_motivo: 'pool_esaurito'` o
+  `'tetto_individuale'`), mai un 429. Il log `convention_attestations`
+  (convenzione→membro→impronta) si scrive solo per le emissioni taggate
+  in convenzione — l'unica associazione identità→opere del sistema,
+  giustificata caso per caso, non generalizzata.
+
+  Varata `/condizioni/` (pagina pubblica delle fasce): pubblicata
+  `noindex` l'11/7 in attesa di delibera assembleare, linkata e
+  indicizzata il 12/7 senza attenderla — regole pubbliche prima del
+  deploy del meccanismo sottostante, contenuti già scritti invariati.
 consequences: >
-  Codice completo e verificato in locale (`wrangler dev`, convenzione di
-  test: match dominio, scadenza/disattivazione, pool esaurito, tetto
-  individuale, log solo per emissioni tassate, sidecar `meta/cert/`), poi
-  **rilasciato in produzione lo stesso giorno** (imgauth 1.21.0, tag
-  `v1.21.0`, via pipeline P24 — schema `conventions.sql` applicato a D1
-  staging e produzione PRIMA della promozione, per evitare che
-  `authenticateAgent` rompesse su una colonna mancante). **Verificato con
-  un login OAuth reale in produzione**: prima convenzione vera creata
-  (dominio `spaziogenesi.org`), login Google reale, chiave emessa con
-  `convention_id` corretto, attestazione con `fascia:'convenzione'`, riga
-  di log corretta in `convention_attestations` — tutto confermato via query
-  diretta su D1 di produzione, non solo dalla risposta dell'API.
-  `CTL-convention-accounting` promosso da `draft` ad `active` — il
-  registro descrive solo ciò che è verificato in produzione. Emerso e
-  risolto lungo il percorso un problema di configurazione preesistente,
-  non collegato al codice P25: l'URI di redirect OAuth per Google era
-  registrato con un carattere iniziale mancante (`redirect_uri_mismatch`).
-  **Approssimazione nota nel sidecar**: il campo `tier` di
-  `meta/cert/<hash>.json` riflette l'appartenenza STATICA della credenziale
-  bearer alla convenzione (lookup read-only, non tocca quota), non l'esito
-  dinamico pool/tetto calcolato al momento esatto di `/api/hash` — un
-  certificato degradato a Base può comparire `tier:'convenzione'` nel
-  sidecar. Accettato perché `tier` non è ancora consumato da nessuna
-  logica di retention differenziata (P26+); da rivalutare quando lo sarà.
-  **Varo anticipato di `/condizioni/`**: le regole pubblicate potrebbero
-  cambiare se/quando l'assemblea delibera — la pagina non promette
-  immutabilità dei numeri, solo l'onestà di quanto già vero oggi (minimi
-  garantiti, non retroattività).
+  Rilasciato lo stesso giorno (imgauth 1.21.0, tag `v1.21.0`, pipeline
+  P24 — schema `conventions.sql` su D1 staging e produzione prima della
+  promozione). Verificato con login OAuth reale in produzione: prima
+  convenzione creata (`spaziogenesi.org`), chiave emessa con
+  `convention_id` corretto, riga di log corretta — confermato via query
+  diretta su D1, non solo dalla risposta API. `CTL-convention-accounting`
+  promosso `draft`→`active`. Risolto lungo il percorso un problema di
+  configurazione preesistente non collegato a P25: URI di redirect OAuth
+  Google con un carattere iniziale mancante (`redirect_uri_mismatch`).
+
+  Approssimazione nota: il campo `tier` di `meta/cert/<hash>.json`
+  riflette l'appartenenza statica della credenziale alla convenzione, non
+  l'esito dinamico pool/tetto calcolato al momento di `/api/hash` — un
+  certificato degradato a Base può comparire `tier:'convenzione'`.
+  Accettato perché `tier` non è ancora consumato da logica di retention
+  differenziata; da rivalutare quando lo sarà.
+
+  `/condizioni/` non promette immutabilità dei numeri: le regole possono
+  cambiare se/quando l'assemblea delibera, solo l'onestà di quanto già
+  vero oggi.
 affects: [CTL-convention-accounting, RSK-convention-data-linkage]
 evidence: [EVD-git-imgauth]
 visibility: public

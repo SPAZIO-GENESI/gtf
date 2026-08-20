@@ -3,67 +3,49 @@ title: "P25 (C) — \"Attesta con la tua email\" dal sito: voucher stateless inv
 date: 2026-07-12
 status: accepted
 context: >
-  Le convenzioni (P25 B, ADR-P25-conventions) erano fruibili solo tramite
-  chiave API o client MCP, ma il loro pubblico reale (studenti di accademie
-  d'arte, professionisti non tecnici) non usa strumenti da sviluppatore:
-  deve poter attestare direttamente dal sito, come fa già chiunque in forma
-  anonima. Serviva un modo per riconoscere l'email istituzionale di chi usa
-  il sito SENZA introdurre cookie, sessioni server o un secondo sistema di
-  login che avrebbe complicato il modello di minimizzazione dati già in
-  vigore (il percorso anonimo resta a zero dati personali).
+  Le convenzioni (ADR-P25-conventions) erano fruibili solo via chiave API
+  o client MCP, ma il pubblico reale (studenti, professionisti non
+  tecnici) non usa strumenti da sviluppatore: deve attestare direttamente
+  dal sito, come già avviene in forma anonima. Serviva riconoscere
+  l'email istituzionale senza cookie, sessioni server o un secondo
+  sistema di login — il percorso anonimo resta a zero dati personali.
 decision: >
-  Stesso OAuth one-shot già usato per le chiavi API (Google/Microsoft/
-  LinkedIn, §3.5), ma l'esito non è una riga persistita in D1: è un
-  **voucher stateless firmato** —
-  `base64url(JSON{email,conv,exp}) + '.' + HMAC-SHA256(HMAC_SECRET,
-  'VOUCHER:'+payload)`, TTL 8 ore — consegnato nel **fragment dell'URL**
-  (`#sgv=`, per costruzione mai inviato a un server) e tenuto in
-  `sessionStorage` dal browser (niente cookie, niente riga di sessione
-  server-side, sparisce alla chiusura della scheda o al click su "Esci").
-  Il campo `conv` nel payload è solo un HINT scritto al momento
-  dell'emissione: la fonte di verità sullo stato della convenzione resta
-  sempre una query fresca (`matchConvention`) a ogni singolo uso del
-  voucher su `/api/hash` — così una convenzione disattivata dopo
-  l'emissione del voucher smette di dare vantaggi senza bisogno di alcun
-  meccanismo di revoca (il voucher, semplicemente, scade da solo e non è
-  mai "attivo" oltre quanto la convenzione lo sia davvero). La contabilità
-  pool/tetto individuale riusa lo stesso meccanismo delle chiavi API
-  (funzione condivisa `accountConventionUsage`, rifattorizzata da questo
-  lavoro), quindi il comportamento — mai un blocco, solo degrado a fascia
-  Base con motivo esplicito — è identico su entrambi i canali.
+  Stesso OAuth one-shot già usato per le chiavi API, ma l'esito non è
+  persistito in D1: un **voucher stateless firmato** —
+  `base64url(JSON{email,conv,exp}) + '.' + HMAC-SHA256(...)`, TTL 8 ore
+  — consegnato nel fragment dell'URL (`#sgv=`, mai inviato a un server) e
+  tenuto in `sessionStorage` (niente cookie, sparisce alla chiusura della
+  scheda). Il campo `conv` è solo un hint: la fonte di verità resta una
+  query fresca (`matchConvention`) a ogni uso su `/api/hash`, così una
+  convenzione disattivata smette di dare vantaggi senza meccanismo di
+  revoca. La contabilità pool/tetto riusa la stessa funzione condivisa
+  delle chiavi API (`accountConventionUsage`): comportamento identico su
+  entrambi i canali, mai un blocco.
 consequences: >
-  Nessun nuovo tipo di credenziale bearer, nessuna modifica al percorso
-  anonimo del sito, nessuna riga D1 per il solo fatto di accedere (a
-  differenza delle chiavi API, che restano in agent_credentials anche se
-  inutilizzate). Testato in locale (wrangler dev, D1 reale): voucher
-  valido con/senza convenzione, tetto individuale, pool esaurito,
-  convenzione disattivata dopo l'emissione (correttamente senza
-  vantaggio), voucher scaduto/manomesso (403), CORS preflight con l'header
-  X-SG-Voucher; frontend verificato in browser con Playwright. Rilasciato
-  lo stesso giorno (imgauth 1.21.2, tag v1.21.2; authweb 1.17.0, tag
-  v1.17.0), poi verificato con un login OAuth reale in produzione:
-  attestazione e certificato PDF generati dal sito e riconosciuti in
-  convenzione — prima prova end-to-end del canale con un vero provider
-  OAuth. `CTL-site-voucher-auth` promosso da `draft` ad `active`.
+  Nessuna riga D1 per il solo accesso (a differenza delle chiavi API).
+  Testato in locale (D1 reale): voucher con/senza convenzione, tetto,
+  pool esaurito, convenzione disattivata dopo l'emissione, voucher
+  scaduto/manomesso (403). Rilasciato lo stesso giorno (imgauth 1.21.2,
+  authweb 1.17.0), poi verificato con login OAuth reale in produzione —
+  prima prova end-to-end del canale. `CTL-site-voucher-auth` promosso
+  `draft`→`active`.
+
   **Incidente di concorrenza, risolto in pochi minuti**: il codice è
   arrivato in produzione tramite il commit di una sessione di lavoro
-  concorrente sullo stesso checkout — non un rilascio deliberato
-  attraverso il gate P24 — *prima* che la migrazione schema/voucher.sql
-  (colonna dev_oauth_state.purpose) fosse applicata alla D1 remota. Poiché
-  handleDevOAuthStart referenzia la colonna su ogni chiamata, l'intero
-  /developer/keys (P22, in uso da utenti reali) ha risposto 500 fino
-  all'applicazione della migrazione. Nessuna perdita di dati; nessuna
-  nuova voce di rischio: la classe è già coperta da
-  RSK-unobserved-production-deploy (P24) — l'incidente è avvenuto proprio
-  perché il rilascio non è passato dal gate.
-  Nel primo uso reale sono emersi e stati corretti due difetti non
-  rilevabili dai test locali: i bottoni dei provider resi invisibili da
-  una classe CSS riusata fuori dal contesto per cui era stata scritta (i
-  test verificavano la presenza nel DOM, non la posizione visiva) e il
-  pannello /admin che non ricaricava i dati alla riapertura di una scheda
-  (emerge solo con due sessioni in parallelo). `/condizioni/`: rimosso il
-  tag "in arrivo" sul canale sito per la sola fascia Convenzione (resta
-  per Professionale, non ancora costruita).
+  concorrente sullo stesso checkout, non un rilascio deliberato via gate
+  P24, prima che la migrazione schema (`voucher.sql`) fosse applicata
+  alla D1 remota — `/developer/keys` (P22, in uso reale) ha risposto 500
+  fino all'applicazione. Nessuna perdita di dati; classe di rischio già
+  coperta da `RSK-unobserved-production-deploy`, l'incidente è avvenuto
+  proprio perché il rilascio non è passato dal gate.
+
+  Due difetti non rilevabili dai test locali, emersi al primo uso reale e
+  corretti: i bottoni dei provider resi invisibili da una classe CSS
+  riusata fuori contesto (i test verificavano il DOM, non la posizione
+  visiva); il pannello `/admin` che non ricaricava i dati alla riapertura
+  di una scheda (emerge solo con due sessioni in parallelo).
+  `/condizioni/`: rimosso il tag "in arrivo" per la fascia Convenzione
+  (resta per Professionale, non ancora costruita).
 affects: [CTL-site-voucher-auth, CTL-convention-accounting, RSK-agent-credential-abuse]
 evidence: [EVD-git-imgauth, EVD-git-imgauthweb, EVD-site-voucher-local-test, EVD-site-voucher-live-test]
 visibility: public
