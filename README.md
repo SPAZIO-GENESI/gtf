@@ -2,122 +2,121 @@
 
 [![Genesis Trust Score](https://trust.spaziogenesi.org/badge.svg)](https://trust.spaziogenesi.org)
 
-Motore e registri attraverso cui **Spazio Genesi ETS** dimostra pubblicamente
-perché il servizio [attestazione.spaziogenesi.org](https://attestazione.spaziogenesi.org)
-merita fiducia — con evidenze verificabili da chiunque, non con dichiarazioni.
-Il motore (`core/`) è un prodotto sviluppato da **Tangram.page**
-(vedi [core/LICENSE](./core/LICENSE)); Spazio Genesi ETS lo applica ai propri
-servizi come partner tecnologico e ne cura i registri (vedi [LICENSE](./LICENSE)).
-Il motore è generico (nessun nome di progetto al suo interno, vedi §15 di
-ARCHITECTURE.md): questo repo ospita oggi un solo pacchetto di dati
-(`attestazione`), ma è costruito per applicarsi a più di un progetto.
+*[Versione italiana](./README.it.md) — the Italian README is the original and is kept in sync.*
 
-Questo repository è la **Single Source of Truth**: ogni documento, pagina del
-Trust Center, matrice di conformità e punteggio (Open Trust Score) è
-**generato** dai registri in `tenants/<id>/registry/`, mai scritto a mano.
+A framework that turns a project's claims about its own trustworthiness into
+**records anyone can verify**: an engine (schemas, validator, generators) plus
+one data package per project it is applied to. Every page, compliance matrix and
+score is **generated** from the registry — never written by hand — and the score
+can be recomputed offline from a clone of this repository, with no network calls
+and without trusting whoever published it.
 
-Leggi prima [ARCHITECTURE.md](./ARCHITECTURE.md): non è documentazione del
-servizio, è il progetto del sistema che la produce. Dal 16 agosto 2026 (P45)
-[trust.spaziogenesi.org](https://trust.spaziogenesi.org) è la pagina del
-framework, con un riepilogo dei tenant; il Trust Center pubblico di
-attestazione è su
-[attestazione.trust.spaziogenesi.org](https://attestazione.trust.spaziogenesi.org).
+Today it is applied to one project: the digital-work attestation service of
+Spazio Genesi ETS. It is built to be applied to more than one.
 
-## Struttura
+## Ownership and licences
 
-- `core/` — il motore, generico per qualunque progetto (nessun nome di
-  progetto al suo interno, sorvegliato da una guardia CI, vedi ARCHITECTURE.md
-  §15):
-  - `schemas/` — uno schema JSON per tipo di record del registro (principi,
-    requisiti, controlli, implementazioni, evidenze, processi, decisioni,
-    rischi, dati, metriche, glossario, azioni).
-  - `generators/` — script Node: `validate.mjs` (schema + integrità del
-    grafo), `collect-evidence.mjs` (snapshot settimanale da endpoint
-    pubblici, tag di release inclusi), `check-cadences.mjs` (avviso Telegram
-    se un processo ricorrente supera la sua cadenza dichiarata),
-    `anchor-monthly.mjs` (bundle mensile da attestare col servizio stesso,
-    §6.4), `score.mjs` (Open Trust Score dal registro + ultimo snapshot),
-    `build-site.mjs` (genera `site/index.html`), `build-changelog.mjs`
-    (genera `CHANGELOG.md` e `site/changelog.html` da `content/changelog.yaml`),
-    `check-core-isolation.mjs` (la guardia anti-contaminazione di `core/`).
-- `tenants/<id>/` — i dati di un progetto applicato: `registry/` (i record
-  YAML veri e propri), `snapshots/` (evidenze raccolte settimanalmente,
-  ADR-GTF-004), `tenant.config.json` (testi del Trust Center, URL esterni,
-  elenco repo di codice, endpoint del collettore), `site/` (il Trust Center
-  **di quel tenant** — `index.html`, `score.json`, `badge.svg` generati, più
-  — dal P47 — i contenuti statici mantenuti a mano del tenant: whitepaper e
-  pagina DevOps del servizio, non più output di build soltanto). Un solo
-  tenant esiste oggi: `tenants/attestazione/`.
-- `content/` — testi curati del prodotto, non derivati dal registro
-  (`changelog.yaml`, sorgente unica a doppia resa; `site.config.json`, testi
-  e riepilogo tenant della radice).
-- `site/` — **dal 16 agosto 2026 (P45), l'output della radice**: la pagina
-  del prodotto (`index.html`, `content/site.config.json` + riepilogo dei
-  tenant, generata da `build-root.mjs`), `changelog/index.html` (del
-  prodotto, non di un tenant — clean URL dal P47), più le copie di
-  compatibilità `badge.svg`/`score.json` del tenant indicato in `compat`
-  (22 punti pubblici esterni li consumano da qui) e il file di verifica
-  motori di ricerca. Tutto generato, non modificarlo a mano — dettagli in
-  `site/README.md`. **Dal P47**: `devops.html`, `whitepaper.html` e
-  `whitepaper-v1.0.pdf` non sono più qui — sono contenuto del tenant
-  attestazione (vedi sotto), e la radice ospita solo tre **shim** statici
-  (`whitepaper.html`, `devops.html`, `changelog.html`) che rimandano al
-  posto giusto per chi ha ancora l'indirizzo vecchio.
-- `default-tenant.json` — quale tenant usare se `GTF_TENANT` non è
-  impostata (configurazione di bootstrap, fuori da `core/` apposta).
+This repository contains two parts with **distinct copyright holders**, both
+MIT-licensed:
 
-## Due siti, due domini, un solo motore
+- the generic engine in `core/` is a product of **Tangram.page** — see
+  [core/LICENSE](./core/LICENSE);
+- the registries, tenant packages, content and configuration are **© Spazio
+  Genesi ETS** — see [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
 
-Dal 16 agosto 2026 (P45, `ADR-GTF-015`) il repo `gtf` pubblica **due bersagli**:
+Spazio Genesi ETS applies the engine to its own services and maintains their
+registries; Tangram.page maintains the engine. Because both parts are MIT, no
+party can strand the result: anyone may fork and continue.
 
-- **`site/`** (la radice) va direttamente su GitHub Pages di questo repo →
-  [trust.spaziogenesi.org](https://trust.spaziogenesi.org) — la pagina del
-  framework.
-- **`tenants/<id>/site/`** (il Trust Center di ciascun tenant) viene spinto
-  con `git push` (PAT dedicato) in un **repo Pages sottile per tenant** —
-  per l'attestazione, `SPAZIO-GENESI/trust-attestazione` →
+## Why it exists
+
+Trust in a piece of software is usually asserted — in a policy page, a
+questionnaire, a self-assessment nobody can check. This framework takes the
+opposite route: every claim must point to a record, every record to dated
+evidence, and the evidence must be collected from public endpoints by a
+scheduled job rather than typed in by the maintainer.
+
+Three properties follow, and they are the point of the whole design:
+
+- **Reproducible.** `npm run build` from a clean clone recomputes the published
+  score from the committed registry alone. A reviewer needs no credentials — the
+  entire audit perimeter is public by design.
+- **Falsifiable.** Controls that are not yet active say so; the score fluctuates
+  honestly with the freshness of real evidence instead of being pinned to a
+  flattering number.
+- **Anchored.** A monthly bundle of the registry is attested with the very
+  service the registry describes, so what the record claimed at a given date can
+  be shown later.
+
+Read [ARCHITECTURE.md](./ARCHITECTURE.md) first: it does not document the
+service, it is the design of the system that produces the record.
+
+## Structure
+
+- **`core/`** — the engine, generic for any project. It contains **no project
+  name at all**, and that is enforced by a CI guard rather than by good
+  intentions (`npm run check-core`).
+  - `schemas/` — one JSON Schema per record type: principles, requirements,
+    controls, implementations, evidence, processes, decisions, risks, data,
+    metrics, glossary, actions.
+  - `generators/` — Node scripts: `validate.mjs` (schema plus graph integrity),
+    `collect-evidence.mjs` (weekly snapshot from public endpoints),
+    `check-cadences.mjs` (alerts when a recurring process exceeds its declared
+    cadence), `anchor-monthly.mjs`, `score.mjs`, `build-site.mjs`,
+    `build-changelog.mjs`, `check-core-isolation.mjs`.
+- **`tenants/<id>/`** — the data of one project: `registry/` (the YAML records),
+  `snapshots/` (weekly evidence), `tenant.config.json` (identity, domains,
+  endpoints, repositories, score formulas), `site/` (that project's generated
+  Trust Center). One tenant exists today: `tenants/attestazione/`.
+- **`content/`** — curated product text that is not derived from a registry.
+- **`site/`** — the generated output of the framework's own page.
+
+## Two sites, one engine
+
+- `site/` → [trust.spaziogenesi.org](https://trust.spaziogenesi.org), the
+  framework's page, with a summary of its tenants.
+- `tenants/<id>/site/` → a thin per-tenant Pages repository, because GitHub
+  Pages allows only one custom domain per repository. For the attestation
+  service that is
   [attestazione.trust.spaziogenesi.org](https://attestazione.trust.spaziogenesi.org).
-  Il repo sottile esiste perché GitHub Pages ammette **un solo dominio
-  custom per repository**: il sottodominio del tenant non è ottenibile dal
-  solo repo `gtf`, che già pubblica la radice. Il repo sottile è di **sola
-  pubblicazione** — non modificarlo lì, il contenuto è sovrascritto a ogni
-  deploy.
 
-Dettagli, tabella degli URL che non si possono spostare, e motivazione
-completa in [ARCHITECTURE.md §15](./ARCHITECTURE.md#15-multi-progetto--core-e-tenantsid).
-
-## Sviluppo locale
+## Running it
 
 ```bash
 npm install
-GTF_TENANT=attestazione npm run validate   # schema, integrità dei riferimenti, anti-segreti
-GTF_TENANT=attestazione npm run build      # validate + check-core + score + build-site + build-root + build-changelog (come in CI)
+GTF_TENANT=attestazione npm run validate   # schemas, reference integrity, secret scan
+GTF_TENANT=attestazione npm run build      # validate + core guard + score + sites + changelog
 ```
 
-`GTF_TENANT` è facoltativa finché esiste un solo tenant (`default-tenant.json`
-la imposta di default), ma va sempre passata esplicitamente non appena ne
-esiste più di uno.
+`GTF_TENANT` is optional while a single tenant exists, but should always be
+passed explicitly once there is more than one.
 
-## Stato
+## Independent review
 
-**M4 in corso, M5 avviata (P44, dal 2026-08-15)**: canary HMAC (P17-B) attivo
-e verificato in produzione; collettore di evidenze settimanale attivo;
-`autart-signer` pubblicato (P11). Primo ancoraggio dogfooding eseguito
-(2026-07, ADR-GTF-008); convenzione di tag `vX.Y.Z` adottata sui tre repo
-pubblici (imgauth, imgauthweb, autart-signer) e monitoraggio automatico delle
-cadenze ricorrenti con avviso Telegram attivo e verificato (ADR-GTF-009).
-Restore drill e prima revisione trimestrale completati senza rilievi (P33).
-Score 91-94/100 (fluttua onestamente con i dati reali raccolti), 10/10
-indicatori disponibili.
-Dal 15 agosto 2026 il motore si sta separando dai dati del progetto
-attestazione (P44, `core/` ↔ `tenants/attestazione/`, ADR-GTF-014) per poter
-applicare lo stesso framework a un secondo progetto (RADART, P46) senza
-duplicare codice — vedi [ARCHITECTURE.md §15](./ARCHITECTURE.md#15-multi-progetto--core-e-tenantsid)
-e `docs/ROADMAP-trust-multiprogetto.md`.
-Dettagli fase per fase in [ARCHITECTURE.md §12](./ARCHITECTURE.md#12-roadmap--wbs).
+The framework's obvious objection is self-reference: who checks the project that
+grades itself? Three answers, none of them a promise:
 
-## Licenza
+1. The score is **recomputable offline by anyone** from the committed registry.
+2. An **independent external review** is planned with a written scope, entirely
+   over public material, with no access to grant — see
+   [docs/piano-review-esterna-2026.md](./docs/piano-review-esterna-2026.md). The
+   resulting report is public by default, findings included.
+3. Findings become corrective actions with deadlines, recorded in the registry
+   like everything else.
 
-MIT — vedi anche [NOTICE](./NOTICE). Il motore in `core/` è coperto da [core/LICENSE](./core/LICENSE)
-(Tangram.page); il resto del repository — i registri dei tenant — da
-[LICENSE](./LICENSE) (Spazio Genesi ETS).
+## Status and roadmap
+
+The engine and the project data were separated in August 2026, and each tenant
+now has its own domain, package version and score. The next steps — extracting
+the engine as a standalone versioned package, onboarding an adopter outside the
+organisation, and mapping the registry's evidence onto regulatory requirements —
+are described in
+[docs/ROADMAP-trust-multiprogetto.md](./docs/ROADMAP-trust-multiprogetto.md),
+which also measures the starting point in the code rather than estimating it.
+
+Current score: 91–94/100 with 10/10 indicators available, fluctuating with the
+freshness of collected evidence.
+
+## Contact
+
+`it@spaziogenesi.org` — Spazio Genesi ETS, Italy.
