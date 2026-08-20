@@ -178,9 +178,9 @@
         <tr class="is-counted is-partial" title="sonda HMAC (componente &quot;worker&quot;, snapshot 2026-W34) + ancoraggi dogfooding onorati (2/2 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"><td class="ledger-label">Integrità *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Tracciabilità</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted"><td class="ledger-label">Documentazione</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">63</td></tr>
-        <tr class="is-counted is-partial" title="revisione: ultima il 2026-07-19 (31/90 giorni); ACT: nessuna ancora risolta"><td class="ledger-label">Audit *</td><td class="ledger-value">100</td></tr>
-        <tr class="is-counted is-partial" title="snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (31 giorni fa)"><td class="ledger-label">Conservazione *</td><td class="ledger-value">94</td></tr>
+        <tr class="is-counted"><td class="ledger-label">Automazione</td><td class="ledger-value">64</td></tr>
+        <tr class="is-counted is-partial" title="revisione: ultima il 2026-07-19 (32/90 giorni); ACT: nessuna ancora risolta"><td class="ledger-label">Audit *</td><td class="ledger-value">100</td></tr>
+        <tr class="is-counted is-partial" title="snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (32 giorni fa)"><td class="ledger-label">Conservazione *</td><td class="ledger-value">94</td></tr>
         <tr class="is-counted"><td class="ledger-label">Riproducibilità</td><td class="ledger-value">97</td></tr>
         <tr class="is-counted is-partial" title="scanner su imgauth@v1.34.1: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"><td class="ledger-label">Privacy *</td><td class="ledger-value">100</td></tr>
         <tr class="is-counted is-partial" title="validate 30/30 + gate 12/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"><td class="ledger-label">Governance *</td><td class="ledger-value">80</td></tr>
@@ -777,6 +777,15 @@
     <summary><h2>Decisioni</h2></summary>
 
     <div class="journal">
+      <details class="entry">
+        <summary><span class="entry-date">2026-08-20</span><span class="entry-title">P54 — seguito: rendere visibile sul Trust Center il badge OpenSSF ottenuto</span><span class="entry-status">accepted</span></summary>
+        <div class="entry-body">
+          <p>`ADR-P54` (19/08) aveva chiuso il piano lasciando il badge OpenSSF Best Practices non sottomesso — richiedeva il login GitHub del gestore — e dichiarava esplicitamente: &quot;un aggiornamento di registro separato va fatto dopo&quot; il suo ottenimento. Il 20/08 il gestore ha completato la compilazione del modulo insieme all'assistente (bozza in `img-auth-hub/p54-f7-badge-attest-mcp.md`), con tre correzioni di rotta rispetto a quella bozza (criteri classificati &quot;SHOULD&quot; che erano in realtà &quot;MUST&quot;: `report_responses`, `vulnerability_report_response`, `warnings`/`test_policy` — questi ultimi due hanno richiesto un fix reale nel codice, non solo testuale). `attest-mcp` ha raggiunto il livello &quot;passing&quot; (`first_achieved_passing_at: 2026-08-20T08:21:35Z`). Il gestore ha poi chiesto esplicitamente se il risultato fosse già visibile da qualche parte oltre il README del repo: verificato che non lo era — né nel Trust Center né sulla pagina pubblica `/sicurezza/` di authweb (quest'ultima, notato di passaggio, non menziona nemmeno Scorecard/CodeQL benché entrambi attivi da agosto: gap preesistente, fuori perimetro di questa voce).</p>
+          <p><strong>Decisione:</strong> Scritto un terzo `CTL` per la famiglia già iniziata da `ADR-A3-parte4` (`CTL-scorecard-monitoring`, `CTL-static-analysis`): `CTL-best-practices-badge`, stesso schema — `verify_howto` senza credenziali (`bestpractices.dev/projects/14159.json`, REST pubblico), collegato a `REQ-27001-inspiration-01`. Un `EVD` con `collection: auto` (`EVD-best-practices-badge-passing`) e un `IMP` che referenzia sia il badge nel README sia i commit dell'hardening che lo hanno sbloccato (ESLint, policy di test). **Nasce `draft`**, stessa cautela di `ADR-A3-parte4`: il dato è verificato con successo (curl pulito, 20/08), ma la promozione ad `active` resta una decisione esplicita del gestore, non assunta per analogia con gli altri due controlli della stessa famiglia.</p>
+          <p><strong>Conseguenze:</strong> `CTL-best-practices-badge` resta `draft` finché il gestore non decide esplicitamente la promozione. Il gap sulla pagina `/sicurezza/` di authweb (nessuna menzione di Scorecard/CodeQL/badge) è stato segnalato al gestore in chat ma **non affrontato qui**: è un lavoro più ampio (tocca un secondo repo pubblico) che il gestore ha scelto di non fare in questo giro.</p>
+          <p class="tag-line"><span class="tag">ADR-P54-badge</span></p>
+        </div>
+      </details>
       <details class="entry">
         <summary><span class="entry-date">2026-08-19</span><span class="entry-title">P54 — CodeQL: copertura, triage del debito e rifiuto di GitHub Code Quality</span><span class="entry-status">accepted</span></summary>
         <div class="entry-body">

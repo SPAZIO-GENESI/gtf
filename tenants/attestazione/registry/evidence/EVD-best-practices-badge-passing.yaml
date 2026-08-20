@@ -1,0 +1,19 @@
+id: EVD-best-practices-badge-passing
+title: Progetto attest-mcp al livello "passing" su OpenSSF Best Practices Badge
+location:
+  system: "bestpractices.dev, progetto id 14159"
+  ref: "https://www.bestpractices.dev/projects/14159"
+  public_via: "https://www.bestpractices.dev/projects/14159.json (REST pubblico, nessuna autenticazione)"
+collection: auto
+last_seen: 2026-08-20
+integrity: >
+  Verificato il 2026-08-20 con `curl` a ambiente pulito:
+  `"badge_level":"passing"`, `"achieve_passing_status":"Met"`,
+  `"first_achieved_passing_at":"2026-08-20T08:21:35.101Z"`. Il servizio
+  ricalcola questi campi automaticamente da tutti i 67 criteri del
+  livello "passing" (incrociati uno per uno con il file ufficiale
+  `criteria.yml` del progetto BadgeApp prima di dichiarare il blocco
+  finale risolto) — l'evidenza si rigenera da sé se un criterio dovesse
+  regredire, senza intervento umano su questo file.
+supports: [CTL-best-practices-badge]
+visibility: public

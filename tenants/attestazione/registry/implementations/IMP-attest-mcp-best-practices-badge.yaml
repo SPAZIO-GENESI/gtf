@@ -1,0 +1,6 @@
+id: IMP-attest-mcp-best-practices-badge
+title: "Badge nel README + hardening che lo ha sbloccato (ESLint, policy di test)"
+repo: attest-mcp
+ref: "README.md (badge SVG), eslint.config.js + package.json script \"lint\" (commit 032d809), CI aggiornata con npm run lint (.github/workflows/ci.yml)"
+supports: [CTL-best-practices-badge]
+visibility: public

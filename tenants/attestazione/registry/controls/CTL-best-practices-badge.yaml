@@ -1,0 +1,69 @@
+id: CTL-best-practices-badge
+title: "Badge OpenSSF Best Practices — livello passing su attest-mcp"
+status: draft
+visibility: public
+satisfies: [REQ-27001-inspiration-01]
+implemented_by: [IMP-attest-mcp-best-practices-badge]
+evidenced_by: [EVD-best-practices-badge-passing]
+verify_howto: >
+  Senza alcuna credenziale: `curl
+  https://www.bestpractices.dev/projects/14159.json` (API pubblica del
+  progetto OpenSSF Best Practices Badge, ex CII Best Practices) restituisce
+  `"badge_level":"passing"` e `"achieve_passing_status":"Met"`. Il badge
+  stesso è embeddabile da
+  `https://www.bestpractices.dev/projects/14159/badge` (SVG pubblico,
+  aggiornato dal servizio) ed è visibile nel README del repo:
+  `https://github.com/SPAZIO-GENESI/attest-mcp#readme`.
+
+  Ottenuto il 2026-08-20 (`first_achieved_passing_at`), durante il piano
+  P54, come seguito diretto del triage CodeQL/Scorecard (vedi `ADR-P54`):
+  la prima candidatura possibile era `imgauth`, scartata perché priva di
+  una suite di test automatica — criterio obbligatorio del badge. Il
+  candidato corretto, `attest-mcp`, aveva già 11 test reali.
+
+  Durante la compilazione, tre criteri erano stati classificati per errore
+  come "SHOULD, non bloccante" in fase di preparazione, quando in realtà
+  sono "MUST": `report_responses`, `vulnerability_report_response`
+  (risposta entro 14 giorni alle segnalazioni — soddisfatti per assenza di
+  casi, nessuna segnalazione mai ricevuta) e `warnings`/`warnings_fixed`/
+  `test_policy` (questi ultimi hanno richiesto un fix reale, non solo
+  testuale: aggiunto ESLint — `eslint.config.js`, zero errori — e una riga
+  di policy sui test nel README). L'ultimo blocco residuo
+  (`enhancement_responses`) è stato trovato incrociando il file ufficiale
+  dei criteri del progetto BadgeApp
+  (`github.com/coreinfrastructure/best-practices-badge`) con lo stato
+  reale via API, non per tentativi.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-08-20
+i18n:
+  en:
+    title: "OpenSSF Best Practices Badge — passing level on attest-mcp"
+    verify_howto: >
+      Without any credential: `curl
+      https://www.bestpractices.dev/projects/14159.json` (public API of the
+      OpenSSF Best Practices Badge project, formerly CII Best Practices)
+      returns `"badge_level":"passing"` and
+      `"achieve_passing_status":"Met"`. The badge itself is embeddable from
+      `https://www.bestpractices.dev/projects/14159/badge` (public SVG,
+      updated by the service) and is visible in the repo's README:
+      `https://github.com/SPAZIO-GENESI/attest-mcp#readme`.
+
+      Achieved on 2026-08-20 (`first_achieved_passing_at`), during plan
+      P54, as a direct follow-up to the CodeQL/Scorecard triage (see
+      `ADR-P54`): the first possible candidate was `imgauth`, ruled out
+      because it lacks an automated test suite — a mandatory badge
+      criterion. The correct candidate, `attest-mcp`, already had 11 real
+      tests.
+
+      During compilation, three criteria had been mistakenly classified as
+      "SHOULD, non-blocking" during preparation when they are actually
+      MUST: `report_responses`, `vulnerability_report_response` (14-day
+      response to reports — satisfied vacuously, no report ever received)
+      and `warnings`/`warnings_fixed`/`test_policy` (the latter required a
+      real fix, not just text: ESLint added — `eslint.config.js`, zero
+      errors — and a test-policy line added to the README). The last
+      remaining blocker (`enhancement_responses`) was found by
+      cross-checking the BadgeApp project's official criteria file
+      (`github.com/coreinfrastructure/best-practices-badge`) against the
+      project's real status via the API, not by trial and error.
