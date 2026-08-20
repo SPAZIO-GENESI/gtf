@@ -35,12 +35,22 @@ decision: >
   `active` resta una decisione esplicita del gestore, non assunta per
   analogia con gli altri due controlli della stessa famiglia.
 consequences: >
-  `CTL-best-practices-badge` resta `draft` finché il gestore non decide
-  esplicitamente la promozione. Il gap sulla pagina `/sicurezza/` di
-  authweb (nessuna menzione di Scorecard/CodeQL/badge) è stato segnalato
-  al gestore in chat ma **non affrontato qui**: è un lavoro più ampio
-  (tocca un secondo repo pubblico) che il gestore ha scelto di non fare
-  in questo giro.
+  **Seguito, stesso giorno**: promosso ad `active` su decisione esplicita
+  del gestore, chiesta e ottenuta in chat dopo aver spiegato la
+  distinzione fra "verificato tecnicamente" e "dichiarato ufficialmente
+  dall'organizzazione" — la stessa in vigore da `ADR-A3-parte4`. Durante
+  la stessa verifica, emerso e corretto un bug più ampio nel generatore
+  (`linkifyUrls` includeva il backtick di chiusura negli `href`, 5 link
+  rotti sulla pagina) e 9 legami controllo↔requisito preesistenti mai
+  collegati (`satisfies` dichiarato nel controllo ma assente dal
+  `satisfied_by` del requisito): 6 controlli già attivi, mai comparsi
+  pubblicamente per lo stesso difetto — sistemati nello stesso giro,
+  zero orfani residui dopo il fix.
+
+  Il gap sulla pagina `/sicurezza/` di authweb (nessuna menzione di
+  Scorecard/CodeQL/badge) resta segnalato ma **non affrontato**: è un
+  lavoro più ampio (tocca un secondo repo pubblico) che il gestore ha
+  scelto di non fare in questo giro.
 affects: [CTL-best-practices-badge]
 evidence: [EVD-best-practices-badge-passing]
 visibility: public

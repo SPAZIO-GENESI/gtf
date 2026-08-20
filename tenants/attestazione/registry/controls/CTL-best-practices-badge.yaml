@@ -1,6 +1,6 @@
 id: CTL-best-practices-badge
 title: "Badge OpenSSF Best Practices — livello passing su attest-mcp"
-status: draft
+status: active
 visibility: public
 satisfies: [REQ-27001-inspiration-01]
 implemented_by: [IMP-attest-mcp-best-practices-badge]
@@ -36,6 +36,9 @@ verify_howto: >
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-08-20
+# 2026-08-20: promosso da draft ad active su decisione esplicita del
+# gestore, richiesta e ottenuta in chat lo stesso giorno del primo
+# collaudo (curl pulito). Vedi ADR-P54-badge per il ragionamento.
 i18n:
   en:
     title: "OpenSSF Best Practices Badge — passing level on attest-mcp"
