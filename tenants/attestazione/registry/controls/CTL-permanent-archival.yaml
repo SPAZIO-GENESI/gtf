@@ -1,0 +1,70 @@
+id: CTL-permanent-archival
+title: "Conservazione permanente del codice e delle pagine pubbliche fuori dal perimetro dell'ente (Software Heritage + Internet Archive)"
+status: draft
+visibility: public
+satisfies: [REQ-27037-pres-01]
+evidenced_by: [EVD-swh-archival-verify, EVD-ia-capture-verify]
+verify_howto: >
+  Due archivi indipendenti, entrambi verificabili da chiunque senza alcuna
+  credenziale, coprono due cose diverse: il **codice sorgente** dei
+  repository pubblici del sistema di attestazione (imgauth, imgauthweb,
+  autart-signer, gtf, attest-mcp, attest-mcp-remote, attest-action,
+  attest-bot) su Software Heritage, e lo **stato pubblico** di
+  trust.spaziogenesi.org e attestazione.spaziogenesi.org su Internet
+  Archive, così che ciò che il servizio dichiarava in una certa data resti
+  dimostrabile anche a chi non si fida di questo registro.
+
+  Software Heritage: `GET
+  https://archive.softwareheritage.org/api/1/resolve/<SWHID>/` risolve
+  ciascuno degli identificatori auto-verificanti (uno per repository)
+  elencati in EVD-swh-archival-verify — nessun account richiesto. Lo SWHID
+  è calcolato dal contenuto, non assegnato da un'autorità: chiunque può
+  clonare il repository e verificare che il digest corrisponda.
+
+  Internet Archive: le due catture elencate in EVD-ia-capture-verify sono
+  pagine pubbliche ordinarie su web.archive.org, apribili da qualunque
+  browser.
+
+  **Cosa NON copre ancora questo controllo**: il deposito Zenodo del
+  whitepaper e degli snapshot del registro (Parte 2 del piano) non è
+  stato eseguito in questa sessione — richiede un token di accesso che
+  non era disponibile, a differenza dell'apertura dell'account. Il
+  controllo resta `draft` anche per questo: diventerà verificabile per
+  intero solo quando il deposito Zenodo avrà un DOI risolvibile. Vedi
+  ADR-A5.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-08-20
+i18n:
+  en:
+    title: "Permanent conservation of code and public pages outside the organization's perimeter (Software Heritage + Internet Archive)"
+    verify_howto: >
+      Two independent archives, both verifiable by anyone without any
+      credential, cover two different things: the **source code** of the
+      attestation system's public repositories (imgauth, imgauthweb,
+      autart-signer, gtf, attest-mcp, attest-mcp-remote, attest-action,
+      attest-bot) on Software Heritage, and the **public state** of
+      trust.spaziogenesi.org and attestazione.spaziogenesi.org on the
+      Internet Archive, so that what the service declared on a given date
+      remains demonstrable even to someone who does not trust this
+      registry.
+
+      Software Heritage: `GET
+      https://archive.softwareheritage.org/api/1/resolve/<SWHID>/`
+      resolves each of the self-verifying identifiers (one per
+      repository) listed in EVD-swh-archival-verify — no account
+      required. The SWHID is computed from content, not assigned by an
+      authority: anyone can clone the repository and check that the
+      digest matches.
+
+      Internet Archive: the two captures listed in EVD-ia-capture-verify
+      are ordinary public pages on web.archive.org, openable from any
+      browser.
+
+      **What this control does NOT cover yet**: the Zenodo deposit of the
+      whitepaper and of the registry's periodic snapshots (Part 2 of the
+      plan) was not carried out in this session — it requires an access
+      token that was not available, unlike opening the account. The
+      control stays `draft` for this reason too: it will become fully
+      verifiable only once the Zenodo deposit has a resolvable DOI. See
+      ADR-A5.

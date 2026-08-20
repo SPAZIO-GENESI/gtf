@@ -1,0 +1,21 @@
+id: EVD-swh-archival-verify
+title: "Otto repository pubblici del sistema di attestazione archiviati su Software Heritage, SWHID risolti uno per uno"
+location: { system: software-heritage, ref: "snapshot SWHID per ciascun repository: imgauth swh:1:snp:b39d8ba8611a29db70a20e38a472762467e4a67d · imgauthweb swh:1:snp:952e8d0ae754dc579bf25b2bce808cd3c3b75110 · autart-signer swh:1:snp:1c7b7e9f925222791bb1f4b4c4a9ceef5966b184 · gtf swh:1:snp:b5e2bc2876f8d4d4b72342f265d421c42c3c857a · attest-mcp swh:1:snp:1d2388ee2de6efb1e6774371b17d98406f7bdb25 · attest-mcp-remote swh:1:snp:368fe99117c983f31c7fb8b33735210d938e1437 · attest-action swh:1:snp:9543bb30d2aede13731da5d897a5fc12c9d6087f · attest-bot swh:1:snp:dfa12be7d99105d96ac459d0408ee8f1011a9374", public_via: "GET https://archive.softwareheritage.org/api/1/resolve/<SWHID>/ (nessuna credenziale)" }
+produced_by: PRC-permanent-archival-refresh
+collection: manual
+integrity: >
+  Eseguito il 2026-08-20: richiesta di archiviazione via `POST
+  https://archive.softwareheritage.org/api/1/origin/save/git/url/<url>/`
+  (nessuna credenziale) per gli otto repository pubblici del sistema di
+  attestazione — non per l'intera organizzazione GitHub, che conta anche
+  una quarantina di repository non pertinenti (siti-portfolio personali
+  di singoli artisti, repository di test/demo, mirror generati): la
+  scelta di limitare lo scope a questi otto è documentata in ADR-A5.
+  Tutte e otto le richieste sono terminate con `save_task_status:
+  succeeded` / `visit_status: full`. Ogni SWHID risultante è stato poi
+  risolto singolarmente con `GET
+  https://archive.softwareheritage.org/api/1/resolve/<SWHID>/`: tutti e
+  otto rispondono HTTP 200 — verificato uno per uno, nessuno citato senza
+  averlo risolto (vincolo esplicito del design doc A5).
+supports: [CTL-permanent-archival]
+visibility: public

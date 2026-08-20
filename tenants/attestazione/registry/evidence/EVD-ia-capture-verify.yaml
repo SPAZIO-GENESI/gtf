@@ -1,0 +1,25 @@
+id: EVD-ia-capture-verify
+title: "Cattura Internet Archive di trust.spaziogenesi.org e attestazione.spaziogenesi.org"
+location: { system: internet-archive, ref: "https://web.archive.org/web/20260820140224/https://trust.spaziogenesi.org/en/ e https://web.archive.org/web/20260820140247/https://attestazione.spaziogenesi.org/", public_via: "pagine pubbliche ordinarie su web.archive.org, apribili da qualunque browser senza credenziali" }
+produced_by: PRC-permanent-archival-refresh
+collection: manual
+integrity: >
+  Eseguito il 2026-08-20 tramite l'endpoint pubblico Save Page Now
+  (`GET https://web.archive.org/save/<url>`, nessuna credenziale) per le
+  due pagine pubbliche del sistema di attestazione. Entrambe le catture
+  risultanti risolvono HTTP 200 — verificato con una richiesta diretta a
+  ciascun URL restituito, non solo assunto dalla risposta 302 iniziale.
+
+  Sorpresa non prevista dal design doc: la cattura di
+  `trust.spaziogenesi.org` è stata reindirizzata da Internet Archive
+  sulla variante `/en/` invece che sulla radice italiana, anche
+  interrogando il dominio direttamente con `curl -H "Accept-Language:
+  it-IT"` non si osserva alcun redirect lato server (risponde 200 senza
+  reindirizzare in entrambi i casi) — il comportamento è quindi imputabile
+  al crawler di Internet Archive, non al sito. La cattura resta valida
+  come prova di ciò che il servizio dichiarava in quella data, ma chi
+  eseguirà la prossima cattura trimestrale (PRC-permanent-archival-refresh)
+  dovrebbe verificare se la variante italiana risulta catturabile
+  separatamente.
+supports: [CTL-permanent-archival]
+visibility: public

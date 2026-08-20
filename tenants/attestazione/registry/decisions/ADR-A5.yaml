@@ -1,0 +1,89 @@
+id: ADR-A5
+title: "A5 — Conservazione permanente del codice e delle pagine pubbliche fuori dal perimetro dell'ente"
+date: 2026-08-20
+status: accepted
+context: >
+  `MET-conservazione` copriva solo backup dentro il perimetro di controllo
+  dell'ente (R2 primario + backup offsite B2, ADR-GTF-013): entrambe le
+  copie cessano di esistere se cessa l'ente. La fascia Professionale vende
+  una garanzia di custodia a cinque anni la cui unica garanzia oggi era la
+  continuità di un'organizzazione di volontari. `design/A5-conservazione-permanente.md`
+  proponeva tre archivi indipendenti — Software Heritage (codice), Zenodo
+  (whitepaper + snapshot del registro, DOI), Internet Archive (pagine
+  pubbliche) — più un controllo e un processo ricorrente nel registro.
+
+  Il documento assumeva, testualmente, l'archiviazione di "ciascun
+  repository pubblico dell'organizzazione". L'organizzazione GitHub
+  SPAZIO-GENESI conta però una quarantina di repository pubblici, la
+  maggior parte estranei al sistema di attestazione: siti-portfolio
+  personali di singoli artisti (repository nominati per nome e cognome),
+  repository di test/demo, e un mirror generato (`trust-attestazione`,
+  output pubblicato dal registro `gtf`, non codice sorgente). Archiviare
+  su Software Heritage è un'operazione pubblica e di fatto permanente:
+  farlo indiscriminatamente anche sui repository-portfolio di persone
+  nominate è una decisione di merito, non di scope tecnico, e non spettava
+  a questa sessione prenderla da sola (§8 di questo CLAUDE.md di sessione).
+decision: >
+  Chiesto al gestore quale perimetro usare; risposta: solo gli otto
+  repository del sistema di attestazione elencati nella tabella "I
+  repository" di `img-auth-hub/CLAUDE.md` (imgauth, imgauthweb,
+  autart-signer, gtf, attest-mcp, attest-mcp-remote, attest-action,
+  attest-bot). Eseguite le Parti 1 e 3 del design doc, entrambe
+  interamente senza credenziali:
+
+  **Software Heritage**: richiesta di archiviazione (`POST
+  .../origin/save/git/url/<url>/`) per tutti e otto, tutte concluse con
+  `visit_status: full`; ogni SWHID risultante risolto singolarmente
+  (`GET .../resolve/<SWHID>/`, HTTP 200) prima di essere citato, come
+  richiesto esplicitamente dal design doc ("non citare uno SWHID che non
+  hai risolto tu stesso") — dettaglio in EVD-swh-archival-verify.
+
+  **Internet Archive**: cattura Save Page Now (`GET web.archive.org/save/<url>`)
+  per trust.spaziogenesi.org e attestazione.spaziogenesi.org, entrambe
+  risolte a HTTP 200 — dettaglio in EVD-ia-capture-verify, inclusa la
+  sorpresa del redirect su `/en/` per il primo dominio (comportamento del
+  crawler di Internet Archive, non del sito: verificato che il dominio
+  risponde 200 senza reindirizzare, con o senza header Accept-Language).
+
+  Registrato `CTL-permanent-archival` (**draft**) e un unico processo
+  ricorrente `PRC-permanent-archival-refresh` (trimestrale, 90 giorni) che
+  copre entrambe le riarchiviazioni — un solo PRC invece di due, perché
+  sono due azioni-browser da pochi minuti nella stessa sessione trimestrale
+  e moltiplicare i processi ricorrenti per azioni quasi identiche va contro
+  PRN-10. Collegato a `REQ-27037-pres-01` (stesso requisito già usato da
+  B3/CTL-maintainer-succession, coerente: entrambi coprono la conservazione
+  della prova nel tempo, non l'integrità del singolo certificato).
+
+  **Parte 2 (Zenodo) non eseguita in questa sessione.** Il design doc la
+  descriveva come bloccata "per l'account umano"; il gestore ha dichiarato
+  in chat il 20/08 di aver aperto l'account, ma un deposito reale richiede
+  un token di accesso API che questa sessione non possiede — l'apertura
+  dell'account sblocca la parte 2 solo in parte, non la rende eseguibile
+  dal modello senza un secondo passaggio umano (fornire il token, o
+  eseguire il deposito da un pannello web). `CTL-permanent-archival` resta
+  `draft` anche per questo, dichiarato esplicitamente nel suo
+  `verify_howto`.
+
+  **`MET-conservazione` non modificata.** Letta la formula reale
+  (`registry/metrics/MET-conservation.yaml`): media di freschezza degli
+  snapshot ed esito dell'ultimo restore-drill — non ha oggi alcun termine
+  per l'archiviazione permanente fuori perimetro. Integrarla è rimandato:
+  proporre un termine per un controllo ancora `draft` e per giunta
+  incompleto (manca Zenodo) rischierebbe di premiare nella metrica un
+  lavoro non ancora verificato — la stessa logica per cui un controllo non
+  si promuove da sé. Da riconsiderare quando `CTL-permanent-archival`
+  arriverà al collaudo con la Parte 2 completa.
+consequences: >
+  `CTL-permanent-archival` nasce e resta `draft`: la promozione è una
+  decisione del gestore, non tecnica, e comunque prematura finché manca
+  Zenodo. Nessuna modifica a `MET-conservazione` in questo giro — resta
+  un'azione futura esplicitamente aperta, non un'omissione.
+
+  Fuori scopo: i circa trenta repository pubblici dell'organizzazione non
+  legati al sistema di attestazione — non archiviati, per decisione
+  esplicita del gestore, non per dimenticanza. Se in futuro qualcuno dovrà
+  decidere sulla loro archiviazione, è una decisione separata, non
+  un'estensione automatica di questo controllo.
+affects: [CTL-permanent-archival]
+evidence: [EVD-swh-archival-verify, EVD-ia-capture-verify]
+visibility: public
