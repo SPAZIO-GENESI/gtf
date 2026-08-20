@@ -1,56 +1,34 @@
 id: ADR-P54-badge
-title: "P54 — seguito: rendere visibile sul Trust Center il badge OpenSSF ottenuto"
+title: "P54 — seguito: badge OpenSSF ottenuto e reso visibile sul Trust Center"
 date: 2026-08-20
 status: accepted
 context: >
-  `ADR-P54` (19/08) aveva chiuso il piano lasciando il badge OpenSSF Best
-  Practices non sottomesso — richiedeva il login GitHub del gestore — e
-  dichiarava esplicitamente: "un aggiornamento di registro separato va
-  fatto dopo" il suo ottenimento. Il 20/08 il gestore ha completato la
-  compilazione del modulo insieme all'assistente (bozza in
-  `img-auth-hub/p54-f7-badge-attest-mcp.md`), con tre correzioni di rotta
-  rispetto a quella bozza (criteri classificati "SHOULD" che erano in
-  realtà "MUST": `report_responses`, `vulnerability_report_response`,
-  `warnings`/`test_policy` — questi ultimi due hanno richiesto un fix
-  reale nel codice, non solo testuale). `attest-mcp` ha raggiunto il
-  livello "passing" (`first_achieved_passing_at: 2026-08-20T08:21:35Z`).
-  Il gestore ha poi chiesto esplicitamente se il risultato fosse già
-  visibile da qualche parte oltre il README del repo: verificato che non
-  lo era — né nel Trust Center né sulla pagina pubblica `/sicurezza/` di
-  authweb (quest'ultima, notato di passaggio, non menziona nemmeno
-  Scorecard/CodeQL benché entrambi attivi da agosto: gap preesistente,
-  fuori perimetro di questa voce).
+  `ADR-P54` aveva lasciato il badge OpenSSF Best Practices non sottomesso
+  (richiedeva login GitHub del gestore). Compilato il modulo per
+  `attest-mcp`: tre criteri erano stati classificati per errore come
+  "SHOULD" quando sono "MUST" (`report_responses`,
+  `vulnerability_report_response`, `warnings`/`test_policy` — questi
+  ultimi due hanno richiesto un fix reale nel codice, non solo testuale).
+  `attest-mcp` ha raggiunto il livello "passing"
+  (`first_achieved_passing_at: 2026-08-20T08:21:35Z`).
 decision: >
-  Scritto un terzo `CTL` per la famiglia già iniziata da `ADR-A3-parte4`
-  (`CTL-scorecard-monitoring`, `CTL-static-analysis`):
-  `CTL-best-practices-badge`, stesso schema — `verify_howto` senza
-  credenziali (`bestpractices.dev/projects/14159.json`, REST pubblico),
-  collegato a `REQ-27001-inspiration-01`. Un `EVD` con `collection: auto`
-  (`EVD-best-practices-badge-passing`) e un `IMP` che referenzia sia il
-  badge nel README sia i commit dell'hardening che lo hanno sbloccato
-  (ESLint, policy di test).
+  Terzo `CTL` della famiglia iniziata da `ADR-A3-parte4`
+  (`CTL-best-practices-badge`), stesso schema: `verify_howto` senza
+  credenziali via l'API pubblica di bestpractices.dev, collegato a
+  `REQ-27001-inspiration-01`, con `EVD`/`IMP` dedicati. Promosso ad
+  `active` lo stesso giorno su decisione esplicita del gestore.
 
-  **Nasce `draft`**, stessa cautela di `ADR-A3-parte4`: il dato è
-  verificato con successo (curl pulito, 20/08), ma la promozione ad
-  `active` resta una decisione esplicita del gestore, non assunta per
-  analogia con gli altri due controlli della stessa famiglia.
+  Verificando la visibilità pubblica del controllo, corretti due difetti
+  preesistenti nel generatore del sito: un bug in `linkifyUrls` che
+  includeva il backtick di chiusura negli `href` (5 link rotti sulla
+  pagina) e 9 legami controllo↔requisito mai collegati (`satisfies`
+  dichiarato nel controllo ma assente dal `satisfied_by` del requisito) —
+  6 controlli già `active`, mai comparsi pubblicamente per lo stesso
+  motivo. Zero orfani residui dopo il fix.
 consequences: >
-  **Seguito, stesso giorno**: promosso ad `active` su decisione esplicita
-  del gestore, chiesta e ottenuta in chat dopo aver spiegato la
-  distinzione fra "verificato tecnicamente" e "dichiarato ufficialmente
-  dall'organizzazione" — la stessa in vigore da `ADR-A3-parte4`. Durante
-  la stessa verifica, emerso e corretto un bug più ampio nel generatore
-  (`linkifyUrls` includeva il backtick di chiusura negli `href`, 5 link
-  rotti sulla pagina) e 9 legami controllo↔requisito preesistenti mai
-  collegati (`satisfies` dichiarato nel controllo ma assente dal
-  `satisfied_by` del requisito): 6 controlli già attivi, mai comparsi
-  pubblicamente per lo stesso difetto — sistemati nello stesso giro,
-  zero orfani residui dopo il fix.
-
   Il gap sulla pagina `/sicurezza/` di authweb (nessuna menzione di
-  Scorecard/CodeQL/badge) resta segnalato ma **non affrontato**: è un
-  lavoro più ampio (tocca un secondo repo pubblico) che il gestore ha
-  scelto di non fare in questo giro.
+  Scorecard/CodeQL/badge) resta segnalato ma non affrontato: lavoro più
+  ampio su un secondo repo, rimandato dal gestore.
 affects: [CTL-best-practices-badge]
 evidence: [EVD-best-practices-badge-passing]
 visibility: public
