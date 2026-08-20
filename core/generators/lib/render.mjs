@@ -16,7 +16,11 @@ export function esc(str) {
 // markdown nei campi del registro, un URL scritto in prosa deve comunque
 // arrivare cliccabile sul Trust Center pubblico.
 function linkifyUrls(str) {
-  return str.replace(/https?:\/\/[^\s<>"']+/g, (url) => {
+  // Il backtick è escluso come <>"': la prosa del registro scrive spesso
+  // gli URL fra backtick in stile markdown (`https://...`) e senza questa
+  // esclusione il backtick di chiusura finiva dentro l'href (bug trovato
+  // il 20/08, P54: link reali rotti con un %60 in coda sul Trust Center).
+  return str.replace(/https?:\/\/[^\s<>"'`]+/g, (url) => {
     const trailing = url.match(/[.,;:)]+$/);
     const clean = trailing ? url.slice(0, -trailing[0].length) : url;
     const trail = trailing ? trailing[0] : "";
