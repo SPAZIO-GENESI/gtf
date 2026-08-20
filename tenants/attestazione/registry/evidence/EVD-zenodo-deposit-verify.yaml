@@ -1,0 +1,26 @@
+id: EVD-zenodo-deposit-verify
+title: "Whitepaper v1.0 e bundle mensili del registro depositati su Zenodo, DOI risolti"
+location: { system: zenodo, ref: "whitepaper: DOI 10.5281/zenodo.22031189 (concept DOI 10.5281/zenodo.22031188) · bundle mensili 2026-07/2026-08: DOI 10.5281/zenodo.22031193 (concept DOI 10.5281/zenodo.22031192)", public_via: "GET https://doi.org/<DOI> (nessuna credenziale, redirect 302 verso la pagina pubblica del record) oppure GET https://zenodo.org/api/records/<id>" }
+produced_by: PRC-zenodo-archival-refresh
+collection: manual
+integrity: >
+  Pubblicati il 2026-08-20 dal gestore (l'unico passo — Publish — che
+  questa sessione ha lasciato volutamente umano: è l'operazione
+  irreversibile del deposito). Verificato dopo la pubblicazione, non
+  assunto: entrambi i DOI risolvono (HTTP 302 su https://doi.org/) verso
+  la pagina pubblica del record; `GET
+  https://zenodo.org/api/records/<id>` conferma per il whitepaper il file
+  `whitepaper-v1.0.pdf` con checksum MD5 `d40c887381c3a3bf4c7d9a9b6ff919d6`
+  (verificato prima del caricamento che lo SHA-256 del PDF scaricato da
+  attestazione.trust.spaziogenesi.org/whitepaper-v1.0.pdf coincidesse
+  byte per byte con l'impronta già attestata,
+  898ec96815e6bee1f85f93651fb64b6d1ad289510f4ac2fd9fbaa92fe01de452, ADR-P38
+  — il deposito Zenodo aggiunge citabilità e conservazione, non integrità,
+  come dichiarato nel design doc A5); per i bundle, i checksum MD5 dei due
+  file caricati confermati identici a quelli calcolati in locale sui file
+  già committati in `snapshots/anchors/`. Contenuto verificato prima del
+  deposito (non a campione): i bundle contengono solo nomi di file ed
+  hash SHA-256 di evidenze operative, nessun dato personale, nessuna
+  impronta di opera attestata.
+supports: [CTL-permanent-archival]
+visibility: public

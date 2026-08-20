@@ -1,0 +1,22 @@
+id: PRC-zenodo-archival-refresh
+title: "Aggiornamento annuale del deposito Zenodo (nuova versione del bundle GTF)"
+owner: it@spaziogenesi.org
+who: "Il gestore — pubblicare una nuova versione richiede l'accesso all'account Zenodo che ha creato il deposito originale"
+needs_technical: false
+duration_minutes: 15
+trigger: "Cadenza annuale dichiarata: gli snapshot mensili del registro continuano ad accumularsi in snapshots/anchors/ (PRC-dogfooding-anchor) ma il deposito Zenodo del 2026-08-20 (EVD-zenodo-deposit-verify) ne contiene solo due. Senza un aggiornamento periodico, il deposito diventa una fotografia sempre più vecchia invece di una conservazione continua."
+output: "Una nuova versione del deposito dataset (stesso concept DOI 10.5281/zenodo.22031192, nuovo DOI di versione) con i bundle mensili accumulati dall'ultimo aggiornamento."
+produces_evidence: [EVD-zenodo-deposit-verify]
+human_cost_minutes_month: 1
+frequency_days: 365
+last_run: "2026-08-20"
+last_outcome: ok
+steps:
+  - do: "Apri il deposito esistente su Zenodo e scegli 'New version'."
+    links:
+      - url: "https://zenodo.org/records/22031193"
+        label: "Deposito bundle mensili GTF"
+  - do: "Rimuovi i file già presenti nella nuova versione (Zenodo li porta avanti di default) e carica tutti i file *-bundle.json presenti oggi in snapshots/anchors/ del repository gtf."
+    note: "Non solo i nuovi: ogni versione Zenodo è un deposito completo, non un incremento — la versione precedente resta comunque raggiungibile dal proprio DOI."
+  - do: "Pubblica la nuova versione, poi aggiorna il DOI (resta lo stesso solo per il concept DOI, cambia quello di versione) in EVD-zenodo-deposit-verify e la data last_run di questo file."
+visibility: public
