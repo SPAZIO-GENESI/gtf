@@ -1,18 +1,20 @@
 id: CTL-permanent-archival
-title: "Conservazione permanente del codice e delle pagine pubbliche fuori dal perimetro dell'ente (Software Heritage + Internet Archive)"
+title: "Conservazione permanente del codice, del whitepaper e delle pagine pubbliche fuori dal perimetro dell'ente (Software Heritage + Zenodo + Internet Archive)"
 status: draft
 visibility: public
 satisfies: [REQ-27037-pres-01]
-evidenced_by: [EVD-swh-archival-verify, EVD-ia-capture-verify]
+evidenced_by: [EVD-swh-archival-verify, EVD-ia-capture-verify, EVD-zenodo-deposit-verify]
 verify_howto: >
-  Due archivi indipendenti, entrambi verificabili da chiunque senza alcuna
-  credenziale, coprono due cose diverse: il **codice sorgente** dei
+  Tre archivi indipendenti, tutti verificabili da chiunque senza alcuna
+  credenziale, coprono tre cose diverse: il **codice sorgente** dei
   repository pubblici del sistema di attestazione (imgauth, imgauthweb,
   autart-signer, gtf, attest-mcp, attest-mcp-remote, attest-action,
-  attest-bot) su Software Heritage, e lo **stato pubblico** di
-  trust.spaziogenesi.org e attestazione.spaziogenesi.org su Internet
-  Archive, così che ciò che il servizio dichiarava in una certa data resti
-  dimostrabile anche a chi non si fida di questo registro.
+  attest-bot) su Software Heritage; il **whitepaper v1.0 e i bundle
+  mensili di evidenze del registro** su Zenodo, con DOI citabile; lo
+  **stato pubblico** di trust.spaziogenesi.org e attestazione.spaziogenesi.org
+  su Internet Archive — così che ciò che il servizio dichiarava, e con
+  cosa, in una certa data resti dimostrabile anche a chi non si fida di
+  questo registro.
 
   Software Heritage: `GET
   https://archive.softwareheritage.org/api/1/resolve/<SWHID>/` risolve
@@ -21,33 +23,37 @@ verify_howto: >
   è calcolato dal contenuto, non assegnato da un'autorità: chiunque può
   clonare il repository e verificare che il digest corrisponda.
 
+  Zenodo: `GET https://doi.org/10.5281/zenodo.22031189` risolve al
+  whitepaper v1.0 (stesso file, byte per byte, dell'impronta SHA-256 già
+  attestata — l'impronta prova l'integrità, il DOI garantisce la
+  reperibilità, distinzione esplicita in whitepaper.html §12); `GET
+  https://doi.org/10.5281/zenodo.22031193` risolve ai bundle mensili del
+  registro (2026-07, 2026-08 al momento del deposito — aggiornati
+  annualmente, PRC-zenodo-archival-refresh). Nessuna delle due pagine
+  contiene dati personali o impronte di opere attestate: solo hash di
+  evidenze operative, verificato record per record prima del deposito
+  (EVD-zenodo-deposit-verify).
+
   Internet Archive: le due catture elencate in EVD-ia-capture-verify sono
   pagine pubbliche ordinarie su web.archive.org, apribili da qualunque
   browser.
-
-  **Cosa NON copre ancora questo controllo**: il deposito Zenodo del
-  whitepaper e degli snapshot del registro (Parte 2 del piano) non è
-  stato eseguito in questa sessione — richiede un token di accesso che
-  non era disponibile, a differenza dell'apertura dell'account. Il
-  controllo resta `draft` anche per questo: diventerà verificabile per
-  intero solo quando il deposito Zenodo avrà un DOI risolvibile. Vedi
-  ADR-A5.
 owner: it@spaziogenesi.org
 review_every_days: 180
 last_reviewed: 2026-08-20
 i18n:
   en:
-    title: "Permanent conservation of code and public pages outside the organization's perimeter (Software Heritage + Internet Archive)"
+    title: "Permanent conservation of code, whitepaper and public pages outside the organization's perimeter (Software Heritage + Zenodo + Internet Archive)"
     verify_howto: >
-      Two independent archives, both verifiable by anyone without any
-      credential, cover two different things: the **source code** of the
-      attestation system's public repositories (imgauth, imgauthweb,
+      Three independent archives, all verifiable by anyone without any
+      credential, cover three different things: the **source code** of
+      the attestation system's public repositories (imgauth, imgauthweb,
       autart-signer, gtf, attest-mcp, attest-mcp-remote, attest-action,
-      attest-bot) on Software Heritage, and the **public state** of
-      trust.spaziogenesi.org and attestazione.spaziogenesi.org on the
-      Internet Archive, so that what the service declared on a given date
-      remains demonstrable even to someone who does not trust this
-      registry.
+      attest-bot) on Software Heritage; the **whitepaper v1.0 and the
+      registry's monthly evidence bundles** on Zenodo, with a citable
+      DOI; the **public state** of trust.spaziogenesi.org and
+      attestazione.spaziogenesi.org on the Internet Archive — so that
+      what the service declared, and with what, on a given date remains
+      demonstrable even to someone who does not trust this registry.
 
       Software Heritage: `GET
       https://archive.softwareheritage.org/api/1/resolve/<SWHID>/`
@@ -57,14 +63,18 @@ i18n:
       authority: anyone can clone the repository and check that the
       digest matches.
 
+      Zenodo: `GET https://doi.org/10.5281/zenodo.22031189` resolves to
+      the whitepaper v1.0 (the same file, byte for byte, as the
+      already-attested SHA-256 fingerprint — the fingerprint proves
+      integrity, the DOI guarantees findability, an explicit distinction
+      in whitepaper.html §12); `GET
+      https://doi.org/10.5281/zenodo.22031193` resolves to the registry's
+      monthly bundles (2026-07, 2026-08 at deposit time — updated
+      annually, PRC-zenodo-archival-refresh). Neither page contains
+      personal data or fingerprints of attested works: only hashes of
+      operational evidence, verified record by record before the
+      deposit (EVD-zenodo-deposit-verify).
+
       Internet Archive: the two captures listed in EVD-ia-capture-verify
       are ordinary public pages on web.archive.org, openable from any
       browser.
-
-      **What this control does NOT cover yet**: the Zenodo deposit of the
-      whitepaper and of the registry's periodic snapshots (Part 2 of the
-      plan) was not carried out in this session — it requires an access
-      token that was not available, unlike opening the account. The
-      control stays `draft` for this reason too: it will become fully
-      verifiable only once the Zenodo deposit has a resolvable DOI. See
-      ADR-A5.

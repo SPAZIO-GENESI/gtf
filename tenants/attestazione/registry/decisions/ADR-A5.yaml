@@ -54,30 +54,51 @@ decision: >
   B3/CTL-maintainer-succession, coerente: entrambi coprono la conservazione
   della prova nel tempo, non l'integrità del singolo certificato).
 
-  **Parte 2 (Zenodo) non eseguita in questa sessione.** Il design doc la
-  descriveva come bloccata "per l'account umano"; il gestore ha dichiarato
-  in chat il 20/08 di aver aperto l'account, ma un deposito reale richiede
-  un token di accesso API che questa sessione non possiede — l'apertura
-  dell'account sblocca la parte 2 solo in parte, non la rende eseguibile
-  dal modello senza un secondo passaggio umano (fornire il token, o
-  eseguire il deposito da un pannello web). `CTL-permanent-archival` resta
-  `draft` anche per questo, dichiarato esplicitamente nel suo
-  `verify_howto`.
+  **Parte 2 (Zenodo), stesso giorno, seguito.** Inizialmente non eseguita:
+  il design doc la descriveva come bloccata "per l'account umano"; il
+  gestore aveva dichiarato in chat di aver aperto l'account, ma un
+  deposito reale richiede un token di accesso API che l'apertura
+  dell'account da sola non forniva. Chiarito il malinteso, il gestore ha
+  generato un token personale (`deposit:write` + `deposit:actions`) e
+  l'ha dato in chat: usato una sola volta, in un'unica sessione di
+  comandi, mai scritto in un file né in un commit. Prima del deposito,
+  verificato — non assunto — che il PDF scaricato da
+  attestazione.trust.spaziogenesi.org/whitepaper-v1.0.pdf avesse lo
+  stesso SHA-256 già attestato (ADR-P38) e che i due bundle mensili
+  (`snapshots/anchors/2026-07-bundle.json`, `2026-08-bundle.json`)
+  contenessero solo nomi di file ed hash di evidenze operative, nessun
+  dato personale né impronta di opera attestata — vincolo esplicito e
+  irreversibile del design doc ("verifica record per record prima di
+  depositare"). Create due deposizioni in **bozza** via API (whitepaper:
+  publication/technicalnote, licenza CC BY 4.0 già dichiarata nel
+  documento §12; bundle: dataset, licenza MIT già dichiarata in
+  `gtf/LICENSE`) — la pubblicazione, l'unico passo irreversibile, lasciata
+  volutamente al gestore. Pubblicate dal gestore lo stesso giorno; DOI
+  risolti dal vivo dopo la pubblicazione (`GET doi.org/<DOI>` → 302),
+  checksum dei file confermati identici a quelli caricati — dettaglio in
+  EVD-zenodo-deposit-verify. DOI stampato in `whitepaper.html` §12
+  accanto all'impronta SHA-256, con la distinzione esplicita richiesta dal
+  design doc (l'impronta prova l'integrità, il DOI la reperibilità).
+  Registrato `PRC-zenodo-archival-refresh` (annuale, separato dal PRC
+  trimestrale di Software Heritage/Internet Archive perché la cadenza
+  dichiarata dal design doc per Zenodo è diversa — "anche solo annuale").
+  `CTL-permanent-archival` aggiornato: ora copre tutti e tre gli archivi.
 
-  **`MET-conservazione` non modificata.** Letta la formula reale
+  **`MET-conservazione` non modificata**, nemmeno ora che la Parte 2 è
+  completa. Letta la formula reale
   (`registry/metrics/MET-conservation.yaml`): media di freschezza degli
   snapshot ed esito dell'ultimo restore-drill — non ha oggi alcun termine
-  per l'archiviazione permanente fuori perimetro. Integrarla è rimandato:
-  proporre un termine per un controllo ancora `draft` e per giunta
-  incompleto (manca Zenodo) rischierebbe di premiare nella metrica un
-  lavoro non ancora verificato — la stessa logica per cui un controllo non
-  si promuove da sé. Da riconsiderare quando `CTL-permanent-archival`
-  arriverà al collaudo con la Parte 2 completa.
+  per l'archiviazione permanente fuori perimetro. Integrarla resta
+  un'azione futura proposta, non eseguita qui: emendare la formula è una
+  decisione (precedente ADR-GTF-011), non una conseguenza automatica del
+  completamento tecnico di un controllo ancora `draft`.
 consequences: >
-  `CTL-permanent-archival` nasce e resta `draft`: la promozione è una
-  decisione del gestore, non tecnica, e comunque prematura finché manca
-  Zenodo. Nessuna modifica a `MET-conservazione` in questo giro — resta
-  un'azione futura esplicitamente aperta, non un'omissione.
+  `CTL-permanent-archival` nasce e resta `draft`: tutte e tre le sue parti
+  (Software Heritage, Zenodo, Internet Archive) sono ora verificabili
+  senza credenziali, ma la promozione ad `active` resta una decisione del
+  gestore, non tecnica — non presa da questa sessione. Nessuna modifica a
+  `MET-conservazione`: resta un'azione futura esplicitamente aperta, non
+  un'omissione.
 
   Fuori scopo: i circa trenta repository pubblici dell'organizzazione non
   legati al sistema di attestazione — non archiviati, per decisione
@@ -85,5 +106,5 @@ consequences: >
   decidere sulla loro archiviazione, è una decisione separata, non
   un'estensione automatica di questo controllo.
 affects: [CTL-permanent-archival]
-evidence: [EVD-swh-archival-verify, EVD-ia-capture-verify]
+evidence: [EVD-swh-archival-verify, EVD-ia-capture-verify, EVD-zenodo-deposit-verify]
 visibility: public
