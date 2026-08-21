@@ -1,0 +1,8 @@
+id: EVD-succession-drill
+title: Collaudo del recupero dei segreti critici da parte del secondo referente tecnico
+location: { system: "modulo di esito compilato e firmato", ref: "prova eseguita il 20/08/2026 18:00-18:10, modulo firmato da entrambe le parti, conservato fuori dal registro pubblico" }
+produced_by: ADR-B3
+collection: manual
+integrity: "esito confermato a voce da entrambe le parti durante la prova e registrato subito dopo in un modulo firmato da entrambe; nessun valore segreto contenuto nel modulo né in questo record"
+visibility: internal
+why_not_public: "il record conferma che una persona diversa dal maintainer sa recuperare i segreti critici in autonomia; pubblicare dettagli operativi del collaudo aumenterebbe la superficie di attacco senza aggiungere fiducia verificabile da terzi"
