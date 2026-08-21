@@ -1,9 +1,11 @@
 id: CTL-maintainer-succession
 title: "Procedura di successione tecnica, con garanzia residua verificabile indipendentemente dall'ente"
-status: draft
+status: active
 visibility: public
 satisfies: [REQ-27037-pres-01]
 mitigates: [RSK-maintainer-unavailability]
+implemented_by: [IMP-succession-procedure]
+evidenced_by: [EVD-succession-drill, EVD-azure-succession-access]
 verify_howto: >
   Due cose distinte sono verificabili oggi, senza credenziali, da chiunque
   — e vanno tenute separate. (1) La garanzia residua per chi possiede un
@@ -15,17 +17,26 @@ verify_howto: >
   Bitcoin — nessun server di Spazio Genesi coinvolto; apri il certificato
   PDF in un lettore PAdES conforme (es. Adobe Acrobat Reader) e verifica
   che la marca temporale risulti di terza parte attendibile (radice
-  DigiCert nella Adobe Approved Trust List). (2) La procedura di
-  successione stessa (piano-2026/umano/procedura-successione.md, repo
-  privato img-auth-hub) NON è oggi pubblicata: è una bozza completata ma
-  non ancora deliberata né pubblicata dall'organo competente. Il
-  controllo resta "draft" anche per questo motivo, oltre che per
-  l'assenza di un collaudo del recupero segreti da parte di una persona
-  diversa dal maintainer (vedi ADR-B3). Diventerà verificabile per intero
-  solo quando la procedura sarà pubblicata.
+  DigiCert nella Adobe Approved Trust List). (2) Il meccanismo di
+  successione stesso è oggi collaudato con dati reali, non solo scritto:
+  un secondo referente tecnico ha ricevuto e usato un accesso operativo
+  verificato con comando (Azure, `EVD-azure-succession-access`) e ha
+  completato da solo, senza aiuto, il recupero dei segreti critici dal
+  caveau esterno (`EVD-succession-drill`). Entrambe le evidenze sono
+  interne (stesso principio di `CTL-secrets-escrow`: descrivere i
+  dettagli operativi del recupero riduce sicurezza senza aggiungere
+  fiducia verificabile da terzi), quindi non riproducibili da un terzo
+  senza credenziali — ciò che è pubblicamente verificabile è il fatto,
+  dichiarato qui, che il controllo è passato ad "active" solo dopo un
+  collaudo reale, non alla scrittura del documento. La procedura scritta
+  stessa (piano-2026/umano/procedura-successione.md, repo privato
+  img-auth-hub) resta un documento interno: non ancora deliberata né
+  pubblicata dall'organo competente. La pubblicazione del documento è un
+  passo organizzativo successivo, non una condizione per il collaudo
+  tecnico già avvenuto.
 owner: it@spaziogenesi.org
 review_every_days: 365
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-21
 i18n:
   en:
     title: "Technical succession procedure, with a residual guarantee independently verifiable from the organization"
@@ -41,11 +52,21 @@ i18n:
       involved; open the PDF certificate in a PAdES-compliant reader
       (e.g. Adobe Acrobat Reader) and check that the timestamp comes
       from a trusted third party (DigiCert root in the Adobe Approved
-      Trust List). (2) The succession procedure itself
+      Trust List). (2) The succession mechanism itself is now tested
+      with real data, not just written down: a second technical contact
+      received and used an operational access verified by command
+      (Azure, `EVD-azure-succession-access`) and independently completed,
+      without help, the recovery of the critical secrets from the
+      external vault (`EVD-succession-drill`). Both pieces of evidence
+      are internal (same principle as `CTL-secrets-escrow`: describing
+      the operational details of the recovery reduces security without
+      adding trust verifiable by third parties), so they are not
+      reproducible by a third party without credentials — what is
+      publicly verifiable is the fact, stated here, that the control
+      moved to "active" only after a real test, not when the document
+      was written. The written procedure itself
       (piano-2026/umano/procedura-successione.md, private img-auth-hub
-      repo) is NOT published today: it is a completed draft, not yet
-      resolved or published by the competent body. The control stays
-      "draft" for this reason too, in addition to the lack of a
-      secret-recovery test carried out by someone other than the
-      maintainer (see ADR-B3). It will become fully verifiable only once
-      the procedure is published.
+      repo) remains an internal document: not yet resolved or published
+      by the competent body. Publishing the document is a subsequent
+      organizational step, not a precondition for the technical test
+      already carried out.

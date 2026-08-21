@@ -1,0 +1,8 @@
+id: EVD-azure-succession-access
+title: Accesso Azure del secondo referente tecnico, verificato con comando
+location: { system: "tenant Microsoft Entra Spazio Genesi ets", ref: "utenza fbattisti@spaziogenesi.org, verificata il 21/08/2026 via Microsoft Graph (roleManagement/directory/roleAssignments) e az role assignment list — dettaglio in umano/procedura-successione.md §2, repo privato img-auth-hub" }
+produced_by: ADR-B3
+collection: manual
+integrity: "ruoli verificati con comandi read-only (Microsoft Graph, az CLI), non riferiti a voce; nessun valore segreto in questo record"
+visibility: internal
+why_not_public: "il record conferma un accesso operativo concesso a una persona fisica; pubblicare identificativi di tenant/sottoscrizione non aggiunge fiducia verificabile da terzi e riduce sicurezza"

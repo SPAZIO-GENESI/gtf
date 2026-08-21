@@ -16,7 +16,20 @@ description: >
   disponibilità continuativa di una sola persona. Alla data di apertura di
   questo record (2026-08-13) non risulta individuato alcun secondo
   referente tecnico con accesso operativo.
-likelihood: medium
+
+  **Aggiornato il 21/08/2026**: un secondo referente tecnico è stato
+  individuato, ha ricevuto un accesso operativo verificato con comando
+  (Azure) e ha completato da solo, senza aiuto, il recupero dei segreti
+  critici dal caveau esterno (`CTL-maintainer-succession`, ora `active`).
+  La probabilità che l'indisponibilità del maintainer lasci il servizio
+  senza nessuno in grado di intervenire scende da "media" a "bassa" per
+  questo motivo — dato verificato, non riferito. L'impatto resta alto
+  invariato: se il rischio si materializzasse comunque (es. entrambi i
+  referenti indisponibili), le conseguenze sulla garanzia contrattuale
+  della fascia Professionale sarebbero le stesse di prima. Restano aperti,
+  e non riducono ulteriormente la probabilità finché non chiusi: la
+  delibera e la pubblicazione della procedura scritta.
+likelihood: low
 impact: high
 mitigated_by: [CTL-maintainer-succession]
 visibility: public

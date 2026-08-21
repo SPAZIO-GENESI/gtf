@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T08:57:09.546Z",
+  "generated_at": "2026-08-21T17:45:06.552Z",
   "registry_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
   "items": [
     {
@@ -173,6 +173,51 @@
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
     },
     {
+      "id": "PRC-permanent-archival-refresh",
+      "title": "Riarchiviazione trimestrale su Software Heritage e cattura su Internet Archive",
+      "who": "Chiunque abbia accesso a un browser — nessuna credenziale richiesta su nessuno dei due servizi",
+      "needs_technical": false,
+      "duration_minutes": 15,
+      "frequency_days": 90,
+      "last_done": "2026-08-20",
+      "never_run": false,
+      "next_due": "2026-11-18",
+      "steps": [
+        {
+          "do": "Per ciascuno degli otto repository pubblici del sistema di attestazione, apri la pagina di archiviazione di Software Heritage e incolla l'indirizzo del repository.",
+          "note": "Sono solo questi otto, non l'intera organizzazione GitHub: imgauth, imgauthweb, autart-signer, gtf, attest-mcp, attest-mcp-remote, attest-action, attest-bot. Il resto dell'organizzazione (siti-portfolio personali, repository di test) resta fuori — vedi ADR-A5.",
+          "links": [
+            {
+              "url": "https://archive.softwareheritage.org/save/",
+              "label": "Software Heritage — Save code now"
+            }
+          ]
+        },
+        {
+          "do": "Attendi il completamento (di solito pochi secondi) e copia lo SWHID risultante per ciascun repository.",
+          "note": "Aggiorna EVD-swh-archival-verify col nuovo SWHID solo se è cambiato rispetto all'ultimo registrato: un repository senza commit nuovi produce lo stesso identico SWHID, e non c'è nulla da riscrivere."
+        },
+        {
+          "do": "Cattura le due pagine pubbliche del servizio su Internet Archive.",
+          "note": "Basta incollare l'indirizzo nel modulo — nessun account necessario.",
+          "links": [
+            {
+              "url": "https://web.archive.org/save/https://trust.spaziogenesi.org",
+              "label": "Cattura trust.spaziogenesi.org"
+            },
+            {
+              "url": "https://web.archive.org/save/https://attestazione.spaziogenesi.org",
+              "label": "Cattura attestazione.spaziogenesi.org"
+            }
+          ]
+        },
+        {
+          "do": "Aggiorna gli indirizzi delle catture in EVD-ia-capture-verify e la data last_run di questo file."
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-permanent-archival-refresh.yaml"
+    },
+    {
       "id": "PRC-restore-drill",
       "title": "Prova periodica di ripristino da backup",
       "who": "Il gestore",
@@ -287,6 +332,36 @@
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-esterna-annuale.yaml"
+    },
+    {
+      "id": "PRC-zenodo-archival-refresh",
+      "title": "Aggiornamento annuale del deposito Zenodo (nuova versione del bundle GTF)",
+      "who": "Il gestore — pubblicare una nuova versione richiede l'accesso all'account Zenodo che ha creato il deposito originale",
+      "needs_technical": false,
+      "duration_minutes": 15,
+      "frequency_days": 365,
+      "last_done": "2026-08-20",
+      "never_run": false,
+      "next_due": "2027-08-20",
+      "steps": [
+        {
+          "do": "Apri il deposito esistente su Zenodo e scegli 'New version'.",
+          "links": [
+            {
+              "url": "https://zenodo.org/records/22031193",
+              "label": "Deposito bundle mensili GTF"
+            }
+          ]
+        },
+        {
+          "do": "Rimuovi i file già presenti nella nuova versione (Zenodo li porta avanti di default) e carica tutti i file *-bundle.json presenti oggi in snapshots/anchors/ del repository gtf.",
+          "note": "Non solo i nuovi: ogni versione Zenodo è un deposito completo, non un incremento — la versione precedente resta comunque raggiungibile dal proprio DOI."
+        },
+        {
+          "do": "Pubblica la nuova versione, poi aggiorna il DOI (resta lo stesso solo per il concept DOI, cambia quello di versione) in EVD-zenodo-deposit-verify e la data last_run di questo file."
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-zenodo-archival-refresh.yaml"
     }
   ]
 }
