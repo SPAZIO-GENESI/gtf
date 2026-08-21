@@ -32,19 +32,19 @@
     {
       "id": "MET-automation",
       "label": "Automazione",
-      "value": 64
+      "value": 57
     },
     {
       "id": "MET-audit",
       "label": "Audit",
       "value": 100,
-      "note": "revisione: ultima il 2026-07-19 (32/90 giorni); ACT: nessuna ancora risolta"
+      "note": "revisione: ultima il 2026-07-19 (33/90 giorni); ACT: nessuna ancora risolta"
     },
     {
       "id": "MET-conservation",
       "label": "Conservazione",
       "value": 94,
-      "note": "snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (32 giorni fa)"
+      "note": "snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (33 giorni fa)"
     },
     {
       "id": "MET-reproducibility",
@@ -64,5 +64,5 @@
       "note": "validate 30/30 + gate 12/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
     }
   ],
-  "computed_at": "2026-08-20T08:57:07.352Z"
+  "computed_at": "2026-08-21T17:45:01.349Z"
 }

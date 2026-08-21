@@ -1,0 +1,7 @@
+id: IMP-succession-procedure
+title: Procedura di successione tecnica, secondo referente e canale di allarme ridondato
+repo: img-auth-hub
+ref: "p43-piano-2026/umano/procedura-successione.md (repo privato); secondo destinatario TELEGRAM_CHAT_ID_SECONDARY su gtf + TELEGRAM_CHAT_ID esteso su imgauth GitHub Actions e imgauth Worker"
+supports: [CTL-maintainer-succession]
+visibility: internal
+why_not_public: "il documento operativo nomina la persona fisica del secondo referente e descrive l'inventario delle risorse critiche; pubblicarlo prima della delibera dell'organo competente non aggiunge fiducia verificabile e anticipa una decisione non ancora presa formalmente"
