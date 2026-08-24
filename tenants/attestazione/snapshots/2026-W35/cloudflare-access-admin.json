@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "url": "https://imgauth.spaziogenesi.org/admin",
+  "status": 302,
+  "location": "https://spaziogenesi.cloudflareaccess.com/cdn-cgi/access/login/imgauth.spaziogenesi.org?kid=0198c31335d851e679a7f3618e3a7769748297b9156060f338ec03f4d6a32e3e&meta=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjMyM2Y5NTgxNTE1NzQ4Mjc0Y2FmZDAxOTM3OWMxY2VhNTU0Y2FmNzBiM2I5OTNmNDIyODZjNjQ3NDJmZjljMTQifQ.eyJ0eXBlIjoibWV0YSIsImF1ZCI6IjAxOThjMzEzMzVkODUxZTY3OWE3ZjM2MThlM2E3NzY5NzQ4Mjk3YjkxNTYwNjBmMzM4ZWMwM2Y0ZDZhMzJlM2UiLCJob3N0bmFtZSI6ImltZ2F1dGguc3BhemlvZ2VuZXNpLm9yZyIsInJlZGlyZWN0X3VybCI6Ii9hZG1pbiIsInNlcnZpY2VfdG9rZW5fc3RhdHVzIjpmYWxzZSwiaXNfd2FycCI6ZmFsc2UsImlzX2dhdGV3YXkiOmZhbHNlLCJleHAiOjE3ODc1NTI2MjYsIm5iZiI6MTc4NzU1MjMyNiwiaWF0IjoxNzg3NTUyMzI2LCJhdXRoX3N0YXR1cyI6Ik5PTkUiLCJtdGxzX2F1dGgiOnsiY2VydF9pc3N1ZXJfZG4iOiIiLCJjZXJ0X3NlcmlhbCI6IiIsImNlcnRfaXNzdWVyX3NraSI6IiIsImNlcnRfcHJlc2VudGVkIjpmYWxzZSwiY29tbW9uX25hbWUiOiIiLCJhdXRoX3N0YXR1cyI6Ik5PTkUifSwicmVhbF9jb3VudHJ5IjoiVVMiLCJhcHBfc2Vzc2lvbl9oYXNoIjoiY2JjZWQwNjUyODc3OTdmMWFhODU1ZGViODNkNDRjZjcyNWRlNjU0MzQyNDUwNjYzOTZjMmIyNWYxMWRjYzkwNSJ9.LU_rkDaXVd6IK4WhCI6ijE6EZ_4oIwIUzGjLd-c9aHO-sbXJMiJhpQx96BQqJsLqdAzzVqcjvkQLqT69zIz8GDI9BK6FzzNPg_22a_1VqNptmp4C03WJFSACOy62iRqb1XDSRCNC6TLdvivaS9644Hn9N0lCPNxNAbBEZNq5SXeWi6d7Ws0TkzxOjJjH_tgl5-bQx4uFP2MumbzH57OpD0uEnh2vCQKMcvHaMkvWg7etQ9o_vVgJP0Fd2gPiEDhDPTczJtUdqXDYVI6W0KNY343_EZbYyOquiBKfv06XDSmWhYlrbDp9zrcLVpbedhkDFk8ikhesVasj7mlF110RWw&redirect_url=%2Fadmin",
+  "headers": {
+    "content-security-policy": "default-src 'self' https: data: blob:; script-src 'self' https:; style-src 'self' https: 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self' https: data:; connect-src 'self' https: wss:; media-src 'self' https: blob:; worker-src 'self' blob:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-ancestors 'self'; upgrade-insecure-requests",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), midi=(), magnetometer=(), gyroscope=(), accelerometer=(), display-capture=()"
+  }
+}
