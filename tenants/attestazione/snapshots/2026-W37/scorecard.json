@@ -1,0 +1,246 @@
+{
+  "week": "2026-W37",
+  "ok": true,
+  "repos": [
+    {
+      "repo": "SPAZIO-GENESI/imgauth",
+      "ok": true,
+      "score": 7.6,
+      "date": "2026-09-05T01:41:58Z",
+      "checks": [
+        {
+          "name": "Binary-Artifacts",
+          "score": 10
+        },
+        {
+          "name": "Code-Review",
+          "score": 0
+        },
+        {
+          "name": "Dependency-Update-Tool",
+          "score": 10
+        },
+        {
+          "name": "Token-Permissions",
+          "score": 10
+        },
+        {
+          "name": "Packaging",
+          "score": -1
+        },
+        {
+          "name": "Pinned-Dependencies",
+          "score": 10
+        },
+        {
+          "name": "Maintained",
+          "score": 10
+        },
+        {
+          "name": "Security-Policy",
+          "score": 10
+        },
+        {
+          "name": "Dangerous-Workflow",
+          "score": 10
+        },
+        {
+          "name": "CII-Best-Practices",
+          "score": 0
+        },
+        {
+          "name": "Vulnerabilities",
+          "score": 10
+        },
+        {
+          "name": "SAST",
+          "score": 9
+        },
+        {
+          "name": "Branch-Protection",
+          "score": 3
+        },
+        {
+          "name": "Signed-Releases",
+          "score": -1
+        },
+        {
+          "name": "License",
+          "score": 10
+        },
+        {
+          "name": "Fuzzing",
+          "score": 0
+        },
+        {
+          "name": "Contributors",
+          "score": 6
+        },
+        {
+          "name": "CI-Tests",
+          "score": 10
+        }
+      ]
+    },
+    {
+      "repo": "SPAZIO-GENESI/imgauthweb",
+      "ok": true,
+      "score": 7.6,
+      "date": "2026-09-05T01:37:23Z",
+      "checks": [
+        {
+          "name": "Packaging",
+          "score": -1
+        },
+        {
+          "name": "Binary-Artifacts",
+          "score": 10
+        },
+        {
+          "name": "Dangerous-Workflow",
+          "score": 10
+        },
+        {
+          "name": "Dependency-Update-Tool",
+          "score": 10
+        },
+        {
+          "name": "Code-Review",
+          "score": 0
+        },
+        {
+          "name": "Security-Policy",
+          "score": 10
+        },
+        {
+          "name": "Maintained",
+          "score": 10
+        },
+        {
+          "name": "Token-Permissions",
+          "score": 10
+        },
+        {
+          "name": "Pinned-Dependencies",
+          "score": 10
+        },
+        {
+          "name": "Vulnerabilities",
+          "score": 10
+        },
+        {
+          "name": "CII-Best-Practices",
+          "score": 0
+        },
+        {
+          "name": "Signed-Releases",
+          "score": -1
+        },
+        {
+          "name": "Fuzzing",
+          "score": 0
+        },
+        {
+          "name": "SAST",
+          "score": 9
+        },
+        {
+          "name": "License",
+          "score": 10
+        },
+        {
+          "name": "Branch-Protection",
+          "score": 3
+        },
+        {
+          "name": "Contributors",
+          "score": 6
+        },
+        {
+          "name": "CI-Tests",
+          "score": 10
+        }
+      ]
+    },
+    {
+      "repo": "SPAZIO-GENESI/autart-signer",
+      "ok": true,
+      "score": 6,
+      "date": "2026-09-05T01:35:55Z",
+      "checks": [
+        {
+          "name": "Code-Review",
+          "score": 0
+        },
+        {
+          "name": "Dependency-Update-Tool",
+          "score": 10
+        },
+        {
+          "name": "Security-Policy",
+          "score": 10
+        },
+        {
+          "name": "Dangerous-Workflow",
+          "score": 10
+        },
+        {
+          "name": "Maintained",
+          "score": 0
+        },
+        {
+          "name": "Packaging",
+          "score": -1
+        },
+        {
+          "name": "Binary-Artifacts",
+          "score": 10
+        },
+        {
+          "name": "Pinned-Dependencies",
+          "score": 3
+        },
+        {
+          "name": "Token-Permissions",
+          "score": 9
+        },
+        {
+          "name": "CII-Best-Practices",
+          "score": 0
+        },
+        {
+          "name": "SAST",
+          "score": 7
+        },
+        {
+          "name": "Fuzzing",
+          "score": 0
+        },
+        {
+          "name": "Signed-Releases",
+          "score": -1
+        },
+        {
+          "name": "License",
+          "score": 10
+        },
+        {
+          "name": "Vulnerabilities",
+          "score": 10
+        },
+        {
+          "name": "Branch-Protection",
+          "score": 3
+        },
+        {
+          "name": "Contributors",
+          "score": 6
+        },
+        {
+          "name": "CI-Tests",
+          "score": 0
+        }
+      ]
+    }
+  ]
+}
