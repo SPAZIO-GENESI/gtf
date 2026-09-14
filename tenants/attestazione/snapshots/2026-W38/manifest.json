@@ -1,0 +1,28 @@
+{
+  "collected_at": "2026-09-14T06:31:53.378Z",
+  "week": "2026-W38",
+  "files": {
+    "status.json": "ecbe51b38ba0b8c21929117641f504536c6becbdec757f438882e8d30a17be08",
+    "status-history.json": "58a543e5cfd33661484157369b11d700f9453bd5fe0700881b06e7c558105c7d",
+    "health-log.json": "b2dcbd183aea39d36508aec79a96131a60b66e3988f2f4560d32373930a3c890",
+    "ping.json": "f6baaafc63523d257f1bae022901ec8254b664e4427fb281b8d05ae43b50671a",
+    "monitor-issues.json": "c1464896656d5bca3d8f6596ac09c8d49b70cd5d7bac584a4d70898ee1b8221c",
+    "git-imgauth.json": "c22653539ad2af55360ef086abefdadd1303d8a66fcaf5c28aaa9fbffaa3ed6e",
+    "git-imgauthweb.json": "b1c736a25f58700927d4bace56b0090a208e4adb548909e49165882194746fa0",
+    "git-authart.json": "78c126de17c03b9a0913abe7292a2c8215d521f1063bfacd9f5c032883399504",
+    "tags-imgauth.json": "60cfdeeb9729233da31cad0516a8eec315467f280c865e003efaa031742a7d1a",
+    "tags-imgauthweb.json": "fda484c8f56c2402c51c99c84a35e8cceb7eab76705a0569dfaf156e388093c2",
+    "tags-autart-signer.json": "93f8268577dbdf9ebb275ddf3e210acf0d54ce716eea8fda8580dc26fa7e8ab9",
+    "governance-validate-runs.json": "8366d45723b925c2b5b729d1b99b6c695e839b6cfdf8faf98db730685300fe85",
+    "governance-prs.json": "b6245549f739cdb5163893a5573d356670fce2d1b6b945fdafdf141a278db25c",
+    "governance-prod-gate.json": "4032eb2d283680f5540e42588e4dc03adb46eced8566591c7763d50ca316298b",
+    "changelog-user.json": "5abffe7c0398630d9e81e7e6f60aeec43591e909a170ddf5c01e3ceff1688bfb",
+    "cloudflare-access-admin.json": "b68fa4655ea7aba821a128aa635f068423e7bf2b704cf48180377dac771ed53a",
+    "edge-security-headers.json": "2d9a5b1f383c1ee37524071d154bc72dc565dc825d6fb3a6ece3590cae2dff11",
+    "dogfooding-anchor.json": "5e91ab186854191d5bc3e5d89500c62834ace221be10e327db50cecfeae97536",
+    "security-txt.json": "ad7ae2808db017ef2da93da4a0664c7e6c791cfc1241cb545b2d3362462546e9",
+    "whitepaper-integrity.json": "3e77a369b0b6597ad2f2e36e8e56f969f7d472492c57672edc65186ec2a3476d",
+    "dnssec-chain.json": "0a908e648c3ba27be1c267571257910c0d5f8975acde5876a56a9c37cd4056d5",
+    "agent-discovery.json": "277e48d345fb9aa04d66f6eb295e4b10cef6205858076e4fb9644f206dd30320"
+  }
+}
