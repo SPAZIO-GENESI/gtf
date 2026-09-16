@@ -1,0 +1,31 @@
+id: CTL-tdm-reservation
+title: "Riserva dei diritti sull'addestramento AI, dichiarata e verificabile"
+status: active
+visibility: public
+satisfies: [PRN-01, PRN-08]
+implemented_by: [IMP-imgauth-tdm-reservation, IMP-imgauthweb-tdm-reservation-ui]
+evidenced_by: [EVD-git-imgauth, EVD-git-imgauthweb]
+verify_howto: >
+  Attesta un'opera scegliendo "Non acconsento" nel menu facoltativo "Riserva
+  dei diritti sull'addestramento AI", accanto ai dati dichiarati. Il
+  certificato PDF e la pagina /c/<hash> riportano la scelta; GET
+  https://imgauth.spaziogenesi.org/api/rights?hash=<impronta> la restituisce
+  pubblicamente (CORS aperto), senza bisogno del file né del certificato.
+  POST /api/verify con un valore diverso da quello dichiarato risponde
+  hmac_valido:false — la dichiarazione è vincolata alla stessa firma HMAC
+  dell'attestazione, non modificabile dopo l'emissione.
+owner: it@spaziogenesi.org
+review_every_days: 180
+last_reviewed: 2026-09-16
+i18n:
+  en:
+    title: "AI training rights reservation, declared and verifiable"
+    verify_howto: >
+      Issue an attestation choosing "I do not consent" in the optional "AI
+      training rights reservation" menu, next to the declared data. The PDF
+      certificate and the /c/<hash> page show the choice; GET
+      https://imgauth.spaziogenesi.org/api/rights?hash=<fingerprint> returns
+      it publicly (open CORS), without needing the file or the certificate.
+      POST /api/verify with a value different from the declared one returns
+      hmac_valido:false — the declaration is bound to the same HMAC
+      signature as the attestation, not changeable after issuance.

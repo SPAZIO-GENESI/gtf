@@ -1,0 +1,6 @@
+id: IMP-imgauth-tdm-reservation
+title: Campo riserva vincolato all'HMAC, endpoint pubblico di lettura
+repo: imgauth
+ref: "worker.js (v1.37.0) — cleanRiserva/hmacMessage accodano riserva:<valore> come ultima riga del messaggio firmato (contratto additivo: assente, il messaggio resta identico a prima); GET /api/rights legge il sidecar meta/cert/<hash>.json e distingue impronta sconosciuta da riserva assente; CORS aperto"
+supports: [CTL-tdm-reservation]
+visibility: public

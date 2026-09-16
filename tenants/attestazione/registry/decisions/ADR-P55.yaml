@@ -1,0 +1,65 @@
+id: ADR-P55
+title: "P55 — Evoluzione L0-L3: onestà del claim e riserva dei diritti registrata (F1 + F3)"
+date: 2026-09-16
+status: accepted
+context: >
+  Specifica del committente (09/2026) per evolvere il servizio verso quattro
+  livelli di garanzia crescente (L0 sigillo qualificato, L1 esistente, L2
+  contrassegno invisibile, L3 riserva dei diritti/persistenza). Verifiche
+  tecniche preliminari (V1) hanno trovato che la marca temporale in uso
+  (DigiCert AATL) non è qualificata eIDAS e che il fail-open del firmatario
+  produceva, in silenzio, certificati più deboli di quanto il PDF lasciasse
+  intendere — un rischio di overclaim più urgente di molto altro nella
+  specifica. Il piano completo, con le verifiche e le migliorie proposte, è
+  in `img-auth-hub/P55-DESIGN-evoluzione-L0-L3.md`.
+decision: >
+  **F1 (onestà del claim, chiusa 16/09/2026)**: rimossa la formula "data
+  certa" dove prometteva un effetto giuridico non ancora vero; il PDF e la
+  pagina /c/<hash> dichiarano ora le garanzie realmente ottenute da QUELLA
+  emissione (firma HMAC, PAdES, marca temporale con livello, ancoraggio
+  Bitcoin) invece di una garanzia generica del servizio; il fail-open del
+  firmatario resta come politica ma smette di essere muto.
+
+  **F3 (riserva dei diritti registrata lato server, chiusa 16/09/2026)**:
+  identificata come il differenziatore principale del servizio rispetto ai
+  soli metadati editabili (IPTC, C2PA): un campo `riserva` facoltativo
+  (vocabolario CAWG training-mining: notAllowed/constrained/allowed),
+  vincolato alla stessa firma HMAC dei metadati dichiarati, verificabile
+  pubblicamente da chiunque conosca l'impronta (`GET /api/rights`) anche
+  quando il file che circola ha perso ogni metadato — è il caso che i
+  metadati embedded non reggono mai.
+
+  **Bivio architetturale risolto (M5 della specifica)**: L2/L3 della
+  specifica del committente presupponevano che il servizio ricevesse i byte
+  del file per scriverci un manifest o un watermark — in contraddizione
+  diretta con l'invariante 4 (il file non lascia il dispositivo dal sito).
+  Deciso: la parte server-side (F3, sopra) non richiede mai il file: basta
+  l'impronta, già nota al servizio. La scrittura del contrassegno nel file
+  stesso (F5, ridimensionata) si farà nel browser, mai sul server. Il
+  contrassegno invisibile watermark (F6) è stato **sospeso**: non protegge da
+  solo (serve monitoraggio continuo, fuori budget), il mercato è presidiato
+  da specialisti con anni di vantaggio, e integrarne uno esterno
+  richiederebbe di inviargli il file — la stessa contraddizione con
+  l'invariante 4, spostata a un fornitore terzo invece che risolta.
+consequences: >
+  Contratto additivo su tutta la linea: `hmacMessage` senza `riserva` resta
+  bit-identico a prima della 1.37.0 (test di non-regressione scritto prima
+  del codice), i certificati emessi prima di F1/F3 restano verificabili senza
+  eccezioni. Nessun costo ricorrente nuovo.
+
+  In produzione dal 16/09/2026: authart 1.3.0 (invariato), imgauth 1.37.0,
+  authweb 1.36.0 — collaudo automatico su staging e prova dal vivo del
+  gestore. Un falso allarme nel collaudo (certificato senza la riga della
+  riserva) è risultato essere cache del browser su una pagina aperta prima
+  del deploy, non un difetto: annotato come trappola operativa
+  (`img-auth-hub/docs/TRAPPOLE.md`), non un rischio di questo registro.
+
+  Restano aperte, fuori da questa decisione: F2 (marca temporale qualificata,
+  bloccata da una spesa da deliberare), F7/L0 (sigillo qualificato, blocca su
+  V3/V4 esterne), F5 ridimensionata (riserva scritta in JPEG/PNG nel
+  browser). F6 resta sospesa fino a un cambio di fatti esplicitamente scritto
+  nel piano (domanda pagante ricorrente, un finanziamento che copra il
+  monitoraggio, o un'integrazione che non trasmetta il file).
+affects: [CTL-tdm-reservation]
+evidence: [EVD-git-imgauth, EVD-git-imgauthweb]
+visibility: public

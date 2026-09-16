@@ -1,0 +1,6 @@
+id: IMP-imgauthweb-tdm-reservation-ui
+title: Selettore della riserva accanto ai dati dichiarati
+repo: imgauthweb
+ref: "index.html / en/index.html (v1.36.0) — select#metaRiserva nella sezione facoltativa 'Racconta l'opera'; js/app.js invia il valore a /api/hash, lo round-trippa a /api/cert-pdf e lo espone nel form di verifica manuale e nella lettura automatica da un PDF re-inviato"
+supports: [CTL-tdm-reservation]
+visibility: public
