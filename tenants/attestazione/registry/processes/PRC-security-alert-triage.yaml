@@ -8,7 +8,7 @@ trigger: "Cadenza fissa settimanale, non un evento: Federico Battisti (President
 output: "Ogni alert aperto ha un esito entro la settimana successiva — chiuso, corretto, o segnalato al gestore con una ACT (PRN-09) — mai lasciato silenzioso."
 human_cost_minutes_month: 60
 frequency_days: 7
-last_run: "2026-08-24"
+last_run: "2026-09-23"
 last_outcome: ok
 steps:
   - do: "Apri, uno alla volta, gli avvisi sul nostro codice dei cinque programmi."
