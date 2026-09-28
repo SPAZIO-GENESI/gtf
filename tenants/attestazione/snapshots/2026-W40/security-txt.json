@@ -1,0 +1,12 @@
+{
+  "attestazione": {
+    "ok": true,
+    "text": "# Spazio Genesi ETS — Attestazione delle opere digitali\n# Politica completa / full policy: https://attestazione.spaziogenesi.org/sicurezza/\n\nContact: mailto:it@spaziogenesi.org\nExpires: 2027-07-21T00:00:00.000Z\nPreferred-Languages: it, en\nCanonical: https://attestazione.spaziogenesi.org/.well-known/security.txt\nPolicy: https://attestazione.spaziogenesi.org/sicurezza/\n",
+    "url": "https://attestazione.spaziogenesi.org/.well-known/security.txt"
+  },
+  "imgauth": {
+    "ok": true,
+    "text": "# Spazio Genesi ETS — Attestazione delle opere digitali\n# Politica completa / full policy: https://attestazione.spaziogenesi.org/sicurezza/\n\nContact: mailto:it@spaziogenesi.org\nExpires: 2027-07-21T00:00:00.000Z\nPreferred-Languages: it, en\nCanonical: https://imgauth.spaziogenesi.org/.well-known/security.txt\nPolicy: https://attestazione.spaziogenesi.org/sicurezza/\n",
+    "url": "https://imgauth.spaziogenesi.org/.well-known/security.txt"
+  }
+}

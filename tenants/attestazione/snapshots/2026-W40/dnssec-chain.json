@@ -1,0 +1,18 @@
+{
+  "zone": "spaziogenesi.org",
+  "checks": {
+    "delegationSigned": true,
+    "dsMatches": true,
+    "dsVisible": true,
+    "dsAuthenticated": true,
+    "namesAuthenticated": true,
+    "mxAuthenticated": true
+  },
+  "names": {
+    "spaziogenesi.org": true,
+    "attestazione.spaziogenesi.org": true,
+    "imgauth.spaziogenesi.org": true
+  },
+  "mxAuthenticated": true,
+  "ok": true
+}
