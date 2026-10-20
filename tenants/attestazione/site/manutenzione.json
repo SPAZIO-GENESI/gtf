@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T17:45:06.552Z",
+  "generated_at": "2026-10-20T07:48:09.235Z",
   "registry_url": "https://github.com/SPAZIO-GENESI/gtf/tree/main/tenants/attestazione/registry/processes",
   "items": [
     {
@@ -9,9 +9,9 @@
       "needs_technical": false,
       "duration_minutes": 15,
       "frequency_days": 7,
-      "last_done": "2026-08-17",
+      "last_done": "2026-09-23",
       "never_run": false,
-      "next_due": "2026-08-24",
+      "next_due": "2026-09-30",
       "steps": [
         {
           "do": "Apri, uno alla volta, gli avvisi sul nostro codice dei cinque programmi.",
@@ -86,15 +86,52 @@
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-security-alert-triage.yaml"
     },
     {
+      "id": "PRC-review-trimestrale",
+      "title": "Revisione interna trimestrale dei controlli e delle azioni correttive",
+      "who": "Il gestore",
+      "needs_technical": true,
+      "duration_minutes": 120,
+      "frequency_days": 90,
+      "last_done": "2026-07-19",
+      "never_run": false,
+      "next_due": "2026-10-17",
+      "steps": [
+        {
+          "do": "Elenca i controlli la cui data di revisione scade entro il trimestre."
+        },
+        {
+          "do": "Per ognuno, riverifica che quanto dichiarato sia ancora vero nella realtà, poi aggiorna la data.",
+          "note": "Riverificare, non ridatare: cambiare la data senza aver riprovato il controllo trasforma il registro in una dichiarazione, che è esattamente ciò che il framework esiste per evitare."
+        },
+        {
+          "do": "Rileggi i rischi a impatto medio e alto e controlla che la descrizione corrisponda ancora a com'è fatto oggi il sistema."
+        },
+        {
+          "do": "Controlla le azioni correttive aperte: chiuse, ancora valide, o da riformulare."
+        },
+        {
+          "do": "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file.",
+          "note": "Il verbale va scritto anche se non ci sono rilievi: 'nessun rilievo' è un esito, il silenzio no.",
+          "links": [
+            {
+              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml",
+              "label": "Apri il file da aggiornare"
+            }
+          ]
+        }
+      ],
+      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
+    },
+    {
       "id": "PRC-dogfooding-anchor",
       "title": "Ancoraggio mensile del registro delle evidenze in Bitcoin",
       "who": "Chiunque abbia accesso a GitHub e al servizio; l'attestazione sul sito può farla chiunque abbia accesso al pannello",
       "needs_technical": false,
       "duration_minutes": 20,
       "frequency_days": null,
-      "last_done": "2026-08-17",
+      "last_done": "2026-09-23",
       "never_run": false,
-      "next_due": "2026-09-21",
+      "next_due": "2026-10-28",
       "steps": [
         {
           "do": "Ogni mese il registro raccoglie una fotografia delle proprie evidenze, una per settimana. Questa procedura le mette insieme in un unico file e le fa attestare dal servizio stesso: da quel momento nessuno — noi compresi — può modificarle a posteriori senza che si veda.",
@@ -134,43 +171,6 @@
         }
       ],
       "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-dogfooding-anchor.yaml"
-    },
-    {
-      "id": "PRC-review-trimestrale",
-      "title": "Revisione interna trimestrale dei controlli e delle azioni correttive",
-      "who": "Il gestore",
-      "needs_technical": true,
-      "duration_minutes": 120,
-      "frequency_days": 90,
-      "last_done": "2026-07-19",
-      "never_run": false,
-      "next_due": "2026-10-17",
-      "steps": [
-        {
-          "do": "Elenca i controlli la cui data di revisione scade entro il trimestre."
-        },
-        {
-          "do": "Per ognuno, riverifica che quanto dichiarato sia ancora vero nella realtà, poi aggiorna la data.",
-          "note": "Riverificare, non ridatare: cambiare la data senza aver riprovato il controllo trasforma il registro in una dichiarazione, che è esattamente ciò che il framework esiste per evitare."
-        },
-        {
-          "do": "Rileggi i rischi a impatto medio e alto e controlla che la descrizione corrisponda ancora a com'è fatto oggi il sistema."
-        },
-        {
-          "do": "Controlla le azioni correttive aperte: chiuse, ancora valide, o da riformulare."
-        },
-        {
-          "do": "Scrivi il verbale in docs/verbali/ e aggiorna last_run e last_outcome in questo file.",
-          "note": "Il verbale va scritto anche se non ci sono rilievi: 'nessun rilievo' è un esito, il silenzio no.",
-          "links": [
-            {
-              "url": "https://github.com/SPAZIO-GENESI/gtf/edit/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml",
-              "label": "Apri il file da aggiornare"
-            }
-          ]
-        }
-      ],
-      "registry_url": "https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/processes/PRC-review-trimestrale.yaml"
     },
     {
       "id": "PRC-permanent-archival-refresh",

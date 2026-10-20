@@ -1,5 +1,5 @@
 {
-  "overall": 93,
+  "overall": 92,
   "available_count": 10,
   "total": 10,
   "core_version": "0.2.1",
@@ -16,8 +16,8 @@
     {
       "id": "MET-integrity",
       "label": "Integrità",
-      "value": 100,
-      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W34) + ancoraggi dogfooding onorati (2/2 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"
+      "value": 92,
+      "note": "sonda HMAC (componente \"worker\", snapshot 2026-W43) + ancoraggi dogfooding onorati (3/4 mesi da 2026-07) + repo con tag di release (3/3) — proxy iniziale, non ancora la quota storica di versioni taggate"
     },
     {
       "id": "MET-traceability",
@@ -27,7 +27,7 @@
     {
       "id": "MET-documentation",
       "label": "Documentazione",
-      "value": 100
+      "value": 97
     },
     {
       "id": "MET-automation",
@@ -37,14 +37,14 @@
     {
       "id": "MET-audit",
       "label": "Audit",
-      "value": 100,
-      "note": "revisione: ultima il 2026-07-19 (33/90 giorni); ACT: nessuna ancora risolta"
+      "value": 97,
+      "note": "revisione: ultima il 2026-07-19, in decadimento (93/90 giorni); ACT: nessuna ancora risolta"
     },
     {
       "id": "MET-conservation",
       "label": "Conservazione",
-      "value": 94,
-      "note": "snapshot 7/8 settimane + drill: riuscito il 2026-07-19 (33 giorni fa)"
+      "value": 100,
+      "note": "snapshot 8/8 settimane + drill: riuscito il 2026-07-19 (93 giorni fa)"
     },
     {
       "id": "MET-reproducibility",
@@ -55,14 +55,14 @@
       "id": "MET-privacy",
       "label": "Privacy",
       "value": 100,
-      "note": "scanner su imgauth@v1.34.1: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"
+      "note": "scanner su imgauth@v1.37.0: 10/10 flussi mappati a un DAT (4 falsi positivi dichiarati esclusi) — non copre repo client (es. bot Telegram)"
     },
     {
       "id": "MET-governance",
       "label": "Governance",
-      "value": 80,
-      "note": "validate 30/30 + gate 12/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
+      "value": 78,
+      "note": "validate 30/30 + gate 11/20 — quota PR esclusa (maintainer singolo, ADR-GTF-011)"
     }
   ],
-  "computed_at": "2026-08-21T17:45:01.349Z"
+  "computed_at": "2026-10-20T07:48:06.633Z"
 }

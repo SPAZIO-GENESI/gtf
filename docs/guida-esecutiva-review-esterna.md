@@ -94,32 +94,36 @@ internet la prima volta, dura circa un minuto.
 npm run build
 ```
 
-Questo esegue in sequenza tre controlli automatici. Output atteso (copiato da
-un'esecuzione reale del 18/07/2026 — i numeri esatti possono differire di
-poco a seconda di quando lo eseguite, ma la forma deve essere questa):
+Questo esegue in sequenza i controlli automatici e rigenera il sito. Output
+atteso (estratto da un'esecuzione reale del 20/10/2026 — i numeri esatti possono
+differire di poco a seconda di quando lo eseguite, ma la forma deve essere
+questa; le righe intermedie sulle cadenze e sul sito sono omesse):
 
 ```
 > gtf@0.1.0 validate
-> node generators/validate.mjs
+> node core/generators/validate.mjs
 
-Registro GTF valido: 193 record, 0 errori.
+Registro GTF valido: 282 record, 0 errori.
 
 > gtf@0.1.0 score
-> node generators/score.mjs
+> node core/generators/score.mjs
 
-Score calcolato: 90/100 (6/10 indicatori disponibili).
+Score calcolato: 92/100 (10/10 indicatori disponibili).
 
 > gtf@0.1.0 build-site
-> node generators/build-site.mjs
+> node core/generators/build-site.mjs
 
-site/index.html generato.
+site/index.html + site/en/index.html generati.
 ```
+
+Nota: `npm run build` rigenera anche i file in `site/` e `tenants/attestazione/site/`
+nella vostra copia locale; è normale e non modifica nulla online.
 
 **Cosa verificare:**
 1. La prima riga deve dire **"0 errori"**. Se dice un numero diverso da zero,
    è già un rilievo da annotare (il registro non passa la propria stessa
    validazione).
-2. Il numero dopo "Score calcolato" (es. `90/100`) deve **coincidere** con
+2. Il numero dopo "Score calcolato" (es. `92/100`) deve **coincidere** con
    quello mostrato in home su **https://trust.spaziogenesi.org** al momento
    della vostra verifica. Se il sito mostra un numero diverso, annotatelo come
    rilievo (potrebbe voler dire che il sito pubblicato non riflette l'ultima
@@ -146,12 +150,12 @@ riga: serve controllare che i **collegamenti dichiarati esistano davvero**.
 
 ### Come sono fatti i dati (struttura, per orientarvi)
 
-Il registro è una cartella `registry/` con sottocartelle per tipo di record,
+Il registro è la cartella `tenants/attestazione/registry/` con sottocartelle per tipo di record,
 tutti file di testo in formato YAML (leggibili anche senza editor speciale,
 va bene il Blocco Note o direttamente GitHub via browser):
 
 ```
-registry/
+tenants/attestazione/registry/
   controls/        → CTL-*.yaml   (i controlli: cosa è stato fatto)
   implementations/  → IMP-*.yaml   (dove, nel codice, il controllo è implementato)
   evidence/         → EVD-*.yaml   (le prove concrete: log, screenshot, run pubblici)
@@ -176,28 +180,28 @@ leggere:
 Per ciascuno, un link diretto al file su GitHub (potete aprirli nel browser
 senza aver clonato nulla) e cosa cercare:
 
-1. **`CTL-hmac-canary`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/registry/controls/CTL-hmac-canary.yaml
+1. **`CTL-hmac-canary`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/controls/CTL-hmac-canary.yaml
    Verificabile "dal vivo": è un controllo che il servizio esegue su sé stesso
    a ogni campionamento. L'`EVD` collegato dovrebbe indicare dove osservarlo
    (tipicamente `GET https://imgauth.spaziogenesi.org/api/status` nel browser
    — il campo `worker` deve risultare `ok`).
 
-2. **`CTL-dogfooding-anchor`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/registry/controls/CTL-dogfooding-anchor.yaml
+2. **`CTL-dogfooding-anchor`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/controls/CTL-dogfooding-anchor.yaml
    Il servizio attesta sé stesso mensilmente. Verificate che il bundle citato
-   esista in `snapshots/anchors/` nel repository e che l'hash dichiarato nel
+   esista in `tenants/attestazione/snapshots/anchors/` nel repository e che l'hash dichiarato nel
    record corrisponda a quello nel file.
 
-3. **`CTL-cicd-pipeline`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/registry/controls/CTL-cicd-pipeline.yaml
+3. **`CTL-cicd-pipeline`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/controls/CTL-cicd-pipeline.yaml
    Verificabile su GitHub Actions del repo `imgauth`
    (https://github.com/SPAZIO-GENESI/imgauth/actions): i run devono esistere
    ed essere effettivamente verdi/completati, non solo dichiarati.
 
-4. **`CTL-eidas-honest-positioning`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/registry/controls/CTL-eidas-honest-positioning.yaml
+4. **`CTL-eidas-honest-positioning`** — https://github.com/SPAZIO-GENESI/gtf/blob/main/tenants/attestazione/registry/controls/CTL-eidas-honest-positioning.yaml
    Questo è un controllo "di onestà" (non tecnico): verifica che il sito non
    sovra-dichiari conformità eIDAS che non ha. Leggete l'evidenza collegata e
    confrontatela con quanto scritto sul sito pubblico spaziogenesi.org.
 
-5. **Una vostra scelta libera** — sfogliate `registry/controls/` e scegliete un
+5. **Una vostra scelta libera** — sfogliate `tenants/attestazione/registry/controls/` e scegliete un
    quinto `CTL-*` con `status: active` che vi incuriosisce o vi sembra critico.
 
 ### Cosa fare per ciascuno dei 5
@@ -221,13 +225,13 @@ senza aver clonato nulla) e cosa cercare:
 
 Due controlli più rapidi (~30 minuti):
 
-- Aprite `registry/processes/` (i file `PRC-*.yaml`): ciascuno ha
+- Aprite `tenants/attestazione/registry/processes/` (i file `PRC-*.yaml`): ciascuno ha
   `frequency_days` (ogni quanto dovrebbe ripetersi) e, se già eseguito,
   `last_run` (l'ultima volta). Verificate che nessuna cadenza risulti scaduta
   rispetto a oggi senza una spiegazione nel registro.
 - Scegliete 2-3 `ADR-*` citate dai controlli che avete già esaminato al passo
   precedente e verificate che esistano davvero nella cartella
-  `registry/decisions/` e che il contenuto (`context`/`decision`) sia coerente
+  `tenants/attestazione/registry/decisions/` e che il contenuto (`context`/`decision`) sia coerente
   con quanto il controllo dichiara di fare.
 
 ---

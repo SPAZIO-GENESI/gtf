@@ -19,10 +19,10 @@ sostenuto da evidenze reali e riproducibili, e segnalare dove non lo è.
 
 | Materiale | Dove |
 |---|---|
-| Registro (record YAML + schemi) | https://github.com/SPAZIO-GENESI/gtf (`registry/`, `schemas/`) |
+| Registro (record YAML + schemi) | https://github.com/SPAZIO-GENESI/gtf (`tenants/attestazione/registry/`, `core/schemas/`) |
 | Trust Center pubblicato | https://trust.spaziogenesi.org |
 | Documento architetturale | `ARCHITECTURE.md` nel repo gtf |
-| Snapshot evidenze + bundle ancorati | `snapshots/` nel repo gtf |
+| Snapshot evidenze + bundle ancorati | `tenants/attestazione/snapshots/` nel repo gtf |
 | Repo di prodotto | github.com/SPAZIO-GENESI/{imgauth, imgauthweb, autart-signer, attest-mcp, attest-bot, attest-mcp-remote} |
 | Servizio live | https://attestazione.spaziogenesi.org (+ `/api/status`, `/status/`, `/docs`) |
 
