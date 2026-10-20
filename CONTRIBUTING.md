@@ -20,6 +20,12 @@ which fails if a project-specific name appears there: `core/` is the generic
 engine, shared across every tenant, and must stay free of references to any
 one of them.
 
+## Conduct and AI provenance
+
+Participation is governed by the [Code of Conduct](./CODE_OF_CONDUCT.md).
+Commits where a generative AI model wrote or substantially rewrote content carry
+a provenance trailer: see the [convention](https://github.com/SPAZIO-GENESI/img-auth-hub/blob/main/docs/AI-PROVENANCE.md) (in Italian, with an English summary).
+
 ## What to expect
 
 Best-effort review within a couple of weeks. This is a non-profit project run

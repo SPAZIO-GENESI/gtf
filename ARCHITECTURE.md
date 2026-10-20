@@ -693,12 +693,12 @@ framework che li descrive.
 
 **Licenze (dal 2026-08-16, P47).** Attribuzione del motore, non rebranding: il nome del
 prodotto resta "Genesis Trust Framework" (la decisione sul nome è D3, rinviata — vedi sopra).
-Il motore in `core/` è coperto da `core/LICENSE` (MIT, `Copyright (c) 2026 Tangram.page`): ne è
+Il motore in `core/` è coperto da `core/LICENSE` (MIT, `Copyright (c) 2026 Massimo Camplone (Tangram.page)`; Tangram.page è la ditta individuale di Massimo Camplone): ne è
 l'autore. Spazio Genesi ETS compare come consumatore e partner tecnologico che fornisce
 l'infrastruttura su cui gira, non come titolare del codice del motore. La `LICENSE` alla radice
 (MIT, `Copyright (c) 2026 Spazio Genesi ETS`) copre invece il resto del repository — i registri
 dei tenant, i contenuti, la configurazione — con una nota che rimanda a `core/LICENSE` per il
-motore. `core/package.json` dichiara `"author": "Tangram.page"`.
+motore. `core/package.json` dichiara `"author": "Massimo Camplone (Tangram.page) (https://tangram.page)"`.
 
 ### 15.1 Topologia dei siti (dal 2026-08-16, P45)
 

@@ -6,6 +6,24 @@ import { loadTenant, TENANT_SNAPSHOTS_DIR, TENANT_SITE_DIR } from "./lib/tenant.
 const SITE_DIR = TENANT_SITE_DIR;
 const SNAPSHOTS_DIR = TENANT_SNAPSHOTS_DIR;
 const ANCHORS_DIR = join(SNAPSHOTS_DIR, "anchors");
+
+// Istante di riferimento del calcolo: l'unica lettura dell'orologio dell'intero
+// generatore. Default = adesso (produzione); `--as-of=<ISO 8601>` lo fissa, così
+// il punteggio pubblicato si può ricalcolare identico in un giorno diverso
+// (stesso clone + stesso as_of = stesso risultato). Vedi README, "Ricalcolare".
+function parseAsOf(argv) {
+  const arg = argv.find((a) => a.startsWith("--as-of="));
+  if (!arg) return new Date();
+  const raw = arg.slice("--as-of=".length);
+  const parsed = new Date(raw);
+  if (!/^\d{4}-\d{2}-\d{2}/.test(raw) || Number.isNaN(parsed.getTime())) {
+    console.error(`--as-of non valido: "${raw}" (atteso ISO 8601, es. 2026-10-19T06:32:24.000Z)`);
+    process.exit(1);
+  }
+  return parsed;
+}
+const AS_OF = parseAsOf(process.argv.slice(2));
+
 const CORE_VERSION = JSON.parse(readFileSync(join(ROOT, "core", "package.json"), "utf8")).version;
 
 // Settimana più recente raccolta dal collettore (generators/collect-evidence.mjs).
@@ -134,7 +152,7 @@ function isoWeekString(date) {
 // riuscito entro 210 giorni, 0 se fallito o decaduto oltre i 210 giorni,
 // componente assente se il drill non è mai stato eseguito].
 function conservationRatio(records) {
-  const now = new Date();
+  const now = AS_OF;
   const total = 8;
   let present = 0;
   for (let i = 0; i < total; i++) {
@@ -214,7 +232,7 @@ function isPublic(record) {
 }
 
 function daysAgo(dateStr) {
-  return (Date.now() - new Date(dateStr).getTime()) / 86400000;
+  return (AS_OF.getTime() - new Date(dateStr).getTime()) / 86400000;
 }
 
 function pct(numerator, denominator) {
@@ -228,7 +246,7 @@ function dogfoodingAnchorRatio(cfg) {
   if (!existsSync(ANCHORS_DIR)) return { ratio: null, done: 0, expected: 0 };
   const done = readdirSync(ANCHORS_DIR).filter((f) => /^\d{4}-\d{2}-bundle\.json$/.test(f)).length;
   const [birthYear, birthMonth] = cfg.score.birth_month.split("-").map(Number);
-  const now = new Date();
+  const now = AS_OF;
   const expected = (now.getUTCFullYear() - birthYear) * 12 + (now.getUTCMonth() + 1 - birthMonth) + 1;
   return { ratio: pct(Math.min(done, expected), expected), done, expected };
 }
@@ -348,6 +366,7 @@ function main() {
     core_version: CORE_VERSION,
     tenant: { id: cfg.id, version: cfg.version },
     indicators,
+    as_of: AS_OF.toISOString(),
     computed_at: new Date().toISOString(),
   };
 

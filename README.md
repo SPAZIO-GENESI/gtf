@@ -19,7 +19,7 @@ Spazio Genesi ETS. It is built to be applied to more than one.
 This repository contains two parts with **distinct copyright holders**, both
 MIT-licensed:
 
-- the generic engine in `core/` is a product of **Tangram.page** — see
+- the generic engine in `core/` is a product of **Tangram.page** (sole proprietorship of Massimo Camplone) — see
   [core/LICENSE](./core/LICENSE);
 - the registries, tenant packages, content and configuration are **© Spazio
   Genesi ETS** — see [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
@@ -91,6 +91,22 @@ GTF_TENANT=attestazione npm run build      # validate + core guard + score + sit
 `GTF_TENANT` is optional while a single tenant exists, but should always be
 passed explicitly once there is more than one.
 
+### Recomputing a published score
+
+Evidence freshness depends on the clock, so the score is computed *as of* an
+instant. Each published `score.json` records it in `as_of` (next to
+`computed_at`). To reproduce a published score from a clone at the commit that
+published it:
+
+```bash
+GTF_TENANT=attestazione npm run score -- --as-of=<as_of from the published score.json>
+```
+
+Without `--as-of` the current time is used (what the scheduled build does). The
+result matches the published one in everything except `computed_at`.
+Scores published before this option existed carry no `as_of`: use their
+`computed_at` instead.
+
 ## Independent review
 
 The framework's obvious objection is self-reference: who checks the project that
@@ -116,6 +132,14 @@ which also measures the starting point in the code rather than estimating it.
 
 Current score: 91–94/100 with 10/10 indicators available, fluctuating with the
 freshness of collected evidence.
+
+## Use of generative AI
+
+Parts of this repository are written with generative AI models, under the
+maintainer's direction and review; the maintainer is solely responsible for
+what is published. Commits from 2026-10-20 onward mark such contributions with
+a `Co-Authored-By` and an `AI-Assisted` trailer; earlier history is not
+rewritten. See [the convention](https://github.com/SPAZIO-GENESI/img-auth-hub/blob/main/docs/AI-PROVENANCE.md).
 
 ## Contact
 

@@ -7,7 +7,7 @@
 Motore e registri attraverso cui **Spazio Genesi ETS** dimostra pubblicamente
 perché il servizio [attestazione.spaziogenesi.org](https://attestazione.spaziogenesi.org)
 merita fiducia — con evidenze verificabili da chiunque, non con dichiarazioni.
-Il motore (`core/`) è un prodotto sviluppato da **Tangram.page**
+Il motore (`core/`) è un prodotto sviluppato da **Tangram.page (ditta individuale di Massimo Camplone)**
 (vedi [core/LICENSE](./core/LICENSE)); Spazio Genesi ETS lo applica ai propri
 servizi come partner tecnologico e ne cura i registri (vedi [LICENSE](./LICENSE)).
 Il motore è generico (nessun nome di progetto al suo interno, vedi §15 di
@@ -100,6 +100,22 @@ GTF_TENANT=attestazione npm run build      # validate + check-core + score + bui
 la imposta di default), ma va sempre passata esplicitamente non appena ne
 esiste più di uno.
 
+### Ricalcolare un punteggio pubblicato
+
+La freschezza delle evidenze dipende dall'orologio, quindi il punteggio è
+calcolato *a un istante*. Ogni `score.json` pubblicato lo riporta in `as_of`
+(accanto a `computed_at`). Per riprodurre un punteggio pubblicato da un clone al
+commit che lo ha pubblicato:
+
+```bash
+GTF_TENANT=attestazione npm run score -- --as-of=<as_of del score.json pubblicato>
+```
+
+Senza `--as-of` si usa l'ora corrente (è ciò che fa la build programmata). Il
+risultato coincide con quello pubblicato in tutto tranne `computed_at`. I
+punteggi pubblicati prima di questa opzione non hanno `as_of`: usa il loro
+`computed_at`.
+
 ## Stato
 
 **M4 in corso, M5 avviata (P44, dal 2026-08-15)**: canary HMAC (P17-B) attivo
@@ -118,8 +134,16 @@ duplicare codice — vedi [ARCHITECTURE.md §15](./ARCHITECTURE.md#15-multi-prog
 e `docs/ROADMAP-trust-multiprogetto.md`.
 Dettagli fase per fase in [ARCHITECTURE.md §12](./ARCHITECTURE.md#12-roadmap--wbs).
 
+## Uso dell'AI generativa
+
+Parti di questo repository sono scritte con modelli di AI generativa, sotto la
+direzione e la revisione del gestore, che è l'unico responsabile di ciò che
+viene pubblicato. I commit dal 20/10/2026 in poi marcano questi contributi con
+i trailer `Co-Authored-By` e `AI-Assisted`; la storia precedente non viene
+riscritta. Vedi [la convenzione](https://github.com/SPAZIO-GENESI/img-auth-hub/blob/main/docs/AI-PROVENANCE.md).
+
 ## Licenza
 
 MIT — vedi anche [NOTICE](./NOTICE). Il motore in `core/` è coperto da [core/LICENSE](./core/LICENSE)
-(Tangram.page); il resto del repository — i registri dei tenant — da
+(Tangram.page (ditta individuale di Massimo Camplone)); il resto del repository — i registri dei tenant — da
 [LICENSE](./LICENSE) (Spazio Genesi ETS).
