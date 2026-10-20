@@ -4,7 +4,7 @@ Genesis Trust Framework
 Questo repository contiene due parti con titolarità distinte, entrambe
 rilasciate con licenza MIT:
 
-- il motore in `core/` è un prodotto di Tangram.page — vedi `core/LICENSE`;
+- il motore in `core/` è un prodotto di Tangram.page (ditta individuale di Massimo Camplone) — vedi `core/LICENSE`;
 - il resto del repository (i registri dei tenant, i contenuti, la
   configurazione) è di Spazio Genesi ETS — vedi `LICENSE`.
 
