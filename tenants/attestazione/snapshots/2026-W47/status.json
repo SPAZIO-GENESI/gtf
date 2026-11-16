@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "data": {
+    "worker": "ok",
+    "archive": "ok",
+    "signer": "ok",
+    "anchor": "ok",
+    "checked_at": "2026-11-16T06:23:29.241Z"
+  },
+  "url": "https://imgauth.spaziogenesi.org/api/status"
+}
